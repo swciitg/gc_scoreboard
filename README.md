@@ -1,6 +1,6 @@
 # gc_scoreboard
 
-A new Flutter project.
+A new Flutter project for IITG.
 
 ## Getting Started
 
