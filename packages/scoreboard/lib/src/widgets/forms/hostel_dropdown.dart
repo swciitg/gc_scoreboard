@@ -1,43 +1,21 @@
 import 'package:flutter/material.dart';
-import '../globals/themes.dart';
+import 'package:scoreboard/src/globals/constants.dart';
+import '../../globals/themes.dart';
 
-class CustomDropDown extends StatelessWidget {
-  final List<String> _hostels = [
-    'Barak',
-    'Brahmaputra',
-    'Dhansiri',
-    'Dibang',
-    'Dihing',
-    'Disang',
-    'Kameng',
-    'Kapili',
-    'Lohit',
-    'Manas',
-    'Married Scholars',
-    'Siang',
-    'Subansiri',
-    'Umiam'
-  ];
+class HostelDropDown extends StatelessWidget {
 
-   CustomDropDown({super.key});
+  final onChanged;
+  final value;
+
+  const HostelDropDown({super.key, required this.onChanged, required this.value});
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
       menuMaxHeight: 400,
-      hint: RichText(
-        text: TextSpan(
-          children: [
-            TextSpan(
-              text: 'Hostels',
-              style: Themes.theme.textTheme.bodyText1,
-            ),
-            TextSpan(
-              text: ' * ',
-              style: Themes.theme.textTheme.headline5,
-            ),
-          ],
-        ),
+      hint: Text(
+        'Hostels*',
+        style: Themes.theme.textTheme.bodyText1,
       ),
       isExpanded: true,
       decoration: InputDecoration(
@@ -77,10 +55,9 @@ class CustomDropDown extends StatelessWidget {
       ),
       elevation: 16,
       style: Themes.theme.textTheme.headline6,
-      onChanged: (String? value) {
-        // This is called when the user selects an item.
-      },
-      items: _hostels.map<DropdownMenuItem<String>>((String value) {
+      onChanged: onChanged,
+      value: value,
+      items: iitgHostels.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),
