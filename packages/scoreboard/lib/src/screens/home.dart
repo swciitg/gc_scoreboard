@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scoreboard/src/screens/add_results_screen.dart';
 
 class ScoreBoardHome extends StatefulWidget {
   const ScoreBoardHome({Key? key}) : super(key: key);
@@ -12,6 +13,16 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
+      body: Column(
+        children: [
+          TextButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AddResult()));
+              },
+              child: Text("Add Result"))
+        ],
+      ),
     );
   }
 }

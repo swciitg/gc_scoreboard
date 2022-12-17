@@ -126,7 +126,7 @@ class AddResult extends StatelessWidget {
                 Stack(
                   alignment: const Alignment(0, 0.5),
                   children: [
-                    SvgPicture.asset('assets/date.svg'),
+                    SvgPicture.asset('packages/scoreboard/assets/date.svg'),
                     Text(
                       '18 Feb',
                       style: Themes.theme.textTheme.headline1,
