@@ -21,8 +21,12 @@ class CustomDropDown extends StatelessWidget {
     'Subansiri',
     'Umiam'
   ];
+  final onChanged;
+  final value;
 
-   CustomDropDown({super.key});
+   CustomDropDown({super.key, required this.onChanged, required this.value}){
+     print("dropdown key is ${super.key}");
+   }
 
   @override
   Widget build(BuildContext context) {
@@ -80,9 +84,8 @@ class CustomDropDown extends StatelessWidget {
       ),
       elevation: 16,
       style: Themes.theme.textTheme.headline6,
-      onChanged: (String? value) {
-        // This is called when the user selects an item.
-      },
+      onChanged: onChanged,
+      value: value,
       items: _hostels.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,

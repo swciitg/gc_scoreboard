@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/src/models/event_model.dart';
+import 'package:scoreboard/src/models/nullable_result_model.dart';
 import '../functions/validation.dart';
 
 import '../stores/counter.dart';
@@ -71,7 +72,10 @@ class AddResult extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {
-            
+              List<NullableResultModel> l = _counter.resultFields??[];
+              for (NullableResultModel x in l) {
+                print("${x.position}: Hostel = ${x.hostel}, Points = ${x.points}, PS= ${x.primaryScore}, SS = ${x.secondaryScore}");
+              }
             },
             child: Text(
               'Next',
@@ -156,12 +160,17 @@ class AddResult extends StatelessWidget {
               height: 37,
             ),
             Expanded(child: Observer(builder: (_) {
-              return ListView.builder(
-                itemCount: _counter.l.length,
-                itemBuilder: (context, index) {
-                  return Form(
-                    key: ObjectKey("FormField${_counter.l[index]}"),
-                    child: Column(
+              return Form(
+                child: ListView.builder(
+                  itemCount: _counter.l.length,
+                  itemBuilder: (context, index) {
+                    String formKey = "FormField${_counter.l[index]}";
+                    if (index != 0 && _counter.l[index-1] == _counter.l[index]) {
+                      formKey += "Tie";
+                    }
+                    print("Key for index $index is $formKey");
+                    return Column(
+                      key: Key(formKey),
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
@@ -182,9 +191,9 @@ class AddResult extends StatelessWidget {
                                   ),
                                 ),
                                 onTap: () {
-                           
+
                                   _counter.addSame(_counter.l[index]);
-                         
+                                  _counter.addTie(_counter.l[index]);
                                 },
                               ),
                             if (countOf(_counter.l, _counter.l[index]) == 2 &&
@@ -201,6 +210,7 @@ class AddResult extends StatelessWidget {
                                 ),
                                 onTap: () {
                                   _counter.removeSame(index);
+                                  _counter.removePosition(index);
                                 },
                               ),
                           ],
@@ -212,7 +222,10 @@ class AddResult extends StatelessWidget {
                           children: [
                             Expanded(
                               flex: 70,
-                              child: CustomDropDown(),
+                              child: CustomDropDown(
+                                value : _counter.resultFields?[index].hostel,
+                                onChanged: (hostel) => _counter.resultFields?[index].hostel = hostel,
+                              ),
                             ),
                             const Spacer(
                               flex: 5,
@@ -221,8 +234,9 @@ class AddResult extends StatelessWidget {
                                 flex: 25,
                                 child: CustomTextField(
                                   hintText: 'Points*',
-                                  controller: _points,
                                   validator: validateScore,
+                                  onChanged: (p) {_counter.resultFields?[index].points = int.tryParse(p); print("points changed to $p");},
+                                  value: _counter.resultFields?[index].points,
                                 ))
                           ],
                         ),
@@ -235,8 +249,9 @@ class AddResult extends StatelessWidget {
                               flex: 46,
                               child: CustomTextField(
                                 hintText: 'Primary Score*',
-                                controller: _primaryScore,
                                 validator: validateScore,
+                                onChanged: (ps) => _counter.resultFields?[index].primaryScore = int.tryParse(ps),
+                                value: _counter.resultFields?[index].primaryScore,
                               ),
                             ),
                             const Spacer(
@@ -246,8 +261,9 @@ class AddResult extends StatelessWidget {
                                 flex: 46,
                                 child: CustomTextField(
                                   hintText: 'Secondary Score',
-                                  controller: _secondaryScore,
                                   validator: null,
+                                  onChanged: (ss) => _counter.resultFields?[index].secondaryScore = int.tryParse(ss),
+                                  value: _counter.resultFields?[index].secondaryScore,
                                 ))
                           ],
                         ),
@@ -269,7 +285,7 @@ class AddResult extends StatelessWidget {
                               ),
                               onPressed: () {
                                 _counter.addDifferent(_counter.l[index]);
-                            
+                                _counter.addNewPosition(_counter.l[index]);
                               },
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
@@ -289,9 +305,9 @@ class AddResult extends StatelessWidget {
                                 ],
                               ))
                       ],
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               );
             }))
           ],
