@@ -39,11 +39,13 @@ class ResultsForm extends StatelessWidget {
         ),
         centerTitle: true,
         title: Text(
-          'Add Result',
+          event.results.isEmpty ? 'Add Result' : 'Edit Result',
           style: Themes.theme.textTheme.headline2,
         ),
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
           icon: Icon(
             Icons.close,
             color: Themes.theme.primaryColor,
@@ -193,8 +195,8 @@ class ResultsForm extends StatelessWidget {
                                   Expanded(
                                     flex: 70,
                                     child: HostelDropDown(
-                                      value:
-                                          resultStore.resultFields?[index].hostel,
+                                      value: resultStore
+                                          .resultFields?[index].hostel,
                                       onChanged: (hostel) => resultStore
                                           .resultFields?[index].hostel = hostel,
                                     ),

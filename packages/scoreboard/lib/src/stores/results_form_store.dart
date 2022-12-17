@@ -12,6 +12,10 @@ abstract class ResultsFormStoreBase with Store {
     if (event.results.isEmpty) {
       resultFields = ObservableList<NullableResultModel>.of(
           [NullableResultModel(position: 1)]);
+    } else {
+      resultFields = ObservableList<NullableResultModel>.of(
+        event.results.map((e) => NullableResultModel.fromResultModel(e)).toList()
+      );
     }
   }
 
