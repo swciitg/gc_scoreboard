@@ -8,7 +8,6 @@ class NullableResultModel extends Comparable{
 
   @override
   int compareTo(other) {
-    // TODO: implement compareTo
     return position.compareTo(other.position);
   }
   

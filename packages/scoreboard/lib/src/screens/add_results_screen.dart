@@ -160,6 +160,7 @@ class AddResult extends StatelessWidget {
                 itemCount: _counter.l.length,
                 itemBuilder: (context, index) {
                   return Form(
+                    key: ObjectKey("FormField${_counter.l[index]}"),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

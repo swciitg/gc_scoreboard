@@ -28,13 +28,13 @@ mixin _$CounterStore on Counter, Store {
       Atom(name: 'Counter.resultFields', context: context);
 
   @override
-  ObservableList<NullableResultModel> get resultFields {
+  ObservableList<NullableResultModel>? get resultFields {
     _$resultFieldsAtom.reportRead();
     return super.resultFields;
   }
 
   @override
-  set resultFields(ObservableList<NullableResultModel> value) {
+  set resultFields(ObservableList<NullableResultModel>? value) {
     _$resultFieldsAtom.reportWrite(value, super.resultFields, () {
       super.resultFields = value;
     });

@@ -18,7 +18,7 @@ abstract class Counter with Store {
   ObservableList<int> l = ObservableList<int>.of([1]);
 
   @observable
-  late ObservableList<NullableResultModel> resultFields;
+  ObservableList<NullableResultModel>? resultFields;
 
   @action
   void addSame(int value) {
@@ -28,8 +28,8 @@ abstract class Counter with Store {
 
   @action
   void addTie(int position) {
-    resultFields.add(NullableResultModel(position: position));
-    resultFields.sort();
+    resultFields?.add(NullableResultModel(position: position));
+    resultFields?.sort();
   }
 
   @action
@@ -41,8 +41,8 @@ abstract class Counter with Store {
 
   @action
   void removePosition(int index) {
-    resultFields.removeAt(index);
-    resultFields.sort();
+    resultFields?.removeAt(index);
+    resultFields?.sort();
   }
 
   @action
@@ -53,8 +53,8 @@ abstract class Counter with Store {
 
   @action
   void addNewPosition(int value) {
-    resultFields.add(NullableResultModel(position: value + 1));
-    resultFields.sort();
+    resultFields?.add(NullableResultModel(position: value + 1));
+    resultFields?.sort();
   }
 }
 
