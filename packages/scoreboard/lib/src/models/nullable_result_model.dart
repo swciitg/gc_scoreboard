@@ -1,3 +1,5 @@
+import 'package:scoreboard/src/models/result_model.dart';
+
 class NullableResultModel extends Comparable{
   int position;
   String? hostel;
@@ -8,7 +10,11 @@ class NullableResultModel extends Comparable{
 
   @override
   int compareTo(other) {
+    print("compare $other");
     return position.compareTo(other.position);
   }
-  
+
+  ResultModel toResultModel() {
+    return ResultModel(position: position, hostel: hostel!, points: points!, primaryScore: primaryScore!,secondaryScore: secondaryScore);
+  }
 }

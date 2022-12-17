@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/src/models/event_model.dart';
-import 'package:scoreboard/src/screens/add_results_screen.dart';
-import 'package:scoreboard/src/stores/counter.dart';
+import 'package:scoreboard/src/screens/results_form.dart';
+import 'package:scoreboard/src/stores/results_form_store.dart';
 
 class ScoreBoardHome extends StatefulWidget {
   const ScoreBoardHome({Key? key}) : super(key: key);
@@ -29,11 +29,11 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Provider<CounterStore>(
-                            create: (_) => CounterStore(event: e),
-                            child: AddResult())));
+                        builder: (context) => Provider<ResultsFormStore>(
+                            create: (_) => ResultsFormStore(event: e),
+                            child: const ResultsForm())));
               },
-              child: Text("Add Result"))
+              child: const Text("Add Result"))
         ],
       ),
     );
