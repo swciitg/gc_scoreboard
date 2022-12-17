@@ -24,18 +24,19 @@ mixin _$CounterStore on Counter, Store {
     });
   }
 
-  late final _$counterAtom = Atom(name: 'Counter.counter', context: context);
+  late final _$resultFieldsAtom =
+      Atom(name: 'Counter.resultFields', context: context);
 
   @override
-  int get counter {
-    _$counterAtom.reportRead();
-    return super.counter;
+  ObservableList<NullableResultModel> get resultFields {
+    _$resultFieldsAtom.reportRead();
+    return super.resultFields;
   }
 
   @override
-  set counter(int value) {
-    _$counterAtom.reportWrite(value, super.counter, () {
-      super.counter = value;
+  set resultFields(ObservableList<NullableResultModel> value) {
+    _$resultFieldsAtom.reportWrite(value, super.resultFields, () {
+      super.resultFields = value;
     });
   }
 
@@ -54,11 +55,33 @@ mixin _$CounterStore on Counter, Store {
   }
 
   @override
+  void addTie(int position) {
+    final _$actionInfo =
+        _$CounterActionController.startAction(name: 'Counter.addTie');
+    try {
+      return super.addTie(position);
+    } finally {
+      _$CounterActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void removeSame(int index) {
     final _$actionInfo =
         _$CounterActionController.startAction(name: 'Counter.removeSame');
     try {
       return super.removeSame(index);
+    } finally {
+      _$CounterActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void removePosition(int index) {
+    final _$actionInfo =
+        _$CounterActionController.startAction(name: 'Counter.removePosition');
+    try {
+      return super.removePosition(index);
     } finally {
       _$CounterActionController.endAction(_$actionInfo);
     }
@@ -76,10 +99,21 @@ mixin _$CounterStore on Counter, Store {
   }
 
   @override
+  void addNewPosition(int value) {
+    final _$actionInfo =
+        _$CounterActionController.startAction(name: 'Counter.addNewPosition');
+    try {
+      return super.addNewPosition(value);
+    } finally {
+      _$CounterActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 l: ${l},
-counter: ${counter}
+resultFields: ${resultFields}
     ''';
   }
 }

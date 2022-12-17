@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../models/validation.dart';
+import 'package:provider/provider.dart';
+import 'package:scoreboard/src/models/event_model.dart';
+import '../functions/validation.dart';
 
-import '../functions/counter.dart';
+import '../stores/counter.dart';
 import '../globals/themes.dart';
 import '../widgets/drop_down.dart';
 import '../widgets/text_field.dart';
@@ -17,7 +19,6 @@ class AddResult extends StatelessWidget {
 
   final TextEditingController _secondaryScore = TextEditingController();
 
-  final _counter = CounterStore();
 
   AddResult({super.key});
 
@@ -41,6 +42,8 @@ class AddResult extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    EventModel event = context.read<CounterStore>().event;
+    CounterStore _counter = context.read<CounterStore>();
     return Scaffold(
       backgroundColor: Themes.theme.backgroundColor,
       appBar: AppBar(
@@ -110,14 +113,14 @@ class AddResult extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '500m Sprint',
+                      event.name,
                       style: Themes.theme.textTheme.headline1,
                     ),
                     const SizedBox(
                       height: 4,
                     ),
                     Text(
-                      'Men',
+                      event.category,
                       style: Themes.theme.textTheme.headline2,
                     ),
                   ],
@@ -145,7 +148,7 @@ class AddResult extends StatelessWidget {
                 color: Themes.theme.cardColor,
               ),
               child: Text(
-                'Semi-Final',
+                event.stage,
                 style: Themes.theme.textTheme.headline3,
               ),
             ),
