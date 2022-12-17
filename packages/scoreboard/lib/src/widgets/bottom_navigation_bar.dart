@@ -19,12 +19,12 @@ class bottomNavigationBar extends StatelessWidget {
         // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           bottomNavigationBarItem(
-              'assets/gc.png', 'GC', 0, MediaQuery.of(context).size.width / 4),
-          bottomNavigationBarItem('assets/spardha.png', 'Spardha', 1,
+              'assets/gc.svg', 'GC', 0, MediaQuery.of(context).size.width / 4),
+          bottomNavigationBarItem('assets/spardha2.svg', 'Spardha', 1,
               MediaQuery.of(context).size.width / 4),
-          bottomNavigationBarItem('assets/kriti.png', 'Kriti', 2,
+          bottomNavigationBarItem('assets/kriti2.svg', 'Kriti', 2,
               MediaQuery.of(context).size.width / 4),
-          bottomNavigationBarItem('assets/manthan.png', 'Manthan', 3,
+          bottomNavigationBarItem('assets/manthan2.svg', 'Manthan', 3,
               MediaQuery.of(context).size.width / 4),
         ],
       ),
@@ -55,10 +55,11 @@ class bottomNavigationBar extends StatelessWidget {
                         : Themes.bottomNavBarColor),
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Image.asset(
-                    assetImageAddress,
-                    package: 'scoreboard',
-                  ),
+                  // child: Image.asset(
+                  //   assetImageAddress,
+                  //   package: 'scoreboard',
+                  // ),
+                  child: SvgPicture.asset(assetImageAddress,package: 'scoreboard',),
                 ),
               ),
             ),
