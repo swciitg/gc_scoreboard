@@ -57,9 +57,10 @@ class FilterBar extends StatelessWidget {
                               )
                             ],
                           ),
-                          SvgPicture.asset(
-                            'assets/updown.svg',
-                            package: 'scoreboard',
+                          Icon(
+                            Icons.unfold_more_outlined,
+                            size: 20,
+                            color: Themes.cardFontColor1,
                           ),
                         ],
                       ),
@@ -107,9 +108,10 @@ class FilterBar extends StatelessWidget {
                               )
                             ],
                           ),
-                          SvgPicture.asset(
-                            'assets/updown.svg',
-                            package: 'scoreboard',
+                          Icon(
+                            Icons.unfold_more_outlined,
+                            size: 20,
+                            color: Themes.cardFontColor1,
                           ),
                         ],
                       ),
