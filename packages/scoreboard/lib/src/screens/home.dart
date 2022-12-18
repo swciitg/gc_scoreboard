@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scoreboard/src/screens/schedule_page.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/src/models/event_model.dart';
 import 'package:scoreboard/src/models/result_model.dart';
@@ -18,6 +19,7 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
     return Scaffold(
       appBar: AppBar(),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextButton(
               onPressed: () {
@@ -63,7 +65,15 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
                             create: (_) => ResultsFormStore(event: e),
                             child: const ResultsForm())));
               },
-              child: Text("Edit Result"))
+              child: Text("Edit Result")),
+          TextButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SchedulePage()));
+              },
+              child: Text("Schedule Page"))
         ],
       ),
     );
