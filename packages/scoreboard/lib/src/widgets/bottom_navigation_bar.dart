@@ -19,11 +19,11 @@ class bottomNavigationBar extends StatelessWidget {
         children: [
           bottomNavigationBarItem(
               'assets/gc.svg', 'GC', 0, MediaQuery.of(context).size.width / 4),
-          bottomNavigationBarItem('assets/spardha.svg', 'Spardha', 1,
+          bottomNavigationBarItem('assets/spardha2.svg', 'Spardha', 1,
               MediaQuery.of(context).size.width / 4),
-          bottomNavigationBarItem('assets/kriti.svg', 'Kriti', 2,
+          bottomNavigationBarItem('assets/kriti2.svg', 'Kriti', 2,
               MediaQuery.of(context).size.width / 4),
-          bottomNavigationBarItem('assets/manthan.svg', 'Manthan', 3,
+          bottomNavigationBarItem('assets/manthan2.svg', 'Manthan', 3,
               MediaQuery.of(context).size.width / 4),
         ],
       ),
