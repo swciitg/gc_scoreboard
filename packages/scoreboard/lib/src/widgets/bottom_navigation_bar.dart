@@ -16,7 +16,6 @@ class bottomNavigationBar extends StatelessWidget {
       height: 90,
       width: MediaQuery.of(context).size.width,
       child: Row(
-        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           bottomNavigationBarItem(
               'assets/gc.svg', 'GC', 0, MediaQuery.of(context).size.width / 4),
