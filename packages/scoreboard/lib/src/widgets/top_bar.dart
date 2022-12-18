@@ -17,9 +17,11 @@ class TopBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            topBarItem(Icons.trending_up_outlined, 'Standings', 0),
-            topBarItem(Icons.date_range_outlined, 'Schedule', 1),
-            topBarItem(Icons.emoji_events_outlined, 'Results', 2),
+            Expanded(child: topBarItem(Icons.trending_up_outlined, 'Standings', 0)),
+            SizedBox(width: 8,),
+            Expanded(child: topBarItem(Icons.date_range_outlined, 'Schedule', 1)),
+            SizedBox(width: 8,),
+            Expanded(child: topBarItem(Icons.emoji_events_outlined, 'Results', 2)),
           ],
         ),
       ),
@@ -31,40 +33,34 @@ class TopBar extends StatelessWidget {
       onTap: () {
         onClicked(index);
       },
-      child: ConstrainedBox(
-        // width: width,
-        constraints: BoxConstraints(
-          minWidth: 104,
-          maxWidth: 124,
-        ),
-        child: Container(
-          // width: width * 0.8,
-          height: 28,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(100),
-              color: index == selectedIndex
-                  ? Themes.primaryColor
-                  : Themes.secondaryColor),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(iconData,
-                  color: index == selectedIndex
-                      ? Themes.secondaryColor
-                      : Themes.primaryColor,
-                  size: 16),
-              SizedBox(
-                width: 8,
-              ),
-              Text(label,
-                  style: GoogleFonts.montserrat(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 12,
-                      color: index == selectedIndex
-                          ? Themes.secondaryColor
-                          : Themes.primaryColor)),
-            ],
-          ),
+      child: Container(
+        // width: width * 0.8,
+        // height: 28,
+        padding: EdgeInsets.symmetric(vertical: 6),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(100),
+            color: index == selectedIndex
+                ? Themes.primaryColor
+                : Themes.secondaryColor),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(iconData,
+                color: index == selectedIndex
+                    ? Themes.secondaryColor
+                    : Themes.primaryColor,
+                size: 16),
+            SizedBox(
+              width: 8,
+            ),
+            Text(label,
+                style: GoogleFonts.montserrat(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                    color: index == selectedIndex
+                        ? Themes.secondaryColor
+                        : Themes.primaryColor)),
+          ],
         ),
       ),
     );

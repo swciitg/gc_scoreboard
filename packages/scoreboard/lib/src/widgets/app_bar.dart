@@ -7,49 +7,43 @@ import '../globals/themes.dart';
 PreferredSize appBar() {
   return PreferredSize(
     preferredSize: const Size.fromHeight(56),
-    child: Padding(
-      padding: const EdgeInsets.fromLTRB(8, 12, 8, 12),
-      child: Container(
-        // color: Colors.orange,
-        child: SafeArea(
+    child: Container(
+      // color: Colors.orange,
+      child: SafeArea(
+        bottom: false,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  bottom: 0,
-                ),
-                child: Container(
-                  // width: width * 0.8,
-                  width: 80,
-
-                  height: 36,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Themes.cardColor),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.arrow_back_outlined,
-                        size: 16,
-                        color: Themes.primaryColor,
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Text('One',
-                          style: GoogleFonts.montserrat(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 12,
-                              color: Themes.primaryColor)),
-                      Text('.',
-                          style: GoogleFonts.montserrat(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 12,
-                              color: Themes.dotColor)),
-                    ],
-                  ),
+              Container(
+                width: 80,
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: Themes.cardColor),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.arrow_back_outlined,
+                      size: 16,
+                      color: Themes.primaryColor,
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Text('One',
+                        style: GoogleFonts.montserrat(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12,
+                            color: Themes.primaryColor)),
+                    Text('.',
+                        style: GoogleFonts.montserrat(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12,
+                            color: Themes.dotColor)),
+                  ],
                 ),
               ),
               Row(
@@ -71,7 +65,6 @@ PreferredSize appBar() {
                 child: Container(
                   // width: width * 0.8,
                   width: 80,
-
                   height: 36,
                 ),
               ),

@@ -1,31 +1,34 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../globals/themes.dart';
 
-class bottomNavigationBar extends StatelessWidget {
+class BottomNavBar extends StatelessWidget {
   final selectedIndex;
   ValueChanged<int> onClicked;
-  bottomNavigationBar({this.selectedIndex, required this.onClicked});
+  BottomNavBar({this.selectedIndex, required this.onClicked});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Themes.bottomNavBarColor,
-      height: 90,
-      width: MediaQuery.of(context).size.width,
-      child: Row(
-        children: [
-          bottomNavigationBarItem(
-              'assets/gc.svg', 'GC', 0, MediaQuery.of(context).size.width / 4),
-          bottomNavigationBarItem('assets/spardha2.svg', 'Spardha', 1,
-              MediaQuery.of(context).size.width / 4),
-          bottomNavigationBarItem('assets/kriti2.svg', 'Kriti', 2,
-              MediaQuery.of(context).size.width / 4),
-          bottomNavigationBarItem('assets/manthan2.svg', 'Manthan', 3,
-              MediaQuery.of(context).size.width / 4),
-        ],
+    return SafeArea(
+      child: Container(
+        color: Themes.bottomNavBarColor,
+        height: 80,
+        width: MediaQuery.of(context).size.width,
+        child: Row(
+          children: [
+            bottomNavigationBarItem(
+                'assets/gc.svg', 'GC', 0, MediaQuery.of(context).size.width / 4),
+            bottomNavigationBarItem('assets/spardha2.svg', 'Spardha', 1,
+                MediaQuery.of(context).size.width / 4),
+            bottomNavigationBarItem('assets/kriti2.svg', 'Kriti', 2,
+                MediaQuery.of(context).size.width / 4),
+            bottomNavigationBarItem('assets/manthan2.svg', 'Manthan', 3,
+                MediaQuery.of(context).size.width / 4),
+          ],
+        ),
       ),
     );
   }

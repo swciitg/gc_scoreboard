@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:scoreboard/src/widgets/filter_bar.dart';
 import 'package:scoreboard/src/widgets/top_bar.dart';
 
@@ -46,7 +48,7 @@ class _SchedulePageState extends State<SchedulePage> {
           ],
         ),
       ),
-      bottomNavigationBar: bottomNavigationBar(
+      bottomNavigationBar: BottomNavBar(
         selectedIndex: _selectedNavBarItemIndex,
         onClicked: onClicked,
       ),
