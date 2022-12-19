@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scoreboard/src/functions/schedule_event/validator.dart';
+import 'package:scoreboard/src/models/event_model.dart';
 import 'package:scoreboard/src/widgets/schedule_event/drop_down.dart';
 import 'package:scoreboard/src/widgets/schedule_event/text_field.dart';
 import '../../globals/themes.dart';
 
 class ScheduleEvent extends StatefulWidget {
-  const ScheduleEvent({super.key});
+  final EventModel? event;
+  const ScheduleEvent({super.key, this.event});
 
   @override
   State<ScheduleEvent> createState() => _ScheduleEventState();
@@ -17,12 +19,17 @@ class _ScheduleEventState extends State<ScheduleEvent> {
   final TextEditingController _venueController = TextEditingController();
   final TextEditingController dateInput = TextEditingController();
   final TextEditingController timeInput = TextEditingController();
+  String? category;
+  String? stage;
+  String? group;
+
   final List<String> sports = [
     'Athletics',
     'Swimming',
     'Basketball',
     'Football',
-    'Badminton'
+    'Badminton',
+    'Aquatics'
   ];
 
   final List<String?> participatingHostels = [];
@@ -30,7 +37,7 @@ class _ScheduleEventState extends State<ScheduleEvent> {
   bool isPostponed = false, isCancelled = false;
   int hostels = 0;
 
-  callbackHostels(value,_) {
+  callbackHostels(value) {
     participatingHostels.length = int.parse(value);
     setState(() {
       hostels = int.parse(value);
@@ -42,7 +49,20 @@ class _ScheduleEventState extends State<ScheduleEvent> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    if (widget.event != null ) {
+      EventModel e = widget.event!;
+      _sportNameController.text = e.name;
+      _venueController.text = e.venue;
+      group = e.group;
+      category = e.category;
+      stage = e.stage;
+    }
+  }
+  @override
   Widget build(BuildContext context) {
+    print("Rebuild");
     return Scaffold(
       backgroundColor: Themes.theme.backgroundColor,
       appBar: AppBar(
@@ -56,18 +76,24 @@ class _ScheduleEventState extends State<ScheduleEvent> {
         ),
         centerTitle: true,
         title: Text(
-          'Add Event',
+          widget.event == null ? 'Add Event' : 'Edit Event',
           style: Themes.theme.textTheme.headline2,
         ),
         leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.close),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.close,
+            color: Themes.theme.primaryColor,
+          ),
           splashColor: const Color.fromRGBO(118, 172, 255, 0.9),
-          splashRadius: 24,
         ),
         actions: [
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              print(group);
+            },
             child: Text(
               'Next',
               style: Themes.theme.textTheme.headline3,
@@ -119,11 +145,11 @@ class _ScheduleEventState extends State<ScheduleEvent> {
                       validator: validateField,
                       controller: _sportNameController),
                   const SizedBox(height: 12),
-                  CustomDropDown(items: sports, hintText: 'Sport Group'),
+                  CustomDropDown(items: sports, hintText: 'Sport Group', onChanged: (s) => group =s,value: group,),
                   const SizedBox(height: 12),
-                  CustomDropDown(items: sports, hintText: 'Category'),
+                  CustomDropDown(items: sports, hintText: 'Category',onChanged: (s) => category =s, value: category,),
                   const SizedBox(height: 12),
-                  CustomDropDown(items: sports, hintText: 'Stage'),
+                  CustomDropDown(items: sports, hintText: 'Stage', onChanged: (s) => stage = s, value: stage,),
                   const SizedBox(height: 12),
                   Row(
                     children: [

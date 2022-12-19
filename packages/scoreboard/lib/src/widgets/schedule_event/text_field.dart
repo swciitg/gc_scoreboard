@@ -26,6 +26,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: widget.onTap != null,
       style: Themes.theme.textTheme.headline6?.copyWith(color: Colors.white),
       validator: widget.validator,
       controller: widget.controller,

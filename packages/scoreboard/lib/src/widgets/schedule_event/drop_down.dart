@@ -8,15 +8,16 @@ class CustomDropDown extends StatelessWidget {
   final String hintText;
   final Function? onChanged;
   final int? index;
+  final String? value;
 
   CustomDropDown(
-      {super.key, required this.items, required this.hintText, this.onChanged,this.index});
+      {super.key, required this.items, required this.hintText, required this.onChanged,this.index, this.value});
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
       menuMaxHeight: 400,
-      //
+      value: value,
       isExpanded: true,
       decoration: InputDecoration(
         label: RichText(
@@ -70,7 +71,11 @@ class CustomDropDown extends StatelessWidget {
       elevation: 16,
       style: Themes.theme.textTheme.headline6,
       onChanged: (String? value) {
-        onChanged!(value,index);
+        if (index != null) {
+          onChanged!(value,index);
+        } else {
+          onChanged!(value);
+        }
       },
       items: items.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
