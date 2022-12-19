@@ -4,12 +4,14 @@ import 'package:scoreboard/src/models/nullable_result_model.dart';
 import 'package:scoreboard/src/stores/counter.dart';
 import '../../globals/themes.dart';
 
-
 class CustomDropDown extends StatelessWidget {
   final List<String> items;
   final String hintText;
+  final Function? onChanged;
+  final int? index;
 
-  CustomDropDown({super.key, required this.items, required this.hintText});
+  CustomDropDown(
+      {super.key, required this.items, required this.hintText, this.onChanged,this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +71,7 @@ class CustomDropDown extends StatelessWidget {
       elevation: 16,
       style: Themes.theme.textTheme.headline6,
       onChanged: (String? value) {
-        // This is called when the user selects an item.
+        onChanged!(value,index);
       },
       items: items.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(

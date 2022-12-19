@@ -13,7 +13,8 @@ class ScheduleEvent extends StatefulWidget {
 }
 
 class _ScheduleEventState extends State<ScheduleEvent> {
-  final TextEditingController _sportName = TextEditingController();
+  final TextEditingController _sportNameController = TextEditingController();
+  final TextEditingController _venueController = TextEditingController();
   final TextEditingController dateInput = TextEditingController();
   final TextEditingController timeInput = TextEditingController();
   final List<String> sports = [
@@ -23,15 +24,21 @@ class _ScheduleEventState extends State<ScheduleEvent> {
     'Football',
     'Badminton'
   ];
-  bool isPostponed = false, isCancelled = false;
-  ValueNotifier<int> hostels = ValueNotifier(0);
 
-  @override
-  void initState() {
-    super.initState();
-    // hostels = (_numberOfHostels.dropDownValue == null)
-    //     ? ValueNotifier(0)
-    //     : ValueNotifier(int.parse(_numberOfHostels.dropDownValue!.name));
+  final List<String?> participatingHostels = [];
+
+  bool isPostponed = false, isCancelled = false;
+  int hostels = 0;
+
+  callbackHostels(value,_) {
+    participatingHostels.length = int.parse(value);
+    setState(() {
+      hostels = int.parse(value);
+    });
+  }
+
+  callbackAddHostel(value,index) {
+    participatingHostels[index - 1] = value;
   }
 
   @override
@@ -110,7 +117,7 @@ class _ScheduleEventState extends State<ScheduleEvent> {
                   CustomTextField(
                       hintText: 'Sport Name',
                       validator: validateField,
-                      controller: _sportName),
+                      controller: _sportNameController),
                   const SizedBox(height: 12),
                   CustomDropDown(items: sports, hintText: 'Sport Group'),
                   const SizedBox(height: 12),
@@ -149,19 +156,21 @@ class _ScheduleEventState extends State<ScheduleEvent> {
                       ),
                       Expanded(
                         child: CustomTextField(
-                            hintText: 'Time',
-                            validator: validateField,
-                            controller: timeInput,
-                          onTap: () async{
+                          hintText: 'Time',
+                          validator: validateField,
+                          controller: timeInput,
+                          onTap: () async {
                             FocusScope.of(context).requestFocus(FocusNode());
-                            TimeOfDay? pickedTime =  await showTimePicker(
+                            TimeOfDay? pickedTime = await showTimePicker(
                               initialTime: TimeOfDay.now(),
                               context: context, //context of current state
                             );
-                            if(pickedTime != null ){
-                              if(!mounted) return;
-                              DateTime parsedTime = DateFormat.jm().parse(pickedTime.format(context).toString());
-                              String formattedTime = DateFormat('h:mm a').format(parsedTime);
+                            if (pickedTime != null) {
+                              if (!mounted) return;
+                              DateTime parsedTime = DateFormat.jm()
+                                  .parse(pickedTime.format(context).toString());
+                              String formattedTime =
+                                  DateFormat('h:mm a').format(parsedTime);
                               //DateFormat() is from intl package, you can format the time on any pattern you need.
                               setState(() {
                                 timeInput.text =
@@ -179,7 +188,7 @@ class _ScheduleEventState extends State<ScheduleEvent> {
                   CustomTextField(
                       hintText: 'Venue',
                       validator: validateField,
-                      controller: _sportName),
+                      controller: _venueController),
                   const SizedBox(
                     height: 12,
                   ),
@@ -230,10 +239,24 @@ class _ScheduleEventState extends State<ScheduleEvent> {
                   CustomDropDown(
                     items: [for (var i = 1; i <= 10; i++) i.toString()],
                     hintText: 'Select Number of Hostels',
+                    onChanged: callbackHostels,
                   ),
                   const SizedBox(
                     height: 12,
                   ),
+                  Column(
+                    children: [
+                      for (var i = 1; i <= hostels; i++)
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 12),
+                          child: CustomDropDown(
+                              items: sports,
+                              hintText: 'Hostel Name $i',
+                              index: i,
+                              onChanged: callbackAddHostel),
+                        )
+                    ],
+                  )
                 ],
               ))
             ],
