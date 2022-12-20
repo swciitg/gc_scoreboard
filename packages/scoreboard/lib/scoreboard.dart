@@ -1,2 +1,2 @@
 library scoreboard;
-export 'src/screens/home.dart' show ScoreBoardHome;
+export 'src/screens/splash/splash.dart' show ScoreboardSplashScreen;

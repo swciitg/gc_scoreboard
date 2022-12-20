@@ -4,9 +4,13 @@ import 'package:provider/provider.dart';
 import 'package:scoreboard/src/models/event_model.dart';
 import 'package:scoreboard/src/models/result_model.dart';
 import 'package:scoreboard/src/screens/results_form.dart';
+import 'package:scoreboard/src/services/api.dart';
+import 'package:scoreboard/src/stores/login_store.dart';
 import 'package:scoreboard/src/stores/results_form_store.dart';
+import 'package:scoreboard/src/widgets/app_bar.dart';
 
 class ScoreBoardHome extends StatefulWidget {
+  static const id = '/home';
   const ScoreBoardHome({Key? key}) : super(key: key);
 
   @override
@@ -14,10 +18,16 @@ class ScoreBoardHome extends StatefulWidget {
 }
 
 class _ScoreBoardHomeState extends State<ScoreBoardHome> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: appBar(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

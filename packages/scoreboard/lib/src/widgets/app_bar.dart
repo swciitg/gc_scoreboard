@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../globals/themes.dart';
 
 PreferredSize appBar() {
   return PreferredSize(
     preferredSize: const Size.fromHeight(56),
     child: Container(
-      // color: Colors.orange,
+      color: Themes.appbarBackgroundColor,
       child: SafeArea(
         bottom: false,
         child: Padding(

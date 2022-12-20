@@ -56,6 +56,7 @@ class Themes {
   static const backgroundColor = Color.fromRGBO(27, 27, 29, 0);
   static const primaryColor = Color.fromRGBO(118, 172, 255, 1);
   static const secondaryColor = Color.fromRGBO(39, 49, 65, 1);
+  static const appbarBackgroundColor = Color.fromRGBO(39, 49, 65, 1);
   static const bottomNavBarColor = Color.fromRGBO(45, 48, 55, 1);
   static const bottomNavFontColor = Color.fromRGBO(171, 171, 175, 1);
   static const bottomNavHighlightColor = Color.fromRGBO(94, 94, 94, 0.38);
