@@ -149,7 +149,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.2"
-<<<<<<< HEAD
   js:
     dependency: transitive
     description:
@@ -157,7 +156,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.4"
-=======
   intl:
     dependency: transitive
     description:
@@ -165,7 +163,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.18.0"
->>>>>>> 65cf7158e0acd085a0bd55114618cc30f2ba5c55
   lints:
     dependency: transitive
     description:
