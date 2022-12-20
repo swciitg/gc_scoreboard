@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scoreboard/src/globals/helper_variables.dart';
 import 'package:scoreboard/src/screens/schedule_event/schedule_event.dart';
 import 'package:scoreboard/src/screens/schedule_page.dart';
 import 'package:provider/provider.dart';
@@ -28,7 +29,7 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(),
+      appBar: appBar(context,viewType.user),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

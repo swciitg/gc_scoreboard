@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:scoreboard/src/globals/auth_user_helper.dart';
-import 'package:scoreboard/src/globals/database_strings.dart';
+import 'package:scoreboard/src/globals/helper_variables.dart';
 
 class APIService {
   final dio = Dio(BaseOptions(

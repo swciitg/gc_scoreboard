@@ -8,3 +8,7 @@ class DatabaseRecords{
   static const accesstoken = "accessToken";
   static const authorization = "authorization";
 }
+
+enum viewType {
+  user, admin
+}

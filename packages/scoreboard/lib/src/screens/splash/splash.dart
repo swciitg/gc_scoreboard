@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:scoreboard/src/routes.dart';
 import 'package:scoreboard/src/screens/home.dart';
 import 'package:scoreboard/src/stores/login_store.dart';
 
@@ -21,7 +22,9 @@ class _ScoreboardSplashScreenState extends State<ScoreboardSplashScreen> {
           future: context.read<LoginStore>().saveUserData(widget.userInfo),
           builder: (context,snapshot){
             return MaterialApp(
+              debugShowCheckedModeBanner: false,
               home: snapshot.hasData ? ScoreBoardHome() : WelcomeScreen(),
+              routes: routes,
             );
           },
         )
@@ -31,6 +34,7 @@ class _ScoreboardSplashScreenState extends State<ScoreboardSplashScreen> {
 }
 
 class WelcomeScreen extends StatefulWidget {
+  static const id = '/welcome';
   const WelcomeScreen({Key? key}) : super(key: key);
 
   @override

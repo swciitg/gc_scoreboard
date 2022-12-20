@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:scoreboard/src/globals/helper_variables.dart';
+import 'package:scoreboard/src/screens/admin_login.dart';
 import '../globals/themes.dart';
 
-PreferredSize appBar() {
+PreferredSize appBar(BuildContext buildContext, var type) {
   return PreferredSize(
     preferredSize: const Size.fromHeight(56),
     child: Container(
@@ -15,34 +17,39 @@ PreferredSize appBar() {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                width: 80,
-                padding: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: Themes.cardColor),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.arrow_back_outlined,
-                      size: 16,
-                      color: Themes.primaryColor,
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Text('One',
-                        style: GoogleFonts.montserrat(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 12,
-                            color: Themes.primaryColor)),
-                    Text('.',
-                        style: GoogleFonts.montserrat(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 12,
-                            color: Themes.dotColor)),
-                  ],
+              InkWell(
+                onTap: (){
+                  Navigator.of(buildContext).popUntil((route) => false);
+                },
+                child: Container(
+                  width: 80,
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: Themes.cardColor),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.arrow_back_outlined,
+                        size: 16,
+                        color: Themes.primaryColor,
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Text('One',
+                          style: GoogleFonts.montserrat(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 12,
+                              color: Themes.primaryColor)),
+                      Text('.',
+                          style: GoogleFonts.montserrat(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 12,
+                              color: Themes.dotColor)),
+                    ],
+                  ),
                 ),
               ),
               Row(
@@ -63,8 +70,25 @@ PreferredSize appBar() {
                 padding: const EdgeInsets.only(bottom: 8),
                 child: Container(
                   // width: width * 0.8,
-                  width: 80,
+                  width: 72,
                   height: 36,
+                  alignment: Alignment.centerRight,
+                  child: PopupMenuButton<String>(
+                    padding: EdgeInsets.only(top: 4),
+                    icon: Icon(Icons.more_vert,color: Themes.kWhite),
+                    color: Themes.kGrey,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                    itemBuilder: (buildContext) => [
+                      PopupMenuItem(
+                        value: type==viewType.admin ? "/home" : "/admin/login",
+                        padding: EdgeInsets.symmetric(horizontal: 20,vertical: 11),
+                        child: Text(type==viewType.admin ? "Switch to User View" : "Switch to Admin View",style: Themes.theme.textTheme.headline6,)
+                      ),
+                    ],
+                    onSelected: (newRoute) => {
+                      Navigator.pushNamedAndRemoveUntil(buildContext, newRoute, (route) => false)
+                    },
+                  )
                 ),
               ),
             ],
