@@ -15,7 +15,6 @@ class NullableResultModel extends Comparable {
 
   @override
   int compareTo(other) {
-    print("compare $other");
     return position.compareTo(other.position);
   }
 

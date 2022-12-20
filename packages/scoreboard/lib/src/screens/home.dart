@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scoreboard/src/screens/schedule_event/schedule_event.dart';
 import 'package:scoreboard/src/screens/schedule_page.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/src/models/event_model.dart';
@@ -35,6 +36,9 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
               onPressed: () {
                 EventModel e = EventModel(
                     name: "Basketball",
+                    group: "Basketball",
+                    venue: "Dihing Basketball Ground",
+                    hostels: [],
                     category: "Men",
                     stage: "Finals",
                     date: DateTime.now(),
@@ -66,6 +70,9 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
                     name: "Swimming",
                     category: "Men",
                     stage: "Semi-Finals",
+                    venue: "Swimming Pool",
+                    hostels: [],
+                    group: "Aquatics",
                     date: DateTime.now(),
                     results: [r1, r2, r3]);
                 Navigator.push(
@@ -83,7 +90,34 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
                     MaterialPageRoute(
                         builder: (context) => const SchedulePage()));
               },
-              child: Text("Schedule Page"))
+              child: Text("Schedule Page")),
+          TextButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ScheduleEvent()));
+              },
+              child: Text("Add Event")),
+          TextButton(
+              onPressed: () {
+                EventModel e = EventModel(
+                    name: "Swimming",
+                    // category: "Men",
+                    category: "Athletics",
+                    // stage: "Semi-Finals",
+                    stage: "Football",
+                    venue: "Swimming Pool",
+                    hostels: [],
+                    group: "Aquatics",
+                    date: DateTime.now(),
+                    results: []);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ScheduleEvent(event: e,)));
+              },
+              child: Text("Edit Event"))
         ],
       ),
     );
