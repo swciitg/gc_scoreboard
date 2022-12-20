@@ -3,9 +3,8 @@ import 'package:scoreboard/src/globals/auth_user_helper.dart';
 import 'package:scoreboard/src/globals/database_strings.dart';
 
 class APIService {
-
   final dio = Dio(BaseOptions(
-      baseUrl: const String.fromEnvironment('SERVER-URL'),
+      baseUrl: "https://swc.iitg.ac.in/onestopapi/v2",
       connectTimeout: 5000,
       receiveTimeout: 5000,
       headers: {'Security-Key': const String.fromEnvironment('SECURITY-KEY')}));
@@ -44,7 +43,7 @@ class APIService {
   Future<Response<dynamic>> retryRequest(RequestOptions requestOptions) async {
     final options = Options(method: requestOptions.method,headers: requestOptions.headers);
     Dio retryDio = Dio(BaseOptions(
-        baseUrl: const String.fromEnvironment('SERVER-URL'),
+        baseUrl: "https://swc.iitg.ac.in/onestopapi/v2",
         connectTimeout: 5000,
         receiveTimeout: 5000,
         headers: {'Security-Key': const String.fromEnvironment('SECURITY-KEY')}));
@@ -62,6 +61,7 @@ class APIService {
     Response<Map<String, dynamic>> resp =
         await dio.post("/gc/login", data: {DatabaseRecords.useremail: userData[DatabaseRecords.useremail]});
     var data = resp.data!;
+    print(data);
     if (data["success"]==true) {
       // print(data["authEvents"]);
       Map<String, bool> authEvents = {
@@ -81,7 +81,7 @@ class APIService {
   Future<bool> regenerateAccessToken() async {
     String refreshToken = await AuthUserHelpers.getRefreshToken();
     Dio regenDio = Dio(BaseOptions(
-        baseUrl: const String.fromEnvironment('SERVER-URL'),
+        baseUrl: "https://swc.iitg.ac.in/onestopapi/v2",
         connectTimeout: 5000,
         receiveTimeout: 5000,
         headers: {'Security-Key': const String.fromEnvironment('SECURITY-KEY')}));

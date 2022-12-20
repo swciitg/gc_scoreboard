@@ -36,8 +36,6 @@ dependencies:
   cupertino_icons: ^1.0.2
   scoreboard:
     path: packages/scoreboard
-  google_fonts: ^3.0.1
-  flutter_svg: ^1.1.6
 
 dev_dependencies:
   flutter_test:
