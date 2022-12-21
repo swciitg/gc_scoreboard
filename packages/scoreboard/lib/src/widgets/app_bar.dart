@@ -19,7 +19,7 @@ PreferredSize appBar(BuildContext buildContext, var type) {
             children: [
               InkWell(
                 onTap: (){
-                  Navigator.of(buildContext).popUntil((route) => false);
+                  Navigator.of(buildContext).pop((route) => false);
                 },
                 child: Container(
                   width: 80,

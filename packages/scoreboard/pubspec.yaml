@@ -22,6 +22,7 @@ dependencies:
   dio: ^4.0.6
   intl: ^0.18.0
   dropdown_textfield: ^1.0.7
+  font_awesome_flutter: ^10.3.0
 
 
 dev_dependencies:
@@ -43,6 +44,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/
+    - assets/images_standingboard/
   #
   # For details regarding assets in packages, see
   # https://flutter.dev/assets-and-images/#from-packages
