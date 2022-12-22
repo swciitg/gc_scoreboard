@@ -8,7 +8,7 @@ import 'package:scoreboard/src/models/result_model.dart';
 import 'package:scoreboard/src/screens/results_form.dart';
 import 'package:scoreboard/src/screens/scoreboard_page.dart';
 import 'package:scoreboard/src/services/api.dart';
-import 'package:scoreboard/src/stores/login_store.dart';
+import 'package:scoreboard/src/stores/user_store.dart';
 import 'package:scoreboard/src/stores/results_form_store.dart';
 import 'package:scoreboard/src/widgets/app_bar.dart';
 
@@ -128,6 +128,7 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
                         builder: (context) => const StandingsPage()));
               },
               child: Text("Scoreboard Page")),
+
         ],
       ),
     );

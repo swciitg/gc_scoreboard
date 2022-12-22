@@ -1,8 +1,12 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:scoreboard/src/globals/auth_user_helper.dart';
+import 'package:scoreboard/src/globals/global_widgets.dart';
 import 'package:scoreboard/src/globals/helper_variables.dart';
-import 'package:scoreboard/src/screens/admin_login.dart';
+import 'package:scoreboard/src/screens/home.dart';
+import 'package:scoreboard/src/screens/login/admin_login.dart';
 import '../globals/themes.dart';
 
 PreferredSize appBar(BuildContext buildContext, var type) {
@@ -80,13 +84,23 @@ PreferredSize appBar(BuildContext buildContext, var type) {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                     itemBuilder: (buildContext) => [
                       PopupMenuItem(
-                        value: type==viewType.admin ? "/home" : "/admin/login",
+                        value: type==viewType.admin ? ScoreBoardHome.id : LoginView.id,
                         padding: EdgeInsets.symmetric(horizontal: 20,vertical: 11),
                         child: Text(type==viewType.admin ? "Switch to User View" : "Switch to Admin View",style: Themes.theme.textTheme.headline6,)
                       ),
                     ],
-                    onSelected: (newRoute) => {
-                      Navigator.pushNamedAndRemoveUntil(buildContext, newRoute, (route) => false)
+                    onSelected: (newRoute) async {
+                      if(newRoute == LoginView.id){
+                        if(!await AuthUserHelpers.checkIfAdmin()){
+                          showSnackBar(buildContext, "You are not an admin");
+                          return;
+                        }
+                        ConnectivityResult connectivityResult = await (Connectivity().checkConnectivity());
+                        if(connectivityResults.contains(connectivityResult) && await Navigator.pushNamed(buildContext, LoginView.id) == true){
+                          Navigator.pushNamedAndRemoveUntil(buildContext, ScoreBoardHome.id, (route) => false);
+                        }
+                      }
+                      else Navigator.pushNamedAndRemoveUntil(buildContext, newRoute, (route) => false);
                     },
                   )
                 ),
