@@ -17,7 +17,7 @@ class StandingsPage extends StatefulWidget {
 class _StandingsPageState extends State<StandingsPage> {
   int _selectedNavBarItemIndex = 1;
   int _selectedTopBarItemIndex = 1;
-  final _itemsCategory = ['Overall','Men', 'Women'];
+  final _itemsCategory = ['Overall', 'Men', 'Women'];
   final _itemsSports = ['Overall', 'hockey', 'football'];
   String _category = 'Overall';
   String _sports = 'Overall';
@@ -53,7 +53,6 @@ class _StandingsPageState extends State<StandingsPage> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(56),
         child: Container(
-          // color: Colors.orange,
           child: SafeArea(
             bottom: false,
             child: Padding(
@@ -113,7 +112,6 @@ class _StandingsPageState extends State<StandingsPage> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8),
                     child: Container(
-                      // width: width * 0.8,
                       width: 80,
                       height: 36,
                     ),
@@ -124,7 +122,6 @@ class _StandingsPageState extends State<StandingsPage> {
           ),
         ),
       ),
-      
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 0),
         child: Column(
@@ -136,7 +133,7 @@ class _StandingsPageState extends State<StandingsPage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 12),
               child: SizedBox(
-                height: 56,
+                height: 75,
                 child: Row(
                   children: [
                     FilterList(
@@ -153,7 +150,7 @@ class _StandingsPageState extends State<StandingsPage> {
                 ),
               ),
             ),
-            StandingBoard()
+            Expanded(child: StandingBoard())
           ],
         ),
       ),
