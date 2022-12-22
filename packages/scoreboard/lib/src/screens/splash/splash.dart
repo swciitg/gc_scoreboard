@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/src/routes.dart';
 import 'package:scoreboard/src/screens/home.dart';
-import 'package:scoreboard/src/stores/login_store.dart';
+import 'package:scoreboard/src/stores/user_store.dart';
 
 class ScoreboardSplashScreen extends StatefulWidget {
   Map<String,String> userInfo;
@@ -16,10 +16,10 @@ class _ScoreboardSplashScreenState extends State<ScoreboardSplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Provider(
-      create: (_) => LoginStore(),
+      create: (_) => UserStore(),
       child: Builder(
         builder: (context) => FutureBuilder(
-          future: context.read<LoginStore>().saveUserData(widget.userInfo),
+          future: context.read<UserStore>().saveUserData(widget.userInfo,context),
           builder: (context,snapshot){
             return MaterialApp(
               debugShowCheckedModeBanner: false,

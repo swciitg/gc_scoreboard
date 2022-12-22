@@ -7,7 +7,7 @@ import 'package:scoreboard/src/models/event_model.dart';
 import 'package:scoreboard/src/models/result_model.dart';
 import 'package:scoreboard/src/screens/results_form.dart';
 import 'package:scoreboard/src/services/api.dart';
-import 'package:scoreboard/src/stores/login_store.dart';
+import 'package:scoreboard/src/stores/user_store.dart';
 import 'package:scoreboard/src/stores/results_form_store.dart';
 import 'package:scoreboard/src/widgets/app_bar.dart';
 
@@ -118,7 +118,13 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
                     MaterialPageRoute(
                         builder: (context) => ScheduleEvent(event: e,)));
               },
-              child: Text("Edit Event"))
+              child: Text("Edit Event")),
+          TextButton(
+              onPressed: (){
+            APIService(context).testAPI();
+            },
+              child: Text("Test Call"),
+          )
         ],
       ),
     );

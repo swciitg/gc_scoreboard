@@ -1,37 +1,51 @@
+import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:scoreboard/src/globals/auth_user_helper.dart';
+import 'package:scoreboard/src/globals/global_widgets.dart';
 import 'package:scoreboard/src/globals/helper_variables.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:scoreboard/src/screens/login/admin_login.dart';
 
 class APIService {
   final dio = Dio(BaseOptions(
-      baseUrl: "https://swc.iitg.ac.in/onestopapi/v2",
+      baseUrl: const String.fromEnvironment('SERVER-URL'),
       connectTimeout: 5000,
       receiveTimeout: 5000,
       headers: {'Security-Key': const String.fromEnvironment('SECURITY-KEY')}));
 
-  APIService(){
-    dio.interceptors.clear(); // remove old instance of interceptorWrapper added with previous call
+  APIService(BuildContext buildContext){
     dio.interceptors.add(InterceptorsWrapper(
       onError: (error,handler) async {
         print("in interceptor");
         Response response = error.response!;
+        print(response.statusCode ?? "no status code");
         if(response.statusCode==401){
+          print("inside here");
           bool couldRegenerate = await regenerateAccessToken();
           bool isAdmin = await AuthUserHelpers.checkIfAdmin();
+          print(isAdmin);
           if(couldRegenerate){
             // retry
             print("regenerated access token");
-            response.requestOptions.headers[DatabaseRecords.authorization]="Bearer ${await AuthUserHelpers.getAccessToken()}";
-            Response retryResponse = await retryRequest(response.requestOptions);
-            print(retryResponse.data);
-            return handler.resolve(retryResponse);
+            return handler.resolve(await retryRequest(response));
           }
-          else if(isAdmin==false){ // normal user
+          else if(isAdmin==false){// normal user
             await generateTokens();
-            response.requestOptions.headers[DatabaseRecords.authorization]="Bearer ${await AuthUserHelpers.getAccessToken()}";
             // retry
-            Response retryResponse = await retryRequest(response.requestOptions);
-            return handler.resolve(retryResponse);
+            return handler.resolve(await retryRequest(response));
+          }
+          else{
+            print("here");
+            // show login screen to admin if only he has internet connection
+            var connectivityResult = await (Connectivity().checkConnectivity());
+            if(connectivityResults.contains(connectivityResult) && await Navigator.pushNamed(buildContext, LoginView.id) == true){
+              print("verified admin via login");
+              await generateTokens();
+              print("regenerated tokens for admin");
+              // retry
+              return handler.resolve(await retryRequest(response));
+            }
           }
         }
         // admin user with expired tokens
@@ -40,10 +54,12 @@ class APIService {
     ));
   }
 
-  Future<Response<dynamic>> retryRequest(RequestOptions requestOptions) async {
+  Future<Response<dynamic>> retryRequest(Response response) async {
+    RequestOptions requestOptions = response.requestOptions;
+    response.requestOptions.headers[DatabaseRecords.authorization]="Bearer ${await AuthUserHelpers.getAccessToken()}";
     final options = Options(method: requestOptions.method,headers: requestOptions.headers);
     Dio retryDio = Dio(BaseOptions(
-        baseUrl: "https://swc.iitg.ac.in/onestopapi/v2",
+        baseUrl: const String.fromEnvironment('SERVER-URL'),
         connectTimeout: 5000,
         receiveTimeout: 5000,
         headers: {'Security-Key': const String.fromEnvironment('SECURITY-KEY')}));
@@ -54,6 +70,11 @@ class APIService {
       print("here");
       return retryDio.request(requestOptions.path,queryParameters: requestOptions.queryParameters,data: requestOptions.data,options: options);
     }
+  }
+
+  Future<void> testAPI() async {
+    var resp = await dio.post("/gc/test",data: {"text" : "test"});
+    print(resp);
   }
 
   Future<void> generateTokens() async {
@@ -80,20 +101,27 @@ class APIService {
 
   Future<bool> regenerateAccessToken() async {
     String refreshToken = await AuthUserHelpers.getRefreshToken();
-    Dio regenDio = Dio(BaseOptions(
-        baseUrl: "https://swc.iitg.ac.in/onestopapi/v2",
-        connectTimeout: 5000,
-        receiveTimeout: 5000,
-        headers: {'Security-Key': const String.fromEnvironment('SECURITY-KEY')}));
-    Response<Map<String, dynamic>> resp = await regenDio.post("/gc/gen-accesstoken",
-        options: Options(headers: {
-          "authorization": "Bearer ${refreshToken}"
-        }));
-    if(resp.statusCode==401) return false;
-    var data = resp.data!;
-    print("regenerate token");
-    await AuthUserHelpers.setAccessToken(data["token"]);
-    return true;
+    print(refreshToken);
+    try{
+      Dio regenDio = Dio(BaseOptions(
+          baseUrl: const String.fromEnvironment('SERVER-URL'),
+          connectTimeout: 5000,
+          receiveTimeout: 5000,
+          headers: {'Security-Key': const String.fromEnvironment('SECURITY-KEY')}));
+      Response<Map<String, dynamic>> resp = await regenDio.post("/gc/gen-accesstoken",
+          options: Options(headers: {
+            "authorization": "Bearer ${refreshToken}"
+          }));
+      print(resp);
+      var data = resp.data!;
+      print("regenerate token");
+      await AuthUserHelpers.setAccessToken(data["token"]);
+      return true;
+    }
+    catch (err){
+      print("resp 401");
+      return false;
+    }
   }
 
 }

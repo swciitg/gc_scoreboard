@@ -1,3 +1,5 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
+
 class DatabaseRecords{
   static const useremail = "email";
   static const username = "name";
@@ -9,6 +11,12 @@ class DatabaseRecords{
   static const authorization = "authorization";
 }
 
+const connectivityResults = [ConnectivityResult.ethernet, ConnectivityResult.mobile, ConnectivityResult.vpn, ConnectivityResult.wifi];
+
 enum viewType {
   user, admin
+}
+
+enum apiResponse{
+  success, adminRelogin
 }
