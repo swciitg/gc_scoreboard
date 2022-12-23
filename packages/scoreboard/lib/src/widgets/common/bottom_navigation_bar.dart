@@ -1,45 +1,56 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
-import '../globals/themes.dart';
+import '../../globals/themes.dart';
+import '../../stores/common_store.dart';
 
-class BottomNavBar extends StatelessWidget {
-  final selectedIndex;
-  ValueChanged<int> onClicked;
-  BottomNavBar({this.selectedIndex, required this.onClicked});
+class BottomNavBar extends StatefulWidget {
+  const BottomNavBar({super.key});
 
   @override
+  State<BottomNavBar> createState() => _BottomNavBarState();
+}
+
+class _BottomNavBarState extends State<BottomNavBar> {
+  @override
   Widget build(BuildContext context) {
+    var commonStore = context.read<CommonStore>();
     return SafeArea(
       child: Container(
         color: Themes.bottomNavBarColor,
         height: 80,
         width: MediaQuery.of(context).size.width,
-        child: Row(
-          children: [
-            bottomNavigationBarItem(
-                'assets/gc.svg', 'GC', 0, MediaQuery.of(context).size.width / 4),
-            bottomNavigationBarItem('assets/spardha2.svg', 'Spardha', 1,
-                MediaQuery.of(context).size.width / 4),
-            bottomNavigationBarItem('assets/kriti2.svg', 'Kriti', 2,
-                MediaQuery.of(context).size.width / 4),
-            bottomNavigationBarItem('assets/manthan2.svg', 'Manthan', 3,
-                MediaQuery.of(context).size.width / 4),
-          ],
+        child: Observer(
+          builder: (context){
+            return Row(
+              children: [
+                bottomNavigationBarItem(
+                    'assets/gc.svg', 'GC', MediaQuery.of(context).size.width / 4, commonStore),
+                bottomNavigationBarItem('assets/spardha2.svg', 'Spardha',
+                    MediaQuery.of(context).size.width / 4, commonStore),
+                bottomNavigationBarItem('assets/kriti2.svg', 'Kriti',
+                    MediaQuery.of(context).size.width / 4, commonStore),
+                bottomNavigationBarItem('assets/manthan2.svg', 'Manthan',
+                    MediaQuery.of(context).size.width / 4, commonStore),
+              ],
+            );
+          },
         ),
       ),
     );
   }
 
   Widget bottomNavigationBarItem(
-      String assetImageAddress, String label, int index, double width) {
+      String assetImageAddress, String label, double width, var store) {
     return GestureDetector(
       onTap: () {
-        onClicked(index);
+        store.setCompetition(label);
       },
-      child: Container(
+      child: SizedBox(
         width: width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -52,7 +63,7 @@ class BottomNavBar extends StatelessWidget {
                 height: 40,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
-                    color: index == selectedIndex
+                    color: store.competition == label
                         ? Themes.bottomNavHighlightColor
                         : Themes.bottomNavBarColor),
                 child: Padding(
@@ -68,11 +79,11 @@ class BottomNavBar extends StatelessWidget {
               padding: const EdgeInsets.all(0.0),
               child: Text(label,
                   style: GoogleFonts.montserrat(
-                      fontWeight: index == selectedIndex
+                      fontWeight: store.competition == label
                           ? FontWeight.w600
                           : FontWeight.w500,
                       fontSize: 12,
-                      color: index == selectedIndex
+                      color: store.competition == label
                           ? Themes.primaryColor
                           : Themes.bottomNavFontColor)),
             )

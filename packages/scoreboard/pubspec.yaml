@@ -23,7 +23,7 @@ dependencies:
   intl: ^0.18.0
   dropdown_textfield: ^1.0.7
   webview_flutter: ^3.0.4
-  connectivity_plus: ^3.0.2
+  connectivity_plus:
 
 
 dev_dependencies:

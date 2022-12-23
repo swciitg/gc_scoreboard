@@ -4,16 +4,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/src/models/event_model.dart';
 import 'package:scoreboard/src/models/nullable_result_model.dart';
-import 'package:scoreboard/src/widgets/forms/fields_mandatory.dart';
 import '../functions/validation.dart';
 
 import '../stores/results_form_store.dart';
 import '../globals/themes.dart';
-import '../widgets/forms/hostel_dropdown.dart';
-import '../widgets/forms/custom_text_field.dart';
+import '../widgets/add_result/custom_text_field.dart';
+import '../widgets/add_result/fields_mandatory.dart';
+import '../widgets/add_result/hostel_dropdown.dart';
 
-class ResultsForm extends StatelessWidget {
-  const ResultsForm({super.key});
+
+class AddResultForm extends StatelessWidget {
+  const AddResultForm({super.key});
 
   String _positionSuffix(int count) {
     if (count == 1) return 'st';

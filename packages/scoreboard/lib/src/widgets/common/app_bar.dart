@@ -7,7 +7,7 @@ import 'package:scoreboard/src/globals/global_widgets.dart';
 import 'package:scoreboard/src/globals/helper_variables.dart';
 import 'package:scoreboard/src/screens/home.dart';
 import 'package:scoreboard/src/screens/login/admin_login.dart';
-import '../globals/themes.dart';
+import '../../globals/themes.dart';
 
 PreferredSize appBar(BuildContext buildContext, var type) {
   return PreferredSize(

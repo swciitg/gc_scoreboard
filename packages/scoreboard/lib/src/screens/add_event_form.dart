@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scoreboard/src/functions/schedule_event/validator.dart';
 import 'package:scoreboard/src/models/event_model.dart';
-import 'package:scoreboard/src/widgets/schedule_event/drop_down.dart';
-import 'package:scoreboard/src/widgets/schedule_event/text_field.dart';
-import '../../globals/themes.dart';
 
-class ScheduleEvent extends StatefulWidget {
+import '../globals/themes.dart';
+import '../widgets/add_event/drop_down.dart';
+import '../widgets/add_event/text_field.dart';
+
+class AddEventForm extends StatefulWidget {
   final EventModel? event;
-  const ScheduleEvent({super.key, this.event});
+  const AddEventForm({super.key, this.event});
 
   @override
-  State<ScheduleEvent> createState() => _ScheduleEventState();
+  State<AddEventForm> createState() => _AddEventFormState();
 }
 
-class _ScheduleEventState extends State<ScheduleEvent> {
+class _AddEventFormState extends State<AddEventForm> {
   final TextEditingController _sportNameController = TextEditingController();
   final TextEditingController _venueController = TextEditingController();
   final TextEditingController dateInput = TextEditingController();

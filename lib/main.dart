@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScoreboardSplashScreen(userInfo: {"name" : "Kunal Pal","email" : "k.pal@iitg.ac.in"});
+    return GCScoreBoard(userInfo: {"name" : "Kunal Pal","email" : "k.pal@iitg.ac.in"});
   }
 }
 
