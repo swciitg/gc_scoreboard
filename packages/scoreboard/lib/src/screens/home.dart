@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:scoreboard/src/globals/helper_variables.dart';
 import 'package:scoreboard/src/screens/add_result_form.dart';
 import 'package:scoreboard/src/screens/add_event_form.dart';
@@ -10,6 +11,7 @@ import 'package:scoreboard/src/widgets/common/app_bar.dart';
 import '../globals/themes.dart';
 import '../stores/common_store.dart';
 import '../widgets/common/bottom_navigation_bar.dart';
+import 'coming_soon.dart';
 
 class ScoreBoardHome extends StatefulWidget {
   static const id = '/home';
@@ -26,9 +28,9 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
   }
 
   Map<String, Widget> tabs = {
-    'Schedule': const SchedulePage(),
+    'Schedule':  const SchedulePage(category: 'schedule',),
     'Standings': const StandingsPage(),
-    'Results': const SchedulePage(),
+    'Results':  const SchedulePage(category: 'results',),
   };
 
   @override
@@ -39,29 +41,54 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
         return Scaffold(
           backgroundColor: Themes.backgroundColor,
           appBar: appBar(context, viewType.user),
-          body: tabs[commonStore.page],
+          body:
+              commonStore.competition == 'Kriti' || commonStore.competition == 'Manthan'
+              ? ComingSoon(competition: commonStore.competition,)
+              : tabs[commonStore.page],
           bottomNavigationBar: const BottomNavBar(),
-          floatingActionButton: commonStore.page == 'Schedule'
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+          floatingActionButton:
+              commonStore.page == 'Schedule' && commonStore.competition != 'Kriti' && commonStore.competition != 'Manthan'
               ? GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => const AddEventForm()));
                   },
-                  child:
-                      Container(height: 15, width: 100,color: Colors.blue ,child: Center(child: const Text('Add Event'))),
+                  child: addButton("Add event "),
                 )
-              : commonStore.page == 'Results'?
-          GestureDetector(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const AddResultForm()));
-            },
-            child:
-            Container(height: 15, width: 100,color: Colors.blue ,child: Center(child: const Text('Add Result'))),
-          )
+              : commonStore.page == 'Results' && commonStore.competition != 'Kriti' && commonStore.competition != 'Manthan'
+              ? GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const AddResultForm()));
+                  },
+                  child: addButton("Add Result ")
+                    
+                )
               :Container(),
         );
       },
+    );
+  }
+
+
+  Widget addButton(String text){
+    return Container(
+        decoration: BoxDecoration(
+          color: Color(0xffFFC907),
+          borderRadius: BorderRadius.circular(21),
+        ),
+        height: 40,
+        width: 130,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Icon(Icons.add, size: 20,),
+            Text(
+              text,
+              style: GoogleFonts.montserrat(fontSize: 15, fontWeight: FontWeight.w600),)
+          ],
+        )
     );
   }
 }
