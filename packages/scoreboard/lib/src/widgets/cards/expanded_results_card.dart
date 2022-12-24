@@ -30,7 +30,7 @@ class ExpandedResultsCard extends StatelessWidget {
               eventModel.results[0].position,
               eventModel.results[0].hostel,
               eventModel.results[0].primaryScore,
-              eventModel.results[1].secondaryScore,
+              eventModel.results[0].secondaryScore,
             ),
             SecondaryScoreResultsCardItem(
               eventModel.results[1].position,
@@ -100,6 +100,7 @@ class ExpandedResultsCard extends StatelessWidget {
   Widget SecondaryScoreResultsCardItem(int position, String hostelName,
       String finalScore, String? secondaryScore) {
     final split = secondaryScore?.split(',');
+    print(split);
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),

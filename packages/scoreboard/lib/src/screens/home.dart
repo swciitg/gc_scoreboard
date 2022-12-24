@@ -31,8 +31,7 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
   Map<Pages, Widget> tabs = {
     Pages.schedule: const SchedulePage(),
     Pages.standings: const StandingsPage(),
-    Pages.results: const SchedulePage(),
-
+    Pages.results: const ResultsPage(),
   };
 
   @override

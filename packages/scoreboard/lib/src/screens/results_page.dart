@@ -55,8 +55,8 @@ class _ResultsPageState extends State<ResultsPage> {
             position: 1,
             hostel: 'Disang',
             points: 1,
-            primaryScore: '22.1s',
-            secondaryScore: '12,22,32,11'),
+            primaryScore: '.1s',
+            secondaryScore: '1,2,3,1'),
         ResultModel(
             position: 2,
             hostel: 'Lohit',
