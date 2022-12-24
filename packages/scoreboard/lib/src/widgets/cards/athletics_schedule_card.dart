@@ -28,6 +28,7 @@ class AthleticsScheduleCard extends StatelessWidget {
               : Container(
                   height: (eventModel.hostels.length).toDouble() * 12,
                   child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
                       itemCount: eventModel.hostels.length.isEven
                           ? (eventModel.hostels.length / 2).toInt()
                           : (eventModel.hostels.length + 1 / 2).toInt(),

@@ -15,6 +15,7 @@ class ExpandedResultsCard extends StatelessWidget {
       return Container(
           height: (eventModel.results.length).toDouble() * 34,
           child: ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
               itemCount: eventModel.results.length,
               itemBuilder: (context, index) {
                 return NullSecondaryResultsCardItem(
@@ -157,6 +158,7 @@ class ExpandedResultsCard extends StatelessWidget {
                   child: ListView.builder(
                       itemCount: split?.length,
                       scrollDirection: Axis.horizontal,
+                      physics: NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
                         return Container(
                           alignment: Alignment.centerRight,
