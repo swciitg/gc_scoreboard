@@ -16,6 +16,10 @@ class APIService {
 
   APIService(BuildContext buildContext){
     dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options,handler) async {
+        options.headers["Authorization"] = "Bearer ${await AuthUserHelpers.getAccessToken()}";
+        handler.next(options);
+      },
       onError: (error,handler) async {
         print("in interceptor");
         Response response = error.response!;
