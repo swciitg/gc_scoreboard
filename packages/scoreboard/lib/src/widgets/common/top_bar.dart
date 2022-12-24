@@ -6,7 +6,7 @@ import '../../globals/themes.dart';
 import '../../stores/common_store.dart';
 
 class TopBar extends StatefulWidget {
-  TopBar({super.key});
+  const TopBar({super.key});
 
   @override
   State<TopBar> createState() => _TopBarState();
@@ -22,7 +22,6 @@ class _TopBarState extends State<TopBar> {
         children: const [
           Expanded(
             child: TopBarItem(
-              iconData: Icons.trending_up_outlined,
               label: Pages.standings,
             ),
           ),
@@ -31,7 +30,6 @@ class _TopBarState extends State<TopBar> {
           ),
           Expanded(
             child: TopBarItem(
-              iconData: Icons.date_range_outlined,
               label: Pages.schedule,
             ),
           ),
@@ -40,7 +38,6 @@ class _TopBarState extends State<TopBar> {
           ),
           Expanded(
             child: TopBarItem(
-              iconData: Icons.emoji_events_outlined,
               label: Pages.results,
             ),
           ),
@@ -51,11 +48,9 @@ class _TopBarState extends State<TopBar> {
 }
 
 class TopBarItem extends StatelessWidget {
-  final IconData iconData;
   final Pages label;
   const TopBarItem({
     Key? key,
-    required this.iconData,
     required this.label,
   }) : super(key: key);
 
@@ -79,7 +74,7 @@ class TopBarItem extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(iconData,
+              Icon(label.icon,
                   color: store.page == label
                       ? Themes.secondaryColor
                       : Themes.primaryColor,

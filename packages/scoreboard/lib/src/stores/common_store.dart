@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 part 'common_store.g.dart';
 
@@ -16,12 +17,13 @@ enum Competitions {
 }
 
 enum Pages {
-  standings("Standings"),
-  schedule("Schedule"),
-  results("Results");
+  standings("Standings", Icons.trending_up_outlined),
+  schedule("Schedule", Icons.date_range_outlined),
+  results("Results", Icons.emoji_events_outlined);
 
   final String name;
-  const Pages(this.name);
+  final IconData icon;
+  const Pages(this.name,this.icon);
 }
 
 class CommonStore = _CommonStore with _$CommonStore;
