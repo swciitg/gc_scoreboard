@@ -28,9 +28,9 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
   }
 
   Map<String, Widget> tabs = {
-    'Schedule':  const SchedulePage(category: 'schedule',),
+    'Schedule': const SchedulePage(),
     'Standings': const StandingsPage(),
-    'Results':  const SchedulePage(category: 'results',),
+    'Results': const SchedulePage(),
   };
 
   @override
@@ -41,41 +41,41 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
         return Scaffold(
           backgroundColor: Themes.backgroundColor,
           appBar: appBar(context, viewType.user),
-          body:
-              commonStore.competition == 'Kriti' || commonStore.competition == 'Manthan'
-              ? ComingSoon(competition: commonStore.competition,)
-              : tabs[commonStore.page],
+          body: commonStore.competition == 'Spardha'
+              ? tabs[commonStore.page]
+              : ComingSoon(
+                  competition: commonStore.competition,
+                ),
           bottomNavigationBar: const BottomNavBar(),
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-          floatingActionButton:
-              commonStore.page == 'Schedule' && commonStore.competition != 'Kriti' && commonStore.competition != 'Manthan'
-              ? GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const AddEventForm()));
-                  },
-                  child: addButton("Add event "),
-                )
-              : commonStore.page == 'Results' && commonStore.competition != 'Kriti' && commonStore.competition != 'Manthan'
-              ? GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const AddResultForm()));
-                  },
-                  child: addButton("Add Result ")
-                    
-                )
-              :Container(),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: commonStore.competition == 'Spardha'
+              ? commonStore.page == 'Schedule'
+                  ? GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const AddEventForm()));
+                      },
+                      child: addButton("Add event "),
+                    )
+                  : commonStore.page == 'Results'
+                      ? GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const AddResultForm()));
+                          },
+                          child: addButton("Add Result "))
+                      : Container()
+              : Container(),
         );
       },
     );
   }
 
-
-  Widget addButton(String text){
+  Widget addButton(String text) {
     return Container(
         decoration: BoxDecoration(
-          color: Color(0xffFFC907),
+          color: const Color(0xffFFC907),
           borderRadius: BorderRadius.circular(21),
         ),
         height: 40,
@@ -83,13 +83,17 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Icon(Icons.add, size: 20,),
+            const Icon(
+              Icons.add,
+              size: 20,
+            ),
             Text(
               text,
-              style: GoogleFonts.montserrat(fontSize: 15, fontWeight: FontWeight.w600),)
+              style: GoogleFonts.montserrat(
+                  fontSize: 15, fontWeight: FontWeight.w600),
+            )
           ],
-        )
-    );
+        ));
   }
 }
 
