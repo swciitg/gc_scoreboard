@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:scoreboard/src/globals/helper_variables.dart';
 import 'package:scoreboard/src/screens/add_result_form.dart';
 import 'package:scoreboard/src/screens/add_event_form.dart';
@@ -11,6 +12,7 @@ import '../widgets/common/app_bar.dart';
 import '../globals/themes.dart';
 import '../stores/common_store.dart';
 import '../widgets/common/bottom_navigation_bar.dart';
+import 'coming_soon.dart';
 
 class ScoreBoardHome extends StatefulWidget {
   static const id = '/home';
@@ -26,10 +28,11 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
     super.initState();
   }
 
-  Map<String, Widget> tabs = {
-    'Schedule': const SchedulePage(),
-    'Standings': const StandingsPage(),
-    'Results': const ResultsPage(),
+  Map<Pages, Widget> tabs = {
+    Pages.schedule: const SchedulePage(),
+    Pages.standings: const StandingsPage(),
+    Pages.results: const SchedulePage(),
+
   };
 
   @override
@@ -40,7 +43,11 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
         return Scaffold(
           backgroundColor: Themes.backgroundColor,
           appBar: appBar(context, viewType.user),
-          body: tabs[commonStore.page],
+          body: commonStore.competition == Competitions.spardha
+              ? tabs[commonStore.page]
+              : ComingSoon(
+                  competition: commonStore.competition.toString(),
+                ),
           bottomNavigationBar: const BottomNavBar(),
           floatingActionButton: commonStore.page == 'Schedule'
               ? GestureDetector(
@@ -67,9 +74,34 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
                           child: Center(child: const Text('Add Result'))),
                     )
                   : Container(),
+
         );
       },
     );
+  }
+
+  Widget addButton(String text) {
+    return Container(
+        decoration: BoxDecoration(
+          color: const Color(0xffFFC907),
+          borderRadius: BorderRadius.circular(21),
+        ),
+        height: 40,
+        width: 130,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const Icon(
+              Icons.add,
+              size: 20,
+            ),
+            Text(
+              text,
+              style: GoogleFonts.montserrat(
+                  fontSize: 15, fontWeight: FontWeight.w600),
+            )
+          ],
+        ));
   }
 }
 

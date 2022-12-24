@@ -6,7 +6,7 @@ import '../../globals/themes.dart';
 import '../../stores/common_store.dart';
 
 class TopBar extends StatefulWidget {
-  TopBar({super.key});
+  const TopBar({super.key});
 
   @override
   State<TopBar> createState() => _TopBarState();
@@ -15,61 +15,84 @@ class TopBar extends StatefulWidget {
 class _TopBarState extends State<TopBar> {
   @override
   Widget build(BuildContext context) {
-    var commonStore = context.read<CommonStore>();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-      child: Observer(
-        builder: (context){
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(child: topBarItem(Icons.trending_up_outlined, 'Standings', commonStore)),
-              const SizedBox(width: 8,),
-              Expanded(child: topBarItem(Icons.date_range_outlined, 'Schedule', commonStore)),
-              const SizedBox(width: 8,),
-              Expanded(child: topBarItem(Icons.emoji_events_outlined, 'Results', commonStore)),
-            ],
-          );
-        },
-      )
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: const [
+          Expanded(
+            child: TopBarItem(
+              label: Pages.standings,
+            ),
+          ),
+          SizedBox(
+            width: 8,
+          ),
+          Expanded(
+            child: TopBarItem(
+              label: Pages.schedule,
+            ),
+          ),
+          SizedBox(
+            width: 8,
+          ),
+          Expanded(
+            child: TopBarItem(
+              label: Pages.results,
+            ),
+          ),
+        ],
+      ),
     );
   }
+}
 
-  Widget topBarItem(IconData iconData, String label, var store) {
+class TopBarItem extends StatelessWidget {
+  final Pages label;
+  const TopBarItem({
+    Key? key,
+    required this.label,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    CommonStore store = context.read<CommonStore>();
     return GestureDetector(
       onTap: () {
         store.setPage(label);
       },
-      child: Container(
-        // width: width * 0.8,
-        // height: 28,
-        padding: const EdgeInsets.symmetric(vertical: 6),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(100),
-            color: store.page == label
-                ? Themes.primaryColor
-                : Themes.secondaryColor),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(iconData,
-                color: store.page == label
-                    ? Themes.secondaryColor
-                    : Themes.primaryColor,
-                size: 16),
-            const SizedBox(
-              width: 8,
-            ),
-            Text(label,
-                style: GoogleFonts.montserrat(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 12,
-                    color: store.page == label
-                        ? Themes.secondaryColor
-                        : Themes.primaryColor)),
-          ],
-        ),
-      ),
+      child: Observer(builder: (context) {
+        return Container(
+          // width: width * 0.8,
+          // height: 28,
+          padding: const EdgeInsets.symmetric(vertical: 6),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              color: store.page == label
+                  ? Themes.primaryColor
+                  : Themes.secondaryColor),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(label.icon,
+                  color: store.page == label
+                      ? Themes.secondaryColor
+                      : Themes.primaryColor,
+                  size: 16),
+              const SizedBox(
+                width: 8,
+              ),
+              Text(label.name,
+                  style: GoogleFonts.montserrat(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 12,
+                      color: store.page == label
+                          ? Themes.secondaryColor
+                          : Themes.primaryColor)),
+            ],
+          ),
+        );
+      }),
     );
   }
 }
