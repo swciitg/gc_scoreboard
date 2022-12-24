@@ -48,7 +48,7 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
                   competition: commonStore.competition.toString(),
                 ),
           bottomNavigationBar: const BottomNavBar(),
-          floatingActionButton: commonStore.page == 'Schedule'
+          floatingActionButton: commonStore.page == Pages.schedule
               ? GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
@@ -60,7 +60,7 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
                       color: Colors.blue,
                       child: Center(child: const Text('Add Event'))),
                 )
-              : commonStore.page == 'Results'
+              : commonStore.page == Pages.results
                   ? GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
