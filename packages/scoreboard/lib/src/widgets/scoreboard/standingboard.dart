@@ -25,7 +25,7 @@ class _StandingBoardState extends State<StandingBoard> {
     return Container(
       margin: EdgeInsets.fromLTRB(4, 16, 4, 0),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(18), color: Themes.cardColor),
+          borderRadius: BorderRadius.circular(18), color: Themes.cardColor1),
       child: ListView.separated(
         itemCount: 10 + 1, //give length of content + 1 for heading
         itemBuilder: (context, index) {

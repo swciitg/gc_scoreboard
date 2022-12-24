@@ -4,7 +4,7 @@ import '../../globals/themes.dart';
 class CustomTextField extends StatelessWidget {
   final String hintText;
   final String? Function(String?)? validator;
-  final int? value;
+  final String? value;
   final onChanged;
 
   const CustomTextField({
@@ -15,10 +15,9 @@ class CustomTextField extends StatelessWidget {
     required this.onChanged,
   });
 
-
   @override
   Widget build(BuildContext context) {
-    final controller = TextEditingController(text: value?.toString() );
+    final controller = TextEditingController(text: value?.toString());
     return TextFormField(
       style: Themes.theme.textTheme.headline6,
       validator: validator,

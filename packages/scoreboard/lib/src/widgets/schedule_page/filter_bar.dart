@@ -22,7 +22,7 @@ class FilterBar extends StatelessWidget {
                     height: 56,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(18),
-                        color: Themes.cardColor),
+                        color: Themes.cardColor1),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 16,
@@ -73,7 +73,7 @@ class FilterBar extends StatelessWidget {
                     height: 56,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(18),
-                        color: Themes.cardColor),
+                        color: Themes.cardColor1),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 16,
@@ -125,7 +125,7 @@ class FilterBar extends StatelessWidget {
                       height: 56,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(18),
-                          color: Themes.cardColor),
+                          color: Themes.cardColor1),
                       child: Icon(
                         Icons.event_outlined,
                         size: 24,

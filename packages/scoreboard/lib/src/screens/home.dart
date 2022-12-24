@@ -4,10 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:scoreboard/src/globals/helper_variables.dart';
 import 'package:scoreboard/src/screens/add_result_form.dart';
 import 'package:scoreboard/src/screens/add_event_form.dart';
-import 'package:scoreboard/src/screens/schedule_page.dart';
+import '../screens/results_page.dart';
+import '../screens/schedule_page.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/screens/standings_page.dart';
-import 'package:scoreboard/src/widgets/common/app_bar.dart';
+import '../screens/standings_page.dart';
+import '../widgets/common/app_bar.dart';
 import '../globals/themes.dart';
 import '../stores/common_store.dart';
 import '../widgets/common/bottom_navigation_bar.dart';
@@ -31,6 +32,7 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
     Pages.schedule: const SchedulePage(),
     Pages.standings: const StandingsPage(),
     Pages.results: const SchedulePage(),
+
   };
 
   @override
@@ -47,26 +49,32 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
                   competition: commonStore.competition.toString(),
                 ),
           bottomNavigationBar: const BottomNavBar(),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: commonStore.competition == Competitions.spardha
-              ? commonStore.page == Pages.schedule
+          floatingActionButton: commonStore.page == 'Schedule'
+              ? GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const AddEventForm()));
+                  },
+                  child: Container(
+                      height: 15,
+                      width: 100,
+                      color: Colors.blue,
+                      child: Center(child: const Text('Add Event'))),
+                )
+              : commonStore.page == 'Results'
                   ? GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const AddEventForm()));
+                            builder: (context) => const AddResultForm()));
                       },
-                      child: addButton("Add event "),
+                      child: Container(
+                          height: 15,
+                          width: 100,
+                          color: Colors.blue,
+                          child: Center(child: const Text('Add Result'))),
                     )
-                  : commonStore.page == Pages.results
-                      ? GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const AddResultForm()));
-                          },
-                          child: addButton("Add Result "))
-                      : Container()
-              : Container(),
+                  : Container(),
+
         );
       },
     );
