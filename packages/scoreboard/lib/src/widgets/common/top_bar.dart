@@ -38,7 +38,7 @@ class _TopBarState extends State<TopBar> {
   Widget topBarItem(IconData iconData, String label, var store) {
     return GestureDetector(
       onTap: () {
-        store.setPage(label);
+        store.setPage(Pages.values.byName(label));
       },
       child: Container(
         // width: width * 0.8,
@@ -46,14 +46,14 @@ class _TopBarState extends State<TopBar> {
         padding: const EdgeInsets.symmetric(vertical: 6),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
-            color: store.page == label
+            color: store.page == Pages.values.byName(label)
                 ? Themes.primaryColor
                 : Themes.secondaryColor),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(iconData,
-                color: store.page == label
+                color: store.page == Pages.values.byName(label)
                     ? Themes.secondaryColor
                     : Themes.primaryColor,
                 size: 16),
@@ -64,7 +64,7 @@ class _TopBarState extends State<TopBar> {
                 style: GoogleFonts.montserrat(
                     fontWeight: FontWeight.w600,
                     fontSize: 12,
-                    color: store.page == label
+                    color: store.page == Pages.values.byName(label)
                         ? Themes.secondaryColor
                         : Themes.primaryColor)),
           ],

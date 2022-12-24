@@ -3,23 +3,27 @@
 import 'package:mobx/mobx.dart';
 part 'common_store.g.dart';
 
+
+enum Competitions {Spardha, Kriti, Manthan, GC}
+enum Pages {Standings, Schedule, Results}
+
 class CommonStore = _CommonStore with _$CommonStore;
 
 abstract class _CommonStore with Store {
   @observable
-  String competition = "Spardha";
+  Competitions competition = Competitions.Spardha;
 
   @observable
-  String page = "Standings";
+  Pages page = Pages.Standings;
 
   @action
-  void setCompetition(String newIndex) {
-    competition = newIndex;
+  void setCompetition(Competitions c) {
+    competition = c;
   }
 
   @action
-  void setPage(String newIndex) {
-    page = newIndex;
+  void setPage(Pages p) {
+    page = p;
   }
 
 }

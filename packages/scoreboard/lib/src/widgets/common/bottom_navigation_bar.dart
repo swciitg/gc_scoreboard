@@ -48,7 +48,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       String assetImageAddress, String label, double width, var store) {
     return GestureDetector(
       onTap: () {
-        store.setCompetition(label);
+        store.setCompetition(Competitions.values.byName(label));
       },
       child: SizedBox(
         width: width,
@@ -63,7 +63,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 height: 40,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
-                    color: store.competition == label
+                    color: store.competition == Competitions.values.byName(label)
                         ? Themes.bottomNavHighlightColor
                         : Themes.bottomNavBarColor),
                 child: Padding(
@@ -79,11 +79,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
               padding: const EdgeInsets.all(0.0),
               child: Text(label,
                   style: GoogleFonts.montserrat(
-                      fontWeight: store.competition == label
+                      fontWeight: store.competition == Competitions.values.byName(label)
                           ? FontWeight.w600
                           : FontWeight.w500,
                       fontSize: 12,
-                      color: store.competition == label
+                      color: store.competition == Competitions.values.byName(label)
                           ? Themes.primaryColor
                           : Themes.bottomNavFontColor)),
             )

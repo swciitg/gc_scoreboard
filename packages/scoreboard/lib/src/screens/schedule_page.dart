@@ -23,7 +23,7 @@ class _SchedulePageState extends State<SchedulePage> {
           children: [
             TopBar(),
             const FilterBar(),
-            emptyState(commonStore.page),
+            emptyState(commonStore.page.name),
           ],
         ),
       );

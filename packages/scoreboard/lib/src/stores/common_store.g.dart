@@ -13,13 +13,13 @@ mixin _$CommonStore on _CommonStore, Store {
       Atom(name: '_CommonStore.competition', context: context);
 
   @override
-  String get competition {
+  Competitions get competition {
     _$competitionAtom.reportRead();
     return super.competition;
   }
 
   @override
-  set competition(String value) {
+  set competition(Competitions value) {
     _$competitionAtom.reportWrite(value, super.competition, () {
       super.competition = value;
     });
@@ -28,13 +28,13 @@ mixin _$CommonStore on _CommonStore, Store {
   late final _$pageAtom = Atom(name: '_CommonStore.page', context: context);
 
   @override
-  String get page {
+  Pages get page {
     _$pageAtom.reportRead();
     return super.page;
   }
 
   @override
-  set page(String value) {
+  set page(Pages value) {
     _$pageAtom.reportWrite(value, super.page, () {
       super.page = value;
     });
@@ -44,22 +44,22 @@ mixin _$CommonStore on _CommonStore, Store {
       ActionController(name: '_CommonStore', context: context);
 
   @override
-  void setCompetition(String newIndex) {
+  void setCompetition(Competitions c) {
     final _$actionInfo = _$_CommonStoreActionController.startAction(
         name: '_CommonStore.setCompetition');
     try {
-      return super.setCompetition(newIndex);
+      return super.setCompetition(c);
     } finally {
       _$_CommonStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void setPage(String newIndex) {
+  void setPage(Pages p) {
     final _$actionInfo = _$_CommonStoreActionController.startAction(
         name: '_CommonStore.setPage');
     try {
-      return super.setPage(newIndex);
+      return super.setPage(p);
     } finally {
       _$_CommonStoreActionController.endAction(_$actionInfo);
     }
