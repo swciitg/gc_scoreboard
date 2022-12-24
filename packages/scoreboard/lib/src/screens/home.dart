@@ -3,10 +3,11 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:scoreboard/src/globals/helper_variables.dart';
 import 'package:scoreboard/src/screens/add_result_form.dart';
 import 'package:scoreboard/src/screens/add_event_form.dart';
-import 'package:scoreboard/src/screens/schedule_page.dart';
+import '../screens/results_page.dart';
+import '../screens/schedule_page.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/screens/standings_page.dart';
-import 'package:scoreboard/src/widgets/common/app_bar.dart';
+import '../screens/standings_page.dart';
+import '../widgets/common/app_bar.dart';
 import '../globals/themes.dart';
 import '../stores/common_store.dart';
 import '../widgets/common/bottom_navigation_bar.dart';
@@ -28,7 +29,7 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
   Map<String, Widget> tabs = {
     'Schedule': const SchedulePage(),
     'Standings': const StandingsPage(),
-    'Results': const SchedulePage(),
+    'Results': const ResultsPage(),
   };
 
   @override
@@ -47,19 +48,25 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => const AddEventForm()));
                   },
-                  child:
-                      Container(height: 15, width: 100,color: Colors.blue ,child: Center(child: const Text('Add Event'))),
+                  child: Container(
+                      height: 15,
+                      width: 100,
+                      color: Colors.blue,
+                      child: Center(child: const Text('Add Event'))),
                 )
-              : commonStore.page == 'Results'?
-          GestureDetector(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const AddResultForm()));
-            },
-            child:
-            Container(height: 15, width: 100,color: Colors.blue ,child: Center(child: const Text('Add Result'))),
-          )
-              :Container(),
+              : commonStore.page == 'Results'
+                  ? GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const AddResultForm()));
+                      },
+                      child: Container(
+                          height: 15,
+                          width: 100,
+                          color: Colors.blue,
+                          child: Center(child: const Text('Add Result'))),
+                    )
+                  : Container(),
         );
       },
     );

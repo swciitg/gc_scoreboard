@@ -27,7 +27,8 @@ class _FilterListState extends State<FilterList> {
       child: Container(
           height: double.infinity,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(18), color: Themes.cardColor),
+              borderRadius: BorderRadius.circular(18),
+              color: Themes.cardColor1),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
             child: DropdownButtonHideUnderline(
@@ -54,7 +55,7 @@ class _FilterListState extends State<FilterList> {
                   size: 23,
                   color: Themes.cardFontColor1,
                 ),
-                dropdownColor: Themes.cardColor,
+                dropdownColor: Themes.cardColor1,
                 decoration: InputDecoration(
                   enabledBorder: const OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.transparent, width: 0),

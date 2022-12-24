@@ -4,8 +4,8 @@ class NullableResultModel extends Comparable {
   int position;
   String? hostel;
   int? points;
-  int? primaryScore;
-  int? secondaryScore;
+  String? primaryScore;
+  String? secondaryScore;
   NullableResultModel(
       {required this.position,
       this.hostel,

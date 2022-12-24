@@ -61,8 +61,10 @@ class Themes {
   static const bottomNavBarColor = Color.fromRGBO(45, 48, 55, 1);
   static const bottomNavFontColor = Color.fromRGBO(171, 171, 175, 1);
   static const bottomNavHighlightColor = Color.fromRGBO(94, 94, 94, 0.38);
-  static const cardColor = Color.fromRGBO(40, 40, 42, 1);
-  static const dotColor = Color.fromRGBO(255, 201, 7, 1);
+  static const cardColor1 = Color.fromRGBO(40, 40, 42, 1);
+  static const cardColor2 = Color.fromRGBO(45, 45, 47, 1);
   static const cardFontColor1 = Color.fromRGBO(143, 143, 143, 1);
   static const cardFontColor2 = Color.fromRGBO(242, 242, 242, 1);
+  static const cardFontColor3 = Color.fromRGBO(255, 201, 7, 1);
+  static const cardFontColor4 = Color.fromRGBO(255, 84, 73, 1);
 }

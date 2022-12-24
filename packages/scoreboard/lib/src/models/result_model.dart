@@ -2,8 +2,8 @@ class ResultModel {
   int position;
   String hostel;
   int points;
-  int primaryScore;
-  int? secondaryScore;
+  String primaryScore;
+  String? secondaryScore;
   ResultModel({
     required this.position,
     required this.hostel,

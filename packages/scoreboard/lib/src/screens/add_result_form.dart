@@ -12,7 +12,6 @@ import '../widgets/add_result/custom_text_field.dart';
 import '../widgets/add_result/fields_mandatory.dart';
 import '../widgets/add_result/hostel_dropdown.dart';
 
-
 class AddResultForm extends StatelessWidget {
   const AddResultForm({super.key});
 
@@ -214,7 +213,8 @@ class AddResultForm extends StatelessWidget {
                                             .resultFields?[index]
                                             .points = int.tryParse(p),
                                         value: resultStore
-                                            .resultFields?[index].points,
+                                            .resultFields?[index].points
+                                            .toString(),
                                       ))
                                 ],
                               ),
@@ -230,7 +230,7 @@ class AddResultForm extends StatelessWidget {
                                       validator: validateScore,
                                       onChanged: (ps) => resultStore
                                           .resultFields?[index]
-                                          .primaryScore = int.tryParse(ps),
+                                          .primaryScore = ps,
                                       value: resultStore
                                           .resultFields?[index].primaryScore,
                                     ),
@@ -245,7 +245,7 @@ class AddResultForm extends StatelessWidget {
                                         validator: null,
                                         onChanged: (ss) => resultStore
                                             .resultFields?[index]
-                                            .secondaryScore = int.tryParse(ss),
+                                            .secondaryScore = ss,
                                         value: resultStore.resultFields?[index]
                                             .secondaryScore,
                                       ))

@@ -17,12 +17,12 @@ PreferredSize appBar(BuildContext buildContext, var type) {
       child: SafeArea(
         bottom: false,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               InkWell(
-                onTap: (){
+                onTap: () {
                   Navigator.of(buildContext).popUntil((route) => false);
                 },
                 child: Container(
@@ -30,7 +30,7 @@ PreferredSize appBar(BuildContext buildContext, var type) {
                   padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
-                      color: Themes.cardColor),
+                      color: Themes.cardColor1),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -51,7 +51,7 @@ PreferredSize appBar(BuildContext buildContext, var type) {
                           style: GoogleFonts.montserrat(
                               fontWeight: FontWeight.w600,
                               fontSize: 12,
-                              color: Themes.dotColor)),
+                              color: Themes.cardFontColor3)),
                     ],
                   ),
                 ),
@@ -67,43 +67,57 @@ PreferredSize appBar(BuildContext buildContext, var type) {
                       style: GoogleFonts.montserrat(
                           fontWeight: FontWeight.w500,
                           fontSize: 22,
-                          color: Themes.dotColor)),
+                          color: Themes.cardFontColor3)),
                 ],
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 8),
                 child: Container(
-                  // width: width * 0.8,
-                  width: 72,
-                  height: 36,
-                  alignment: Alignment.centerRight,
-                  child: PopupMenuButton<String>(
-                    padding: EdgeInsets.only(top: 4),
-                    icon: Icon(Icons.more_vert,color: Themes.kWhite),
-                    color: Themes.kGrey,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                    itemBuilder: (buildContext) => [
-                      PopupMenuItem(
-                        value: type==viewType.admin ? ScoreBoardHome.id : LoginView.id,
-                        padding: EdgeInsets.symmetric(horizontal: 20,vertical: 11),
-                        child: Text(type==viewType.admin ? "Switch to User View" : "Switch to Admin View",style: Themes.theme.textTheme.headline6,)
-                      ),
-                    ],
-                    onSelected: (newRoute) async {
-                      if(newRoute == LoginView.id){
-                        if(!await AuthUserHelpers.checkIfAdmin()){
-                          showSnackBar(buildContext, "You are not an admin");
-                          return;
-                        }
-                        ConnectivityResult connectivityResult = await (Connectivity().checkConnectivity());
-                        if(connectivityResults.contains(connectivityResult) && await Navigator.pushNamed(buildContext, LoginView.id) == true){
-                          Navigator.pushNamedAndRemoveUntil(buildContext, ScoreBoardHome.id, (route) => false);
-                        }
-                      }
-                      else Navigator.pushNamedAndRemoveUntil(buildContext, newRoute, (route) => false);
-                    },
-                  )
-                ),
+                    // width: width * 0.8,
+                    width: 72,
+                    height: 36,
+                    alignment: Alignment.centerRight,
+                    child: PopupMenuButton<String>(
+                      padding: EdgeInsets.only(top: 4),
+                      icon: Icon(Icons.more_vert, color: Themes.kWhite),
+                      color: Themes.kGrey,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                      itemBuilder: (buildContext) => [
+                        PopupMenuItem(
+                            value: type == viewType.admin
+                                ? ScoreBoardHome.id
+                                : LoginView.id,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 11),
+                            child: Text(
+                              type == viewType.admin
+                                  ? "Switch to User View"
+                                  : "Switch to Admin View",
+                              style: Themes.theme.textTheme.headline6,
+                            )),
+                      ],
+                      onSelected: (newRoute) async {
+                        if (newRoute == LoginView.id) {
+                          if (!await AuthUserHelpers.checkIfAdmin()) {
+                            showSnackBar(buildContext, "You are not an admin");
+                            return;
+                          }
+                          ConnectivityResult connectivityResult =
+                              await (Connectivity().checkConnectivity());
+                          if (connectivityResults
+                                  .contains(connectivityResult) &&
+                              await Navigator.pushNamed(
+                                      buildContext, LoginView.id) ==
+                                  true) {
+                            Navigator.pushNamedAndRemoveUntil(buildContext,
+                                ScoreBoardHome.id, (route) => false);
+                          }
+                        } else
+                          Navigator.pushNamedAndRemoveUntil(
+                              buildContext, newRoute, (route) => false);
+                      },
+                    )),
               ),
             ],
           ),
