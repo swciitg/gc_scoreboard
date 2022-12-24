@@ -5,7 +5,6 @@ import 'package:scoreboard/src/screens/home.dart';
 import 'package:scoreboard/src/screens/splash.dart';
 import 'package:scoreboard/src/stores/results_form_store.dart';
 import 'package:scoreboard/src/stores/user_store.dart';
-
 import 'models/event_model.dart';
 import 'stores/common_store.dart';
 

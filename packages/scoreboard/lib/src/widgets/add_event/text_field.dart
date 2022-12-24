@@ -2,21 +2,17 @@ import 'package:flutter/material.dart';
 
 import '../../globals/themes.dart';
 
-
 class CustomTextField extends StatefulWidget {
   final String hintText;
   final String? Function(String?)? validator;
   final TextEditingController controller;
   final void Function()? onTap;
 
-
-  CustomTextField({
-    required this.hintText,
-    required this.validator,
-    required this.controller,
-    this.onTap
-
-  });
+  CustomTextField(
+      {required this.hintText,
+      required this.validator,
+      required this.controller,
+      this.onTap});
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -33,7 +29,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       cursorColor: Themes.theme.primaryColor,
       onTap: widget.onTap,
       decoration: InputDecoration(
-        label:RichText(
+        label: RichText(
           text: TextSpan(
             children: [
               TextSpan(
@@ -47,9 +43,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
             ],
           ),
         ),
-        labelStyle:Themes.theme.textTheme.bodyText1 ,
+        labelStyle: Themes.theme.textTheme.bodyText1,
         contentPadding:
-        const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+            const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Themes.theme.focusColor, width: 1),
           borderRadius: const BorderRadius.all(

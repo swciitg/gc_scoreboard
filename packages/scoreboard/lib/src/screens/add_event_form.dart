@@ -45,14 +45,14 @@ class _AddEventFormState extends State<AddEventForm> {
     });
   }
 
-  callbackAddHostel(value,index) {
+  callbackAddHostel(value, index) {
     participatingHostels[index - 1] = value;
   }
 
   @override
   void initState() {
     super.initState();
-    if (widget.event != null ) {
+    if (widget.event != null) {
       EventModel e = widget.event!;
       _sportNameController.text = e.name;
       _venueController.text = e.venue;
@@ -61,6 +61,7 @@ class _AddEventFormState extends State<AddEventForm> {
       stage = e.stage;
     }
   }
+
   @override
   Widget build(BuildContext context) {
     print("Rebuild");
@@ -146,11 +147,26 @@ class _AddEventFormState extends State<AddEventForm> {
                       validator: validateField,
                       controller: _sportNameController),
                   const SizedBox(height: 12),
-                  CustomDropDown(items: sports, hintText: 'Sport Group', onChanged: (s) => group =s,value: group,),
+                  CustomDropDown(
+                    items: sports,
+                    hintText: 'Sport Group',
+                    onChanged: (s) => group = s,
+                    value: group,
+                  ),
                   const SizedBox(height: 12),
-                  CustomDropDown(items: sports, hintText: 'Category',onChanged: (s) => category =s, value: category,),
+                  CustomDropDown(
+                    items: sports,
+                    hintText: 'Category',
+                    onChanged: (s) => category = s,
+                    value: category,
+                  ),
                   const SizedBox(height: 12),
-                  CustomDropDown(items: sports, hintText: 'Stage', onChanged: (s) => stage = s, value: stage,),
+                  CustomDropDown(
+                    items: sports,
+                    hintText: 'Stage',
+                    onChanged: (s) => stage = s,
+                    value: stage,
+                  ),
                   const SizedBox(height: 12),
                   Row(
                     children: [
