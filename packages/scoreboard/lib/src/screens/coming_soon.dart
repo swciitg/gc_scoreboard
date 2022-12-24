@@ -1,0 +1,39 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:scoreboard/src/widgets/common/top_bar.dart';
+
+class ComingSoon extends StatefulWidget {
+  final String competition;
+  const ComingSoon({Key? key, required this.competition}) : super(key: key);
+
+  @override
+  State<ComingSoon> createState() => _ComingSoonState();
+}
+
+class _ComingSoonState extends State<ComingSoon> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        TopBar(),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 140),
+          child: SizedBox(
+            height: 230,
+            width: 220,
+            child: widget.competition == 'Kriti'
+                ? SvgPicture.asset(
+              'assets/kriti_comingsoon.svg',
+              package: 'scoreboard',
+            )
+                : SvgPicture.asset(
+              'assets/manthan_comingsoon.svg',
+              package: 'scoreboard',
+            ),
+          ),
+        ),
+      ],
+
+    );
+  }
+}
