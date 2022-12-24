@@ -28,9 +28,9 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
   }
 
   Map<Pages, Widget> tabs = {
-    Pages.Schedule: const SchedulePage(),
-    Pages.Standings: const StandingsPage(),
-    Pages.Results: const SchedulePage(),
+    Pages.schedule: const SchedulePage(),
+    Pages.standings: const StandingsPage(),
+    Pages.results: const SchedulePage(),
   };
 
   @override
@@ -41,7 +41,7 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
         return Scaffold(
           backgroundColor: Themes.backgroundColor,
           appBar: appBar(context, viewType.user),
-          body: commonStore.competition == Competitions.Spardha
+          body: commonStore.competition == Competitions.spardha
               ? tabs[commonStore.page]
               : ComingSoon(
                   competition: commonStore.competition.toString(),
@@ -49,8 +49,8 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
           bottomNavigationBar: const BottomNavBar(),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: commonStore.competition == Competitions.Spardha
-              ? commonStore.page == Pages.Schedule
+          floatingActionButton: commonStore.competition == Competitions.spardha
+              ? commonStore.page == Pages.schedule
                   ? GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
@@ -58,7 +58,7 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
                       },
                       child: addButton("Add event "),
                     )
-                  : commonStore.page == Pages.Results
+                  : commonStore.page == Pages.results
                       ? GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(

@@ -23,7 +23,7 @@ class _TopBarState extends State<TopBar> {
           Expanded(
             child: TopBarItem(
               iconData: Icons.trending_up_outlined,
-              label: 'Standings',
+              label: Pages.standings,
             ),
           ),
           SizedBox(
@@ -32,7 +32,7 @@ class _TopBarState extends State<TopBar> {
           Expanded(
             child: TopBarItem(
               iconData: Icons.date_range_outlined,
-              label: 'Schedule',
+              label: Pages.schedule,
             ),
           ),
           SizedBox(
@@ -41,7 +41,7 @@ class _TopBarState extends State<TopBar> {
           Expanded(
             child: TopBarItem(
               iconData: Icons.emoji_events_outlined,
-              label: 'Results',
+              label: Pages.results,
             ),
           ),
         ],
@@ -52,7 +52,7 @@ class _TopBarState extends State<TopBar> {
 
 class TopBarItem extends StatelessWidget {
   final IconData iconData;
-  final String label;
+  final Pages label;
   const TopBarItem({
     Key? key,
     required this.iconData,
@@ -64,7 +64,7 @@ class TopBarItem extends StatelessWidget {
     CommonStore store = context.read<CommonStore>();
     return GestureDetector(
       onTap: () {
-        store.setPage(Pages.values.byName(label));
+        store.setPage(label);
       },
       child: Observer(builder: (context) {
         return Container(
@@ -73,25 +73,25 @@ class TopBarItem extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 6),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
-              color: store.page == Pages.values.byName(label)
+              color: store.page == label
                   ? Themes.primaryColor
                   : Themes.secondaryColor),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(iconData,
-                  color: store.page == Pages.values.byName(label)
+                  color: store.page == label
                       ? Themes.secondaryColor
                       : Themes.primaryColor,
                   size: 16),
               const SizedBox(
                 width: 8,
               ),
-              Text(label,
+              Text(label.name,
                   style: GoogleFonts.montserrat(
                       fontWeight: FontWeight.w600,
                       fontSize: 12,
-                      color: store.page == Pages.values.byName(label)
+                      color: store.page == label
                           ? Themes.secondaryColor
                           : Themes.primaryColor)),
             ],
