@@ -3,8 +3,22 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../globals/themes.dart';
 
-class FilterBar extends StatelessWidget {
-  const FilterBar({Key? key}) : super(key: key);
+class FilterBar extends StatefulWidget {
+  final List<String> itemsSports;
+  final List<String> itemsHostels;
+  final TextEditingController hostel;
+  final TextEditingController sport;
+  const FilterBar({Key? key,
+    required this.hostel,
+    required this.sport,
+    required this.itemsSports,
+    required this.itemsHostels, }) : super(key: key);
+
+  @override
+  State<FilterBar> createState() => _FilterBarState();
+}
+
+class _FilterBarState extends State<FilterBar> {
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +61,7 @@ class FilterBar extends StatelessWidget {
                               ),
                               Container(
                                 height: 18,
-                                child: Text('Overall',
+                                child: Text(widget.sport.text,
                                     style: GoogleFonts.montserrat(
                                         fontWeight: FontWeight.w600,
                                         fontSize: 12,
@@ -55,10 +69,30 @@ class FilterBar extends StatelessWidget {
                               )
                             ],
                           ),
-                          Icon(
-                            Icons.unfold_more_outlined,
-                            size: 20,
-                            color: Themes.cardFontColor1,
+                          PopupMenuButton<String>(
+                            color: Themes.cardColor1,
+                            icon: Icon(
+                              Icons.unfold_more_outlined,
+                              size: 20,
+                              color: Themes.cardFontColor1,
+                            ),
+                            onSelected: (String item) {
+                              setState(() {
+                                // selectedSport = item;
+                                widget.sport.text = item;
+                              });
+                            },
+                            itemBuilder: (BuildContext context) =>
+                                widget.itemsSports.map((item) => PopupMenuItem<String>(
+                                  value: item,
+                                  child: Text(item,
+                                    style: GoogleFonts.montserrat(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12,
+                                        color: Themes.cardFontColor2),
+                                  ),
+                                )
+                                ).toList(),
                           ),
                         ],
                       ),
@@ -98,7 +132,7 @@ class FilterBar extends StatelessWidget {
                               ),
                               Container(
                                 height: 18,
-                                child: Text('Overall',
+                                child: Text(widget.hostel.text,
                                     style: GoogleFonts.montserrat(
                                         fontWeight: FontWeight.w600,
                                         fontSize: 12,
@@ -106,10 +140,30 @@ class FilterBar extends StatelessWidget {
                               )
                             ],
                           ),
-                          Icon(
-                            Icons.unfold_more_outlined,
-                            size: 20,
-                            color: Themes.cardFontColor1,
+                          PopupMenuButton<String>(
+                            color: Themes.cardColor1,
+                            icon: Icon(
+                              Icons.unfold_more_outlined,
+                              size: 20,
+                              color: Themes.cardFontColor1,
+                            ),
+                            onSelected: (String item) {
+                              setState(() {
+                                // selectedSport = item;
+                                widget.hostel.text = item;
+                              });
+                            },
+                            itemBuilder: (BuildContext context) =>
+                                widget.itemsHostels.map((item) => PopupMenuItem<String>(
+                                  value: item,
+                                  child: Text(item,
+                                    style: GoogleFonts.montserrat(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12,
+                                        color: Themes.cardFontColor2),
+                                  ),
+                                )
+                                ).toList(),
                           ),
                         ],
                       ),
