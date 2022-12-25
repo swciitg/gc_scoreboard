@@ -193,7 +193,7 @@ class AddResultForm extends StatelessWidget {
                               Row(
                                 children: [
                                   Expanded(
-                                    flex: 70,
+                                    flex: 65,
                                     child: HostelDropDown(
                                       value: resultStore
                                           .resultFields?[index].hostel,
@@ -205,7 +205,7 @@ class AddResultForm extends StatelessWidget {
                                     flex: 5,
                                   ),
                                   Expanded(
-                                      flex: 25,
+                                      flex: 30,
                                       child: CustomTextField(
                                         isNecessary: true,
                                         hintText: 'Points',
@@ -228,7 +228,7 @@ class AddResultForm extends StatelessWidget {
                                     flex: 46,
                                     child: CustomTextField(
                                       isNecessary: true,
-                                      hintText: 'Primary Score*',
+                                      hintText: 'Primary Score',
                                       validator: validateScore,
                                       onChanged: (ps) => resultStore
                                           .resultFields?[index]
@@ -264,7 +264,7 @@ class AddResultForm extends StatelessWidget {
                               const SizedBox(
                                 height: 24,
                               ),
-                              if (resultStore.displayAddPosition(index))
+                             
                                 TextButton(
                                     style: TextButton.styleFrom(
                                       padding: EdgeInsets.zero,
