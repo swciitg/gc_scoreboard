@@ -13,12 +13,25 @@ class HostelDropDown extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
       menuMaxHeight: 400,
-      hint: Text(
-        'Hostels*',
-        style: Themes.theme.textTheme.bodyText1,
-      ),
+      
       isExpanded: true,
       decoration: InputDecoration(
+         label: RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: 'Hostels',
+                style: Themes.theme.textTheme.bodyText1,
+              ),
+           
+                TextSpan(
+                  text: ' * ',
+                  style: Themes.theme.textTheme.headline5,
+                ),
+            ],
+          ),
+        ),
+        labelStyle: Themes.theme.textTheme.bodyText1,
         hintStyle: Themes.theme.textTheme.bodyText1,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 16, horizontal: 16),

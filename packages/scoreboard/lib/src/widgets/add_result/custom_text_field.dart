@@ -6,18 +6,20 @@ class CustomTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final String? value;
   final onChanged;
+  final bool isNecessary;
 
-  const CustomTextField({
-    super.key,
-    required this.hintText,
-    required this.validator,
-    required this.value,
-    required this.onChanged,
-  });
+  const CustomTextField(
+      {super.key,
+      required this.hintText,
+      required this.validator,
+      required this.value,
+      required this.onChanged,
+      required this.isNecessary});
 
   @override
   Widget build(BuildContext context) {
-    final controller = TextEditingController(text: value?.toString());
+    final text = value?.toString() == 'null' ? '' : value?.toString();
+    final controller = TextEditingController(text: text);
     return TextFormField(
       style: Themes.theme.textTheme.headline6,
       validator: validator,
@@ -26,7 +28,22 @@ class CustomTextField extends StatelessWidget {
       cursorColor: Themes.theme.primaryColor,
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
-        hintText: hintText,
+        label: RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: hintText,
+                style: Themes.theme.textTheme.bodyText1,
+              ),
+              if (isNecessary)
+                TextSpan(
+                  text: ' * ',
+                  style: Themes.theme.textTheme.headline5,
+                ),
+            ],
+          ),
+        ),
+        labelStyle: Themes.theme.textTheme.bodyText1,
         hintStyle: Themes.theme.textTheme.bodyText1,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 20, horizontal: 16),

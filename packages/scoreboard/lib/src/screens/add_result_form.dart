@@ -207,7 +207,8 @@ class AddResultForm extends StatelessWidget {
                                   Expanded(
                                       flex: 25,
                                       child: CustomTextField(
-                                        hintText: 'Points*',
+                                        isNecessary: true,
+                                        hintText: 'Points',
                                         validator: validateScore,
                                         onChanged: (p) => resultStore
                                             .resultFields?[index]
@@ -226,6 +227,7 @@ class AddResultForm extends StatelessWidget {
                                   Expanded(
                                     flex: 46,
                                     child: CustomTextField(
+                                      isNecessary: true,
                                       hintText: 'Primary Score*',
                                       validator: validateScore,
                                       onChanged: (ps) => resultStore
@@ -241,6 +243,7 @@ class AddResultForm extends StatelessWidget {
                                   Expanded(
                                       flex: 46,
                                       child: CustomTextField(
+                                        isNecessary: false,
                                         hintText: 'Secondary Score',
                                         validator: null,
                                         onChanged: (ss) => resultStore
