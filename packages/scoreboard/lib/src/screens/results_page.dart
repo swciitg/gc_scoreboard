@@ -14,6 +14,26 @@ class ResultsPage extends StatefulWidget {
 }
 
 class _ResultsPageState extends State<ResultsPage> {
+
+  final TextEditingController sport = TextEditingController(text: "Overall");
+  final TextEditingController hostel = TextEditingController(text: "Overall");
+  final List<String> _itemsSports = [
+    'Overall',
+    'Athletics',
+    'Swimming',
+    'Basketball',
+    'Football',
+    'Badminton',
+    'Aquatics'
+  ];
+
+  final List<String> _itemsHostels =[
+    'Overall',
+    'Brahma',
+    'Manas',
+    'Kameng',
+  ];
+
   EventModel eventModel = EventModel(
       name: 'Cricket',
       group: 'Athletics',
@@ -80,7 +100,7 @@ class _ResultsPageState extends State<ResultsPage> {
         child: Column(
           children: [
             TopBar(),
-            const FilterBar(),
+            FilterBar(sport: sport, hostel: hostel, itemsHostels: _itemsHostels, itemsSports: _itemsSports),
             ResultsCard(
               eventModel: eventModel,
               isTie: false,

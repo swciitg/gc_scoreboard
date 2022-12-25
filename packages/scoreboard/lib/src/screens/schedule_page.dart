@@ -3,11 +3,8 @@ import '../models/event_model.dart';
 import '../widgets/cards/schedule_card.dart';
 import '../widgets/schedule_page/filter_bar.dart';
 import '../widgets/common/top_bar.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/src/stores/common_store.dart';
-import 'package:scoreboard/src/widgets/schedule_page/filter_bar.dart';
-import 'package:scoreboard/src/widgets/common/top_bar.dart';
 
 
 class SchedulePage extends StatefulWidget {
@@ -18,6 +15,26 @@ class SchedulePage extends StatefulWidget {
 }
 
 class _SchedulePageState extends State<SchedulePage> {
+
+  final TextEditingController sport = TextEditingController(text: "Overall");
+  final TextEditingController hostel = TextEditingController(text: "Overall");
+  final List<String> _itemsSports = [
+    'Overall',
+    'Athletics',
+    'Swimming',
+    'Basketball',
+    'Football',
+    'Badminton',
+    'Aquatics'
+  ];
+
+  final List<String> _itemsHostels =[
+    'Overall',
+    'Brahma',
+    'Manas',
+    'Kameng',
+  ];
+
   EventModel eventModel = EventModel(
       name: 'Badminton Doubles',
       group: 'Athletics',
@@ -52,7 +69,7 @@ class _SchedulePageState extends State<SchedulePage> {
         child: Column(
           children: [
             TopBar(),
-            const FilterBar(),
+            FilterBar(sport: sport, hostel: hostel, itemsHostels: _itemsHostels, itemsSports: _itemsSports),
             ScheduleCard(
               eventModel: eventModel,
               status: '',
@@ -66,27 +83,6 @@ class _SchedulePageState extends State<SchedulePage> {
               status: 'cancelled',
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-
-  Widget emptyState(String category) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 100),
-      child: SizedBox(
-        height: 230,
-        width: 220,
-        child:
-        category == 'Schedule'
-            ? SvgPicture.asset(
-          'assets/no_schedule.svg',
-          package: 'scoreboard',
-        )
-            : SvgPicture.asset(
-          'assets/no_result.svg',
-          package: 'scoreboard',
         ),
       ),
     );
