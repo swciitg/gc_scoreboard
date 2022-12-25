@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/event_model.dart';
 import '../widgets/cards/schedule_card.dart';
-import '../widgets/schedule_page/filter_bar.dart';
+import '../widgets/common/filter_bar.dart';
 import '../widgets/common/top_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/src/stores/common_store.dart';
@@ -18,22 +18,7 @@ class _SchedulePageState extends State<SchedulePage> {
 
   final TextEditingController sport = TextEditingController(text: "Overall");
   final TextEditingController hostel = TextEditingController(text: "Overall");
-  final List<String> _itemsSports = [
-    'Overall',
-    'Athletics',
-    'Swimming',
-    'Basketball',
-    'Football',
-    'Badminton',
-    'Aquatics'
-  ];
-
-  final List<String> _itemsHostels =[
-    'Overall',
-    'Brahma',
-    'Manas',
-    'Kameng',
-  ];
+  final TextEditingController category = TextEditingController(text: "Overall");
 
   EventModel eventModel = EventModel(
       name: 'Badminton Doubles',
@@ -68,8 +53,8 @@ class _SchedulePageState extends State<SchedulePage> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            TopBar(),
-            FilterBar(sport: sport, hostel: hostel, itemsHostels: _itemsHostels, itemsSports: _itemsSports),
+            const TopBar(),
+            FilterBar(sport: sport, hostel: hostel, category: category, screen: 'schedule',),
             ScheduleCard(
               eventModel: eventModel,
               status: '',

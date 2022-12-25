@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:scoreboard/src/decorations/filter_style.dart';
-
 import '../../globals/themes.dart';
 
 class FilterBar extends StatefulWidget {
@@ -55,9 +53,7 @@ class _FilterBarState extends State<FilterBar> {
                   padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
                   child: Container(
                     height: 56,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18),
-                        color: Themes.cardColor1),
+                    decoration: boxDecoration,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(13, 0, 0, 0),
                       child: Row(
@@ -70,21 +66,15 @@ class _FilterBarState extends State<FilterBar> {
                               SizedBox(
                                 height: 12,
                                 child: Text('Category',
-                                    style: GoogleFonts.montserrat(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 10,
-                                        color: Themes.cardFontColor1)),
+                                    style: popUpHeadingStyle),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 8,
                               ),
                               SizedBox(
                                 height: 18,
                                 child: Text(widget.category.text,
-                                    style: GoogleFonts.montserrat(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 12,
-                                        color: Themes.cardFontColor2)),
+                                    style: popUpItemStyle),
                               )
                             ],
                           ),
@@ -100,10 +90,7 @@ class _FilterBarState extends State<FilterBar> {
                                 _itemsCategory.map((item) => PopupMenuItem<String>(
                                   value: item,
                                   child: Text(item,
-                                    style: GoogleFonts.montserrat(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 12,
-                                        color: Themes.cardFontColor2),
+                                    style: popUpItemStyle,
                                   ),
                                 )
                                 ).toList(),
@@ -122,9 +109,7 @@ class _FilterBarState extends State<FilterBar> {
                   padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
                   child: Container(
                     height: 56,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18),
-                        color: Themes.cardColor1),
+                    decoration: boxDecoration,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(13, 0, 0, 0),
                       child: Row(
@@ -179,9 +164,7 @@ class _FilterBarState extends State<FilterBar> {
                   padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
                   child: Container(
                     height: 56,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18),
-                        color: Themes.cardColor1),
+                    decoration: boxDecoration,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(13, 0, 0, 0),
                       child: Row(
@@ -239,9 +222,7 @@ class _FilterBarState extends State<FilterBar> {
                   child: Container(
                       alignment: Alignment.center,
                       height: 56,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(18),
-                          color: Themes.cardColor1),
+                      decoration: boxDecoration,
                       child: const Icon(
                         Icons.event_outlined,
                         size: 24,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoreboard/src/widgets/common/top_bar.dart';
-import 'package:scoreboard/src/widgets/scoreboard/filter_standings.dart';
+import '../widgets/common/filter_bar.dart';
 import '../widgets/scoreboard/standingboard.dart';
 
 class StandingsPage extends StatefulWidget {
@@ -12,17 +12,8 @@ class StandingsPage extends StatefulWidget {
 
 class _StandingsPageState extends State<StandingsPage> {
   final TextEditingController sport = TextEditingController(text: "Overall");
+  final TextEditingController hostel = TextEditingController(text: "Overall");
   final TextEditingController category = TextEditingController(text: "Overall");
-  final List<String> _itemsSports = [
-    'Overall',
-    'Athletics',
-    'Swimming',
-    'Basketball',
-    'Football',
-    'Badminton',
-    'Aquatics'
-  ];
-  final _itemsCategory = ['Overall', 'Men', 'Women'];
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +21,8 @@ class _StandingsPageState extends State<StandingsPage> {
         padding: const EdgeInsets.symmetric(horizontal: 0),
         child: Column(
           children: [
-            TopBar(),
-            FilterStandings(category: category, sport: sport, itemsSports: _itemsSports, itemsCategory: _itemsCategory),
+            const TopBar(),
+            FilterBar(sport: sport, hostel: hostel, category: category, screen: 'standings',),
             const Expanded(child: StandingBoard())
           ],
         ),
