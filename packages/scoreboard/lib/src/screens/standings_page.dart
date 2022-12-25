@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoreboard/src/widgets/common/top_bar.dart';
-import '../widgets/scoreboard/filter_board.dart';
+import 'package:scoreboard/src/widgets/scoreboard/filter_standings.dart';
 import '../widgets/scoreboard/standingboard.dart';
 
 class StandingsPage extends StatefulWidget {
@@ -11,23 +11,18 @@ class StandingsPage extends StatefulWidget {
 }
 
 class _StandingsPageState extends State<StandingsPage> {
+  final TextEditingController sport = TextEditingController(text: "Overall");
+  final TextEditingController category = TextEditingController(text: "Overall");
+  final List<String> _itemsSports = [
+    'Overall',
+    'Athletics',
+    'Swimming',
+    'Basketball',
+    'Football',
+    'Badminton',
+    'Aquatics'
+  ];
   final _itemsCategory = ['Overall', 'Men', 'Women'];
-  final _itemsSports = ['Overall', 'hockey', 'football'];
-  String _category = 'Overall';
-  String _sports = 'Overall';
-
-
-  void onFilteringCategory(String index) {
-    setState(() {
-      _category = index;
-    });
-  }
-
-  void onFilteringSports(String index) {
-    setState(() {
-      _sports = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,26 +31,7 @@ class _StandingsPageState extends State<StandingsPage> {
         child: Column(
           children: [
             TopBar(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 12),
-              child: SizedBox(
-                height: 75,
-                child: Row(
-                  children: [
-                    FilterList(
-                        heading: 'Category',
-                        items: _itemsCategory,
-                        callbackFunction: onFilteringCategory,
-                        index: _category),
-                    FilterList(
-                        heading: 'Sports',
-                        items: _itemsSports,
-                        callbackFunction: onFilteringSports,
-                        index: _sports),
-                  ],
-                ),
-              ),
-            ),
+            FilterStandings(category: category, sport: sport, itemsSports: _itemsSports, itemsCategory: _itemsCategory),
             const Expanded(child: StandingBoard())
           ],
         ),
