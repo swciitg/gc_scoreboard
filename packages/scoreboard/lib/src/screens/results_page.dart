@@ -4,7 +4,7 @@ import 'package:scoreboard/src/models/result_model.dart';
 import '../widgets/cards/results_card.dart';
 import '../models/event_model.dart';
 import '../widgets/common/top_bar.dart';
-import '../widgets/schedule_page/filter_bar.dart';
+import '../widgets/common/filter_bar.dart';
 
 class ResultsPage extends StatefulWidget {
   const ResultsPage({Key? key}) : super(key: key);
@@ -17,22 +17,7 @@ class _ResultsPageState extends State<ResultsPage> {
 
   final TextEditingController sport = TextEditingController(text: "Overall");
   final TextEditingController hostel = TextEditingController(text: "Overall");
-  final List<String> _itemsSports = [
-    'Overall',
-    'Athletics',
-    'Swimming',
-    'Basketball',
-    'Football',
-    'Badminton',
-    'Aquatics'
-  ];
-
-  final List<String> _itemsHostels =[
-    'Overall',
-    'Brahma',
-    'Manas',
-    'Kameng',
-  ];
+  final TextEditingController category = TextEditingController(text: "Overall");
 
   EventModel eventModel = EventModel(
       name: 'Cricket',
@@ -99,8 +84,8 @@ class _ResultsPageState extends State<ResultsPage> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            TopBar(),
-            FilterBar(sport: sport, hostel: hostel, itemsHostels: _itemsHostels, itemsSports: _itemsSports),
+            const TopBar(),
+            FilterBar(sport: sport, hostel: hostel, category: category, screen: 'results',),
             ResultsCard(
               eventModel: eventModel,
               isTie: false,
