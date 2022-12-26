@@ -67,4 +67,6 @@ class Themes {
   static const cardFontColor2 = Color.fromRGBO(242, 242, 242, 1);
   static const cardFontColor3 = Color.fromRGBO(255, 201, 7, 1);
   static const cardFontColor4 = Color.fromRGBO(255, 84, 73, 1);
+  static const errorRed = Color(0xFFFF5449);
+  static const warning = Color(0xFFFFC907);
 }
