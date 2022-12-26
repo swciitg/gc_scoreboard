@@ -4,16 +4,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/src/models/event_model.dart';
 import 'package:scoreboard/src/models/nullable_result_model.dart';
+import 'package:scoreboard/src/widgets/forms/fields_mandatory.dart';
 import '../functions/validation.dart';
 
 import '../stores/results_form_store.dart';
 import '../globals/themes.dart';
-import '../widgets/add_result/custom_text_field.dart';
-import '../widgets/add_result/fields_mandatory.dart';
-import '../widgets/add_result/hostel_dropdown.dart';
+import '../widgets/forms/hostel_dropdown.dart';
+import '../widgets/forms/custom_text_field.dart';
 
-class AddResultForm extends StatelessWidget {
-  const AddResultForm({super.key});
+class ResultsForm extends StatelessWidget {
+  const ResultsForm({super.key});
 
   String _positionSuffix(int count) {
     if (count == 1) return 'st';
@@ -193,7 +193,7 @@ class AddResultForm extends StatelessWidget {
                               Row(
                                 children: [
                                   Expanded(
-                                    flex: 65,
+                                    flex: 70,
                                     child: HostelDropDown(
                                       value: resultStore
                                           .resultFields?[index].hostel,
@@ -205,17 +205,15 @@ class AddResultForm extends StatelessWidget {
                                     flex: 5,
                                   ),
                                   Expanded(
-                                      flex: 30,
+                                      flex: 25,
                                       child: CustomTextField(
-                                        isNecessary: true,
-                                        hintText: 'Points',
+                                        hintText: 'Points*',
                                         validator: validateScore,
                                         onChanged: (p) => resultStore
                                             .resultFields?[index]
                                             .points = int.tryParse(p),
                                         value: resultStore
-                                            .resultFields?[index].points
-                                            .toString(),
+                                            .resultFields?[index].points,
                                       ))
                                 ],
                               ),
@@ -227,12 +225,11 @@ class AddResultForm extends StatelessWidget {
                                   Expanded(
                                     flex: 46,
                                     child: CustomTextField(
-                                      isNecessary: true,
-                                      hintText: 'Primary Score',
+                                      hintText: 'Primary Score*',
                                       validator: validateScore,
                                       onChanged: (ps) => resultStore
                                           .resultFields?[index]
-                                          .primaryScore = ps,
+                                          .primaryScore = int.tryParse(ps),
                                       value: resultStore
                                           .resultFields?[index].primaryScore,
                                     ),
@@ -243,12 +240,11 @@ class AddResultForm extends StatelessWidget {
                                   Expanded(
                                       flex: 46,
                                       child: CustomTextField(
-                                        isNecessary: false,
                                         hintText: 'Secondary Score',
                                         validator: null,
                                         onChanged: (ss) => resultStore
                                             .resultFields?[index]
-                                            .secondaryScore = ss,
+                                            .secondaryScore = int.tryParse(ss),
                                         value: resultStore.resultFields?[index]
                                             .secondaryScore,
                                       ))
