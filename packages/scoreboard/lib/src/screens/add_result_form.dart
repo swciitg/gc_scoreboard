@@ -193,7 +193,7 @@ class AddResultForm extends StatelessWidget {
                               Row(
                                 children: [
                                   Expanded(
-                                    flex: 70,
+                                    flex: 65,
                                     child: HostelDropDown(
                                       value: resultStore
                                           .resultFields?[index].hostel,
@@ -205,9 +205,10 @@ class AddResultForm extends StatelessWidget {
                                     flex: 5,
                                   ),
                                   Expanded(
-                                      flex: 25,
+                                      flex: 30,
                                       child: CustomTextField(
-                                        hintText: 'Points*',
+                                        isNecessary: true,
+                                        hintText: 'Points',
                                         validator: validateScore,
                                         onChanged: (p) => resultStore
                                             .resultFields?[index]
@@ -226,7 +227,8 @@ class AddResultForm extends StatelessWidget {
                                   Expanded(
                                     flex: 46,
                                     child: CustomTextField(
-                                      hintText: 'Primary Score*',
+                                      isNecessary: true,
+                                      hintText: 'Primary Score',
                                       validator: validateScore,
                                       onChanged: (ps) => resultStore
                                           .resultFields?[index]
@@ -241,6 +243,7 @@ class AddResultForm extends StatelessWidget {
                                   Expanded(
                                       flex: 46,
                                       child: CustomTextField(
+                                        isNecessary: false,
                                         hintText: 'Secondary Score',
                                         validator: null,
                                         onChanged: (ss) => resultStore

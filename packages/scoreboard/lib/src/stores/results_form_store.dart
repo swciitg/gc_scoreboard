@@ -60,5 +60,5 @@ abstract class ResultsFormStoreBase with Store {
           resultFields![resultFieldIndex - 1].position;
 
   bool displayAddPosition(int resultFieldIndex) =>
-      resultFieldIndex == (numResults - 1) && resultFields!.last.position < 3;
+      resultFieldIndex == (numResults - 1) ;
 }

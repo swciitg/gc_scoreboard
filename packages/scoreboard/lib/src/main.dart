@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/src/routes.dart';
+import 'package:scoreboard/src/screens/add_result_form.dart';
 import 'package:scoreboard/src/screens/home.dart';
 import 'package:scoreboard/src/screens/splash.dart';
 import 'package:scoreboard/src/stores/results_form_store.dart';
@@ -41,21 +42,22 @@ class _GCScoreBoardState extends State<GCScoreBoard> {
                   results: [])),
         ),
       ],
-      child: Builder(
-          builder: (context) => FutureBuilder(
-                future: context
-                    .read<UserStore>()
-                    .saveUserData(widget.userInfo, context),
-                builder: (context, snapshot) {
-                  return MaterialApp(
-                    debugShowCheckedModeBanner: false,
-                    home: snapshot.hasData
-                        ? const ScoreBoardHome()
-                        : const WelcomeScreen(),
-                    routes: routes,
-                  );
-                },
-              )),
+      child: MaterialApp(home: AddResultForm(),),
+      // child: Builder(
+      //     builder: (context) => FutureBuilder(
+      //           future: context
+      //               .read<UserStore>()
+      //               .saveUserData(widget.userInfo, context),
+      //           builder: (context, snapshot) {
+      //             return MaterialApp(
+      //               debugShowCheckedModeBanner: false,
+      //               home: snapshot.hasData
+      //                   ? const ScoreBoardHome()
+      //                   : const WelcomeScreen(),
+      //               routes: routes,
+      //             );
+      //           },
+      //         )),
     );
   }
 }
