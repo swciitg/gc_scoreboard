@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:scoreboard/src/globals/helper_variables.dart';
 import 'package:scoreboard/src/screens/add_result_form.dart';
 import 'package:scoreboard/src/screens/add_event_form.dart';
@@ -12,6 +11,7 @@ import '../widgets/common/app_bar.dart';
 import '../globals/themes.dart';
 import '../stores/common_store.dart';
 import '../widgets/common/bottom_navigation_bar.dart';
+import '../widgets/schedule_page/add_button.dart';
 import 'coming_soon.dart';
 
 class ScoreBoardHome extends StatefulWidget {
@@ -48,59 +48,31 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
                   competition: commonStore.competition.toString(),
                 ),
           bottomNavigationBar: const BottomNavBar(),
-          floatingActionButton: commonStore.page == Pages.schedule
-              ? GestureDetector(
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+          floatingActionButton:
+             commonStore.competition == Competitions.spardha
+              ? commonStore.page == Pages.schedule
+                ? GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => const AddEventForm()));
                   },
-                  child: Container(
-                      height: 15,
-                      width: 100,
-                      color: Colors.blue,
-                      child: Center(child: const Text('Add Event'))),
-                )
-              : commonStore.page == Pages.results
+                  child: AddButton(text: 'Add Event ',),
+          )
+                : commonStore.page == Pages.results
                   ? GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => const AddResultForm()));
                       },
-                      child: Container(
-                          height: 15,
-                          width: 100,
-                          color: Colors.blue,
-                          child: Center(child: const Text('Add Result'))),
+                      child: AddButton(text: "Add Result ",),
                     )
-                  : Container(),
+                  : Container()
+        : Container(),
 
         );
       },
     );
-  }
-
-  Widget addButton(String text) {
-    return Container(
-        decoration: BoxDecoration(
-          color: const Color(0xffFFC907),
-          borderRadius: BorderRadius.circular(21),
-        ),
-        height: 40,
-        width: 130,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            const Icon(
-              Icons.add,
-              size: 20,
-            ),
-            Text(
-              text,
-              style: GoogleFonts.montserrat(
-                  fontSize: 15, fontWeight: FontWeight.w600),
-            )
-          ],
-        ));
   }
 }
 
