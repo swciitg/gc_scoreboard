@@ -14,7 +14,6 @@ class ResultsPage extends StatefulWidget {
 }
 
 class _ResultsPageState extends State<ResultsPage> {
-
   final TextEditingController sport = TextEditingController(text: "Overall");
   final TextEditingController hostel = TextEditingController(text: "Overall");
   final TextEditingController category = TextEditingController(text: "Overall");
@@ -81,18 +80,29 @@ class _ResultsPageState extends State<ResultsPage> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0),
-      child: SingleChildScrollView(
+      child: Container(
         child: Column(
           children: [
             const TopBar(),
-            FilterBar(sport: sport, hostel: hostel, category: category, screen: 'results',),
-            ResultsCard(
-              eventModel: eventModel,
-              isTie: false,
+            FilterBar(
+              sport: sport,
+              hostel: hostel,
+              category: category,
+              screen: 'results',
             ),
-            ResultsCard(
-              eventModel: eventModel2,
-              isTie: true,
+            Expanded(
+              child: ListView(
+                children: [
+                  ResultsCard(
+                    eventModel: eventModel,
+                    isTie: false,
+                  ),
+                  ResultsCard(
+                    eventModel: eventModel2,
+                    isTie: true,
+                  )
+                ],
+              ),
             )
           ],
         ),
