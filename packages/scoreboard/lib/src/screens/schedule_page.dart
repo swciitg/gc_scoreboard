@@ -6,7 +6,6 @@ import '../widgets/common/top_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/src/stores/common_store.dart';
 
-
 class SchedulePage extends StatefulWidget {
   const SchedulePage({Key? key}) : super(key: key);
 
@@ -15,7 +14,6 @@ class SchedulePage extends StatefulWidget {
 }
 
 class _SchedulePageState extends State<SchedulePage> {
-
   final TextEditingController sport = TextEditingController(text: "Overall");
   final TextEditingController hostel = TextEditingController(text: "Overall");
   final TextEditingController category = TextEditingController(text: "Overall");
@@ -50,23 +48,34 @@ class _SchedulePageState extends State<SchedulePage> {
     var commonStore = context.read<CommonStore>();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0),
-      child: SingleChildScrollView(
+      child: Container(
         child: Column(
           children: [
             const TopBar(),
-            FilterBar(sport: sport, hostel: hostel, category: category, screen: 'schedule',),
-            ScheduleCard(
-              eventModel: eventModel,
-              status: '',
+            FilterBar(
+              sport: sport,
+              hostel: hostel,
+              category: category,
+              screen: 'schedule',
             ),
-            ScheduleCard(
-              eventModel: eventModel,
-              status: 'postponed',
-            ),
-            ScheduleCard(
-              eventModel: eventModel,
-              status: 'cancelled',
-            ),
+            Expanded(
+              child: ListView(
+                children: [
+                  ScheduleCard(
+                    eventModel: eventModel,
+                    status: '',
+                  ),
+                  ScheduleCard(
+                    eventModel: eventModel,
+                    status: 'postponed',
+                  ),
+                  ScheduleCard(
+                    eventModel: eventModel,
+                    status: 'cancelled',
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
