@@ -31,7 +31,7 @@ class _ResultsCardState extends State<ResultsCard> {
         constraints: BoxConstraints(minHeight: 186),
         child: PopupMenu(
           items: [
-            OptionsMenuItem('Edit', 'edit schedule', Themes.kWhite),
+            OptionsMenuItem('Edit', 'edit result', Themes.kWhite),
             PopupMenuDivider(
               height: 2,
             ),
