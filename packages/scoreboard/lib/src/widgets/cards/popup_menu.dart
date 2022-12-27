@@ -27,6 +27,7 @@ class _PopupMenuState extends State<PopupMenu> {
         Overlay.of(context)?.context.findRenderObject() as RenderBox;
 
     final result = await showMenu(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         color: Themes.kGrey,
         context: context,
         position: RelativeRect.fromSize(

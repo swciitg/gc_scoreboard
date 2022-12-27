@@ -30,7 +30,13 @@ class _ScheduleCardState extends State<ScheduleCard> {
         child: PopupMenu(
           items: [
             OptionsMenuItem('Edit', 'edit schedule', Themes.kWhite),
+            const PopupMenuDivider(
+              height: 2,
+            ),
             OptionsMenuItem('Add result', 'add', Themes.primaryColor),
+            const PopupMenuDivider(
+              height: 2,
+            ),
             OptionsMenuItem('Delete', 'delete', Themes.errorRed),
           ],
           child: Container(

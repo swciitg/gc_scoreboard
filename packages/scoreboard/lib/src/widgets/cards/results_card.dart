@@ -32,6 +32,9 @@ class _ResultsCardState extends State<ResultsCard> {
         child: PopupMenu(
           items: [
             OptionsMenuItem('Edit', 'edit schedule', Themes.kWhite),
+            PopupMenuDivider(
+              height: 2,
+            ),
             OptionsMenuItem('Delete', 'delete', Themes.errorRed),
           ],
           child: Container(
