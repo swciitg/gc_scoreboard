@@ -39,7 +39,7 @@ class AddResultForm extends StatelessWidget {
         ),
         centerTitle: true,
         title: Text(
-          event.results.isEmpty ? 'Add Result' : 'Edit Result',
+          event.winners.isEmpty ? 'Add Result' : 'Edit Result',
           style: Themes.theme.textTheme.headline2,
         ),
         leading: IconButton(
@@ -86,7 +86,7 @@ class AddResultForm extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        event.name,
+                        event.event,
                         style: Themes.theme.textTheme.headline1,
                       ),
                       const SizedBox(

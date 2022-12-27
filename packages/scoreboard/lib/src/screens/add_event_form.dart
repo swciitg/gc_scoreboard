@@ -54,9 +54,9 @@ class _AddEventFormState extends State<AddEventForm> {
     super.initState();
     if (widget.event != null) {
       EventModel e = widget.event!;
-      _sportNameController.text = e.name;
+      _sportNameController.text = e.event;
       _venueController.text = e.venue;
-      group = e.group;
+      // group = e.group;
       category = e.category;
       stage = e.stage;
     }

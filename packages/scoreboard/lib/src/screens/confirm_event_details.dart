@@ -29,13 +29,13 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
   Widget build(BuildContext context) {
     //<------- TEST -------->
     EventModel test = EventModel(
-        name: "500m Sprint",
-        group: "Athletics",
+        event: "500m Sprint",
         category: "Men",
+        posterEmail: 'poster@post.com',
+        fieldStatus: '',
         stage: "Semi-Final",
         date: DateTime(12 - 03 - 2002),
         venue: "Athletics Track",
-        results: results,
         hostels: hostels);
     //<------- TEST -------->
     return Scaffold(
@@ -97,7 +97,7 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
               const SizedBox(
                 height: 12,
               ),
-              DataTile(title: "Sport Name", semiTitle: test.name),
+              DataTile(title: "Sport Name", semiTitle: test.event),
               const SizedBox(
                 height: 26,
               ),

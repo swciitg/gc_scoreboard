@@ -43,7 +43,7 @@ class ScheduleCard extends StatelessWidget {
                             child: Container(
                               height: 28,
                               child: Text(
-                                eventModel.name,
+                                eventModel.event,
                                 style: GoogleFonts.montserrat(
                                     fontWeight: FontWeight.w700,
                                     fontSize: 16,

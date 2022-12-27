@@ -50,7 +50,7 @@ class _ResultsCardState extends State<ResultsCard> {
                               child: Container(
                                 height: 28,
                                 child: Text(
-                                  widget.eventModel.name,
+                                  widget.eventModel.event,
                                   style: GoogleFonts.montserrat(
                                       fontWeight: FontWeight.w700,
                                       fontSize: 16,
