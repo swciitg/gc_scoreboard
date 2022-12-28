@@ -19,13 +19,11 @@ class _SchedulePageState extends State<SchedulePage> {
   final TextEditingController category = TextEditingController(text: "Overall");
 
   EventModel eventModel = EventModel(
-      name: 'Badminton Doubles',
-      group: 'Athletics',
+      event: 'Badminton Doubles',
       category: 'Men',
       stage: 'Quarter-Final',
       date: DateTime.now(),
       venue: 'Table Tennis Court, Old SAC',
-      results: [],
       hostels: [
         'Married Scholars',
         'Brahmaputra',
@@ -41,7 +39,7 @@ class _SchedulePageState extends State<SchedulePage> {
         // 'Brahmaputra',
         // 'Married Scholars',
         // 'Brahmaputra',
-      ]);
+      ], status: 'ok', winners: []);
 
   @override
   Widget build(BuildContext context) {

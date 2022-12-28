@@ -70,7 +70,7 @@ class HostelDropDown extends StatelessWidget {
       style: Themes.theme.textTheme.headline6,
       onChanged: onChanged,
       value: value,
-      items: iitgHostels.map<DropdownMenuItem<String>>((String value) {
+      items: HOSTELS.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),

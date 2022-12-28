@@ -19,13 +19,12 @@ class _ResultsPageState extends State<ResultsPage> {
   final TextEditingController category = TextEditingController(text: "Overall");
 
   EventModel eventModel = EventModel(
-      name: 'Cricket',
-      group: 'Athletics',
+      event: 'Cricket',
       category: 'Men',
       stage: 'Quarter-Final',
       date: DateTime.now(),
       venue: 'Table Tennis Court, Old SAC',
-      results: [
+      winners: [
         ResultModel(
             position: 1, hostel: 'Disang', points: 1, primaryScore: '22.1s'),
         ResultModel(
@@ -46,15 +45,14 @@ class _ResultsPageState extends State<ResultsPage> {
         'Kameng',
         'Umiam',
         'Brahmaputra',
-      ]);
+      ], status: 'ok');
   EventModel eventModel2 = EventModel(
-      name: 'Cricket',
-      group: 'Athletics',
+      event: 'Cricket',
       category: 'Men',
       stage: 'Quarter-Final',
       date: DateTime.now(),
       venue: 'Table Tennis Court, Old SAC',
-      results: [
+      winners: [
         ResultModel(
             position: 1,
             hostel: 'Disang',
@@ -74,7 +72,7 @@ class _ResultsPageState extends State<ResultsPage> {
         'Kameng',
         'Umiam',
         'Brahmaputra',
-      ]);
+      ], status: 'ok');
 
   @override
   Widget build(BuildContext context) {

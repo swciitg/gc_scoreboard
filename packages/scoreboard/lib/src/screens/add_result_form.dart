@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:scoreboard/src/models/event_model.dart';
 import 'package:scoreboard/src/models/nullable_result_model.dart';
 import '../functions/validation.dart';
-
 import '../stores/results_form_store.dart';
 import '../globals/themes.dart';
 import '../widgets/add_result/custom_text_field.dart';
@@ -39,7 +38,7 @@ class AddResultForm extends StatelessWidget {
         ),
         centerTitle: true,
         title: Text(
-          event.results.isEmpty ? 'Add Result' : 'Edit Result',
+          event.winners.isEmpty ? 'Add Result' : 'Edit Result',
           style: Themes.theme.textTheme.headline2,
         ),
         leading: IconButton(
@@ -86,7 +85,7 @@ class AddResultForm extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        event.name,
+                        event.event,
                         style: Themes.theme.textTheme.headline1,
                       ),
                       const SizedBox(

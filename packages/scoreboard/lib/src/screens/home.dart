@@ -48,28 +48,31 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
                   competition: commonStore.competition.toString(),
                 ),
           bottomNavigationBar: const BottomNavBar(),
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-          floatingActionButton:
-             commonStore.competition == Competitions.spardha
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: commonStore.competition == Competitions.spardha
               ? commonStore.page == Pages.schedule
-                ? GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const AddEventForm()));
-                  },
-                  child: AddButton(text: 'Add Event ',),
-          )
-                : commonStore.page == Pages.results
                   ? GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const AddResultForm()));
+                            builder: (context) => const AddEventForm()));
                       },
-                      child: AddButton(text: "Add Result ",),
+                      child: const AddButton(
+                        text: 'Add Event ',
+                      ),
                     )
-                  : Container()
-        : Container(),
-
+                  : commonStore.page == Pages.results
+                      ? GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const AddResultForm()));
+                          },
+                          child: const AddButton(
+                            text: "Add Result ",
+                          ),
+                        )
+                      : Container()
+              : Container(),
         );
       },
     );

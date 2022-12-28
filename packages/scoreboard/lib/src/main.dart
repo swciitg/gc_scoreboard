@@ -30,14 +30,14 @@ class _GCScoreBoardState extends State<GCScoreBoard> {
         Provider<ResultsFormStore>(
           create: (_) => ResultsFormStore(
               event: EventModel(
-                  name: "Basketball",
-                  group: "Basketball",
+                  event: "Basketball",
+                  status: 'ok',
                   venue: "Dihing Basketball Ground",
                   hostels: [],
                   category: "Men",
                   stage: "Finals",
-                  date: DateTime.now(),
-                  results: [])),
+                  date: DateTime.now(), winners: [],
+              )),
         ),
       ],
       child: Builder(

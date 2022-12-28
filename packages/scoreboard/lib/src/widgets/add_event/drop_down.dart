@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:scoreboard/src/models/nullable_result_model.dart';
 import '../../globals/themes.dart';
 
 class CustomDropDown extends StatelessWidget {
   final List<String> items;
   final String hintText;
   final Function? onChanged;
+  final validator;
   final int? index;
   final String? value;
 
-  CustomDropDown(
-      {super.key, required this.items, required this.hintText, required this.onChanged,this.index, this.value});
+  const CustomDropDown(
+      {super.key, required this.items, required this.hintText, required this.onChanged,this.index, this.value, required this.validator});
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
+      validator: validator,
       menuMaxHeight: 400,
       value: value,
       isExpanded: true,

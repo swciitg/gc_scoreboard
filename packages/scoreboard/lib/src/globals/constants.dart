@@ -1,4 +1,4 @@
-const List<String> iitgHostels = [
+const List<String> HOSTELS = [
   'Barak',
   'Brahmaputra',
   'Dhansiri',
@@ -14,3 +14,5 @@ const List<String> iitgHostels = [
   'Subansiri',
   'Umiam'
 ];
+
+

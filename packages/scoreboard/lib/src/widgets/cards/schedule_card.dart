@@ -4,8 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:scoreboard/src/widgets/cards/menu_item.dart';
 import '../../widgets/cards/popup_menu.dart';
-import '../../screens/add_event_form.dart';
-import '../../screens/add_result_form.dart';
 import '../../widgets/cards/athletics_schedule_card.dart';
 import '../../models/event_model.dart';
 import '../../globals/themes.dart';
@@ -63,7 +61,7 @@ class _ScheduleCardState extends State<ScheduleCard> {
                               child: Container(
                                 height: 28,
                                 child: Text(
-                                  widget.eventModel.name,
+                                  widget.eventModel.event,
                                   style: GoogleFonts.montserrat(
                                       fontWeight: FontWeight.w700,
                                       fontSize: 16,

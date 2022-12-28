@@ -2,42 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scoreboard/src/globals/themes.dart';
 import 'package:scoreboard/src/models/event_model.dart';
-import 'package:scoreboard/src/models/result_model.dart';
 
 class ConfirmEventDetails extends StatefulWidget {
-  final EventModel? event;
-  final bool isPostponed;
-  final bool isCancelled;
-  const ConfirmEventDetails(
-      {Key? key,
-      required this.event,
-      required this.isPostponed,
-      required this.isCancelled})
-      : super(key: key);
+  final EventModel event;
+  const ConfirmEventDetails({
+    Key? key,
+    required this.event,
+  }) : super(key: key);
 
   @override
   _ConfirmEventDetailsState createState() => _ConfirmEventDetailsState();
 }
 
 class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
-  //<------- TEST -------->
-  List<ResultModel> results = [];
-  List<String> hostels = ["Brahmaputra", "Kameng", "Manas", "Dihing"];
-  //<------- TEST -------->
-
   @override
   Widget build(BuildContext context) {
-    //<------- TEST -------->
-    EventModel test = EventModel(
-        name: "500m Sprint",
-        group: "Athletics",
-        category: "Men",
-        stage: "Semi-Final",
-        date: DateTime(12 - 03 - 2002),
-        venue: "Athletics Track",
-        results: results,
-        hostels: hostels);
-    //<------- TEST -------->
     return Scaffold(
       backgroundColor: Themes.theme.backgroundColor,
       appBar: AppBar(
@@ -97,19 +76,15 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
               const SizedBox(
                 height: 12,
               ),
-              DataTile(title: "Sport Name", semiTitle: test.name),
+              DataTile(title: "Sport Name", semiTitle: widget.event.event),
               const SizedBox(
                 height: 26,
               ),
-              DataTile(title: "Sport Group", semiTitle: test.category),
+              DataTile(title: "Category", semiTitle: widget.event.category),
               const SizedBox(
                 height: 26,
               ),
-              DataTile(title: "Category", semiTitle: test.category),
-              const SizedBox(
-                height: 26,
-              ),
-              DataTile(title: "Stage", semiTitle: test.stage),
+              DataTile(title: "Stage", semiTitle: widget.event.stage),
               const SizedBox(
                 height: 26,
               ),
@@ -122,20 +97,21 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
                         width: MediaQuery.of(context).size.width / 2,
                         child: DataTile(
                             title: "Date",
-                            semiTitle:
-                                DateFormat('dd-MMM-yyyy').format(test.date))),
+                            semiTitle: DateFormat('dd-MMM-yyyy')
+                                .format(widget.event.date))),
                     DataTile(
                         title: "Time",
-                        semiTitle: widget.isPostponed
+                        semiTitle: widget.event.status == 'postponed'
                             ? "Event postponed"
-                            : widget.isCancelled
+                            : widget.event.status == 'cancelled'
                                 ? "Event cancelled"
-                                : DateFormat('h:mm a').format(test.date))
+                                : DateFormat('h:mm a')
+                                    .format(widget.event.date))
                   ]),
               const SizedBox(
                 height: 26,
               ),
-              DataTile(title: "Venue", semiTitle: test.venue),
+              DataTile(title: "Venue", semiTitle: widget.event.venue),
               const SizedBox(
                 height: 40,
               ),
@@ -148,13 +124,13 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
               ),
               DataTile(
                   title: "Number of Hostels",
-                  semiTitle: test.hostels.length.toString()),
-              for (var i = 0; i < test.hostels.length; i++)
+                  semiTitle: widget.event.hostels.length.toString()),
+              for (var i = 0; i < widget.event.hostels.length; i++)
                 Padding(
                   padding: const EdgeInsets.only(top: 26),
                   child: DataTile(
                       title: "Hostel Name ${i + 1}",
-                      semiTitle: test.hostels[i]),
+                      semiTitle: widget.event.hostels[i]),
                 )
             ],
           ),

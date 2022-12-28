@@ -8,8 +8,10 @@ class CustomTextField extends StatefulWidget {
   final TextEditingController controller;
   final void Function()? onTap;
 
-  CustomTextField(
-      {required this.hintText,
+  const CustomTextField(
+      {
+      super.key,
+        required this.hintText,
       required this.validator,
       required this.controller,
       this.onTap});

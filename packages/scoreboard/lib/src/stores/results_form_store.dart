@@ -9,12 +9,12 @@ class ResultsFormStore = ResultsFormStoreBase with _$ResultsFormStore;
 abstract class ResultsFormStoreBase with Store {
   final EventModel event;
   ResultsFormStoreBase({required this.event}) {
-    if (event.results.isEmpty) {
+    if (event.winners.isEmpty) {
       resultFields = ObservableList<NullableResultModel>.of(
           [NullableResultModel(position: 1)]);
     } else {
       resultFields = ObservableList<NullableResultModel>.of(
-        event.results.map((e) => NullableResultModel.fromResultModel(e)).toList()
+        event.winners.map((e) => NullableResultModel.fromResultModel(e)).toList()
       );
     }
   }
