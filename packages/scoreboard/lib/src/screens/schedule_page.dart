@@ -3,8 +3,6 @@ import '../models/event_model.dart';
 import '../widgets/cards/schedule_card.dart';
 import '../widgets/common/filter_bar.dart';
 import '../widgets/common/top_bar.dart';
-import 'package:provider/provider.dart';
-import 'package:scoreboard/src/stores/common_store.dart';
 
 class SchedulePage extends StatefulWidget {
   const SchedulePage({Key? key}) : super(key: key);
@@ -27,23 +25,10 @@ class _SchedulePageState extends State<SchedulePage> {
       hostels: [
         'Married Scholars',
         'Brahmaputra',
-        'Married Scholars',
-        // 'Brahmaputra',
-        // 'Married Scholars',
-        // 'Brahmaputra',
-        // 'Married Scholars',
-        // 'Brahmaputra',
-        // 'Married Scholars',
-        // 'Brahmaputra',
-        // 'Married Scholars',
-        // 'Brahmaputra',
-        // 'Married Scholars',
-        // 'Brahmaputra',
-      ], status: 'ok', winners: []);
+      ], status: 'ok', winners: [], resultAdded: false);
 
   @override
   Widget build(BuildContext context) {
-    var commonStore = context.read<CommonStore>();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0),
       child: Container(
@@ -61,15 +46,12 @@ class _SchedulePageState extends State<SchedulePage> {
                 children: [
                   ScheduleCard(
                     eventModel: eventModel,
-                    status: '',
                   ),
                   ScheduleCard(
                     eventModel: eventModel,
-                    status: 'postponed',
                   ),
                   ScheduleCard(
                     eventModel: eventModel,
-                    status: 'cancelled',
                   ),
                 ],
               ),

@@ -10,8 +10,7 @@ import '../../globals/themes.dart';
 
 class ScheduleCard extends StatefulWidget {
   final EventModel eventModel;
-  final String status;
-  ScheduleCard({super.key, required this.eventModel, required this.status});
+  ScheduleCard({super.key, required this.eventModel});
 
   @override
   State<ScheduleCard> createState() => _ScheduleCardState();
@@ -238,13 +237,13 @@ class _ScheduleCardState extends State<ScheduleCard> {
                               SizedBox(
                                 width: 8,
                               ),
-                              if (widget.status == 'postponed')
+                              if (widget.eventModel.status == 'postponed')
                                 Text('Event postponed',
                                     style: GoogleFonts.montserrat(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 12,
                                         color: Themes.cardFontColor3))
-                              else if (widget.status == 'cancelled')
+                              else if (widget.eventModel.status == 'cancelled')
                                 Text('Event cancelled',
                                     style: GoogleFonts.montserrat(
                                         fontWeight: FontWeight.w600,

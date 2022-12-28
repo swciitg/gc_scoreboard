@@ -115,7 +115,7 @@ class _AddEventFormState extends State<AddEventForm> {
                                   : isPostponed
                                       ? 'postponed'
                                       : 'ok',
-                              winners: []),
+                              winners: [], resultAdded: false),
                         )));
               }
             },

@@ -36,7 +36,7 @@ class _GCScoreBoardState extends State<GCScoreBoard> {
                   hostels: [],
                   category: "Men",
                   stage: "Finals",
-                  date: DateTime.now(), winners: [],
+                  date: DateTime.now(), winners: [], resultAdded: false,
               )),
         ),
       ],

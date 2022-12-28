@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:scoreboard/src/models/result_model.dart';
-
 import '../widgets/cards/results_card.dart';
 import '../models/event_model.dart';
 import '../widgets/common/top_bar.dart';
@@ -19,6 +18,7 @@ class _ResultsPageState extends State<ResultsPage> {
   final TextEditingController category = TextEditingController(text: "Overall");
 
   EventModel eventModel = EventModel(
+    victoryStatement: 'Disang won',
       event: 'Cricket',
       category: 'Men',
       stage: 'Quarter-Final',
@@ -45,8 +45,10 @@ class _ResultsPageState extends State<ResultsPage> {
         'Kameng',
         'Umiam',
         'Brahmaputra',
-      ], status: 'ok');
+      ], status: 'ok', resultAdded: false);
+
   EventModel eventModel2 = EventModel(
+    victoryStatement: 'Tie between Disang and Lohit',
       event: 'Cricket',
       category: 'Men',
       stage: 'Quarter-Final',
@@ -58,7 +60,7 @@ class _ResultsPageState extends State<ResultsPage> {
             hostel: 'Disang',
             points: 1,
             primaryScore: '.1s',
-            secondaryScore: '1,2,3,1'),
+            secondaryScore: '1,2,3,1',),
         ResultModel(
             position: 2,
             hostel: 'Lohit',
@@ -72,7 +74,7 @@ class _ResultsPageState extends State<ResultsPage> {
         'Kameng',
         'Umiam',
         'Brahmaputra',
-      ], status: 'ok');
+      ], status: 'ok', resultAdded: false);
 
   @override
   Widget build(BuildContext context) {
@@ -93,11 +95,9 @@ class _ResultsPageState extends State<ResultsPage> {
                 children: [
                   ResultsCard(
                     eventModel: eventModel,
-                    isTie: false,
                   ),
                   ResultsCard(
                     eventModel: eventModel2,
-                    isTie: true,
                   )
                 ],
               ),

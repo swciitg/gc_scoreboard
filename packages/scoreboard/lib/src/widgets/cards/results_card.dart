@@ -12,8 +12,7 @@ import 'menu_item.dart';
 
 class ResultsCard extends StatefulWidget {
   final EventModel eventModel;
-  final bool isTie;
-  ResultsCard({Key? key, required this.eventModel, required this.isTie})
+  ResultsCard({Key? key, required this.eventModel})
       : super(key: key);
 
   @override
@@ -174,9 +173,7 @@ class _ResultsCardState extends State<ResultsCard> {
                                   width: 4,
                                 ),
                                 Text(
-                                  widget.isTie
-                                      ? 'Tie - ${widget.eventModel.hostels[0]} & ${widget.eventModel.hostels[1]}'
-                                      : '${widget.eventModel.hostels[0]} won',
+                                  widget.eventModel.victoryStatement!,
                                   style: GoogleFonts.montserrat(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 12,
