@@ -14,20 +14,18 @@ class ResultsPage extends StatefulWidget {
 }
 
 class _ResultsPageState extends State<ResultsPage> {
-
   final TextEditingController sport = TextEditingController(text: "Overall");
   final TextEditingController hostel = TextEditingController(text: "Overall");
   final TextEditingController category = TextEditingController(text: "Overall");
 
   EventModel eventModel = EventModel(
       event: 'Cricket',
-      posterEmail: 'poster@post.com',
       fieldStatus: '',
+      posterEmail: 'poster@post.com',
       category: 'Men',
       stage: 'Quarter-Final',
       date: DateTime.now(),
       venue: 'Table Tennis Court, Old SAC',
-
       hostels: [
         'Disang',
         'Lohit',
@@ -37,8 +35,8 @@ class _ResultsPageState extends State<ResultsPage> {
       ]);
   EventModel eventModel2 = EventModel(
       event: 'Cricket',
-      posterEmail: 'poster@post.com',
       fieldStatus: '',
+      posterEmail: 'poster@post.com',
       category: 'Men',
       stage: 'Quarter-Final',
       date: DateTime.now(),
@@ -55,18 +53,11 @@ class _ResultsPageState extends State<ResultsPage> {
   void initState() {
     super.initState();
     eventModel.winners = [
-      ResultModel(
-          hostel: 'Disang', points: 1, primaryScore: '22.1s'),
-      ResultModel(
-          hostel: 'Lohit', points: 1, primaryScore: '23.1s'),
-      ResultModel(
-          hostel: 'Kameng', points: 1, primaryScore: '24.1s'),
-      ResultModel(
-          hostel: 'Umiam', points: 1, primaryScore: '25.1s'),
-      ResultModel(
-          hostel: 'Brahmaputra',
-          points: 1,
-          primaryScore: '26.1s'),
+      ResultModel(hostel: 'Disang', points: 1, primaryScore: '22.1s'),
+      ResultModel(hostel: 'Lohit', points: 1, primaryScore: '23.1s'),
+      ResultModel(hostel: 'Kameng', points: 1, primaryScore: '24.1s'),
+      ResultModel(hostel: 'Umiam', points: 1, primaryScore: '25.1s'),
+      ResultModel(hostel: 'Brahmaputra', points: 1, primaryScore: '26.1s'),
     ];
     eventModel2.winners = [
       ResultModel(
@@ -80,28 +71,35 @@ class _ResultsPageState extends State<ResultsPage> {
           primaryScore: '23.1s',
           secondaryScore: '13,23,33,32'),
     ];
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0),
-      child: SingleChildScrollView(
+      child: Container(
         child: Column(
           children: [
             const TopBar(),
-            FilterBar(sport: sport,
+            FilterBar(
+              sport: sport,
               hostel: hostel,
               category: category,
-              screen: 'results',),
-            ResultsCard(
-              eventModel: eventModel,
-              isTie: false,
+              screen: 'results',
             ),
-            ResultsCard(
-              eventModel: eventModel2,
-              isTie: true,
+            Expanded(
+              child: ListView(
+                children: [
+                  ResultsCard(
+                    eventModel: eventModel,
+                    isTie: false,
+                  ),
+                  ResultsCard(
+                    eventModel: eventModel2,
+                    isTie: true,
+                  )
+                ],
+              ),
             )
           ],
         ),

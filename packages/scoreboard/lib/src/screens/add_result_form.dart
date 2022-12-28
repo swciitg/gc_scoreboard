@@ -69,7 +69,7 @@ class AddResultForm extends StatelessWidget {
         ],
       ),
       body: Observer(builder: (context) {
-        if (resultStore.resultFields == null) return Container();
+        // if (resultStore.resultFields == null) return Container();
         return Container(
           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
           width: double.infinity,
@@ -86,14 +86,14 @@ class AddResultForm extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        event.event,
+                        'Basketball',
                         style: Themes.theme.textTheme.headline1,
                       ),
                       const SizedBox(
                         height: 4,
                       ),
                       Text(
-                        event.category,
+                        'Mens',
                         style: Themes.theme.textTheme.headline2,
                       ),
                     ],
@@ -136,10 +136,11 @@ class AddResultForm extends StatelessWidget {
                         itemCount: resultStore.numResults,
                         itemBuilder: (context, index) {
                           String formKey =
-                              "FormField${resultStore.resultFields![index].position}";
+                              "FormField${index+1}";
                           if (index != 0 &&
-                              resultStore.resultFields![index - 1].position ==
-                                  resultStore.resultFields![index].position) {
+                              resultStore.resultFields![index - 1] ==
+                                  resultStore.resultFields![index]
+                          ) {
                             formKey += "Tie";
                           }
                           return Column(
