@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:scoreboard/src/functions/schedule_event/validator.dart';
 import 'package:scoreboard/src/models/event_model.dart';
 import 'package:scoreboard/src/models/nullable_result_model.dart';
-import '../functions/validation.dart';
 import '../stores/results_form_store.dart';
 import '../globals/themes.dart';
 import '../widgets/add_result/custom_text_field.dart';
@@ -208,7 +208,7 @@ class AddResultForm extends StatelessWidget {
                                       child: CustomTextField(
                                         isNecessary: true,
                                         hintText: 'Points',
-                                        validator: validateScore,
+                                        validator: validateField,
                                         onChanged: (p) => resultStore
                                             .resultFields?[index]
                                             .points = int.tryParse(p),
@@ -228,7 +228,7 @@ class AddResultForm extends StatelessWidget {
                                     child: CustomTextField(
                                       isNecessary: true,
                                       hintText: 'Primary Score',
-                                      validator: validateScore,
+                                      validator: validateField,
                                       onChanged: (ps) => resultStore
                                           .resultFields?[index]
                                           .primaryScore = ps,

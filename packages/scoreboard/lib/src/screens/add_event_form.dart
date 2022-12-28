@@ -287,7 +287,7 @@ class _AddEventFormState extends State<AddEventForm> {
                             Padding(
                               padding: const EdgeInsets.only(bottom: 12),
                               child: CustomDropDown(
-                                items: HOSTELS,
+                                items: allHostelList,
                                 value: participatingHostels[i - 1],
                                 hintText: 'Hostel Name $i',
                                 index: i,

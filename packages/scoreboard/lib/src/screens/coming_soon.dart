@@ -16,9 +16,9 @@ class _ComingSoonState extends State<ComingSoon> {
     // print(widget.competition);
     return Column(
       children: [
-        TopBar(),
+        const TopBar(),
         Padding(
-          padding: EdgeInsets.symmetric(vertical: 140),
+          padding: const EdgeInsets.symmetric(vertical: 140),
           child: SizedBox(
             height: 230,
             width: 220,
