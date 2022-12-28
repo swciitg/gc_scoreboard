@@ -55,11 +55,11 @@ class AddResultForm extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {
-              List<NullableResultModel> l = resultStore.resultFields ?? [];
-              for (NullableResultModel x in l) {
-                print(
-                    "${x.position}: Hostel = ${x.hostel}, Points = ${x.points}, PS= ${x.primaryScore}, SS = ${x.secondaryScore}");
-              }
+              // List<NullableResultModel> l = resultStore.resultFields ?? [];
+              // for (NullableResultModel x in l) {
+              //   print(
+              //       "Hostel = ${x.hostel}, Points = ${x.points}, PS= ${x.primaryScore}, SS = ${x.secondaryScore}");
+              // }
             },
             child: Text(
               'Next',

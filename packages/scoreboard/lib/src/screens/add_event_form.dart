@@ -9,6 +9,7 @@ import '../widgets/add_event/text_field.dart';
 
 class AddEventForm extends StatefulWidget {
   final EventModel? event;
+
   const AddEventForm({super.key, this.event});
 
   @override
@@ -22,7 +23,8 @@ class _AddEventFormState extends State<AddEventForm> {
   final TextEditingController timeInput = TextEditingController();
   String? category;
   String? stage;
-  String? group;
+
+  // String? group;
 
   final List<String> sports = [
     'Athletics',
@@ -93,9 +95,7 @@ class _AddEventFormState extends State<AddEventForm> {
         ),
         actions: [
           TextButton(
-            onPressed: () {
-              print(group);
-            },
+            onPressed: () {},
             child: Text(
               'Next',
               style: Themes.theme.textTheme.headline3,
@@ -147,13 +147,13 @@ class _AddEventFormState extends State<AddEventForm> {
                       validator: validateField,
                       controller: _sportNameController),
                   const SizedBox(height: 12),
-                  CustomDropDown(
-                    items: sports,
-                    hintText: 'Sport Group',
-                    onChanged: (s) => group = s,
-                    value: group,
-                  ),
-                  const SizedBox(height: 12),
+                  // CustomDropDown(
+                  //   items: sports,
+                  //   hintText: 'Sport Group',
+                  //   onChanged: (s) => group = s,
+                  //   value: group,
+                  // ),
+                  // const SizedBox(height: 12),
                   CustomDropDown(
                     items: sports,
                     hintText: 'Category',

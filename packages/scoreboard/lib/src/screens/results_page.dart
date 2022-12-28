@@ -56,28 +56,25 @@ class _ResultsPageState extends State<ResultsPage> {
     super.initState();
     eventModel.winners = [
       ResultModel(
-          position: 1, hostel: 'Disang', points: 1, primaryScore: '22.1s'),
+          hostel: 'Disang', points: 1, primaryScore: '22.1s'),
       ResultModel(
-          position: 2, hostel: 'Lohit', points: 1, primaryScore: '23.1s'),
+          hostel: 'Lohit', points: 1, primaryScore: '23.1s'),
       ResultModel(
-          position: 3, hostel: 'Kameng', points: 1, primaryScore: '24.1s'),
+          hostel: 'Kameng', points: 1, primaryScore: '24.1s'),
       ResultModel(
-          position: 4, hostel: 'Umiam', points: 1, primaryScore: '25.1s'),
+          hostel: 'Umiam', points: 1, primaryScore: '25.1s'),
       ResultModel(
-          position: 5,
           hostel: 'Brahmaputra',
           points: 1,
           primaryScore: '26.1s'),
     ];
     eventModel2.winners = [
       ResultModel(
-          position: 1,
           hostel: 'Disang',
           points: 1,
           primaryScore: '.1s',
           secondaryScore: '1,2,3,1'),
       ResultModel(
-          position: 2,
           hostel: 'Lohit',
           points: 1,
           primaryScore: '23.1s',
