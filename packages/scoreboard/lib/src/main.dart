@@ -28,18 +28,6 @@ class _GCScoreBoardState extends State<GCScoreBoard> {
         Provider<CommonStore>(
           create: (_) => CommonStore(),
         ),
-        Provider<ResultsFormStore>(
-          create: (_) => ResultsFormStore(
-              event: EventModel(
-                  event: "Basketball",
-                  status: 'ok',
-                  venue: "Dihing Basketball Ground",
-                  hostels: [],
-                  category: "Men",
-                  stage: "Finals",
-                  date: DateTime.now(), winners: [], resultAdded: false,
-              )),
-        ),
       ],
       child: Builder(
           builder: (context) => FutureBuilder(

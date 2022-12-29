@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:scoreboard/src/globals/helper_variables.dart';
 import 'package:scoreboard/src/screens/login/login_webview.dart';
 import 'package:scoreboard/src/stores/common_store.dart';
@@ -26,8 +27,9 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
+    var commonStore = context.read<CommonStore>();
     return Scaffold(
-      appBar: appBar(context, ViewType.admin),
+      appBar: PreferredSize(child: AppBarHomeComponent(homeViewType: commonStore.viewType), preferredSize: const Size.fromHeight(56)),
       body: LoginWebView(),
     );
   }

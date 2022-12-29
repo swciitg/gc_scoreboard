@@ -38,7 +38,7 @@ class AddResultForm extends StatelessWidget {
         ),
         centerTitle: true,
         title: Text(
-          event.winners.isEmpty ? 'Add Result' : 'Edit Result',
+          event.results.isEmpty ? 'Add Result' : 'Edit Result',
           style: Themes.theme.textTheme.headline2,
         ),
         leading: IconButton(

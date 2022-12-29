@@ -11,10 +11,18 @@ import 'package:scoreboard/src/screens/login/admin_login.dart';
 import 'package:scoreboard/src/stores/common_store.dart';
 import '../../globals/themes.dart';
 
-PreferredSize appBar(BuildContext context, var type) {
-  return PreferredSize(
-    preferredSize: const Size.fromHeight(56),
-    child: Container(
+class AppBarHomeComponent extends StatefulWidget {
+  ViewType homeViewType;
+  AppBarHomeComponent({Key? key,required this.homeViewType}) : super(key: key);
+
+  @override
+  State<AppBarHomeComponent> createState() => _AppBarHomeComponentState();
+}
+
+class _AppBarHomeComponentState extends State<AppBarHomeComponent> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
       color: Themes.appbarBackgroundColor,
       child: SafeArea(
         bottom: false,
@@ -75,7 +83,7 @@ PreferredSize appBar(BuildContext context, var type) {
               Padding(
                 padding: const EdgeInsets.only(bottom: 8),
                 child: Container(
-                    // width: width * 0.8,
+                  // width: width * 0.8,
                     width: 72,
                     height: 36,
                     alignment: Alignment.centerRight,
@@ -87,13 +95,13 @@ PreferredSize appBar(BuildContext context, var type) {
                           borderRadius: BorderRadius.circular(8)),
                       itemBuilder: (BuildContext buildContext) => [
                         PopupMenuItem(
-                            value: type == ViewType.user
+                            value: widget.homeViewType== ViewType.user
                                 ? LoginView.id
                                 : ScoreBoardHome.id,
                             padding: EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 11),
                             child: Text(
-                              type == ViewType.admin
+                              widget.homeViewType == ViewType.admin
                                   ? "Switch to User View"
                                   : "Switch to Admin View",
                               style: Themes.theme.textTheme.headline6,
@@ -106,11 +114,11 @@ PreferredSize appBar(BuildContext context, var type) {
                             return;
                           }
                           ConnectivityResult connectivityResult =
-                              await (Connectivity().checkConnectivity());
+                          await (Connectivity().checkConnectivity());
                           if (connectivityResults
-                                  .contains(connectivityResult) &&
+                              .contains(connectivityResult) &&
                               await Navigator.pushNamed(
-                                      context, LoginView.id) ==
+                                  context, LoginView.id) ==
                                   true) {
                             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (buildContext) => ScoreBoardHome()), (route) => false);
                           }
@@ -123,6 +131,60 @@ PreferredSize appBar(BuildContext context, var type) {
           ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }
+
+class AppBarFormComponent extends StatefulWidget {
+  String title;
+  String actionTitle;
+  Function onFormSubmit;
+  AppBarFormComponent({Key? key,required this.title,required this.actionTitle,required this.onFormSubmit}) : super(key: key);
+
+  @override
+  State<AppBarFormComponent> createState() => _AppBarFormComponentState();
+}
+
+class _AppBarFormComponentState extends State<AppBarFormComponent> {
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      elevation: 0,
+      backgroundColor: Themes.theme.backgroundColor,
+      shape: Border(
+        bottom: BorderSide(
+          color: Themes.theme.dividerColor,
+          width: 1,
+        ),
+      ),
+      centerTitle: true,
+      title: Text(
+        widget.title,
+        style: Themes.theme.textTheme.headline2,
+      ),
+      leading: IconButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        icon: Icon(
+          Icons.close,
+          color: Themes.theme.primaryColor,
+        ),
+        splashColor: const Color.fromRGBO(118, 172, 255, 0.9),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () async {
+            await widget.onFormSubmit();
+          },
+          child: Text(
+            widget.actionTitle,
+            style: Themes.theme.textTheme.headline3,
+          ),
+        )
+      ],
+    );
+  }
+}
+
+

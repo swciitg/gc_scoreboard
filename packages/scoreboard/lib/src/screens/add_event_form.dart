@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scoreboard/src/functions/schedule_event/validator.dart';
+import 'package:scoreboard/src/globals/global_widgets.dart';
+import 'package:scoreboard/src/globals/helper_variables.dart';
 import 'package:scoreboard/src/models/event_model.dart';
 import 'package:scoreboard/src/screens/confirm_event_details.dart';
 import 'package:scoreboard/src/widgets/add_event/heading.dart';
+import 'package:scoreboard/src/widgets/common/app_bar.dart';
 import '../globals/constants.dart';
 import '../globals/themes.dart';
 import '../widgets/add_event/drop_down.dart';
@@ -66,66 +69,34 @@ class _AddEventFormState extends State<AddEventForm> {
 
   @override
   Widget build(BuildContext context) {
+
+    Future<void> onFormSubmit() async {
+      if (!_formKey.currentState!.validate()) {
+        showSnackBar(context, 'Processing Data');
+        return;
+      } else {
+        var data={"event": _sportNameController.text,
+          "category": category!,
+          "stage": stage!,
+          "date": DateTime.now(),
+          "venue": _venueController.text,
+          "hostels": ['wow', 'bow', 'cow'],
+          "status": isCancelled
+              ? 'cancelled'
+              : isPostponed
+              ? 'postponed'
+              : 'ok',
+          "results": [], "resultAdded": false};
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => ConfirmEventDetails(
+              event: EventModel.fromJson(data),
+            )));
+      }
+    }
+
     return Scaffold(
       backgroundColor: Themes.theme.backgroundColor,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Themes.theme.backgroundColor,
-        shape: Border(
-          bottom: BorderSide(
-            color: Themes.theme.dividerColor,
-            width: 1,
-          ),
-        ),
-        centerTitle: true,
-        title: Text(
-          widget.event == null ? 'Add Event' : 'Edit Event',
-          style: Themes.theme.textTheme.headline2,
-        ),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: Icon(
-            Icons.close,
-            color: Themes.theme.primaryColor,
-          ),
-          splashColor: const Color.fromRGBO(118, 172, 255, 0.9),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              if (!_formKey.currentState!.validate()) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Processing Data')),
-                );
-                return;
-              } else {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => ConfirmEventDetails(
-                          event: EventModel(
-                              event: _sportNameController.text,
-                              category: category!,
-                              stage: stage!,
-                              date: DateTime.now(),
-                              venue: _venueController.text,
-                              hostels: ['wow', 'bow', 'cow'],
-                              status: isCancelled
-                                  ? 'cancelled'
-                                  : isPostponed
-                                      ? 'postponed'
-                                      : 'ok',
-                              winners: [], resultAdded: false),
-                        )));
-              }
-            },
-            child: Text(
-              'Next',
-              style: Themes.theme.textTheme.headline3,
-            ),
-          )
-        ],
-      ),
+      appBar: PreferredSize(child: AppBarFormComponent(title: widget.event == null ? 'Add Event' : 'Edit Event',actionTitle: "Next",onFormSubmit: onFormSubmit,), preferredSize: Size.fromHeight(56)),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(8),
@@ -145,7 +116,7 @@ class _AddEventFormState extends State<AddEventForm> {
                           controller: _sportNameController),
                       const SizedBox(height: 12),
                       CustomDropDown(
-                        items: const ['Men', 'Women', 'Men and Women'],
+                        items: eventCategories,
                         hintText: 'Category',
                         onChanged: (s) => category = s,
                         value: category,
@@ -153,12 +124,7 @@ class _AddEventFormState extends State<AddEventForm> {
                       ),
                       const SizedBox(height: 12),
                       CustomDropDown(
-                        items: const [
-                          'Qualifier',
-                          'Finals',
-                          'Semi-Final',
-                          '3rd vs 4th'
-                        ],
+                        items: spardhaEventStages,
                         hintText: 'Stage',
                         onChanged: (s) => stage = s,
                         value: stage,

@@ -23,7 +23,7 @@ dependencies:
   dropdown_textfield: ^1.0.7
   webview_flutter: ^3.0.4
   connectivity_plus:
-
+  json_annotation: ^4.7.0
 
 dev_dependencies:
   flutter_test:
@@ -37,6 +37,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   build_runner: ^2.2.1
   mobx_codegen: ^2.0.7+2
+  json_serializable: ^6.5.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

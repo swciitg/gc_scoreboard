@@ -42,7 +42,7 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
       builder: (context) {
         return Scaffold(
             backgroundColor: Themes.backgroundColor,
-            appBar: appBar(context, commonStore.viewType),
+            appBar: PreferredSize(child: AppBarHomeComponent(homeViewType: commonStore.viewType), preferredSize: const Size.fromHeight(56)),
             body: commonStore.competition == Competitions.spardha
                 ? tabs[commonStore.page]
                 : ComingSoon(

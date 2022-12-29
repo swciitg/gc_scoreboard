@@ -11,33 +11,33 @@ class ExpandedResultsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (eventModel.winners[0].secondaryScore == null) {
+    if (eventModel.results[0].secondaryScore == null) {
       return Container(
-          height: (eventModel.winners.length).toDouble() * 34,
+          height: (eventModel.results.length).toDouble() * 34,
           child: ListView.builder(
               physics: NeverScrollableScrollPhysics(),
-              itemCount: eventModel.winners.length,
+              itemCount: eventModel.results.length,
               itemBuilder: (context, index) {
                 return NullSecondaryResultsCardItem(
-                    eventModel.winners[index].position,
-                    eventModel.winners[index].hostel,
-                    eventModel.winners[index].primaryScore);
+                    eventModel.results[index].position,
+                    eventModel.results[index].hostel,
+                    eventModel.results[index].primaryScore);
               }));
     } else {
       return Container(
         child: Column(
           children: [
             SecondaryScoreResultsCardItem(
-              eventModel.winners[0].position,
-              eventModel.winners[0].hostel,
-              eventModel.winners[0].primaryScore,
-              eventModel.winners[0].secondaryScore,
+              eventModel.results[0].position,
+              eventModel.results[0].hostel,
+              eventModel.results[0].primaryScore,
+              eventModel.results[0].secondaryScore,
             ),
             SecondaryScoreResultsCardItem(
-              eventModel.winners[1].position,
-              eventModel.winners[1].hostel,
-              eventModel.winners[1].primaryScore,
-              eventModel.winners[1].secondaryScore,
+              eventModel.results[1].position,
+              eventModel.results[1].hostel,
+              eventModel.results[1].primaryScore,
+              eventModel.results[1].secondaryScore,
             ),
           ],
         ),
