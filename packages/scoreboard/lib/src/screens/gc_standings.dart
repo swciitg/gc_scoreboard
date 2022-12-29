@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:scoreboard/src/widgets/common/app_bar.dart';
-import 'package:scoreboard/src/widgets/common/top_bar.dart';
 import '../decorations/filter_style.dart';
 import '../globals/themes.dart';
-import '../stores/common_store.dart';
-import '../widgets/common/bottom_navigation_bar.dart';
-import '../widgets/common/filter_bar.dart';
 import '../widgets/scoreboard/standingboard.dart';
-import 'package:scoreboard/src/globals/helper_variables.dart';
 
 class GCStandingsPage extends StatefulWidget {
   const GCStandingsPage({super.key});
@@ -32,7 +26,7 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
         padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
         child: Column(
           children: [
-            Container(
+            SizedBox(
               height: 56,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 0),
@@ -75,7 +69,7 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
                               .map((item) => PopupMenuItem<String>(
                                     value: item,
                                     child: Text(
-                                      'General Championship [${item}]',
+                                      'General Championship [$item]',
                                       style: popUpItemStyle,
                                     ),
                                   ))
@@ -97,10 +91,13 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
                   SvgPicture.asset(
                       "packages/scoreboard/assets/trophy.svg",
                   ),
-                  SizedBox(width: 5,),
+                  const SizedBox(width: 5,),
                   Text(
                     'GC [${category.text}] Standings',
-                    style: const TextStyle(color: Themes.cardFontColor1, fontSize: 20,fontWeight: FontWeight.w500),
+                    style: GoogleFonts.montserrat(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        color: Themes.kWhite),
                   ),
                 ],
               ),
@@ -116,7 +113,7 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
               indent: 8,
               endIndent: 8,
             ),
-            Expanded(child: StandingBoard()),
+            const Expanded(child: StandingBoard()),
           ],
         ));
   }

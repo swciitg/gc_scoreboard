@@ -45,7 +45,7 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
           backgroundColor: Themes.backgroundColor,
           appBar: appBar(context, viewType.user),
           body: commonStore.competition == Competitions.gc
-              ? GCStandingsPage()
+              ? const GCStandingsPage()
               : commonStore.competition == Competitions.spardha
               ? tabs[commonStore.page]
               : ComingSoon(
