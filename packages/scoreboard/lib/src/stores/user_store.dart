@@ -16,8 +16,8 @@ class UserStore{
       userData["name"] = userInfo["name"]!;
       userData["email"] = userInfo["email"]!;
       await AuthUserHelpers.setUserData(userInfo);
-      await APIService(buildContext).generateTokens();
     }
+    await APIService(buildContext).generateTokens();
     return true;
   }
 

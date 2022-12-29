@@ -3,7 +3,7 @@ import 'package:scoreboard/src/models/result_model.dart';
 class EventModel {
   String event; // Sprint
   String category; // Men/Women
-  String stage; // Semi-finals
+  String stage; // Semi-Finals
   DateTime date;
   String status;
   String venue;

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:scoreboard/src/globals/helper_variables.dart';
 import 'package:scoreboard/src/screens/login/login_webview.dart';
+import 'package:scoreboard/src/stores/common_store.dart';
 import 'package:scoreboard/src/widgets/common/app_bar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -26,7 +27,7 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar(context, viewType.admin),
+      appBar: appBar(context, ViewType.admin),
       body: LoginWebView(),
     );
   }

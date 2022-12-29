@@ -2,14 +2,16 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:scoreboard/src/globals/auth_user_helper.dart';
 import 'package:scoreboard/src/globals/global_widgets.dart';
 import 'package:scoreboard/src/globals/helper_variables.dart';
 import 'package:scoreboard/src/screens/home.dart';
 import 'package:scoreboard/src/screens/login/admin_login.dart';
+import 'package:scoreboard/src/stores/common_store.dart';
 import '../../globals/themes.dart';
 
-PreferredSize appBar(BuildContext buildContext, var type) {
+PreferredSize appBar(BuildContext context, var type) {
   return PreferredSize(
     preferredSize: const Size.fromHeight(56),
     child: Container(
@@ -23,7 +25,7 @@ PreferredSize appBar(BuildContext buildContext, var type) {
             children: [
               InkWell(
                 onTap: () {
-                  Navigator.of(buildContext).popUntil((route) => false);
+                  Navigator.of(context).popUntil((route) => false);
                 },
                 child: Container(
                   width: 80,
@@ -83,15 +85,15 @@ PreferredSize appBar(BuildContext buildContext, var type) {
                       color: Themes.kGrey,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8)),
-                      itemBuilder: (buildContext) => [
+                      itemBuilder: (BuildContext buildContext) => [
                         PopupMenuItem(
-                            value: type == viewType.admin
-                                ? ScoreBoardHome.id
-                                : LoginView.id,
+                            value: type == ViewType.user
+                                ? LoginView.id
+                                : ScoreBoardHome.id,
                             padding: EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 11),
                             child: Text(
-                              type == viewType.admin
+                              type == ViewType.admin
                                   ? "Switch to User View"
                                   : "Switch to Admin View",
                               style: Themes.theme.textTheme.headline6,
@@ -100,7 +102,7 @@ PreferredSize appBar(BuildContext buildContext, var type) {
                       onSelected: (newRoute) async {
                         if (newRoute == LoginView.id) {
                           if (!await AuthUserHelpers.checkIfAdmin()) {
-                            showSnackBar(buildContext, "You are not an admin");
+                            showSnackBar(context, "You are not an admin");
                             return;
                           }
                           ConnectivityResult connectivityResult =
@@ -108,14 +110,12 @@ PreferredSize appBar(BuildContext buildContext, var type) {
                           if (connectivityResults
                                   .contains(connectivityResult) &&
                               await Navigator.pushNamed(
-                                      buildContext, LoginView.id) ==
+                                      context, LoginView.id) ==
                                   true) {
-                            Navigator.pushNamedAndRemoveUntil(buildContext,
-                                ScoreBoardHome.id, (route) => false);
+                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (buildContext) => ScoreBoardHome()), (route) => false);
                           }
                         } else
-                          Navigator.pushNamedAndRemoveUntil(
-                              buildContext, newRoute, (route) => false);
+                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (buildContext) => ScoreBoardHome()), (route) => false);
                       },
                     )),
               ),

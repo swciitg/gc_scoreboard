@@ -13,9 +13,6 @@ class DatabaseRecords{
 
 const connectivityResults = [ConnectivityResult.ethernet, ConnectivityResult.mobile, ConnectivityResult.vpn, ConnectivityResult.wifi];
 
-enum viewType {
-  user, admin
-}
 
 enum apiResponse{
   success, adminRelogin

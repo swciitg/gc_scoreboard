@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:scoreboard/src/globals/helper_variables.dart';
 import 'package:scoreboard/src/routes.dart';
 import 'package:scoreboard/src/screens/home.dart';
 import 'package:scoreboard/src/screens/splash.dart';
@@ -49,7 +50,7 @@ class _GCScoreBoardState extends State<GCScoreBoard> {
                   return MaterialApp(
                     debugShowCheckedModeBanner: false,
                     home: snapshot.hasData
-                        ? const ScoreBoardHome()
+                        ? ScoreBoardHome()
                         : const WelcomeScreen(),
                     routes: routes,
                   );

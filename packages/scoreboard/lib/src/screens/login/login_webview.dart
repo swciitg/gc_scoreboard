@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:scoreboard/src/globals/helper_variables.dart';
 import 'package:scoreboard/src/services/api.dart';
+import 'package:scoreboard/src/stores/common_store.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:scoreboard/src/globals/global_widgets.dart';
 class LoginWebView extends StatefulWidget {
@@ -23,6 +25,7 @@ class _LoginWebViewState extends State<LoginWebView> {
 
   @override
   Widget build(BuildContext context) {
+    var commonStore = context.read<CommonStore>();
     return WebView(
       initialUrl: "https://swc.iitg.ac.in/onestopapi/v2/auth/microsoft",
       javascriptMode: JavascriptMode.unrestricted,
@@ -40,9 +43,13 @@ class _LoginWebViewState extends State<LoginWebView> {
           await CookieManager().clearCookies();
           if (!values[0].toLowerCase().contains("error")) {
             await APIService(context).generateTokens();
+            commonStore.setViewType(ViewType.admin);
             Navigator.pop(context,true);
           }
-          else Navigator.pop(context,false);
+          else{
+            commonStore.setViewType(ViewType.user);
+            Navigator.pop(context,false);
+          }
         }
       },
     );
