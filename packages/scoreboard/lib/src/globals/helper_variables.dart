@@ -12,10 +12,13 @@ class DatabaseRecords{
 }
 
 const connectivityResults = [ConnectivityResult.ethernet, ConnectivityResult.mobile, ConnectivityResult.vpn, ConnectivityResult.wifi];
-
-enum viewType {
-  user, admin
-}
+const List<String> eventCategories = ['Men', 'Women', 'Men + Women'];
+const List<String> spardhaEventStages = [
+  'Qualifier',
+  'Final',
+  'Semi-Final',
+  '3rd vs 4th'
+];
 
 enum apiResponse{
   success, adminRelogin

@@ -50,7 +50,7 @@ class CardEventDetails extends StatelessWidget {
                           horizontal: 8, vertical: 4),
                       child: Text(
                         eventModel.stage,
-                        style: eventModel.winners.isEmpty? cardStageStyle1 : cardStageStyle2
+                        style: eventModel.results.isEmpty? cardStageStyle1 : cardStageStyle2
                       ),
                     ),
                   )

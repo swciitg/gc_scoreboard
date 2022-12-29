@@ -16,6 +16,10 @@ enum Competitions {
 
 }
 
+enum ViewType {
+  user, admin
+}
+
 enum Pages {
   standings("Standings", Icons.trending_up_outlined),
   schedule("Schedule", Icons.date_range_outlined),
@@ -35,13 +39,24 @@ abstract class _CommonStore with Store {
   @observable
   Pages page = Pages.standings;
 
+  @observable
+  ViewType viewType = ViewType.user;
+
   @action
   void setCompetition(Competitions c) {
+    print(c);
     competition = c;
   }
 
   @action
   void setPage(Pages p) {
+    print(p);
     page = p;
+  }
+
+  @action
+  void setViewType(ViewType v){
+    print(v);
+    viewType=v;
   }
 }

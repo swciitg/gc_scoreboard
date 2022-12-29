@@ -20,8 +20,8 @@ class _AddResultFormState extends State<AddResultForm> {
   @override
   void initState() {
     super.initState();
-    if (widget.event.winners.isNotEmpty){
-      ResultForm.resultFields = widget.event.winners;
+    if (widget.event.results.isNotEmpty){
+      ResultForm.resultFields = widget.event.results;
     }
   }
 
@@ -41,7 +41,7 @@ class _AddResultFormState extends State<AddResultForm> {
           ),
           centerTitle: true,
           title: Text(
-            widget.event.winners.isEmpty ? 'Add Result' : 'Edit Result',
+            widget.event.results.isEmpty ? 'Add Result' : 'Edit Result',
             style: Themes.theme.textTheme.headline2,
           ),
           leading: IconButton(

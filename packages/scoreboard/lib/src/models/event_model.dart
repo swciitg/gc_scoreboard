@@ -1,19 +1,27 @@
 
 import 'result_model.dart';
 
+import 'package:json_annotation/json_annotation.dart';
+
+part 'event_model.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 class EventModel {
+  @JsonKey(name: '_id')
+  String? id;
   String event; // Sprint
   String category; // Men/Women
-  String stage; // Semi-finals
+  String stage; // Semi-Finals
   DateTime date;
   String status;
   String venue;
   List<String> hostels; // Participating hostels
-  List<List<ResultModel>> winners;
+  List<List<ResultModel>> results;
   String? posterEmail = '';
   bool resultAdded;
   String? victoryStatement = '';
   EventModel({
+    this.id,
     required this.event,
     required this.category,
     required this.stage,
@@ -21,9 +29,13 @@ class EventModel {
     required this.venue,
     required this.hostels,
     required this.status,
-    required this.winners,
-    required this.resultAdded,
-    this.victoryStatement,
-    this.posterEmail
+    this.results = const [],
+    this.resultAdded = false,
+    this.victoryStatement = '',
   });
+
+  factory EventModel.fromJson(Map<String,dynamic> json) => _$EventModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$EventModelToJson(this);
+
 }

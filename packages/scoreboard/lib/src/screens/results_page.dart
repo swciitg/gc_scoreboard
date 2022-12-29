@@ -24,7 +24,7 @@ class _ResultsPageState extends State<ResultsPage> {
       stage: 'Quarter-Final',
       date: DateTime.now(),
       venue: 'Table Tennis Court, Old SAC',
-      winners: [
+      results: [
         [ResultModel(
              hostel: 'Disang', points: 1, primaryScore: '22.1s')],
         [ResultModel(
@@ -54,7 +54,7 @@ class _ResultsPageState extends State<ResultsPage> {
       stage: 'Quarter-Final',
       date: DateTime.now(),
       venue: 'Table Tennis Court, Old SAC',
-      winners: [
+      results: [
         [ResultModel(
 
             hostel: 'Disang',

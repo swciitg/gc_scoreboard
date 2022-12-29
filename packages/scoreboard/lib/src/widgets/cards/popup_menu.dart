@@ -49,7 +49,7 @@ class _PopupMenuState extends State<PopupMenu> {
               stage: 'Quarter-Final',
               date: DateTime.now(),
               venue: 'Table Tennis Court, Old SAC',
-              winners: [
+              results: [
                 [ResultModel(
 
                   hostel: 'Disang',
@@ -82,7 +82,7 @@ class _PopupMenuState extends State<PopupMenu> {
               stage: 'Quarter-Final',
               date: DateTime.now(),
               venue: 'Table Tennis Court, Old SAC',
-              winners: [
+              results: [
                 [ResultModel(
 
                   hostel: 'Disang',

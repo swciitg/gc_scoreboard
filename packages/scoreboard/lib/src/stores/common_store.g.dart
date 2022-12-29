@@ -40,6 +40,22 @@ mixin _$CommonStore on _CommonStore, Store {
     });
   }
 
+  late final _$viewTypeAtom =
+      Atom(name: '_CommonStore.viewType', context: context);
+
+  @override
+  ViewType get viewType {
+    _$viewTypeAtom.reportRead();
+    return super.viewType;
+  }
+
+  @override
+  set viewType(ViewType value) {
+    _$viewTypeAtom.reportWrite(value, super.viewType, () {
+      super.viewType = value;
+    });
+  }
+
   late final _$_CommonStoreActionController =
       ActionController(name: '_CommonStore', context: context);
 
@@ -66,10 +82,22 @@ mixin _$CommonStore on _CommonStore, Store {
   }
 
   @override
+  void setViewType(ViewType v) {
+    final _$actionInfo = _$_CommonStoreActionController.startAction(
+        name: '_CommonStore.setViewType');
+    try {
+      return super.setViewType(v);
+    } finally {
+      _$_CommonStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 competition: ${competition},
-page: ${page}
+page: ${page},
+viewType: ${viewType}
     ''';
   }
 }

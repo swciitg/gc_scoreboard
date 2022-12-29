@@ -25,7 +25,7 @@ class _SchedulePageState extends State<SchedulePage> {
       hostels: [
         'Married Scholars',
         'Brahmaputra',
-      ], status: 'ok', winners: [], resultAdded: false);
+      ], status: 'ok', results: [], resultAdded: false);
 
   @override
   Widget build(BuildContext context) {
