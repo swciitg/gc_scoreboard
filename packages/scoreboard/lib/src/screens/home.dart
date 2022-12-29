@@ -4,7 +4,6 @@ import 'package:scoreboard/src/globals/helper_variables.dart';
 import 'package:scoreboard/src/screens/add_result_form.dart';
 import 'package:scoreboard/src/screens/add_event_form.dart';
 import '../models/event_model.dart';
-import '../models/result_model.dart';
 import '../screens/results_page.dart';
 import '../screens/schedule_page.dart';
 import 'package:provider/provider.dart';
@@ -75,18 +74,7 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
                                       stage: 'Quarter-Final',
                                       date: DateTime.now(),
                                       venue: 'Table Tennis Court, Old SAC',
-                                      winners: [
-                                        [ResultModel(
-                                          hostel: 'Disang',
-                                          points: 1,
-                                          primaryScore: '.1s',
-                                          secondaryScore: '1,2,3,1',)],
-                                        [ResultModel(
-                                            hostel: 'Lohit',
-                                            points: 1,
-                                            primaryScore: '23.1s',
-                                            secondaryScore: '13,23,33,32')],
-                                      ],
+                                      winners: [],
                                       hostels: [
                                         'Disang',
                                         'Lohit',

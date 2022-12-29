@@ -7,9 +7,23 @@ import 'package:scoreboard/src/widgets/cards/card_date_widget.dart';
 import '../globals/themes.dart';
 import '../widgets/add_result/fields_mandatory.dart';
 
-class AddResultForm extends StatelessWidget {
+class AddResultForm extends StatefulWidget {
   final EventModel event;
   const AddResultForm({super.key, required this.event});
+
+  @override
+  State<AddResultForm> createState() => _AddResultFormState();
+}
+
+class _AddResultFormState extends State<AddResultForm> {
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.event.winners.isNotEmpty){
+      ResultForm.resultFields = widget.event.winners;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +41,7 @@ class AddResultForm extends StatelessWidget {
           ),
           centerTitle: true,
           title: Text(
-            event.winners.isEmpty ? 'Add Result' : 'Edit Result',
+            widget.event.winners.isEmpty ? 'Add Result' : 'Edit Result',
             style: Themes.theme.textTheme.headline2,
           ),
           leading: IconButton(
@@ -84,21 +98,21 @@ class AddResultForm extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        event.event,
+                        widget.event.event,
                         style: Themes.theme.textTheme.headline1,
                       ),
                       const SizedBox(
                         height: 4,
                       ),
                       Text(
-                        event.category,
+                        widget.event.category,
                         style: Themes.theme.textTheme.headline2,
                       ),
                     ],
                   ),
                   const Spacer(),
                   DateWidget(
-                    date: event.date,
+                    date: widget.event.date,
                   )
                 ],
               ),
@@ -112,7 +126,7 @@ class AddResultForm extends StatelessWidget {
                   color: Themes.theme.cardColor,
                 ),
                 child: Text(
-                  event.stage,
+                  widget.event.stage,
                   style: Themes.theme.textTheme.headline3,
                 ),
               ),
