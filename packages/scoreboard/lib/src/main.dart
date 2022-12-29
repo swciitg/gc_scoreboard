@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/src/routes.dart';
+import 'package:scoreboard/src/screens/add_result_form.dart';
 import 'package:scoreboard/src/screens/home.dart';
 import 'package:scoreboard/src/screens/splash.dart';
-import 'package:scoreboard/src/stores/results_form_store.dart';
 import 'package:scoreboard/src/stores/user_store.dart';
 import 'models/event_model.dart';
 import 'stores/common_store.dart';
@@ -27,34 +27,24 @@ class _GCScoreBoardState extends State<GCScoreBoard> {
         Provider<CommonStore>(
           create: (_) => CommonStore(),
         ),
-        Provider<ResultsFormStore>(
-          create: (_) => ResultsFormStore(
-              event: EventModel(
-                  event: "Basketball",
-                  status: 'ok',
-                  venue: "Dihing Basketball Ground",
-                  hostels: [],
-                  category: "Men",
-                  stage: "Finals",
-                  date: DateTime.now(), winners: [], resultAdded: false,
-              )),
-        ),
+       
       ],
-      child: Builder(
-          builder: (context) => FutureBuilder(
-                future: context
-                    .read<UserStore>()
-                    .saveUserData(widget.userInfo, context),
-                builder: (context, snapshot) {
-                  return MaterialApp(
-                    debugShowCheckedModeBanner: false,
-                    home: snapshot.hasData
-                        ? const ScoreBoardHome()
-                        : const WelcomeScreen(),
-                    routes: routes,
-                  );
-                },
-              )),
+      child: MaterialApp(debugShowCheckedModeBanner: false,home: AddResultForm(),)
+      // child: Builder(
+      //     builder: (context) => FutureBuilder(
+      //           future: context
+      //               .read<UserStore>()
+      //               .saveUserData(widget.userInfo, context),
+      //           builder: (context, snapshot) {
+      //             return MaterialApp(
+      //               debugShowCheckedModeBanner: false,
+      //               home: snapshot.hasData
+      //                   ? const ScoreBoardHome()
+      //                   : const WelcomeScreen(),
+      //               routes: routes,
+      //             );
+      //           },
+      //         )),
     );
   }
 }
