@@ -3,18 +3,18 @@ import 'package:scoreboard/src/globals/constants.dart';
 import '../../globals/themes.dart';
 
 class HostelDropDown extends StatelessWidget {
-
+  final validator;
   final onChanged;
-  final value;
+  final String? value;
 
-  const HostelDropDown({super.key, required this.onChanged, required this.value});
+  const HostelDropDown({super.key, required this.onChanged, required this.value, required this.validator});
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
       menuMaxHeight: 400,
-      
       isExpanded: true,
+      validator: validator,
       decoration: InputDecoration(
          label: RichText(
           text: TextSpan(

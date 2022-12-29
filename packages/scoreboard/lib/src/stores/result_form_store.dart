@@ -5,13 +5,13 @@ class ResultForm {
     [ResultModel()]
   ];
 
-  static void addTeamAtPosition(int index) {
-    resultFields?[index].add(ResultModel());
+  static void addTeamAtPosition(int position) {
+    resultFields?[position-1].add(ResultModel());
     print(resultFields);
   }
 
-  static void removeTeamAtPosition(int index, int team) {
-    resultFields?[index].removeAt(team);
+  static void removeTeamAtPosition(int position, int team) {
+    resultFields?[position-1].removeAt(team);
   }
 
   static int numPositions() {

@@ -3,11 +3,11 @@ import 'package:scoreboard/src/stores/result_form_store.dart';
 import '../../functions/schedule_event/validator.dart';
 import './hostel_dropdown.dart';
 import './custom_text_field.dart';
-
 import '../../globals/themes.dart';
 
 class AddResultList extends StatefulWidget {
-  const AddResultList({super.key});
+  final GlobalKey<FormState> formKey;
+  const AddResultList({super.key, required this.formKey});
 
   @override
   State<AddResultList> createState() => _AddResultListState();
@@ -18,12 +18,15 @@ class _AddResultListState extends State<AddResultList> {
   Widget build(BuildContext context) {
     return Expanded(
         child: Form(
+      key: widget.formKey,
       child: ListView.builder(
-        itemCount: ResultForm.resultFields!.length,
+        itemCount: ResultForm.numPositions(),
         itemBuilder: (context, index) {
           return Column(
             children: [
-              for(int team = 0; team < ResultForm.resultFields![index].length; team++)
+              for (int team = 0;
+                  team < ResultForm.numTeamsWithPosition(index+1);
+                  team++)
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -46,7 +49,7 @@ class _AddResultListState extends State<AddResultList> {
                             ),
                             onTap: () {
                               setState(() {
-                                ResultForm.addTeamAtPosition(index);
+                                ResultForm.addTeamAtPosition(index+1);
                               });
                             },
                           ),
@@ -62,7 +65,7 @@ class _AddResultListState extends State<AddResultList> {
                             ),
                             onTap: () {
                               setState(() {
-                                ResultForm.removeTeamAtPosition(index, team);
+                                ResultForm.removeTeamAtPosition(index+1, team);
                               });
                             },
                           ),
@@ -76,6 +79,7 @@ class _AddResultListState extends State<AddResultList> {
                         Expanded(
                           flex: 65,
                           child: HostelDropDown(
+                            validator: validateField,
                             value: ResultForm.resultFields?[index][team].hostel,
                             onChanged: (hostel) => ResultForm
                                 .resultFields?[index][team].hostel = hostel,
@@ -93,7 +97,8 @@ class _AddResultListState extends State<AddResultList> {
                               onChanged: (p) => ResultForm
                                   .resultFields?[index][team]
                                   .points = int.tryParse(p),
-                              value: ResultForm.resultFields?[index][team].points
+                              value: ResultForm
+                                  .resultFields?[index][team].points
                                   .toString(),
                             ))
                       ],
@@ -111,8 +116,8 @@ class _AddResultListState extends State<AddResultList> {
                             validator: validateField,
                             onChanged: (ps) => ResultForm
                                 .resultFields?[index][team].primaryScore = ps,
-                            value:
-                            ResultForm.resultFields?[index][team].primaryScore,
+                            value: ResultForm
+                                .resultFields?[index][team].primaryScore,
                           ),
                         ),
                         const Spacer(
@@ -125,7 +130,8 @@ class _AddResultListState extends State<AddResultList> {
                               hintText: 'Secondary Score',
                               validator: null,
                               onChanged: (ss) => ResultForm
-                                  .resultFields?[index][team].secondaryScore = ss,
+                                  .resultFields?[index][team]
+                                  .secondaryScore = ss,
                               value: ResultForm
                                   .resultFields?[index][team].secondaryScore,
                             ))
@@ -141,7 +147,8 @@ class _AddResultListState extends State<AddResultList> {
                     const SizedBox(
                       height: 24,
                     ),
-                    if (index + 1 == ResultForm.resultFields!.length && team+1 == ResultForm.resultFields![index].length)
+                    if (index + 1 == ResultForm.resultFields!.length &&
+                        team + 1 == ResultForm.resultFields![index].length)
                       TextButton(
                           style: TextButton.styleFrom(
                             padding: EdgeInsets.zero,
