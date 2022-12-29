@@ -33,7 +33,7 @@ class AddResultForm extends StatelessWidget {
           leading: IconButton(
             onPressed: () {
               //To clear the current values int the persistant variable
-              ResultForm.resultFields = [ResultModel(position: 1)];
+              ResultForm.resultFields = [[ResultModel()]];
               Navigator.of(context).pop();
             },
             icon: Icon(
@@ -45,11 +45,14 @@ class AddResultForm extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () {
-                List<ResultModel> l = ResultForm.resultFields ?? [];
-                for (ResultModel x in l) {
-                  print(
-                      "${x.position}: Hostel = ${x.hostel}, Points = ${x.points}, PS= ${x.primaryScore}, SS = ${x.secondaryScore}");
-                }
+                List<List<ResultModel>> l = ResultForm.resultFields ?? [];
+                for(var list in l)
+                  {
+                    for (ResultModel x in list) {
+                      print(
+                          "${1}: Hostel = ${x.hostel}, Points = ${x.points}, PS= ${x.primaryScore}, SS = ${x.secondaryScore}");
+                    }
+                  }
               },
               child: Text(
                 'Next',

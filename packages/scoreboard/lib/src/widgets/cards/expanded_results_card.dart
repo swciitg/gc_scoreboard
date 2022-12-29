@@ -11,7 +11,7 @@ class ExpandedResultsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (eventModel.winners[0].secondaryScore == null) {
+    if (eventModel.winners[0][0].secondaryScore == null) {
       return Container(
           height: (eventModel.winners.length).toDouble() * 34,
           child: ListView.builder(
@@ -19,25 +19,25 @@ class ExpandedResultsCard extends StatelessWidget {
               itemCount: eventModel.winners.length,
               itemBuilder: (context, index) {
                 return NullSecondaryResultsCardItem(
-                    eventModel.winners[index].position,
-                    eventModel.winners[index].hostel!,
-                    eventModel.winners[index].primaryScore!);
+                    index,
+                    eventModel.winners[index][0].hostel!,
+                    eventModel.winners[index][0].primaryScore!);
               }));
     } else {
       return Container(
         child: Column(
           children: [
             SecondaryScoreResultsCardItem(
-              eventModel.winners[0].position,
-              eventModel.winners[0].hostel!,
-              eventModel.winners[0].primaryScore!,
-              eventModel.winners[0].secondaryScore,
+              1,
+              eventModel.winners[0][0].hostel!,
+              eventModel.winners[0][0].primaryScore!,
+              eventModel.winners[0][0].secondaryScore,
             ),
             SecondaryScoreResultsCardItem(
-              eventModel.winners[1].position,
-              eventModel.winners[1].hostel!,
-              eventModel.winners[1].primaryScore!,
-              eventModel.winners[1].secondaryScore,
+              2,
+              eventModel.winners[1][0].hostel!,
+              eventModel.winners[1][0].primaryScore!,
+              eventModel.winners[1][0].secondaryScore,
             ),
           ],
         ),

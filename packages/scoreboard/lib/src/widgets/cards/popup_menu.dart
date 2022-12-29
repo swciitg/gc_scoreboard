@@ -50,18 +50,18 @@ class _PopupMenuState extends State<PopupMenu> {
               date: DateTime.now(),
               venue: 'Table Tennis Court, Old SAC',
               winners: [
-                ResultModel(
-                  position: 1,
+                [ResultModel(
+
                   hostel: 'Disang',
                   points: 1,
                   primaryScore: '.1s',
-                  secondaryScore: '1,2,3,1',),
-                ResultModel(
-                    position: 2,
+                  secondaryScore: '1,2,3,1',)],
+                [ResultModel(
+
                     hostel: 'Lohit',
                     points: 1,
                     primaryScore: '23.1s',
-                    secondaryScore: '13,23,33,32'),
+                    secondaryScore: '13,23,33,32')],
               ],
               hostels: [
                 'Disang',
@@ -83,18 +83,18 @@ class _PopupMenuState extends State<PopupMenu> {
               date: DateTime.now(),
               venue: 'Table Tennis Court, Old SAC',
               winners: [
-                ResultModel(
-                  position: 1,
+                [ResultModel(
+
                   hostel: 'Disang',
                   points: 1,
                   primaryScore: '.1s',
-                  secondaryScore: '1,2,3,1',),
-                ResultModel(
-                    position: 2,
+                  secondaryScore: '1,2,3,1',)],
+                [ResultModel(
+
                     hostel: 'Lohit',
                     points: 1,
                     primaryScore: '23.1s',
-                    secondaryScore: '13,23,33,32'),
+                    secondaryScore: '13,23,33,32')],
               ],
               hostels: [
                 'Disang',

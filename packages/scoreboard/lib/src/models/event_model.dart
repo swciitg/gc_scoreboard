@@ -9,7 +9,7 @@ class EventModel {
   String status;
   String venue;
   List<String> hostels; // Participating hostels
-  List<ResultModel> winners;
+  List<List<ResultModel>> winners;
   String? posterEmail = '';
   bool resultAdded;
   String? victoryStatement = '';
