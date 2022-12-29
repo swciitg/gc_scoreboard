@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scoreboard/src/functions/schedule_event/validator.dart';
-import 'package:scoreboard/src/globals/auth_user_helper.dart';
 import 'package:scoreboard/src/globals/global_widgets.dart';
 import 'package:scoreboard/src/globals/helper_variables.dart';
 import 'package:scoreboard/src/models/event_model.dart';
@@ -73,15 +72,20 @@ class _AddEventFormState extends State<AddEventForm> {
 
   @override
   Widget build(BuildContext context) {
-
     Future<void> onFormSubmit() async {
       if (!_formKey.currentState!.validate()) {
         showSnackBar(context, 'Please give all the inputs correctly');
         return;
       } else {
-        DateTime eventDateTime = DateTime(selectedDate!.year,selectedDate!.month,selectedDate!.day,selectedTime!.hour,selectedTime!.minute);
+        DateTime eventDateTime = DateTime(
+            selectedDate!.year,
+            selectedDate!.month,
+            selectedDate!.day,
+            selectedTime!.hour,
+            selectedTime!.minute);
 
-        var data={"event": sportName,
+        var data = {
+          "event": sportName,
           "category": category!,
           "stage": stage!,
           "date": eventDateTime.toIso8601String(),
@@ -90,21 +94,26 @@ class _AddEventFormState extends State<AddEventForm> {
           "status": isCancelled
               ? 'cancelled'
               : isPostponed
-              ? 'postponed'
-              : 'ok',
+                  ? 'postponed'
+                  : 'ok',
           "results": [],
           "resultAdded": false
         };
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => ConfirmEventDetails(
-              event: EventModel.fromJson(data),
-            )));
+                  event: EventModel.fromJson(data),
+                )));
       }
     }
-
     return Scaffold(
       backgroundColor: Themes.theme.backgroundColor,
-      appBar: PreferredSize(child: AppBarFormComponent(title: widget.event == null ? 'Add Event' : 'Edit Event',actionTitle: "Next",onFormSubmit: onFormSubmit,), preferredSize: Size.fromHeight(56)),
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(56),
+          child: AppBarFormComponent(
+            title: widget.event == null ? 'Add Event' : 'Edit Event',
+            actionTitle: "Next",
+            onFormSubmit: onFormSubmit,
+          )),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(8),
@@ -161,7 +170,7 @@ class _AddEventFormState extends State<AddEventForm> {
                                     lastDate: DateTime(2101));
                                 if (pickedDate != null) {
                                   if (!mounted) return;
-                                  selectedDate=pickedDate;
+                                  selectedDate = pickedDate;
                                   String formattedDate =
                                       DateFormat('dd-MMM-yyyy')
                                           .format(pickedDate);
@@ -173,32 +182,40 @@ class _AddEventFormState extends State<AddEventForm> {
                               },
                             ),
                           ),
-                          const SizedBox(width: 12,),
+                          const SizedBox(
+                            width: 12,
+                          ),
                           Expanded(
                             child: CustomTextField(
                               hintText: 'Time',
                               validator: validateField,
                               controller: timeInput,
                               onTap: () async {
-                                FocusScope.of(context).requestFocus(FocusNode());
+                                FocusScope.of(context)
+                                    .requestFocus(FocusNode());
                                 TimeOfDay? pickedTime = await showTimePicker(
-                                    builder: (context, childWidget) {
-                                      return MediaQuery(
-                                          data: MediaQuery.of(context).copyWith(
-                                              alwaysUse24HourFormat: false),
-                                          // If you want 24-Hour format, just change alwaysUse24HourFormat to true or remove all the builder argument
-                                          child: childWidget!);
-                                    },
+                                  builder: (context, childWidget) {
+                                    return MediaQuery(
+                                        data: MediaQuery.of(context).copyWith(
+                                            alwaysUse24HourFormat: false),
+                                        // If you want 24-Hour format, just change alwaysUse24HourFormat to true or remove all the builder argument
+                                        child: childWidget!);
+                                  },
                                   initialTime: TimeOfDay.now(),
                                   context: context, //context of current state
                                 );
                                 if (pickedTime != null) {
                                   if (!mounted) return;
-                                  selectedTime=pickedTime;
+                                  selectedTime = pickedTime;
                                   setState(() {
                                     final now = DateTime.now();
-                                    final formattedTimeString = DateFormat.jm().format(DateTime(now.year, now.month, now.day, pickedTime.hour, pickedTime.minute));  //"6:00 AM"
-                                    print(formattedTimeString);
+                                    final formattedTimeString = DateFormat.jm()
+                                        .format(DateTime(
+                                            now.year,
+                                            now.month,
+                                            now.day,
+                                            pickedTime.hour,
+                                            pickedTime.minute)); //"6:00 AM"
                                     timeInput.text = formattedTimeString;
                                   });
                                 }
@@ -207,12 +224,16 @@ class _AddEventFormState extends State<AddEventForm> {
                           )
                         ],
                       ),
-                      const SizedBox(height: 12,),
+                      const SizedBox(
+                        height: 12,
+                      ),
                       CustomTextField(
                           hintText: 'Venue',
                           validator: validateField,
                           controller: _venueController),
-                      const SizedBox(height: 12,),
+                      const SizedBox(
+                        height: 12,
+                      ),
                       Row(
                         children: [
                           Checkbox(
@@ -250,12 +271,16 @@ class _AddEventFormState extends State<AddEventForm> {
                               style: Themes.theme.textTheme.headline2),
                         ],
                       ),
-                      const SizedBox(height: 12,),
+                      const SizedBox(
+                        height: 12,
+                      ),
                       Text(
                         'Participating Hostels',
                         style: Themes.theme.textTheme.headline1,
                       ),
-                      const SizedBox(height: 18,),
+                      const SizedBox(
+                        height: 18,
+                      ),
                       CustomDropDown(
                         items: [for (var i = 1; i <= 10; i++) i.toString()],
                         value: (widget.event != null)
@@ -265,7 +290,9 @@ class _AddEventFormState extends State<AddEventForm> {
                         onChanged: callbackHostels,
                         validator: validateField,
                       ),
-                      const SizedBox(height: 12,),
+                      const SizedBox(
+                        height: 12,
+                      ),
                       Column(
                         children: [
                           for (var i = 1; i <= hostels; i++)
