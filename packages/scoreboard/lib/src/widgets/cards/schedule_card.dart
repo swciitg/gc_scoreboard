@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:scoreboard/src/widgets/cards/menu_item.dart';
 import '../../widgets/cards/popup_menu.dart';
 import '../../widgets/cards/athletics_schedule_card.dart';
 import '../../models/event_model.dart';
 import '../../globals/themes.dart';
 import 'card_event_details.dart';
+import 'menu_item.dart';
 
 class ScheduleCard extends StatefulWidget {
   final EventModel eventModel;

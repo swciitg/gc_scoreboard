@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoreboard/src/decorations/card_style.dart';
 import '../../models/event_model.dart';
-import 'date_widget.dart';
+import 'card_date_widget.dart';
 
 class CardEventDetails extends StatelessWidget {
   final EventModel eventModel;
