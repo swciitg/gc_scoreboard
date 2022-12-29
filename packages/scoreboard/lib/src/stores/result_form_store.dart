@@ -1,44 +1,30 @@
-import 'package:scoreboard/src/models/nullable_result_model.dart';
+import 'package:scoreboard/src/models/result_model.dart';
 
 class ResultForm {
-  static List<NullableResultModel>? resultFields = [NullableResultModel(position: 1)] ;
+  static List<List<ResultModel>>? resultFields = [
+    [ResultModel()]
+  ];
 
-  static void addTie(int position) {
-    resultFields?.add(NullableResultModel(position: position));
-    resultFields?.sort();
+  static void addTeamAtPosition(int position) {
+    resultFields?[position-1].add(ResultModel());
+    print(resultFields);
   }
 
-
-  static void removePosition(int index) {
-    resultFields?.removeAt(index);
-    resultFields?.sort();
+  static void removeTeamAtPosition(int position, int team) {
+    resultFields?[position-1].removeAt(team);
   }
 
-  static int get numResults => resultFields?.length ?? 0;
-
+  static int numPositions() {
+    return resultFields!.length;
+  }
 
   static void addNewPosition(int? value) {
     if (value == null) return;
-    resultFields?.add(NullableResultModel(position: value + 1));
-    resultFields?.sort();
+    resultFields?.add([ResultModel()]);
   }
 
-  static int numResultsWithPosition(int position) {
+  static int numTeamsWithPosition(int position) {
     if (resultFields == null) return 0;
-    return resultFields!
-        .where((element) => element.position == position)
-        .length;
+    return resultFields![position - 1].length;
   }
-
-  static bool displayAddTieIcon(int resultFieldIndex) =>
-      numResultsWithPosition(resultFields![resultFieldIndex].position) < 2;
-
-  static bool displayRemoveTieIcon(int resultFieldIndex) =>
-      numResultsWithPosition(resultFields![resultFieldIndex].position) == 2 &&
-      resultFieldIndex != 0 &&
-      resultFields![resultFieldIndex].position ==
-          resultFields![resultFieldIndex - 1].position;
-
-  static bool displayAddPosition(int resultFieldIndex) =>
-      resultFieldIndex == (numResults - 1);
 }

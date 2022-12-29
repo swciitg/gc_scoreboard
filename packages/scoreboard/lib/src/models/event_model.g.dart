@@ -17,12 +17,14 @@ EventModel _$EventModelFromJson(Map<String, dynamic> json) => EventModel(
           (json['hostels'] as List<dynamic>).map((e) => e as String).toList(),
       status: json['status'] as String,
       results: (json['results'] as List<dynamic>?)
-              ?.map((e) => ResultModel.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => (e as List<dynamic>)
+                  .map((e) => ResultModel.fromJson(e as Map<String, dynamic>))
+                  .toList())
               .toList() ??
           const [],
       resultAdded: json['resultAdded'] as bool? ?? false,
       victoryStatement: json['victoryStatement'] as String? ?? '',
-    );
+    )..posterEmail = json['posterEmail'] as String?;
 
 Map<String, dynamic> _$EventModelToJson(EventModel instance) =>
     <String, dynamic>{
@@ -34,7 +36,10 @@ Map<String, dynamic> _$EventModelToJson(EventModel instance) =>
       'status': instance.status,
       'venue': instance.venue,
       'hostels': instance.hostels,
-      'results': instance.results.map((e) => e.toJson()).toList(),
+      'results': instance.results
+          .map((e) => e.map((e) => e.toJson()).toList())
+          .toList(),
+      'posterEmail': instance.posterEmail,
       'resultAdded': instance.resultAdded,
       'victoryStatement': instance.victoryStatement,
     };

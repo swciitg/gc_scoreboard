@@ -4,6 +4,7 @@ import 'package:scoreboard/src/globals/auth_user_helper.dart';
 import 'package:scoreboard/src/globals/helper_variables.dart';
 import 'package:scoreboard/src/screens/add_result_form.dart';
 import 'package:scoreboard/src/screens/add_event_form.dart';
+import '../models/event_model.dart';
 import '../screens/results_page.dart';
 import '../screens/schedule_page.dart';
 import 'package:provider/provider.dart';
@@ -65,7 +66,21 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
                 ? GestureDetector(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => AddResultForm()));
+                    builder: (context) => AddResultForm(event: EventModel(
+                        victoryStatement: 'Tie between Disang and Lohit',
+                        event: 'Cricket',
+                        category: 'Men',
+                        stage: 'Quarter-Final',
+                        date: DateTime.now(),
+                        venue: 'Table Tennis Court, Old SAC',
+                        results: [],
+                        hostels: [
+                          'Disang',
+                          'Lohit',
+                          'Kameng',
+                          'Umiam',
+                          'Brahmaputra',
+                        ], status: 'ok', resultAdded: false),)));
               },
               child: const AddButton(
                 text: "Add Result ",

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scoreboard/src/models/result_model.dart';
+import '../models/result_model.dart';
 import '../widgets/cards/results_card.dart';
 import '../models/event_model.dart';
 import '../widgets/common/top_bar.dart';
@@ -25,19 +25,19 @@ class _ResultsPageState extends State<ResultsPage> {
       date: DateTime.now(),
       venue: 'Table Tennis Court, Old SAC',
       results: [
-        ResultModel(
-            position: 1, hostel: 'Disang', points: 1, primaryScore: '22.1s'),
-        ResultModel(
-            position: 2, hostel: 'Lohit', points: 1, primaryScore: '23.1s'),
-        ResultModel(
-            position: 3, hostel: 'Kameng', points: 1, primaryScore: '24.1s'),
-        ResultModel(
-            position: 4, hostel: 'Umiam', points: 1, primaryScore: '25.1s'),
-        ResultModel(
-            position: 5,
+        [ResultModel(
+             hostel: 'Disang', points: 1, primaryScore: '22.1s')],
+        [ResultModel(
+             hostel: 'Lohit', points: 1, primaryScore: '23.1s')],
+        [ResultModel(
+             hostel: 'Kameng', points: 1, primaryScore: '24.1s')],
+        [ResultModel(
+             hostel: 'Umiam', points: 1, primaryScore: '25.1s')],
+        [ResultModel(
+
             hostel: 'Brahmaputra',
             points: 1,
-            primaryScore: '26.1s'),
+            primaryScore: '26.1s')],
       ],
       hostels: [
         'Disang',
@@ -55,18 +55,18 @@ class _ResultsPageState extends State<ResultsPage> {
       date: DateTime.now(),
       venue: 'Table Tennis Court, Old SAC',
       results: [
-        ResultModel(
-            position: 1,
+        [ResultModel(
+
             hostel: 'Disang',
             points: 1,
             primaryScore: '.1s',
-            secondaryScore: '1,2,3,1',),
-        ResultModel(
-            position: 2,
+            secondaryScore: '1,2,3,1',)],
+        [ResultModel(
+
             hostel: 'Lohit',
             points: 1,
             primaryScore: '23.1s',
-            secondaryScore: '13,23,33,32'),
+            secondaryScore: '13,23,33,32')],
       ],
       hostels: [
         'Disang',

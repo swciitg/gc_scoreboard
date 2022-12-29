@@ -19,6 +19,7 @@ class APIService {
     dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options,handler) async {
         options.headers["Authorization"] = "Bearer ${await AuthUserHelpers.getAccessToken()}";
+        print(options.headers["Authorization"]);
         handler.next(options);
       },
       onError: (error,handler) async {

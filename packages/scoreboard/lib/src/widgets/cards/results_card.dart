@@ -58,7 +58,7 @@ class _ResultsCardState extends State<ResultsCard> {
                               width: 4,
                             ),
                             Text(
-                              widget.eventModel.victoryStatement,
+                              widget.eventModel.victoryStatement!,
                               style: GoogleFonts.montserrat(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 12,

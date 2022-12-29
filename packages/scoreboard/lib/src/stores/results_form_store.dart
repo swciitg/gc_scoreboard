@@ -1,64 +1,30 @@
-import 'package:mobx/mobx.dart';
-import 'package:scoreboard/src/models/event_model.dart';
-import 'package:scoreboard/src/models/nullable_result_model.dart';
+import 'package:scoreboard/src/models/result_model.dart';
 
-part 'results_form_store.g.dart';
+class ResultForm {
+  static List<List<ResultModel>>? resultFields = [
+    [ResultModel()]
+  ];
 
-class ResultsFormStore = ResultsFormStoreBase with _$ResultsFormStore;
-
-abstract class ResultsFormStoreBase with Store {
-  final EventModel event;
-  ResultsFormStoreBase({required this.event}) {
-    if (event.results.isEmpty) {
-      resultFields = ObservableList<NullableResultModel>.of(
-          [NullableResultModel(position: 1)]);
-    } else {
-      resultFields = ObservableList<NullableResultModel>.of(
-        event.results.map((e) => NullableResultModel.fromResultModel(e)).toList()
-      );
-    }
+  static void addTeamAtPosition(int position) {
+    resultFields?[position-1].add(ResultModel());
+    print(resultFields);
   }
 
-  @observable
-  ObservableList<NullableResultModel>? resultFields;
-
-  @action
-  void addTie(int position) {
-    resultFields?.add(NullableResultModel(position: position));
-    resultFields?.sort();
+  static void removeTeamAtPosition(int position, int team) {
+    resultFields?[position-1].removeAt(team);
   }
 
-  @action
-  void removePosition(int index) {
-    resultFields?.removeAt(index);
-    resultFields?.sort();
+  static int numPositions() {
+    return resultFields!.length;
   }
 
-  int get numResults => resultFields?.length ?? 0;
-
-  @action
-  void addNewPosition(int? value) {
+  static void addNewPosition(int? value) {
     if (value == null) return;
-    resultFields?.add(NullableResultModel(position: value + 1));
-    resultFields?.sort();
+    resultFields?.add([ResultModel()]);
   }
 
-  int numResultsWithPosition(int position) {
+  static int numTeamsWithPosition(int position) {
     if (resultFields == null) return 0;
-    return resultFields!
-        .where((element) => element.position == position)
-        .length;
+    return resultFields![position - 1].length;
   }
-
-  bool displayAddTieIcon(int resultFieldIndex) =>
-      numResultsWithPosition(resultFields![resultFieldIndex].position) < 2;
-
-  bool displayRemoveTieIcon(int resultFieldIndex) =>
-      numResultsWithPosition(resultFields![resultFieldIndex].position) == 2 &&
-      resultFieldIndex != 0 &&
-      resultFields![resultFieldIndex].position ==
-          resultFields![resultFieldIndex - 1].position;
-
-  bool displayAddPosition(int resultFieldIndex) =>
-      resultFieldIndex == (numResults - 1) ;
 }

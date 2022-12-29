@@ -1,4 +1,5 @@
-import 'package:scoreboard/src/models/result_model.dart';
+
+import 'result_model.dart';
 
 import 'package:json_annotation/json_annotation.dart';
 
@@ -15,10 +16,10 @@ class EventModel {
   String status;
   String venue;
   List<String> hostels; // Participating hostels
-  List<ResultModel> results=[];
-  bool resultAdded=false;
-  String victoryStatement = '';
-
+  List<List<ResultModel>> results;
+  String? posterEmail = '';
+  bool resultAdded;
+  String? victoryStatement = '';
   EventModel({
     this.id,
     required this.event,
