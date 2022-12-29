@@ -30,7 +30,7 @@ class CommonStore = _CommonStore with _$CommonStore;
 
 abstract class _CommonStore with Store {
   @observable
-  Competitions competition = Competitions.spardha;
+  Competitions competition = Competitions.gc;
 
   @observable
   Pages page = Pages.standings;
