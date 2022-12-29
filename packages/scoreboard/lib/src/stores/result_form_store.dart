@@ -7,7 +7,6 @@ class ResultForm {
 
   static void addTeamAtPosition(int position) {
     resultFields?[position-1].add(ResultModel());
-    print(resultFields);
   }
 
   static void removeTeamAtPosition(int position, int team) {

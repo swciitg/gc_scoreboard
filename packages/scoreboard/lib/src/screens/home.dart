@@ -15,6 +15,7 @@ import '../stores/common_store.dart';
 import '../widgets/common/bottom_navigation_bar.dart';
 import '../widgets/schedule_page/add_button.dart';
 import 'coming_soon.dart';
+import 'gc_standings.dart';
 
 class ScoreBoardHome extends StatefulWidget {
   static const id = '/home';
