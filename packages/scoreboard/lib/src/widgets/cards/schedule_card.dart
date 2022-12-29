@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
+import 'package:scoreboard/src/widgets/cards/time_venue_widget.dart';
 import '../../widgets/cards/popup_menu.dart';
 import '../../widgets/cards/athletics_schedule_card.dart';
 import '../../models/event_model.dart';
@@ -116,73 +116,7 @@ class _ScheduleCardState extends State<ScheduleCard> {
                   const SizedBox(
                     height: 32,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 18,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Icon(
-                              Icons.access_time_outlined,
-                              color: Themes.cardFontColor2,
-                              size: 14,
-                            ),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            if (widget.eventModel.status == 'postponed')
-                              Text('Event postponed',
-                                  style: GoogleFonts.montserrat(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 12,
-                                      color: Themes.cardFontColor3))
-                            else if (widget.eventModel.status == 'cancelled')
-                              Text('Event cancelled',
-                                  style: GoogleFonts.montserrat(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 12,
-                                      color: Themes.cardFontColor4))
-                            else
-                              Text(
-                                  DateFormat.jm()
-                                      .format(widget.eventModel.date),
-                                  style: GoogleFonts.montserrat(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 12,
-                                      color: Themes.cardFontColor2))
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      SizedBox(
-                        height: 18,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Icon(
-                              Icons.location_on_outlined,
-                              color: Themes.cardFontColor2,
-                              size: 14,
-                            ),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            Text(
-                              widget.eventModel.venue,
-                              style: GoogleFonts.montserrat(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 12,
-                                  color: Themes.cardFontColor2),
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                  TimeVenueWidget(eventModel: widget.eventModel),
                 ],
               ),
             ),
