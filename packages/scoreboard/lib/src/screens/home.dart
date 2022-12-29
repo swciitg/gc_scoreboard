@@ -65,7 +65,7 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
                 ? GestureDetector(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const AddResultForm()));
+                    builder: (context) => AddResultForm()));
               },
               child: const AddButton(
                 text: "Add Result ",

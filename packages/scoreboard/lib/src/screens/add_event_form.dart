@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scoreboard/src/functions/schedule_event/validator.dart';
+import 'package:scoreboard/src/globals/auth_user_helper.dart';
 import 'package:scoreboard/src/globals/global_widgets.dart';
 import 'package:scoreboard/src/globals/helper_variables.dart';
 import 'package:scoreboard/src/models/event_model.dart';
 import 'package:scoreboard/src/screens/confirm_event_details.dart';
+import 'package:scoreboard/src/stores/user_store.dart';
 import 'package:scoreboard/src/widgets/add_event/heading.dart';
 import 'package:scoreboard/src/widgets/common/app_bar.dart';
 import '../globals/constants.dart';
@@ -21,10 +23,12 @@ class AddEventForm extends StatefulWidget {
 }
 
 class _AddEventFormState extends State<AddEventForm> {
-  final TextEditingController _sportNameController = TextEditingController();
+  String? sportName;
   final TextEditingController _venueController = TextEditingController();
   final TextEditingController dateInput = TextEditingController();
   final TextEditingController timeInput = TextEditingController();
+  DateTime? selectedDate; // stores date picked
+  TimeOfDay? selectedTime; // stores time picked
   bool isPostponed = false;
   bool isCancelled = false;
   String? category;
@@ -49,7 +53,7 @@ class _AddEventFormState extends State<AddEventForm> {
     super.initState();
     if (widget.event != null) {
       EventModel e = widget.event!;
-      _sportNameController.text = e.event;
+      sportName = e.event;
       _venueController.text = e.venue;
       category = e.category;
       stage = e.stage;
@@ -72,21 +76,25 @@ class _AddEventFormState extends State<AddEventForm> {
 
     Future<void> onFormSubmit() async {
       if (!_formKey.currentState!.validate()) {
-        showSnackBar(context, 'Processing Data');
+        showSnackBar(context, 'Please give all the inputs correctly');
         return;
       } else {
-        var data={"event": _sportNameController.text,
+        DateTime eventDateTime = DateTime(selectedDate!.year,selectedDate!.month,selectedDate!.day,selectedTime!.hour,selectedTime!.minute);
+
+        var data={"event": sportName,
           "category": category!,
           "stage": stage!,
-          "date": DateTime.now(),
+          "date": eventDateTime.toIso8601String(),
           "venue": _venueController.text,
-          "hostels": ['wow', 'bow', 'cow'],
+          "hostels": participatingHostels,
           "status": isCancelled
               ? 'cancelled'
               : isPostponed
               ? 'postponed'
               : 'ok',
-          "results": [], "resultAdded": false};
+          "results": [],
+          "resultAdded": false
+        };
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => ConfirmEventDetails(
               event: EventModel.fromJson(data),
@@ -110,10 +118,13 @@ class _AddEventFormState extends State<AddEventForm> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomTextField(
-                          hintText: 'Sport Name',
-                          validator: validateField,
-                          controller: _sportNameController),
+                      CustomDropDown(
+                        items: UserStore.spardhaEvents,
+                        hintText: 'Event Name',
+                        onChanged: (s) => sportName = s,
+                        value: sportName,
+                        validator: validateField,
+                      ),
                       const SizedBox(height: 12),
                       CustomDropDown(
                         items: eventCategories,
@@ -132,6 +143,7 @@ class _AddEventFormState extends State<AddEventForm> {
                       ),
                       const SizedBox(height: 12),
                       Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
                             child: CustomTextField(
@@ -148,6 +160,8 @@ class _AddEventFormState extends State<AddEventForm> {
                                     //DateTime.now() - not to allow to choose before today.
                                     lastDate: DateTime(2101));
                                 if (pickedDate != null) {
+                                  if (!mounted) return;
+                                  selectedDate=pickedDate;
                                   String formattedDate =
                                       DateFormat('dd-MMM-yyyy')
                                           .format(pickedDate);
@@ -168,19 +182,24 @@ class _AddEventFormState extends State<AddEventForm> {
                               onTap: () async {
                                 FocusScope.of(context).requestFocus(FocusNode());
                                 TimeOfDay? pickedTime = await showTimePicker(
+                                    builder: (context, childWidget) {
+                                      return MediaQuery(
+                                          data: MediaQuery.of(context).copyWith(
+                                              alwaysUse24HourFormat: false),
+                                          // If you want 24-Hour format, just change alwaysUse24HourFormat to true or remove all the builder argument
+                                          child: childWidget!);
+                                    },
                                   initialTime: TimeOfDay.now(),
                                   context: context, //context of current state
                                 );
                                 if (pickedTime != null) {
                                   if (!mounted) return;
-                                  DateTime parsedTime = DateFormat.jm().parse(
-                                      pickedTime.format(context).toString());
-                                  String formattedTime =
-                                      DateFormat('h:mm a').format(parsedTime);
-                                  //DateFormat() is from intl package, you can format the time on any pattern you need.
+                                  selectedTime=pickedTime;
                                   setState(() {
-                                    timeInput.text =
-                                        formattedTime; //set output date to TextField value.
+                                    final now = DateTime.now();
+                                    final formattedTimeString = DateFormat.jm().format(DateTime(now.year, now.month, now.day, pickedTime.hour, pickedTime.minute));  //"6:00 AM"
+                                    print(formattedTimeString);
+                                    timeInput.text = formattedTimeString;
                                   });
                                 }
                               },

@@ -15,10 +15,9 @@ class EventModel {
   String status;
   String venue;
   List<String> hostels; // Participating hostels
-  List<ResultModel> results;
-  String? posterEmail = '';
-  bool resultAdded;
-  String? victoryStatement = '';
+  List<ResultModel> results=[];
+  bool resultAdded=false;
+  String victoryStatement = '';
 
   EventModel({
     this.id,
@@ -29,10 +28,9 @@ class EventModel {
     required this.venue,
     required this.hostels,
     required this.status,
-    required this.results,
-    required this.resultAdded,
-    this.victoryStatement,
-    this.posterEmail
+    this.results = const [],
+    this.resultAdded = false,
+    this.victoryStatement = '',
   });
 
   factory EventModel.fromJson(Map<String,dynamic> json) => _$EventModelFromJson(json);

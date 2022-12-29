@@ -8,6 +8,7 @@ import 'package:scoreboard/src/globals/helper_variables.dart';
 
 class UserStore{
   Map<String,String> userData={};
+  static List<String> spardhaEvents=[];
 
   Future<bool> saveUserData(Map<String,String> userInfo,BuildContext buildContext) async {
     print(userInfo);
@@ -16,9 +17,13 @@ class UserStore{
       userData["name"] = userInfo["name"]!;
       userData["email"] = userInfo["email"]!;
       await AuthUserHelpers.setUserData(userInfo);
+      await APIService(buildContext).generateTokens();
     }
-    await APIService(buildContext).generateTokens();
+    spardhaEvents= await APIService(buildContext).getAllSpardhaEvents();
+    print(spardhaEvents.toString());
     return true;
   }
+
+
 
 }

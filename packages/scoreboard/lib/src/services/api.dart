@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -81,8 +82,14 @@ class APIService {
     print(resp);
   }
 
+  Future<void> postEventSchedule(Map<String,dynamic> data) async {
+    var resp = await dio.post("/gc/spardha/event-schedule",data: data);
+    print(resp);
+  }
+
   Future<void> generateTokens() async {
     Map<String,String> userData = await AuthUserHelpers.getUserData();
+    print(userData);
     Response<Map<String, dynamic>> resp =
         await dio.post("/gc/login", data: {DatabaseRecords.useremail: userData[DatabaseRecords.useremail]});
     var data = resp.data!;
@@ -126,6 +133,16 @@ class APIService {
       print("resp 401");
       return false;
     }
+  }
+
+  Future<List<String>> getAllSpardhaEvents() async {
+    Response resp = await dio.get("/gc/spardha/all-events");
+    print(resp.data["details"]); // it is string of dynamic
+    List<String> allSpardhaEvents=[];
+    resp.data["details"].forEach((element) => {
+      allSpardhaEvents.add(element)
+    });
+    return allSpardhaEvents;
   }
 
 }

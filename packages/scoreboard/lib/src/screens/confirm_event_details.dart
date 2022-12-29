@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:scoreboard/src/globals/global_widgets.dart';
 import 'package:scoreboard/src/globals/themes.dart';
 import 'package:scoreboard/src/models/event_model.dart';
+import 'package:scoreboard/src/screens/home.dart';
+import 'package:scoreboard/src/services/api.dart';
 
 class ConfirmEventDetails extends StatefulWidget {
   final EventModel event;
@@ -17,6 +20,7 @@ class ConfirmEventDetails extends StatefulWidget {
 class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
   @override
   Widget build(BuildContext context) {
+    print(widget.event);
     return Scaffold(
       backgroundColor: Themes.theme.backgroundColor,
       appBar: AppBar(
@@ -45,7 +49,17 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
         ),
         actions: [
           TextButton(
-            onPressed: () {},
+            onPressed: () async {
+              try{
+                print(widget.event.toJson());
+                await APIService(context).postEventSchedule(widget.event.toJson());
+                showSnackBar(context, "Event schedule posted successfully");
+                Navigator.of(context).pushNamedAndRemoveUntil(ScoreBoardHome.id, (route) => false);
+              }
+              catch(err){
+                print(err.toString());
+              }
+            },
             child: Text(
               'Post',
               style: Themes.theme.textTheme.headline3,

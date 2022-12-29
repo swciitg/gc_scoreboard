@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
-import 'package:scoreboard/src/widgets/cards/menu_item.dart';
+import 'package:scoreboard/src/widgets/cards/time_venue_widget.dart';
 import '../../widgets/cards/popup_menu.dart';
 import '../../widgets/cards/athletics_schedule_card.dart';
 import '../../models/event_model.dart';
 import '../../globals/themes.dart';
+import 'card_event_details.dart';
+import 'menu_item.dart';
 
 class ScheduleCard extends StatefulWidget {
   final EventModel eventModel;
-  ScheduleCard({super.key, required this.eventModel});
+  const ScheduleCard({super.key, required this.eventModel});
 
   @override
   State<ScheduleCard> createState() => _ScheduleCardState();
@@ -47,248 +48,75 @@ class _ScheduleCardState extends State<ScheduleCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    height: 98,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 4),
-                              child: Container(
-                                height: 28,
-                                child: Text(
-                                  widget.eventModel.event,
-                                  style: GoogleFonts.montserrat(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 16,
-                                      color: Themes.cardFontColor2),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              height: 20,
-                              child: Text(
-                                widget.eventModel.category,
-                                style: GoogleFonts.montserrat(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 14,
-                                    color: Themes.bottomNavFontColor),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 16,
-                            ),
-                            Container(
-                              height: 26,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: Color.fromRGBO(71, 71, 71, 1),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8, vertical: 4),
-                                child: Text(
-                                  widget.eventModel.stage,
-                                  style: GoogleFonts.montserrat(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 12,
-                                      color: Themes.cardFontColor3),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                        Container(
-                          alignment: Alignment.topCenter,
-                          width: 82,
-                          child: Stack(
-                            children: [
-                              SvgPicture.asset(
-                                'assets/date.svg',
-                                package: 'scoreboard',
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(8, 34, 8, 0),
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  height: 28,
-                                  width: 66,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        DateFormat.d()
-                                            .format(widget.eventModel.date),
-                                        style: GoogleFonts.montserrat(
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 16,
-                                            color: Themes.cardFontColor2),
-                                      ),
-                                      SizedBox(
-                                        width: 4,
-                                      ),
-                                      Text(
-                                        DateFormat.LLL()
-                                            .format(widget.eventModel.date),
-                                        style: GoogleFonts.montserrat(
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 16,
-                                            color: Themes.cardFontColor2),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 32,
-                  ),
+                  CardEventDetails(eventModel: widget.eventModel),
                   widget.eventModel.hostels.length > 2
                       ? AthleticsScheduleCard(eventModel: widget.eventModel)
-                      : Container(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: 20,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      height: 18,
-                                      width: 18,
-                                      child: SvgPicture.asset(
-                                        'assets/kriti2.svg',
-                                        package: 'scoreboard',
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text(
-                                      widget.eventModel.hostels[0],
-                                      style: GoogleFonts.montserrat(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 14,
-                                          color: Themes.cardFontColor2),
-                                    )
-                                  ],
+                      : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 20,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 18,
+                                  width: 18,
+                                  child: SvgPicture.asset(
+                                    'assets/kriti2.svg',
+                                    package: 'scoreboard',
+                                    fit: BoxFit.fill,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 12,
-                              ),
-                              Container(
-                                height: 20,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      height: 18,
-                                      width: 18,
-                                      child: SvgPicture.asset(
-                                        'assets/manthan2.svg',
-                                        package: 'scoreboard',
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text(
-                                      widget.eventModel.hostels[1],
-                                      style: GoogleFonts.montserrat(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 14,
-                                          color: Themes.cardFontColor2),
-                                    )
-                                  ],
+                                const SizedBox(
+                                  width: 8,
                                 ),
-                              ),
-                            ],
+                                Text(
+                                  widget.eventModel.hostels[0],
+                                  style: GoogleFonts.montserrat(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 14,
+                                      color: Themes.cardFontColor2),
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                  SizedBox(
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          SizedBox(
+                            height: 20,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 18,
+                                  width: 18,
+                                  child: SvgPicture.asset(
+                                    'assets/manthan2.svg',
+                                    package: 'scoreboard',
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  widget.eventModel.hostels[1],
+                                  style: GoogleFonts.montserrat(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 14,
+                                      color: Themes.cardFontColor2),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                  const SizedBox(
                     height: 32,
                   ),
-                  Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          height: 18,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(
-                                Icons.access_time_outlined,
-                                color: Themes.cardFontColor2,
-                                size: 14,
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              if (widget.eventModel.status == 'postponed')
-                                Text('Event postponed',
-                                    style: GoogleFonts.montserrat(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 12,
-                                        color: Themes.cardFontColor3))
-                              else if (widget.eventModel.status == 'cancelled')
-                                Text('Event cancelled',
-                                    style: GoogleFonts.montserrat(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 12,
-                                        color: Themes.cardFontColor4))
-                              else
-                                Text(
-                                    DateFormat.jm()
-                                        .format(widget.eventModel.date),
-                                    style: GoogleFonts.montserrat(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 12,
-                                        color: Themes.cardFontColor2))
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Container(
-                          height: 18,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(
-                                Icons.location_on_outlined,
-                                color: Themes.cardFontColor2,
-                                size: 14,
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Text(
-                                widget.eventModel.venue,
-                                style: GoogleFonts.montserrat(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 12,
-                                    color: Themes.cardFontColor2),
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  TimeVenueWidget(eventModel: widget.eventModel),
                 ],
               ),
             ),

@@ -12,10 +12,10 @@ class DatabaseRecords{
 }
 
 const connectivityResults = [ConnectivityResult.ethernet, ConnectivityResult.mobile, ConnectivityResult.vpn, ConnectivityResult.wifi];
-const List<String> eventCategories = ['Men', 'Women', 'Men and Women'];
+const List<String> eventCategories = ['Men', 'Women', 'Men + Women'];
 const List<String> spardhaEventStages = [
   'Qualifier',
-  'Finals',
+  'Final',
   'Semi-Final',
   '3rd vs 4th'
 ];

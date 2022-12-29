@@ -38,6 +38,11 @@ class AuthUserHelpers{
     return {"name" : prefs.getString(DatabaseRecords.username) ?? " ",DatabaseRecords.useremail : prefs.getString(DatabaseRecords.useremail) ?? " "};
   }
 
+  static Future<String> getUserEmail() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(DatabaseRecords.useremail) ?? " ";
+  }
+
   static Future<void> setUserData(Map<String,String> userInfo) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(DatabaseRecords.username, userInfo[DatabaseRecords.username]!);
