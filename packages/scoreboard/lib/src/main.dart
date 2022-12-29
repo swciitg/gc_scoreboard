@@ -29,22 +29,21 @@ class _GCScoreBoardState extends State<GCScoreBoard> {
         ),
        
       ],
-      child: MaterialApp(debugShowCheckedModeBanner: false,home: AddResultForm(),)
-      // child: Builder(
-      //     builder: (context) => FutureBuilder(
-      //           future: context
-      //               .read<UserStore>()
-      //               .saveUserData(widget.userInfo, context),
-      //           builder: (context, snapshot) {
-      //             return MaterialApp(
-      //               debugShowCheckedModeBanner: false,
-      //               home: snapshot.hasData
-      //                   ? const ScoreBoardHome()
-      //                   : const WelcomeScreen(),
-      //               routes: routes,
-      //             );
-      //           },
-      //         )),
+      child: Builder(
+          builder: (context) => FutureBuilder(
+                future: context
+                    .read<UserStore>()
+                    .saveUserData(widget.userInfo, context),
+                builder: (context, snapshot) {
+                  return MaterialApp(
+                    debugShowCheckedModeBanner: false,
+                    home: snapshot.hasData
+                        ? const ScoreBoardHome()
+                        : const WelcomeScreen(),
+                    routes: routes,
+                  );
+                },
+              )),
     );
   }
 }

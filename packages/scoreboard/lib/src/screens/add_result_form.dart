@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:scoreboard/src/models/event_model.dart';
-import 'package:scoreboard/src/models/nullable_result_model.dart';
 import 'package:scoreboard/src/models/result_model.dart';
 import 'package:scoreboard/src/stores/result_form_store.dart';
 import 'package:scoreboard/src/widgets/add_result/list_view_widget.dart';
-
 import '../globals/themes.dart';
-
 import '../widgets/add_result/fields_mandatory.dart';
 
 class AddResultForm extends StatelessWidget {
-
-   AddResultForm({super.key});
-
-  final EventModel event  = EventModel(event: 'Cricket', category: 'Men', stage: 'Stage', date: DateTime.now(), venue: 'IITG', hostels: ['Kameng','Brahma'], status: 'Finished', winners: [ResultModel(position: 1, hostel: 'kameng', points: 89, primaryScore: '82/21')], resultAdded: false);
+  final EventModel event;
+   const AddResultForm({super.key, required this.event});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +32,9 @@ class AddResultForm extends StatelessWidget {
           ),
           leading: IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              //To clear the current values int the persistant variable
+              ResultForm.resultFields = [ResultModel(position: 1)];
+              Navigator.of(context).pop();
             },
             icon: Icon(
               Icons.close,
@@ -48,8 +45,8 @@ class AddResultForm extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () {
-                List<NullableResultModel> l = ResultForm.resultFields ?? [];
-                for (NullableResultModel x in l) {
+                List<ResultModel> l = ResultForm.resultFields ?? [];
+                for (ResultModel x in l) {
                   print(
                       "${x.position}: Hostel = ${x.hostel}, Points = ${x.points}, PS= ${x.primaryScore}, SS = ${x.secondaryScore}");
                 }
@@ -122,7 +119,7 @@ class AddResultForm extends StatelessWidget {
                     const SizedBox(
                       height: 37,
                     ),
-                    AddResultList()
+                    const AddResultList()
                   ],
                 ),
               ));

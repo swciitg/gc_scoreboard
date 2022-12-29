@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scoreboard/src/models/result_model.dart';
+import '../models/result_model.dart';
 import '../widgets/cards/results_card.dart';
 import '../models/event_model.dart';
 import '../widgets/common/top_bar.dart';

@@ -20,8 +20,8 @@ class ExpandedResultsCard extends StatelessWidget {
               itemBuilder: (context, index) {
                 return NullSecondaryResultsCardItem(
                     eventModel.winners[index].position,
-                    eventModel.winners[index].hostel,
-                    eventModel.winners[index].primaryScore);
+                    eventModel.winners[index].hostel!,
+                    eventModel.winners[index].primaryScore!);
               }));
     } else {
       return Container(
@@ -29,14 +29,14 @@ class ExpandedResultsCard extends StatelessWidget {
           children: [
             SecondaryScoreResultsCardItem(
               eventModel.winners[0].position,
-              eventModel.winners[0].hostel,
-              eventModel.winners[0].primaryScore,
+              eventModel.winners[0].hostel!,
+              eventModel.winners[0].primaryScore!,
               eventModel.winners[0].secondaryScore,
             ),
             SecondaryScoreResultsCardItem(
               eventModel.winners[1].position,
-              eventModel.winners[1].hostel,
-              eventModel.winners[1].primaryScore,
+              eventModel.winners[1].hostel!,
+              eventModel.winners[1].primaryScore!,
               eventModel.winners[1].secondaryScore,
             ),
           ],

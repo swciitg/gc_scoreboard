@@ -1,4 +1,5 @@
-import 'package:scoreboard/src/models/result_model.dart';
+
+import 'result_model.dart';
 
 class EventModel {
   String event; // Sprint

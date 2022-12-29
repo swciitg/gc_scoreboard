@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-
-import 'package:provider/provider.dart';
-
-import 'package:scoreboard/src/models/event_model.dart';
 import 'package:scoreboard/src/stores/result_form_store.dart';
 import '../../functions/schedule_event/validator.dart';
 import './hostel_dropdown.dart';

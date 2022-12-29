@@ -1,10 +1,10 @@
-import 'package:scoreboard/src/models/nullable_result_model.dart';
+import 'package:scoreboard/src/models/result_model.dart';
 
 class ResultForm {
-  static List<NullableResultModel>? resultFields = [NullableResultModel(position: 1)] ;
+  static List<ResultModel>? resultFields = [ResultModel(position: 1)] ;
 
   static void addTie(int position) {
-    resultFields?.add(NullableResultModel(position: position));
+    resultFields?.add(ResultModel(position: position));
     resultFields?.sort();
   }
 
@@ -19,7 +19,7 @@ class ResultForm {
 
   static void addNewPosition(int? value) {
     if (value == null) return;
-    resultFields?.add(NullableResultModel(position: value + 1));
+    resultFields?.add(ResultModel(position: value + 1));
     resultFields?.sort();
   }
 
