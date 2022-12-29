@@ -51,51 +51,52 @@ class _FilterBarState extends State<FilterBar> {
                 flex: 3,
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
-                  child: Container(
-                    height: 56,
-                    decoration: boxDecoration,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(13, 0, 0, 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 12,
-                                child: Text('Category',
-                                    style: popUpHeadingStyle),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              SizedBox(
-                                height: 18,
-                                child: Text(widget.category.text,
-                                    style: popUpItemStyle),
-                              )
-                            ],
+                  child: PopupMenuButton(
+                    position: PopupMenuPosition.under,
+                    color: Themes.cardColor1,
+                    onSelected: (String item) {
+                      setState(() {
+                        widget.category.text = item;
+                      });
+                    },
+                    itemBuilder: (BuildContext context) =>
+                        _itemsCategory.map((item) => PopupMenuItem<String>(
+                          value: item,
+                          child: Text(item,
+                            style: popUpItemStyle,
                           ),
-                          PopupMenuButton<String>(
-                            color: Themes.cardColor1,
-                            icon: popUpIcon,
-                            onSelected: (String item) {
-                              setState(() {
-                                widget.category.text = item;
-                              });
-                            },
-                            itemBuilder: (BuildContext context) =>
-                                _itemsCategory.map((item) => PopupMenuItem<String>(
-                                  value: item,
-                                  child: Text(item,
-                                    style: popUpItemStyle,
-                                  ),
+                        )
+                        ).toList(),
+                    child: Container(
+                      height: 56,
+                      decoration: boxDecoration,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 12,
+                                  child: Text('Category',
+                                      style: popUpHeadingStyle),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                SizedBox(
+                                  height: 18,
+                                  child: Text(widget.category.text,
+                                      style: popUpItemStyle),
                                 )
-                                ).toList(),
-                          ),
-                        ],
+                              ],
+                            ),
+                            popUpIcon,
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -107,51 +108,52 @@ class _FilterBarState extends State<FilterBar> {
                 flex: 3,
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
-                  child: Container(
-                    height: 56,
-                    decoration: boxDecoration,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(13, 0, 0, 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 12,
-                                child: Text('Sport',
-                                    style: popUpHeadingStyle),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              SizedBox(
-                                height: 18,
-                                child: Text(widget.sport.text,
-                                    style: popUpItemStyle),
-                              )
-                            ],
+                  child: PopupMenuButton(
+                    position: PopupMenuPosition.under,
+                    color: Themes.cardColor1,
+                    onSelected: (String item) {
+                      setState(() {
+                        widget.sport.text = item;
+                      });
+                    },
+                    itemBuilder: (BuildContext context) =>
+                        _itemsSports.map((item) => PopupMenuItem<String>(
+                          value: item,
+                          child: Text(item,
+                            style: popUpItemStyle,
                           ),
-                          PopupMenuButton<String>(
-                            color: Themes.cardColor1,
-                            icon: popUpIcon,
-                            onSelected: (String item) {
-                              setState(() {
-                                widget.sport.text = item;
-                              });
-                            },
-                            itemBuilder: (BuildContext context) =>
-                                _itemsSports.map((item) => PopupMenuItem<String>(
-                                  value: item,
-                                  child: Text(item,
-                                    style: popUpItemStyle,
-                                  ),
+                        )
+                        ).toList(),
+                    child: Container(
+                      height: 56,
+                      decoration: boxDecoration,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 12,
+                                  child: Text('Sport',
+                                      style: popUpHeadingStyle),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                SizedBox(
+                                  height: 18,
+                                  child: Text(widget.sport.text,
+                                      style: popUpItemStyle),
                                 )
-                                ).toList(),
-                          ),
-                        ],
+                              ],
+                            ),
+                            popUpIcon,
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -162,51 +164,52 @@ class _FilterBarState extends State<FilterBar> {
                 flex: 3,
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
-                  child: Container(
-                    height: 56,
-                    decoration: boxDecoration,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(13, 0, 0, 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 12,
-                                child: Text('Hostel',
-                                    style: popUpHeadingStyle),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              SizedBox(
-                                height: 18,
-                                child: Text(widget.hostel.text,
-                                    style: popUpItemStyle),
-                              )
-                            ],
+                  child: PopupMenuButton(
+                    position: PopupMenuPosition.under,
+                    color: Themes.cardColor1,
+                    onSelected: (String item) {
+                      setState(() {
+                        widget.hostel.text = item;
+                      });
+                    },
+                    itemBuilder: (BuildContext context) =>
+                        _itemsHostels.map((item) => PopupMenuItem<String>(
+                          value: item,
+                          child: Text(item,
+                            style: popUpItemStyle,
                           ),
-                          PopupMenuButton<String>(
-                            color: Themes.cardColor1,
-                            icon: popUpIcon,
-                            onSelected: (String item) {
-                              setState(() {
-                                widget.hostel.text = item;
-                              });
-                            },
-                            itemBuilder: (BuildContext context) =>
-                                _itemsHostels.map((item) => PopupMenuItem<String>(
-                                  value: item,
-                                  child: Text(item,
-                                    style: popUpItemStyle,
-                                  ),
+                        )
+                        ).toList(),
+                    child: Container(
+                      height: 56,
+                      decoration: boxDecoration,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 12,
+                                  child: Text('Hostel',
+                                      style: popUpHeadingStyle),
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                SizedBox(
+                                  height: 18,
+                                  child: Text(widget.hostel.text,
+                                      style: popUpItemStyle),
                                 )
-                                ).toList(),
-                          ),
-                        ],
+                              ],
+                            ),
+                            popUpIcon,
+                          ],
+                        ),
                       ),
                     ),
                   ),
