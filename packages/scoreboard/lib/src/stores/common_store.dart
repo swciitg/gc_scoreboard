@@ -133,6 +133,11 @@ abstract class _CommonStore with Store {
   }
 
   @action
+  void makeSelectedDateEmpty(){
+    selectedDate='';
+  }
+
+  @action
   void changeSelectedEvent(String e){
     selectedEvent=e;
     print(selectedEvent);

@@ -190,6 +190,17 @@ mixin _$CommonStore on _CommonStore, Store {
   }
 
   @override
+  void makeSelectedDateEmpty() {
+    final _$actionInfo = _$_CommonStoreActionController.startAction(
+        name: '_CommonStore.makeSelectedDateEmpty');
+    try {
+      return super.makeSelectedDateEmpty();
+    } finally {
+      _$_CommonStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void changeSelectedEvent(String e) {
     final _$actionInfo = _$_CommonStoreActionController.startAction(
         name: '_CommonStore.changeSelectedEvent');
