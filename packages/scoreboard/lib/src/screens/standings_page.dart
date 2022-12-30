@@ -11,9 +11,6 @@ class StandingsPage extends StatefulWidget {
 }
 
 class _StandingsPageState extends State<StandingsPage> {
-  final TextEditingController sport = TextEditingController(text: "Overall");
-  final TextEditingController hostel = TextEditingController(text: "Overall");
-  final TextEditingController category = TextEditingController(text: "Overall");
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +19,7 @@ class _StandingsPageState extends State<StandingsPage> {
         child: Column(
           children: [
             const TopBar(),
-            FilterBar(sport: sport, hostel: hostel, category: category, screen: 'standings',),
+            FilterBar(),
             const Expanded(child: StandingBoard())
           ],
         ),

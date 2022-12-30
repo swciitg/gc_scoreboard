@@ -2,8 +2,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:scoreboard/src/stores/common_store.dart';
 import '../../globals/themes.dart';
-import '../../stores/common_store.dart';
 
 class TopBar extends StatefulWidget {
   const TopBar({super.key});
@@ -56,10 +56,10 @@ class TopBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CommonStore store = context.read<CommonStore>();
+    CommonStore commonStore = context.read<CommonStore>();
     return GestureDetector(
       onTap: () {
-        store.setPage(label);
+        commonStore.setPage(label);
       },
       child: Observer(builder: (context) {
         return Container(
@@ -68,14 +68,14 @@ class TopBarItem extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 6),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
-              color: store.page == label
+              color: commonStore.page == label
                   ? Themes.primaryColor
                   : Themes.secondaryColor),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(label.icon,
-                  color: store.page == label
+                  color: commonStore.page == label
                       ? Themes.secondaryColor
                       : Themes.primaryColor,
                   size: 16),
@@ -86,7 +86,7 @@ class TopBarItem extends StatelessWidget {
                   style: GoogleFonts.montserrat(
                       fontWeight: FontWeight.w600,
                       fontSize: 12,
-                      color: store.page == label
+                      color: commonStore.page == label
                           ? Themes.secondaryColor
                           : Themes.primaryColor)),
             ],
