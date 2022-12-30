@@ -56,6 +56,70 @@ mixin _$CommonStore on _CommonStore, Store {
     });
   }
 
+  late final _$selectedCategoryAtom =
+      Atom(name: '_CommonStore.selectedCategory', context: context);
+
+  @override
+  Category get selectedCategory {
+    _$selectedCategoryAtom.reportRead();
+    return super.selectedCategory;
+  }
+
+  @override
+  set selectedCategory(Category value) {
+    _$selectedCategoryAtom.reportWrite(value, super.selectedCategory, () {
+      super.selectedCategory = value;
+    });
+  }
+
+  late final _$selectedHostelAtom =
+      Atom(name: '_CommonStore.selectedHostel', context: context);
+
+  @override
+  Hostel get selectedHostel {
+    _$selectedHostelAtom.reportRead();
+    return super.selectedHostel;
+  }
+
+  @override
+  set selectedHostel(Hostel value) {
+    _$selectedHostelAtom.reportWrite(value, super.selectedHostel, () {
+      super.selectedHostel = value;
+    });
+  }
+
+  late final _$selectedDateAtom =
+      Atom(name: '_CommonStore.selectedDate', context: context);
+
+  @override
+  String get selectedDate {
+    _$selectedDateAtom.reportRead();
+    return super.selectedDate;
+  }
+
+  @override
+  set selectedDate(String value) {
+    _$selectedDateAtom.reportWrite(value, super.selectedDate, () {
+      super.selectedDate = value;
+    });
+  }
+
+  late final _$selectedEventAtom =
+      Atom(name: '_CommonStore.selectedEvent', context: context);
+
+  @override
+  String get selectedEvent {
+    _$selectedEventAtom.reportRead();
+    return super.selectedEvent;
+  }
+
+  @override
+  set selectedEvent(String value) {
+    _$selectedEventAtom.reportWrite(value, super.selectedEvent, () {
+      super.selectedEvent = value;
+    });
+  }
+
   late final _$_CommonStoreActionController =
       ActionController(name: '_CommonStore', context: context);
 
@@ -93,11 +157,59 @@ mixin _$CommonStore on _CommonStore, Store {
   }
 
   @override
+  void changeSelectedCategory(String c) {
+    final _$actionInfo = _$_CommonStoreActionController.startAction(
+        name: '_CommonStore.changeSelectedCategory');
+    try {
+      return super.changeSelectedCategory(c);
+    } finally {
+      _$_CommonStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void changeSelectedHostel(String h) {
+    final _$actionInfo = _$_CommonStoreActionController.startAction(
+        name: '_CommonStore.changeSelectedHostel');
+    try {
+      return super.changeSelectedHostel(h);
+    } finally {
+      _$_CommonStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void changeSelectedDate(String d) {
+    final _$actionInfo = _$_CommonStoreActionController.startAction(
+        name: '_CommonStore.changeSelectedDate');
+    try {
+      return super.changeSelectedDate(d);
+    } finally {
+      _$_CommonStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void changeSelectedEvent(String e) {
+    final _$actionInfo = _$_CommonStoreActionController.startAction(
+        name: '_CommonStore.changeSelectedEvent');
+    try {
+      return super.changeSelectedEvent(e);
+    } finally {
+      _$_CommonStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 competition: ${competition},
 page: ${page},
-viewType: ${viewType}
+viewType: ${viewType},
+selectedCategory: ${selectedCategory},
+selectedHostel: ${selectedHostel},
+selectedDate: ${selectedDate},
+selectedEvent: ${selectedEvent}
     ''';
   }
 }

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
+import 'package:scoreboard/src/stores/common_store.dart';
 import '../models/event_model.dart';
 import '../widgets/cards/schedule_card.dart';
 import '../widgets/common/filter_bar.dart';
@@ -12,9 +15,6 @@ class SchedulePage extends StatefulWidget {
 }
 
 class _SchedulePageState extends State<SchedulePage> {
-  final TextEditingController sport = TextEditingController(text: "Overall");
-  final TextEditingController hostel = TextEditingController(text: "Overall");
-  final TextEditingController category = TextEditingController(text: "Overall");
 
   EventModel eventModel = EventModel(
       event: 'Badminton Doubles',
@@ -29,36 +29,36 @@ class _SchedulePageState extends State<SchedulePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 0),
-      child: Container(
-        child: Column(
-          children: [
-            const TopBar(),
-            FilterBar(
-              sport: sport,
-              hostel: hostel,
-              category: category,
-              screen: 'schedule',
+    var commonStore = context.read<CommonStore>();
+    return Observer(
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 0),
+          child: Container(
+            child: Column(
+              children: [
+                const TopBar(),
+                FilterBar(),
+                Expanded(
+                  child: ListView(
+                    children: [
+                      ScheduleCard(
+                        eventModel: eventModel,
+                      ),
+                      ScheduleCard(
+                        eventModel: eventModel,
+                      ),
+                      ScheduleCard(
+                        eventModel: eventModel,
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
-            Expanded(
-              child: ListView(
-                children: [
-                  ScheduleCard(
-                    eventModel: eventModel,
-                  ),
-                  ScheduleCard(
-                    eventModel: eventModel,
-                  ),
-                  ScheduleCard(
-                    eventModel: eventModel,
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
+          ),
+        );
+      }
     );
   }
 }

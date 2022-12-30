@@ -13,9 +13,6 @@ class ResultsPage extends StatefulWidget {
 }
 
 class _ResultsPageState extends State<ResultsPage> {
-  final TextEditingController sport = TextEditingController(text: "Overall");
-  final TextEditingController hostel = TextEditingController(text: "Overall");
-  final TextEditingController category = TextEditingController(text: "Overall");
 
   EventModel eventModel = EventModel(
     victoryStatement: 'Disang won',
@@ -84,12 +81,7 @@ class _ResultsPageState extends State<ResultsPage> {
         child: Column(
           children: [
             const TopBar(),
-            FilterBar(
-              sport: sport,
-              hostel: hostel,
-              category: category,
-              screen: 'results',
-            ),
+            FilterBar(),
             Expanded(
               child: ListView(
                 children: [
