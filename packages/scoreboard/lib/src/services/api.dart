@@ -138,12 +138,8 @@ class APIService {
 
   Future<List<String>> getAllSpardhaEvents() async {
     Response resp = await dio.get("/gc/spardha/all-events");
-    print(resp.data["details"]); // it is string of dynamic
-    List<String> allSpardhaEvents=[];
-    resp.data["details"].forEach((element) => {
-      allSpardhaEvents.add(element)
-    });
-    return allSpardhaEvents;
+    print(resp.data["details"]); // it is List of dynamic
+    return List<String>.from(resp.data["details"]);
   }
 
 }
