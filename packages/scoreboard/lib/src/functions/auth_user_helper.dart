@@ -1,5 +1,6 @@
-import 'package:scoreboard/src/globals/helper_variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../globals/constants.dart';
 
 class AuthUserHelpers{
 

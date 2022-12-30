@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/globals/helper_variables.dart';
+import 'package:scoreboard/src/globals/enums.dart';
 import 'package:scoreboard/src/services/api.dart';
 import 'package:scoreboard/src/stores/common_store.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:scoreboard/src/globals/global_widgets.dart';
+import 'package:scoreboard/src/functions/snackbar.dart';
 class LoginWebView extends StatefulWidget {
   const LoginWebView({Key? key}) : super(key: key);
 

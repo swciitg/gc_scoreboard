@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/globals/helper_variables.dart';
 import 'package:scoreboard/src/routes.dart';
-import 'package:scoreboard/src/screens/add_result_form.dart';
 import 'package:scoreboard/src/screens/home.dart';
 import 'package:scoreboard/src/screens/splash.dart';
 import 'package:scoreboard/src/stores/user_store.dart';
-import 'models/event_model.dart';
 import 'stores/common_store.dart';
 
 class GCScoreBoard extends StatefulWidget {

@@ -1,6 +1,7 @@
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
-import '../globals/themes.dart';
+
+import '../colors.dart';
 
 final dateWidgetStyle = GoogleFonts.montserrat(
     fontWeight: FontWeight.w700, fontSize: 16, color: Themes.cardFontColor2);

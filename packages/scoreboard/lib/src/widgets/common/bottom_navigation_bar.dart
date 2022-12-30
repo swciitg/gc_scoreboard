@@ -4,8 +4,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
-import '../../globals/themes.dart';
+import '../../globals/colors.dart';
+import '../../globals/enums.dart';
 import '../../stores/common_store.dart';
 
 class BottomNavBar extends StatefulWidget {

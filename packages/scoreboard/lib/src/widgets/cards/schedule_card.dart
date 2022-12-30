@@ -5,7 +5,7 @@ import 'package:scoreboard/src/widgets/cards/time_venue_widget.dart';
 import '../../widgets/cards/popup_menu.dart';
 import '../../widgets/cards/athletics_schedule_card.dart';
 import '../../models/event_model.dart';
-import '../../globals/themes.dart';
+import '../../globals/colors.dart';
 import 'card_event_details.dart';
 import 'menu_item.dart';
 

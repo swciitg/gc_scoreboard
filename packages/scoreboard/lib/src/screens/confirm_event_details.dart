@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:scoreboard/src/globals/global_widgets.dart';
-import 'package:scoreboard/src/globals/themes.dart';
+import 'package:scoreboard/src/functions/snackbar.dart';
+import 'package:scoreboard/src/globals/colors.dart';
 import 'package:scoreboard/src/models/event_model.dart';
 import 'package:scoreboard/src/screens/home.dart';
 import 'package:scoreboard/src/services/api.dart';

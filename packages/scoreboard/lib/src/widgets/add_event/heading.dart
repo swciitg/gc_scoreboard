@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../globals/themes.dart';
+import '../../globals/colors.dart';
 
 class EventFormHeading extends StatelessWidget {
   const EventFormHeading({Key? key}) : super(key: key);

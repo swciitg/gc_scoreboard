@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:scoreboard/src/stores/result_form_store.dart';
-import '../../functions/schedule_event/validator.dart';
+import '../../functions/validator.dart';
 import './hostel_dropdown.dart';
 import './custom_text_field.dart';
-import '../../globals/themes.dart';
+import '../../globals/colors.dart';
 
 class AddResultList extends StatefulWidget {
   final GlobalKey<FormState> formKey;

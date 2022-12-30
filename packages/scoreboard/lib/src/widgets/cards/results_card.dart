@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../widgets/cards/expanded_results_card.dart';
 import '../../models/event_model.dart';
-import '../../globals/themes.dart';
+import '../../globals/colors.dart';
 import 'card_event_details.dart';
 import 'menu_item.dart';
 import 'popup_menu.dart';

@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:scoreboard/src/functions/schedule_event/validator.dart';
-import 'package:scoreboard/src/globals/global_widgets.dart';
-import 'package:scoreboard/src/globals/helper_variables.dart';
+import 'package:scoreboard/src/functions/validator.dart';
+import 'package:scoreboard/src/functions/snackbar.dart';
 import 'package:scoreboard/src/models/event_model.dart';
 import 'package:scoreboard/src/screens/confirm_event_details.dart';
 import 'package:scoreboard/src/stores/user_store.dart';
 import 'package:scoreboard/src/widgets/add_event/heading.dart';
-import 'package:scoreboard/src/widgets/common/app_bar.dart';
 import '../globals/constants.dart';
-import '../globals/themes.dart';
+import '../globals/colors.dart';
 import '../widgets/add_event/drop_down.dart';
 import '../widgets/add_event/text_field.dart';
+import '../widgets/common/form_app_bar.dart';
 
 class AddEventForm extends StatefulWidget {
   final EventModel? event;
