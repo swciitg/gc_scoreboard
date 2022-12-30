@@ -1,12 +1,10 @@
-import 'dart:convert';
-import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:scoreboard/src/globals/auth_user_helper.dart';
-import 'package:scoreboard/src/globals/global_widgets.dart';
-import 'package:scoreboard/src/globals/helper_variables.dart';
+import 'package:scoreboard/src/functions/auth_user_helper.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:scoreboard/src/screens/login/admin_login.dart';
+
+import '../globals/constants.dart';
 
 class APIService {
   final dio = Dio(BaseOptions(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../decorations/filter_style.dart';
-import '../globals/themes.dart';
+import '../globals/styles/filter_style.dart';
+import '../globals/colors.dart';
 import '../widgets/scoreboard/standingboard.dart';
 
 class GCStandingsPage extends StatefulWidget {

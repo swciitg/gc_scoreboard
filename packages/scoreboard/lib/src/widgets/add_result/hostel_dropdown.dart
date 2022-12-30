@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoreboard/src/globals/constants.dart';
-import '../../globals/themes.dart';
+import '../../globals/colors.dart';
 
 class HostelDropDown extends StatelessWidget {
   final validator;

@@ -3,7 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/src/stores/common_store.dart';
-import '../../globals/themes.dart';
+import '../../globals/colors.dart';
+import '../../globals/enums.dart';
 
 class TopBar extends StatefulWidget {
   const TopBar({super.key});

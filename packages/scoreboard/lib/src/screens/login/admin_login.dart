@@ -1,12 +1,10 @@
-import 'dart:async';
-import 'dart:io';
 
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/globals/helper_variables.dart';
 import 'package:scoreboard/src/screens/login/login_webview.dart';
 import 'package:scoreboard/src/stores/common_store.dart';
-import 'package:scoreboard/src/widgets/common/app_bar.dart';
+import 'package:scoreboard/src/widgets/common/home_app_bar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class LoginView extends StatefulWidget {

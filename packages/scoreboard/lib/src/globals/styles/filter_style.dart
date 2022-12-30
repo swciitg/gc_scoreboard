@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../globals/themes.dart';
+import '../colors.dart';
 
 final boxDecoration = BoxDecoration(
     borderRadius: BorderRadius.circular(18),

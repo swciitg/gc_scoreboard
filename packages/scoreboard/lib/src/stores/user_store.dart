@@ -1,10 +1,7 @@
-import 'dart:convert';
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:scoreboard/src/services/api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:scoreboard/src/globals/auth_user_helper.dart';
-import 'package:scoreboard/src/globals/helper_variables.dart';
+import 'package:scoreboard/src/functions/auth_user_helper.dart';
 
 class UserStore{
   Map<String,String> userData={};

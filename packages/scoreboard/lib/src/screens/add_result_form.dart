@@ -4,7 +4,7 @@ import 'package:scoreboard/src/models/result_model.dart';
 import 'package:scoreboard/src/stores/result_form_store.dart';
 import 'package:scoreboard/src/widgets/add_result/list_view_widget.dart';
 import 'package:scoreboard/src/widgets/cards/card_date_widget.dart';
-import '../globals/themes.dart';
+import '../globals/colors.dart';
 import '../widgets/add_result/fields_mandatory.dart';
 
 class AddResultForm extends StatefulWidget {

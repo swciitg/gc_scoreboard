@@ -1,8 +1,5 @@
-
 import 'result_model.dart';
-
 import 'package:json_annotation/json_annotation.dart';
-
 part 'event_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)

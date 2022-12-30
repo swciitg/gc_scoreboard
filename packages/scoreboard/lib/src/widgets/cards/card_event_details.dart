@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scoreboard/src/decorations/card_style.dart';
+import 'package:scoreboard/src/globals/styles/card_style.dart';
 import '../../models/event_model.dart';
 import 'card_date_widget.dart';
 

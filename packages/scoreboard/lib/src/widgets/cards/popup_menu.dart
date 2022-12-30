@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../globals/themes.dart';
+import '../../globals/colors.dart';
 import '../../models/event_model.dart';
 import '../../models/result_model.dart';
 import '../../screens/add_event_form.dart';

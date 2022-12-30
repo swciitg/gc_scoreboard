@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/decorations/filter_style.dart';
-import 'package:scoreboard/src/globals/helper_variables.dart';
+import 'package:scoreboard/src/globals/styles/filter_style.dart';
+import 'package:scoreboard/src/globals/enums.dart';
 import 'package:scoreboard/src/stores/common_store.dart';
 import 'package:scoreboard/src/stores/user_store.dart';
-import '../../globals/themes.dart';
+import '../../globals/colors.dart';
 import 'package:intl/intl.dart';
 
 class FilterBar extends StatefulWidget {
+  const FilterBar({Key? key}) : super(key: key);
+
   @override
   State<FilterBar> createState() => _FilterBarState();
 }
@@ -271,7 +273,7 @@ class _FilterBarState extends State<FilterBar> {
                             fontSize: 12,
                             color: Themes.bottomNavFontColor)),
                         Container(
-                          margin: EdgeInsets.only(left: 6),
+                          margin: const EdgeInsets.only(left: 6),
                           padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 6),
                           decoration: BoxDecoration(
                               border: Border.all(

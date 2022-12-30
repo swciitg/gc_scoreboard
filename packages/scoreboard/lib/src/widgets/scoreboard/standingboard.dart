@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../globals/themes.dart';
+import '../../globals/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class StandingBoard extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../models/event_model.dart';
-import '../../globals/themes.dart';
+import '../../globals/colors.dart';
 
 class AthleticsScheduleCard extends StatelessWidget {
   final EventModel eventModel;
