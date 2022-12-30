@@ -287,7 +287,7 @@ class _FilterBarState extends State<FilterBar> {
                                   .format(DateTime.parse(commonStore.selectedDate)) : '', style: GoogleFonts.montserrat(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 12,
-                                  color: Themes.secondaryColor)),
+                                  color: Themes.primaryColor)),
                               SizedBox(
                                 height: 16,
                                 width: 20,
@@ -297,7 +297,7 @@ class _FilterBarState extends State<FilterBar> {
                                   onPressed: (){
                                     commonStore.changeSelectedDate(''); // making selected date empty
                                   },
-                                  icon: const Icon(Icons.clear,color: Themes.secondaryColor),
+                                  icon: const Icon(Icons.clear,color: Themes.primaryColor),
                                   iconSize: 16,
                                 ),
                               )
