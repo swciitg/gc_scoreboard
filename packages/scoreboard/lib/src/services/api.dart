@@ -2,6 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:scoreboard/src/functions/auth_user_helper.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:scoreboard/src/globals/enums.dart';
+import 'package:scoreboard/src/models/event_model.dart';
+import 'package:scoreboard/src/models/result_model.dart';
 import 'package:scoreboard/src/screens/login/admin_login.dart';
 
 import '../globals/constants.dart';
@@ -138,6 +141,20 @@ class APIService {
     Response resp = await dio.get("/gc/spardha/all-events");
     print(resp.data["details"]); // it is List of dynamic
     return List<String>.from(resp.data["details"]);
+  }
+
+  Future<List<EventModel>> getSpardhaSchedule(ViewType viewType,String selectedDate) async {
+    if(viewType == ViewType.admin){
+      dio.options.queryParameters["forAdmin"] = "true";
+    }
+    if(selectedDate.isNotEmpty){
+      dio.options.queryParameters["date"]=selectedDate;
+    }
+    Response resp = await dio.get("/gc/spardha/event-schedule");
+    List<EventModel> toRtn = [];
+    print(resp.data);
+    List<dynamic>.from(resp.data["details"]).forEach((e) => {toRtn.add(EventModel.fromJson(e))});
+    return toRtn;
   }
 
 }

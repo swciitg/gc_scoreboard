@@ -1,10 +1,12 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:scoreboard/src/functions/auth_user_helper.dart';
 import 'package:scoreboard/src/functions/snackbar.dart';
 import 'package:scoreboard/src/screens/home.dart';
 import 'package:scoreboard/src/screens/login/admin_login.dart';
+import 'package:scoreboard/src/stores/common_store.dart';
 import '../../globals/constants.dart';
 import '../../globals/colors.dart';
 import '../../globals/enums.dart';
@@ -20,6 +22,7 @@ class AppBarHomeComponent extends StatefulWidget {
 class _AppBarHomeComponentState extends State<AppBarHomeComponent> {
   @override
   Widget build(BuildContext context) {
+    var commonStore = context.read<CommonStore>();
     return Container(
       color: Themes.appbarBackgroundColor,
       child: SafeArea(
@@ -114,24 +117,12 @@ class _AppBarHomeComponentState extends State<AppBarHomeComponent> {
                           ConnectivityResult connectivityResult =
                               await (Connectivity().checkConnectivity());
                           if (connectivityResults
-                                  .contains(connectivityResult) &&
-                              await Navigator.pushNamed(
-                                      context, LoginView.id) ==
-                                  true) {
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (buildContext) =>
-                                        const ScoreBoardHome()),
-                                (route) => false);
+                                  .contains(connectivityResult)) {
+                            Navigator.pushNamed(
+                                context, LoginView.id);
                           }
                         } else {
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (buildContext) =>
-                                      const ScoreBoardHome()),
-                              (route) => false);
+                          commonStore.setViewType(ViewType.user);
                         }
                       },
                     )),

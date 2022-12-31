@@ -1,23 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 
-const List<String> allHostelList = [
-  'Barak',
-  'Brahmaputra',
-  'Dhansiri',
-  'Dibang',
-  'Dihing',
-  'Disang',
-  'Kameng',
-  'Kapili',
-  'Lohit',
-  'Manas',
-  'Married Scholars',
-  'Siang',
-  'Subansiri',
-  'Umiam'
-];
-
-class DatabaseRecords {
+class DatabaseRecords{
   static const useremail = "email";
   static const username = "name";
   static const isadmin = "isAdmin";
@@ -28,15 +11,8 @@ class DatabaseRecords {
   static const authorization = "authorization";
 }
 
-const connectivityResults = [
-  ConnectivityResult.ethernet,
-  ConnectivityResult.mobile,
-  ConnectivityResult.vpn,
-  ConnectivityResult.wifi
-];
-
+const connectivityResults = [ConnectivityResult.ethernet, ConnectivityResult.mobile, ConnectivityResult.vpn, ConnectivityResult.wifi];
 const List<String> eventCategories = ['Men', 'Women', 'Men + Women'];
-
 const List<String> spardhaEventStages = [
   'Qualifiers',
   'Finals',
@@ -44,3 +20,7 @@ const List<String> spardhaEventStages = [
   'Quater-Finals',
   '3rd vs 4th'
 ];
+
+enum apiResponse{
+  success, adminRelogin
+}

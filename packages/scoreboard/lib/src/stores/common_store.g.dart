@@ -120,6 +120,22 @@ mixin _$CommonStore on _CommonStore, Store {
     });
   }
 
+  late final _$fetchedDataAtom =
+      Atom(name: '_CommonStore.fetchedData', context: context);
+
+  @override
+  bool get fetchedData {
+    _$fetchedDataAtom.reportRead();
+    return super.fetchedData;
+  }
+
+  @override
+  set fetchedData(bool value) {
+    _$fetchedDataAtom.reportWrite(value, super.fetchedData, () {
+      super.fetchedData = value;
+    });
+  }
+
   late final _$_CommonStoreActionController =
       ActionController(name: '_CommonStore', context: context);
 
@@ -190,11 +206,33 @@ mixin _$CommonStore on _CommonStore, Store {
   }
 
   @override
+  void makeSelectedDateEmpty() {
+    final _$actionInfo = _$_CommonStoreActionController.startAction(
+        name: '_CommonStore.makeSelectedDateEmpty');
+    try {
+      return super.makeSelectedDateEmpty();
+    } finally {
+      _$_CommonStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void changeSelectedEvent(String e) {
     final _$actionInfo = _$_CommonStoreActionController.startAction(
         name: '_CommonStore.changeSelectedEvent');
     try {
       return super.changeSelectedEvent(e);
+    } finally {
+      _$_CommonStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void changeFetchedData() {
+    final _$actionInfo = _$_CommonStoreActionController.startAction(
+        name: '_CommonStore.changeFetchedData');
+    try {
+      return super.changeFetchedData();
     } finally {
       _$_CommonStoreActionController.endAction(_$actionInfo);
     }
@@ -209,7 +247,8 @@ viewType: ${viewType},
 selectedCategory: ${selectedCategory},
 selectedHostel: ${selectedHostel},
 selectedDate: ${selectedDate},
-selectedEvent: ${selectedEvent}
+selectedEvent: ${selectedEvent},
+fetchedData: ${fetchedData}
     ''';
   }
 }
