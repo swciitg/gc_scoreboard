@@ -34,7 +34,7 @@ class _AppBarHomeComponentState extends State<AppBarHomeComponent> {
             children: [
               InkWell(
                 onTap: () {
-                  Navigator.of(context).popUntil((route) => false);
+                  Navigator.of(context).pop();
                 },
                 child: Container(
                   width: 80,
