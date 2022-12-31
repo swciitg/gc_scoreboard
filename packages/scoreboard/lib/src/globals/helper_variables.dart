@@ -16,7 +16,7 @@ const List<String> eventCategories = ['Men', 'Women', 'Men + Women'];
 const List<String> spardhaEventStages = [
   'Qualifiers',
   'Finals',
-  'Semi-Final',
+  'Semi-Finals',
   'Quater-Finals',
   '3rd vs 4th'
 ];

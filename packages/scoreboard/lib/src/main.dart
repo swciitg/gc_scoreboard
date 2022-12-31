@@ -24,7 +24,7 @@ class _GCScoreBoardState extends State<GCScoreBoard> {
         ),
         Provider<CommonStore>(
           create: (_) => CommonStore(),
-        ),
+        )
       ],
       child: Builder(
           builder: (context) => FutureBuilder(

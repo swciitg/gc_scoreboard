@@ -38,8 +38,9 @@ const connectivityResults = [
 const List<String> eventCategories = ['Men', 'Women', 'Men + Women'];
 
 const List<String> spardhaEventStages = [
-  'Qualifier',
-  'Final',
-  'Semi-Final',
+  'Qualifiers',
+  'Finals',
+  'Semi-Finals',
+  'Quater-Finals',
   '3rd vs 4th'
 ];

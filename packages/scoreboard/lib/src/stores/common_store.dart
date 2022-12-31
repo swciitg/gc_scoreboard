@@ -27,6 +27,9 @@ abstract class _CommonStore with Store {
   @observable
   String selectedEvent='Overall';
 
+  @observable
+  bool fetchedData = false;
+
   @action
   void setCompetition(Competitions c) {
     print(c);
@@ -90,6 +93,11 @@ abstract class _CommonStore with Store {
   void changeSelectedEvent(String e){
     selectedEvent=e;
     print(selectedEvent);
+  }
+
+  @action
+  void changeFetchedData(){
+    fetchedData=!fetchedData;
   }
 
 }
