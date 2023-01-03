@@ -65,7 +65,7 @@ class _PopupMenuState extends State<PopupMenu> {
                     )));
         break;
       case 'delete':
-        print(result);
+        print(widget.eventModel);
       // Navigator.push(
       //     context, MaterialPageRoute(builder: (context) => Container()));
     }
