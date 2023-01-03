@@ -8,7 +8,12 @@ import '../../screens/add_result_form.dart';
 class PopupMenu extends StatefulWidget {
   final Widget child;
   final List<PopupMenuEntry> items;
-  const PopupMenu({Key? key, required this.child, required this.items})
+  final EventModel eventModel;
+  const PopupMenu(
+      {Key? key,
+      required this.child,
+      required this.items,
+      required this.eventModel})
       : super(key: key);
 
   @override
@@ -36,74 +41,28 @@ class _PopupMenuState extends State<PopupMenu> {
     switch (result) {
       case 'edit schedule':
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => AddEventForm()));
+            context,
+            MaterialPageRoute(
+                builder: (context) => AddEventForm(
+                      event: widget.eventModel,
+                    )));
         break;
-     
+
       case 'edit result':
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => AddResultForm(
-          event: EventModel(
-              victoryStatement: 'Tie between Disang and Lohit',
-              event: 'Cricket',
-              category: 'Men',
-              stage: 'Quarter-Final',
-              date: DateTime.now(),
-              venue: 'Table Tennis Court, Old SAC',
-              results: [
-                [ResultModel(
-
-                  hostel: 'Disang',
-                  points: 1,
-                  primaryScore: '.1s',
-                  secondaryScore: '1,2,3,1',)],
-                [ResultModel(
-
-                    hostel: 'Lohit',
-                    points: 1,
-                    primaryScore: '23.1s',
-                    secondaryScore: '13,23,33,32')],
-              ],
-              hostels: [
-                'Disang',
-                'Lohit',
-                'Kameng',
-                'Umiam',
-                'Brahmaputra',
-              ], status: 'ok', resultAdded: false),
-        )));
+            context,
+            MaterialPageRoute(
+                builder: (context) => AddResultForm(
+                      event: widget.eventModel,
+                    )));
         break;
       case 'add':
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => AddResultForm(
-          event: EventModel(
-              victoryStatement: 'Tie between Disang and Lohit',
-              event: 'Cricket',
-              category: 'Men',
-              stage: 'Quarter-Final',
-              date: DateTime.now(),
-              venue: 'Table Tennis Court, Old SAC',
-              results: [
-                [ResultModel(
-
-                  hostel: 'Disang',
-                  points: 1,
-                  primaryScore: '.1s',
-                  secondaryScore: '1,2,3,1',)],
-                [ResultModel(
-
-                    hostel: 'Lohit',
-                    points: 1,
-                    primaryScore: '23.1s',
-                    secondaryScore: '13,23,33,32')],
-              ],
-              hostels: [
-                'Disang',
-                'Lohit',
-                'Kameng',
-                'Umiam',
-                'Brahmaputra',
-              ], status: 'ok', resultAdded: false),
-        )));
+            context,
+            MaterialPageRoute(
+                builder: (context) => AddResultForm(
+                      event: widget.eventModel,
+                    )));
         break;
       case 'delete':
         print(result);
