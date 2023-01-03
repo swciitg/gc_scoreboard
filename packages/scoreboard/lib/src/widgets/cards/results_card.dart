@@ -9,8 +9,7 @@ import 'popup_menu.dart';
 
 class ResultsCard extends StatefulWidget {
   final EventModel eventModel;
-  const ResultsCard({Key? key, required this.eventModel})
-      : super(key: key);
+  const ResultsCard({Key? key, required this.eventModel}) : super(key: key);
 
   @override
   State<ResultsCard> createState() => _ResultsCardState();
@@ -26,6 +25,7 @@ class _ResultsCardState extends State<ResultsCard> {
       child: ConstrainedBox(
         constraints: const BoxConstraints(minHeight: 186),
         child: PopupMenu(
+          eventModel: widget.eventModel,
           items: [
             OptionsMenuItem('Edit', 'edit result', Themes.kWhite),
             const PopupMenuDivider(
@@ -129,8 +129,7 @@ class _ResultsCardState extends State<ResultsCard> {
                                         style: GoogleFonts.montserrat(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 10,
-                                            color:
-                                                Themes.bottomNavFontColor),
+                                            color: Themes.bottomNavFontColor),
                                       ),
                                     ],
                                   ),

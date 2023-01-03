@@ -42,6 +42,7 @@ class _ScheduleCardState extends State<ScheduleCard> {
           constraints: BoxConstraints(
               minHeight: widget.eventModel.hostels.length == 11 ? 256 : 290),
           child: PopupMenu(
+            eventModel: widget.eventModel,
             items: commonStore.viewType == ViewType.admin ? popupOptions : [],
             child: Container(
               decoration: BoxDecoration(
