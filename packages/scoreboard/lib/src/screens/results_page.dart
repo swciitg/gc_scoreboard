@@ -13,28 +13,23 @@ class ResultsPage extends StatefulWidget {
 }
 
 class _ResultsPageState extends State<ResultsPage> {
-
   EventModel eventModel = EventModel(
-    victoryStatement: 'Disang won',
+      victoryStatement: 'Disang won',
       event: 'Cricket',
       category: 'Men',
       stage: 'Quarter-Final',
       date: DateTime.now(),
       venue: 'Table Tennis Court, Old SAC',
       results: [
-        [ResultModel(
-             hostel: 'Disang', points: 1, primaryScore: '22.1s')],
-        [ResultModel(
-             hostel: 'Lohit', points: 1, primaryScore: '23.1s')],
-        [ResultModel(
-             hostel: 'Kameng', points: 1, primaryScore: '24.1s')],
-        [ResultModel(
-             hostel: 'Umiam', points: 1, primaryScore: '25.1s')],
-        [ResultModel(
-
-            hostel: 'Brahmaputra',
-            points: 1,
-            primaryScore: '26.1s')],
+        [
+          ResultModel(hostel: 'Disang', points: 1, primaryScore: '22.1s'),
+          ResultModel(hostel: 'Disang', points: 1, primaryScore: '22.1s'),
+          ResultModel(hostel: 'Disang', points: 1, primaryScore: '22.1s')
+        ],
+        [ResultModel(hostel: 'Lohit', points: 1, primaryScore: '23.1s')],
+        [ResultModel(hostel: 'Kameng', points: 1, primaryScore: '24.1s')],
+        [ResultModel(hostel: 'Umiam', points: 1, primaryScore: '25.1s')],
+        [ResultModel(hostel: 'Brahmaputra', points: 1, primaryScore: '26.1s')],
       ],
       hostels: [
         'Disang',
@@ -42,28 +37,33 @@ class _ResultsPageState extends State<ResultsPage> {
         'Kameng',
         'Umiam',
         'Brahmaputra',
-      ], status: 'ok', resultAdded: false);
+      ],
+      status: 'ok',
+      resultAdded: false);
 
   EventModel eventModel2 = EventModel(
-    victoryStatement: 'Tie between Disang and Lohit',
+      victoryStatement: 'Tie between Disang and Lohit',
       event: 'Cricket',
       category: 'Men',
       stage: 'Quarter-Final',
       date: DateTime.now(),
       venue: 'Table Tennis Court, Old SAC',
       results: [
-        [ResultModel(
-
+        [
+          ResultModel(
             hostel: 'Disang',
             points: 1,
             primaryScore: '.1s',
-            secondaryScore: '1,2,3,1',)],
-        [ResultModel(
-
-            hostel: 'Lohit',
-            points: 1,
-            primaryScore: '23.1s',
-            secondaryScore: '13,23,33,32')],
+            secondaryScore: '1,2,3,1',
+          ),
+        ],
+        [
+          ResultModel(
+              hostel: 'Lohit',
+              points: 1,
+              primaryScore: '23.1s',
+              secondaryScore: '13,23,33,32')
+        ],
       ],
       hostels: [
         'Disang',
@@ -71,7 +71,9 @@ class _ResultsPageState extends State<ResultsPage> {
         'Kameng',
         'Umiam',
         'Brahmaputra',
-      ], status: 'ok', resultAdded: false);
+      ],
+      status: 'ok',
+      resultAdded: false);
 
   @override
   Widget build(BuildContext context) {

@@ -6,49 +6,54 @@ import '../../globals/colors.dart';
 
 class ExpandedResultsCard extends StatelessWidget {
   final EventModel eventModel;
-  const ExpandedResultsCard({Key? key, required this.eventModel})
-      : super(key: key);
+  ExpandedResultsCard({Key? key, required this.eventModel}) : super(key: key);
+
+  int length = 0;
 
   @override
-  Widget build(BuildContext context) {
-    if (eventModel.results[0][0].secondaryScore == null) {
-      return Container(
-          height: (eventModel.results.length).toDouble() * 34,
-          child: ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: eventModel.results.length,
-              itemBuilder: (context, index) {
-                return NullSecondaryResultsCardItem(
-                    index,
-                    eventModel.results[index][0].hostel!,
-                    eventModel.results[index][0].primaryScore!);
-              }));
-    } else {
-      return Container(
-        child: Column(
-          children: [
-            SecondaryScoreResultsCardItem(
-              1,
-              eventModel.results[0][0].hostel!,
-              eventModel.results[0][0].primaryScore!,
-              eventModel.results[0][0].secondaryScore,
-            ),
-            SecondaryScoreResultsCardItem(
-              2,
-              eventModel.results[1][0].hostel!,
-              eventModel.results[1][0].primaryScore!,
-              eventModel.results[1][0].secondaryScore,
-            ),
-          ],
-        ),
-      );
+  void count() {
+    for (int i = 0; i < eventModel.results.length.toInt(); i++) {
+      length += eventModel.results[i].length.toInt();
     }
+  }
+
+  Widget build(BuildContext context) {
+    count();
+    return ConstrainedBox(
+        constraints: BoxConstraints(
+          maxHeight: length * 30,
+        ),
+        child: ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: eventModel.results.length,
+            itemBuilder: (context, index) {
+              return ConstrainedBox(
+                constraints: BoxConstraints(
+                    maxHeight: eventModel.results[index].length * 30),
+                child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: eventModel.results[index].length,
+                    itemBuilder: (context, subIndex) {
+                      return eventModel.results[0][0].secondaryScore == null
+                          ? NullSecondaryResultsCardItem(
+                              index + 1,
+                              eventModel.results[index][subIndex].hostel!,
+                              eventModel.results[index][subIndex].primaryScore!)
+                          : SecondaryScoreResultsCardItem(
+                              index + 1,
+                              eventModel.results[index][subIndex].hostel!,
+                              eventModel.results[index][subIndex].primaryScore!,
+                              eventModel
+                                  .results[index][subIndex].secondaryScore);
+                    }),
+              );
+            }));
   }
 
   Widget NullSecondaryResultsCardItem(
       int position, String hostelName, String score) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -104,7 +109,7 @@ class ExpandedResultsCard extends StatelessWidget {
     print(split);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
