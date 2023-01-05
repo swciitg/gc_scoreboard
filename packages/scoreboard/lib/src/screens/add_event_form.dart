@@ -31,14 +31,14 @@ class _AddEventFormState extends State<AddEventForm> {
   bool isCancelled = false;
   String? category;
   String? stage;
-  int hostels = 0;
+  int hostelsSize = 0;
   List<String?> participatingHostels = [];
   final _formKey = GlobalKey<FormState>();
 
   callbackHostels(value) {
     participatingHostels.length = int.parse(value);
     setState(() {
-      hostels = int.parse(value);
+      hostelsSize = int.parse(value);
     });
   }
 
@@ -55,7 +55,7 @@ class _AddEventFormState extends State<AddEventForm> {
       _venueController.text = e.venue;
       category = e.category;
       stage = e.stage;
-      hostels = e.hostels.length;
+      hostelsSize = e.hostels.length;
       for (var hostel in e.hostels) {
         participatingHostels.add(hostel);
       }
@@ -281,7 +281,7 @@ class _AddEventFormState extends State<AddEventForm> {
                         height: 18,
                       ),
                       CustomDropDown(
-                        items: [for (var i = 1; i <= 10; i++) i.toString()],
+                        items: [for (var i = 2; i <= 10; i++) i.toString()],
                         value: (widget.event != null)
                             ? widget.event!.hostels.length.toString()
                             : null,
@@ -294,7 +294,7 @@ class _AddEventFormState extends State<AddEventForm> {
                       ),
                       Column(
                         children: [
-                          for (var i = 1; i <= hostels; i++)
+                          for (var i = 1; i <= hostelsSize; i++)
                             Padding(
                               padding: const EdgeInsets.only(bottom: 12),
                               child: CustomDropDown(
