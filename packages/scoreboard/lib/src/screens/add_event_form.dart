@@ -4,6 +4,7 @@ import 'package:scoreboard/src/functions/validator.dart';
 import 'package:scoreboard/src/functions/snackbar.dart';
 import 'package:scoreboard/src/models/event_model.dart';
 import 'package:scoreboard/src/screens/confirm_event_details.dart';
+import 'package:scoreboard/src/services/api.dart';
 import 'package:scoreboard/src/stores/user_store.dart';
 import 'package:scoreboard/src/widgets/add_event/heading.dart';
 import '../globals/constants.dart';
@@ -64,6 +65,8 @@ class _AddEventFormState extends State<AddEventForm> {
       } else if (e.status == 'postponed') {
         isPostponed = true;
       }
+      selectedDate = e.date;
+      selectedTime = TimeOfDay(hour: e.date.hour, minute: e.date.minute);
       dateInput.text = DateFormat('dd-MMM-yyyy').format(e.date);
       timeInput.text = DateFormat('h:mm a').format(e.date);
     }
@@ -93,15 +96,23 @@ class _AddEventFormState extends State<AddEventForm> {
           "status": isCancelled
               ? 'cancelled'
               : isPostponed
-                  ? 'postponed'
-                  : 'ok',
+              ? 'postponed'
+              : 'ok',
           "results": [],
           "resultAdded": false
         };
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => ConfirmEventDetails(
+
+        if(widget.event != null)
+          {
+            data['_id'] = widget.event!.id;
+          }
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => ConfirmEventDetails(
+                  isEdit: !(widget.event == null),
                   event: EventModel.fromJson(data),
                 )));
+
+
       }
     }
     return Scaffold(
@@ -127,7 +138,7 @@ class _AddEventFormState extends State<AddEventForm> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomDropDown(
-                        items: UserStore.spardhaEvents,
+                        items: SpardhaStore.spardhaEvents,
                         hintText: 'Event Name',
                         onChanged: (s) => sportName = s,
                         value: sportName,

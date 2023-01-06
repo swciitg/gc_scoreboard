@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:scoreboard/src/globals/constants.dart';
 import '../../globals/colors.dart';
 
 class HostelDropDown extends StatelessWidget {
+  final List<String> hostels;
   final validator;
   final onChanged;
   final String? value;
 
-  const HostelDropDown({super.key, required this.onChanged, required this.value, required this.validator});
+  const HostelDropDown({super.key, required this.onChanged, required this.value, required this.validator, required this.hostels});
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +70,7 @@ class HostelDropDown extends StatelessWidget {
       style: Themes.theme.textTheme.headline6,
       onChanged: onChanged,
       value: value,
-      items: allHostelList.map<DropdownMenuItem<String>>((String value) {
+      items: hostels.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),

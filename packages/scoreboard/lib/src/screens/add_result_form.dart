@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:scoreboard/src/functions/validator.dart';
 import 'package:scoreboard/src/models/event_model.dart';
 import 'package:scoreboard/src/models/result_model.dart';
+import 'package:scoreboard/src/services/api.dart';
 import 'package:scoreboard/src/stores/result_form_store.dart';
+
 import 'package:scoreboard/src/widgets/add_result/list_view_widget.dart';
 import 'package:scoreboard/src/widgets/cards/card_date_widget.dart';
 import '../globals/colors.dart';
+import '../widgets/add_result/custom_text_field.dart';
 import '../widgets/add_result/fields_mandatory.dart';
+import 'home.dart';
 
 class AddResultForm extends StatefulWidget {
   final EventModel event;
@@ -17,11 +22,14 @@ class AddResultForm extends StatefulWidget {
 
 class _AddResultFormState extends State<AddResultForm> {
 
+  TextEditingController victoryStatement = TextEditingController();
+
   @override
   void initState() {
     super.initState();
     if (widget.event.results.isNotEmpty){
-      ResultForm.resultFields = widget.event.results;
+      ResultFormStore.resultFields = widget.event.results;
+      ResultFormStore.victoryStatement = widget.event.victoryStatement!;
     }
   }
 
@@ -46,10 +54,7 @@ class _AddResultFormState extends State<AddResultForm> {
           ),
           leading: IconButton(
             onPressed: () {
-              //To clear the current values int the persistant variable
-              ResultForm.resultFields = [
-                [ResultModel()]
-              ];
+              ResultFormStore.clear();
               Navigator.of(context).pop();
             },
             icon: Icon(
@@ -60,19 +65,26 @@ class _AddResultFormState extends State<AddResultForm> {
           ),
           actions: [
             TextButton(
-              onPressed: () {
-                // List<List<ResultModel>> l = ResultForm.resultFields ?? [];
-                // for(var list in l)
-                //   {
-                //     for (ResultModel x in list) {
-                //       print(
-                //           "${1}: Hostel = ${x.hostel}, Points = ${x.points}, PS= ${x.primaryScore}, SS = ${x.secondaryScore}");
-                //     }
-                //   }
-                if (!key.currentState!.validate()) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Processing Data')),
-                  );
+              onPressed: () async {
+                print('button pressed');
+                if (key.currentState!.validate()) {
+                  print('submit result pressed');
+                  bool respose = await APIService(context).addResult(widget.event.id!, ResultFormStore.resultFields!,ResultFormStore.victoryStatement!);
+                  if(respose)
+                    {
+                      Navigator.of(context).pushNamedAndRemoveUntil(ScoreBoardHome.id, (route) => false);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Success')),
+                      );
+                      ResultFormStore.clear();
+                    }
+                  else
+                    {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Failed')),
+                      );
+                    }
+
                 }
               },
               child: Text(
@@ -131,9 +143,17 @@ class _AddResultFormState extends State<AddResultForm> {
                 ),
               ),
               const SizedBox(
-                height: 37,
+                height: 22,
               ),
-              AddResultList(formKey: key,)
+              CustomTextField(
+                  hintText: 'Victory Statement',
+                  validator: validateField,
+                  value: ResultFormStore.victoryStatement,
+                  onChanged: (p) {
+                    ResultFormStore.victoryStatement = p;
+                  },
+                  isNecessary: true),
+              AddResultList(formKey: key, hostels: widget.event.hostels)
             ],
           ),
         ));

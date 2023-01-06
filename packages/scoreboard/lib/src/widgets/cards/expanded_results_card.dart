@@ -37,11 +37,11 @@ class ExpandedResultsCard extends StatelessWidget {
                       return eventModel.results[0][0].secondaryScore == null
                           ? NullSecondaryResultsCardItem(
                               index + 1,
-                              eventModel.results[index][subIndex].hostel!,
+                              eventModel.results[index][subIndex].hostelName!,
                               eventModel.results[index][subIndex].primaryScore!)
                           : SecondaryScoreResultsCardItem(
                               index + 1,
-                              eventModel.results[index][subIndex].hostel!,
+                              eventModel.results[index][subIndex].hostelName!,
                               eventModel.results[index][subIndex].primaryScore!,
                               eventModel
                                   .results[index][subIndex].secondaryScore);

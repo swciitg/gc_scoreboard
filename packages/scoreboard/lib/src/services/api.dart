@@ -1,3 +1,4 @@
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:scoreboard/src/functions/auth_user_helper.dart';
@@ -7,15 +8,18 @@ import 'package:scoreboard/src/models/event_model.dart';
 import 'package:scoreboard/src/screens/login/admin_login.dart';
 
 import '../globals/constants.dart';
+import '../models/result_model.dart';
 
 class APIService {
   final dio = Dio(BaseOptions(
       baseUrl: const String.fromEnvironment('SERVER-URL'),
-      connectTimeout: 5000,
-      receiveTimeout: 5000,
+      connectTimeout: 15000,
+      receiveTimeout: 15000,
       headers: {'Security-Key': const String.fromEnvironment('SECURITY-KEY')}));
 
   APIService(BuildContext buildContext){
+    print(const String.fromEnvironment('SERVER-URL'));
+    print(const String.fromEnvironment('SECURITY-KEY'));
     dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options,handler) async {
         options.headers["Authorization"] = "Bearer ${await AuthUserHelpers.getAccessToken()}";
@@ -23,6 +27,7 @@ class APIService {
         handler.next(options);
       },
       onError: (error,handler) async {
+        print(error.toString());
         print("in interceptor");
         Response response = error.response!;
         print(response.statusCode ?? "no status code");
@@ -83,9 +88,10 @@ class APIService {
     print(resp);
   }
 
-  Future<void> postEventSchedule(Map<String,dynamic> data) async {
+  Future<bool> postEventSchedule(Map<String,dynamic> data) async {
     var resp = await dio.post("/gc/spardha/event-schedule",data: data);
     print(resp);
+    return resp.data['success'];
   }
 
   Future<void> generateTokens() async {
@@ -147,10 +153,51 @@ class APIService {
       dio.options.queryParameters["forAdmin"] = "true";
     }
     Response resp = await dio.get("/gc/spardha/event-schedule");
-    List<EventModel> toRtn = [];
+    List<EventModel> output = [];
     print(resp.data);
-    List<dynamic>.from(resp.data["details"]).forEach((e) => {toRtn.add(EventModel.fromJson(e))});
-    return toRtn;
+    List<dynamic>.from(resp.data["details"]).forEach((e) => {output.add(EventModel.fromJson(e))});
+    return output;
+  }
+
+  Future<List<EventModel>> getSpardhaResults(ViewType viewType) async {
+    if(viewType == ViewType.admin){
+      dio.options.queryParameters["forAdmin"] = "true";
+    }
+    Response resp = await dio.get("/gc/spardha/event-schedule/results");
+    List<EventModel> output = [];
+    print(resp.data);
+    List<dynamic>.from(resp.data["details"]).forEach((e) => {output.add(EventModel.fromJson(e))});
+    return output;
+  }
+
+  Future<bool> addResult(String eventID, List<List<ResultModel>> data, String victoryStatement) async {
+    List<List<Map>> results=[];
+    data.forEach((positionResults) {
+      List<Map> addResults=[];
+      positionResults.forEach((result) {
+        addResults.add(result.toJson());
+      });
+      results.add(addResults);
+    });
+    print(results);
+    Response resp = await dio.patch('/gc/spardha/event-schedule/result/$eventID', data: {
+      'victoryStatement': victoryStatement,
+      'results' : results
+    });
+    print(resp.data);
+    return resp.data['success'];
+  }
+
+  Future<bool> deleteEvent(String eventID) async {
+    Response resp = await dio.delete('/gc/spardha/event-schedule/$eventID');
+    return resp.data['success'];
+  }
+
+  Future<bool> updateSpardhaEvent(EventModel event)
+  async {
+    print(event.id);
+    Response resp = await dio.patch('/gc/spardha/event-schedule/${event.id!}', data: event.toJson());
+    return resp.data['success'];
   }
 
 }

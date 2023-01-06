@@ -27,7 +27,7 @@ class _FilterBarState extends State<FilterBar> {
     List<String> itemsCategory = [];
 
     if(commonStore.competition == Competitions.spardha){
-      itemsEvents.addAll(UserStore.spardhaEvents);
+      itemsEvents.addAll(SpardhaStore.spardhaEvents);
       itemsHostels = Hostel.values.map((e) => e.hostelName).toList(); // get all hostel names from common store hostel
       itemsCategory = Category.values.map((e) => e.categoryName).toList(); // get all categories from common store category
     }

@@ -4,6 +4,7 @@ import 'package:scoreboard/src/routes.dart';
 import 'package:scoreboard/src/screens/home.dart';
 import 'package:scoreboard/src/screens/splash.dart';
 import 'package:scoreboard/src/stores/user_store.dart';
+import 'functions/auth_user_helper.dart';
 import 'stores/common_store.dart';
 
 class GCScoreBoard extends StatefulWidget {
@@ -20,22 +21,20 @@ class _GCScoreBoardState extends State<GCScoreBoard> {
     return MultiProvider(
       providers: [
         Provider(
-          create: (_) => UserStore(),
+          create: (_) => SpardhaStore(),
         ),
         Provider<CommonStore>(
           create: (_) => CommonStore(),
         )
       ],
       child: Builder(
-          builder: (context) => FutureBuilder(
-                future: context
-                    .read<UserStore>()
-                    .saveUserData(widget.userInfo, context),
-                builder: (context, snapshot) {
+          builder: (buildContext) => FutureBuilder(
+                future: AuthUserHelpers.saveUserData(widget.userInfo, buildContext),
+                builder: (buildContext, snapshot) {
                   return MaterialApp(
                     debugShowCheckedModeBanner: false,
                     home: snapshot.hasData
-                        ? ScoreBoardHome()
+                        ? const ScoreBoardHome()
                         : const WelcomeScreen(),
                     routes: routes,
                   );

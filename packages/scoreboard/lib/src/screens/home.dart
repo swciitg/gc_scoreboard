@@ -17,7 +17,7 @@ import 'coming_soon.dart';
 import 'gc_standings.dart';
 
 class ScoreBoardHome extends StatefulWidget {
-  static const id = '/home';
+  static const id = '/gc/home';
   const ScoreBoardHome({Key? key}) : super(key: key);
 
   @override
@@ -68,37 +68,7 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
                             text: 'Add Event ',
                           ),
                         )
-                      : commonStore.page == Pages.results
-                          ? GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => AddResultForm(
-                                          event: EventModel(
-                                              victoryStatement:
-                                                  'Tie between Disang and Lohit',
-                                              event: 'Cricket',
-                                              category: 'Men',
-                                              stage: 'Quarter-Final',
-                                              date: DateTime.now(),
-                                              venue:
-                                                  'Table Tennis Court, Old SAC',
-                                              results: [],
-                                              hostels: [
-                                                'Disang',
-                                                'Lohit',
-                                                'Kameng',
-                                                'Umiam',
-                                                'Brahmaputra',
-                                              ],
-                                              status: 'ok',
-                                              resultAdded: false),
-                                        )));
-                              },
-                              child: const AddButton(
-                                text: "Add Result ",
-                              ),
-                            )
-                          : Container()
+                      : Container()
                   : Container(),
           bottomNavigationBar: const BottomNavBar(),
         );

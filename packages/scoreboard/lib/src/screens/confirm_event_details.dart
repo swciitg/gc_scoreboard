@@ -7,10 +7,12 @@ import 'package:scoreboard/src/screens/home.dart';
 import 'package:scoreboard/src/services/api.dart';
 
 class ConfirmEventDetails extends StatefulWidget {
+  final bool isEdit;
   final EventModel event;
   const ConfirmEventDetails({
     Key? key,
     required this.event,
+    required this.isEdit,
   }) : super(key: key);
 
   @override
@@ -50,15 +52,34 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
         actions: [
           TextButton(
             onPressed: () async {
-              try{
                 print(widget.event.toJson());
-                await APIService(context).postEventSchedule(widget.event.toJson());
-                showSnackBar(context, "Event schedule posted successfully");
-                Navigator.of(context).pushNamedAndRemoveUntil(ScoreBoardHome.id, (route) => false);
-              }
-              catch(err){
-                print(err.toString());
-              }
+                bool response;
+                if(widget.isEdit)
+                  {
+                    response = await APIService(context).updateSpardhaEvent(widget.event);
+                  }
+                else
+                  {
+                    response = await APIService(context).postEventSchedule(widget.event.toJson());
+                  }
+                if(response)
+                  {
+                    if(widget.isEdit)
+                      {
+                        showSnackBar(context, "Event Edited successfully");
+                      }
+                    else
+                      {
+                        showSnackBar(context, "Event schedule posted successfully");
+                      }
+
+                    Navigator.of(context).pushNamedAndRemoveUntil(ScoreBoardHome.id, (route) => false);
+                  }
+                else
+                  {
+                    showSnackBar(context, "Some error occures, please try again");
+                  }
+
             },
             child: Text(
               'Post',

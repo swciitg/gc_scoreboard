@@ -1,6 +1,7 @@
 import 'package:scoreboard/src/models/result_model.dart';
 
-class ResultForm {
+class ResultFormStore {
+  static String? victoryStatement;
   static List<List<ResultModel>>? resultFields = [
     [ResultModel()]
   ];
@@ -25,5 +26,13 @@ class ResultForm {
   static int numTeamsWithPosition(int position) {
     if (resultFields == null) return 0;
     return resultFields![position - 1].length;
+  }
+
+  static void clear()
+  {
+    resultFields = [
+      [ResultModel()]
+    ];
+    victoryStatement = null;
   }
 }

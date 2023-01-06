@@ -3,13 +3,13 @@ part 'result_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class ResultModel{
-  String? hostel;
+  String? hostelName;
   int? points;
   String? primaryScore;
   String? secondaryScore;
   ResultModel(
       {
-      this.hostel,
+      this.hostelName,
       this.points,
       this.primaryScore,
       this.secondaryScore});

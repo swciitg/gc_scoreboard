@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scoreboard/src/functions/position.dart';
 import 'package:scoreboard/src/stores/result_form_store.dart';
 import '../../functions/validator.dart';
 import './hostel_dropdown.dart';
@@ -7,7 +8,9 @@ import '../../globals/colors.dart';
 
 class AddResultList extends StatefulWidget {
   final GlobalKey<FormState> formKey;
-  const AddResultList({super.key, required this.formKey});
+  final List<String> hostels;
+  const AddResultList(
+      {super.key, required this.formKey, required this.hostels});
 
   @override
   State<AddResultList> createState() => _AddResultListState();
@@ -20,12 +23,13 @@ class _AddResultListState extends State<AddResultList> {
         child: Form(
       key: widget.formKey,
       child: ListView.builder(
-        itemCount: ResultForm.numPositions(),
+        itemCount: ResultFormStore.numPositions(),
         itemBuilder: (context, index) {
           return Column(
             children: [
+              SizedBox(height: 10,),
               for (int team = 0;
-                  team < ResultForm.numTeamsWithPosition(index+1);
+                  team < ResultFormStore.numTeamsWithPosition(index + 1);
                   team++)
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,7 +37,7 @@ class _AddResultListState extends State<AddResultList> {
                     Row(
                       children: [
                         Text(
-                          '${index + 1} Position',
+                          getPosition(index),
                           style: Themes.theme.textTheme.bodyText2,
                         ),
                         const Spacer(),
@@ -49,7 +53,7 @@ class _AddResultListState extends State<AddResultList> {
                             ),
                             onTap: () {
                               setState(() {
-                                ResultForm.addTeamAtPosition(index+1);
+                                ResultFormStore.addTeamAtPosition(index + 1);
                               });
                             },
                           ),
@@ -65,7 +69,8 @@ class _AddResultListState extends State<AddResultList> {
                             ),
                             onTap: () {
                               setState(() {
-                                ResultForm.removeTeamAtPosition(index+1, team);
+                                ResultFormStore.removeTeamAtPosition(
+                                    index + 1, team);
                               });
                             },
                           ),
@@ -80,9 +85,11 @@ class _AddResultListState extends State<AddResultList> {
                           flex: 65,
                           child: HostelDropDown(
                             validator: validateField,
-                            value: ResultForm.resultFields?[index][team].hostel,
-                            onChanged: (hostel) => ResultForm
-                                .resultFields?[index][team].hostel = hostel,
+                            value: ResultFormStore
+                                .resultFields?[index][team].hostelName,
+                            onChanged: (hostel) => ResultFormStore
+                                .resultFields?[index][team].hostelName = hostel,
+                            hostels: widget.hostels,
                           ),
                         ),
                         const Spacer(
@@ -94,10 +101,10 @@ class _AddResultListState extends State<AddResultList> {
                               isNecessary: true,
                               hintText: 'Points',
                               validator: validateField,
-                              onChanged: (p) => ResultForm
+                              onChanged: (p) => ResultFormStore
                                   .resultFields?[index][team]
                                   .points = int.tryParse(p),
-                              value: ResultForm
+                              value: ResultFormStore
                                   .resultFields?[index][team].points
                                   .toString(),
                             ))
@@ -114,9 +121,9 @@ class _AddResultListState extends State<AddResultList> {
                             isNecessary: true,
                             hintText: 'Primary Score',
                             validator: validateField,
-                            onChanged: (ps) => ResultForm
+                            onChanged: (ps) => ResultFormStore
                                 .resultFields?[index][team].primaryScore = ps,
-                            value: ResultForm
+                            value: ResultFormStore
                                 .resultFields?[index][team].primaryScore,
                           ),
                         ),
@@ -129,10 +136,10 @@ class _AddResultListState extends State<AddResultList> {
                               isNecessary: false,
                               hintText: 'Secondary Score',
                               validator: null,
-                              onChanged: (ss) => ResultForm
+                              onChanged: (ss) => ResultFormStore
                                   .resultFields?[index][team]
                                   .secondaryScore = ss,
-                              value: ResultForm
+                              value: ResultFormStore
                                   .resultFields?[index][team].secondaryScore,
                             ))
                       ],
@@ -147,15 +154,15 @@ class _AddResultListState extends State<AddResultList> {
                     const SizedBox(
                       height: 24,
                     ),
-                    if (index + 1 == ResultForm.resultFields!.length &&
-                        team + 1 == ResultForm.resultFields![index].length)
+                    if (index + 1 == ResultFormStore.resultFields!.length &&
+                        team + 1 == ResultFormStore.resultFields![index].length)
                       TextButton(
                           style: TextButton.styleFrom(
                             padding: EdgeInsets.zero,
                           ),
                           onPressed: () {
                             setState(() {
-                              ResultForm.addNewPosition(index);
+                              ResultFormStore.addNewPosition(index);
                             });
                           },
                           child: Row(

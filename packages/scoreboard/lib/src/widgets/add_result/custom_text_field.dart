@@ -26,7 +26,7 @@ class CustomTextField extends StatelessWidget {
       onChanged: onChanged,
       controller: controller,
       cursorColor: Themes.theme.primaryColor,
-      keyboardType: TextInputType.number,
+      keyboardType: TextInputType.text,
       decoration: InputDecoration(
         label: RichText(
           text: TextSpan(

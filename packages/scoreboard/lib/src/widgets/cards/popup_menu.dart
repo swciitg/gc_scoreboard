@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:scoreboard/src/functions/snackbar.dart';
+import 'package:scoreboard/src/globals/enums.dart';
+import 'package:scoreboard/src/screens/home.dart';
+import 'package:scoreboard/src/services/api.dart';
+import 'package:scoreboard/src/stores/common_store.dart';
 import '../../globals/colors.dart';
 import '../../models/event_model.dart';
-import '../../models/result_model.dart';
 import '../../screens/add_event_form.dart';
 import '../../screens/add_result_form.dart';
 
@@ -26,7 +31,7 @@ class _PopupMenuState extends State<PopupMenu> {
     _tapPosition = tapDownDetails.globalPosition;
   }
 
-  void _showContextMenu(context) async {
+  void _showContextMenu(context, commonStore) async {
     final RenderBox overlay =
         Overlay.of(context)?.context.findRenderObject() as RenderBox;
 
@@ -65,20 +70,35 @@ class _PopupMenuState extends State<PopupMenu> {
                     )));
         break;
       case 'delete':
+
+        if (commonStore.page == Pages.results) {
+
+
+        } else {
+          bool response = await APIService(context).deleteEvent(widget.eventModel.id!);
+          if(!response)
+          {
+            showSnackBar(context, 'Some error occured, try again later');
+          }
+          else
+            {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const ScoreBoardHome()));
+            }
+        }
         print(widget.eventModel);
-      // Navigator.push(
-      //     context, MaterialPageRoute(builder: (context) => Container()));
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    CommonStore commmonStore = context.read<CommonStore>();
     return GestureDetector(
       onTapDown: (position) {
         _getTapPosition(position);
       },
       onLongPress: () {
-        _showContextMenu(context);
+        _showContextMenu(context, commmonStore);
       },
       child: widget.child,
     );
