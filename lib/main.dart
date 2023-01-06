@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return GCScoreBoard(userInfo: {"name" : "Nandigrama Naga Venkata Hareesh","email" : "h.nandigrama@iitg.ac.in"});
   }
 }
