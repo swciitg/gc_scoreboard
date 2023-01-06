@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:scoreboard/src/functions/auth_user_helper.dart';
 import 'package:scoreboard/src/globals/enums.dart';
 import 'package:scoreboard/src/services/api.dart';
 import 'package:scoreboard/src/stores/common_store.dart';
@@ -47,9 +48,22 @@ class _LoginWebViewState extends State<LoginWebView> {
               List<String> values = userInfoString.replaceAll('"', '').split("/");
               await controller.clearCache();
               await CookieManager().clearCookies();
-              if (!values[0].toLowerCase().contains("error")) {
+              print(values);
+              print(await AuthUserHelpers.getUserEmail());
+              if(values[0].toLowerCase().contains("error")){
+                showSnackBar(context, "Some Error occured");
+              }
+              else if (values[1] != await AuthUserHelpers.getUserEmail()){
+                showSnackBar(context, "You are not using email logged as in OneStop");
+              }
+              else{
                 await APIService(context).generateTokens();
-                commonStore.setViewType(ViewType.admin);
+                if(await AuthUserHelpers.checkIfAdmin() == true){
+                  commonStore.setViewType(ViewType.admin);
+                }
+                else{
+                  showSnackBar(context, "You are not authorized admin");
+                }
               }
               Navigator.pop(context);
             }

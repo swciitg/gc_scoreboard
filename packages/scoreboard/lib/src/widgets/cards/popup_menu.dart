@@ -73,7 +73,6 @@ class _PopupMenuState extends State<PopupMenu> {
 
         if (commonStore.page == Pages.results) {
 
-
         } else {
           bool response = await APIService(context).deleteEvent(widget.eventModel.id!);
           if(!response)

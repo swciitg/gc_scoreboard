@@ -170,7 +170,7 @@ class APIService {
     return output;
   }
 
-  Future<bool> addResult(String eventID, List<List<ResultModel>> data, String victoryStatement) async {
+  Future<bool> addUpdateResult(String eventID, List<List<ResultModel>> data, String victoryStatement) async {
     List<List<Map>> results=[];
     data.forEach((positionResults) {
       List<Map> addResults=[];

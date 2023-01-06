@@ -69,7 +69,7 @@ class _AddResultFormState extends State<AddResultForm> {
                 print('button pressed');
                 if (key.currentState!.validate()) {
                   print('submit result pressed');
-                  bool respose = await APIService(context).addResult(widget.event.id!, ResultFormStore.resultFields!,ResultFormStore.victoryStatement!);
+                  bool respose = await APIService(context).addUpdateResult(widget.event.id!, ResultFormStore.resultFields!,ResultFormStore.victoryStatement!);
                   if(respose)
                     {
                       Navigator.of(context).pushNamedAndRemoveUntil(ScoreBoardHome.id, (route) => false);
