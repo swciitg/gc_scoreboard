@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../globals/styles/filter_style.dart';
 import '../globals/colors.dart';
-import '../widgets/scoreboard/standingboard.dart';
+import '../widgets/standings_page/standingboard.dart';
 
 class GCStandingsPage extends StatefulWidget {
   const GCStandingsPage({super.key});
@@ -113,7 +113,7 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
               indent: 8,
               endIndent: 8,
             ),
-            const Expanded(child: StandingBoard()),
+            Expanded(child: StandingBoard(hostelStandings: [],)), // passed empty list for now
           ],
         ));
   }
