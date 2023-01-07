@@ -212,4 +212,9 @@ class APIService {
     return {"overall" : resp2.data["details"],"event-wise" : resp1.data["details"]};
   }
 
+  Future<List<dynamic>> getGCStandings() async {
+    Response resp = await dio.get("/gc/overall/standings");
+    return resp.data['details'];
+  }
+
 }

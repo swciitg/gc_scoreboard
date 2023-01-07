@@ -19,8 +19,7 @@ class _StandingBoardState extends State<StandingBoard> {
     0xffD0DBDD,
     0xffF07E48,
   ];
-  final String _imageUrl =
-      'https://cdn.dribbble.com/users/465625/screenshots/16421846/media/5e93cae5c3e0bd0eeb5c21a29f3dce64.png?compress=1&resize=400x300';
+
 
   @override
   Widget build(BuildContext context) {
@@ -156,7 +155,7 @@ class _StandingBoardState extends State<StandingBoard> {
         separatorBuilder: (context, index) {
           return const Divider(
             thickness: 0.7,
-            color: Colors.grey,
+            color: Color.fromRGBO(94, 94, 94, 0.38),
             indent: 20,
             endIndent: 20,
             height: 0,

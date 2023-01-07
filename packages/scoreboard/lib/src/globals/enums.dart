@@ -26,7 +26,6 @@ enum Pages {
 }
 
 enum Category {
-  overall("Overall"),
   men("Men"),
   women("Women"),
   menandwomen("Men + Women");

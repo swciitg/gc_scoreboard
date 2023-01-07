@@ -92,22 +92,22 @@ class _AddResultListState extends State<AddResultList> {
                             hostels: widget.hostels,
                           ),
                         ),
-                        const Spacer(
-                          flex: 5,
-                        ),
-                        Expanded(
-                            flex: 30,
-                            child: CustomTextField(
-                              isNecessary: true,
-                              hintText: 'Points',
-                              validator: validateField,
-                              onChanged: (p) => ResultFormStore
-                                  .resultFields?[index][team]
-                                  .points = int.tryParse(p),
-                              value: ResultFormStore
-                                  .resultFields?[index][team].points
-                                  .toString(),
-                            ))
+                        // const Spacer(
+                        //   flex: 5,
+                        // ),
+                        // Expanded(
+                        //     flex: 30,
+                        //     child: CustomTextField(
+                        //       isNecessary: true,
+                        //       hintText: 'Points',
+                        //       validator: validateField,
+                        //       onChanged: (p) => ResultFormStore
+                        //           .resultFields?[index][team]
+                        //           .points = int.tryParse(p),
+                        //       value: ResultFormStore
+                        //           .resultFields?[index][team].points
+                        //           .toString(),
+                        //     ))
                       ],
                     ),
                     const SizedBox(

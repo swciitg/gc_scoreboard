@@ -4,13 +4,11 @@ part 'result_model.g.dart';
 @JsonSerializable(explicitToJson: true)
 class ResultModel{
   String? hostelName;
-  int? points;
   String? primaryScore;
   String? secondaryScore;
   ResultModel(
       {
       this.hostelName,
-      this.points,
       this.primaryScore,
       this.secondaryScore});
   factory ResultModel.fromJson(Map<String,dynamic> json) => _$ResultModelFromJson(json);

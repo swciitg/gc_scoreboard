@@ -16,7 +16,7 @@ abstract class _CommonStore with Store {
   ViewType viewType = ViewType.user;
 
   @observable
-  Category selectedCategory = Category.overall;
+  Category selectedCategory = Category.men;
 
   @observable
   Hostel selectedHostel = Hostel.overall;
@@ -35,7 +35,7 @@ abstract class _CommonStore with Store {
     print(c);
     competition = c;
     // chaning filters to default
-    selectedCategory=Category.overall;
+    selectedCategory=Category.men;
     selectedHostel=Hostel.overall;
     selectedDate='';
     selectedEvent='Overall';
@@ -45,7 +45,7 @@ abstract class _CommonStore with Store {
   void setPage(Pages p) {
     page = p;
     // chaning filters to default
-    selectedCategory=Category.overall;
+    selectedCategory=Category.men;
     selectedHostel=Hostel.overall;
     selectedDate='';
     selectedEvent='Overall';

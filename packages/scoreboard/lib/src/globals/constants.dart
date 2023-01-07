@@ -1,21 +1,25 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-
-const List<String> allHostelList = [
+const List<String> menHostel = [
   'Barak',
   'Brahmaputra',
-  'Dhansiri',
-  'Dibang',
   'Dihing',
-  'Disang',
+  'Disang (Men)',
   'Kameng',
   'Kapili',
   'Lohit',
   'Manas',
   'Married Scholars',
   'Siang',
-  'Subansiri',
   'Umiam'
 ];
+
+const List<String> womenHostel = [
+  'Dhansiri',
+  'Subansiri',
+  'Disang (Women)',
+];
+
+const List<String> allHostelList = [...menHostel, ...womenHostel];
 
 const Map<String,String> hostelsImagePath = {
   'Barak' : 'packages/scoreboard/assets/hostel_image.jpg',
@@ -23,7 +27,8 @@ const Map<String,String> hostelsImagePath = {
   'Dhansiri' : 'packages/scoreboard/assets/hostel_image.jpg',
   'Dibang' : 'packages/scoreboard/assets/hostel_image.jpg',
   'Dihing' : 'packages/scoreboard/assets/hostel_image.jpg',
-  'Disang' : 'packages/scoreboard/assets/hostel_image.jpg',
+  'Disang (Men)' : 'packages/scoreboard/assets/hostel_image.jpg',
+  'Disang (Women)' : 'packages/scoreboard/assets/hostel_image.jpg',
   'Kameng' : 'packages/scoreboard/assets/hostel_image.jpg',
   'Kapili' : 'packages/scoreboard/assets/hostel_image.jpg',
   'Lohit' : 'packages/scoreboard/assets/hostel_image.jpg',
