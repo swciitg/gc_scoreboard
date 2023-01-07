@@ -206,4 +206,10 @@ class APIService {
     return resp.data['success'];
   }
 
+  Future<Map<String,dynamic>> getSpardhaStandings() async {
+    Response resp1 = await dio.get("/gc/spardha/standings/all-events");
+    Response resp2 = await dio.get("/gc/spardha/standings");
+    return {"overall" : resp2.data["details"],"event-wise" : resp1.data["details"]};
+  }
+
 }

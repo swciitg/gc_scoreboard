@@ -17,6 +17,23 @@ const List<String> allHostelList = [
   'Umiam'
 ];
 
+const Map<String,String> hostelsImagePath = {
+  'Barak' : 'packages/scoreboard/assets/hostel_image.jpg',
+  'Brahmaputra' : 'packages/scoreboard/assets/hostel_image.jpg',
+  'Dhansiri' : 'packages/scoreboard/assets/hostel_image.jpg',
+  'Dibang' : 'packages/scoreboard/assets/hostel_image.jpg',
+  'Dihing' : 'packages/scoreboard/assets/hostel_image.jpg',
+  'Disang' : 'packages/scoreboard/assets/hostel_image.jpg',
+  'Kameng' : 'packages/scoreboard/assets/hostel_image.jpg',
+  'Kapili' : 'packages/scoreboard/assets/hostel_image.jpg',
+  'Lohit' : 'packages/scoreboard/assets/hostel_image.jpg',
+  'Manas' : 'packages/scoreboard/assets/hostel_image.jpg',
+  'Married Scholars' : 'packages/scoreboard/assets/hostel_image.jpg',
+  'Siang' : 'packages/scoreboard/assets/hostel_image.jpg',
+  'Subansiri' : 'packages/scoreboard/assets/hostel_image.jpg',
+  'Umiam' : 'packages/scoreboard/assets/hostel_image.jpg'
+};
+
 class DatabaseRecords {
   static const useremail = "email";
   static const username = "name";

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:scoreboard/src/globals/constants.dart';
 import '../../globals/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class StandingBoard extends StatefulWidget {
-  const StandingBoard({
-    Key? key,
+  List<dynamic> hostelStandings;
+  StandingBoard({
+    Key? key, required this.hostelStandings
   }) : super(key: key);
 
   @override
@@ -22,12 +24,20 @@ class _StandingBoardState extends State<StandingBoard> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.hostelStandings);
     return Container(
       margin: EdgeInsets.fromLTRB(4, 16, 4, 0),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(18), color: Themes.cardColor1),
-      child: ListView.separated(
-        itemCount: 10 + 1, //give length of content + 1 for heading
+      child: widget.hostelStandings.length==0 ? Center(
+        child: Text("No Standings found",
+            softWrap: true,
+            style: GoogleFonts.montserrat(
+                fontWeight: FontWeight.w600,
+                fontSize: 12,
+                color: Themes.kWhite)),
+      ) : ListView.separated(
+        itemCount: widget.hostelStandings.length + 1, //give length of content + 1 for heading
         itemBuilder: (context, index) {
           if (index == 0) {
             return Container(
@@ -47,30 +57,33 @@ class _StandingBoardState extends State<StandingBoard> {
                     width: 10,
                   ),
                   Expanded(
-                    flex: 3,
-                    child: Row(
-                      children: [
-                        Text('Hostels',
-                            style: GoogleFonts.montserrat(
-                                fontWeight: FontWeight.w700,
-                                fontSize: 13,
-                                color: Themes.cardFontColor2)),
-                      ],
+                    flex: 2,
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Text('Hostels',
+                          style: GoogleFonts.montserrat(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 13,
+                              color: Themes.cardFontColor2)),
                     ),
                   ),
                   Expanded(
                     flex: 1,
-                    child: Text('Score',
-                        style: GoogleFonts.montserrat(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 13,
-                            color: Themes.cardFontColor2)),
+                    child: Container(
+                      alignment: Alignment.centerRight,
+                      child: Text('Points',
+                          style: GoogleFonts.montserrat(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 13,
+                              color: Themes.cardFontColor2)),
+                    ),
                   ),
                 ],
               ),
             );
           }
           index -= 1;
+          print(widget.hostelStandings[index]["hostelName"]);
           return Container(
             margin: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
             padding: EdgeInsets.fromLTRB(15, 10, 10, 10),
@@ -102,33 +115,39 @@ class _StandingBoardState extends State<StandingBoard> {
                   width: 10,
                 ),
                 Expanded(
-                  flex: 3,
-                  child: Row(
-                    children: [
-                      Image.network(
-                        _imageUrl.toString(),
-                        height: 30,
-                        width: 30,
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      Text('name',
-                          style: GoogleFonts.montserrat(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 13,
-                              color: Themes.cardFontColor2)),
-                    ],
+                  flex: 2,
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          hostelsImagePath[widget.hostelStandings[index]["hostelName"]]!,
+                          height: 30,
+                          width: 30,
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        Text(widget.hostelStandings[index]["hostelName"],
+                            style: GoogleFonts.montserrat(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 13,
+                                color: Themes.cardFontColor2)),
+                      ],
+                    ),
                   ),
                 ),
                 Expanded(
                   flex: 1,
-                  child: Text('23',
-                      textAlign: TextAlign.left,
-                      style: GoogleFonts.montserrat(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 13,
-                          color: Themes.cardFontColor2)),
+                  child: Container(
+                    alignment: Alignment.centerRight,
+                    child: Text(widget.hostelStandings[index]["points"].toString(),
+                        textAlign: TextAlign.left,
+                        style: GoogleFonts.montserrat(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 13,
+                            color: Themes.cardFontColor2)),
+                  ),
                 ),
               ],
             ),
