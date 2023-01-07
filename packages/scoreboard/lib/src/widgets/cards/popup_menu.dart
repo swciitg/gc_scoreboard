@@ -72,7 +72,16 @@ class _PopupMenuState extends State<PopupMenu> {
       case 'delete':
 
         if (commonStore.page == Pages.results) {
-
+          bool response = await APIService(context).deleteSpardhaEventResult(widget.eventModel.id!);
+          if(!response)
+          {
+            showSnackBar(context, 'Some error occured, try again later');
+          }
+          else
+          {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => const ScoreBoardHome()));
+          }
         } else {
           bool response = await APIService(context).deleteEvent(widget.eventModel.id!);
           if(!response)

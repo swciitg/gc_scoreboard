@@ -200,4 +200,10 @@ class APIService {
     return resp.data['success'];
   }
 
+  Future<bool> deleteSpardhaEventResult(String eventID)
+  async {
+    Response resp = await dio.delete('/gc/spardha/event-schedule/result/$eventID');
+    return resp.data['success'];
+  }
+
 }
