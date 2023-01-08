@@ -7,8 +7,8 @@ import 'package:scoreboard/src/services/api.dart';
 import 'package:scoreboard/src/stores/common_store.dart';
 import '../../globals/colors.dart';
 import '../../models/event_model.dart';
-import '../../screens/add_event_form.dart';
-import '../../screens/add_result_form.dart';
+import '../../screens/spardha/add_event_form.dart';
+import '../../screens/spardha/add_result_form.dart';
 
 class PopupMenu extends StatefulWidget {
   final Widget child;

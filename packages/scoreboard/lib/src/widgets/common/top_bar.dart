@@ -3,8 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/src/stores/common_store.dart';
+import 'package:scoreboard/src/stores/manthan_store.dart';
 import '../../globals/colors.dart';
 import '../../globals/enums.dart';
+import '../../stores/gc_store.dart';
+import '../../stores/kriti_store.dart';
+import '../../stores/spardha_store.dart';
 
 class TopBar extends StatefulWidget {
   const TopBar({super.key});
@@ -23,7 +27,7 @@ class _TopBarState extends State<TopBar> {
         children: const [
           Expanded(
             child: TopBarItem(
-              label: Pages.standings,
+              page: Pages.standings,
             ),
           ),
           SizedBox(
@@ -31,7 +35,7 @@ class _TopBarState extends State<TopBar> {
           ),
           Expanded(
             child: TopBarItem(
-              label: Pages.schedule,
+              page: Pages.schedule,
             ),
           ),
           SizedBox(
@@ -39,7 +43,7 @@ class _TopBarState extends State<TopBar> {
           ),
           Expanded(
             child: TopBarItem(
-              label: Pages.results,
+              page: Pages.results,
             ),
           ),
         ],
@@ -49,18 +53,35 @@ class _TopBarState extends State<TopBar> {
 }
 
 class TopBarItem extends StatelessWidget {
-  final Pages label;
+  final Pages page;
   const TopBarItem({
     Key? key,
-    required this.label,
+    required this.page,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     CommonStore commonStore = context.read<CommonStore>();
+
+    var competitionStore;
+    switch(commonStore.competition){
+      case Competitions.gc : {
+        competitionStore = context.read<GCStore>();
+      } break;
+      case Competitions.spardha : {
+        competitionStore = context.read<SpardhaStore>();
+      } break;
+      case Competitions.kriti : {
+        competitionStore = context.read<KritiStore>();
+      } break;
+      case Competitions.manthan : {
+        competitionStore = context.read<ManthanStore>();
+      } break;
+    }
+
     return GestureDetector(
       onTap: () {
-        commonStore.setPage(label);
+        commonStore.setPage(page,competitionStore);
       },
       child: Observer(builder: (context) {
         return Container(
@@ -69,25 +90,25 @@ class TopBarItem extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 6),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
-              color: commonStore.page == label
+              color: commonStore.page == page
                   ? Themes.primaryColor
                   : Themes.secondaryColor),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(label.icon,
-                  color: commonStore.page == label
+              Icon(page.icon,
+                  color: commonStore.page == page
                       ? Themes.secondaryColor
                       : Themes.primaryColor,
                   size: 16),
               const SizedBox(
                 width: 8,
               ),
-              Text(label.name,
+              Text(page.name,
                   style: GoogleFonts.montserrat(
                       fontWeight: FontWeight.w600,
                       fontSize: 12,
-                      color: commonStore.page == label
+                      color: commonStore.page == page
                           ? Themes.secondaryColor
                           : Themes.primaryColor)),
             ],

@@ -1,11 +1,15 @@
 // ignore_for_file: library_private_types_in_public_api
 import 'package:mobx/mobx.dart';
+import 'package:scoreboard/src/stores/static_store.dart';
 import '../globals/enums.dart';
 part 'common_store.g.dart';
 
 class CommonStore = _CommonStore with _$CommonStore;
 
 abstract class _CommonStore with Store {
+
+  static List<String> spardhaEvents=[];
+
   @observable
   Competitions competition = Competitions.gc;
 
@@ -16,39 +20,27 @@ abstract class _CommonStore with Store {
   ViewType viewType = ViewType.user;
 
   @observable
-  Category selectedCategory = Category.men;
+  bool isSpardhaAdmin=false;
 
   @observable
-  Hostel selectedHostel = Hostel.overall;
+  bool isKritiAdmin=false;
 
   @observable
-  String selectedDate=''; // no date selected
-
-  @observable
-  String selectedEvent='Overall';
-
-  @observable
-  bool fetchedData = false;
+  bool isManthanAdmin=false;
 
   @action
-  void setCompetition(Competitions c) {
+  void setCompetition(Competitions c,var competitionStore) {
     print(c);
     competition = c;
-    // chaning filters to default
-    selectedCategory=Category.men;
-    selectedHostel=Hostel.overall;
-    selectedDate='';
-    selectedEvent='Overall';
+    // changing filters to default
+    competitionStore.setFiltersToDefault();
   }
 
   @action
-  void setPage(Pages p) {
+  void setPage(Pages p,var competitionStore) {
     page = p;
-    // chaning filters to default
-    selectedCategory=Category.men;
-    selectedHostel=Hostel.overall;
-    selectedDate='';
-    selectedEvent='Overall';
+    // changing filters to default
+    competitionStore.setFiltersToDefault();
   }
 
   @action
@@ -58,46 +50,25 @@ abstract class _CommonStore with Store {
   }
 
   @action
-  void changeSelectedCategory(String c){
-    Category.values.firstWhere((element){
-      if(c==element.categoryName){
-        selectedCategory=element;
-        return true;
-      }
-      return false;
-    });
+  void setAdminNone(){
+    isSpardhaAdmin=false;
+    isKritiAdmin=false;
+    isManthanAdmin=false;
   }
 
   @action
-  void changeSelectedHostel(String h){
-    Hostel.values.firstWhere((element){
-      if(h==element.hostelName){
-        selectedHostel=element;
-        return true;
-      }
-      return false;
-    });
+  void setSpardhaAdmin(bool input){
+    isSpardhaAdmin=input;
   }
 
   @action
-  void changeSelectedDate(String d){
-    selectedDate=d;
+  void setKritiAdmin(bool input){
+    isKritiAdmin=input;
   }
 
   @action
-  void makeSelectedDateEmpty(){
-    selectedDate='';
-  }
-
-  @action
-  void changeSelectedEvent(String e){
-    selectedEvent=e;
-    print(selectedEvent);
-  }
-
-  @action
-  void changeFetchedData(){
-    fetchedData=!fetchedData;
+  void setManthanAdmin(bool input){
+    isManthanAdmin=input;
   }
 
 }

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:scoreboard/src/screens/add_result_form.dart';
-import 'package:scoreboard/src/screens/add_event_form.dart';
+import 'package:scoreboard/src/screens/kriti/kriti_home.dart';
+import 'package:scoreboard/src/screens/manthan/manthan_home.dart';
+import 'package:scoreboard/src/screens/spardha/add_result_form.dart';
+import 'package:scoreboard/src/screens/spardha/add_event_form.dart';
+import 'package:scoreboard/src/screens/spardha/spardha_home.dart';
 import '../globals/enums.dart';
 import '../models/event_model.dart';
-import '../screens/results_page.dart';
-import '../screens/schedule_page.dart';
+import 'spardha/results_page.dart';
 import 'package:provider/provider.dart';
-import '../screens/standings_page.dart';
+import 'spardha/schedule_page.dart';
+import 'spardha/standings_page.dart';
 import '../widgets/common/home_app_bar.dart';
 import '../globals/colors.dart';
 import '../stores/common_store.dart';
@@ -41,37 +44,10 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
     var commonStore = context.read<CommonStore>();
     return Observer(
       builder: (context) {
-        return Scaffold(
-          backgroundColor: Themes.backgroundColor,
-          appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(56),
-              child: AppBarHomeComponent(homeViewType: commonStore.viewType)),
-          body: commonStore.competition == Competitions.gc
-              ? const GCStandingsPage()
-              : commonStore.competition == Competitions.spardha
-                  ? tabs[commonStore.page]
-                  : ComingSoon(
-                      competition: commonStore.competition.toString(),
-                    ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: commonStore.viewType == ViewType.user
-              ? Container()
-              : commonStore.competition == Competitions.spardha
-                  ? commonStore.page == Pages.schedule
-                      ? GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const AddEventForm()));
-                          },
-                          child: const AddButton(
-                            text: 'Add Event ',
-                          ),
-                        )
-                      : Container()
-                  : Container(),
-          bottomNavigationBar: const BottomNavBar(),
-        );
+        return commonStore.competition == Competitions.gc
+            ? const GCStandingsPage()
+            : commonStore.competition == Competitions.spardha
+            ? SpardhaHome() : (commonStore.competition == Competitions.kriti ? KritiHome() : ManthanHome());
       },
     );
   }
