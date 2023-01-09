@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/stores/static_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../globals/constants.dart';
 import '../services/api.dart';
 import '../stores/common_store.dart';
+import '../stores/static_store.dart';
 
 class AuthUserHelpers{
 

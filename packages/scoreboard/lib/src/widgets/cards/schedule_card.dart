@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/globals/enums.dart';
-import 'package:scoreboard/src/stores/common_store.dart';
-import 'package:scoreboard/src/widgets/cards/schedule/single_hostel_view.dart';
-import 'package:scoreboard/src/widgets/cards/schedule/time_venue_widget.dart';
+import '../../globals/enums.dart';
+import '../../stores/common_store.dart';
 import '../../widgets/cards/popup_menu.dart';
 import 'schedule/multiple_hostel_view.dart';
 import '../../models/event_model.dart';
 import '../../globals/colors.dart';
 import 'card_event_details.dart';
 import 'menu_item.dart';
+import 'schedule/single_hostel_view.dart';
+import 'schedule/time_venue_widget.dart';
 
 class ScheduleCard extends StatefulWidget {
   final EventModel eventModel;

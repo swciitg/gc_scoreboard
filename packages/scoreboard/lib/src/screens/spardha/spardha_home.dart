@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:scoreboard/src/screens/spardha/results_page.dart';
-import 'package:scoreboard/src/screens/spardha/schedule_page.dart';
-import 'package:scoreboard/src/screens/spardha/standings_page.dart';
 import '../../globals/colors.dart';
 import '../../globals/enums.dart';
 import '../../stores/common_store.dart';
 import '../../widgets/common/home_app_bar.dart';
 import '../../widgets/schedule_page/add_button.dart';
-import '../coming_soon.dart';
 import 'add_event_form.dart';
 import '../../widgets/common/bottom_navigation_bar.dart';
-import '../gc_standings.dart';
+import 'results_page.dart';
+import 'schedule_page.dart';
+import 'standings_page.dart';
+
 
 class SpardhaHome extends StatefulWidget {
   const SpardhaHome({Key? key}) : super(key: key);

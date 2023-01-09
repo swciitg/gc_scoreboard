@@ -1,4 +1,6 @@
-import 'package:scoreboard/src/models/result_model.dart';
+
+
+import '../models/result_model.dart';
 
 class ResultFormStore {
   static String? victoryStatement;

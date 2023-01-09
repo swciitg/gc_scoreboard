@@ -2,14 +2,15 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/functions/auth_user_helper.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:scoreboard/src/globals/enums.dart';
-import 'package:scoreboard/src/models/event_model.dart';
-import 'package:scoreboard/src/screens/login/admin_login.dart';
 
+
+import '../functions/auth_user_helper.dart';
 import '../globals/constants.dart';
+import '../globals/enums.dart';
+import '../models/event_model.dart';
 import '../models/result_model.dart';
+import '../screens/login/admin_login.dart';
 import '../stores/common_store.dart';
 
 class APIService {

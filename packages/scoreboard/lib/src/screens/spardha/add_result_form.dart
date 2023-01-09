@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:scoreboard/src/functions/validator.dart';
-import 'package:scoreboard/src/models/event_model.dart';
-import 'package:scoreboard/src/models/result_model.dart';
-import 'package:scoreboard/src/services/api.dart';
-import 'package:scoreboard/src/stores/result_form_store.dart';
-
-import 'package:scoreboard/src/widgets/add_result/list_view_widget.dart';
-import 'package:scoreboard/src/widgets/cards/card_date_widget.dart';
+import '../../functions/validator.dart';
 import '../../globals/colors.dart';
+import '../../models/event_model.dart';
+import '../../services/api.dart';
+import '../../stores/result_form_store.dart';
 import '../../widgets/add_result/custom_text_field.dart';
 import '../../widgets/add_result/fields_mandatory.dart';
+import '../../widgets/add_result/list_view_widget.dart';
+import '../../widgets/cards/card_date_widget.dart';
 import '../home.dart';
 
 class AddResultForm extends StatefulWidget {

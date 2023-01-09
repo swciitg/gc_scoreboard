@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:scoreboard/src/globals/enums.dart';
-import 'package:scoreboard/src/widgets/common/top_bar.dart';
+
+import '../globals/enums.dart';
+import '../widgets/common/top_bar.dart';
+
 
 class ComingSoon extends StatefulWidget {
   final Competitions competition;

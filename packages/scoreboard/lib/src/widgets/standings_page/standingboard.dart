@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:scoreboard/src/globals/constants.dart';
 import '../../globals/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../globals/constants.dart';
 
 class StandingBoard extends StatefulWidget {
   List<dynamic> hostelStandings;

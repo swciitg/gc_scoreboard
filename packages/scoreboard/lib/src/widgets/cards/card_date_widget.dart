@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
-import 'package:scoreboard/src/globals/styles/card_style.dart';
+
+import '../../globals/styles/card_style.dart';
+
 
 class DateWidget extends StatelessWidget {
   final DateTime date;

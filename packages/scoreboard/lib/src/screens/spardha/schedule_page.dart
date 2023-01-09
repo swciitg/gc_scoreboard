@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/functions/filter_schedule.dart';
-import 'package:scoreboard/src/services/api.dart';
-import 'package:scoreboard/src/stores/common_store.dart';
+import '../../functions/filter_schedule.dart';
 import '../../globals/colors.dart';
 import '../../models/event_model.dart';
+import '../../services/api.dart';
+import '../../stores/common_store.dart';
 import '../../stores/spardha_store.dart';
 import '../../widgets/cards/schedule_card.dart';
 import '../../widgets/common/filter_bar.dart';

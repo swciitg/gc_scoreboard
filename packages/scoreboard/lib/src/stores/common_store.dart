@@ -1,6 +1,5 @@
 // ignore_for_file: library_private_types_in_public_api
 import 'package:mobx/mobx.dart';
-import 'package:scoreboard/src/stores/static_store.dart';
 import '../globals/enums.dart';
 part 'common_store.g.dart';
 

@@ -2,12 +2,12 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/stores/common_store.dart';
-import 'package:scoreboard/src/stores/manthan_store.dart';
 import '../../globals/colors.dart';
 import '../../globals/enums.dart';
+import '../../stores/common_store.dart';
 import '../../stores/gc_store.dart';
 import '../../stores/kriti_store.dart';
+import '../../stores/manthan_store.dart';
 import '../../stores/spardha_store.dart';
 
 class TopBar extends StatefulWidget {

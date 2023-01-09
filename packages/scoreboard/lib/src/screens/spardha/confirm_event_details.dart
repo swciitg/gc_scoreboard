@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:scoreboard/src/functions/snackbar.dart';
-import 'package:scoreboard/src/globals/colors.dart';
-import 'package:scoreboard/src/models/event_model.dart';
-import 'package:scoreboard/src/screens/home.dart';
-import 'package:scoreboard/src/services/api.dart';
+
+import '../../functions/snackbar.dart';
+import '../../globals/colors.dart';
+import '../../models/event_model.dart';
+import '../../services/api.dart';
+import '../home.dart';
+
 
 class ConfirmEventDetails extends StatefulWidget {
   final bool isEdit;
