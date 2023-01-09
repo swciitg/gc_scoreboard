@@ -1,5 +1,5 @@
 import 'package:mobx/mobx.dart';
-import 'package:scoreboard/src/stores/static_store.dart';
+
 import '../globals/enums.dart';
 part 'gc_store.g.dart';
 

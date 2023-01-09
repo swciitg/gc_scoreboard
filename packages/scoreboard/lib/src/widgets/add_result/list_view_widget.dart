@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:scoreboard/src/functions/position.dart';
-import 'package:scoreboard/src/stores/result_form_store.dart';
+import '../../functions/position.dart';
 import '../../functions/validator.dart';
+import '../../stores/result_form_store.dart';
 import './hostel_dropdown.dart';
 import './custom_text_field.dart';
 import '../../globals/colors.dart';

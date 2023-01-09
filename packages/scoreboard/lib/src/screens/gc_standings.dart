@@ -3,12 +3,13 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/services/api.dart';
-import 'package:scoreboard/src/stores/gc_store.dart';
+
 import '../functions/filter_men_women.dart';
 import '../globals/styles/filter_style.dart';
 import '../globals/colors.dart';
+import '../services/api.dart';
 import '../stores/common_store.dart';
+import '../stores/gc_store.dart';
 import '../widgets/common/bottom_navigation_bar.dart';
 import '../widgets/common/home_app_bar.dart';
 import '../widgets/standings_page/standingboard.dart';

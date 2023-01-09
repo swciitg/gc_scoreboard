@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/routes.dart';
-import 'package:scoreboard/src/screens/home.dart';
-import 'package:scoreboard/src/screens/splash.dart';
-import 'package:scoreboard/src/stores/gc_store.dart';
-import 'package:scoreboard/src/stores/kriti_store.dart';
-import 'package:scoreboard/src/stores/manthan_store.dart';
-import 'package:scoreboard/src/stores/spardha_store.dart';
 import 'functions/auth_user_helper.dart';
+import 'routes.dart';
+import 'screens/home.dart';
+import 'screens/splash.dart';
 import 'stores/common_store.dart';
+import 'stores/gc_store.dart';
+import 'stores/kriti_store.dart';
+import 'stores/manthan_store.dart';
+import 'stores/spardha_store.dart';
 
 class GCScoreBoard extends StatefulWidget {
   Map<String, String> userInfo;

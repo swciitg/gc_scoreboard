@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:scoreboard/src/globals/colors.dart';
+
+import '../globals/colors.dart';
+
 
 class RestrictedPage extends StatefulWidget {
   const RestrictedPage({Key? key}) : super(key: key);

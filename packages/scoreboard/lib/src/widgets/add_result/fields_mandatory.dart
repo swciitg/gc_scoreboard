@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:scoreboard/src/globals/colors.dart';
+
+import '../../globals/colors.dart';
+
 
 class FieldsMandatory extends StatelessWidget {
   const FieldsMandatory({
