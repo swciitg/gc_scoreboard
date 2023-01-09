@@ -5,7 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:scoreboard/src/globals/styles/filter_style.dart';
 import 'package:scoreboard/src/globals/enums.dart';
 import 'package:scoreboard/src/stores/common_store.dart';
-import 'package:scoreboard/src/stores/user_store.dart';
+import 'package:scoreboard/src/stores/spardha_store.dart';
+import 'package:scoreboard/src/stores/static_store.dart';
 import '../../globals/colors.dart';
 import 'package:intl/intl.dart';
 
@@ -21,13 +22,14 @@ class _FilterBarState extends State<FilterBar> {
   @override
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
+    var spardhaStore = context.read<SpardhaStore>();
 
     List<String> itemsEvents = ['Overall'];
     List<String> itemsHostels =[];
     List<String> itemsCategory = [];
 
     if(commonStore.competition == Competitions.spardha){
-      itemsEvents.addAll(SpardhaStore.spardhaEvents);
+      itemsEvents.addAll(StaticStore.spardhaEvents);
       itemsHostels = Hostel.values.map((e) => e.hostelName).toList(); // get all hostel names from common store hostel
       itemsCategory = Category.values.map((e) => e.categoryName).toList(); // get all categories from common store category
     }
@@ -52,7 +54,7 @@ class _FilterBarState extends State<FilterBar> {
                             position: PopupMenuPosition.under,
                             color: Themes.cardColor1,
                             onSelected: (String item) {
-                              commonStore.changeSelectedCategory(item);
+                              spardhaStore.changeSelectedCategory(item);
                             },
                             itemBuilder: (BuildContext context) =>
                                 itemsCategory.map((item) => PopupMenuItem<String>(
@@ -84,7 +86,7 @@ class _FilterBarState extends State<FilterBar> {
                                         ),
                                         SizedBox(
                                           height: 18,
-                                          child: Text(commonStore.selectedCategory.categoryName,
+                                          child: Text(spardhaStore.selectedCategory.categoryName,
                                               style: popUpItemStyle),
                                         )
                                       ],
@@ -107,7 +109,7 @@ class _FilterBarState extends State<FilterBar> {
                             position: PopupMenuPosition.under,
                             color: Themes.cardColor1,
                             onSelected: (String item) {
-                              commonStore.changeSelectedEvent(item);
+                              spardhaStore.changeSelectedEvent(item);
                             },
                             itemBuilder: (BuildContext context) =>
                                 itemsEvents.map((item) => PopupMenuItem<String>(
@@ -139,7 +141,7 @@ class _FilterBarState extends State<FilterBar> {
                                         ),
                                         SizedBox(
                                           height: 18,
-                                          child: Text(commonStore.selectedEvent,
+                                          child: Text(spardhaStore.selectedEvent,
                                               style: popUpItemStyle),
                                         )
                                       ],
@@ -177,8 +179,8 @@ class _FilterBarState extends State<FilterBar> {
                               color: Themes.cardColor1,
                               onSelected: (String item) {
                                 print(item);
-                                commonStore.changeSelectedHostel(item);
-                                print(commonStore.selectedHostel.hostelName);
+                                spardhaStore.changeSelectedHostel(item);
+                                print(spardhaStore.selectedHostel.hostelName);
                               },
                               itemBuilder: (BuildContext context) =>
                                   itemsHostels.map((item) => PopupMenuItem<String>(
@@ -211,7 +213,7 @@ class _FilterBarState extends State<FilterBar> {
                                           SizedBox(
                                             height: 18,
                                             child: Text(
-                                                commonStore.selectedHostel.hostelName,
+                                                spardhaStore.selectedHostel.hostelName,
                                                 style: popUpItemStyle),
                                           )
                                         ],
@@ -242,7 +244,7 @@ class _FilterBarState extends State<FilterBar> {
                                 lastDate: DateTime(2101));
                             if (pickedDate != null) {
                               if (!mounted) return;
-                              commonStore.changeSelectedDate(pickedDate.toIso8601String());
+                              spardhaStore.changeSelectedDate(pickedDate.toIso8601String());
                             }
                           },
                           child: Padding(
@@ -263,7 +265,7 @@ class _FilterBarState extends State<FilterBar> {
                   ],
                 ),
                 Visibility(
-                  visible: commonStore.selectedDate.isNotEmpty ? true : false, // date selected or not
+                  visible: spardhaStore.selectedDate.isNotEmpty ? true : false, // date selected or not
                   child: Padding(
                     padding: const EdgeInsets.only(left: 12,top: 12),
                     child: Row(
@@ -285,8 +287,8 @@ class _FilterBarState extends State<FilterBar> {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text(commonStore.selectedDate.isNotEmpty ? DateFormat('dd-MMM-yyyy')
-                                  .format(DateTime.parse(commonStore.selectedDate)) : '', style: GoogleFonts.montserrat(
+                              Text(spardhaStore.selectedDate.isNotEmpty ? DateFormat('dd-MMM-yyyy')
+                                  .format(DateTime.parse(spardhaStore.selectedDate)) : '', style: GoogleFonts.montserrat(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 12,
                                   color: Themes.primaryColor)),
@@ -297,7 +299,7 @@ class _FilterBarState extends State<FilterBar> {
                                   alignment: Alignment.topLeft,
                                   padding: const  EdgeInsets.only(left: 4),
                                   onPressed: (){
-                                    commonStore.changeSelectedDate(''); // making selected date empty
+                                    spardhaStore.changeSelectedDate(''); // making selected date empty
                                   },
                                   icon: const Icon(Icons.clear,color: Themes.primaryColor),
                                   iconSize: 16,

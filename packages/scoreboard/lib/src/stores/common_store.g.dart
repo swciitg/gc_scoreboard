@@ -56,83 +56,51 @@ mixin _$CommonStore on _CommonStore, Store {
     });
   }
 
-  late final _$selectedCategoryAtom =
-      Atom(name: '_CommonStore.selectedCategory', context: context);
+  late final _$isSpardhaAdminAtom =
+      Atom(name: '_CommonStore.isSpardhaAdmin', context: context);
 
   @override
-  Category get selectedCategory {
-    _$selectedCategoryAtom.reportRead();
-    return super.selectedCategory;
+  bool get isSpardhaAdmin {
+    _$isSpardhaAdminAtom.reportRead();
+    return super.isSpardhaAdmin;
   }
 
   @override
-  set selectedCategory(Category value) {
-    _$selectedCategoryAtom.reportWrite(value, super.selectedCategory, () {
-      super.selectedCategory = value;
+  set isSpardhaAdmin(bool value) {
+    _$isSpardhaAdminAtom.reportWrite(value, super.isSpardhaAdmin, () {
+      super.isSpardhaAdmin = value;
     });
   }
 
-  late final _$selectedHostelAtom =
-      Atom(name: '_CommonStore.selectedHostel', context: context);
+  late final _$isKritiAdminAtom =
+      Atom(name: '_CommonStore.isKritiAdmin', context: context);
 
   @override
-  Hostel get selectedHostel {
-    _$selectedHostelAtom.reportRead();
-    return super.selectedHostel;
+  bool get isKritiAdmin {
+    _$isKritiAdminAtom.reportRead();
+    return super.isKritiAdmin;
   }
 
   @override
-  set selectedHostel(Hostel value) {
-    _$selectedHostelAtom.reportWrite(value, super.selectedHostel, () {
-      super.selectedHostel = value;
+  set isKritiAdmin(bool value) {
+    _$isKritiAdminAtom.reportWrite(value, super.isKritiAdmin, () {
+      super.isKritiAdmin = value;
     });
   }
 
-  late final _$selectedDateAtom =
-      Atom(name: '_CommonStore.selectedDate', context: context);
+  late final _$isManthanAdminAtom =
+      Atom(name: '_CommonStore.isManthanAdmin', context: context);
 
   @override
-  String get selectedDate {
-    _$selectedDateAtom.reportRead();
-    return super.selectedDate;
+  bool get isManthanAdmin {
+    _$isManthanAdminAtom.reportRead();
+    return super.isManthanAdmin;
   }
 
   @override
-  set selectedDate(String value) {
-    _$selectedDateAtom.reportWrite(value, super.selectedDate, () {
-      super.selectedDate = value;
-    });
-  }
-
-  late final _$selectedEventAtom =
-      Atom(name: '_CommonStore.selectedEvent', context: context);
-
-  @override
-  String get selectedEvent {
-    _$selectedEventAtom.reportRead();
-    return super.selectedEvent;
-  }
-
-  @override
-  set selectedEvent(String value) {
-    _$selectedEventAtom.reportWrite(value, super.selectedEvent, () {
-      super.selectedEvent = value;
-    });
-  }
-
-  late final _$fetchedDataAtom =
-      Atom(name: '_CommonStore.fetchedData', context: context);
-
-  @override
-  bool get fetchedData {
-    _$fetchedDataAtom.reportRead();
-    return super.fetchedData;
-  }
-
-  @override
-  set fetchedData(bool value) {
-    _$fetchedDataAtom.reportWrite(value, super.fetchedData, () {
-      super.fetchedData = value;
+  set isManthanAdmin(bool value) {
+    _$isManthanAdminAtom.reportWrite(value, super.isManthanAdmin, () {
+      super.isManthanAdmin = value;
     });
   }
 
@@ -140,22 +108,22 @@ mixin _$CommonStore on _CommonStore, Store {
       ActionController(name: '_CommonStore', context: context);
 
   @override
-  void setCompetition(Competitions c) {
+  void setCompetition(Competitions c, dynamic competitionStore) {
     final _$actionInfo = _$_CommonStoreActionController.startAction(
         name: '_CommonStore.setCompetition');
     try {
-      return super.setCompetition(c);
+      return super.setCompetition(c, competitionStore);
     } finally {
       _$_CommonStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void setPage(Pages p) {
+  void setPage(Pages p, dynamic competitionStore) {
     final _$actionInfo = _$_CommonStoreActionController.startAction(
         name: '_CommonStore.setPage');
     try {
-      return super.setPage(p);
+      return super.setPage(p, competitionStore);
     } finally {
       _$_CommonStoreActionController.endAction(_$actionInfo);
     }
@@ -173,66 +141,44 @@ mixin _$CommonStore on _CommonStore, Store {
   }
 
   @override
-  void changeSelectedCategory(String c) {
+  void setAdminNone() {
     final _$actionInfo = _$_CommonStoreActionController.startAction(
-        name: '_CommonStore.changeSelectedCategory');
+        name: '_CommonStore.setAdminNone');
     try {
-      return super.changeSelectedCategory(c);
+      return super.setAdminNone();
     } finally {
       _$_CommonStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void changeSelectedHostel(String h) {
+  void setSpardhaAdmin(bool input) {
     final _$actionInfo = _$_CommonStoreActionController.startAction(
-        name: '_CommonStore.changeSelectedHostel');
+        name: '_CommonStore.setSpardhaAdmin');
     try {
-      return super.changeSelectedHostel(h);
+      return super.setSpardhaAdmin(input);
     } finally {
       _$_CommonStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void changeSelectedDate(String d) {
+  void setKritiAdmin(bool input) {
     final _$actionInfo = _$_CommonStoreActionController.startAction(
-        name: '_CommonStore.changeSelectedDate');
+        name: '_CommonStore.setKritiAdmin');
     try {
-      return super.changeSelectedDate(d);
+      return super.setKritiAdmin(input);
     } finally {
       _$_CommonStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void makeSelectedDateEmpty() {
+  void setManthanAdmin(bool input) {
     final _$actionInfo = _$_CommonStoreActionController.startAction(
-        name: '_CommonStore.makeSelectedDateEmpty');
+        name: '_CommonStore.setManthanAdmin');
     try {
-      return super.makeSelectedDateEmpty();
-    } finally {
-      _$_CommonStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void changeSelectedEvent(String e) {
-    final _$actionInfo = _$_CommonStoreActionController.startAction(
-        name: '_CommonStore.changeSelectedEvent');
-    try {
-      return super.changeSelectedEvent(e);
-    } finally {
-      _$_CommonStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void changeFetchedData() {
-    final _$actionInfo = _$_CommonStoreActionController.startAction(
-        name: '_CommonStore.changeFetchedData');
-    try {
-      return super.changeFetchedData();
+      return super.setManthanAdmin(input);
     } finally {
       _$_CommonStoreActionController.endAction(_$actionInfo);
     }
@@ -244,11 +190,9 @@ mixin _$CommonStore on _CommonStore, Store {
 competition: ${competition},
 page: ${page},
 viewType: ${viewType},
-selectedCategory: ${selectedCategory},
-selectedHostel: ${selectedHostel},
-selectedDate: ${selectedDate},
-selectedEvent: ${selectedEvent},
-fetchedData: ${fetchedData}
+isSpardhaAdmin: ${isSpardhaAdmin},
+isKritiAdmin: ${isKritiAdmin},
+isManthanAdmin: ${isManthanAdmin}
     ''';
   }
 }

@@ -57,7 +57,7 @@ class _LoginWebViewState extends State<LoginWebView> {
                 showSnackBar(context, "You are not using email logged as in OneStop");
               }
               else{
-                await APIService(context).generateTokens();
+                await APIService(context).generateTokens(commonStore);
                 if(await AuthUserHelpers.checkIfAdmin() == true){
                   commonStore.setViewType(ViewType.admin);
                 }

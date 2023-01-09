@@ -4,9 +4,13 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:scoreboard/src/stores/kriti_store.dart';
+import 'package:scoreboard/src/stores/manthan_store.dart';
+import 'package:scoreboard/src/stores/spardha_store.dart';
 import '../../globals/colors.dart';
 import '../../globals/enums.dart';
 import '../../stores/common_store.dart';
+import '../../stores/gc_store.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -27,16 +31,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
           child: Row(
             children: [
               BottomNavBarItem(
-                  label: Competitions.gc,
+                  competition: Competitions.gc,
                   width: mediaWidth / 4),
               BottomNavBarItem(
-                  label: Competitions.spardha,
+                  competition: Competitions.spardha,
                   width: mediaWidth / 4),
               BottomNavBarItem(
-                  label: Competitions.kriti,
+                  competition: Competitions.kriti,
                   width: mediaWidth / 4),
               BottomNavBarItem(
-                  label: Competitions.manthan,
+                  competition: Competitions.manthan,
                   width: mediaWidth / 4),
             ],
           )),
@@ -46,21 +50,38 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
 class BottomNavBarItem extends StatelessWidget {
   final double width;
-  final Competitions label;
+  final Competitions competition;
 
   const BottomNavBarItem({
     Key? key,
     required this.width,
-    required this.label,
+    required this.competition,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    CommonStore store = context.read<CommonStore>();
+    CommonStore commonStore = context.read<CommonStore>();
+
+    var competitionStore;
+    switch(competition){
+      case Competitions.gc : {
+        competitionStore = context.read<GCStore>();
+      } break;
+      case Competitions.spardha : {
+        competitionStore = context.read<SpardhaStore>();
+      } break;
+      case Competitions.kriti : {
+        competitionStore = context.read<KritiStore>();
+      } break;
+      case Competitions.manthan : {
+        competitionStore = context.read<ManthanStore>();
+      } break;
+    }
+
     return Observer(builder: (context) {
       return GestureDetector(
         onTap: () {
-          store.setCompetition(label);
+          commonStore.setCompetition(competition,competitionStore);
         },
         child: SizedBox(
           width: width,
@@ -75,13 +96,13 @@ class BottomNavBarItem extends StatelessWidget {
                   height: 40,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(100),
-                      color: store.competition == label
+                      color: commonStore.competition == competition
                           ? Themes.bottomNavHighlightColor
                           : Themes.bottomNavBarColor),
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: SvgPicture.asset(
-                      label.assetPath,
+                      competition.assetPath,
                       package: 'scoreboard',
                     ),
                   ),
@@ -89,13 +110,13 @@ class BottomNavBarItem extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(0.0),
-                child: Text(label.name,
+                child: Text(competition.name,
                     style: GoogleFonts.montserrat(
-                        fontWeight: store.competition == label
+                        fontWeight: commonStore.competition == competition
                             ? FontWeight.w600
                             : FontWeight.w500,
                         fontSize: 12,
-                        color: store.competition == label
+                        color: commonStore.competition == competition
                             ? Themes.primaryColor
                             : Themes.bottomNavFontColor)),
               )

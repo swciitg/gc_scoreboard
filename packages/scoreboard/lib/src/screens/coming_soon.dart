@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:scoreboard/src/globals/enums.dart';
 import 'package:scoreboard/src/widgets/common/top_bar.dart';
 
 class ComingSoon extends StatefulWidget {
-  final String competition;
+  final Competitions competition;
   const ComingSoon({Key? key, required this.competition}) : super(key: key);
 
   @override
@@ -23,17 +24,15 @@ class _ComingSoonState extends State<ComingSoon> {
             height: 230,
             width: 220,
             child:
-            widget.competition == 'Competitions.kriti'
+            widget.competition == Competitions.kriti
                 ? SvgPicture.asset(
               'assets/kriti_comingsoon.svg',
               package: 'scoreboard',
             )
-                : widget.competition == 'Competitions.manthan'
-                  ? SvgPicture.asset(
-                  'assets/manthan_comingsoon.svg',
-                  package: 'scoreboard',
+                : SvgPicture.asset(
+              'assets/manthan_comingsoon.svg',
+              package: 'scoreboard',
             )
-              : Container(),
             ),
           ),
       ],

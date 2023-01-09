@@ -3,15 +3,15 @@ import 'package:intl/intl.dart';
 import 'package:scoreboard/src/functions/validator.dart';
 import 'package:scoreboard/src/functions/snackbar.dart';
 import 'package:scoreboard/src/models/event_model.dart';
-import 'package:scoreboard/src/screens/confirm_event_details.dart';
+import 'package:scoreboard/src/screens/spardha/confirm_event_details.dart';
 import 'package:scoreboard/src/services/api.dart';
-import 'package:scoreboard/src/stores/user_store.dart';
+import 'package:scoreboard/src/stores/static_store.dart';
 import 'package:scoreboard/src/widgets/add_event/heading.dart';
-import '../globals/constants.dart';
-import '../globals/colors.dart';
-import '../widgets/add_event/drop_down.dart';
-import '../widgets/add_event/text_field.dart';
-import '../widgets/common/form_app_bar.dart';
+import '../../globals/constants.dart';
+import '../../globals/colors.dart';
+import '../../widgets/add_event/drop_down.dart';
+import '../../widgets/add_event/text_field.dart';
+import '../../widgets/common/form_app_bar.dart';
 
 class AddEventForm extends StatefulWidget {
   final EventModel? event;
@@ -138,7 +138,7 @@ class _AddEventFormState extends State<AddEventForm> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomDropDown(
-                        items: SpardhaStore.spardhaEvents,
+                        items: StaticStore.spardhaEvents,
                         hintText: 'Event Name',
                         onChanged: (s) => sportName = s,
                         value: sportName,

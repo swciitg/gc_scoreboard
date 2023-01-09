@@ -1,6 +1,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:scoreboard/src/functions/auth_user_helper.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:scoreboard/src/globals/enums.dart';
@@ -9,6 +10,7 @@ import 'package:scoreboard/src/screens/login/admin_login.dart';
 
 import '../globals/constants.dart';
 import '../models/result_model.dart';
+import '../stores/common_store.dart';
 
 class APIService {
   final dio = Dio(BaseOptions(
@@ -42,7 +44,7 @@ class APIService {
             return handler.resolve(await retryRequest(response));
           }
           else if(isAdmin==false){// normal user
-            await generateTokens();
+            await generateTokens(buildContext.read<CommonStore>());
             // retry
             return handler.resolve(await retryRequest(response));
           }
@@ -52,7 +54,7 @@ class APIService {
             var connectivityResult = await (Connectivity().checkConnectivity());
             if(connectivityResults.contains(connectivityResult) && await Navigator.pushNamed(buildContext, LoginView.id) == true){
               print("verified admin via login");
-              await generateTokens();
+              await generateTokens(buildContext.read<CommonStore>());
               print("regenerated tokens for admin");
               // retry
               return handler.resolve(await retryRequest(response));
@@ -94,7 +96,7 @@ class APIService {
     return resp.data['success'];
   }
 
-  Future<void> generateTokens() async {
+  Future<void> generateTokens(CommonStore commStore) async {
     Map<String,String> userData = await AuthUserHelpers.getUserData();
     print(userData);
     Response<Map<String, dynamic>> resp =
@@ -102,15 +104,19 @@ class APIService {
     var data = resp.data!;
     print(data);
     if (data["success"]==true) {
-      // print(data["authEvents"]);
-      Map<String, bool> authEvents = {
-        "spardha": false,
-        "kriti": false,
-        "manthan": false
-      };
-      data[DatabaseRecords.authevents].forEach((element) => {authEvents[element] = true});
+      commStore.setAdminNone();
+      data[DatabaseRecords.authevents].forEach((element) => {
+        if(element=="spardha"){
+          commStore.setSpardhaAdmin(true)
+        }
+        else if(element=="kriti"){
+          commStore.setKritiAdmin(true)
+        }
+        else if(element=="manthan"){
+            commStore.setManthanAdmin(true)
+          }
+      });
       await AuthUserHelpers.setAdmin(data[DatabaseRecords.isadmin]);
-      await AuthUserHelpers.setAuthEvents(authEvents);
       await AuthUserHelpers.setAccessToken(data[DatabaseRecords.accesstoken]);
       await AuthUserHelpers.setRefreshToken(data[DatabaseRecords.refreshtoken]);
       print("generated tokens");
