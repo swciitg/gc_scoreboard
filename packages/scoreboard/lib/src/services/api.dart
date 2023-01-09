@@ -97,7 +97,7 @@ class APIService {
     return resp.data['success'];
   }
 
-  Future<void> generateTokens(CommonStore commStore) async {
+  Future<dynamic> generateTokens(CommonStore commStore) async {
     Map<String,String> userData = await AuthUserHelpers.getUserData();
     print(userData);
     Response<Map<String, dynamic>> resp =

@@ -136,7 +136,7 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
                   builder: (context, snapshot) {
                     if(!snapshot.hasData)
                     {
-                      return Center(child: CircularProgressIndicator(),);
+                      return Expanded(child: Center(child: CircularProgressIndicator(),));
                     }
                     return Observer(
                         builder: (context) {

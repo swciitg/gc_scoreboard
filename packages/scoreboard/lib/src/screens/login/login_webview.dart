@@ -28,7 +28,6 @@ class _LoginWebViewState extends State<LoginWebView> {
   @override
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
-    bool redirectPageLoaded = false;
     return Observer(
       builder: (context) {
         return WebView(
@@ -38,15 +37,12 @@ class _LoginWebViewState extends State<LoginWebView> {
             controllerCompleter.complete(_controller);
           },
           onPageFinished: (url) async {
-            if(redirectPageLoaded) return;
             if (url.startsWith(
                 "https://swc.iitg.ac.in/onestopapi/v2/auth/microsoft/redirect?code")) {
-              redirectPageLoaded=true;
               WebViewController controller = await controllerCompleter.future;
               var userInfoString = await controller.runJavascriptReturningResult(
                   "document.querySelector('#userInfo').innerText");
               List<String> values = userInfoString.replaceAll('"', '').split("/");
-              await controller.clearCache();
               await CookieManager().clearCookies();
               print(values);
               print(await AuthUserHelpers.getUserEmail());
