@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoreboard/scoreboard.dart';
 
-
 void main() {
   runApp(const MyApp());
 }

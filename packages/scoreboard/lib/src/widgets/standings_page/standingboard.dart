@@ -26,8 +26,8 @@ class _StandingBoardState extends State<StandingBoard> {
     print(widget.hostelStandings);
     return Container(
       margin: EdgeInsets.fromLTRB(4, 16, 4, 0),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(18), color: Themes.cardColor1),
+      decoration: const BoxDecoration(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(18)),color: Themes.cardColor1),
       child: widget.hostelStandings.length==0 ? Center(
         child: Text("No Standings found",
             softWrap: true,

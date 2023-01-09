@@ -26,48 +26,50 @@ class _ResultsPageState extends State<ResultsPage> {
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
     var spardhaStore = context.read<SpardhaStore>();
-    return FutureBuilder<List<EventModel>>(
-        future: APIService(context).getSpardhaResults(
-            commonStore.viewType),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            List<EventModel> allSpardhaEventSchedules = snapshot.data!;
-            return Observer(builder: (context) {
-              List<EventModel> filteredEventSchedules = filterSchedule(
-                  input: allSpardhaEventSchedules,
-                  event: spardhaStore.selectedEvent,
-                  date: spardhaStore.selectedDate,
-                  hostel: spardhaStore.selectedHostel);
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 0),
-                child: Column(
-                  children: [
-                    const TopBar(),
-                    const FilterBar(),
-                    Expanded(
-                        child: filteredEventSchedules.isNotEmpty
-                            ? ListView.builder(
-                            itemCount: filteredEventSchedules.length,
-                            itemBuilder: (context, index) {
-                              return ResultsCard(
-                                  eventModel:
-                                  filteredEventSchedules[index]);
-                            })
-                            : Center(
-                          child: Text("No Schedule found",
-                              style: GoogleFonts.montserrat(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 12,
-                                  color: Themes.kWhite)),
-                        ))
-                  ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 0),
+      child: Column(
+        children: [
+          const TopBar(),
+          const FilterBar(),
+        FutureBuilder<List<EventModel>>(
+            future: APIService(context).getSpardhaResults(
+                commonStore.viewType),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                List<EventModel> allSpardhaEventSchedules = snapshot.data!;
+                return Observer(builder: (context) {
+                  List<EventModel> filteredEventSchedules = filterSchedule(
+                      input: allSpardhaEventSchedules,
+                      event: spardhaStore.selectedEvent,
+                      date: spardhaStore.selectedDate,
+                      hostel: spardhaStore.selectedHostel);
+                  return Expanded(
+                      child: filteredEventSchedules.isNotEmpty
+                          ? ListView.builder(
+                          itemCount: filteredEventSchedules.length,
+                          itemBuilder: (context, index) {
+                            return ResultsCard(
+                                eventModel:
+                                filteredEventSchedules[index]);
+                          })
+                          : Center(
+                        child: Text("No Schedule found",
+                            style: GoogleFonts.montserrat(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 12,
+                                color: Themes.kWhite)),
+                      ));
+                });
+              }
+              return const Expanded(
+                child: Center(
+                  child: CircularProgressIndicator(),
                 ),
               );
-            });
-          }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        });
+            })
+        ],
+      ),
+    );
   }
 }

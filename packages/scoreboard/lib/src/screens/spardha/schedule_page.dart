@@ -34,8 +34,10 @@ class _SchedulePageState extends State<SchedulePage> {
                 future: APIService(context).getSpardhaSchedule(
                     commonStore.viewType),
                 builder: (context, snapshot) {
-                  if(!snapshot.hasData) return const Center(
-                    child: CircularProgressIndicator(),
+                  if(!snapshot.hasData) return const Expanded(
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   );
                   List<EventModel> allSpardhaEventSchedules = snapshot.data!;
                   return Builder(

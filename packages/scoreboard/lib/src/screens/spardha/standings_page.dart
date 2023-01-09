@@ -39,7 +39,7 @@ class _StandingsPageState extends State<StandingsPage> {
                     return Expanded(child: StandingBoard(hostelStandings: filteredEventSchedules));
                   });
                 }
-                return Center(child: CircularProgressIndicator(),);
+                return Expanded(child: Center(child: CircularProgressIndicator(),));
               },
             )
           ],
