@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../functions/filter_schedule.dart';
@@ -39,7 +40,7 @@ class _SchedulePageState extends State<SchedulePage> {
                     ),
                   );
                   List<EventModel> allSpardhaEventSchedules = snapshot.data!;
-                  return Builder(
+                  return Observer(
                       builder: (context) {
                         List<EventModel> filteredEventSchedules = filterSchedule(
                             input: allSpardhaEventSchedules,
