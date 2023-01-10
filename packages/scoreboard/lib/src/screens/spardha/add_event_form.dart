@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:scoreboard/src/widgets/add_event/timepicker_color.dart';
 import '../../functions/snackbar.dart';
 import '../../functions/validator.dart';
 import '../../globals/constants.dart';
@@ -180,7 +181,24 @@ class _AddEventFormState extends State<AddEventForm> {
                                     initialDate: DateTime.now(),
                                     firstDate: DateTime(2000),
                                     //DateTime.now() - not to allow to choose before today.
-                                    lastDate: DateTime(2101));
+                                    lastDate: DateTime(2101),
+                                    builder: (context, child) =>Theme(
+                                      child: child!,
+                                      data: Theme.of(context).copyWith(
+                                        colorScheme: ColorScheme.light(
+                                          primary: Color(0xff2B3E5C),
+                                          onPrimary: Colors.white,
+                                          onSurface: Colors.blueGrey.shade900,
+                                        ),
+                                        textButtonTheme: TextButtonThemeData(
+                                          style: TextButton.styleFrom(
+                                            foregroundColor: Colors.blue, // button text color
+                                          ),
+                                        ),
+                                      ),
+                                      
+                                    ) 
+                                  );
                                 if (pickedDate != null) {
                                   if (!mounted) return;
                                   selectedDate = pickedDate;
@@ -207,15 +225,15 @@ class _AddEventFormState extends State<AddEventForm> {
                                 FocusScope.of(context)
                                     .requestFocus(FocusNode());
                                 TimeOfDay? pickedTime = await showTimePicker(
+
                                   builder: (context, childWidget) {
-                                    return MediaQuery(
-                                        data: MediaQuery.of(context).copyWith(
-                                            alwaysUse24HourFormat: false),
-                                        // If you want 24-Hour format, just change alwaysUse24HourFormat to true or remove all the builder argument
-                                        child: childWidget!);
+
+
+                                    return TimePickerColor(childWidget: childWidget,);
                                   },
                                   initialTime: TimeOfDay.now(),
-                                  context: context, //context of current state
+                                  context: context,
+                                  //context of current state
                                 );
                                 if (pickedTime != null) {
                                   if (!mounted) return;
