@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scoreboard/src/functions/snackbar.dart';
+import '../../functions/snackbar.dart';
 import '../../functions/validator.dart';
 import '../../globals/colors.dart';
 import '../../models/event_model.dart';

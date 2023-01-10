@@ -8,7 +8,7 @@ import 'package:scoreboard/src/globals/enums.dart';
 import 'package:scoreboard/src/services/api.dart';
 import 'package:scoreboard/src/stores/common_store.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:scoreboard/src/functions/snackbar.dart';
+import '../../functions/snackbar.dart';
 class LoginWebView extends StatefulWidget {
   const LoginWebView({Key? key}) : super(key: key);
 
