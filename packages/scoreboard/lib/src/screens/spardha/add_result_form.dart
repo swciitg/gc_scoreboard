@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../functions/snackbar.dart';
 import '../../functions/validator.dart';
 import '../../globals/colors.dart';
 import '../../models/event_model.dart';
@@ -71,16 +72,12 @@ class _AddResultFormState extends State<AddResultForm> {
                   if(respose)
                     {
                       Navigator.of(context).pushNamedAndRemoveUntil(ScoreBoardHome.id, (route) => false);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Success')),
-                      );
+                      showSnackBar(context, 'Success');
                       ResultFormStore.clear();
                     }
                   else
                     {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Failed')),
-                      );
+                      showSnackBar(context, 'Failed');
                     }
 
                 }

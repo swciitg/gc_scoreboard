@@ -9,6 +9,7 @@ import '../../stores/common_store.dart';
 import '../../stores/spardha_store.dart';
 import '../../widgets/cards/results_card.dart';
 import '../../models/event_model.dart';
+import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
 import '../../widgets/common/filter_bar.dart';
 
@@ -61,10 +62,18 @@ class _ResultsPageState extends State<ResultsPage> {
                               ));
                   });
                 }
-                return const Expanded(
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
+                return Expanded(
+                  child: ListView.builder(
+                      itemCount: 3,
+                      itemBuilder: (context, index) {
+                        return SizedBox(
+                          height: 300,
+                          child: ShowShimmer(
+                            height: 300,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                        );
+                      }),
                 );
               })
         ],
