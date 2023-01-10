@@ -27,7 +27,7 @@ class _AddResultListState extends State<AddResultList> {
         itemBuilder: (context, index) {
           return Column(
             children: [
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               for (int team = 0;
                   team < ResultFormStore.numTeamsWithPosition(index + 1);
                   team++)

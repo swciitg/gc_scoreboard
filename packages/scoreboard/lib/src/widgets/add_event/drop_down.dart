@@ -10,7 +10,13 @@ class CustomDropDown extends StatelessWidget {
   final String? value;
 
   const CustomDropDown(
-      {super.key, required this.items, required this.hintText, required this.onChanged,this.index, this.value, required this.validator});
+      {super.key,
+      required this.items,
+      required this.hintText,
+      required this.onChanged,
+      this.index,
+      this.value,
+      required this.validator});
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +78,7 @@ class CustomDropDown extends StatelessWidget {
       style: Themes.theme.textTheme.headline6,
       onChanged: (String? value) {
         if (index != null) {
-          onChanged!(value,index);
+          onChanged!(value, index);
         } else {
           onChanged!(value);
         }
