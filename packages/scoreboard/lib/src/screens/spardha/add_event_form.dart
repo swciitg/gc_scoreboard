@@ -14,6 +14,7 @@ import 'confirm_event_details.dart';
 
 class AddEventForm extends StatefulWidget {
   final EventModel? event;
+
   const AddEventForm({super.key, this.event});
 
   @override
@@ -95,25 +96,23 @@ class _AddEventFormState extends State<AddEventForm> {
           "status": isCancelled
               ? 'cancelled'
               : isPostponed
-              ? 'postponed'
-              : 'ok',
+                  ? 'postponed'
+                  : 'ok',
           "results": [],
           "resultAdded": false
         };
 
-        if(widget.event != null)
-          {
-            data['_id'] = widget.event!.id;
-          }
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => ConfirmEventDetails(
+        if (widget.event != null) {
+          data['_id'] = widget.event!.id;
+        }
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => ConfirmEventDetails(
                   isEdit: !(widget.event == null),
                   event: EventModel.fromJson(data),
                 )));
-
-
       }
     }
+
     return Scaffold(
       backgroundColor: Themes.theme.backgroundColor,
       appBar: PreferredSize(
@@ -147,7 +146,12 @@ class _AddEventFormState extends State<AddEventForm> {
                       CustomDropDown(
                         items: eventCategories,
                         hintText: 'Category',
-                        onChanged: (s) => category = s,
+                        onChanged: (s) {
+                          category = s;
+                          setState(() {
+                            hostelsSize = 0;
+                          });
+                        },
                         value: category,
                         validator: validateField,
                       ),
@@ -294,7 +298,9 @@ class _AddEventFormState extends State<AddEventForm> {
                         items: [for (var i = 2; i <= 10; i++) i.toString()],
                         value: (widget.event != null)
                             ? widget.event!.hostels.length.toString()
-                            : null,
+                            : (hostelsSize != 0
+                                ? hostelsSize.toString()
+                                : null),
                         hintText: 'Select Number of Hostels',
                         onChanged: callbackHostels,
                         validator: validateField,
@@ -308,7 +314,11 @@ class _AddEventFormState extends State<AddEventForm> {
                             Padding(
                               padding: const EdgeInsets.only(bottom: 12),
                               child: CustomDropDown(
-                                items: allHostelList,
+                                items: category == "Men"
+                                    ? menHostel
+                                    : (category == "Women"
+                                        ? womenHostel
+                                        : allHostelList),
                                 value: participatingHostels[i - 1],
                                 hintText: 'Hostel Name $i',
                                 index: i,
