@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:scoreboard/src/widgets/common/shimmer.dart';
 
 import '../functions/filter_men_women.dart';
 import '../globals/styles/filter_style.dart';
@@ -136,7 +137,7 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
                   builder: (context, snapshot) {
                     if(!snapshot.hasData)
                     {
-                      return Expanded(child: Center(child: CircularProgressIndicator(),));
+                      return Expanded(child: Center(child: ShowShimmer(height: 400, width: MediaQuery.of(context).size.width,),));
                     }
                     return Observer(
                         builder: (context) {

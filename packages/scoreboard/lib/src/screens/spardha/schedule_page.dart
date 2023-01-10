@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:scoreboard/src/widgets/common/shimmer.dart';
 import '../../functions/filter_schedule.dart';
 import '../../globals/colors.dart';
 import '../../models/event_model.dart';
@@ -24,51 +25,59 @@ class _SchedulePageState extends State<SchedulePage> {
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
     var spardhaStore = context.read<SpardhaStore>();
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 0),
-        child: Column(
-          children: [
-            const TopBar(),
-            const FilterBar(),
-            FutureBuilder<List<EventModel>>(
-                future: APIService(context).getSpardhaSchedule(
-                    commonStore.viewType),
-                builder: (context, snapshot) {
-                  if(!snapshot.hasData) return const Expanded(
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const TopBar(),
+          const FilterBar(),
+          FutureBuilder<List<EventModel>>(
+              future:
+                  APIService(context).getSpardhaSchedule(commonStore.viewType),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Expanded(
+                    child: ListView.builder(
+                        itemCount: 3,
+                        itemBuilder: (context, index) {
+                          return SizedBox(
+                            height: 300,
+                            child: ShowShimmer(
+                              height: 300,
+                              width: MediaQuery.of(context).size.width,
+                            ),
+                          );
+                        }),
                   );
-                  List<EventModel> allSpardhaEventSchedules = snapshot.data!;
-                  return Observer(
-                      builder: (context) {
-                        List<EventModel> filteredEventSchedules = filterSchedule(
-                            input: allSpardhaEventSchedules,
-                            event: spardhaStore.selectedEvent,
-                            date: spardhaStore.selectedDate,
-                            hostel: spardhaStore.selectedHostel);
-                        return Expanded(
-                            child: filteredEventSchedules.isNotEmpty
-                                ? ListView.builder(
-                                itemCount: filteredEventSchedules.length,
-                                itemBuilder: (context, index) {
-                                  return ScheduleCard(
-                                      eventModel:
-                                      filteredEventSchedules[index]);
-                                })
-                                : Center(
+                }
+                List<EventModel> allSpardhaEventSchedules = snapshot.data!;
+                return Observer(builder: (context) {
+                  List<EventModel> filteredEventSchedules = filterSchedule(
+                      input: allSpardhaEventSchedules,
+                      event: spardhaStore.selectedEvent,
+                      date: spardhaStore.selectedDate,
+                      hostel: spardhaStore.selectedHostel);
+                  return Expanded(
+                      child: filteredEventSchedules.isNotEmpty
+                          ? ListView.builder(
+                              itemCount: filteredEventSchedules.length,
+                              itemBuilder: (context, index) {
+                                return ScheduleCard(
+                                    eventModel: filteredEventSchedules[index]);
+                              })
+                          : Center(
                               child: Text("No Schedule found",
                                   style: GoogleFonts.montserrat(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 12,
                                       color: Themes.kWhite)),
                             ));
-                      }
-                  );
-                }
-            )
-          ],
-        ),
-      );;
+                });
+              })
+        ],
+      ),
+    );
+
   }
 }
