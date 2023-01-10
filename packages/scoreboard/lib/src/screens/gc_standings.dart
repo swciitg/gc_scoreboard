@@ -12,6 +12,7 @@ import '../stores/common_store.dart';
 import '../stores/gc_store.dart';
 import '../widgets/common/bottom_navigation_bar.dart';
 import '../widgets/common/home_app_bar.dart';
+import '../widgets/common/shimmer.dart';
 import '../widgets/standings_page/standingboard.dart';
 
 class GCStandingsPage extends StatefulWidget {
@@ -136,7 +137,7 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
                   builder: (context, snapshot) {
                     if(!snapshot.hasData)
                     {
-                      return Expanded(child: Center(child: CircularProgressIndicator(),));
+                      return Expanded(child: Center(child: ShowShimmer(height: 400, width: MediaQuery.of(context).size.width,),));
                     }
                     return Observer(
                         builder: (context) {

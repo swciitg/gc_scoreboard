@@ -4,6 +4,7 @@ import '../../functions/filter_standings.dart';
 import '../../services/api.dart';
 import '../../stores/spardha_store.dart';
 import '../../widgets/common/filter_bar.dart';
+import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
 import '../../widgets/standings_page/standingboard.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +38,13 @@ class _StandingsPageState extends State<StandingsPage> {
                     return Expanded(child: StandingBoard(hostelStandings: filteredEventSchedules));
                   });
                 }
-                return Expanded(child: Center(child: CircularProgressIndicator(),));
+                return Expanded(
+                    child: Center(
+                      child: ShowShimmer(
+                        height: 400,
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                    ));
               },
             )
           ],

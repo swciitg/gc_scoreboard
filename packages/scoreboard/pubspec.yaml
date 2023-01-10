@@ -23,6 +23,8 @@ dependencies:
   webview_flutter: ^3.0.4
   connectivity_plus:
   json_annotation: ^4.7.0
+  shimmer: ^2.0.0
+
 
 dev_dependencies:
   flutter_test:

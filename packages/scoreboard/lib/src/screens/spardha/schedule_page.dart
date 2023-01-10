@@ -10,6 +10,7 @@ import '../../stores/common_store.dart';
 import '../../stores/spardha_store.dart';
 import '../../widgets/cards/schedule_card.dart';
 import '../../widgets/common/filter_bar.dart';
+import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
 
 class SchedulePage extends StatefulWidget {
@@ -34,11 +35,21 @@ class _SchedulePageState extends State<SchedulePage> {
                 future: APIService(context).getSpardhaSchedule(
                     commonStore.viewType),
                 builder: (context, snapshot) {
-                  if(!snapshot.hasData) return const Expanded(
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
+                  if(!snapshot.hasData) {
+                    return Expanded(
+                    child: ListView.builder(
+                        itemCount: 3,
+                        itemBuilder: (context, index) {
+                          return SizedBox(
+                            height: 300,
+                            child: ShowShimmer(
+                              height: 300,
+                              width: MediaQuery.of(context).size.width,
+                            ),
+                          );
+                        }),
                   );
+                  }
                   List<EventModel> allSpardhaEventSchedules = snapshot.data!;
                   return Observer(
                       builder: (context) {
@@ -69,6 +80,6 @@ class _SchedulePageState extends State<SchedulePage> {
             )
           ],
         ),
-      );;
+      );
   }
 }
