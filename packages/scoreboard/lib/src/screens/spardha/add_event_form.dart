@@ -176,7 +176,24 @@ class _AddEventFormState extends State<AddEventForm> {
                                     initialDate: DateTime.now(),
                                     firstDate: DateTime(2000),
                                     //DateTime.now() - not to allow to choose before today.
-                                    lastDate: DateTime(2101));
+                                    lastDate: DateTime(2101),
+                                    builder: (context, child) =>Theme(
+                                      child: child!,
+                                      data: Theme.of(context).copyWith(
+                                        colorScheme: ColorScheme.light(
+                                          primary: Color(0xff2B3E5C),
+                                          onPrimary: Colors.white,
+                                          onSurface: Colors.blueGrey.shade900,
+                                        ),
+                                        textButtonTheme: TextButtonThemeData(
+                                          style: TextButton.styleFrom(
+                                            foregroundColor: Colors.blue, // button text color
+                                          ),
+                                        ),
+                                      ),
+                                      
+                                    ) 
+                                  );
                                 if (pickedDate != null) {
                                   if (!mounted) return;
                                   selectedDate = pickedDate;
@@ -203,15 +220,51 @@ class _AddEventFormState extends State<AddEventForm> {
                                 FocusScope.of(context)
                                     .requestFocus(FocusNode());
                                 TimeOfDay? pickedTime = await showTimePicker(
+
                                   builder: (context, childWidget) {
-                                    return MediaQuery(
-                                        data: MediaQuery.of(context).copyWith(
-                                            alwaysUse24HourFormat: false),
-                                        // If you want 24-Hour format, just change alwaysUse24HourFormat to true or remove all the builder argument
-                                        child: childWidget!);
+
+
+                                    return Theme(
+                                      data: Theme.of(context).copyWith(
+                                        timePickerTheme: TimePickerThemeData(
+                                          backgroundColor: Color(0xff273141),
+                                          dayPeriodBorderSide: const BorderSide(color: Colors.white, width: 2),
+                                          dayPeriodColor: MaterialStateColor.resolveWith((states) => states.contains(MaterialState.selected) ? Colors.white:Color(0xff273141)),
+
+                                          shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                                          ),
+                                          dayPeriodTextColor: MaterialStateColor.resolveWith((states) => states.contains(MaterialState.selected) ? Colors.blue:Colors.blueGrey.shade600),
+
+                                          dayPeriodShape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                                            side: BorderSide(width: 4),
+                                          ),
+                                          hourMinuteColor: MaterialStateColor.resolveWith((states) =>
+                                          states.contains(MaterialState.selected) ? Colors.white : Color(0xff2B3E5C)),
+                                          hourMinuteTextColor: MaterialStateColor.resolveWith(
+                                                  (states) => states.contains(MaterialState.selected) ? Colors.blue : Colors.white),
+                                          dialHandColor: Colors.blue.shade400,
+                                          dialBackgroundColor: Color(0xff2B3E5C),
+                                          hourMinuteTextStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                          dayPeriodTextStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                                          helpTextStyle:
+                                          const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white),
+                                          dialTextColor: MaterialStateColor.resolveWith(
+                                                  (states) => states.contains(MaterialState.selected) ? Colors.black : Colors.white),
+                                          entryModeIconColor: Colors.blueGrey.shade600,
+                                        )
+                                      ),
+                                      child: MediaQuery(
+                                          data: MediaQuery.of(context).copyWith(
+                                              alwaysUse24HourFormat: false),
+                                          // If you want 24-Hour format, just change alwaysUse24HourFormat to true or remove all the builder argument
+                                          child: childWidget!),
+                                    );
                                   },
                                   initialTime: TimeOfDay.now(),
-                                  context: context, //context of current state
+                                  context: context,
+                                  //context of current state
                                 );
                                 if (pickedTime != null) {
                                   if (!mounted) return;
