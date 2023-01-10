@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:scoreboard/src/models/standing_model.dart';
 
-import '../../models/event_model.dart';
 import '../../globals/colors.dart';
+import '../../models/standing_model.dart';
 
 class StandingsExpandedresultsCard extends StatelessWidget {
   final StandingModel standingModel;

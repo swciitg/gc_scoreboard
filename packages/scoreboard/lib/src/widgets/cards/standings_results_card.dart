@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:scoreboard/src/models/standing_model.dart';
-import 'package:scoreboard/src/widgets/cards/standings_expanded_results_card.dart';
-import 'package:scoreboard/src/widgets/cards/standing_popup_menu.dart';
 import '../../globals/styles/card_style.dart';
 import '../../globals/colors.dart';
+import '../../models/standing_model.dart';
 import 'menu_item.dart';
+import 'standing_popup_menu.dart';
+import 'standings_expanded_results_card.dart';
 
 class StandingsResultCard extends StatefulWidget {
   final StandingModel standingModel;

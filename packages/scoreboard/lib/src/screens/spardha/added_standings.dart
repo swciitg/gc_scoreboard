@@ -1,19 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:provider/provider.dart';
-import 'package:scoreboard/src/models/standing_model.dart';
-import 'package:scoreboard/src/widgets/cards/standings_results_card.dart';
-import 'package:scoreboard/src/widgets/common/standings_app_bar.dart';
-
-import '../../functions/filter_standings.dart';
 import '../../globals/colors.dart';
+import '../../models/standing_model.dart';
 import '../../services/api.dart';
-import '../../stores/common_store.dart';
-import '../../stores/spardha_store.dart';
-import '../../widgets/common/filter_bar.dart';
-import '../../widgets/common/home_app_bar.dart';
-import '../../widgets/common/top_bar.dart';
-import '../../widgets/standings_page/standingboard.dart';
+import '../../widgets/cards/standings_results_card.dart';
+import '../../widgets/common/standings_app_bar.dart';
 
 class SpardhaAdminStandingsPage extends StatefulWidget {
   const SpardhaAdminStandingsPage({Key? key}) : super(key: key);

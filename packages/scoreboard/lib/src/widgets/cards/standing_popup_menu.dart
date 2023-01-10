@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/models/standing_model.dart';
-import 'package:scoreboard/src/screens/spardha/added_standings.dart';
 import '../../functions/snackbar.dart';
 import '../../globals/colors.dart';
-import '../../globals/enums.dart';
-import '../../models/event_model.dart';
-import '../../screens/home.dart';
-import '../../screens/spardha/add_event_form.dart';
-import '../../screens/spardha/add_result_form.dart';
+import '../../models/standing_model.dart';
+import '../../screens/spardha/added_standings.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
 
