@@ -1,9 +1,13 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddButton extends StatelessWidget {
   final String text;
-  const AddButton({Key? key, required this.text}) : super(key: key);
+  final double? width;
+
+  const AddButton({Key? key, required this.text, this.width}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +17,7 @@ class AddButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(21),
         ),
         height: 40,
-        width: 130,
+        width: width,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
