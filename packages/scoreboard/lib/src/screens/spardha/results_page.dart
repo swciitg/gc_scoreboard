@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:scoreboard/src/models/hostel_points.dart';
+import 'package:scoreboard/src/models/standing_model.dart';
+import 'package:scoreboard/src/widgets/cards/standings_results_card.dart';
 import '../../functions/filter_schedule.dart';
 import '../../globals/colors.dart';
 import '../../services/api.dart';
@@ -20,53 +23,53 @@ class ResultsPage extends StatefulWidget {
 }
 
 class _ResultsPageState extends State<ResultsPage> {
-
   @override
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
     var spardhaStore = context.read<SpardhaStore>();
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0),
       child: Column(
         children: [
           const TopBar(),
           const FilterBar(),
-        FutureBuilder<List<EventModel>>(
-            future: APIService(context).getSpardhaResults(
-                commonStore.viewType),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                List<EventModel> allSpardhaEventSchedules = snapshot.data!;
-                return Observer(builder: (context) {
-                  List<EventModel> filteredEventSchedules = filterSchedule(
-                      input: allSpardhaEventSchedules,
-                      event: spardhaStore.selectedEvent,
-                      date: spardhaStore.selectedDate,
-                      hostel: spardhaStore.selectedHostel);
-                  return Expanded(
-                      child: filteredEventSchedules.isNotEmpty
-                          ? ListView.builder(
-                          itemCount: filteredEventSchedules.length,
-                          itemBuilder: (context, index) {
-                            return ResultsCard(
-                                eventModel:
-                                filteredEventSchedules[index]);
-                          })
-                          : Center(
-                        child: Text("No Schedule found",
-                            style: GoogleFonts.montserrat(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 12,
-                                color: Themes.kWhite)),
-                      ));
-                });
-              }
-              return const Expanded(
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
-            })
+          FutureBuilder<List<EventModel>>(
+              future:
+                  APIService(context).getSpardhaResults(commonStore.viewType),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  List<EventModel> allSpardhaEventSchedules = snapshot.data!;
+                  return Observer(builder: (context) {
+                    List<EventModel> filteredEventSchedules = filterSchedule(
+                        input: allSpardhaEventSchedules,
+                        event: spardhaStore.selectedEvent,
+                        date: spardhaStore.selectedDate,
+                        hostel: spardhaStore.selectedHostel);
+                    return Expanded(
+                        child: filteredEventSchedules.isNotEmpty
+                            ? ListView.builder(
+                                itemCount: filteredEventSchedules.length,
+                                itemBuilder: (context, index) {
+                                  return ResultsCard(
+                                      eventModel:
+                                          filteredEventSchedules[index]);
+                                })
+                            : Center(
+                                child: Text("No Schedule found",
+                                    style: GoogleFonts.montserrat(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12,
+                                        color: Themes.kWhite)),
+                              ));
+                  });
+                }
+                return const Expanded(
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              })
         ],
       ),
     );
