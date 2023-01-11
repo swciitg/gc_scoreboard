@@ -1,3 +1,8 @@
+
+
+import 'package:scoreboard/src/globals/constants.dart';
+import 'package:scoreboard/src/globals/enums.dart';
+
 String getPosition(int index) {
   String answer = '';
   if (index == 0) {
@@ -10,5 +15,18 @@ String getPosition(int index) {
     answer = '${index + 1}th';
   }
 
+
+
   return '$answer Position';
 }
+
+List<String> getHostel(Category? category) {
+  if (category == Category.men) {
+    return menHostel;
+  } else if (category == Category.women) {
+    return womenHostel;
+  }
+
+  return menHostel + womenHostel;
+}
+
