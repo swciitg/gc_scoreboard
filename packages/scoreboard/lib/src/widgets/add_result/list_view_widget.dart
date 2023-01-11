@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import '../../functions/position.dart';
 import '../../functions/validator.dart';
 import '../../stores/result_form_store.dart';
-import '../common/drop_down.dart';
-import '../common/text_field.dart';
-
-
+import './hostel_dropdown.dart';
+import './custom_text_field.dart';
 import '../../globals/colors.dart';
 
 class AddResultList extends StatefulWidget {
@@ -85,14 +83,13 @@ class _AddResultListState extends State<AddResultList> {
                       children: [
                         Expanded(
                           flex: 65,
-                          child: CustomDropDown(
-                            hintText: 'Hostels',
+                          child: HostelDropDown(
                             validator: validateField,
                             value: ResultFormStore
                                 .resultFields?[index][team].hostelName,
                             onChanged: (hostel) => ResultFormStore
                                 .resultFields?[index][team].hostelName = hostel,
-                            items: widget.hostels,
+                            hostels: widget.hostels,
                           ),
                         ),
                         // const Spacer(
