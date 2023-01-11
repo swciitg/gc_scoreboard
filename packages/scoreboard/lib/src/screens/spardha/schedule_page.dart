@@ -12,6 +12,7 @@ import '../../widgets/cards/schedule_card.dart';
 import '../../widgets/common/filter_bar.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
+import '../err_reload.dart';
 
 class SchedulePage extends StatefulWidget {
   const SchedulePage({Key? key}) : super(key: key);
@@ -25,6 +26,11 @@ class _SchedulePageState extends State<SchedulePage> {
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
     var spardhaStore = context.read<SpardhaStore>();
+
+    reloadCallback(){ // reload page
+      setState(() {});
+    }
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0),
       child: Column(
@@ -36,7 +42,7 @@ class _SchedulePageState extends State<SchedulePage> {
               future:
                   APIService(context).getSpardhaSchedule(commonStore.viewType),
               builder: (context, snapshot) {
-                if (!snapshot.hasData) {
+                if (snapshot.connectionState != ConnectionState.done) {
                   return Expanded(
                     child: ListView.builder(
                         itemCount: 3,
@@ -51,29 +57,32 @@ class _SchedulePageState extends State<SchedulePage> {
                         }),
                   );
                 }
-                List<EventModel> allSpardhaEventSchedules = snapshot.data!;
-                return Observer(builder: (context) {
-                  List<EventModel> filteredEventSchedules = filterSchedule(
-                      input: allSpardhaEventSchedules,
-                      event: spardhaStore.selectedEvent,
-                      date: spardhaStore.selectedDate,
-                      hostel: spardhaStore.selectedHostel);
-                  return Expanded(
-                      child: filteredEventSchedules.isNotEmpty
-                          ? ListView.builder(
-                              itemCount: filteredEventSchedules.length,
-                              itemBuilder: (context, index) {
-                                return ScheduleCard(
-                                    eventModel: filteredEventSchedules[index]);
-                              })
-                          : Center(
-                              child: Text("No Schedule found",
-                                  style: GoogleFonts.montserrat(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 12,
-                                      color: Themes.kWhite)),
-                            ));
-                });
+                else if(snapshot.hasData) {
+                  List<EventModel> allSpardhaEventSchedules = snapshot.data!;
+                  return Observer(builder: (context) {
+                    List<EventModel> filteredEventSchedules = filterSchedule(
+                        input: allSpardhaEventSchedules,
+                        event: spardhaStore.selectedEvent,
+                        date: spardhaStore.selectedDate,
+                        hostel: spardhaStore.selectedHostel);
+                    return Expanded(
+                        child: filteredEventSchedules.isNotEmpty
+                            ? ListView.builder(
+                            itemCount: filteredEventSchedules.length,
+                            itemBuilder: (context, index) {
+                              return ScheduleCard(
+                                  eventModel: filteredEventSchedules[index]);
+                            })
+                            : Center(
+                          child: Text("No Schedule found",
+                              style: GoogleFonts.montserrat(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 12,
+                                  color: Themes.kWhite)),
+                        ));
+                  });
+                }
+                return ErrorReloadPage(apiFunction: reloadCallback);
               })
         ],
       ),

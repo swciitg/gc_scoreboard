@@ -12,6 +12,7 @@ import '../../models/event_model.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
 import '../../widgets/common/filter_bar.dart';
+import '../err_reload.dart';
 
 class ResultsPage extends StatefulWidget {
   const ResultsPage({Key? key}) : super(key: key);
@@ -26,6 +27,10 @@ class _ResultsPageState extends State<ResultsPage> {
     var commonStore = context.read<CommonStore>();
     var spardhaStore = context.read<SpardhaStore>();
 
+    reloadCallback(){ // reload page
+      setState(() {});
+    }
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0),
       child: Column(
@@ -36,7 +41,22 @@ class _ResultsPageState extends State<ResultsPage> {
               future:
                   APIService(context).getSpardhaResults(commonStore.viewType),
               builder: (context, snapshot) {
-                if (snapshot.hasData) {
+                if (snapshot.connectionState != ConnectionState.done) {
+                  return Expanded(
+                    child: ListView.builder(
+                        itemCount: 3,
+                        itemBuilder: (context, index) {
+                          return SizedBox(
+                            height: 300,
+                            child: ShowShimmer(
+                              height: 300,
+                              width: MediaQuery.of(context).size.width,
+                            ),
+                          );
+                        }),
+                  );
+                }
+                else if(snapshot.hasData) {
                   List<EventModel> allSpardhaEventSchedules = snapshot.data!;
                   return Observer(builder: (context) {
                     List<EventModel> filteredEventSchedules = filterSchedule(
@@ -62,19 +82,7 @@ class _ResultsPageState extends State<ResultsPage> {
                               ));
                   });
                 }
-                return Expanded(
-                  child: ListView.builder(
-                      itemCount: 3,
-                      itemBuilder: (context, index) {
-                        return SizedBox(
-                          height: 300,
-                          child: ShowShimmer(
-                            height: 300,
-                            width: MediaQuery.of(context).size.width,
-                          ),
-                        );
-                      }),
-                );
+                return ErrorReloadPage(apiFunction: reloadCallback);
               })
         ],
       ),

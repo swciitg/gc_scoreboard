@@ -66,37 +66,16 @@ class _AddStandingState extends State<AddStanding> {
           actions: [
             TextButton(
               onPressed: () async {
-                if (widget.standings == null) {
-                  APIService(context).postSpardhaStanding({
-                    "category": abc.category!.categoryName,
-                    'event': abc.event,
-                    'standings':
-                        List<Map>.from(abc.standing!.map((e) => e.toJson()))
-                  });
-                } else {
-                  final StandingModel model = StandingModel(category: abc.category!.categoryName,event: abc.event,standings:abc.standing );
-                  APIService(context).updateSpardhaStanding(model);
-                }
-
-                // print('button pressed');
-                // if (key.currentState!.validate()) {
-                //   print('submit result pressed');
-                //   bool respose = await APIService(context).addUpdateResult(
-                //       widget.standings!.id!,
-                //       StandingFormStore.resultFields!,
-                //       StandingFormStore.victoryStatement!);
-                //   if (respose) {
-                //     Navigator.of(context).pushNamedAndRemoveUntil(
-                //         ScoreBoardHome.id, (route) => false);
-                //     ScaffoldMessenger.of(context).showSnackBar(
-                //       const SnackBar(content: Text('Success')),
-                //     );
-                //     StandingFormStore.clear();
-                //   } else {
-                //     ScaffoldMessenger.of(context).showSnackBar(
-                //       const SnackBar(content: Text('Failed')),
-                //     );
-                //   }
+                // if (widget.standings == null) {
+                //   APIService(context).postSpardhaStanding({
+                //     "category": abc.category!.categoryName,
+                //     'event': abc.event,
+                //     'standings':
+                //         List<Map>.from(abc.standing!.map((e) => e.toJson()))
+                //   });
+                // } else {
+                //   final StandingModel model = StandingModel(category: abc.category!.categoryName,event: abc.event,standings:abc.standing );
+                //   APIService(context).updateSpardhaStanding(model);
                 // }
               },
               child: Text(
