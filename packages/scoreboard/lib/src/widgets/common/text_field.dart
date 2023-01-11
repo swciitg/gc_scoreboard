@@ -1,41 +1,59 @@
 import 'package:flutter/material.dart';
 import '../../globals/colors.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomTextField extends StatefulWidget {
   final String hintText;
-  final String? Function(String?)? validator;
   final String? value;
+  final String? Function(String?)? validator;
+  final TextEditingController? controller;
+  final void Function()? onTap;
   final onChanged;
   final bool isNecessary;
+  final TextInputType? keyboardType;
 
   const CustomTextField(
       {super.key,
       required this.hintText,
       required this.validator,
-      required this.value,
-      required this.onChanged,
-      required this.isNecessary});
+      this.controller,
+      required this.isNecessary,
+      this.onTap,
+      this.onChanged,
+      this.value,
+      this.keyboardType});
 
   @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  @override
   Widget build(BuildContext context) {
-    final text = value?.toString() == 'null' ? '' : value?.toString();
-    final controller = TextEditingController(text: text);
+    final text =
+        widget.value?.toString() == 'null' ? '' : widget.value?.toString();
+    final controller = (widget.controller == null)
+        ? TextEditingController(text: text)
+        : widget.controller;
     return TextFormField(
-      style: Themes.theme.textTheme.headline6,
-      validator: validator,
-      onChanged: onChanged,
+      readOnly: widget.onTap != null,
+      style: Themes.theme.textTheme.headline6?.copyWith(color: Colors.white),
+      validator: widget.validator,
+      keyboardType: (widget.keyboardType != null)
+          ? widget.keyboardType
+          : TextInputType.text,
       controller: controller,
       cursorColor: Themes.theme.primaryColor,
-      keyboardType: TextInputType.text,
+      onTap: widget.onTap,
+      onChanged: widget.onChanged,
       decoration: InputDecoration(
         label: RichText(
           text: TextSpan(
             children: [
               TextSpan(
-                text: hintText,
+                text: widget.hintText,
                 style: Themes.theme.textTheme.bodyText1,
               ),
-              if (isNecessary)
+              if (widget.isNecessary)
                 TextSpan(
                   text: ' * ',
                   style: Themes.theme.textTheme.headline5,
@@ -44,7 +62,6 @@ class CustomTextField extends StatelessWidget {
           ),
         ),
         labelStyle: Themes.theme.textTheme.bodyText1,
-        hintStyle: Themes.theme.textTheme.bodyText1,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
         focusedBorder: OutlineInputBorder(

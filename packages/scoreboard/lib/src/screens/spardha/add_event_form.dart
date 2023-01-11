@@ -7,9 +7,9 @@ import '../../globals/constants.dart';
 import '../../globals/colors.dart';
 import '../../models/event_model.dart';
 import '../../stores/static_store.dart';
-import '../../widgets/add_event/drop_down.dart';
+import '../../widgets/common/drop_down.dart';
 import '../../widgets/add_event/heading.dart';
-import '../../widgets/add_event/text_field.dart';
+import '../../widgets/common/text_field.dart';
 import '../../widgets/common/form_app_bar.dart';
 import 'confirm_event_details.dart';
 
@@ -171,6 +171,7 @@ class _AddEventFormState extends State<AddEventForm> {
                           Expanded(
                             child: CustomTextField(
                               hintText: 'Date',
+                              isNecessary: true,
                               validator: validateField,
                               controller: dateInput,
                               onTap: () async {
@@ -182,23 +183,24 @@ class _AddEventFormState extends State<AddEventForm> {
                                     firstDate: DateTime(2000),
                                     //DateTime.now() - not to allow to choose before today.
                                     lastDate: DateTime(2101),
-                                    builder: (context, child) =>Theme(
-                                      child: child!,
-                                      data: Theme.of(context).copyWith(
-                                        colorScheme: ColorScheme.light(
-                                          primary: Color(0xff2B3E5C),
-                                          onPrimary: Colors.white,
-                                          onSurface: Colors.blueGrey.shade900,
-                                        ),
-                                        textButtonTheme: TextButtonThemeData(
-                                          style: TextButton.styleFrom(
-                                            foregroundColor: Colors.blue, // button text color
+                                    builder: (context, child) => Theme(
+                                          data: Theme.of(context).copyWith(
+                                            colorScheme: ColorScheme.light(
+                                              primary: Color(0xff2B3E5C),
+                                              onPrimary: Colors.white,
+                                              onSurface:
+                                                  Colors.blueGrey.shade900,
+                                            ),
+                                            textButtonTheme:
+                                                TextButtonThemeData(
+                                              style: TextButton.styleFrom(
+                                                foregroundColor: Colors
+                                                    .blue, // button text color
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                      ),
-                                      
-                                    ) 
-                                  );
+                                          child: child!,
+                                        ));
                                 if (pickedDate != null) {
                                   if (!mounted) return;
                                   selectedDate = pickedDate;
@@ -219,17 +221,17 @@ class _AddEventFormState extends State<AddEventForm> {
                           Expanded(
                             child: CustomTextField(
                               hintText: 'Time',
+                              isNecessary: true,
                               validator: validateField,
                               controller: timeInput,
                               onTap: () async {
                                 FocusScope.of(context)
                                     .requestFocus(FocusNode());
                                 TimeOfDay? pickedTime = await showTimePicker(
-
                                   builder: (context, childWidget) {
-
-
-                                    return TimePickerColor(childWidget: childWidget,);
+                                    return TimePickerColor(
+                                      childWidget: childWidget,
+                                    );
                                   },
                                   initialTime: TimeOfDay.now(),
                                   context: context,
@@ -259,9 +261,11 @@ class _AddEventFormState extends State<AddEventForm> {
                         height: 12,
                       ),
                       CustomTextField(
-                          hintText: 'Venue',
-                          validator: validateField,
-                          controller: _venueController),
+                        hintText: 'Venue',
+                        validator: validateField,
+                        controller: _venueController,
+                        isNecessary: true,
+                      ),
                       const SizedBox(
                         height: 12,
                       ),

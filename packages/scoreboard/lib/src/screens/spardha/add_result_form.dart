@@ -5,7 +5,7 @@ import '../../globals/colors.dart';
 import '../../models/event_model.dart';
 import '../../services/api.dart';
 import '../../stores/result_form_store.dart';
-import '../../widgets/add_result/custom_text_field.dart';
+import '../../widgets/common/text_field.dart';
 import '../../widgets/add_result/fields_mandatory.dart';
 import '../../widgets/add_result/list_view_widget.dart';
 import '../../widgets/cards/card_date_widget.dart';
