@@ -72,26 +72,37 @@ class _AddStandingState extends State<AddStanding> {
                 if (!key.currentState!.validate()) {
                   return;
                 }
-                bool response;
-                if (widget.standings == null) {
-                  response = await APIService(context).postSpardhaStanding({
-                    "category": standingFormStore.category!.categoryName,
-                    'event': standingFormStore.event,
-                    'standings': List<Map>.from(standingFormStore.standing!.map((e) => e.toJson()))
-                  });
-
-                } else {
-                  final StandingModel model = StandingModel(category: standingFormStore.category!.categoryName,event: standingFormStore.event,standings:standingFormStore.standing );
-                  response = await APIService(context).updateSpardhaStanding(model);
-                }
-                if(response)
-                  {
+                try {
+                  bool response;
+                  if (widget.standings == null) {
+                    response = await APIService(context).postSpardhaStanding({
+                      "category": standingFormStore.category!.categoryName,
+                      'event': standingFormStore.event,
+                      'standings': List<Map>.from(
+                          standingFormStore.standing!.map((e) => e.toJson()))
+                    });
+                  } else {
+                    final StandingModel model = StandingModel(
+                        category: standingFormStore.category!.categoryName,
+                        event: standingFormStore.event,
+                        standings: standingFormStore.standing);
+                    response =
+                    await APIService(context).updateSpardhaStanding(model);
+                  }
+                  if (response) {
                     Navigator.of(context).pop();
                   }
-                else
-                  {
-                    showSnackBar(context, 'Some error occured, please try again');
+                  else {
+                    showSnackBar(
+                        context, 'Some error occured, please try again');
                   }
+                }
+                catch(err)
+                {
+                  print(err.toString());
+                  showSnackBar(
+                      context, 'Some error occured, please try again');
+                }
               },
               child: Text(
                 'Next',
@@ -117,6 +128,7 @@ class _AddStandingState extends State<AddStanding> {
                     Expanded(
                       flex: 30,
                       child: CustomTextField(
+                        inputType: TextInputType.text,
                           hintText: 'Event',
                           validator: validateField,
                           value: standingFormStore.event,
@@ -199,6 +211,7 @@ class _AddStandingState extends State<AddStanding> {
                                           flex: 35,
                                           child: CustomTextField(
                                             isNecessary: true,
+                                            inputType: TextInputType.number,
                                             hintText: 'Primary Score',
                                             validator: validateField,
                                             onChanged: (ps) {

@@ -6,6 +6,7 @@ import '../../models/standing_model.dart';
 import '../../services/api.dart';
 import '../../widgets/cards/standings_results_card.dart';
 import '../../widgets/common/standings_app_bar.dart';
+import '../err_reload.dart';
 
 class SpardhaAdminStandingsPage extends StatefulWidget {
   const SpardhaAdminStandingsPage({Key? key}) : super(key: key);
@@ -16,6 +17,12 @@ class SpardhaAdminStandingsPage extends StatefulWidget {
 }
 
 class _SpardhaAdminStandingsPageState extends State<SpardhaAdminStandingsPage> {
+
+  rebuild(){
+    setState(() {
+
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +54,10 @@ class _SpardhaAdminStandingsPageState extends State<SpardhaAdminStandingsPage> {
                             snapshot.data!['event-wise'][index]));
                   });
             }
+            else if(snapshot.hasError)
+              {
+                return ErrorReloadPage(apiFunction: rebuild,);
+              }
             return Center(
               child: CircularProgressIndicator(),
             );

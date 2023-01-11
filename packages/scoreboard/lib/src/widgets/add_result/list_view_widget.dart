@@ -118,6 +118,7 @@ class _AddResultListState extends State<AddResultList> {
                         Expanded(
                           flex: 46,
                           child: CustomTextField(
+                            inputType: TextInputType.text,
                             isNecessary: true,
                             hintText: 'Primary Score',
                             validator: validateField,
@@ -133,6 +134,7 @@ class _AddResultListState extends State<AddResultList> {
                         Expanded(
                             flex: 46,
                             child: CustomTextField(
+                              inputType: TextInputType.text,
                               isNecessary: false,
                               hintText: 'Secondary Score',
                               validator: null,

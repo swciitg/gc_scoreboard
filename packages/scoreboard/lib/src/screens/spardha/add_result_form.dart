@@ -65,21 +65,25 @@ class _AddResultFormState extends State<AddResultForm> {
           actions: [
             TextButton(
               onPressed: () async {
-                print('button pressed');
                 if (key.currentState!.validate()) {
-                  print('submit result pressed');
-                  bool respose = await APIService(context).addUpdateResult(widget.event.id!, ResultFormStore.resultFields!,ResultFormStore.victoryStatement!);
-                  if(respose)
-                    {
-                      Navigator.of(context).pushNamedAndRemoveUntil(ScoreBoardHome.id, (route) => false);
+                  try {
+                    bool respose = await APIService(context).addUpdateResult(
+                        widget.event.id!, ResultFormStore.resultFields!,
+                        ResultFormStore.victoryStatement!);
+                    if (respose) {
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          ScoreBoardHome.id, (route) => false);
                       showSnackBar(context, 'Success');
                       ResultFormStore.clear();
                     }
-                  else
-                    {
+                    else {
                       showSnackBar(context, 'Failed');
                     }
-
+                  }
+                  catch(err)
+                {
+                  showSnackBar(context, 'Some error occured, please try again');
+                }
                 }
               },
               child: Text(
@@ -141,6 +145,7 @@ class _AddResultFormState extends State<AddResultForm> {
                 height: 22,
               ),
               CustomTextField(
+                inputType: TextInputType.text,
                   hintText: 'Victory Statement',
                   validator: validateField,
                   value: ResultFormStore.victoryStatement,
