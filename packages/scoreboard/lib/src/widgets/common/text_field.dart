@@ -9,6 +9,7 @@ class CustomTextField extends StatefulWidget {
   final void Function()? onTap;
   final onChanged;
   final bool isNecessary;
+  final TextInputType? keyboardType;
 
   const CustomTextField(
       {super.key,
@@ -18,7 +19,8 @@ class CustomTextField extends StatefulWidget {
       required this.isNecessary,
       this.onTap,
       this.onChanged,
-      this.value});
+      this.value,
+      this.keyboardType});
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -27,12 +29,18 @@ class CustomTextField extends StatefulWidget {
 class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
-    final text = widget.value?.toString() == 'null' ? '' : widget.value?.toString();
-    final controller =(widget.controller==null)?TextEditingController(text: text):widget.controller;
+    final text =
+        widget.value?.toString() == 'null' ? '' : widget.value?.toString();
+    final controller = (widget.controller == null)
+        ? TextEditingController(text: text)
+        : widget.controller;
     return TextFormField(
       readOnly: widget.onTap != null,
       style: Themes.theme.textTheme.headline6?.copyWith(color: Colors.white),
       validator: widget.validator,
+      keyboardType: (widget.keyboardType != null)
+          ? widget.keyboardType
+          : TextInputType.text,
       controller: controller,
       cursorColor: Themes.theme.primaryColor,
       onTap: widget.onTap,
@@ -45,11 +53,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 text: widget.hintText,
                 style: Themes.theme.textTheme.bodyText1,
               ),
-              if(widget.isNecessary)
-              TextSpan(
-                text: ' * ',
-                style: Themes.theme.textTheme.headline5,
-              ),
+              if (widget.isNecessary)
+                TextSpan(
+                  text: ' * ',
+                  style: Themes.theme.textTheme.headline5,
+                ),
             ],
           ),
         ),
