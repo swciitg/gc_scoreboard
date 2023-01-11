@@ -13,16 +13,16 @@ class StandingsExpandedresultsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConstrainedBox(
         constraints: BoxConstraints(
-          maxHeight: standingModel.standings.length * 30,
+          maxHeight: standingModel.standings!.length * 30,
         ),
         child: ListView.builder(
             physics: NeverScrollableScrollPhysics(),
-            itemCount: standingModel.standings.length,
+            itemCount: standingModel.standings!.length,
             itemBuilder: (context, index) {
               return AthleticsResultsCardItem(
                   index + 1,
-                  standingModel.standings[index].hostelName,
-                  standingModel.standings[index].points.toString());
+                  standingModel.standings![index].hostelName!,
+                  standingModel.standings![index].points.toString());
             }));
     ;
   }

@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:scoreboard/src/screens/err_reload.dart';
 import '../widgets/common/shimmer.dart';
 
 import '../functions/filter_men_women.dart';
@@ -34,6 +35,10 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
     var gcStore = context.read<GCStore>();
+
+    reloadCallback(){ // reload page
+      setState(() {});
+    }
 
     return Scaffold(
       backgroundColor: Themes.backgroundColor,
@@ -135,15 +140,24 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
               FutureBuilder<List<dynamic>>(
                   future: APIService(context).getGCStandings(),
                   builder: (context, snapshot) {
-                    if(!snapshot.hasData)
-                    {
-                      return Expanded(child: Center(child: ShowShimmer(height: 400, width: MediaQuery.of(context).size.width,),));
+                    if (snapshot.connectionState != ConnectionState.done) {
+                      return Expanded(
+                          child: Center(
+                            child: ShowShimmer(
+                              height: 400,
+                              width: MediaQuery.of(context).size.width,
+
+                            ),
+                          ));
                     }
-                    return Observer(
-                        builder: (context) {
-                          return Expanded(child: StandingBoard(hostelStandings: filterGCStandings(gcStore.selectedCategory,snapshot.data!),));
-                        }
-                    );
+                    else if(snapshot.hasData){
+                      return Observer(
+                          builder: (context) {
+                            return Expanded(child: StandingBoard(hostelStandings: filterGCStandings(gcStore.selectedCategory,snapshot.data!),));
+                          }
+                      );
+                    }
+                    return ErrorReloadPage(apiFunction: reloadCallback);
                   }
               )
             ],
