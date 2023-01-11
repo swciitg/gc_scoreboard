@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:scoreboard/src/models/standing_model.dart';
 
 import '../functions/auth_user_helper.dart';
 import '../globals/constants.dart';
@@ -234,5 +235,20 @@ class APIService {
   Future<bool> deleteStanding(String standingID) async {
     Response resp = await dio.delete("/gc/spardha/standings/${standingID}");
     return resp.data['success'];
+  }
+
+  Future<bool> postSpardha(String standingID) async {
+    Response resp = await dio.delete("/gc/spardha/standings/${standingID}");
+    return resp.data['success'];
+  }
+
+  Future<bool> postSpardhaStanding(Map<String, dynamic> data) async {
+    return true;
+    //return resp.data['success'];
+  }
+
+  Future<bool> updateSpardhaStanding(StandingModel model) async {
+    return true;
+    //return resp.data['success'];
   }
 }

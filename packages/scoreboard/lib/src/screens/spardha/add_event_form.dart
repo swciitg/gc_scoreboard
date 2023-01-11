@@ -192,7 +192,7 @@ class _AddEventFormState extends State<AddEventForm> {
                                         ),
                                         textButtonTheme: TextButtonThemeData(
                                           style: TextButton.styleFrom(
-                                            foregroundColor: Colors.blue, // button text color
+                                            backgroundColor: Colors.blue, // button text color
                                           ),
                                         ),
                                       ),
