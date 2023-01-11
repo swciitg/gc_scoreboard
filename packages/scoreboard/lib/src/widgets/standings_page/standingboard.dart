@@ -156,7 +156,7 @@ class _StandingBoardState extends State<StandingBoard> {
         separatorBuilder: (context, index) {
           return const Divider(
             thickness: 0.7,
-            color: Color.fromRGBO(94, 94, 94, 0.38),
+            color: Themes.divider,
             indent: 20,
             endIndent: 20,
             height: 0,

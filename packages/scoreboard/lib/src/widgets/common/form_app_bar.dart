@@ -41,7 +41,7 @@ class _AppBarFormComponentState extends State<AppBarFormComponent> {
           Icons.close,
           color: Themes.theme.primaryColor,
         ),
-        splashColor: const Color.fromRGBO(118, 172, 255, 0.9),
+        splashColor: Themes.iconButtonSplashColor,
       ),
       actions: [
         TextButton(

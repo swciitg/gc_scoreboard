@@ -49,7 +49,7 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
             Icons.arrow_back,
             color: Colors.white,
           ),
-          splashColor: const Color.fromRGBO(118, 172, 255, 0.9),
+          splashColor: Themes.iconButtonSplashColor,
         ),
         actions: [
           TextButton(

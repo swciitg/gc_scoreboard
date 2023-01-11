@@ -3,6 +3,8 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../globals/colors.dart';
+
 class AddButton extends StatelessWidget {
   final String text;
   final double? width;
@@ -13,7 +15,7 @@ class AddButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
-          color: const Color(0xffFFC907),
+          color: Themes.warning,
           borderRadius: BorderRadius.circular(21),
         ),
         height: 40,

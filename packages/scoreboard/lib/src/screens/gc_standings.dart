@@ -127,7 +127,7 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
               ),
               const Divider(
                 thickness: 0.7,
-                color: Color.fromRGBO(94, 94, 94, 0.38),
+                color: Themes.divider,
                 height: 0,
                 indent: 8,
                 endIndent: 8,
