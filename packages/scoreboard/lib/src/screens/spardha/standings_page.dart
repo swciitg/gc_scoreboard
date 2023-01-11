@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:scoreboard/src/screens/err_reload.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../functions/filter_standings.dart';
 import '../../services/api.dart';
@@ -20,6 +21,11 @@ class _StandingsPageState extends State<StandingsPage> {
   @override
   Widget build(BuildContext context) {
     var spardhaStore = context.read<SpardhaStore>();
+
+    reloadCallback(){ // reload page
+      setState(() {});
+    }
+
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 0),
         child: Column(
@@ -29,7 +35,17 @@ class _StandingsPageState extends State<StandingsPage> {
             FutureBuilder<Map<String, dynamic>>(
               future: APIService(context).getSpardhaStandings(),
               builder: (context, snapshot) {
-                if (snapshot.hasData) {
+                if (snapshot.connectionState != ConnectionState.done) {
+                  return Expanded(
+                      child: Center(
+                        child: ShowShimmer(
+                          height: 400,
+                          width: MediaQuery.of(context).size.width,
+
+                        ),
+                      ));
+                }
+                else if (snapshot.hasData) {
                   print(snapshot.data);
                   return Observer(builder: (context) {
                     List<dynamic> filteredEventSchedules = filterStandings(
@@ -41,14 +57,8 @@ class _StandingsPageState extends State<StandingsPage> {
                             hostelStandings: filteredEventSchedules));
                   });
                 }
-                return Expanded(
-                    child: Center(
-                  child: ShowShimmer(
-                    height: 400,
-                    width: MediaQuery.of(context).size.width,
-
-                  ),
-                ));
+                print("here");
+                return ErrorReloadPage(apiFunction: reloadCallback);
               },
             )
           ],

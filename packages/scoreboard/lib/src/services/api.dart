@@ -30,9 +30,9 @@ class APIService {
     }, onError: (error, handler) async {
       print(error.toString());
       print("in interceptor");
-      Response response = error.response!;
-      print(response.statusCode ?? "no status code");
-      if (response.statusCode == 401) {
+      var response = error.response;
+      // print(response.statusCode ?? "no status code");
+      if (response!=null && response.statusCode == 401) {
         print("inside here");
         bool couldRegenerate = await regenerateAccessToken();
         bool isAdmin = await AuthUserHelpers.checkIfAdmin();
@@ -152,33 +152,57 @@ class APIService {
   }
 
   Future<List<String>> getAllSpardhaEvents() async {
-    Response resp = await dio.get("/gc/spardha/all-events");
-    print(resp.data["details"]); // it is List of dynamic
-    return List<String>.from(resp.data["details"]);
+    try{
+      print("here");
+      Response resp = await dio.get("/gc/spardha/all-events");
+      print(resp.data["details"]); // it is List of dynamic
+      return List<String>.from(resp.data["details"]);
+    }
+    on DioError catch (err){
+      print("inside api");
+      print(err);
+      return Future.error(err);
+    }
   }
 
   Future<List<EventModel>> getSpardhaSchedule(ViewType viewType) async {
-    if (viewType == ViewType.admin) {
-      dio.options.queryParameters["forAdmin"] = "true";
+    try{
+      // throw DioError(requestOptions: RequestOptions(path: "gf"));
+      if (viewType == ViewType.admin) {
+        dio.options.queryParameters["forAdmin"] = "true";
+      }
+      Response resp = await dio.get("/gc/spardha/event-schedule");
+      List<EventModel> output = [];
+      print(resp.data);
+      List<dynamic>.from(resp.data["details"])
+          .forEach((e) => {output.add(EventModel.fromJson(e))});
+      return output;
     }
-    Response resp = await dio.get("/gc/spardha/event-schedule");
-    List<EventModel> output = [];
-    print(resp.data);
-    List<dynamic>.from(resp.data["details"])
-        .forEach((e) => {output.add(EventModel.fromJson(e))});
-    return output;
+    on DioError catch (err){
+      print("inside api");
+      print(err);
+      return Future.error(err);
+    }
   }
 
   Future<List<EventModel>> getSpardhaResults(ViewType viewType) async {
-    if (viewType == ViewType.admin) {
-      dio.options.queryParameters["forAdmin"] = "true";
+    try{
+      // throw DioError(requestOptions: RequestOptions(path: "gf"));
+      if (viewType == ViewType.admin) {
+        dio.options.queryParameters["forAdmin"] = "true";
+      }
+      Response resp = await dio.get("/gc/spardha/event-schedule/results");
+      List<EventModel> output = [];
+      print(resp.data);
+      List<dynamic>.from(resp.data["details"])
+          .forEach((e) => {output.add(EventModel.fromJson(e))});
+      return output;
     }
-    Response resp = await dio.get("/gc/spardha/event-schedule/results");
-    List<EventModel> output = [];
-    print(resp.data);
-    List<dynamic>.from(resp.data["details"])
-        .forEach((e) => {output.add(EventModel.fromJson(e))});
-    return output;
+    on DioError catch (err){
+      print("inside api");
+      print(err);
+      return Future.error(err);
+    }
   }
 
   Future<bool> addUpdateResult(String eventID, List<List<ResultModel>> data,
@@ -218,21 +242,39 @@ class APIService {
   }
 
   Future<Map<String, dynamic>> getSpardhaStandings() async {
-    Response resp1 = await dio.get("/gc/spardha/standings/all-events");
-    Response resp2 = await dio.get("/gc/spardha/standings");
-    return {
-      "overall": resp2.data["details"],
-      "event-wise": resp1.data["details"]
-    };
+    try{
+      Response resp1 = await dio.get("/gc/spardha/standings/all-events");
+      Response resp2 = await dio.get("/gc/spardha/standings");
+      // throw DioError(requestOptions: RequestOptions(path: "gf"));
+      return {
+        "overall": resp2.data["details"],
+        "event-wise": resp1.data["details"]
+      };
+    }
+    on DioError catch (err){
+      print("inside api");
+      print(err);
+      return Future.error(err);
+    }
   }
 
   Future<List<dynamic>> getGCStandings() async {
-    Response resp = await dio.get("/gc/overall/standings");
-    return resp.data['details'];
+    try{
+      // throw DioError(requestOptions: RequestOptions(path: "gf"));
+      Response resp = await dio.get("/gc/overall/standings");
+      return resp.data['details'];
+    }
+    on DioError catch (err){
+      print("inside api");
+      print(err);
+      return Future.error(err);
+    }
   }
 
   Future<bool> deleteStanding(String standingID) async {
     Response resp = await dio.delete("/gc/spardha/standings/${standingID}");
     return resp.data['success'];
   }
+
+
 }
