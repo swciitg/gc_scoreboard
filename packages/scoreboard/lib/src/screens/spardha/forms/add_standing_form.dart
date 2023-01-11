@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:scoreboard/src/globals/constants.dart';
 import 'package:scoreboard/src/globals/enums.dart';
 import 'package:scoreboard/src/models/standing_model.dart';
 import 'package:scoreboard/src/screens/home.dart';
 import 'package:scoreboard/src/services/api.dart';
+import 'package:scoreboard/src/stores/common_store.dart';
 import 'package:scoreboard/src/stores/static_store.dart';
 import 'package:scoreboard/src/widgets/add_event/drop_down.dart';
 import 'package:scoreboard/src/widgets/add_result/hostel_dropdown.dart';
@@ -41,7 +43,7 @@ class _AddStandingState extends State<AddStanding> {
   @override
   Widget build(BuildContext context) {
     final key = GlobalKey<FormState>();
-
+    var commStore = context.read<CommonStore>();
     return Scaffold(
         backgroundColor: Themes.theme.backgroundColor,
         appBar: AppBar(
@@ -92,6 +94,7 @@ class _AddStandingState extends State<AddStanding> {
                   }
                   if (response) {
                     showSnackBar(context, "Done Successfully");
+                    commStore.competition=Competitions.gc;
                     Navigator.pushNamedAndRemoveUntil(context, ScoreBoardHome.id, (route) => false);
                   }
                   else {

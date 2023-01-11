@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../globals/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -57,9 +58,9 @@ class _StandingBoardState extends State<StandingBoard> {
                     width: 10,
                   ),
                   Expanded(
-                    flex: 2,
+                    flex: 1,
                     child: Container(
-                      alignment: Alignment.center,
+                      alignment: Alignment.centerLeft,
                       child: Text('Hostels',
                           style: GoogleFonts.montserrat(
                               fontWeight: FontWeight.w700,
@@ -115,26 +116,14 @@ class _StandingBoardState extends State<StandingBoard> {
                   width: 10,
                 ),
                 Expanded(
-                  flex: 2,
+                  flex: 1,
                   child: Container(
-                    alignment: Alignment.center,
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          hostelsImagePath[widget.hostelStandings[index]["hostelName"]]!,
-                          height: 30,
-                          width: 30,
-                        ),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        Text(widget.hostelStandings[index]["hostelName"],
-                            style: GoogleFonts.montserrat(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 13,
-                                color: Themes.cardFontColor2)),
-                      ],
-                    ),
+                    alignment: Alignment.centerLeft,
+                    child: Text(widget.hostelStandings[index]["hostelName"],
+                        style: GoogleFonts.montserrat(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 13,
+                            color: Themes.cardFontColor2)),
                   ),
                 ),
                 Expanded(

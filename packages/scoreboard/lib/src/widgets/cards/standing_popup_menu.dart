@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:scoreboard/src/globals/enums.dart';
 import 'package:scoreboard/src/screens/spardha/forms/add_standing_form.dart';
 import '../../functions/snackbar.dart';
 import '../../globals/colors.dart';
@@ -52,7 +53,7 @@ class _StandingPopupState extends State<StandingPopup> {
       case 'delete':
         bool response =
             await APIService(context).deleteStanding(widget.standingModel.id!);
-
+        commonStore.competition = Competitions.gc;
         if (!response) {
           showSnackBar(context, 'Some error occured, try again later');
         } else {

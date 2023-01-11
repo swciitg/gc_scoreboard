@@ -8,7 +8,7 @@ const List<String> menHostel = [
   'Kapili',
   'Lohit',
   'Manas',
-  'Married Scholars',
+  'Married Scholars (Men)',
   'Siang',
   'Umiam'
 ];
@@ -17,25 +17,26 @@ const List<String> womenHostel = [
   'Dhansiri',
   'Subansiri',
   'Disang (Women)',
+  'Married Scholars (Women)'
 ];
 
 const List<String> allHostelList = [...menHostel, ...womenHostel];
 
 const Map<String,String> hostelsImagePath = {
-  'Barak' : 'packages/scoreboard/assets/hostel_image.jpg',
-  'Brahmaputra' : 'packages/scoreboard/assets/hostel_image.jpg',
-  'Dhansiri' : 'packages/scoreboard/assets/hostel_image.jpg',
-  'Dibang' : 'packages/scoreboard/assets/hostel_image.jpg',
-  'Dihing' : 'packages/scoreboard/assets/hostel_image.jpg',
-  'Disang (Men)' : 'packages/scoreboard/assets/hostel_image.jpg',
-  'Disang (Women)' : 'packages/scoreboard/assets/hostel_image.jpg',
-  'Kameng' : 'packages/scoreboard/assets/hostel_image.jpg',
-  'Kapili' : 'packages/scoreboard/assets/hostel_image.jpg',
-  'Lohit' : 'packages/scoreboard/assets/hostel_image.jpg',
-  'Manas' : 'packages/scoreboard/assets/hostel_image.jpg',
-  'Married Scholars' : 'packages/scoreboard/assets/hostel_image.jpg',
-  'Siang' : 'packages/scoreboard/assets/hostel_image.jpg',
-  'Subansiri' : 'packages/scoreboard/assets/hostel_image.jpg',
+  'Barak' : 'packages/scoreboard/assets/barak.svg',
+  'Brahmaputra' : 'packages/scoreboard/assets/brahmaputra.svg',
+  'Dhansiri' : 'packages/scoreboard/assets/dhansiri.svg',
+  'Dihing' : 'packages/scoreboard/assets/dihing.svg',
+  'Disang (Men)' : 'packages/scoreboard/assets/disang.svg',
+  'Disang (Women)' : 'packages/scoreboard/assets/disang.svg',
+  'Kameng' : 'packages/scoreboard/assets/kameng.svg',
+  'Kapili' : 'packages/scoreboard/assets/kapili.svg',
+  'Lohit' : 'packages/scoreboard/assets/lohit.svg',
+  'Manas' : 'packages/scoreboard/assets/manas.svg',
+  'Married Scholars (Men)' : 'packages/scoreboard/assets/married_scholar.svg',
+  'Married Scholars (Women)' : 'packages/scoreboard/assets/married_scholar.svg',
+  'Siang' : 'packages/scoreboard/assets/siang.svg',
+  'Subansiri' : 'packages/scoreboard/assets/subansiri.svg',
   'Umiam' : 'packages/scoreboard/assets/hostel_image.jpg'
 };
 
