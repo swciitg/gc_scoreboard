@@ -4,24 +4,24 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../functions/filter_schedule.dart';
 import '../../globals/colors.dart';
+import '../../models/event_model.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
 import '../../stores/spardha_store.dart';
-import '../../widgets/cards/results_card.dart';
-import '../../models/event_model.dart';
+import '../../widgets/cards/schedule_card.dart';
+import '../../widgets/common/filter_bar.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
-import '../../widgets/common/filter_bar.dart';
-import '../err_reload.dart';
+import '../../widgets/common/err_reload.dart';
 
-class ResultsPage extends StatefulWidget {
-  const ResultsPage({Key? key}) : super(key: key);
+class SchedulePage extends StatefulWidget {
+  const SchedulePage({Key? key}) : super(key: key);
 
   @override
-  State<ResultsPage> createState() => _ResultsPageState();
+  State<SchedulePage> createState() => _SchedulePageState();
 }
 
-class _ResultsPageState extends State<ResultsPage> {
+class _SchedulePageState extends State<SchedulePage> {
   @override
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
@@ -34,12 +34,13 @@ class _ResultsPageState extends State<ResultsPage> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           const TopBar(),
           const FilterBar(),
           FutureBuilder<List<EventModel>>(
               future:
-                  APIService(context).getSpardhaResults(commonStore.viewType),
+                  APIService(context).getSpardhaSchedule(commonStore.viewType),
               builder: (context, snapshot) {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Expanded(
@@ -67,19 +68,18 @@ class _ResultsPageState extends State<ResultsPage> {
                     return Expanded(
                         child: filteredEventSchedules.isNotEmpty
                             ? ListView.builder(
-                                itemCount: filteredEventSchedules.length,
-                                itemBuilder: (context, index) {
-                                  return ResultsCard(
-                                      eventModel:
-                                          filteredEventSchedules[index]);
-                                })
+                            itemCount: filteredEventSchedules.length,
+                            itemBuilder: (context, index) {
+                              return ScheduleCard(
+                                  eventModel: filteredEventSchedules[index]);
+                            })
                             : Center(
-                                child: Text("No Schedule found",
-                                    style: GoogleFonts.montserrat(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 12,
-                                        color: Themes.kWhite)),
-                              ));
+                          child: Text("No Schedule found",
+                              style: GoogleFonts.montserrat(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 12,
+                                  color: Themes.kWhite)),
+                        ));
                   });
                 }
                 return ErrorReloadPage(apiFunction: reloadCallback);
@@ -87,5 +87,6 @@ class _ResultsPageState extends State<ResultsPage> {
         ],
       ),
     );
+
   }
 }

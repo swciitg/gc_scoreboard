@@ -5,8 +5,8 @@ import '../../globals/colors.dart';
 import '../../globals/enums.dart';
 import '../../models/event_model.dart';
 import '../../screens/home.dart';
-import '../../screens/spardha/add_event_form.dart';
-import '../../screens/spardha/add_result_form.dart';
+import '../../screens/spardha/forms/add_event_form.dart';
+import '../../screens/spardha/forms/add_result_form.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
 

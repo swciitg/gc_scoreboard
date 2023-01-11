@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/screens/spardha/add_standing.dart';
+import 'package:scoreboard/src/screens/spardha/forms/add_standing_form.dart';
 import '../../functions/snackbar.dart';
 import '../../globals/colors.dart';
 import '../../models/standing_model.dart';

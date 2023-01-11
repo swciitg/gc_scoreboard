@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:scoreboard/src/screens/spardha/add_standing.dart';
-import 'package:scoreboard/src/widgets/schedule_page/add_button.dart';
 import '../../globals/colors.dart';
 import '../../models/standing_model.dart';
 import '../../services/api.dart';
 import '../../widgets/cards/standings_results_card.dart';
 import '../../widgets/common/standings_app_bar.dart';
-import '../err_reload.dart';
+import '../../widgets/schedule_page/add_button.dart';
+import '../../widgets/common/err_reload.dart';
+import 'forms/add_standing_form.dart';
 
 class SpardhaAdminStandingsPage extends StatefulWidget {
   const SpardhaAdminStandingsPage({Key? key}) : super(key: key);

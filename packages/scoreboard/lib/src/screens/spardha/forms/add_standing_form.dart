@@ -5,13 +5,13 @@ import 'package:scoreboard/src/models/standing_model.dart';
 import 'package:scoreboard/src/services/api.dart';
 import 'package:scoreboard/src/widgets/add_event/drop_down.dart';
 import 'package:scoreboard/src/widgets/add_result/hostel_dropdown.dart';
-import '../../functions/snackbar.dart';
-import '../../functions/validator.dart';
-import '../../globals/colors.dart';
-import '../../stores/standing_form_store.dart';
-import '../../widgets/add_result/custom_text_field.dart';
-import '../../widgets/add_result/fields_mandatory.dart';
-import '../../functions/position.dart';
+import '../../../functions/snackbar.dart';
+import '../../../functions/validator.dart';
+import '../../../globals/colors.dart';
+import '../../../stores/standing_form_store.dart';
+import '../../../widgets/add_result/custom_text_field.dart';
+import '../../../widgets/add_result/fields_mandatory.dart';
+import '../../../functions/position.dart';
 
 class AddStanding extends StatefulWidget {
   final StandingModel? standings;

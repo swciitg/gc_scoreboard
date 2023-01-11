@@ -9,7 +9,7 @@ import 'stores/gc_store.dart';
 import 'stores/kriti_store.dart';
 import 'stores/manthan_store.dart';
 import 'stores/spardha_store.dart';
-import './screens/err_reload.dart';
+import 'widgets/common/err_reload.dart';
 
 class GCScoreBoard extends StatefulWidget {
   Map<String, String> userInfo;
@@ -52,7 +52,11 @@ class _GCScoreBoardState extends State<GCScoreBoard> {
                 future: AuthUserHelpers.saveUserData(widget.userInfo, buildContext),
                 builder: (futureContext, snapshot) {
                   if (snapshot.connectionState != ConnectionState.done) {
-                    return const WelcomeScreen();
+                    return const Scaffold(
+                      body: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
                   }
                   else if(snapshot.hasError){
                     print("snapshot has error");

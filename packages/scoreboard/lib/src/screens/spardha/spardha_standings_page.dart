@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:scoreboard/src/screens/err_reload.dart';
+import 'package:scoreboard/src/widgets/common/err_reload.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../functions/filter_standings.dart';
 import '../../services/api.dart';

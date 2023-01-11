@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/screens/err_reload.dart';
+import 'package:scoreboard/src/widgets/common/err_reload.dart';
 import '../widgets/common/shimmer.dart';
 
 import '../functions/filter_men_women.dart';

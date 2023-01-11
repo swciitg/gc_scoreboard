@@ -223,7 +223,6 @@ class APIService {
     try {
       Response resp1 = await dio.get("/gc/spardha/standings/all-events");
       Response resp2 = await dio.get("/gc/spardha/standings");
-      // throw DioError(requestOptions: RequestOptions(path: "gf"));
       return {
         "overall": resp2.data["details"],
         "event-wise": resp1.data["details"]

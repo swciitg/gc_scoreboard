@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../functions/snackbar.dart';
-import '../../globals/colors.dart';
-import '../../models/event_model.dart';
-import '../../services/api.dart';
-import '../home.dart';
+import '../../../functions/snackbar.dart';
+import '../../../globals/colors.dart';
+import '../../../models/event_model.dart';
+import '../../../services/api.dart';
+import '../../home.dart';
 
 class ConfirmEventDetails extends StatefulWidget {
   final bool isEdit;

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scoreboard/src/widgets/add_event/timepicker_color.dart';
-import '../../functions/snackbar.dart';
-import '../../functions/validator.dart';
-import '../../globals/constants.dart';
-import '../../globals/colors.dart';
-import '../../models/event_model.dart';
-import '../../stores/static_store.dart';
-import '../../widgets/add_event/drop_down.dart';
-import '../../widgets/add_event/heading.dart';
-import '../../widgets/add_event/text_field.dart';
-import '../../widgets/common/form_app_bar.dart';
+import '../../../functions/snackbar.dart';
+import '../../../functions/validator.dart';
+import '../../../globals/constants.dart';
+import '../../../globals/colors.dart';
+import '../../../models/event_model.dart';
+import '../../../stores/static_store.dart';
+import '../../../widgets/add_event/drop_down.dart';
+import '../../../widgets/add_event/heading.dart';
+import '../../../widgets/add_event/text_field.dart';
+import '../../../widgets/common/form_app_bar.dart';
 import 'confirm_event_details.dart';
 
 class AddEventForm extends StatefulWidget {
@@ -183,10 +183,9 @@ class _AddEventFormState extends State<AddEventForm> {
                                     //DateTime.now() - not to allow to choose before today.
                                     lastDate: DateTime(2101),
                                     builder: (context, child) =>Theme(
-                                      child: child!,
                                       data: Theme.of(context).copyWith(
                                         colorScheme: ColorScheme.light(
-                                          primary: Color(0xff2B3E5C),
+                                          primary: const Color(0xff2B3E5C),
                                           onPrimary: Colors.white,
                                           onSurface: Colors.blueGrey.shade900,
                                         ),
@@ -196,6 +195,7 @@ class _AddEventFormState extends State<AddEventForm> {
                                           ),
                                         ),
                                       ),
+                                      child: child!,
                                       
                                     ) 
                                   );
@@ -225,10 +225,7 @@ class _AddEventFormState extends State<AddEventForm> {
                                 FocusScope.of(context)
                                     .requestFocus(FocusNode());
                                 TimeOfDay? pickedTime = await showTimePicker(
-
                                   builder: (context, childWidget) {
-
-
                                     return TimePickerColor(childWidget: childWidget,);
                                   },
                                   initialTime: TimeOfDay.now(),
