@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../globals/colors.dart';
 import '../../globals/styles/card_style.dart';
 import '../../models/event_model.dart';
 import 'card_date_widget.dart';
@@ -44,7 +43,7 @@ class CardEventDetails extends StatelessWidget {
                     height: 26,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      color: Themes.kGrey,
+                      color: const Color.fromRGBO(71, 71, 71, 1),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(

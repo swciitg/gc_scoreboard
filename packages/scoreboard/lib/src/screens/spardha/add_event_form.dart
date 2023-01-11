@@ -183,17 +183,19 @@ class _AddEventFormState extends State<AddEventForm> {
                                     firstDate: DateTime(2000),
                                     //DateTime.now() - not to allow to choose before today.
                                     lastDate: DateTime(2101),
-                                    builder: (context, child) =>Theme(
-                                      child: child!,
-                                      data: Theme.of(context).copyWith(
-                                        colorScheme: ColorScheme.light(
-                                          primary: Themes.datePickerPrimary,
-                                          onPrimary: Colors.white,
-                                          onSurface: Colors.blueGrey.shade900,
-                                        ),
-                                        textButtonTheme: TextButtonThemeData(
-                                          style: TextButton.styleFrom(
-                                            foregroundColor: Colors.blue, // button text color
+                                    builder: (context, child) => Theme(
+                                          data: Theme.of(context).copyWith(
+                                            colorScheme: ColorScheme.light(
+                                              primary: Color(0xff2B3E5C),
+                                              onPrimary: Colors.white,
+                                              onSurface:
+                                                  Colors.blueGrey.shade900,
+                                            ),
+                                            textButtonTheme:
+                                                TextButtonThemeData(
+                                              style: TextButton.styleFrom(
+                                                foregroundColor: Colors
+                                                    .blue, // button text color
                                               ),
                                             ),
                                           ),
@@ -273,7 +275,7 @@ class _AddEventFormState extends State<AddEventForm> {
                             checkColor: Colors.white,
                             activeColor: Themes.theme.primaryColor,
                             side: const BorderSide(
-                              color: Themes.checkboxBorderSide,
+                              color: Color.fromRGBO(171, 171, 175, 1),
                               width: 2,
                             ),
                             value: isCancelled,
@@ -290,7 +292,7 @@ class _AddEventFormState extends State<AddEventForm> {
                             checkColor: Colors.white,
                             activeColor: Themes.theme.primaryColor,
                             side: const BorderSide(
-                                color: Themes.checkboxBorderSide,
+                                color: Color.fromRGBO(171, 171, 175, 1),
                                 width: 2),
                             value: isPostponed,
                             onChanged: (bool? value) {
