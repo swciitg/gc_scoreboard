@@ -3,9 +3,8 @@ import 'package:scoreboard/src/globals/constants.dart';
 import 'package:scoreboard/src/globals/enums.dart';
 import 'package:scoreboard/src/models/standing_model.dart';
 import 'package:scoreboard/src/screens/home.dart';
-import 'package:scoreboard/src/screens/spardha/added_standings.dart';
-import 'package:scoreboard/src/screens/spardha/spardha_home.dart';
 import 'package:scoreboard/src/services/api.dart';
+import 'package:scoreboard/src/stores/static_store.dart';
 import 'package:scoreboard/src/widgets/add_event/drop_down.dart';
 import 'package:scoreboard/src/widgets/add_result/hostel_dropdown.dart';
 import '../../../functions/snackbar.dart';
@@ -130,15 +129,16 @@ class _AddStandingState extends State<AddStanding> {
                   children: [
                     Expanded(
                       flex: 30,
-                      child: CustomTextField(
-                        inputType: TextInputType.text,
+                      child: CustomDropDown(
+                          items: StaticStore.spardhaEvents,
                           hintText: 'Event',
-                          validator: validateField,
                           value: standingFormStore.event,
                           onChanged: (value) {
-                            standingFormStore.event = value;
+                            setState(() {
+                              standingFormStore.event = value;
+                            });
                           },
-                          isNecessary: true),
+                          validator: validateField),
                     ),
                     const Spacer(
                       flex: 10,

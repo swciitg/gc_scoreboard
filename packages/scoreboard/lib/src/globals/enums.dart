@@ -37,7 +37,19 @@ enum Category {
 enum Hostel {
   overall("Overall"),
   brahmaputra("Brahmaputra"),
-  kameng("Kameng");
+  kameng("Kameng"),
+  dihing("Dihing"),
+  disangMen("Disang Men"),
+  kapili('Kapili'),
+  barak("Barak"),
+  lohit("Lohit"),
+  manas("Manas"),
+  married("Married Scholars"),
+  siang("Siang"),
+  dhansiri('Dhansiri'),
+  subansiri('Subansiri'),
+  disangWomen('Disang (Women)'),
+  umiam("Umiam");
 
   final String hostelName;
   const Hostel(this.hostelName);

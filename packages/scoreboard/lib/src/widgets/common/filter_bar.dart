@@ -54,6 +54,7 @@ class _FilterBarState extends State<FilterBar> {
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
                             child: PopupMenuButton(
+                              constraints: BoxConstraints(maxHeight: 300),
                               position: PopupMenuPosition.under,
                               color: Themes.cardColor1,
                               onSelected: (String item) {
@@ -115,6 +116,7 @@ class _FilterBarState extends State<FilterBar> {
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
                         child: PopupMenuButton(
+                          constraints: BoxConstraints(maxHeight: 300),
                           position: PopupMenuPosition.under,
                           color: Themes.cardColor1,
                           onSelected: (String item) {
@@ -184,6 +186,7 @@ class _FilterBarState extends State<FilterBar> {
                             child: Padding(
                               padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
                               child: PopupMenuButton(
+                                constraints: BoxConstraints(maxHeight: 300),
                                 position: PopupMenuPosition.under,
                                 color: Themes.cardColor1,
                                 onSelected: (String item) {
