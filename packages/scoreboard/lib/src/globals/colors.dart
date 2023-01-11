@@ -67,14 +67,6 @@ class Themes {
   static const cardFontColor2 = Color.fromRGBO(242, 242, 242, 1);
   static const cardFontColor3 = Color.fromRGBO(255, 201, 7, 1);
   static const cardFontColor4 = Color.fromRGBO(255, 84, 73, 1);
-  static const errorRed = Color.fromRGBO(255, 84, 73, 1);
-  static const warning = Color.fromRGBO(255, 201, 7, 1);
-  static const kShimmerBase = Color.fromRGBO(47, 48, 51, 1);
-  static const kShimmerHighlight = Color.fromRGBO(68, 71, 79, 1);
-  static const divider=Color.fromRGBO(94, 94, 94, 0.38);
-  static const iconButtonSplashColor=const Color.fromRGBO(118, 172, 255, 0.9);
-  static const checkboxBorderSide=Color.fromRGBO(171, 171, 175, 1);
-  static const datePickerPrimary=Color.fromRGBO(43, 62, 92, 1);
-  static const timePickerBackground=Color.fromRGBO(39, 49, 65, 1);
-  static const timePickerDialBackground=Color.fromRGBO(43, 62, 92, 1);
+  static const errorRed = Color(0xFFFF5449);
+  static const warning = Color(0xFFFFC907);
 }
