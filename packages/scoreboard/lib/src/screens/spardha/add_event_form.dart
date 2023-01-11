@@ -186,7 +186,7 @@ class _AddEventFormState extends State<AddEventForm> {
                                       child: child!,
                                       data: Theme.of(context).copyWith(
                                         colorScheme: ColorScheme.light(
-                                          primary: Color(0xff2B3E5C),
+                                          primary: Themes.datePickerPrimary,
                                           onPrimary: Colors.white,
                                           onSurface: Colors.blueGrey.shade900,
                                         ),
@@ -271,7 +271,7 @@ class _AddEventFormState extends State<AddEventForm> {
                             checkColor: Colors.white,
                             activeColor: Themes.theme.primaryColor,
                             side: const BorderSide(
-                              color: Color.fromRGBO(171, 171, 175, 1),
+                              color: Themes.checkboxBorderSide,
                               width: 2,
                             ),
                             value: isCancelled,
@@ -288,7 +288,7 @@ class _AddEventFormState extends State<AddEventForm> {
                             checkColor: Colors.white,
                             activeColor: Themes.theme.primaryColor,
                             side: const BorderSide(
-                                color: Color.fromRGBO(171, 171, 175, 1),
+                                color: Themes.checkboxBorderSide,
                                 width: 2),
                             value: isPostponed,
                             onChanged: (bool? value) {
