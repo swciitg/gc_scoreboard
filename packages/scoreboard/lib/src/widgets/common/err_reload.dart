@@ -14,7 +14,6 @@ class _ErrorReloadPageState extends State<ErrorReloadPage> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex: 1,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

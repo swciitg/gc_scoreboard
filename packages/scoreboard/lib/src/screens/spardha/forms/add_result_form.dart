@@ -67,10 +67,10 @@ class _AddResultFormState extends State<AddResultForm> {
               onPressed: () async {
                 if (key.currentState!.validate()) {
                   try {
-                    bool respose = await APIService(context).addUpdateResult(
+                    bool response = await APIService(context).addUpdateResult(
                         widget.event.id!, ResultFormStore.resultFields!,
                         ResultFormStore.victoryStatement!);
-                    if (respose) {
+                    if (response) {
                       Navigator.of(context).pushNamedAndRemoveUntil(
                           ScoreBoardHome.id, (route) => false);
                       showSnackBar(context, 'Success');

@@ -5,7 +5,7 @@ import '../models/result_model.dart';
 class ResultFormStore {
   static String? victoryStatement;
   static List<List<ResultModel>>? resultFields = [
-    [ResultModel()]
+    [ResultModel()],[ResultModel()] // there must be atleast two positions
   ];
 
   static void addTeamAtPosition(int position) {

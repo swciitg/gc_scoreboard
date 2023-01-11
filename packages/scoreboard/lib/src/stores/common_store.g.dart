@@ -40,6 +40,22 @@ mixin _$CommonStore on _CommonStore, Store {
     });
   }
 
+  late final _$isAdminAtom =
+      Atom(name: '_CommonStore.isAdmin', context: context);
+
+  @override
+  bool get isAdmin {
+    _$isAdminAtom.reportRead();
+    return super.isAdmin;
+  }
+
+  @override
+  set isAdmin(bool value) {
+    _$isAdminAtom.reportWrite(value, super.isAdmin, () {
+      super.isAdmin = value;
+    });
+  }
+
   late final _$viewTypeAtom =
       Atom(name: '_CommonStore.viewType', context: context);
 
@@ -108,6 +124,17 @@ mixin _$CommonStore on _CommonStore, Store {
       ActionController(name: '_CommonStore', context: context);
 
   @override
+  void setViewType(ViewType v) {
+    final _$actionInfo = _$_CommonStoreActionController.startAction(
+        name: '_CommonStore.setViewType');
+    try {
+      return super.setViewType(v);
+    } finally {
+      _$_CommonStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setCompetition(Competitions c, dynamic competitionStore) {
     final _$actionInfo = _$_CommonStoreActionController.startAction(
         name: '_CommonStore.setCompetition');
@@ -124,17 +151,6 @@ mixin _$CommonStore on _CommonStore, Store {
         name: '_CommonStore.setPage');
     try {
       return super.setPage(p, competitionStore);
-    } finally {
-      _$_CommonStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setViewType(ViewType v) {
-    final _$actionInfo = _$_CommonStoreActionController.startAction(
-        name: '_CommonStore.setViewType');
-    try {
-      return super.setViewType(v);
     } finally {
       _$_CommonStoreActionController.endAction(_$actionInfo);
     }
@@ -189,6 +205,7 @@ mixin _$CommonStore on _CommonStore, Store {
     return '''
 competition: ${competition},
 page: ${page},
+isAdmin: ${isAdmin},
 viewType: ${viewType},
 isSpardhaAdmin: ${isSpardhaAdmin},
 isKritiAdmin: ${isKritiAdmin},

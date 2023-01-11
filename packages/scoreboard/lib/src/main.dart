@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'functions/auth_user_helper.dart';
+import 'globals/colors.dart';
 import 'routes.dart';
 import 'screens/home.dart';
 import 'stores/common_store.dart';
@@ -59,7 +60,7 @@ class _GCScoreBoardState extends State<GCScoreBoard> {
                   }
                   else if(snapshot.hasError){
                     print("snapshot has error");
-                    return Scaffold(body: ErrorReloadPage(apiFunction: reloadCallback),);
+                    return Scaffold(backgroundColor: Themes.backgroundColor,body: Column(children: [ErrorReloadPage(apiFunction: reloadCallback)]));
                   }
                   return const ScoreBoardHome();
                 },

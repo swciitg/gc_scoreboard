@@ -15,8 +15,6 @@ String getPosition(int index) {
     answer = '${index + 1}th';
   }
 
-
-
   return '$answer Position';
 }
 

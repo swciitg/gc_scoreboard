@@ -12,8 +12,7 @@ import '../../screens/login/admin_login.dart';
 import '../../stores/common_store.dart';
 
 class AppBarHomeComponent extends StatefulWidget {
-  ViewType homeViewType;
-  AppBarHomeComponent({Key? key, required this.homeViewType}) : super(key: key);
+  AppBarHomeComponent({Key? key}) : super(key: key);
 
   @override
   State<AppBarHomeComponent> createState() => _AppBarHomeComponentState();
@@ -96,13 +95,12 @@ class _AppBarHomeComponentState extends State<AppBarHomeComponent> {
                           borderRadius: BorderRadius.circular(8)),
                       itemBuilder: (BuildContext buildContext) => [
                         PopupMenuItem(
-                            value: widget.homeViewType == ViewType.user
-                                ? LoginView.id
-                                : ScoreBoardHome.id,
+                            value: commonStore.viewType==ViewType.admin
+                                ? ScoreBoardHome.id : LoginView.id,
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 11),
                             child: Text(
-                              widget.homeViewType == ViewType.admin
+                              commonStore.viewType==ViewType.admin
                                   ? "Switch to User View"
                                   : "Switch to Admin View",
                               style: Themes.theme.textTheme.headline6,
@@ -110,7 +108,7 @@ class _AppBarHomeComponentState extends State<AppBarHomeComponent> {
                       ],
                       onSelected: (newRoute) async {
                         if (newRoute == LoginView.id) {
-                          if (!await AuthUserHelpers.checkIfAdmin()) {
+                          if (!commonStore.isAdmin) {
                             showSnackBar(context, "You are not an admin");
                             return;
                           }
@@ -120,6 +118,9 @@ class _AppBarHomeComponentState extends State<AppBarHomeComponent> {
                                   .contains(connectivityResult)) {
                             Navigator.pushNamed(
                                 context, LoginView.id);
+                          }
+                          else{
+                            showSnackBar(context, "No internet connection");
                           }
                         } else {
                           commonStore.setViewType(ViewType.user);

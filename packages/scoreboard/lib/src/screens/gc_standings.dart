@@ -44,7 +44,7 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
       backgroundColor: Themes.backgroundColor,
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(56),
-          child: AppBarHomeComponent(homeViewType: commonStore.viewType)),
+          child: AppBarHomeComponent()),
       body: Padding(
           padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
           child: Column(

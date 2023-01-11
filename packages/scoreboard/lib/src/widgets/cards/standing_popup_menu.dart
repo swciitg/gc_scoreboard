@@ -66,6 +66,8 @@ class _StandingPopupState extends State<StandingPopup> {
 
   @override
   Widget build(BuildContext context) {
+    print("here");
+    print(widget.standingModel.toJson());
     CommonStore commmonStore = context.read<CommonStore>();
     return GestureDetector(
       onTapDown: (position) {

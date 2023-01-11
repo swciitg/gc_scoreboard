@@ -21,6 +21,7 @@ class StandingsAppBar extends StatefulWidget {
 class _StandingsAppBarState extends State<StandingsAppBar> {
   @override
   Widget build(BuildContext context) {
+    var commonStore = context.read<CommonStore>();
     return Container(
       color: Themes.appbarBackgroundColor,
       child: SafeArea(
@@ -64,6 +65,49 @@ class _StandingsAppBarState extends State<StandingsAppBar> {
                     ],
                   ),
                 ),
+              ),
+              Row(
+                children: [
+                  Text('Scoreboard',
+                      style: GoogleFonts.montserrat(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 22,
+                          color: Themes.primaryColor)),
+                  Text('.',
+                      style: GoogleFonts.montserrat(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 22,
+                          color: Themes.cardFontColor3)),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Container(
+                  // width: width * 0.8,
+                    width: 72,
+                    height: 36,
+                    alignment: Alignment.centerRight,
+                    child: PopupMenuButton<String>(
+                      padding: const EdgeInsets.only(top: 4),
+                      icon: const Icon(Icons.more_vert, color: Themes.kWhite),
+                      color: Themes.kGrey,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                      itemBuilder: (BuildContext buildContext) => [
+                        PopupMenuItem(
+                            value: ScoreBoardHome.id,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 11),
+                            child: Text(
+                              "Switch to User View",
+                              style: Themes.theme.textTheme.headline6,
+                            )),
+                      ],
+                      onSelected: (newRoute) async {
+                        commonStore.setViewType(ViewType.user);
+                        Navigator.pushNamedAndRemoveUntil(context, ScoreBoardHome.id, (route) => false);
+                      },
+                    )),
               ),
             ],
           ),

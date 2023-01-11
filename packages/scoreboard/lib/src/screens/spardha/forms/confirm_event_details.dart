@@ -57,6 +57,7 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
               bool response;
               try {
                 if (widget.isEdit) {
+                  print("here");
                   response = await APIService(context)
                       .updateSpardhaEvent(widget.event);
                 } else {
@@ -69,7 +70,6 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
                   } else {
                     showSnackBar(context, "Event schedule posted successfully");
                   }
-
                   Navigator.of(context).pushNamedAndRemoveUntil(
                       ScoreBoardHome.id, (route) => false);
                 } else {

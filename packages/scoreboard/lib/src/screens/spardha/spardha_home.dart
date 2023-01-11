@@ -41,11 +41,11 @@ class _SpardhaHomeState extends State<SpardhaHome> {
           backgroundColor: Themes.backgroundColor,
           appBar: PreferredSize(
               preferredSize: const Size.fromHeight(56),
-              child: AppBarHomeComponent(homeViewType: commonStore.viewType)),
+              child: AppBarHomeComponent()),
           body: tabs[commonStore.page],
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: commonStore.viewType == ViewType.admin &&
+          floatingActionButton: commonStore.viewType==ViewType.admin &&
                   commonStore.page != Pages.results
               ? GestureDetector(
                   onTap: () {

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:scoreboard/src/globals/constants.dart';
 import 'package:scoreboard/src/globals/enums.dart';
 import 'package:scoreboard/src/models/standing_model.dart';
+import 'package:scoreboard/src/screens/home.dart';
+import 'package:scoreboard/src/screens/spardha/added_standings.dart';
+import 'package:scoreboard/src/screens/spardha/spardha_home.dart';
 import 'package:scoreboard/src/services/api.dart';
 import 'package:scoreboard/src/widgets/add_event/drop_down.dart';
 import 'package:scoreboard/src/widgets/add_result/hostel_dropdown.dart';
@@ -82,15 +85,15 @@ class _AddStandingState extends State<AddStanding> {
                           standingFormStore.standing!.map((e) => e.toJson()))
                     });
                   } else {
-                    final StandingModel model = StandingModel(
-                        category: standingFormStore.category!.categoryName,
-                        event: standingFormStore.event,
-                        standings: standingFormStore.standing);
+                    widget.standings!.category=standingFormStore.category!.categoryName;
+                    widget.standings!.event=standingFormStore.event;
+                    widget.standings!.standings=standingFormStore.standing;
                     response =
-                    await APIService(context).updateSpardhaStanding(model);
+                    await APIService(context).updateSpardhaStanding(widget.standings!);
                   }
                   if (response) {
-                    Navigator.of(context).pop();
+                    showSnackBar(context, "Done Successfully");
+                    Navigator.pushNamedAndRemoveUntil(context, ScoreBoardHome.id, (route) => false);
                   }
                   else {
                     showSnackBar(

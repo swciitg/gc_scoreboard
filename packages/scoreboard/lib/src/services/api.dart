@@ -27,24 +27,25 @@ class APIService {
     }, onError: (error, handler) async {
       var response = error.response;
       // print(response.statusCode ?? "no status code");
+      if(response!=null){
+        print(response.data);
+      }
       if (response != null && response.statusCode == 401) {
         bool couldRegenerate = await regenerateAccessToken();
-        bool isAdmin = await AuthUserHelpers.checkIfAdmin();
+        var commStore = buildContext.read<CommonStore>();
         if (couldRegenerate) {
           // retry
           return handler.resolve(await retryRequest(response));
-        } else if (isAdmin == false) {
+        } else if (!commStore.isAdmin) {
           // normal user
-          await generateTokens(buildContext.read<CommonStore>());
+          await generateTokens(commStore);
           // retry
           return handler.resolve(await retryRequest(response));
         } else {
           // show login screen to admin if only he has internet connection
           var connectivityResult = await (Connectivity().checkConnectivity());
-          if (connectivityResults.contains(connectivityResult) &&
-              await Navigator.pushNamed(buildContext, LoginView.id) == true) {
-            await generateTokens(buildContext.read<CommonStore>());
-            // retry
+          if (connectivityResults.contains(connectivityResult) && await Navigator.pushNamed(buildContext, LoginView.id)==true){
+            // retry for admin
             return handler.resolve(await retryRequest(response));
           }
         }
@@ -140,9 +141,9 @@ class APIService {
     }
   }
 
-  Future<List<EventModel>> getSpardhaSchedule(ViewType viewType) async {
+  Future<List<EventModel>> getSpardhaSchedule(ViewType v) async {
     try {
-      if (viewType == ViewType.admin) {
+      if (v==ViewType.admin) {
         dio.options.queryParameters["forAdmin"] = "true";
       }
       Response resp = await dio.get("/gc/spardha/event-schedule");
@@ -155,9 +156,9 @@ class APIService {
     }
   }
 
-  Future<List<EventModel>> getSpardhaResults(ViewType viewType) async {
+  Future<List<EventModel>> getSpardhaResults(ViewType v) async {
     try {
-      if (viewType == ViewType.admin) {
+      if (v==ViewType.admin) {
         dio.options.queryParameters["forAdmin"] = "true";
       }
       Response resp = await dio.get("/gc/spardha/event-schedule/results");
@@ -172,15 +173,16 @@ class APIService {
 
   Future<bool> addUpdateResult(String eventID, List<List<ResultModel>> data,
       String victoryStatement) async {
-    List<List<Map>> results = [];
-    data.forEach((positionResults) {
-      List<Map> addResults = [];
-      positionResults.forEach((result) {
-        addResults.add(result.toJson());
-      });
-      results.add(addResults);
-    });
     try {
+      List<List<Map>> results = [];
+      data.forEach((positionResults) {
+        print(positionResults);
+        List<Map> addResults = [];
+        positionResults.forEach((result) {
+          addResults.add(result.toJson());
+        });
+        results.add(addResults);
+      });
       Response resp = await dio.patch(
           '/gc/spardha/event-schedule/result/$eventID',
           data: {'victoryStatement': victoryStatement, 'results': results});
@@ -201,6 +203,7 @@ class APIService {
 
   Future<bool> updateSpardhaEvent(EventModel event) async {
     try {
+      print(event.toJson());
       Response resp = await dio.patch('/gc/spardha/event-schedule/${event.id!}',
           data: event.toJson());
       return resp.data['success'];
@@ -234,7 +237,6 @@ class APIService {
 
   Future<List<dynamic>> getGCStandings() async {
     try {
-      // throw DioError(requestOptions: RequestOptions(path: "gf"));
       Response resp = await dio.get("/gc/overall/standings");
       return resp.data['details'];
     } on DioError catch (err) {
@@ -244,6 +246,7 @@ class APIService {
 
   Future<bool> postSpardhaStanding(Map<String, dynamic> data) async {
     try {
+      print(data.toString());
       Response resp = await dio.post("/gc/spardha/standings", data: data);
       return resp.data['success'];
     } on DioError catch (err) {

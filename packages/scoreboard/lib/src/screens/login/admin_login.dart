@@ -27,7 +27,7 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
     return Scaffold(
-      appBar: PreferredSize(child: AppBarHomeComponent(homeViewType: commonStore.viewType), preferredSize: const Size.fromHeight(56)),
+      appBar: PreferredSize(child: AppBarHomeComponent(), preferredSize: const Size.fromHeight(56)),
       body: LoginWebView(),
     );
   }
