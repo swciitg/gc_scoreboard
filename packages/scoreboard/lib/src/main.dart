@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'functions/auth_user_helper.dart';
 import 'routes.dart';
 import 'screens/home.dart';
-import 'screens/splash.dart';
 import 'stores/common_store.dart';
 import 'stores/gc_store.dart';
 import 'stores/kriti_store.dart';
