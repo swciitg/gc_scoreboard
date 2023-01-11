@@ -32,7 +32,8 @@ class _AppBarHomeComponentState extends State<AppBarHomeComponent> {
             children: [
               InkWell(
                 onTap: () {
-                  Navigator.popUntil(context, ModalRoute.withName("/home2"));
+                  Navigator.of(context,rootNavigator: true).pop();
+                  // Navigator.popUntil(context, ModalRoute.withName("/home2"));
                 },
                 child: Container(
                   width: 80,
