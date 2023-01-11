@@ -16,6 +16,9 @@ abstract class _CommonStore with Store {
   Pages page = Pages.standings;
 
   @observable
+  bool isAdmin=false; // if any competition admin
+
+  @observable
   ViewType viewType = ViewType.user;
 
   @observable
@@ -26,6 +29,11 @@ abstract class _CommonStore with Store {
 
   @observable
   bool isManthanAdmin=false;
+
+  @action
+  void setViewType(ViewType v){
+    viewType=v;
+  }
 
   @action
   void setCompetition(Competitions c,var competitionStore) {
@@ -43,13 +51,8 @@ abstract class _CommonStore with Store {
   }
 
   @action
-  void setViewType(ViewType v){
-    print(v);
-    viewType=v;
-  }
-
-  @action
   void setAdminNone(){
+    isAdmin=false;
     isSpardhaAdmin=false;
     isKritiAdmin=false;
     isManthanAdmin=false;
@@ -58,16 +61,19 @@ abstract class _CommonStore with Store {
   @action
   void setSpardhaAdmin(bool input){
     isSpardhaAdmin=input;
+    isAdmin=true;
   }
 
   @action
   void setKritiAdmin(bool input){
     isKritiAdmin=input;
+    isAdmin=true;
   }
 
   @action
   void setManthanAdmin(bool input){
     isManthanAdmin=input;
+    isAdmin=true;
   }
 
 }

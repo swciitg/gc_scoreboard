@@ -3,8 +3,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/src/globals/colors.dart';
 import 'package:scoreboard/src/globals/enums.dart';
-import 'package:scoreboard/src/screens/coming_soon.dart';
-import 'package:scoreboard/src/screens/restricted_page.dart';
+import 'package:scoreboard/src/widgets/common/coming_soon.dart';
+import 'package:scoreboard/src/widgets/common/restricted_page.dart';
 import 'package:scoreboard/src/stores/common_store.dart';
 import '../../widgets/common/bottom_navigation_bar.dart';
 import '../../widgets/common/home_app_bar.dart';
@@ -26,8 +26,8 @@ class _KritiHomeState extends State<KritiHome> {
           backgroundColor: Themes.backgroundColor,
           appBar: PreferredSize(
               preferredSize: const Size.fromHeight(56),
-              child: AppBarHomeComponent(homeViewType: commonStore.viewType)),
-          body: commonStore.viewType==ViewType.user || commonStore.isKritiAdmin ? ComingSoon(competition: commonStore.competition) : RestrictedPage(),
+              child: AppBarHomeComponent()),
+          body: commonStore.isManthanAdmin ? RestrictedPage() : ComingSoon(competition: commonStore.competition),
           bottomNavigationBar: const BottomNavBar(),
         );
       }

@@ -54,6 +54,8 @@ class Themes {
   );
   static const kWhite = Color.fromRGBO(242, 242, 242, 1);
   static const kGrey = Color.fromRGBO(71, 71, 71, 1);
+  static const kYellow = Color.fromRGBO(255,201,7,1);
+  static const kBlack = Colors.black;
   static const backgroundColor = Color.fromRGBO(27, 27, 29, 1);
   static const primaryColor = Color.fromRGBO(118, 172, 255, 1);
   static const secondaryColor = Color.fromRGBO(39, 49, 65, 1);

@@ -37,7 +37,7 @@ class _ResultsCardState extends State<ResultsCard> {
         padding: const EdgeInsets.all(8.0),
         child: ConstrainedBox(
           constraints: const BoxConstraints(minHeight: 186),
-          child: commonStore.viewType == ViewType.admin
+          child: commonStore.viewType==ViewType.admin
               ? PopupMenu(
                   eventModel: widget.eventModel,
                   items: popupOptions,

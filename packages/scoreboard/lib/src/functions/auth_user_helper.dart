@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -50,17 +51,25 @@ class AuthUserHelpers{
   }
 
   static Future<bool> saveUserData(Map<String,String> userInfo,BuildContext buildContext) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString("email", userInfo["email"]!);
-    await prefs.setString("name", userInfo["name"]!);
-    if(!prefs.containsKey("accessToken")){ // has already once used scoreboard
-      await APIService(buildContext).generateTokens(buildContext.read<CommonStore>());
+    try{
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString("email", userInfo["email"]!);
+      await prefs.setString("name", userInfo["name"]!);
+      var commStore = buildContext.read<CommonStore>();
+      if(!prefs.containsKey("accessToken")){ // has already once used scoreboard
+        await APIService(buildContext).generateTokens(commStore);
+      }
+      else if(await checkIfAdmin()){
+        commStore.isAdmin=true;
+      }
+      StaticStore.spardhaEvents= await APIService(buildContext).getAllSpardhaEvents();
+      print(StaticStore.spardhaEvents);
+      return true;
     }
-    StaticStore.spardhaEvents= await APIService(buildContext).getAllSpardhaEvents();
-    print(StaticStore.spardhaEvents);
-    return true;
+    on DioError catch (err) {
+      print("inside auth helper");
+      return Future.error(err);
+    }
   }
-
-
 
 }

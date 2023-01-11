@@ -49,19 +49,16 @@ class _LoginWebViewState extends State<LoginWebView> {
               if(values[0].toLowerCase().contains("error")){
                 showSnackBar(context, "Some Error occured");
               }
-              else if (values[1] != await AuthUserHelpers.getUserEmail()){
-                showSnackBar(context, "You are not using email logged as in OneStop");
-              }
               else{
                 await APIService(context).generateTokens(commonStore);
-                if(await AuthUserHelpers.checkIfAdmin() == true){
-                  commonStore.setViewType(ViewType.admin);
-                }
-                else{
+                if(!commonStore.isAdmin){
                   showSnackBar(context, "You are not authorized admin");
                 }
+                else{
+                  commonStore.setViewType(ViewType.admin);
+                }
               }
-              Navigator.pop(context);
+              Navigator.pop(context,true); // token may be generated
             }
           },
         );

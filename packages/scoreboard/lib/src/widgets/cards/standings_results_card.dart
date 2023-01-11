@@ -27,6 +27,7 @@ class _StandingsResultCardState extends State<StandingsResultCard> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.standingModel.toJson());
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ConstrainedBox(
@@ -52,13 +53,13 @@ class _StandingsResultCardState extends State<StandingsResultCard> {
                                   vertical: 4, horizontal: 4),
                               child: SizedBox(
                                 height: 28,
-                                child: Text(widget.standingModel.event,
+                                child: Text(widget.standingModel.event!,
                                     style: cardEventStyle),
                               ),
                             ),
                             SizedBox(
                               height: 20,
-                              child: Text(widget.standingModel.category,
+                              child: Text(widget.standingModel.category!,
                                   style: cardCategoryStyle),
                             ),
                           ],

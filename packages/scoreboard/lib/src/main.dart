@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'functions/auth_user_helper.dart';
+import 'globals/colors.dart';
 import 'routes.dart';
 import 'screens/home.dart';
-import 'screens/splash.dart';
 import 'stores/common_store.dart';
 import 'stores/gc_store.dart';
 import 'stores/kriti_store.dart';
 import 'stores/manthan_store.dart';
 import 'stores/spardha_store.dart';
+import 'widgets/common/err_reload.dart';
 
 class GCScoreBoard extends StatefulWidget {
   Map<String, String> userInfo;
@@ -21,6 +22,7 @@ class GCScoreBoard extends StatefulWidget {
 class _GCScoreBoardState extends State<GCScoreBoard> {
   @override
   Widget build(BuildContext context) {
+
     return MultiProvider(
       providers: [
         Provider<CommonStore>(
@@ -39,19 +41,33 @@ class _GCScoreBoardState extends State<GCScoreBoard> {
           create: (_) => ManthanStore(),
         ),
       ],
-      child: Builder(
-          builder: (buildContext) => FutureBuilder(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Builder(
+            builder: (buildContext){
+              reloadCallback(){ // reload page
+                setState(() {});
+              }
+              return FutureBuilder(
                 future: AuthUserHelpers.saveUserData(widget.userInfo, buildContext),
-                builder: (buildContext, snapshot) {
-                  return MaterialApp(
-                    debugShowCheckedModeBanner: false,
-                    home: snapshot.hasData
-                        ? const ScoreBoardHome()
-                        : const WelcomeScreen(),
-                    routes: routes,
-                  );
+                builder: (futureContext, snapshot) {
+                  if (snapshot.connectionState != ConnectionState.done) {
+                    return const Scaffold(
+                      body: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  }
+                  else if(snapshot.hasError){
+                    print("snapshot has error");
+                    return Scaffold(backgroundColor: Themes.backgroundColor,body: Column(children: [ErrorReloadPage(apiFunction: reloadCallback)]));
+                  }
+                  return const ScoreBoardHome();
                 },
-              )),
+              );
+            }),
+        routes: routes,
+      )
     );
   }
 }

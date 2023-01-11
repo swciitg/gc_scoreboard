@@ -3,6 +3,7 @@ import '../../globals/colors.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hintText;
+  final TextInputType inputType;
   final String? Function(String?)? validator;
   final String? value;
   final onChanged;
@@ -14,7 +15,7 @@ class CustomTextField extends StatelessWidget {
       required this.validator,
       required this.value,
       required this.onChanged,
-      required this.isNecessary});
+      required this.isNecessary, required this.inputType});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class CustomTextField extends StatelessWidget {
       onChanged: onChanged,
       controller: controller,
       cursorColor: Themes.theme.primaryColor,
-      keyboardType: TextInputType.text,
+      keyboardType: inputType,
       decoration: InputDecoration(
         label: RichText(
           text: TextSpan(

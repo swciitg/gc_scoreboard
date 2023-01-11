@@ -27,7 +27,7 @@ class _AddResultListState extends State<AddResultList> {
         itemBuilder: (context, index) {
           return Column(
             children: [
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               for (int team = 0;
                   team < ResultFormStore.numTeamsWithPosition(index + 1);
                   team++)
@@ -118,6 +118,7 @@ class _AddResultListState extends State<AddResultList> {
                         Expanded(
                           flex: 46,
                           child: CustomTextField(
+                            inputType: TextInputType.text,
                             isNecessary: true,
                             hintText: 'Primary Score',
                             validator: validateField,
@@ -133,6 +134,7 @@ class _AddResultListState extends State<AddResultList> {
                         Expanded(
                             flex: 46,
                             child: CustomTextField(
+                              inputType: TextInputType.text,
                               isNecessary: false,
                               hintText: 'Secondary Score',
                               validator: null,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:scoreboard/src/screens/spardha/forms/add_standing_form.dart';
 import '../../functions/snackbar.dart';
 import '../../globals/colors.dart';
 import '../../models/standing_model.dart';
@@ -42,7 +43,10 @@ class _StandingPopupState extends State<StandingPopup> {
 
     switch (result) {
       case 'edit standings':
-        print('edit standings');
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => AddStanding(standings: widget.standingModel,)));
         break;
 
       case 'delete':
@@ -62,6 +66,8 @@ class _StandingPopupState extends State<StandingPopup> {
 
   @override
   Widget build(BuildContext context) {
+    print("here");
+    print(widget.standingModel.toJson());
     CommonStore commmonStore = context.read<CommonStore>();
     return GestureDetector(
       onTapDown: (position) {

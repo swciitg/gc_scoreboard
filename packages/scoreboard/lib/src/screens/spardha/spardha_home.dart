@@ -6,12 +6,12 @@ import '../../globals/enums.dart';
 import '../../stores/common_store.dart';
 import '../../widgets/common/home_app_bar.dart';
 import '../../widgets/schedule_page/add_button.dart';
-import 'add_event_form.dart';
+import 'forms/add_event_form.dart';
 import '../../widgets/common/bottom_navigation_bar.dart';
 import 'added_standings.dart';
-import 'results_page.dart';
-import 'schedule_page.dart';
-import 'standings_page.dart';
+import 'spardha_results_page.dart';
+import 'spardha_schedule_page.dart';
+import 'spardha_standings_page.dart';
 
 class SpardhaHome extends StatefulWidget {
   const SpardhaHome({Key? key}) : super(key: key);
@@ -41,11 +41,11 @@ class _SpardhaHomeState extends State<SpardhaHome> {
           backgroundColor: Themes.backgroundColor,
           appBar: PreferredSize(
               preferredSize: const Size.fromHeight(56),
-              child: AppBarHomeComponent(homeViewType: commonStore.viewType)),
+              child: AppBarHomeComponent()),
           body: tabs[commonStore.page],
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: commonStore.viewType == ViewType.admin &&
+          floatingActionButton: commonStore.viewType==ViewType.admin &&
                   commonStore.page != Pages.results
               ? GestureDetector(
                   onTap: () {

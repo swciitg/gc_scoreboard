@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../functions/snackbar.dart';
-import '../../globals/colors.dart';
-import '../../models/event_model.dart';
-import '../../services/api.dart';
-import '../home.dart';
-
+import '../../../functions/snackbar.dart';
+import '../../../globals/colors.dart';
+import '../../../models/event_model.dart';
+import '../../../services/api.dart';
+import '../../home.dart';
 
 class ConfirmEventDetails extends StatefulWidget {
   final bool isEdit;
@@ -54,34 +53,31 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
         actions: [
           TextButton(
             onPressed: () async {
-                print(widget.event.toJson());
-                bool response;
-                if(widget.isEdit)
-                  {
-                    response = await APIService(context).updateSpardhaEvent(widget.event);
+              print(widget.event.toJson());
+              bool response;
+              try {
+                if (widget.isEdit) {
+                  print("here");
+                  response = await APIService(context)
+                      .updateSpardhaEvent(widget.event);
+                } else {
+                  response = await APIService(context)
+                      .postEventSchedule(widget.event.toJson());
+                }
+                if (response) {
+                  if (widget.isEdit) {
+                    showSnackBar(context, "Event Edited successfully");
+                  } else {
+                    showSnackBar(context, "Event schedule posted successfully");
                   }
-                else
-                  {
-                    response = await APIService(context).postEventSchedule(widget.event.toJson());
-                  }
-                if(response)
-                  {
-                    if(widget.isEdit)
-                      {
-                        showSnackBar(context, "Event Edited successfully");
-                      }
-                    else
-                      {
-                        showSnackBar(context, "Event schedule posted successfully");
-                      }
-
-                    Navigator.of(context).pushNamedAndRemoveUntil(ScoreBoardHome.id, (route) => false);
-                  }
-                else
-                  {
-                    showSnackBar(context, "Some error occures, please try again");
-                  }
-
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      ScoreBoardHome.id, (route) => false);
+                } else {
+                  showSnackBar(context, "Some error occures, please try again");
+                }
+              } catch (err) {
+                showSnackBar(context, "Some error occures, please try again");
+              }
             },
             child: Text(
               'Post',

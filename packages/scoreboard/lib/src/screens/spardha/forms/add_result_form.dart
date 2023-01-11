@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import '../../functions/snackbar.dart';
-import '../../functions/validator.dart';
-import '../../globals/colors.dart';
-import '../../models/event_model.dart';
-import '../../services/api.dart';
-import '../../stores/result_form_store.dart';
-import '../../widgets/add_result/custom_text_field.dart';
-import '../../widgets/add_result/fields_mandatory.dart';
-import '../../widgets/add_result/list_view_widget.dart';
-import '../../widgets/cards/card_date_widget.dart';
-import '../home.dart';
+import '../../../functions/snackbar.dart';
+import '../../../functions/validator.dart';
+import '../../../globals/colors.dart';
+import '../../../models/event_model.dart';
+import '../../../services/api.dart';
+import '../../../stores/result_form_store.dart';
+import '../../../widgets/add_result/custom_text_field.dart';
+import '../../../widgets/add_result/fields_mandatory.dart';
+import '../../../widgets/add_result/list_view_widget.dart';
+import '../../../widgets/cards/card_date_widget.dart';
+import '../../home.dart';
 
 class AddResultForm extends StatefulWidget {
   final EventModel event;
@@ -65,21 +65,25 @@ class _AddResultFormState extends State<AddResultForm> {
           actions: [
             TextButton(
               onPressed: () async {
-                print('button pressed');
                 if (key.currentState!.validate()) {
-                  print('submit result pressed');
-                  bool respose = await APIService(context).addUpdateResult(widget.event.id!, ResultFormStore.resultFields!,ResultFormStore.victoryStatement!);
-                  if(respose)
-                    {
-                      Navigator.of(context).pushNamedAndRemoveUntil(ScoreBoardHome.id, (route) => false);
+                  try {
+                    bool response = await APIService(context).addUpdateResult(
+                        widget.event.id!, ResultFormStore.resultFields!,
+                        ResultFormStore.victoryStatement!);
+                    if (response) {
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          ScoreBoardHome.id, (route) => false);
                       showSnackBar(context, 'Success');
                       ResultFormStore.clear();
                     }
-                  else
-                    {
+                    else {
                       showSnackBar(context, 'Failed');
                     }
-
+                  }
+                  catch(err)
+                {
+                  showSnackBar(context, 'Some error occured, please try again');
+                }
                 }
               },
               child: Text(
@@ -141,6 +145,7 @@ class _AddResultFormState extends State<AddResultForm> {
                 height: 22,
               ),
               CustomTextField(
+                inputType: TextInputType.text,
                   hintText: 'Victory Statement',
                   validator: validateField,
                   value: ResultFormStore.victoryStatement,
