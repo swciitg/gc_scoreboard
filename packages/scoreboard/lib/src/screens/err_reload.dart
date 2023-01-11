@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-
 import '../globals/colors.dart';
-import '../stores/common_store.dart';
-import '../widgets/common/home_app_bar.dart';
 
 class ErrorReloadPage extends StatefulWidget {
-  var apiFunction;
-  ErrorReloadPage({Key? key,required this.apiFunction}) : super(key: key);
+  final apiFunction;
+  const ErrorReloadPage({Key? key,required this.apiFunction}) : super(key: key);
 
   @override
   State<ErrorReloadPage> createState() => _ErrorReloadPageState();
@@ -17,8 +13,8 @@ class ErrorReloadPage extends StatefulWidget {
 class _ErrorReloadPageState extends State<ErrorReloadPage> {
   @override
   Widget build(BuildContext context) {
-    var commonStore = context.read<CommonStore>();
     return Expanded(
+      flex: 1,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -30,7 +26,7 @@ class _ErrorReloadPageState extends State<ErrorReloadPage> {
                 fontSize: 16),),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Text(
               "Looks like you’ve run into an error. Please reload to resolve the issue.",
               style: GoogleFonts.montserrat(
@@ -44,8 +40,8 @@ class _ErrorReloadPageState extends State<ErrorReloadPage> {
             onPressed: (){
               widget.apiFunction();
             },
-            icon: Icon(Icons.rotate_right,size: 16,color: Themes.kBlack,),
-            label: Text("Try again",style: TextStyle(color: Themes.kBlack,fontSize: 12,fontWeight: FontWeight.w600)),
+            icon: const Icon(Icons.rotate_right,size: 16,color: Themes.kBlack,),
+            label: const Text("Try again",style: TextStyle(color: Themes.kBlack,fontSize: 12,fontWeight: FontWeight.w600)),
             style: const ButtonStyle(
                 backgroundColor: MaterialStatePropertyAll(Themes.kYellow)
             ),

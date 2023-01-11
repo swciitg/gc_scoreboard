@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:scoreboard/src/models/standing_model.dart';
 
 import '../functions/auth_user_helper.dart';
 import '../globals/constants.dart';
@@ -263,6 +264,30 @@ class APIService {
       // throw DioError(requestOptions: RequestOptions(path: "gf"));
       Response resp = await dio.get("/gc/overall/standings");
       return resp.data['details'];
+    }
+    on DioError catch (err){
+      print("inside api");
+      print(err);
+      return Future.error(err);
+    }
+  }
+
+  Future<bool> postSpardhaStanding(Map<String, dynamic> data) async {
+    try{
+      Response resp = await dio.post("/gc/spardha/standings", data: data);
+      return resp.data['success'];
+    }
+    on DioError catch (err){
+      print("inside api");
+      print(err);
+      return Future.error(err);
+    }
+  }
+
+  Future<bool> updateSpardhaStanding(StandingModel standingModel) async {
+    try{
+      Response resp = await dio.patch("/gc/spardha/standings/${standingModel.id}", data: standingModel.toJson());
+      return resp.data['success'];
     }
     on DioError catch (err){
       print("inside api");

@@ -5,6 +5,7 @@ import 'package:scoreboard/src/models/standing_model.dart';
 import 'package:scoreboard/src/services/api.dart';
 import 'package:scoreboard/src/widgets/add_event/drop_down.dart';
 import 'package:scoreboard/src/widgets/add_result/hostel_dropdown.dart';
+import '../../functions/snackbar.dart';
 import '../../functions/validator.dart';
 import '../../globals/colors.dart';
 import '../../stores/standing_form_store.dart';
@@ -24,13 +25,15 @@ class AddStanding extends StatefulWidget {
 class _AddStandingState extends State<AddStanding> {
   TextEditingController victoryStatement = TextEditingController();
 
-  final StandingFormStore abc = StandingFormStore();
+  final StandingFormStore standingFormStore = StandingFormStore();
 
   @override
   void initState() {
     super.initState();
-
-    abc.setPreData(widget.standings);
+    if(widget.standings != null)
+      {
+        standingFormStore.setPreData(widget.standings!);
+      }
   }
 
   @override
@@ -66,17 +69,26 @@ class _AddStandingState extends State<AddStanding> {
           actions: [
             TextButton(
               onPressed: () async {
-                // if (widget.standings == null) {
-                //   APIService(context).postSpardhaStanding({
-                //     "category": abc.category!.categoryName,
-                //     'event': abc.event,
-                //     'standings':
-                //         List<Map>.from(abc.standing!.map((e) => e.toJson()))
-                //   });
-                // } else {
-                //   final StandingModel model = StandingModel(category: abc.category!.categoryName,event: abc.event,standings:abc.standing );
-                //   APIService(context).updateSpardhaStanding(model);
-                // }
+                bool response;
+                if (widget.standings == null) {
+                  response = await APIService(context).postSpardhaStanding({
+                    "category": standingFormStore.category!.categoryName,
+                    'event': standingFormStore.event,
+                    'standings': List<Map>.from(standingFormStore.standing!.map((e) => e.toJson()))
+                  });
+
+                } else {
+                  final StandingModel model = StandingModel(category: standingFormStore.category!.categoryName,event: standingFormStore.event,standings:standingFormStore.standing );
+                  response = await APIService(context).updateSpardhaStanding(model);
+                }
+                if(response)
+                  {
+                    Navigator.of(context).pop();
+                  }
+                else
+                  {
+                    showSnackBar(context, 'Some error occured, please try again');
+                  }
               },
               child: Text(
                 'Next',
@@ -102,10 +114,9 @@ class _AddStandingState extends State<AddStanding> {
                     child: CustomTextField(
                         hintText: 'Event',
                         validator: validateField,
-                        value: widget.standings!.event,
-                        onChanged: (ps) {
-                          // print(standing.event);
-                          abc.event = ps;
+                        value: standingFormStore.event,
+                        onChanged: (value) {
+                          standingFormStore.event = value;
                         },
                         isNecessary: true),
                   ),
@@ -117,17 +128,17 @@ class _AddStandingState extends State<AddStanding> {
                     child: CustomDropDown(
                         items: eventCategories,
                         hintText: 'Category',
-                        onChanged: (ps) {
+                        value: standingFormStore.category?.categoryName,
+                        onChanged: (value) {
                           setState(() {
-                            abc.clearStandings();
-                            if (ps == "Men") {
-                              abc.category = Category.men;
-                            } else if (ps == 'Women') {
-                              abc.category = Category.women;
+                            standingFormStore.clearStandings();
+                            if (value == "Men") {
+                              standingFormStore.category = Category.men;
+                            } else if (value == 'Women') {
+                              standingFormStore.category = Category.women;
                             } else {
-                              abc.category = Category.menandwomen;
+                              standingFormStore.category = Category.menandwomen;
                             }
-                            print(ps);
                           });
                         },
                         validator: validateField),
@@ -138,7 +149,7 @@ class _AddStandingState extends State<AddStanding> {
                   child: Form(
                 key: key,
                 child: ListView.builder(
-                  itemCount: abc.standing!.length + 1,
+                  itemCount: standingFormStore.standing!.length + 1,
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
@@ -169,11 +180,11 @@ class _AddStandingState extends State<AddStanding> {
                                     child: HostelDropDown(
                                       validator: validateField,
                                       value:
-                                          abc.standing![index - 1].hostelName,
-                                      onChanged: (hostel) => abc
+                                          standingFormStore.standing![index - 1].hostelName,
+                                      onChanged: (hostel) => standingFormStore
                                           .standing![index - 1]
                                           .hostelName = hostel,
-                                      hostels: getHostel(abc.category),
+                                      hostels: getHostel(standingFormStore.category),
                                     ),
                                   ),
                                   if (index > 0)
@@ -188,10 +199,10 @@ class _AddStandingState extends State<AddStanding> {
                                         hintText: 'Primary Score',
                                         validator: validateField,
                                         onChanged: (ps) {
-                                          abc.standing![index - 1].points =
+                                          standingFormStore.standing![index - 1].points =
                                               int.parse(ps);
                                         },
-                                        value: abc.standing![index - 1].points
+                                        value: standingFormStore.standing![index - 1].points
                                             .toString(),
                                       ),
                                     ),
@@ -210,14 +221,14 @@ class _AddStandingState extends State<AddStanding> {
                               const SizedBox(
                                 height: 24,
                               ),
-                            if (index == abc.standing!.length)
+                            if (index == standingFormStore.standing!.length)
                               TextButton(
                                   style: TextButton.styleFrom(
                                     padding: EdgeInsets.zero,
                                   ),
                                   onPressed: () {
                                     setState(() {
-                                      abc.addNewPosition();
+                                      standingFormStore.addNewPosition();
                                     });
                                   },
                                   child: Row(

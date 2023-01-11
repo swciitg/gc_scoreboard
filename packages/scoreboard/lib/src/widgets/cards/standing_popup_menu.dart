@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:scoreboard/src/screens/spardha/add_standing.dart';
 import '../../functions/snackbar.dart';
 import '../../globals/colors.dart';
 import '../../models/standing_model.dart';
@@ -42,7 +43,10 @@ class _StandingPopupState extends State<StandingPopup> {
 
     switch (result) {
       case 'edit standings':
-        print('edit standings');
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => AddStanding(standings: widget.standingModel,)));
         break;
 
       case 'delete':

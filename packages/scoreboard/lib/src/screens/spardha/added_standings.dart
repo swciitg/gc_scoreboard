@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:scoreboard/src/screens/spardha/add_standing.dart';
+import 'package:scoreboard/src/widgets/schedule_page/add_button.dart';
 import '../../globals/colors.dart';
 import '../../models/standing_model.dart';
 import '../../services/api.dart';
@@ -17,18 +19,23 @@ class _SpardhaAdminStandingsPageState extends State<SpardhaAdminStandingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: GestureDetector(
+        onTap: (){
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddStanding()));
+        },
+        child: const AddButton(text: 'Add Standing', width: 175,
+
+        ),
+      ),
         backgroundColor: Themes.backgroundColor,
-        appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(56), child: StandingsAppBar()),
+        appBar: const PreferredSize(
+            preferredSize: Size.fromHeight(56), child: StandingsAppBar()),
         body: FutureBuilder<Map<String, dynamic>>(
           future: APIService(context).getSpardhaStandings(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               print(snapshot.data);
-              // AthleticsresultCard(
-              //   standingModel:
-              //       StandingModel.fromJson(snapshot.data!['event-wise'][0]),
-              // );
               return ListView.builder(
                   itemCount: snapshot.data!['event-wise'].length,
                   itemBuilder: (context, index) {
