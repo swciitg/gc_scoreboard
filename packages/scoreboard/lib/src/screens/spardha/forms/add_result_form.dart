@@ -81,6 +81,7 @@ class _AddResultFormState extends State<AddResultForm> {
                         showSnackBar(
                             context, 'Successfully added/updated result');
                         ResultFormStore.clear();
+                        Navigator.pushNamedAndRemoveUntil(context, ScoreBoardHome.id, (route) => false);
                       } on DioError catch (err) {
                         showErrorSnackBar(context, err);
                       }

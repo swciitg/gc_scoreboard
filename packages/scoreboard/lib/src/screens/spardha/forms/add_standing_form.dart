@@ -216,9 +216,9 @@ class _AddStandingState extends State<AddStanding> {
                                             inputType: TextInputType.number,
                                             hintText: 'Points',
                                             validator: validateField,
-                                            onChanged: (value) {
+                                            onChanged: (ps) {
                                               standingFormStore.standing![index - 1].points =
-                                                  int.parse(value);
+                                                  int.parse(ps);
                                             },
                                             value: standingFormStore.standing![index - 1].points
                                                 .toString(),

@@ -70,6 +70,7 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
                       .postEventSchedule(widget.event.toJson());
                   showSnackBar(context, "Event schedule posted successfully");
                 }
+                Navigator.pushNamedAndRemoveUntil(context, ScoreBoardHome.id, (route) => false);
               } on DioError catch (err) {
                 showErrorSnackBar(context, err);
               }
