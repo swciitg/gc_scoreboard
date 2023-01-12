@@ -34,19 +34,22 @@ class _AddEventFormState extends State<AddEventForm> {
   bool isCancelled = false;
   String? category;
   String? stage;
+  String? hostelSizeValue;
   int hostelsSize = 0;
   List<String?> participatingHostels = [];
-  static final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   callbackHostels(value) {
     participatingHostels.length = int.parse(value);
     setState(() {
       hostelsSize = int.parse(value);
+      hostelSizeValue = hostelsSize.toString();
     });
   }
 
   callbackAddHostel(value, index) {
     participatingHostels[index - 1] = value;
+    hostelSizeValue = participatingHostels.length.toString();
   }
 
   @override
@@ -67,6 +70,7 @@ class _AddEventFormState extends State<AddEventForm> {
       } else if (e.status == 'postponed') {
         isPostponed = true;
       }
+      hostelSizeValue = participatingHostels.length.toString();
       selectedDate = e.date;
       selectedTime = TimeOfDay(hour: e.date.hour, minute: e.date.minute);
       dateInput.text = DateFormat('dd-MMM-yyyy').format(e.date);
@@ -162,13 +166,6 @@ class _AddEventFormState extends State<AddEventForm> {
                           );
                         },
                       ),
-                      // CustomDropDown(
-                      //   items: StaticStore.spardhaEvents,
-                      //   hintText: 'Event Name',
-                      //   onChanged: (s) => sportName = s,
-                      //   value: sportName,
-                      //   validator: validateField,
-                      // ),
                       const SizedBox(height: 12),
                       CustomDropDown(
                         items: eventCategories,
@@ -177,6 +174,8 @@ class _AddEventFormState extends State<AddEventForm> {
                           category = s;
                           setState(() {
                             hostelsSize = 0;
+                            participatingHostels = [];
+                            hostelSizeValue = null;
                           });
                         },
                         value: category,
@@ -241,9 +240,6 @@ class _AddEventFormState extends State<AddEventForm> {
                                             textButtonTheme:
                                                 TextButtonThemeData(
                                               style: TextButton.styleFrom(
-                                                foregroundColor: Colors
-                                                    .blue, // button text color
-
                                                 backgroundColor:
                                                     Colors.blue, // button
                                                 primary: Colors.white,
@@ -367,12 +363,8 @@ class _AddEventFormState extends State<AddEventForm> {
                         height: 18,
                       ),
                       CustomDropDown(
-                        items: [for (var i = 2; i <= 15; i++) i.toString()],
-                        value: (widget.event != null)
-                            ? widget.event!.hostels.length.toString()
-                            : (hostelsSize != 0
-                                ? hostelsSize.toString()
-                                : null),
+                        items: [for (var i = 2; i <= 10; i++) i.toString()],
+                        value: hostelSizeValue,
                         hintText: 'Select Number of Hostels',
                         onChanged: callbackHostels,
                         validator: validateField,

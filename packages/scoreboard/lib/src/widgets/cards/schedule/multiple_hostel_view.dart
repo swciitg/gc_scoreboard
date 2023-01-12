@@ -1,10 +1,8 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:scoreboard/src/globals/constants.dart';
 import '../../../models/event_model.dart';
 import '../../../globals/colors.dart';
+
 
 class MultipleHostelView extends StatelessWidget {
   final EventModel eventModel;
@@ -13,46 +11,18 @@ class MultipleHostelView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isAllHostel(String category, List<String> participatingHostels) {
-      List<String> allHostels;
-      if (category == eventCategories[0]) {
-        allHostels = [...menHostel];
-      } else if (category == eventCategories[1]) {
-        allHostels = [...womenHostel];
-      } else
-        allHostels = [...allHostelList];
-
-      if (allHostels.length != participatingHostels.length) {
-        return false;
-      }
-
-      List<String> l1 = [...allHostels];
-      List<String> l2 = [...participatingHostels];
-
-      l1.sort((a, b) => a.compareTo(b));
-      l2.sort((a, b) => a.compareTo(b));
-
-      for (int i = 0; i < l1.length; i++) {
-        if (l1[i] != l2[i]) {
-          return false;
-        }
-      }
-
-      return true;
-    }
-
-    ;
     return ConstrainedBox(
       constraints: const BoxConstraints(minHeight: 18),
       child: Container(
-          child: isAllHostel(eventModel.category, eventModel.hostels)
+          // color: Colors.red,
+          child: eventModel.hostels.length > 12
               ? Text(
-                  'All hostels will participate.',
-                  style: GoogleFonts.montserrat(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 12,
-                      color: Themes.cardFontColor2),
-                )
+                'All hostels will participate.',
+                style: GoogleFonts.montserrat(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                    color: Themes.cardFontColor2),
+              )
               : SizedBox(
                   height: (eventModel.hostels.length).toDouble() * 12,
                   child: ListView.builder(
