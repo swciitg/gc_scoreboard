@@ -56,7 +56,7 @@ class _AddEventFormState extends State<AddEventForm> {
   @override
   void initState() {
     super.initState();
-    print(widget.event!.toJson());
+    // print(widget.event!.toJson());
     if (widget.event != null) {
       EventModel e = widget.event!;
       sportName = e.event;
@@ -153,36 +153,37 @@ class _AddEventFormState extends State<AddEventForm> {
                                   .toLowerCase()
                                   .contains(val.text.toLowerCase()));
                         },
+                        initialValue: TextEditingValue(text:widget.event?.event??""),
                         onSelected: (s) => sportName = s,
                         optionsMaxHeight: 50,
                         optionsViewBuilder: (BuildContext context,
                             AutocompleteOnSelected<String> onSelected,
                             Iterable<String> options) {
+                          // options = [...options,...options,...options,...options,...options,...options,...options,];
                           return Align(
                             alignment: Alignment.topLeft,
                             child: Material(
-                              child: Container(
-                                // width: 300,
-                                color: Themes.theme.backgroundColor,
-                                child: ListView.builder(
-                                  padding: EdgeInsets.all(10.0),
-                                  itemCount: options.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    final String option =
-                                        options.elementAt(index);
-                                    return GestureDetector(
-                                      onTap: () {
-                                        onSelected(option);
-                                      },
-                                      child: ListTile(
-                                        title: Text(option,
-                                            style: Themes
-                                                .theme.textTheme.headline6),
-                                      ),
-                                    );
-                                  },
-                                ),
+                              color: Colors.transparent,
+                              child: ListView.builder(
+                                // padding: EdgeInsets.all(10.0),
+                                padding: EdgeInsets.symmetric(vertical: 0),
+                                itemCount: options.length,
+                                itemBuilder:
+                                    (BuildContext context, int index) {
+                                  final String option =
+                                      options.elementAt(index);
+                                  return GestureDetector(
+                                    onTap: () {
+                                      onSelected(option);
+                                    },
+                                    child: ListTile(
+                                      tileColor: Themes.theme.backgroundColor,
+                                      title: Text(option,
+                                          style: Themes
+                                              .theme.textTheme.headline6),
+                                    ),
+                                  );
+                                },
                               ),
                             ),
                           );
