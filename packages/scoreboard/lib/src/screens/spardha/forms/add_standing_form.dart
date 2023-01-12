@@ -214,11 +214,11 @@ class _AddStandingState extends State<AddStanding> {
                                           child: CustomTextField(
                                             isNecessary: true,
                                             inputType: TextInputType.number,
-                                            hintText: 'Primary Score',
+                                            hintText: 'Points',
                                             validator: validateField,
-                                            onChanged: (ps) {
+                                            onChanged: (value) {
                                               standingFormStore.standing![index - 1].points =
-                                                  int.parse(ps);
+                                                  int.parse(value);
                                             },
                                             value: standingFormStore.standing![index - 1].points
                                                 .toString(),
