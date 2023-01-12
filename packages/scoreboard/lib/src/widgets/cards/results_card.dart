@@ -53,68 +53,75 @@ class _ResultsCardState extends State<ResultsCard> {
                           CardEventDetails(eventModel: widget.eventModel),
                           SizedBox(
                             height: 24,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.emoji_events_outlined,
-                                      color: Themes.cardFontColor3,
-                                      size: 12,
-                                    ),
-                                    const SizedBox(
-                                      width: 4,
-                                    ),
-                                    Text(
-                                      widget.eventModel.victoryStatement!,
-                                      style: GoogleFonts.montserrat(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 12,
-                                          color: Themes.cardFontColor3),
-                                    ),
-                                  ],
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      isExpanded = !isExpanded;
-                                    });
-                                  },
-                                  child: Container(
-                                    height: 24,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        color: Themes.kGrey),
-                                    width: 64,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 12, vertical: 6),
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            isExpanded ? 'Less' : 'More',
+                            child: Expanded(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.emoji_events_outlined,
+                                          color: Themes.cardFontColor3,
+                                          size: 12,
+                                        ),
+                                        const SizedBox(
+                                          width: 4,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            widget.eventModel.victoryStatement!,
+                                            overflow: TextOverflow.ellipsis,
                                             style: GoogleFonts.montserrat(
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 10,
-                                                color: Themes.cardFontColor2),
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 12,
+                                                color: Themes.cardFontColor3),
                                           ),
-                                          Icon(
-                                            isExpanded
-                                                ? Icons
-                                                    .keyboard_arrow_up_outlined
-                                                : Icons
-                                                    .keyboard_arrow_down_outlined,
-                                            size: 14,
-                                            color: Themes.cardFontColor2,
-                                          )
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                )
-                              ],
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        isExpanded = !isExpanded;
+                                      });
+                                    },
+                                    child: Container(
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          color: Themes.kGrey),
+                                      width: 64,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 12, vertical: 6),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              isExpanded ? 'Less' : 'More',
+                                              style: GoogleFonts.montserrat(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 10,
+                                                  color: Themes.cardFontColor2),
+                                            ),
+                                            Icon(
+                                              isExpanded
+                                                  ? Icons
+                                                      .keyboard_arrow_up_outlined
+                                                  : Icons
+                                                      .keyboard_arrow_down_outlined,
+                                              size: 14,
+                                              color: Themes.cardFontColor2,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                           isExpanded
