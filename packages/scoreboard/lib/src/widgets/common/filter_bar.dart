@@ -10,6 +10,7 @@ import '../../globals/styles/filter_style.dart';
 import '../../stores/common_store.dart';
 import '../../stores/spardha_store.dart';
 import '../../stores/static_store.dart';
+import '../add_event/datepicker_color.dart';
 
 class FilterBar extends StatefulWidget {
   const FilterBar({Key? key}) : super(key: key);
@@ -179,49 +180,7 @@ class _FilterBarState extends State<FilterBar> {
                                   firstDate: DateTime(2000),
                                   //DateTime.now() - not to allow to choose before today.
                                   lastDate: DateTime(2101),
-                                  builder: (context, child) => Theme(
-                                          data: Theme.of(context).copyWith(
-                                            textTheme: TextTheme(
-                                              headline4:
-                                                  GoogleFonts.montserrat(),
-                                              headline5: GoogleFonts
-                                                  .montserrat(), // Selected Date landscape
-                                              headline6: GoogleFonts
-                                                  .montserrat(), // Selected Date portrait
-                                              overline: GoogleFonts
-                                                  .montserrat(), // Title - SELECT DATE
-                                              bodyText1: GoogleFonts
-                                                  .montserrat(), // year gridbview picker
-                                              bodyText2: GoogleFonts
-                                                  .montserrat(), // year gridbview picker
-                                              subtitle1: GoogleFonts
-                                                  .montserrat(), // input
-                                              subtitle2: GoogleFonts
-                                                  .montserrat(), // month/year picker
-                                              caption: GoogleFonts
-                                                  .montserrat(), // days
-                                            ),
-                                            colorScheme: ColorScheme.dark(
-                                              primary: Colors.blueAccent,
-                                              onPrimary: Colors.white,
-                                              onSurface: Colors.white,
-                                              surface: const Color(0xff2B3E5C),
-                                            ),
-                                            dialogBackgroundColor:
-                                                const Color(0xff2B3E5C),
-                                            textButtonTheme:
-                                                TextButtonThemeData(
-                                              style: TextButton.styleFrom(
-                                                backgroundColor:
-                                                    Colors.blue, // button
-                                                foregroundColor: Colors.white,
-                                                elevation: 0,
-                                                textStyle: GoogleFonts.montserrat()
-                                              ),
-                                            ),
-                                          ),
-                                          child: child!,
-                                        ));
+                                  builder: (context, child) => DatePickerTheme(child: child,));
                               if (pickedDate != null) {
                                 if (!mounted) return;
                               }
@@ -299,49 +258,8 @@ class _FilterBarState extends State<FilterBar> {
                                   firstDate: DateTime(2000),
                                   //DateTime.now() - not to allow to choose before today.
                                   lastDate: DateTime(2101),
-                                  builder: (context, child) => Theme(
-                                          data: Theme.of(context).copyWith(
-                                            textTheme: TextTheme(
-                                              headline4:
-                                                  GoogleFonts.montserrat(),
-                                              headline5: GoogleFonts
-                                                  .montserrat(), // Selected Date landscape
-                                              headline6: GoogleFonts
-                                                  .montserrat(), // Selected Date portrait
-                                              overline: GoogleFonts
-                                                  .montserrat(), // Title - SELECT DATE
-                                              bodyText1: GoogleFonts
-                                                  .montserrat(), // year gridbview picker
-                                              bodyText2: GoogleFonts
-                                                  .montserrat(), // year gridbview picker
-                                              subtitle1: GoogleFonts
-                                                  .montserrat(), // input
-                                              subtitle2: GoogleFonts
-                                                  .montserrat(), // month/year picker
-                                              caption: GoogleFonts
-                                                  .montserrat(), // days
-                                            ),
-                                            colorScheme: ColorScheme.dark(
-                                              primary: Colors.blueAccent,
-                                              onPrimary: Colors.white,
-                                              onSurface: Colors.white,
-                                              surface: const Color(0xff2B3E5C),
-                                            ),
-                                            dialogBackgroundColor:
-                                                const Color(0xff2B3E5C),
-                                            textButtonTheme:
-                                                TextButtonThemeData(
-                                              style: TextButton.styleFrom(
-                                                backgroundColor:
-                                                    Colors.blue, // button
-                                                foregroundColor: Colors.white,
-                                                elevation: 0,
-                                                textStyle: GoogleFonts.montserrat()
-                                              ),
-                                            ),
-                                          ),
-                                          child: child!,
-                                        ));
+                                  builder: (context, child) => DatePickerTheme(child: child,)
+                                      );
                               if (pickedDate != null) {
                                 if (!mounted) return;
                                 spardhaStore.changeSelectedDate(
