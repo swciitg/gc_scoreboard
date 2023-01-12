@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../globals/colors.dart';
+import '../../../globals/constants.dart';
 
 class BiHostelView extends StatelessWidget {
   final String hostelA;
@@ -22,10 +21,8 @@ class BiHostelView extends StatelessWidget {
               SizedBox(
                 height: 18,
                 width: 18,
-                child: SvgPicture.asset(
-                  'assets/kriti2.svg',
-                  package: 'scoreboard',
-                  fit: BoxFit.fill,
+                child: Image.asset(
+                    hostelsImagePath[hostelA]!,
                 ),
               ),
               const SizedBox(
@@ -52,10 +49,8 @@ class BiHostelView extends StatelessWidget {
               SizedBox(
                 height: 18,
                 width: 18,
-                child: SvgPicture.asset(
-                  'assets/manthan2.svg',
-                  package: 'scoreboard',
-                  fit: BoxFit.fill,
+                child: Image.asset(
+                  hostelsImagePath[hostelB]!,
                 ),
               ),
               const SizedBox(
