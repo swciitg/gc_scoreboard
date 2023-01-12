@@ -16,17 +16,17 @@ class _TimePickerColorState extends State<TimePickerColor> {
       data: Theme.of(context).copyWith(
           timePickerTheme: TimePickerThemeData(
         backgroundColor: const Color(0xff273141),
-        dayPeriodBorderSide: const BorderSide(color: Colors.white, width: 2),
+        dayPeriodBorderSide: const BorderSide(color: Color.fromRGBO(91, 146, 227, 1), width: 2),
         dayPeriodColor: MaterialStateColor.resolveWith((states) =>
             states.contains(MaterialState.selected)
-                ? Colors.white
+                ? Color.fromRGBO(91, 146, 227, 1)
                 : const Color(0xff273141)),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
         dayPeriodTextColor: MaterialStateColor.resolveWith((states) =>
             states.contains(MaterialState.selected)
-                ? Colors.blue
+                ? Colors.white
                 : Colors.blueGrey.shade600),
         dayPeriodShape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -34,13 +34,13 @@ class _TimePickerColorState extends State<TimePickerColor> {
         ),
         hourMinuteColor: MaterialStateColor.resolveWith((states) =>
             states.contains(MaterialState.selected)
-                ? Colors.white
+                ? Color.fromRGBO(91, 146, 227, 1)
                 : const Color(0xff2B3E5C)),
         hourMinuteTextColor: MaterialStateColor.resolveWith((states) =>
             states.contains(MaterialState.selected)
-                ? Colors.blue
+                ? Colors.white
                 : Colors.white),
-        dialHandColor: Colors.blue.shade400,
+        dialHandColor: Color.fromRGBO(118, 172, 255, 1),
         dialBackgroundColor: const Color(0xff2B3E5C),
         hourMinuteTextStyle:
             GoogleFonts.montserrat(fontSize: 20, fontWeight: FontWeight.bold,),

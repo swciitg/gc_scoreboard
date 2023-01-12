@@ -8,6 +8,7 @@ import '../../../globals/constants.dart';
 import '../../../globals/colors.dart';
 import '../../../models/event_model.dart';
 import '../../../stores/static_store.dart';
+import '../../../widgets/add_event/datepicker_color.dart';
 import '../../../widgets/add_event/drop_down.dart';
 import '../../../widgets/add_event/heading.dart';
 import '../../../widgets/add_event/text_field.dart';
@@ -152,6 +153,39 @@ class _AddEventFormState extends State<AddEventForm> {
                                   .contains(val.text.toLowerCase()));
                         },
                         onSelected: (s) => sportName = s,
+                        optionsMaxHeight: 50,
+                        optionsViewBuilder: (BuildContext context,
+                            AutocompleteOnSelected<String> onSelected,
+                            Iterable<String> options) {
+                          return Align(
+                            alignment: Alignment.topLeft,
+                            child: Material(
+                              child: Container(
+                                // width: 300,
+                                color: Themes.theme.backgroundColor,
+                                child: ListView.builder(
+                                  padding: EdgeInsets.all(10.0),
+                                  itemCount: options.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    final String option =
+                                        options.elementAt(index);
+                                    return GestureDetector(
+                                      onTap: () {
+                                        onSelected(option);
+                                      },
+                                      child: ListTile(
+                                        title: Text(option,
+                                            style: Themes
+                                                .theme.textTheme.headline6),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                         fieldViewBuilder: (context, c, f, __) {
                           return CustomTextField(
                             hintText: 'Event Name',
@@ -229,18 +263,23 @@ class _AddEventFormState extends State<AddEventForm> {
                                               caption: GoogleFonts
                                                   .montserrat(), // days
                                             ),
-                                            colorScheme: ColorScheme.light(
-                                              primary: const Color(0xff2B3E5C),
-                                              onPrimary: Colors.white,
-                                              onSurface:
-                                                  Colors.blueGrey.shade900,
+                                            colorScheme: ColorScheme.dark(
+                                              primary: Color.fromRGBO(189, 199, 220, 1),
+                                              onPrimary: Colors.black,
+                                              onSurface: Colors.white,
+                                              surface: const Color(0xff2B3E5C),
                                             ),
+                                            dialogBackgroundColor:
+                                                const Color(0xff2B3E5C),
                                             textButtonTheme:
                                                 TextButtonThemeData(
                                               style: TextButton.styleFrom(
-                                                backgroundColor: Colors
-                                                    .blue, // button text color
-                                              ),
+                                                  backgroundColor:
+                                                  const Color(0xff2B3E5C), // button
+                                                  foregroundColor: Color.fromRGBO(118, 172, 255, 1),
+                                                  elevation: 0,
+                                                  textStyle:
+                                                      GoogleFonts.montserrat()),
                                             ),
                                           ),
                                           child: child!,
