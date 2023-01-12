@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/src/globals/constants.dart';
@@ -39,10 +40,11 @@ class _AddStandingState extends State<AddStanding> {
         standingFormStore.setPreData(widget.standings!);
       }
   }
+  final key = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final key = GlobalKey<FormState>();
+
     var commStore = context.read<CommonStore>();
     return Scaffold(
         backgroundColor: Themes.theme.backgroundColor,
@@ -77,36 +79,26 @@ class _AddStandingState extends State<AddStanding> {
                   return;
                 }
                 try {
-                  bool response;
                   if (widget.standings == null) {
-                    response = await APIService(context).postSpardhaStanding({
+                    await APIService(context).postSpardhaStanding({
                       "category": standingFormStore.category!.categoryName,
                       'event': standingFormStore.event,
                       'standings': List<Map>.from(
                           standingFormStore.standing!.map((e) => e.toJson()))
                     });
+                    showSnackBar(context, "Standing added");
                   } else {
                     widget.standings!.category=standingFormStore.category!.categoryName;
                     widget.standings!.event=standingFormStore.event;
                     widget.standings!.standings=standingFormStore.standing;
-                    response =
                     await APIService(context).updateSpardhaStanding(widget.standings!);
-                  }
-                  if (response) {
-                    showSnackBar(context, "Done Successfully");
-                    commStore.competition=Competitions.gc;
-                    Navigator.pushNamedAndRemoveUntil(context, ScoreBoardHome.id, (route) => false);
-                  }
-                  else {
-                    showSnackBar(
-                        context, 'Some error occurred, please try again');
+                    showSnackBar(context, "Standing updated");
                   }
                 }
-                catch(err)
+                on DioError catch(err)
                 {
                   print(err.toString());
-                  showSnackBar(
-                      context, 'Some error occurred, please try again');
+                  showErrorSnackBar(context, err);
                 }
               },
               child: Text(
