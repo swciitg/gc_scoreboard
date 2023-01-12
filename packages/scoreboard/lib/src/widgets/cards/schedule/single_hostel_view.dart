@@ -23,6 +23,8 @@ class BiHostelView extends StatelessWidget {
                 width: 18,
                 child: Image.asset(
                     hostelsImagePath[hostelA]!,
+                  cacheWidth: 50,
+                  cacheHeight: 50,
                 ),
               ),
               const SizedBox(
@@ -51,6 +53,8 @@ class BiHostelView extends StatelessWidget {
                 width: 18,
                 child: Image.asset(
                   hostelsImagePath[hostelB]!,
+                  cacheWidth: 50,
+                  cacheHeight: 50,
                 ),
               ),
               const SizedBox(

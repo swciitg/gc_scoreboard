@@ -126,6 +126,8 @@ class _StandingBoardState extends State<StandingBoard> {
                           // 'packages/scoreboard/assets/logos/subansiri.jpg',
                           height: 30,
                           width: 30,
+                          cacheHeight: 50,
+                          cacheWidth: 50,
                         ),
                         const SizedBox(
                           width: 8,
