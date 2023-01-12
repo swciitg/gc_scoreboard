@@ -242,7 +242,7 @@ class _AddEventFormState extends State<AddEventForm> {
                                               style: TextButton.styleFrom(
                                                 backgroundColor:
                                                     Colors.blue, // button
-                                                foregroundColor: Colors.white,
+                                                primary: Colors.white,
                                                 elevation: 0,
                                                 textStyle: GoogleFonts.montserrat()
                                               ),
