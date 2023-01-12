@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -57,26 +58,16 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
               bool response;
               try {
                 if (widget.isEdit) {
-                  print("here");
-                  response = await APIService(context)
+                  await APIService(context)
                       .updateSpardhaEvent(widget.event);
+                  showSnackBar(context, "Event Edited successfully");
                 } else {
-                  response = await APIService(context)
+                  await APIService(context)
                       .postEventSchedule(widget.event.toJson());
+                  showSnackBar(context, "Event schedule posted successfully");
                 }
-                if (response) {
-                  if (widget.isEdit) {
-                    showSnackBar(context, "Event Edited successfully");
-                  } else {
-                    showSnackBar(context, "Event schedule posted successfully");
-                  }
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      ScoreBoardHome.id, (route) => false);
-                } else {
-                  showSnackBar(context, "Some error occurred, please try again");
-                }
-              } catch (err) {
-                showSnackBar(context, "Some error occurred, please try again");
+              } on DioError catch (err) {
+                showErrorSnackBar(context, err);
               }
             },
             child: Text(

@@ -20,13 +20,11 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final text = value?.toString() == 'null' ? '' : value?.toString();
-    final controller = TextEditingController(text: text);
     return TextFormField(
       style: Themes.theme.textTheme.headline6,
       validator: validator,
       onChanged: onChanged,
-      controller: controller,
+      initialValue: value=='null' ? '' : value,
       cursorColor: Themes.theme.primaryColor,
       keyboardType: inputType,
       decoration: InputDecoration(

@@ -22,7 +22,7 @@ class APIService {
     dio.interceptors
         .add(InterceptorsWrapper(onRequest: (options, handler) async {
       options.headers["Authorization"] =
-          "Bearer ${await AuthUserHelpers.getAccessToken()}";
+      "Bearer ${await AuthUserHelpers.getAccessToken()}";
       handler.next(options);
     }, onError: (error, handler) async {
       var response = error.response;
@@ -58,9 +58,9 @@ class APIService {
   Future<Response<dynamic>> retryRequest(Response response) async {
     RequestOptions requestOptions = response.requestOptions;
     response.requestOptions.headers[DatabaseRecords.authorization] =
-        "Bearer ${await AuthUserHelpers.getAccessToken()}";
+    "Bearer ${await AuthUserHelpers.getAccessToken()}";
     final options =
-        Options(method: requestOptions.method, headers: requestOptions.headers);
+    Options(method: requestOptions.method, headers: requestOptions.headers);
     Dio retryDio = Dio(BaseOptions(
         baseUrl: const String.fromEnvironment('SERVER-URL'),
         connectTimeout: 5000,
@@ -88,13 +88,13 @@ class APIService {
     if (data["success"] == true) {
       commStore.setAdminNone();
       data[DatabaseRecords.authevents].forEach((element) => {
-            if (element == "spardha")
-              {commStore.setSpardhaAdmin(true)}
-            else if (element == "kriti")
-              {commStore.setKritiAdmin(true)}
-            else if (element == "manthan")
-              {commStore.setManthanAdmin(true)}
-          });
+        if (element == "spardha")
+          {commStore.setSpardhaAdmin(true)}
+        else if (element == "kriti")
+          {commStore.setKritiAdmin(true)}
+        else if (element == "manthan")
+            {commStore.setManthanAdmin(true)}
+      });
       await AuthUserHelpers.setAdmin(data[DatabaseRecords.isadmin]);
       await AuthUserHelpers.setAccessToken(data[DatabaseRecords.accesstoken]);
       await AuthUserHelpers.setRefreshToken(data[DatabaseRecords.refreshtoken]);
@@ -114,7 +114,7 @@ class APIService {
       Response<Map<String, dynamic>> resp = await regenDio.post(
           "/gc/gen-accesstoken",
           options:
-              Options(headers: {"authorization": "Bearer ${refreshToken}"}));
+          Options(headers: {"authorization": "Bearer ${refreshToken}"}));
       var data = resp.data!;
       await AuthUserHelpers.setAccessToken(data["token"]);
       return true;
@@ -123,11 +123,11 @@ class APIService {
     }
   }
 
-  Future<bool> postEventSchedule(Map<String, dynamic> data) async {
+  Future<void> postEventSchedule(Map<String, dynamic> data) async {
     try {
       var resp = await dio.post("/gc/spardha/event-schedule", data: data);
-      return resp.data['success'];
     } on DioError catch (err) {
+      print(err.response!.data['message']);
       return Future.error(err);
     }
   }
@@ -171,7 +171,7 @@ class APIService {
     }
   }
 
-  Future<bool> addUpdateResult(String eventID, List<List<ResultModel>> data,
+  Future<void> addUpdateResult(String eventID, List<List<ResultModel>> data,
       String victoryStatement) async {
     try {
       List<List<Map>> results = [];
@@ -186,37 +186,33 @@ class APIService {
       Response resp = await dio.patch(
           '/gc/spardha/event-schedule/result/$eventID',
           data: {'victoryStatement': victoryStatement, 'results': results});
-      return resp.data['success'];
     } on DioError catch (err) {
       return Future.error(err);
     }
   }
 
-  Future<bool> deleteEvent(String eventID) async {
+  Future<void> deleteEvent(String eventID) async {
     try {
       Response resp = await dio.delete('/gc/spardha/event-schedule/$eventID');
-      return resp.data['success'];
     } on DioError catch (err) {
       return Future.error(err);
     }
   }
 
-  Future<bool> updateSpardhaEvent(EventModel event) async {
+  Future<void> updateSpardhaEvent(EventModel event) async {
     try {
       print(event.toJson());
       Response resp = await dio.patch('/gc/spardha/event-schedule/${event.id!}',
           data: event.toJson());
-      return resp.data['success'];
     } on DioError catch (err) {
       return Future.error(err);
     }
   }
 
-  Future<bool> deleteSpardhaEventResult(String eventID) async {
+  Future<void> deleteSpardhaEventResult(String eventID) async {
     try {
       Response resp =
-          await dio.delete('/gc/spardha/event-schedule/result/$eventID');
-      return resp.data['success'];
+      await dio.delete('/gc/spardha/event-schedule/result/$eventID');
     } on DioError catch (err) {
       return Future.error(err);
     }
@@ -244,22 +240,20 @@ class APIService {
     }
   }
 
-  Future<bool> postSpardhaStanding(Map<String, dynamic> data) async {
+  Future<void> postSpardhaStanding(Map<String, dynamic> data) async {
     try {
       print(data.toString());
       Response resp = await dio.post("/gc/spardha/standings", data: data);
-      return resp.data['success'];
     } on DioError catch (err) {
       return Future.error(err);
     }
   }
 
-  Future<bool> updateSpardhaStanding(StandingModel standingModel) async {
+  Future<void> updateSpardhaStanding(StandingModel standingModel) async {
     try {
       Response resp = await dio.patch(
           "/gc/spardha/standings/${standingModel.id}",
           data: standingModel.toJson());
-      return resp.data['success'];
     } on DioError catch (err) {
       return Future.error(err);
     }
