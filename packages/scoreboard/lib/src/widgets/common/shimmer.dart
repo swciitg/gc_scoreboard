@@ -20,7 +20,7 @@ class _ShowShimmerState extends State<ShowShimmer> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -31,7 +31,6 @@ class _ShowShimmerState extends State<ShowShimmer> {
               child: Container(
                 height: widget.height,
                 width: widget.width,
-                margin: EdgeInsets.fromLTRB(4, 16, 4, 0),
                 decoration:  BoxDecoration(
                     borderRadius: BorderRadius.circular(24),color:kShimmerBase),
               )

@@ -24,7 +24,6 @@ class GCStandingsPage extends StatefulWidget {
 }
 
 class _GCStandingsPageState extends State<GCStandingsPage> {
-
   final _itemsCategory = ['Men', 'Women'];
 
   void onTapped(int index) {
@@ -36,7 +35,8 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
     var commonStore = context.read<CommonStore>();
     var gcStore = context.read<GCStore>();
 
-    reloadCallback(){ // reload page
+    reloadCallback() {
+      // reload page
       setState(() {});
     }
 
@@ -52,7 +52,8 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
               SizedBox(
                 height: 56,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 0),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
                   child: Container(
                     height: 56,
                     decoration: boxDecoration,
@@ -67,7 +68,8 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
                             children: [
                               SizedBox(
                                 height: 12,
-                                child: Text('Category', style: popUpHeadingStyle),
+                                child:
+                                    Text('Category', style: popUpHeadingStyle),
                               ),
                               const SizedBox(
                                 height: 8,
@@ -84,18 +86,19 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
                             color: Themes.cardColor1,
                             icon: popUpIcon,
                             initialValue: gcStore.selectedCategory.categoryName,
-                            onSelected: (value){
+                            onSelected: (value) {
                               gcStore.changeSelectedCategory(value);
                             },
-                            itemBuilder: (BuildContext context) => _itemsCategory
-                                .map((item) => PopupMenuItem<String>(
-                              value: item,
-                              child: Text(
-                                'General Championship [$item]',
-                                style: popUpItemStyle,
-                              ),
-                            ))
-                                .toList(),
+                            itemBuilder: (BuildContext context) =>
+                                _itemsCategory
+                                    .map((item) => PopupMenuItem<String>(
+                                          value: item,
+                                          child: Text(
+                                            'General Championship [$item]',
+                                            style: popUpItemStyle,
+                                          ),
+                                        ))
+                                    .toList(),
                           ),
                         ],
                       ),
@@ -126,7 +129,6 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
                   ],
                 ),
               ),
-
               const SizedBox(
                 height: 12,
               ),
@@ -142,24 +144,27 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
                   builder: (context, snapshot) {
                     if (snapshot.connectionState != ConnectionState.done) {
                       return Expanded(
-                          child: Center(
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 16.0),
                             child: ShowShimmer(
                               height: 400,
                               width: MediaQuery.of(context).size.width,
-
                             ),
-                          ));
-                    }
-                    else if(snapshot.hasData){
-                      return Observer(
-                          builder: (context) {
-                            return Expanded(child: StandingBoard(hostelStandings: filterGCStandings(gcStore.selectedCategory,snapshot.data!),));
-                          }
+                          ),
+                        ),
                       );
+                    } else if (snapshot.hasData) {
+                      return Observer(builder: (context) {
+                        return Expanded(
+                            child: StandingBoard(
+                          hostelStandings: filterGCStandings(
+                              gcStore.selectedCategory, snapshot.data!),
+                        ));
+                      });
                     }
                     return ErrorReloadPage(apiFunction: reloadCallback);
-                  }
-              )
+                  })
             ],
           )),
       bottomNavigationBar: const BottomNavBar(),

@@ -38,8 +38,9 @@ class _SpardhaAdminStandingsPageState extends State<SpardhaAdminStandingsPage> {
               return ListView.builder(
                   itemCount: 4,
                   itemBuilder: (context, index) {
-                    return SizedBox(
+                    return Container(
                       height: 200,
+                      padding: EdgeInsets.symmetric(vertical: 8),
                       child: ShowShimmer(
                         height: 200,
                         width: MediaQuery.of(context).size.width,

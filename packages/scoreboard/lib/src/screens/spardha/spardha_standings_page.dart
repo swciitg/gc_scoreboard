@@ -38,10 +38,13 @@ class _StandingsPageState extends State<StandingsPage> {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Expanded(
                       child: Center(
-                        child: ShowShimmer(
-                          height: 400,
-                          width: MediaQuery.of(context).size.width,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: ShowShimmer(
+                            height: 400,
+                            width: MediaQuery.of(context).size.width,
 
+                          ),
                         ),
                       ));
                 }
