@@ -242,7 +242,7 @@ class _AddEventFormState extends State<AddEventForm> {
                                               style: TextButton.styleFrom(
                                                 backgroundColor:
                                                     Colors.blue, // button
-                                                primary: Colors.white,
+                                                foregroundColor: Colors.white,
                                                 elevation: 0,
                                                 textStyle: GoogleFonts.montserrat()
                                               ),
@@ -250,6 +250,7 @@ class _AddEventFormState extends State<AddEventForm> {
                                           ),
                                           child: child!,
                                         ));
+                                
                                 if (pickedDate != null) {
                                   if (!mounted) return;
                                   selectedDate = pickedDate;
