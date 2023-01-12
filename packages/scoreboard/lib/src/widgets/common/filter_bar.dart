@@ -10,6 +10,7 @@ import '../../globals/styles/filter_style.dart';
 import '../../stores/common_store.dart';
 import '../../stores/spardha_store.dart';
 import '../../stores/static_store.dart';
+import '../add_event/datepicker_color.dart';
 
 class FilterBar extends StatefulWidget {
   const FilterBar({Key? key}) : super(key: key);
@@ -178,7 +179,8 @@ class _FilterBarState extends State<FilterBar> {
                                   initialDate: DateTime.now(),
                                   firstDate: DateTime(2000),
                                   //DateTime.now() - not to allow to choose before today.
-                                  lastDate: DateTime(2101));
+                                  lastDate: DateTime(2101),
+                                  builder: (context, child) => DatePickerTheme(child: child,));
                               if (pickedDate != null) {
                                 if (!mounted) return;
                               }
@@ -255,7 +257,9 @@ class _FilterBarState extends State<FilterBar> {
                                   initialDate: DateTime.now(),
                                   firstDate: DateTime(2000),
                                   //DateTime.now() - not to allow to choose before today.
-                                  lastDate: DateTime(2101));
+                                  lastDate: DateTime(2101),
+                                  builder: (context, child) => DatePickerTheme(child: child,)
+                                      );
                               if (pickedDate != null) {
                                 if (!mounted) return;
                                 spardhaStore.changeSelectedDate(
