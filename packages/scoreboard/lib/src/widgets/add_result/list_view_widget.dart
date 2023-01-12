@@ -20,14 +20,14 @@ class _AddResultListState extends State<AddResultList> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-        child: Form(
-      key: widget.formKey,
       child: ListView.builder(
         itemCount: ResultFormStore.numPositions(),
         itemBuilder: (context, index) {
           return Column(
             children: [
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               for (int team = 0;
                   team < ResultFormStore.numTeamsWithPosition(index + 1);
                   team++)
@@ -190,6 +190,6 @@ class _AddResultListState extends State<AddResultList> {
           );
         },
       ),
-    ));
+    );
   }
 }
