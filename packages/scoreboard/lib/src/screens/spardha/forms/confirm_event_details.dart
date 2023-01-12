@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -54,16 +55,24 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
           TextButton(
             onPressed: () async {
               print(widget.event.toJson());
-              bool response;
               try {
                 if (widget.isEdit) {
-                  print("here");
-                  response = await APIService(context)
+                  await APIService(context)
                       .updateSpardhaEvent(widget.event);
+                  showSnackBar(context, "Event Edited successfully");
                 } else {
-                  response = await APIService(context)
+                  await APIService(context)
                       .postEventSchedule(widget.event.toJson());
+                  showSnackBar(context, "Event schedule posted successfully");
                 }
+<<<<<<< HEAD
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    ScoreBoardHome.id, (route) => false);
+              } on DioError catch (err) {
+                print("here");
+                print(err);
+                showErrorSnackBar(context, err);
+=======
                 if (response) {
                   if (widget.isEdit) {
                     showSnackBar(context, "Event Edited successfully");
@@ -77,6 +86,7 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
                 }
               } catch (err) {
                 showSnackBar(context, "Some error occurred, please try again");
+>>>>>>> 6c6b5dc24ca7a3206bf138c221f76d7b9f96ef75
               }
             },
             child: Text(

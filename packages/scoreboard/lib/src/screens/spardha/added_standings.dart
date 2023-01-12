@@ -64,7 +64,7 @@ class _SpardhaAdminStandingsPageState extends State<SpardhaAdminStandingsPage> {
                   fontSize: 12,
                   color: Themes.kWhite)),);
             }
-            return ErrorReloadPage(apiFunction: reloadCallback,);
+            return Column(children: [ErrorReloadPage(apiFunction: reloadCallback)]);
           },
         ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

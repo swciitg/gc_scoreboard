@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import '../../../functions/snackbar.dart';
 import '../../../functions/validator.dart';
@@ -31,9 +32,11 @@ class _AddResultFormState extends State<AddResultForm> {
     }
   }
 
+  final key = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    final key = GlobalKey<FormState>();
+
     return Scaffold(
         backgroundColor: Themes.theme.backgroundColor,
         appBar: AppBar(
@@ -66,6 +69,19 @@ class _AddResultFormState extends State<AddResultForm> {
               onPressed: () async {
                 if (key.currentState!.validate()) {
                   try {
+<<<<<<< HEAD
+                    await APIService(context)
+                        .addUpdateResult(
+                            widget.event.id!,
+                            ResultFormStore.resultFields!,
+                            ResultFormStore.victoryStatement!);
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        ScoreBoardHome.id, (route) => false);
+                showSnackBar(context, 'Successfully added/updated result');
+                ResultFormStore.clear();
+                  } on DioError catch (err) {
+                    showErrorSnackBar(context, err);
+=======
                     bool response = await APIService(context).addUpdateResult(
                         widget.event.id!,
                         ResultFormStore.resultFields!,
@@ -81,6 +97,7 @@ class _AddResultFormState extends State<AddResultForm> {
                   } catch (err) {
                     showSnackBar(
                         context, 'Some error occurred, please try again');
+>>>>>>> 6c6b5dc24ca7a3206bf138c221f76d7b9f96ef75
                   }
                 }
               },
@@ -144,7 +161,15 @@ class _AddResultFormState extends State<AddResultForm> {
                 const SizedBox(
                   height: 22,
                 ),
+<<<<<<< HEAD
+              ),
+              const SizedBox(
+                height: 22,
+              ),
+              CustomTextField(
+=======
                 CustomTextField(
+>>>>>>> 6c6b5dc24ca7a3206bf138c221f76d7b9f96ef75
                   inputType: TextInputType.text,
                   hintText: 'Victory Statement',
                   validator: validateField,
@@ -158,6 +183,6 @@ class _AddResultFormState extends State<AddResultForm> {
               ],
             ),
           ),
-        ));
+        ),);
   }
 }
