@@ -73,10 +73,10 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
                   Navigator.of(context).pushNamedAndRemoveUntil(
                       ScoreBoardHome.id, (route) => false);
                 } else {
-                  showSnackBar(context, "Some error occures, please try again");
+                  showSnackBar(context, "Some error occurred, please try again");
                 }
               } catch (err) {
-                showSnackBar(context, "Some error occures, please try again");
+                showSnackBar(context, "Some error occurred, please try again");
               }
             },
             child: Text(

@@ -47,7 +47,7 @@ class _LoginWebViewState extends State<LoginWebView> {
               print(values);
               print(await AuthUserHelpers.getUserEmail());
               if(values[0].toLowerCase().contains("error")){
-                showSnackBar(context, "Some Error occured");
+                showSnackBar(context, "Some Error occurred");
               }
               else{
                 await APIService(context).generateTokens(commonStore);

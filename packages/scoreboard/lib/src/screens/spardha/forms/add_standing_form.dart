@@ -99,14 +99,14 @@ class _AddStandingState extends State<AddStanding> {
                   }
                   else {
                     showSnackBar(
-                        context, 'Some error occured, please try again');
+                        context, 'Some error occurred, please try again');
                   }
                 }
                 catch(err)
                 {
                   print(err.toString());
                   showSnackBar(
-                      context, 'Some error occured, please try again');
+                      context, 'Some error occurred, please try again');
                 }
               },
               child: Text(

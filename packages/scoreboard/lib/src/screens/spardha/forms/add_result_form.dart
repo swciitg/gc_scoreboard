@@ -82,7 +82,7 @@ class _AddResultFormState extends State<AddResultForm> {
                   }
                   catch(err)
                 {
-                  showSnackBar(context, 'Some error occured, please try again');
+                  showSnackBar(context, 'Some error occurred, please try again');
                 }
                 }
               },

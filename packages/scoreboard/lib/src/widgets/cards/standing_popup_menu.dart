@@ -55,7 +55,7 @@ class _StandingPopupState extends State<StandingPopup> {
             await APIService(context).deleteStanding(widget.standingModel.id!);
         commonStore.competition = Competitions.gc;
         if (!response) {
-          showSnackBar(context, 'Some error occured, try again later');
+          showSnackBar(context, 'Some error occurred, try again later');
         } else {
           Navigator.pushReplacement(
               context,

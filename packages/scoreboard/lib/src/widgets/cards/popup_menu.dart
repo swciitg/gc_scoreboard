@@ -75,7 +75,7 @@ class _PopupMenuState extends State<PopupMenu> {
           bool response = await APIService(context).deleteSpardhaEventResult(widget.eventModel.id!);
           if(!response)
           {
-            showSnackBar(context, 'Some error occured, try again later');
+            showSnackBar(context, 'Some error occurred, try again later');
           }
           else
           {
@@ -86,7 +86,7 @@ class _PopupMenuState extends State<PopupMenu> {
           bool response = await APIService(context).deleteEvent(widget.eventModel.id!);
           if(!response)
           {
-            showSnackBar(context, 'Some error occured, try again later');
+            showSnackBar(context, 'Some error occurred, try again later');
           }
           else
             {
