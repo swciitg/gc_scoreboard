@@ -34,15 +34,14 @@ class _AddStandingState extends State<AddStanding> {
   @override
   void initState() {
     super.initState();
-    if(widget.standings != null)
-      {
-        standingFormStore.setPreData(widget.standings!);
-      }
+    if (widget.standings != null) {
+      standingFormStore.setPreData(widget.standings!);
+    }
   }
 
+  static final key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final key = GlobalKey<FormState>();
     var commStore = context.read<CommonStore>();
     return Scaffold(
         backgroundColor: Themes.theme.backgroundColor,
@@ -86,24 +85,23 @@ class _AddStandingState extends State<AddStanding> {
                           standingFormStore.standing!.map((e) => e.toJson()))
                     });
                   } else {
-                    widget.standings!.category=standingFormStore.category!.categoryName;
-                    widget.standings!.event=standingFormStore.event;
-                    widget.standings!.standings=standingFormStore.standing;
-                    response =
-                    await APIService(context).updateSpardhaStanding(widget.standings!);
+                    widget.standings!.category =
+                        standingFormStore.category!.categoryName;
+                    widget.standings!.event = standingFormStore.event;
+                    widget.standings!.standings = standingFormStore.standing;
+                    response = await APIService(context)
+                        .updateSpardhaStanding(widget.standings!);
                   }
                   if (response) {
                     showSnackBar(context, "Done Successfully");
-                    commStore.competition=Competitions.gc;
-                    Navigator.pushNamedAndRemoveUntil(context, ScoreBoardHome.id, (route) => false);
-                  }
-                  else {
+                    commStore.competition = Competitions.gc;
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, ScoreBoardHome.id, (route) => false);
+                  } else {
                     showSnackBar(
                         context, 'Some error occurred, please try again');
                   }
-                }
-                catch(err)
-                {
+                } catch (err) {
                   print(err.toString());
                   showSnackBar(
                       context, 'Some error occurred, please try again');
@@ -160,7 +158,8 @@ class _AddStandingState extends State<AddStanding> {
                               } else if (value == 'Women') {
                                 standingFormStore.category = Category.women;
                               } else {
-                                standingFormStore.category = Category.menandwomen;
+                                standingFormStore.category =
+                                    Category.menandwomen;
                               }
                             });
                           },
@@ -170,112 +169,114 @@ class _AddStandingState extends State<AddStanding> {
                 ),
                 Expanded(
                     child: ListView.builder(
-                      itemCount: standingFormStore.standing!.length + 1,
-                      itemBuilder: (context, index) {
-                        return Column(
+                  itemCount: standingFormStore.standing!.length + 1,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            if (index > 0)
+                              Row(
+                                children: [
+                                  Text(
+                                    getPosition(index - 1),
+                                    style: Themes.theme.textTheme.bodyText2,
+                                  ),
+                                  const Spacer(),
+                                ],
+                              ),
                             const SizedBox(
-                              height: 10,
+                              height: 20,
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                if (index > 0)
-                                  Row(
+                            if (index > 0)
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 50,
+                                    child: HostelDropDown(
+                                      validator: validateField,
+                                      value: standingFormStore
+                                          .standing![index - 1].hostelName,
+                                      onChanged: (hostel) => standingFormStore
+                                          .standing![index - 1]
+                                          .hostelName = hostel,
+                                      hostels:
+                                          getHostel(standingFormStore.category),
+                                    ),
+                                  ),
+                                  if (index > 0)
+                                    const Spacer(
+                                      flex: 10,
+                                    ),
+                                  if (index > 0)
+                                    Expanded(
+                                      flex: 35,
+                                      child: CustomTextField(
+                                        isNecessary: true,
+                                        inputType: TextInputType.number,
+                                        hintText: 'Primary Score',
+                                        validator: validateField,
+                                        onChanged: (ps) {
+                                          standingFormStore.standing![index - 1]
+                                              .points = int.parse(ps);
+                                        },
+                                        value: standingFormStore
+                                            .standing![index - 1].points
+                                            .toString(),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            if (index > 0)
+                              const SizedBox(
+                                height: 16,
+                              ),
+                            if (index > 0)
+                              Divider(
+                                thickness: 1,
+                                color: Themes.theme.dividerColor,
+                              ),
+                            if (index > 0)
+                              const SizedBox(
+                                height: 24,
+                              ),
+                            if (index == standingFormStore.standing!.length)
+                              TextButton(
+                                  style: TextButton.styleFrom(
+                                    padding: EdgeInsets.zero,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      standingFormStore.addNewPosition();
+                                    });
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
+                                      Icon(
+                                        Icons.add,
+                                        color: Themes.theme.primaryColor,
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
                                       Text(
-                                        getPosition(index - 1),
-                                        style: Themes.theme.textTheme.bodyText2,
-                                      ),
-                                      const Spacer(),
+                                        'Add Position',
+                                        style: Themes.theme.textTheme.headline3,
+                                      )
                                     ],
-                                  ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                if (index > 0)
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 50,
-                                        child: HostelDropDown(
-                                          validator: validateField,
-                                          value:
-                                              standingFormStore.standing![index - 1].hostelName,
-                                          onChanged: (hostel) => standingFormStore
-                                              .standing![index - 1]
-                                              .hostelName = hostel,
-                                          hostels: getHostel(standingFormStore.category),
-                                        ),
-                                      ),
-                                      if (index > 0)
-                                        const Spacer(
-                                          flex: 10,
-                                        ),
-                                      if (index > 0)
-                                        Expanded(
-                                          flex: 35,
-                                          child: CustomTextField(
-                                            isNecessary: true,
-                                            inputType: TextInputType.number,
-                                            hintText: 'Primary Score',
-                                            validator: validateField,
-                                            onChanged: (ps) {
-                                              standingFormStore.standing![index - 1].points =
-                                                  int.parse(ps);
-                                            },
-                                            value: standingFormStore.standing![index - 1].points
-                                                .toString(),
-                                          ),
-                                        ),
-                                    ],
-                                  ),
-                                if (index > 0)
-                                  const SizedBox(
-                                    height: 16,
-                                  ),
-                                if (index > 0)
-                                  Divider(
-                                    thickness: 1,
-                                    color: Themes.theme.dividerColor,
-                                  ),
-                                if (index > 0)
-                                  const SizedBox(
-                                    height: 24,
-                                  ),
-                                if (index == standingFormStore.standing!.length)
-                                  TextButton(
-                                      style: TextButton.styleFrom(
-                                        padding: EdgeInsets.zero,
-                                      ),
-                                      onPressed: () {
-                                        setState(() {
-                                          standingFormStore.addNewPosition();
-                                        });
-                                      },
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        children: [
-                                          Icon(
-                                            Icons.add,
-                                            color: Themes.theme.primaryColor,
-                                          ),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(
-                                            'Add Position',
-                                            style: Themes.theme.textTheme.headline3,
-                                          )
-                                        ],
-                                      ))
-                              ],
-                            )
+                                  ))
                           ],
-                        );
-                      },
-                    )),
+                        )
+                      ],
+                    );
+                  },
+                )),
               ],
             ),
           ),

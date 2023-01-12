@@ -31,9 +31,9 @@ class _AddResultFormState extends State<AddResultForm> {
     }
   }
 
+  static final key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final key = GlobalKey<FormState>();
     return Scaffold(
         backgroundColor: Themes.theme.backgroundColor,
         appBar: AppBar(
@@ -91,60 +91,58 @@ class _AddResultFormState extends State<AddResultForm> {
             )
           ],
         ),
-        body: Form(
-          key: key,
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-            width: double.infinity,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const FieldsMandatory(),
-                const SizedBox(
-                  height: 28,
-                ),
-                Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.event.event,
-                          style: Themes.theme.textTheme.headline1,
-                        ),
-                        const SizedBox(
-                          height: 4,
-                        ),
-                        Text(
-                          widget.event.category,
-                          style: Themes.theme.textTheme.headline2,
-                        ),
-                      ],
-                    ),
-                    const Spacer(),
-                    DateWidget(
-                      date: widget.event.date,
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 4,
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Themes.theme.cardColor,
+        body: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const FieldsMandatory(),
+              const SizedBox(
+                height: 28,
+              ),
+              Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.event.event,
+                        style: Themes.theme.textTheme.headline1,
+                      ),
+                      const SizedBox(
+                        height: 4,
+                      ),
+                      Text(
+                        widget.event.category,
+                        style: Themes.theme.textTheme.headline2,
+                      ),
+                    ],
                   ),
-                  child: Text(
-                    widget.event.stage,
-                    style: Themes.theme.textTheme.headline3,
-                  ),
+                  const Spacer(),
+                  DateWidget(
+                    date: widget.event.date,
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 4,
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Themes.theme.cardColor,
                 ),
-                const SizedBox(
-                  height: 22,
+                child: Text(
+                  widget.event.stage,
+                  style: Themes.theme.textTheme.headline3,
                 ),
-                CustomTextField(
+              ),
+              const SizedBox(
+                height: 22,
+              ),
+              CustomTextField(
                   inputType: TextInputType.text,
                   hintText: 'Victory Statement',
                   validator: validateField,
@@ -152,11 +150,9 @@ class _AddResultFormState extends State<AddResultForm> {
                   onChanged: (p) {
                     ResultFormStore.victoryStatement = p;
                   },
-                  isNecessary: true,
-                ),
-                AddResultList(formKey: key, hostels: widget.event.hostels)
-              ],
-            ),
+                  isNecessary: true),
+              AddResultList(formKey: key, hostels: widget.event.hostels)
+            ],
           ),
         ));
   }
