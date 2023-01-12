@@ -8,13 +8,14 @@ class CustomTextField extends StatefulWidget {
   final String? Function(String?)? validator;
   final TextEditingController controller;
   final void Function()? onTap;
+  final FocusNode? focusNode;
 
   const CustomTextField(
-      {
-      super.key,
-        required this.hintText,
+      {super.key,
+      required this.hintText,
       required this.validator,
       required this.controller,
+      this.focusNode,
       this.onTap});
 
   @override
@@ -29,6 +30,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       style: Themes.theme.textTheme.headline6?.copyWith(color: Colors.white),
       validator: widget.validator,
       controller: widget.controller,
+      focusNode: widget.focusNode,
       cursorColor: Themes.theme.primaryColor,
       onTap: widget.onTap,
       decoration: InputDecoration(

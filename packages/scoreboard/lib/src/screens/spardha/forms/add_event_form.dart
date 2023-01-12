@@ -137,13 +137,38 @@ class _AddEventFormState extends State<AddEventForm> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomDropDown(
-                        items: StaticStore.spardhaEvents,
-                        hintText: 'Event Name',
-                        onChanged: (s) => sportName = s,
-                        value: sportName,
-                        validator: validateField,
+                      Autocomplete<String>(
+                        optionsBuilder: (TextEditingValue val) {
+                          if (val.text == '') {
+                            return Iterable<String>.empty();
+                          }
+                          return StaticStore.spardhaEvents.where((element) =>
+                              element
+                                  .toLowerCase()
+                                  .contains(val.text.toLowerCase()));
+                        },
+                        onSelected: (s) => sportName = s,
+                        fieldViewBuilder: (context, c, f, __) {
+                          return CustomTextField(
+                            hintText: 'Event Name',
+                            validator: (s) {
+                              if (StaticStore.spardhaEvents.contains(s)) {
+                                return null;
+                              }
+                              return "Enter a valid event";
+                            },
+                            controller: c,
+                            focusNode: f,
+                          );
+                        },
                       ),
+                      // CustomDropDown(
+                      //   items: StaticStore.spardhaEvents,
+                      //   hintText: 'Event Name',
+                      //   onChanged: (s) => sportName = s,
+                      //   value: sportName,
+                      //   validator: validateField,
+                      // ),
                       const SizedBox(height: 12),
                       CustomDropDown(
                         items: eventCategories,
@@ -183,34 +208,44 @@ class _AddEventFormState extends State<AddEventForm> {
                                     firstDate: DateTime(2000),
                                     //DateTime.now() - not to allow to choose before today.
                                     lastDate: DateTime(2101),
-                                    builder: (context, child) =>Theme(
-                                      data: Theme.of(context).copyWith(
-                                        textTheme: TextTheme(
-                                          headline4: GoogleFonts.montserrat(),
-                                          headline5: GoogleFonts.montserrat(), // Selected Date landscape
-                                          headline6: GoogleFonts.montserrat(), // Selected Date portrait
-                                          overline: GoogleFonts.montserrat(), // Title - SELECT DATE
-                                          bodyText1: GoogleFonts.montserrat(), // year gridbview picker
-                                          bodyText2: GoogleFonts.montserrat(), // year gridbview picker
-                                          subtitle1: GoogleFonts.montserrat(), // input
-                                          subtitle2: GoogleFonts.montserrat(), // month/year picker
-                                          caption: GoogleFonts.montserrat(), // days
-                                        ),
-                                        colorScheme: ColorScheme.light(
-                                          primary: const Color(0xff2B3E5C),
-                                          onPrimary: Colors.white,
-                                          onSurface: Colors.blueGrey.shade900,
-                                        ),
-                                        textButtonTheme: TextButtonThemeData(
-                                          style: TextButton.styleFrom(
-                                            foregroundColor: Colors.blue, // button text color
+                                    builder: (context, child) => Theme(
+                                          data: Theme.of(context).copyWith(
+                                            textTheme: TextTheme(
+                                              headline4:
+                                                  GoogleFonts.montserrat(),
+                                              headline5: GoogleFonts
+                                                  .montserrat(), // Selected Date landscape
+                                              headline6: GoogleFonts
+                                                  .montserrat(), // Selected Date portrait
+                                              overline: GoogleFonts
+                                                  .montserrat(), // Title - SELECT DATE
+                                              bodyText1: GoogleFonts
+                                                  .montserrat(), // year gridbview picker
+                                              bodyText2: GoogleFonts
+                                                  .montserrat(), // year gridbview picker
+                                              subtitle1: GoogleFonts
+                                                  .montserrat(), // input
+                                              subtitle2: GoogleFonts
+                                                  .montserrat(), // month/year picker
+                                              caption: GoogleFonts
+                                                  .montserrat(), // days
+                                            ),
+                                            colorScheme: ColorScheme.light(
+                                              primary: const Color(0xff2B3E5C),
+                                              onPrimary: Colors.white,
+                                              onSurface:
+                                                  Colors.blueGrey.shade900,
+                                            ),
+                                            textButtonTheme:
+                                                TextButtonThemeData(
+                                              style: TextButton.styleFrom(
+                                                foregroundColor: Colors
+                                                    .blue, // button text color
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                      ),
-                                      child: child!,
-                                      
-                                    ) 
-                                  );
+                                          child: child!,
+                                        ));
                                 if (pickedDate != null) {
                                   if (!mounted) return;
                                   selectedDate = pickedDate;
@@ -238,7 +273,9 @@ class _AddEventFormState extends State<AddEventForm> {
                                     .requestFocus(FocusNode());
                                 TimeOfDay? pickedTime = await showTimePicker(
                                   builder: (context, childWidget) {
-                                    return TimePickerColor(childWidget: childWidget,);
+                                    return TimePickerColor(
+                                      childWidget: childWidget,
+                                    );
                                   },
                                   initialTime: selectedTime ?? TimeOfDay.now(),
                                   context: context,
