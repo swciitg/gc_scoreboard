@@ -49,6 +49,7 @@ class _ResultsCardState extends State<ResultsCard> {
                       padding: const EdgeInsets.all(16),
                       child: Column(
                         children: [
+
                           CardEventDetails(eventModel: widget.eventModel),
                           SizedBox(
                             height: 24,

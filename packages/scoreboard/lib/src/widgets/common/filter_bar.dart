@@ -230,9 +230,13 @@ class _FilterBarState extends State<FilterBar> {
                                             ),
                                             SizedBox(
                                               height: 18,
+                                              width: 90,
+
                                               child: Text(
+
                                                   spardhaStore.selectedHostel
                                                       .hostelName,
+                                                  overflow: TextOverflow.ellipsis,
                                                   style: popUpItemStyle),
                                             )
                                           ],
