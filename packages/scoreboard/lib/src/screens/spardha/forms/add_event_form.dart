@@ -242,49 +242,7 @@ class _AddEventFormState extends State<AddEventForm> {
                                     firstDate: DateTime(2000),
                                     //DateTime.now() - not to allow to choose before today.
                                     lastDate: DateTime(2101),
-                                    builder: (context, child) => Theme(
-                                          data: Theme.of(context).copyWith(
-                                            textTheme: TextTheme(
-                                              headline4:
-                                                  GoogleFonts.montserrat(),
-                                              headline5: GoogleFonts
-                                                  .montserrat(), // Selected Date landscape
-                                              headline6: GoogleFonts
-                                                  .montserrat(), // Selected Date portrait
-                                              overline: GoogleFonts
-                                                  .montserrat(), // Title - SELECT DATE
-                                              bodyText1: GoogleFonts
-                                                  .montserrat(), // year gridbview picker
-                                              bodyText2: GoogleFonts
-                                                  .montserrat(), // year gridbview picker
-                                              subtitle1: GoogleFonts
-                                                  .montserrat(), // input
-                                              subtitle2: GoogleFonts
-                                                  .montserrat(), // month/year picker
-                                              caption: GoogleFonts
-                                                  .montserrat(), // days
-                                            ),
-                                            colorScheme: ColorScheme.dark(
-                                              primary: Color.fromRGBO(189, 199, 220, 1),
-                                              onPrimary: Colors.black,
-                                              onSurface: Colors.white,
-                                              surface: const Color(0xff2B3E5C),
-                                            ),
-                                            dialogBackgroundColor:
-                                                const Color(0xff2B3E5C),
-                                            textButtonTheme:
-                                                TextButtonThemeData(
-                                              style: TextButton.styleFrom(
-                                                  backgroundColor:
-                                                  const Color(0xff2B3E5C), // button
-                                                  foregroundColor: Color.fromRGBO(118, 172, 255, 1),
-                                                  elevation: 0,
-                                                  textStyle:
-                                                      GoogleFonts.montserrat()),
-                                            ),
-                                          ),
-                                          child: child!,
-                                        ));
+                                    builder: (context, child) => DatePickerTheme(child: child,));
                                 if (pickedDate != null) {
                                   if (!mounted) return;
                                   selectedDate = pickedDate;
