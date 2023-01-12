@@ -46,7 +46,11 @@ class _AddStandingState extends State<AddStanding> {
   Widget build(BuildContext context) {
 
     var commStore = context.read<CommonStore>();
-    return Scaffold(
+    return GestureDetector(
+        onTap: (){
+      FocusScope.of(context).requestFocus(FocusNode());
+    },
+    child: Scaffold(
         backgroundColor: Themes.theme.backgroundColor,
         appBar: AppBar(
           elevation: 0,
@@ -80,7 +84,7 @@ class _AddStandingState extends State<AddStanding> {
                 }
                 try {
                   if (widget.standings == null) {
-                    await APIService(context).postSpardhaStanding({
+                   await APIService(context).postSpardhaStanding({
                       "category": standingFormStore.category!.categoryName,
                       'event': standingFormStore.event,
                       'standings': List<Map>.from(
@@ -94,6 +98,8 @@ class _AddStandingState extends State<AddStanding> {
                     await APIService(context).updateSpardhaStanding(widget.standings!);
                     showSnackBar(context, "Standing updated");
                   }
+                  commStore.competition=Competitions.gc;
+                  Navigator.pushNamedAndRemoveUntil(context, ScoreBoardHome.id, (route) => false);
                 }
                 on DioError catch(err)
                 {
@@ -269,6 +275,6 @@ class _AddStandingState extends State<AddStanding> {
               ],
             ),
           ),
-        ));
+        )));
   }
 }

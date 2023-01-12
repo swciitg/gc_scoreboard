@@ -56,7 +56,6 @@ class _AddEventFormState extends State<AddEventForm> {
   @override
   void initState() {
     super.initState();
-    // print(widget.event!.toJson());
     if (widget.event != null) {
       EventModel e = widget.event!;
       sportName = e.event;
