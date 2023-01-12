@@ -59,49 +59,71 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
                     decoration: boxDecoration,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(13, 0, 0, 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 12,
-                                child:
-                                    Text('Category', style: popUpHeadingStyle),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              SizedBox(
-                                height: 18,
-                                child: Text(
-                                    'General Championship [${gcStore.selectedCategory.categoryName}]',
-                                    style: popUpItemStyle),
-                              )
-                            ],
-                          ),
-                          PopupMenuButton<String>(
-                            color: Themes.cardColor1,
-                            icon: popUpIcon,
-                            initialValue: gcStore.selectedCategory.categoryName,
-                            onSelected: (value) {
-                              gcStore.changeSelectedCategory(value);
-                            },
-                            itemBuilder: (BuildContext context) =>
-                                _itemsCategory
-                                    .map((item) => PopupMenuItem<String>(
-                                          value: item,
-                                          child: Text(
-                                            'General Championship [$item]',
-                                            style: popUpItemStyle,
+                      child: PopupMenuButton(
+                          constraints: BoxConstraints(maxHeight: 300),
+                          position: PopupMenuPosition.under,
+                          color: Themes.cardColor1,
+                          onSelected: (String item) {
+                            gcStore.changeSelectedCategory(item);
+                            setState(() {
+                              
+                            });
+                          },
+                          itemBuilder: (BuildContext context) =>
+                              _itemsCategory
+                                  .map((item) => PopupMenuItem<String>(
+                                        value: item,
+                                        child: Container(
+                                          width: double.infinity,
+                                          child: Container(
+                                            width: MediaQuery.of(context).size.width,
+                                            child: Text(
+                                              'General Championship [$item]',
+                                              style: popUpItemStyle,
+                                            ),
                                           ),
-                                        ))
-                                    .toList(),
+                                        ),
+                                      ))
+                                  .toList(),
+                          child: Container(
+                            height: 56,
+                            decoration: boxDecoration,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(13, 0, 13, 0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        height: 12,
+                                        child: Text('Category',
+                                            style: popUpHeadingStyle),
+                                      ),
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      SizedBox(
+                                        height: 18,
+                                        child: Text(
+                                                'General Championship [${gcStore.selectedCategory.categoryName}]',
+                                            style: popUpItemStyle),
+                                      )
+                                    ],
+                                  ),
+                                  popUpIcon,
+                                ],
+                              ),
+                            ),
                           ),
-                        ],
-                      ),
+                        ),
+                      
                     ),
                   ),
                 ),
