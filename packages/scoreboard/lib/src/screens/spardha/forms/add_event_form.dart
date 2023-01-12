@@ -229,17 +229,22 @@ class _AddEventFormState extends State<AddEventForm> {
                                               caption: GoogleFonts
                                                   .montserrat(), // days
                                             ),
-                                            colorScheme: ColorScheme.light(
-                                              primary: const Color(0xff2B3E5C),
+                                            colorScheme: ColorScheme.dark(
+                                              primary: Colors.blueAccent,
                                               onPrimary: Colors.white,
-                                              onSurface:
-                                                  Colors.blueGrey.shade900,
+                                              onSurface: Colors.white,
+                                              surface: const Color(0xff2B3E5C),
                                             ),
+                                            dialogBackgroundColor:
+                                                const Color(0xff2B3E5C),
                                             textButtonTheme:
                                                 TextButtonThemeData(
                                               style: TextButton.styleFrom(
-                                                backgroundColor: Colors
-                                                    .blue, // button text color
+                                                backgroundColor:
+                                                    Colors.blue, // button
+                                                foregroundColor: Colors.white,
+                                                elevation: 0,
+                                                textStyle: GoogleFonts.montserrat()
                                               ),
                                             ),
                                           ),
