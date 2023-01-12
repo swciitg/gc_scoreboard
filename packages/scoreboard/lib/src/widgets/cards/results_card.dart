@@ -190,24 +190,29 @@ class _ResultsCardState extends State<ResultsCard> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                children: [
-                                  const Icon(
-                                    Icons.emoji_events_outlined,
-                                    color: Themes.cardFontColor3,
-                                    size: 12,
-                                  ),
-                                  const SizedBox(
-                                    width: 4,
-                                  ),
-                                  Text(
-                                    widget.eventModel.victoryStatement!,
-                                    style: GoogleFonts.montserrat(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 12,
-                                        color: Themes.cardFontColor3),
-                                  ),
-                                ],
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.emoji_events_outlined,
+                                      color: Themes.cardFontColor3,
+                                      size: 12,
+                                    ),
+                                    const SizedBox(
+                                      width: 4,
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        widget.eventModel.victoryStatement!,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: GoogleFonts.montserrat(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 12,
+                                            color: Themes.cardFontColor3),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                               GestureDetector(
                                 onTap: () {
