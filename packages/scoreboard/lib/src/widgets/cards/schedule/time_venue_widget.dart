@@ -55,11 +55,14 @@ class TimeVenueWidget extends StatelessWidget {
                 width: 8,
               ),
 
-             Text(
-                  eventModel.venue,
-                  overflow: TextOverflow.ellipsis,
-                  style: cardVenueStyle,
-                ),
+             SizedBox(
+               width: 200,
+               child: Text(
+                    eventModel.venue,
+                    overflow: TextOverflow.ellipsis,
+                    style: cardVenueStyle,
+                  ),
+             ),
 
             ],
           ),
