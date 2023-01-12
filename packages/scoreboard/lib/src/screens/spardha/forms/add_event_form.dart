@@ -359,7 +359,7 @@ class _AddEventFormState extends State<AddEventForm> {
                         height: 18,
                       ),
                       CustomDropDown(
-                        items: [for (var i = 2; i <= 10; i++) i.toString()],
+                        items: [for (var i = 2; i <= 15; i++) i.toString()],
                         value: (widget.event != null)
                             ? widget.event!.hostels.length.toString()
                             : (hostelsSize != 0
