@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:scoreboard/src/widgets/common/err_reload.dart';
+import 'package:shimmer/shimmer.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../functions/filter_standings.dart';
 import '../../services/api.dart';
@@ -22,7 +23,8 @@ class _StandingsPageState extends State<StandingsPage> {
   Widget build(BuildContext context) {
     var spardhaStore = context.read<SpardhaStore>();
 
-    reloadCallback(){ // reload page
+    reloadCallback() {
+      // reload page
       setState(() {});
     }
 
@@ -38,17 +40,15 @@ class _StandingsPageState extends State<StandingsPage> {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Expanded(
                       child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 16),
-                          child: ShowShimmer(
-                            height: 400,
-                            width: MediaQuery.of(context).size.width,
-
-                          ),
-                        ),
-                      ));
-                }
-                else if (snapshot.hasData) {
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: ShowShimmer(
+                        height: 400,
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                    ),
+                  ));
+                } else if (snapshot.hasData) {
                   print(snapshot.data);
                   return Observer(builder: (context) {
                     List<dynamic> filteredEventSchedules = filterStandings(
