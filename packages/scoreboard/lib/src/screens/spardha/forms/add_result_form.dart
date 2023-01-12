@@ -145,16 +145,16 @@ class _AddResultFormState extends State<AddResultForm> {
                 const SizedBox(
                   height: 22,
                 ),
-                CustomTextField(
-                  inputType: TextInputType.text,
-                  hintText: 'Victory Statement',
-                  validator: validateField,
-                  value: ResultFormStore.victoryStatement,
-                  onChanged: (p) {
-                    ResultFormStore.victoryStatement = p;
-                  },
-                  isNecessary: true,
-                ),
+                // CustomTextField(
+                //   inputType: TextInputType.text,
+                //   hintText: 'Victory Statement',
+                //   validator: validateField,
+                //   value: ResultFormStore.victoryStatement,
+                //   onChanged: (p) {
+                //     ResultFormStore.victoryStatement = p;
+                //   },
+                //   isNecessary: true,
+                // ),
                 AddResultList(formKey: key, hostels: widget.event.hostels)
               ],
             ),

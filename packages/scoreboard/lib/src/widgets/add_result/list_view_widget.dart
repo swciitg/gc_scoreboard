@@ -21,8 +21,21 @@ class _AddResultListState extends State<AddResultList> {
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        itemCount: ResultFormStore.numPositions(),
+        itemCount: ResultFormStore.numPositions()+1,
         itemBuilder: (context, index) {
+          if (index == 0) {
+ return CustomTextField(
+              inputType: TextInputType.text,
+              hintText: 'Victory Statement',
+              validator: validateField,
+              value: ResultFormStore.victoryStatement,
+              onChanged: (p) {
+                ResultFormStore.victoryStatement = p;
+              },
+              isNecessary: true,
+            );
+          }
+          index--;
           return Column(
             children: [
               const SizedBox(
