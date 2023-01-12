@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import '../../../functions/snackbar.dart';
 import '../../../functions/validator.dart';
@@ -20,21 +21,22 @@ class AddResultForm extends StatefulWidget {
 }
 
 class _AddResultFormState extends State<AddResultForm> {
-
   TextEditingController victoryStatement = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    if (widget.event.results.isNotEmpty){
+    if (widget.event.results.isNotEmpty) {
       ResultFormStore.resultFields = widget.event.results;
       ResultFormStore.victoryStatement = widget.event.victoryStatement!;
     }
   }
 
+  final key = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    final key = GlobalKey<FormState>();
+
     return Scaffold(
         backgroundColor: Themes.theme.backgroundColor,
         appBar: AppBar(
@@ -67,23 +69,18 @@ class _AddResultFormState extends State<AddResultForm> {
               onPressed: () async {
                 if (key.currentState!.validate()) {
                   try {
-                    bool response = await APIService(context).addUpdateResult(
-                        widget.event.id!, ResultFormStore.resultFields!,
-                        ResultFormStore.victoryStatement!);
-                    if (response) {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                          ScoreBoardHome.id, (route) => false);
-                      showSnackBar(context, 'Success');
-                      ResultFormStore.clear();
-                    }
-                    else {
-                      showSnackBar(context, 'Failed');
-                    }
+                    await APIService(context)
+                        .addUpdateResult(
+                            widget.event.id!,
+                            ResultFormStore.resultFields!,
+                            ResultFormStore.victoryStatement!);
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        ScoreBoardHome.id, (route) => false);
+                showSnackBar(context, 'Successfully added/updated result');
+                ResultFormStore.clear();
+                  } on DioError catch (err) {
+                    showErrorSnackBar(context, err);
                   }
-                  catch(err)
-                {
-                  showSnackBar(context, 'Some error occured, please try again');
-                }
                 }
               },
               child: Text(
@@ -145,7 +142,7 @@ class _AddResultFormState extends State<AddResultForm> {
                 height: 22,
               ),
               CustomTextField(
-                inputType: TextInputType.text,
+                  inputType: TextInputType.text,
                   hintText: 'Victory Statement',
                   validator: validateField,
                   value: ResultFormStore.victoryStatement,
@@ -156,6 +153,6 @@ class _AddResultFormState extends State<AddResultForm> {
               AddResultList(formKey: key, hostels: widget.event.hostels)
             ],
           ),
-        ));
+        ),);
   }
 }
