@@ -36,7 +36,7 @@ class _AddEventFormState extends State<AddEventForm> {
   String? stage;
   int hostelsSize = 0;
   List<String?> participatingHostels = [];
-  final _formKey = GlobalKey<FormState>();
+  static final _formKey = GlobalKey<FormState>();
 
   callbackHostels(value) {
     participatingHostels.length = int.parse(value);

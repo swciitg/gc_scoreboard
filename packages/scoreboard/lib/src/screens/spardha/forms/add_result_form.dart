@@ -20,21 +20,20 @@ class AddResultForm extends StatefulWidget {
 }
 
 class _AddResultFormState extends State<AddResultForm> {
-
   TextEditingController victoryStatement = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    if (widget.event.results.isNotEmpty){
+    if (widget.event.results.isNotEmpty) {
       ResultFormStore.resultFields = widget.event.results;
       ResultFormStore.victoryStatement = widget.event.victoryStatement!;
     }
   }
 
+  static final key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final key = GlobalKey<FormState>();
     return Scaffold(
         backgroundColor: Themes.theme.backgroundColor,
         appBar: AppBar(
@@ -68,22 +67,21 @@ class _AddResultFormState extends State<AddResultForm> {
                 if (key.currentState!.validate()) {
                   try {
                     bool response = await APIService(context).addUpdateResult(
-                        widget.event.id!, ResultFormStore.resultFields!,
+                        widget.event.id!,
+                        ResultFormStore.resultFields!,
                         ResultFormStore.victoryStatement!);
                     if (response) {
                       Navigator.of(context).pushNamedAndRemoveUntil(
                           ScoreBoardHome.id, (route) => false);
                       showSnackBar(context, 'Success');
                       ResultFormStore.clear();
-                    }
-                    else {
+                    } else {
                       showSnackBar(context, 'Failed');
                     }
+                  } catch (err) {
+                    showSnackBar(
+                        context, 'Some error occurred, please try again');
                   }
-                  catch(err)
-                {
-                  showSnackBar(context, 'Some error occurred, please try again');
-                }
                 }
               },
               child: Text(
@@ -145,7 +143,7 @@ class _AddResultFormState extends State<AddResultForm> {
                 height: 22,
               ),
               CustomTextField(
-                inputType: TextInputType.text,
+                  inputType: TextInputType.text,
                   hintText: 'Victory Statement',
                   validator: validateField,
                   value: ResultFormStore.victoryStatement,
