@@ -162,6 +162,7 @@ class _AddResultListState extends State<AddResultList> {
                               style: TextButton.styleFrom(
                                 padding: EdgeInsets.zero,
                               ),
+<<<<<<< HEAD
                               onPressed: () {
                                 setState(() {
                                   ResultFormStore.addNewPosition(index);
@@ -191,5 +192,23 @@ class _AddResultListState extends State<AddResultList> {
             },
           ),
         ));
+=======
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                'Add Position',
+                                style: Themes.theme.textTheme.headline3,
+                              )
+                            ],
+                          ))
+                  ],
+                )
+            ],
+          );
+        },
+      ),
+    );
+>>>>>>> 6c6b5dc24ca7a3206bf138c221f76d7b9f96ef75
   }
 }

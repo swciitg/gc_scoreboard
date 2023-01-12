@@ -65,12 +65,28 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
                       .postEventSchedule(widget.event.toJson());
                   showSnackBar(context, "Event schedule posted successfully");
                 }
+<<<<<<< HEAD
                 Navigator.of(context).pushNamedAndRemoveUntil(
                     ScoreBoardHome.id, (route) => false);
               } on DioError catch (err) {
                 print("here");
                 print(err);
                 showErrorSnackBar(context, err);
+=======
+                if (response) {
+                  if (widget.isEdit) {
+                    showSnackBar(context, "Event Edited successfully");
+                  } else {
+                    showSnackBar(context, "Event schedule posted successfully");
+                  }
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      ScoreBoardHome.id, (route) => false);
+                } else {
+                  showSnackBar(context, "Some error occurred, please try again");
+                }
+              } catch (err) {
+                showSnackBar(context, "Some error occurred, please try again");
+>>>>>>> 6c6b5dc24ca7a3206bf138c221f76d7b9f96ef75
               }
             },
             child: Text(

@@ -24,7 +24,6 @@ class GCStandingsPage extends StatefulWidget {
 }
 
 class _GCStandingsPageState extends State<GCStandingsPage> {
-
   final _itemsCategory = ['Men', 'Women'];
 
   void onTapped(int index) {
@@ -36,7 +35,8 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
     var commonStore = context.read<CommonStore>();
     var gcStore = context.read<GCStore>();
 
-    reloadCallback(){ // reload page
+    reloadCallback() {
+      // reload page
       setState(() {});
     }
 
@@ -52,53 +52,78 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
               SizedBox(
                 height: 56,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 0),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
                   child: Container(
                     height: 56,
                     decoration: boxDecoration,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(13, 0, 0, 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 12,
-                                child: Text('Category', style: popUpHeadingStyle),
+                      child: PopupMenuButton(
+                          constraints: BoxConstraints(maxHeight: 300),
+                          position: PopupMenuPosition.under,
+                          color: Themes.cardColor1,
+                          onSelected: (String item) {
+                            gcStore.changeSelectedCategory(item);
+                            setState(() {
+                              
+                            });
+                          },
+                          itemBuilder: (BuildContext context) =>
+                              _itemsCategory
+                                  .map((item) => PopupMenuItem<String>(
+                                        value: item,
+                                        child: Container(
+                                          width: double.infinity,
+                                          child: Container(
+                                            width: MediaQuery.of(context).size.width,
+                                            child: Text(
+                                              'General Championship [$item]',
+                                              style: popUpItemStyle,
+                                            ),
+                                          ),
+                                        ),
+                                      ))
+                                  .toList(),
+                          child: Container(
+                            height: 56,
+                            decoration: boxDecoration,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(13, 0, 13, 0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        height: 12,
+                                        child: Text('Category',
+                                            style: popUpHeadingStyle),
+                                      ),
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      SizedBox(
+                                        height: 18,
+                                        child: Text(
+                                                'General Championship [${gcStore.selectedCategory.categoryName}]',
+                                            style: popUpItemStyle),
+                                      )
+                                    ],
+                                  ),
+                                  popUpIcon,
+                                ],
                               ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              SizedBox(
-                                height: 18,
-                                child: Text(
-                                    'General Championship [${gcStore.selectedCategory.categoryName}]',
-                                    style: popUpItemStyle),
-                              )
-                            ],
+                            ),
                           ),
-                          PopupMenuButton<String>(
-                            color: Themes.cardColor1,
-                            icon: popUpIcon,
-                            initialValue: gcStore.selectedCategory.categoryName,
-                            onSelected: (value){
-                              gcStore.changeSelectedCategory(value);
-                            },
-                            itemBuilder: (BuildContext context) => _itemsCategory
-                                .map((item) => PopupMenuItem<String>(
-                              value: item,
-                              child: Text(
-                                'General Championship [$item]',
-                                style: popUpItemStyle,
-                              ),
-                            ))
-                                .toList(),
-                          ),
-                        ],
-                      ),
+                        ),
+                      
                     ),
                   ),
                 ),
@@ -126,7 +151,6 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
                   ],
                 ),
               ),
-
               const SizedBox(
                 height: 12,
               ),
@@ -142,24 +166,27 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
                   builder: (context, snapshot) {
                     if (snapshot.connectionState != ConnectionState.done) {
                       return Expanded(
-                          child: Center(
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 16.0),
                             child: ShowShimmer(
                               height: 400,
                               width: MediaQuery.of(context).size.width,
-
                             ),
-                          ));
-                    }
-                    else if(snapshot.hasData){
-                      return Observer(
-                          builder: (context) {
-                            return Expanded(child: StandingBoard(hostelStandings: filterGCStandings(gcStore.selectedCategory,snapshot.data!),));
-                          }
+                          ),
+                        ),
                       );
+                    } else if (snapshot.hasData) {
+                      return Observer(builder: (context) {
+                        return Expanded(
+                            child: StandingBoard(
+                          hostelStandings: filterGCStandings(
+                              gcStore.selectedCategory, snapshot.data!),
+                        ));
+                      });
                     }
                     return ErrorReloadPage(apiFunction: reloadCallback);
-                  }
-              )
+                  })
             ],
           )),
       bottomNavigationBar: const BottomNavBar(),

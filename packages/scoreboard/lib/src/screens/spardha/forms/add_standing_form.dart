@@ -94,13 +94,30 @@ class _AddStandingState extends State<AddStanding> {
                     await APIService(context).updateSpardhaStanding(widget.standings!);
                     showSnackBar(context, "Standing updated");
                   }
+<<<<<<< HEAD
                   commStore.competition=Competitions.gc; // show gc standings page on main screen
                   Navigator.pushNamedAndRemoveUntil(context, ScoreBoardHome.id, (route) => false);
+=======
+                  if (response) {
+                    showSnackBar(context, "Done Successfully");
+                    commStore.competition=Competitions.gc;
+                    Navigator.pushNamedAndRemoveUntil(context, ScoreBoardHome.id, (route) => false);
+                  }
+                  else {
+                    showSnackBar(
+                        context, 'Some error occurred, please try again');
+                  }
+>>>>>>> 6c6b5dc24ca7a3206bf138c221f76d7b9f96ef75
                 }
                 on DioError catch(err)
                 {
                   print(err.toString());
+<<<<<<< HEAD
                   showErrorSnackBar(context, err);
+=======
+                  showSnackBar(
+                      context, 'Some error occurred, please try again');
+>>>>>>> 6c6b5dc24ca7a3206bf138c221f76d7b9f96ef75
                 }
               },
               child: Text(

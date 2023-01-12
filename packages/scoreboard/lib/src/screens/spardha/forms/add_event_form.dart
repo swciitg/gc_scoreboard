@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:scoreboard/src/widgets/add_event/timepicker_color.dart';
 import '../../../functions/snackbar.dart';
@@ -33,6 +34,7 @@ class _AddEventFormState extends State<AddEventForm> {
   bool isCancelled = false;
   String? category;
   String? stage;
+  String? hostelSizeValue;
   int hostelsSize = 0;
   List<String?> participatingHostels = [];
   final _formKey = GlobalKey<FormState>();
@@ -42,11 +44,13 @@ class _AddEventFormState extends State<AddEventForm> {
     print(participatingHostels);
     setState(() {
       hostelsSize = int.parse(value);
+      hostelSizeValue = hostelsSize.toString();
     });
   }
 
   callbackAddHostel(value, index) {
     participatingHostels[index - 1] = value;
+    hostelSizeValue = participatingHostels.length.toString();
   }
 
   @override
@@ -67,6 +71,7 @@ class _AddEventFormState extends State<AddEventForm> {
       } else if (e.status == 'postponed') {
         isPostponed = true;
       }
+      hostelSizeValue = participatingHostels.length.toString();
       selectedDate = e.date;
       selectedTime = TimeOfDay(hour: e.date.hour, minute: e.date.minute);
       dateInput.text = DateFormat('dd-MMM-yyyy').format(e.date);
@@ -137,12 +142,30 @@ class _AddEventFormState extends State<AddEventForm> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomDropDown(
-                        items: StaticStore.spardhaEvents,
-                        hintText: 'Event Name',
-                        onChanged: (s) => sportName = s,
-                        value: sportName,
-                        validator: validateField,
+                      Autocomplete<String>(
+                        optionsBuilder: (TextEditingValue val) {
+                          if (val.text == '') {
+                            return Iterable<String>.empty();
+                          }
+                          return StaticStore.spardhaEvents.where((element) =>
+                              element
+                                  .toLowerCase()
+                                  .contains(val.text.toLowerCase()));
+                        },
+                        onSelected: (s) => sportName = s,
+                        fieldViewBuilder: (context, c, f, __) {
+                          return CustomTextField(
+                            hintText: 'Event Name',
+                            validator: (s) {
+                              if (StaticStore.spardhaEvents.contains(s)) {
+                                return null;
+                              }
+                              return "Enter a valid event";
+                            },
+                            controller: c,
+                            focusNode: f,
+                          );
+                        },
                       ),
                       const SizedBox(height: 12),
                       CustomDropDown(
@@ -152,7 +175,12 @@ class _AddEventFormState extends State<AddEventForm> {
                           category = s;
                           setState(() {
                             hostelsSize = 0;
+<<<<<<< HEAD
                             participatingHostels.clear();
+=======
+                            participatingHostels = [];
+                            hostelSizeValue = null;
+>>>>>>> 6c6b5dc24ca7a3206bf138c221f76d7b9f96ef75
                           });
                         },
                         value: category,
@@ -180,27 +208,48 @@ class _AddEventFormState extends State<AddEventForm> {
                                     .requestFocus(FocusNode());
                                 DateTime? pickedDate = await showDatePicker(
                                     context: context,
-                                    initialDate: DateTime.now(),
+                                    initialDate: selectedDate ?? DateTime.now(),
                                     firstDate: DateTime(2000),
                                     //DateTime.now() - not to allow to choose before today.
                                     lastDate: DateTime(2101),
-                                    builder: (context, child) =>Theme(
-                                      data: Theme.of(context).copyWith(
-                                        colorScheme: ColorScheme.light(
-                                          primary: const Color(0xff2B3E5C),
-                                          onPrimary: Colors.white,
-                                          onSurface: Colors.blueGrey.shade900,
-                                        ),
-                                        textButtonTheme: TextButtonThemeData(
-                                          style: TextButton.styleFrom(
-                                            foregroundColor: Colors.blue, // button text color
+                                    builder: (context, child) => Theme(
+                                          data: Theme.of(context).copyWith(
+                                            textTheme: TextTheme(
+                                              headline4:
+                                                  GoogleFonts.montserrat(),
+                                              headline5: GoogleFonts
+                                                  .montserrat(), // Selected Date landscape
+                                              headline6: GoogleFonts
+                                                  .montserrat(), // Selected Date portrait
+                                              overline: GoogleFonts
+                                                  .montserrat(), // Title - SELECT DATE
+                                              bodyText1: GoogleFonts
+                                                  .montserrat(), // year gridbview picker
+                                              bodyText2: GoogleFonts
+                                                  .montserrat(), // year gridbview picker
+                                              subtitle1: GoogleFonts
+                                                  .montserrat(), // input
+                                              subtitle2: GoogleFonts
+                                                  .montserrat(), // month/year picker
+                                              caption: GoogleFonts
+                                                  .montserrat(), // days
+                                            ),
+                                            colorScheme: ColorScheme.light(
+                                              primary: const Color(0xff2B3E5C),
+                                              onPrimary: Colors.white,
+                                              onSurface:
+                                                  Colors.blueGrey.shade900,
+                                            ),
+                                            textButtonTheme:
+                                                TextButtonThemeData(
+                                              style: TextButton.styleFrom(
+                                                backgroundColor: Colors
+                                                    .blue, // button text color
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                      ),
-                                      child: child!,
-                                      
-                                    ) 
-                                  );
+                                          child: child!,
+                                        ));
                                 if (pickedDate != null) {
                                   if (!mounted) return;
                                   selectedDate = pickedDate;
@@ -228,9 +277,11 @@ class _AddEventFormState extends State<AddEventForm> {
                                     .requestFocus(FocusNode());
                                 TimeOfDay? pickedTime = await showTimePicker(
                                   builder: (context, childWidget) {
-                                    return TimePickerColor(childWidget: childWidget,);
+                                    return TimePickerColor(
+                                      childWidget: childWidget,
+                                    );
                                   },
-                                  initialTime: TimeOfDay.now(),
+                                  initialTime: selectedTime ?? TimeOfDay.now(),
                                   context: context,
                                   //context of current state
                                 );
@@ -313,11 +364,7 @@ class _AddEventFormState extends State<AddEventForm> {
                       ),
                       CustomDropDown(
                         items: [for (var i = 2; i <= 10; i++) i.toString()],
-                        value: (widget.event != null)
-                            ? widget.event!.hostels.length.toString()
-                            : (hostelsSize != 0
-                                ? hostelsSize.toString()
-                                : null),
+                        value: hostelSizeValue,
                         hintText: 'Select Number of Hostels',
                         onChanged: callbackHostels,
                         validator: validateField,

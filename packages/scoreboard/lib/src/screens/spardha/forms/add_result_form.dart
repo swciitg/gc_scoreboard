@@ -69,6 +69,7 @@ class _AddResultFormState extends State<AddResultForm> {
               onPressed: () async {
                 if (key.currentState!.validate()) {
                   try {
+<<<<<<< HEAD
                     await APIService(context)
                         .addUpdateResult(
                             widget.event.id!,
@@ -80,6 +81,23 @@ class _AddResultFormState extends State<AddResultForm> {
                 ResultFormStore.clear();
                   } on DioError catch (err) {
                     showErrorSnackBar(context, err);
+=======
+                    bool response = await APIService(context).addUpdateResult(
+                        widget.event.id!,
+                        ResultFormStore.resultFields!,
+                        ResultFormStore.victoryStatement!);
+                    if (response) {
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          ScoreBoardHome.id, (route) => false);
+                      showSnackBar(context, 'Success');
+                      ResultFormStore.clear();
+                    } else {
+                      showSnackBar(context, 'Failed');
+                    }
+                  } catch (err) {
+                    showSnackBar(
+                        context, 'Some error occurred, please try again');
+>>>>>>> 6c6b5dc24ca7a3206bf138c221f76d7b9f96ef75
                   }
                 }
               },
@@ -90,58 +108,68 @@ class _AddResultFormState extends State<AddResultForm> {
             )
           ],
         ),
-        body: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-          width: double.infinity,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const FieldsMandatory(),
-              const SizedBox(
-                height: 28,
-              ),
-              Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.event.event,
-                        style: Themes.theme.textTheme.headline1,
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      Text(
-                        widget.event.category,
-                        style: Themes.theme.textTheme.headline2,
-                      ),
-                    ],
+        body: Form(
+          key: key,
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+            width: double.infinity,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const FieldsMandatory(),
+                const SizedBox(
+                  height: 28,
+                ),
+                Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.event.event,
+                          style: Themes.theme.textTheme.headline1,
+                        ),
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        Text(
+                          widget.event.category,
+                          style: Themes.theme.textTheme.headline2,
+                        ),
+                      ],
+                    ),
+                    const Spacer(),
+                    DateWidget(
+                      date: widget.event.date,
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 4,
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: Themes.theme.cardColor,
                   ),
-                  const Spacer(),
-                  DateWidget(
-                    date: widget.event.date,
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 4,
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: Themes.theme.cardColor,
+                  child: Text(
+                    widget.event.stage,
+                    style: Themes.theme.textTheme.headline3,
+                  ),
                 ),
-                child: Text(
-                  widget.event.stage,
-                  style: Themes.theme.textTheme.headline3,
+                const SizedBox(
+                  height: 22,
                 ),
+<<<<<<< HEAD
               ),
               const SizedBox(
                 height: 22,
               ),
               CustomTextField(
+=======
+                CustomTextField(
+>>>>>>> 6c6b5dc24ca7a3206bf138c221f76d7b9f96ef75
                   inputType: TextInputType.text,
                   hintText: 'Victory Statement',
                   validator: validateField,
@@ -149,9 +177,11 @@ class _AddResultFormState extends State<AddResultForm> {
                   onChanged: (p) {
                     ResultFormStore.victoryStatement = p;
                   },
-                  isNecessary: true),
-              AddResultList(formKey: key, hostels: widget.event.hostels)
-            ],
+                  isNecessary: true,
+                ),
+                AddResultList(formKey: key, hostels: widget.event.hostels)
+              ],
+            ),
           ),
         ),);
   }

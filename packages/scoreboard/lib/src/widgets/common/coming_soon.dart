@@ -20,7 +20,7 @@ class _ComingSoonState extends State<ComingSoon> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SvgPicture.asset("packages/scoreboard/assets/restricted_access.svg"),
+          SvgPicture.asset("packages/scoreboard/assets/coming_soon.svg"),
           Padding(
             padding: const EdgeInsets.only(top: 16, bottom: 8),
             child: Text(

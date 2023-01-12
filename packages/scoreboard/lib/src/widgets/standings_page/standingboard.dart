@@ -27,7 +27,7 @@ class _StandingBoardState extends State<StandingBoard> {
   Widget build(BuildContext context) {
     print(widget.hostelStandings);
     return Container(
-      margin: EdgeInsets.fromLTRB(4, 16, 4, 0),
+      margin: EdgeInsets.fromLTRB(8, 16, 8, 0),
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.vertical(top: Radius.circular(18)),color: Themes.cardColor1),
       child: widget.hostelStandings.length==0 ? Center(
@@ -58,7 +58,7 @@ class _StandingBoardState extends State<StandingBoard> {
                     width: 10,
                   ),
                   Expanded(
-                    flex: 1,
+                    flex: 2,
                     child: Container(
                       alignment: Alignment.centerLeft,
                       child: Text('Hostels',
@@ -116,14 +116,36 @@ class _StandingBoardState extends State<StandingBoard> {
                   width: 10,
                 ),
                 Expanded(
-                  flex: 1,
+                  flex: 2,
                   child: Container(
-                    alignment: Alignment.centerLeft,
-                    child: Text(widget.hostelStandings[index]["hostelName"],
-                        style: GoogleFonts.montserrat(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 13,
-                            color: Themes.cardFontColor2)),
+                    alignment: Alignment.center,
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          hostelsImagePath[widget.hostelStandings[index]["hostelName"]]!,
+                          // 'packages/scoreboard/assets/logos/subansiri.jpg',
+                          height: 30,
+                          width: 30,
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        Expanded(
+                          child: Text(
+                              widget.hostelStandings[index]["hostelName"],
+                              style: GoogleFonts.montserrat(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 13,
+                                  color: Themes.cardFontColor2)),
+                        ),
+                      ],
+                    ),
+                    // alignment: Alignment.centerLeft,
+                    // child: Text(widget.hostelStandings[index]["hostelName"],
+                    //     style: GoogleFonts.montserrat(
+                    //         fontWeight: FontWeight.w600,
+                    //         fontSize: 13,
+                    //         color: Themes.cardFontColor2)),
                   ),
                 ),
                 Expanded(

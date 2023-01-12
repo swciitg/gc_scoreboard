@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TimePickerColor extends StatefulWidget {
   final Widget? childWidget;
@@ -42,10 +43,10 @@ class _TimePickerColorState extends State<TimePickerColor> {
         dialHandColor: Colors.blue.shade400,
         dialBackgroundColor: const Color(0xff2B3E5C),
         hourMinuteTextStyle:
-            const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            GoogleFonts.montserrat(fontSize: 20, fontWeight: FontWeight.bold,),
         dayPeriodTextStyle:
-            const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-        helpTextStyle: const TextStyle(
+            GoogleFonts.montserrat(fontSize: 12, fontWeight: FontWeight.bold),
+        helpTextStyle: GoogleFonts.montserrat(
             fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white),
         dialTextColor: MaterialStateColor.resolveWith((states) =>
             states.contains(MaterialState.selected)

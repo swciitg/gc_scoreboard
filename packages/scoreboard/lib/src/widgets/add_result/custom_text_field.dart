@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../globals/colors.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -27,6 +28,7 @@ class CustomTextField extends StatelessWidget {
       keyboardType: inputType,
       initialValue: value=='null' ? '' : value,
       decoration: InputDecoration(
+        errorStyle: GoogleFonts.montserrat(),
         label: RichText(
           text: TextSpan(
             children: [

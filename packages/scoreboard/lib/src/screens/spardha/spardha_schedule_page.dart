@@ -47,8 +47,9 @@ class _SchedulePageState extends State<SchedulePage> {
                     child: ListView.builder(
                         itemCount: 3,
                         itemBuilder: (context, index) {
-                          return SizedBox(
+                          return Container(
                             height: 300,
+                            padding: EdgeInsets.symmetric(vertical: 8),
                             child: ShowShimmer(
                               height: 300,
                               width: MediaQuery.of(context).size.width,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../globals/colors.dart';
 
 class HostelDropDown extends StatelessWidget {
@@ -16,6 +17,7 @@ class HostelDropDown extends StatelessWidget {
       isExpanded: true,
       validator: validator,
       decoration: InputDecoration(
+        errorStyle: GoogleFonts.montserrat(),
          label: RichText(
           text: TextSpan(
             children: [
