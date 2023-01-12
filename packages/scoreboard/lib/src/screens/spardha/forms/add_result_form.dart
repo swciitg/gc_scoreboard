@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import '../../../functions/snackbar.dart';
 import '../../../functions/validator.dart';
@@ -30,10 +31,10 @@ class _AddResultFormState extends State<AddResultForm> {
       ResultFormStore.victoryStatement = widget.event.victoryStatement!;
     }
   }
-
+  final key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final key = GlobalKey<FormState>();
+
     return Scaffold(
         backgroundColor: Themes.theme.backgroundColor,
         appBar: AppBar(
@@ -66,21 +67,17 @@ class _AddResultFormState extends State<AddResultForm> {
               onPressed: () async {
                 if (key.currentState!.validate()) {
                   try {
-                    bool response = await APIService(context).addUpdateResult(
+                    await APIService(context)
+                        .addUpdateResult(
                         widget.event.id!,
                         ResultFormStore.resultFields!,
                         ResultFormStore.victoryStatement!);
-                    if (response) {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                          ScoreBoardHome.id, (route) => false);
-                      showSnackBar(context, 'Success');
-                      ResultFormStore.clear();
-                    } else {
-                      showSnackBar(context, 'Failed');
-                    }
-                  } catch (err) {
-                    showSnackBar(
-                        context, 'Some error occurred, please try again');
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        ScoreBoardHome.id, (route) => false);
+                    showSnackBar(context, 'Successfully added/updated result');
+                    ResultFormStore.clear();
+                  } on DioError catch (err) {
+                    showErrorSnackBar(context, err);
                   }
                 }
               },
