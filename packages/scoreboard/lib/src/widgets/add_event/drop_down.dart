@@ -21,7 +21,6 @@ class CustomDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(value);
     return DropdownButtonFormField(
       validator: validator,
       menuMaxHeight: 400,
@@ -87,7 +86,6 @@ class CustomDropDown extends StatelessWidget {
         }
       },
       items: items.map<DropdownMenuItem<String>>((String value) {
-        print(value);
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),

@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../functions/snackbar.dart';
@@ -71,21 +70,31 @@ class _PopupMenuState extends State<PopupMenu> {
                     )));
         break;
       case 'delete':
-        try{
-          if(commonStore.page == Pages.results){
-            await APIService(context).deleteSpardhaEventResult(widget.eventModel.id!);
-            showSnackBar(context,"Result Deleted");
+
+        if (commonStore.page == Pages.results) {
+          bool response = await APIService(context).deleteSpardhaEventResult(widget.eventModel.id!);
+          if(!response)
+          {
+            showSnackBar(context, 'Some error occurred, try again later');
           }
-          else{
-            await APIService(context).deleteEvent(widget.eventModel.id!);
-            showSnackBar(context,"Event Deleted");
+          else
+          {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => const ScoreBoardHome()));
           }
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const ScoreBoardHome()));
+        } else {
+          bool response = await APIService(context).deleteEvent(widget.eventModel.id!);
+          if(!response)
+          {
+            showSnackBar(context, 'Some error occurred, try again later');
+          }
+          else
+            {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const ScoreBoardHome()));
+            }
         }
-        on DioError catch(err){
-          showErrorSnackBar(context, err);
-        }
+        print(widget.eventModel);
     }
   }
 

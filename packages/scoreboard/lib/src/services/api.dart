@@ -123,11 +123,11 @@ class APIService {
     }
   }
 
-  Future<void> postEventSchedule(Map<String, dynamic> data) async {
+  Future<bool> postEventSchedule(Map<String, dynamic> data) async {
     try {
       var resp = await dio.post("/gc/spardha/event-schedule", data: data);
+      return resp.data['success'];
     } on DioError catch (err) {
-      print(err.response!.data['message']);
       return Future.error(err);
     }
   }
@@ -171,7 +171,7 @@ class APIService {
     }
   }
 
-  Future<void> addUpdateResult(String eventID, List<List<ResultModel>> data,
+  Future<bool> addUpdateResult(String eventID, List<List<ResultModel>> data,
       String victoryStatement) async {
     try {
       List<List<Map>> results = [];
@@ -186,33 +186,37 @@ class APIService {
       Response resp = await dio.patch(
           '/gc/spardha/event-schedule/result/$eventID',
           data: {'victoryStatement': victoryStatement, 'results': results});
+      return resp.data['success'];
     } on DioError catch (err) {
       return Future.error(err);
     }
   }
 
-  Future<void> deleteEvent(String eventID) async {
+  Future<bool> deleteEvent(String eventID) async {
     try {
       Response resp = await dio.delete('/gc/spardha/event-schedule/$eventID');
+      return resp.data['success'];
     } on DioError catch (err) {
       return Future.error(err);
     }
   }
 
-  Future<void> updateSpardhaEvent(EventModel event) async {
+  Future<bool> updateSpardhaEvent(EventModel event) async {
     try {
       print(event.toJson());
       Response resp = await dio.patch('/gc/spardha/event-schedule/${event.id!}',
           data: event.toJson());
+      return resp.data['success'];
     } on DioError catch (err) {
       return Future.error(err);
     }
   }
 
-  Future<void> deleteSpardhaEventResult(String eventID) async {
+  Future<bool> deleteSpardhaEventResult(String eventID) async {
     try {
       Response resp =
           await dio.delete('/gc/spardha/event-schedule/result/$eventID');
+      return resp.data['success'];
     } on DioError catch (err) {
       return Future.error(err);
     }
@@ -240,20 +244,22 @@ class APIService {
     }
   }
 
-  Future<void> postSpardhaStanding(Map<String, dynamic> data) async {
+  Future<bool> postSpardhaStanding(Map<String, dynamic> data) async {
     try {
       print(data.toString());
       Response resp = await dio.post("/gc/spardha/standings", data: data);
+      return resp.data['success'];
     } on DioError catch (err) {
       return Future.error(err);
     }
   }
 
-  Future<void> updateSpardhaStanding(StandingModel standingModel) async {
+  Future<bool> updateSpardhaStanding(StandingModel standingModel) async {
     try {
       Response resp = await dio.patch(
           "/gc/spardha/standings/${standingModel.id}",
           data: standingModel.toJson());
+      return resp.data['success'];
     } on DioError catch (err) {
       return Future.error(err);
     }

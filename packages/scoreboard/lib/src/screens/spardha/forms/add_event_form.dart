@@ -41,7 +41,6 @@ class _AddEventFormState extends State<AddEventForm> {
 
   callbackHostels(value) {
     participatingHostels.length = int.parse(value);
-    print(participatingHostels);
     setState(() {
       hostelsSize = int.parse(value);
       hostelSizeValue = hostelsSize.toString();
@@ -175,12 +174,8 @@ class _AddEventFormState extends State<AddEventForm> {
                           category = s;
                           setState(() {
                             hostelsSize = 0;
-<<<<<<< HEAD
-                            participatingHostels.clear();
-=======
                             participatingHostels = [];
                             hostelSizeValue = null;
->>>>>>> 6c6b5dc24ca7a3206bf138c221f76d7b9f96ef75
                           });
                         },
                         value: category,
