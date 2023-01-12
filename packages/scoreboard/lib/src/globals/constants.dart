@@ -22,22 +22,24 @@ const List<String> womenHostel = [
 
 const List<String> allHostelList = [...menHostel, ...womenHostel];
 
+const String logoDir = 'packages/scoreboard/assets/logos';
+
 const Map<String,String> hostelsImagePath = {
-  'Barak' : 'packages/scoreboard/assets/barak.svg',
-  'Brahmaputra' : 'packages/scoreboard/assets/brahmaputra.svg',
-  'Dhansiri' : 'packages/scoreboard/assets/dhansiri.svg',
-  'Dihing' : 'packages/scoreboard/assets/dihing.svg',
-  'Disang (Men)' : 'packages/scoreboard/assets/disang.svg',
-  'Disang (Women)' : 'packages/scoreboard/assets/disang.svg',
-  'Kameng' : 'packages/scoreboard/assets/kameng.svg',
-  'Kapili' : 'packages/scoreboard/assets/kapili.svg',
-  'Lohit' : 'packages/scoreboard/assets/lohit.svg',
-  'Manas' : 'packages/scoreboard/assets/manas.svg',
-  'Married Scholars (Men)' : 'packages/scoreboard/assets/married_scholar.svg',
-  'Married Scholars (Women)' : 'packages/scoreboard/assets/married_scholar.svg',
-  'Siang' : 'packages/scoreboard/assets/siang.svg',
-  'Subansiri' : 'packages/scoreboard/assets/subansiri.svg',
-  'Umiam' : 'packages/scoreboard/assets/hostel_image.jpg'
+  'Barak' : '$logoDir/barak.jpg',
+  'Brahmaputra' : '$logoDir/brahma.jpg',
+  'Dhansiri' : '$logoDir/dhansiri.jpg',
+  'Dihing' : '$logoDir/dihing.jpg',
+  'Disang (Men)' : '$logoDir/disang.jpg',
+  'Disang (Women)' : '$logoDir/disang.jpg',
+  'Kameng' : '$logoDir/kameng.jpg',
+  'Kapili' : '$logoDir/kapili.jpg',
+  'Lohit' : '$logoDir/lohit.jpg',
+  'Manas' : '$logoDir/hostel_image.jpg',
+  'Married Scholars (Men)' : '$logoDir/married_scholar.jpg',
+  'Married Scholars (Women)' : '$logoDir/married_scholar.jpg',
+  'Siang' : '$logoDir/siang.jpg',
+  'Subansiri' : '$logoDir/subansiri.jpg',
+  'Umiam' : '$logoDir/umiam.jpg'
 };
 
 class DatabaseRecords {

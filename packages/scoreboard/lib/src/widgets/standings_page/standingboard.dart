@@ -58,7 +58,7 @@ class _StandingBoardState extends State<StandingBoard> {
                     width: 10,
                   ),
                   Expanded(
-                    flex: 1,
+                    flex: 2,
                     child: Container(
                       alignment: Alignment.centerLeft,
                       child: Text('Hostels',
@@ -116,14 +116,33 @@ class _StandingBoardState extends State<StandingBoard> {
                   width: 10,
                 ),
                 Expanded(
-                  flex: 1,
+                  flex: 2,
                   child: Container(
-                    alignment: Alignment.centerLeft,
-                    child: Text(widget.hostelStandings[index]["hostelName"],
-                        style: GoogleFonts.montserrat(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 13,
-                            color: Themes.cardFontColor2)),
+                    alignment: Alignment.center,
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          hostelsImagePath[widget.hostelStandings[index]["hostelName"]]!,
+                          // 'packages/scoreboard/assets/logos/subansiri.jpg',
+                          height: 30,
+                          width: 30,
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        Text(widget.hostelStandings[index]["hostelName"],
+                            style: GoogleFonts.montserrat(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 13,
+                                color: Themes.cardFontColor2)),
+                      ],
+                    ),
+                    // alignment: Alignment.centerLeft,
+                    // child: Text(widget.hostelStandings[index]["hostelName"],
+                    //     style: GoogleFonts.montserrat(
+                    //         fontWeight: FontWeight.w600,
+                    //         fontSize: 13,
+                    //         color: Themes.cardFontColor2)),
                   ),
                 ),
                 Expanded(
