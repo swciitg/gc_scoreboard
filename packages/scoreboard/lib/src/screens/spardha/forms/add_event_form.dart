@@ -56,7 +56,6 @@ class _AddEventFormState extends State<AddEventForm> {
   @override
   void initState() {
     super.initState();
-    print(widget.event!.toJson());
     if (widget.event != null) {
       EventModel e = widget.event!;
       sportName = e.event;
@@ -121,315 +120,320 @@ class _AddEventFormState extends State<AddEventForm> {
       }
     }
 
-    return Scaffold(
-      backgroundColor: Themes.theme.backgroundColor,
-      appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(56),
-          child: AppBarFormComponent(
-            title: widget.event == null ? 'Add Event' : 'Edit Event',
-            actionTitle: "Next",
-            onFormSubmit: onFormSubmit,
-          )),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          width: double.infinity,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const EventFormHeading(),
-              Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Autocomplete<String>(
-                        optionsBuilder: (TextEditingValue val) {
-                          if (val.text == '') {
-                            return Iterable<String>.empty();
-                          }
-                          return StaticStore.spardhaEvents.where((element) =>
-                              element
-                                  .toLowerCase()
-                                  .contains(val.text.toLowerCase()));
-                        },
-                        onSelected: (s) => sportName = s,
-                        optionsMaxHeight: 50,
-                        optionsViewBuilder: (BuildContext context,
-                            AutocompleteOnSelected<String> onSelected,
-                            Iterable<String> options) {
-                          return Align(
-                            alignment: Alignment.topLeft,
-                            child: Material(
-                              child: Container(
-                                // width: 300,
-                                color: Themes.theme.backgroundColor,
-                                child: ListView.builder(
-                                  padding: EdgeInsets.all(10.0),
-                                  itemCount: options.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    final String option =
-                                        options.elementAt(index);
-                                    return GestureDetector(
-                                      onTap: () {
-                                        onSelected(option);
-                                      },
-                                      child: ListTile(
-                                        title: Text(option,
-                                            style: Themes
-                                                .theme.textTheme.headline6),
-                                      ),
-                                    );
-                                  },
+    return GestureDetector(
+      onTap: (){
+        FocusScope.of(context).requestFocus(FocusNode());
+      },
+      child: Scaffold(
+        backgroundColor: Themes.theme.backgroundColor,
+        appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(56),
+            child: AppBarFormComponent(
+              title: widget.event == null ? 'Add Event' : 'Edit Event',
+              actionTitle: "Next",
+              onFormSubmit: onFormSubmit,
+            )),
+        body: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.all(8),
+            width: double.infinity,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const EventFormHeading(),
+                Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Autocomplete<String>(
+                          optionsBuilder: (TextEditingValue val) {
+                            if (val.text == '') {
+                              return Iterable<String>.empty();
+                            }
+                            return StaticStore.spardhaEvents.where((element) =>
+                                element
+                                    .toLowerCase()
+                                    .contains(val.text.toLowerCase()));
+                          },
+                          onSelected: (s) => sportName = s,
+                          optionsMaxHeight: 50,
+                          optionsViewBuilder: (BuildContext context,
+                              AutocompleteOnSelected<String> onSelected,
+                              Iterable<String> options) {
+                            return Align(
+                              alignment: Alignment.topLeft,
+                              child: Material(
+                                child: Container(
+                                  // width: 300,
+                                  color: Themes.theme.backgroundColor,
+                                  child: ListView.builder(
+                                    padding: EdgeInsets.all(10.0),
+                                    itemCount: options.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      final String option =
+                                          options.elementAt(index);
+                                      return GestureDetector(
+                                        onTap: () {
+                                          onSelected(option);
+                                        },
+                                        child: ListTile(
+                                          title: Text(option,
+                                              style: Themes
+                                                  .theme.textTheme.headline6),
+                                        ),
+                                      );
+                                    },
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
-                        fieldViewBuilder: (context, c, f, __) {
-                          return CustomTextField(
-                            hintText: 'Event Name',
-                            validator: (s) {
-                              if (StaticStore.spardhaEvents.contains(s)) {
-                                return null;
-                              }
-                              return "Enter a valid event";
-                            },
-                            controller: c,
-                            focusNode: f,
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 12),
-                      CustomDropDown(
-                        items: eventCategories,
-                        hintText: 'Category',
-                        onChanged: (s) {
-                          category = s;
-                          setState(() {
-                            hostelsSize = 0;
-                            participatingHostels = [];
-                            hostelSizeValue = null;
-                          });
-                        },
-                        value: category,
-                        validator: validateField,
-                      ),
-                      const SizedBox(height: 12),
-                      CustomDropDown(
-                        items: spardhaEventStages,
-                        hintText: 'Stage',
-                        onChanged: (s) => stage = s,
-                        value: stage,
-                        validator: validateField,
-                      ),
-                      const SizedBox(height: 12),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: CustomTextField(
-                              hintText: 'Date',
-                              validator: validateField,
-                              controller: dateInput,
-                              onTap: () async {
-                                FocusScope.of(context)
-                                    .requestFocus(FocusNode());
-                                DateTime? pickedDate = await showDatePicker(
-                                    context: context,
-                                    initialDate: selectedDate ?? DateTime.now(),
-                                    firstDate: DateTime(2000),
-                                    //DateTime.now() - not to allow to choose before today.
-                                    lastDate: DateTime(2101),
-                                    builder: (context, child) => Theme(
-                                          data: Theme.of(context).copyWith(
-                                            textTheme: TextTheme(
-                                              headline4:
-                                                  GoogleFonts.montserrat(),
-                                              headline5: GoogleFonts
-                                                  .montserrat(), // Selected Date landscape
-                                              headline6: GoogleFonts
-                                                  .montserrat(), // Selected Date portrait
-                                              overline: GoogleFonts
-                                                  .montserrat(), // Title - SELECT DATE
-                                              bodyText1: GoogleFonts
-                                                  .montserrat(), // year gridbview picker
-                                              bodyText2: GoogleFonts
-                                                  .montserrat(), // year gridbview picker
-                                              subtitle1: GoogleFonts
-                                                  .montserrat(), // input
-                                              subtitle2: GoogleFonts
-                                                  .montserrat(), // month/year picker
-                                              caption: GoogleFonts
-                                                  .montserrat(), // days
-                                            ),
-                                            colorScheme: ColorScheme.dark(
-                                              primary: Color.fromRGBO(189, 199, 220, 1),
-                                              onPrimary: Colors.black,
-                                              onSurface: Colors.white,
-                                              surface: const Color(0xff2B3E5C),
-                                            ),
-                                            dialogBackgroundColor:
-                                                const Color(0xff2B3E5C),
-                                            textButtonTheme:
-                                                TextButtonThemeData(
-                                              style: TextButton.styleFrom(
-                                                  backgroundColor:
-                                                  const Color(0xff2B3E5C), // button
-                                                  foregroundColor: Color.fromRGBO(118, 172, 255, 1),
-                                                  elevation: 0,
-                                                  textStyle:
-                                                      GoogleFonts.montserrat()),
-                                            ),
-                                          ),
-                                          child: child!,
-                                        ));
-                                if (pickedDate != null) {
-                                  if (!mounted) return;
-                                  selectedDate = pickedDate;
-                                  String formattedDate =
-                                      DateFormat('dd-MMM-yyyy')
-                                          .format(pickedDate);
-                                  setState(() {
-                                    dateInput.text =
-                                        formattedDate; //set output date to TextField value.
-                                  });
+                            );
+                          },
+                          fieldViewBuilder: (context, c, f, __) {
+                            return CustomTextField(
+                              hintText: 'Event Name',
+                              validator: (s) {
+                                if (StaticStore.spardhaEvents.contains(s)) {
+                                  return null;
                                 }
+                                return "Enter a valid event";
                               },
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 12,
-                          ),
-                          Expanded(
-                            child: CustomTextField(
-                              hintText: 'Time',
-                              validator: validateField,
-                              controller: timeInput,
-                              onTap: () async {
-                                FocusScope.of(context)
-                                    .requestFocus(FocusNode());
-                                TimeOfDay? pickedTime = await showTimePicker(
-                                  builder: (context, childWidget) {
-                                    return TimePickerColor(
-                                      childWidget: childWidget,
-                                    );
-                                  },
-                                  initialTime: selectedTime ?? TimeOfDay.now(),
-                                  context: context,
-                                  //context of current state
-                                );
-                                if (pickedTime != null) {
-                                  if (!mounted) return;
-                                  selectedTime = pickedTime;
-                                  setState(() {
-                                    final now = DateTime.now();
-                                    final formattedTimeString = DateFormat.jm()
-                                        .format(DateTime(
-                                            now.year,
-                                            now.month,
-                                            now.day,
-                                            pickedTime.hour,
-                                            pickedTime.minute)); //"6:00 AM"
-                                    timeInput.text = formattedTimeString;
-                                  });
-                                }
-                              },
-                            ),
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      CustomTextField(
-                          hintText: 'Venue',
+                              controller: c,
+                              focusNode: f,
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 12),
+                        CustomDropDown(
+                          items: eventCategories,
+                          hintText: 'Category',
+                          onChanged: (s) {
+                            category = s;
+                            setState(() {
+                              hostelsSize = 0;
+                              participatingHostels = [];
+                              hostelSizeValue = null;
+                            });
+                          },
+                          value: category,
                           validator: validateField,
-                          controller: _venueController),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Row(
-                        children: [
-                          Checkbox(
-                            checkColor: Colors.white,
-                            activeColor: Themes.theme.primaryColor,
-                            side: const BorderSide(
-                              color: Color.fromRGBO(171, 171, 175, 1),
-                              width: 2,
-                            ),
-                            value: isCancelled,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                isCancelled = value!;
-                                isPostponed = false;
-                              });
-                            },
-                          ),
-                          Text('Event cancelled',
-                              style: Themes.theme.textTheme.headline2),
-                          Checkbox(
-                            checkColor: Colors.white,
-                            activeColor: Themes.theme.primaryColor,
-                            side: const BorderSide(
-                                color: Color.fromRGBO(171, 171, 175, 1),
-                                width: 2),
-                            value: isPostponed,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                isPostponed = value!;
-                                isCancelled = false;
-                              });
-                            },
-                          ),
-                          Text('Event postponed',
-                              style: Themes.theme.textTheme.headline2),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Text(
-                        'Participating Hostels',
-                        style: Themes.theme.textTheme.headline1,
-                      ),
-                      const SizedBox(
-                        height: 18,
-                      ),
-                      CustomDropDown(
-                        items: [for (var i = 2; i <= 10; i++) i.toString()],
-                        value: hostelSizeValue,
-                        hintText: 'Select Number of Hostels',
-                        onChanged: callbackHostels,
-                        validator: validateField,
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Column(
-                        children: [
-                          for (var i = 1; i <= hostelsSize; i++)
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 12),
-                              child: CustomDropDown(
-                                items: category == "Men"
-                                    ? menHostel
-                                    : (category == "Women"
-                                        ? womenHostel
-                                        : allHostelList),
-                                value: participatingHostels[i - 1],
-                                hintText: 'Hostel Name $i',
-                                index: i,
+                        ),
+                        const SizedBox(height: 12),
+                        CustomDropDown(
+                          items: spardhaEventStages,
+                          hintText: 'Stage',
+                          onChanged: (s) => stage = s,
+                          value: stage,
+                          validator: validateField,
+                        ),
+                        const SizedBox(height: 12),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: CustomTextField(
+                                hintText: 'Date',
                                 validator: validateField,
-                                onChanged: callbackAddHostel,
+                                controller: dateInput,
+                                onTap: () async {
+                                  FocusScope.of(context)
+                                      .requestFocus(FocusNode());
+                                  DateTime? pickedDate = await showDatePicker(
+                                      context: context,
+                                      initialDate: selectedDate ?? DateTime.now(),
+                                      firstDate: DateTime(2000),
+                                      //DateTime.now() - not to allow to choose before today.
+                                      lastDate: DateTime(2101),
+                                      builder: (context, child) => Theme(
+                                            data: Theme.of(context).copyWith(
+                                              textTheme: TextTheme(
+                                                headline4:
+                                                    GoogleFonts.montserrat(),
+                                                headline5: GoogleFonts
+                                                    .montserrat(), // Selected Date landscape
+                                                headline6: GoogleFonts
+                                                    .montserrat(), // Selected Date portrait
+                                                overline: GoogleFonts
+                                                    .montserrat(), // Title - SELECT DATE
+                                                bodyText1: GoogleFonts
+                                                    .montserrat(), // year gridbview picker
+                                                bodyText2: GoogleFonts
+                                                    .montserrat(), // year gridbview picker
+                                                subtitle1: GoogleFonts
+                                                    .montserrat(), // input
+                                                subtitle2: GoogleFonts
+                                                    .montserrat(), // month/year picker
+                                                caption: GoogleFonts
+                                                    .montserrat(), // days
+                                              ),
+                                              colorScheme: ColorScheme.dark(
+                                                primary: Color.fromRGBO(189, 199, 220, 1),
+                                                onPrimary: Colors.black,
+                                                onSurface: Colors.white,
+                                                surface: const Color(0xff2B3E5C),
+                                              ),
+                                              dialogBackgroundColor:
+                                                  const Color(0xff2B3E5C),
+                                              textButtonTheme:
+                                                  TextButtonThemeData(
+                                                style: TextButton.styleFrom(
+                                                    backgroundColor:
+                                                    const Color(0xff2B3E5C), // button
+                                                    foregroundColor: Color.fromRGBO(118, 172, 255, 1),
+                                                    elevation: 0,
+                                                    textStyle:
+                                                        GoogleFonts.montserrat()),
+                                              ),
+                                            ),
+                                            child: child!,
+                                          ));
+                                  if (pickedDate != null) {
+                                    if (!mounted) return;
+                                    selectedDate = pickedDate;
+                                    String formattedDate =
+                                        DateFormat('dd-MMM-yyyy')
+                                            .format(pickedDate);
+                                    setState(() {
+                                      dateInput.text =
+                                          formattedDate; //set output date to TextField value.
+                                    });
+                                  }
+                                },
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 12,
+                            ),
+                            Expanded(
+                              child: CustomTextField(
+                                hintText: 'Time',
+                                validator: validateField,
+                                controller: timeInput,
+                                onTap: () async {
+                                  FocusScope.of(context)
+                                      .requestFocus(FocusNode());
+                                  TimeOfDay? pickedTime = await showTimePicker(
+                                    builder: (context, childWidget) {
+                                      return TimePickerColor(
+                                        childWidget: childWidget,
+                                      );
+                                    },
+                                    initialTime: selectedTime ?? TimeOfDay.now(),
+                                    context: context,
+                                    //context of current state
+                                  );
+                                  if (pickedTime != null) {
+                                    if (!mounted) return;
+                                    selectedTime = pickedTime;
+                                    setState(() {
+                                      final now = DateTime.now();
+                                      final formattedTimeString = DateFormat.jm()
+                                          .format(DateTime(
+                                              now.year,
+                                              now.month,
+                                              now.day,
+                                              pickedTime.hour,
+                                              pickedTime.minute)); //"6:00 AM"
+                                      timeInput.text = formattedTimeString;
+                                    });
+                                  }
+                                },
                               ),
                             )
-                        ],
-                      )
-                    ],
-                  ))
-            ],
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        CustomTextField(
+                            hintText: 'Venue',
+                            validator: validateField,
+                            controller: _venueController),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              checkColor: Colors.white,
+                              activeColor: Themes.theme.primaryColor,
+                              side: const BorderSide(
+                                color: Color.fromRGBO(171, 171, 175, 1),
+                                width: 2,
+                              ),
+                              value: isCancelled,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  isCancelled = value!;
+                                  isPostponed = false;
+                                });
+                              },
+                            ),
+                            Text('Event cancelled',
+                                style: Themes.theme.textTheme.headline2),
+                            Checkbox(
+                              checkColor: Colors.white,
+                              activeColor: Themes.theme.primaryColor,
+                              side: const BorderSide(
+                                  color: Color.fromRGBO(171, 171, 175, 1),
+                                  width: 2),
+                              value: isPostponed,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  isPostponed = value!;
+                                  isCancelled = false;
+                                });
+                              },
+                            ),
+                            Text('Event postponed',
+                                style: Themes.theme.textTheme.headline2),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        Text(
+                          'Participating Hostels',
+                          style: Themes.theme.textTheme.headline1,
+                        ),
+                        const SizedBox(
+                          height: 18,
+                        ),
+                        CustomDropDown(
+                          items: [for (var i = 2; i <= 10; i++) i.toString()],
+                          value: hostelSizeValue,
+                          hintText: 'Select Number of Hostels',
+                          onChanged: callbackHostels,
+                          validator: validateField,
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        Column(
+                          children: [
+                            for (var i = 1; i <= hostelsSize; i++)
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 12),
+                                child: CustomDropDown(
+                                  items: category == "Men"
+                                      ? menHostel
+                                      : (category == "Women"
+                                          ? womenHostel
+                                          : allHostelList),
+                                  value: participatingHostels[i - 1],
+                                  hintText: 'Hostel Name $i',
+                                  index: i,
+                                  validator: validateField,
+                                  onChanged: callbackAddHostel,
+                                ),
+                              )
+                          ],
+                        )
+                      ],
+                    ))
+              ],
+            ),
           ),
         ),
       ),

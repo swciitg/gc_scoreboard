@@ -25,7 +25,11 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
   @override
   Widget build(BuildContext context) {
     print(widget.event);
-    return Scaffold(
+    return GestureDetector(
+        onTap: (){
+      FocusScope.of(context).requestFocus(FocusNode());
+    },
+    child: Scaffold(
       backgroundColor: Themes.theme.backgroundColor,
       appBar: AppBar(
         elevation: 0,
@@ -160,7 +164,7 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
           ),
         ),
       ),
-    );
+    ));
   }
 }
 

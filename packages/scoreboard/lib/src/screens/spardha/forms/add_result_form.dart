@@ -35,7 +35,11 @@ class _AddResultFormState extends State<AddResultForm> {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
+    return GestureDetector(
+        onTap: (){
+      FocusScope.of(context).requestFocus(FocusNode());
+    },
+    child: Scaffold(
         backgroundColor: Themes.theme.backgroundColor,
         appBar: AppBar(
           elevation: 0,
@@ -155,6 +159,6 @@ class _AddResultFormState extends State<AddResultForm> {
               ],
             ),
           ),
-        ));
+        )));
   }
 }

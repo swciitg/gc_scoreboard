@@ -46,7 +46,11 @@ class _AddStandingState extends State<AddStanding> {
   Widget build(BuildContext context) {
 
     var commStore = context.read<CommonStore>();
-    return Scaffold(
+    return GestureDetector(
+        onTap: (){
+      FocusScope.of(context).requestFocus(FocusNode());
+    },
+    child: Scaffold(
         backgroundColor: Themes.theme.backgroundColor,
         appBar: AppBar(
           elevation: 0,
@@ -269,6 +273,6 @@ class _AddStandingState extends State<AddStanding> {
               ],
             ),
           ),
-        ));
+        )));
   }
 }
