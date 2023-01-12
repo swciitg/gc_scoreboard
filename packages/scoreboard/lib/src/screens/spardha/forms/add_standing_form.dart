@@ -120,10 +120,10 @@ class _AddStandingState extends State<AddStanding> {
                 const SizedBox(
                   height: 28,
                 ),
-                Row(
+                Column(
                   children: [
-                    Expanded(
-                      flex: 30,
+                    Container(
+                      width: double.infinity,
                       child: CustomDropDown(
                           items: StaticStore.spardhaEvents,
                           hintText: 'Event',
@@ -135,11 +135,9 @@ class _AddStandingState extends State<AddStanding> {
                           },
                           validator: validateField),
                     ),
-                    const Spacer(
-                      flex: 10,
-                    ),
-                    Expanded(
-                      flex: 30,
+                    SizedBox(height: 15,),
+                    Container(
+                      width: double.infinity,
                       child: CustomDropDown(
                           items: eventCategories,
                           hintText: 'Category',
@@ -157,7 +155,7 @@ class _AddStandingState extends State<AddStanding> {
                             });
                           },
                           validator: validateField),
-                    ),
+                    )
                   ],
                 ),
                 Expanded(
