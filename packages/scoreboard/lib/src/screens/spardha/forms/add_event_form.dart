@@ -8,6 +8,7 @@ import '../../../globals/constants.dart';
 import '../../../globals/colors.dart';
 import '../../../models/event_model.dart';
 import '../../../stores/static_store.dart';
+import '../../../widgets/add_event/datepicker_color.dart';
 import '../../../widgets/add_event/drop_down.dart';
 import '../../../widgets/add_event/heading.dart';
 import '../../../widgets/add_event/text_field.dart';
