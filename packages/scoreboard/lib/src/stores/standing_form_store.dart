@@ -5,16 +5,16 @@ import '../globals/enums.dart';
 class StandingFormStore {
   String? event;
   Category? category;
-  List<HostelPoints> standing = [];
+  List<HostelPoints>? standing = [];
 
   void addNewPosition() {
-    standing.add(HostelPoints());
+    standing?.add(HostelPoints());
   }
 
   void setPreData(StandingModel standings) {
+
       event = standings.event;
-      standing = standings.standings!;
-      standing.forEach((element) {print(element.toJson());});
+      standing = standings.standings;
       if(standings.category == 'Men')
         {
           print('men');
@@ -29,9 +29,10 @@ class StandingFormStore {
         print('womeedededeen');
         category = Category.menandwomen;
       }
+
   }
 
   void clearStandings() {
-    standing = [];
+    standing = [HostelPoints()];
   }
 }
