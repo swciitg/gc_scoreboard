@@ -29,7 +29,6 @@ class AddStanding extends StatefulWidget {
 }
 
 class _AddStandingState extends State<AddStanding> {
-  String? sportName;
   TextEditingController victoryStatement = TextEditingController();
   final StandingFormStore standingFormStore = StandingFormStore();
 
@@ -145,12 +144,11 @@ class _AddStandingState extends State<AddStanding> {
                             },
                             initialValue: TextEditingValue(
                                 text: widget.standings?.event ?? ""),
-                            onSelected: (s) => sportName = s,
+                            onSelected: (s) => standingFormStore.event = s,
                             optionsMaxHeight: 50,
                             optionsViewBuilder: (BuildContext context,
                                 AutocompleteOnSelected<String> onSelected,
                                 Iterable<String> options) {
-                              // options = [...options,...options,...options,...options,...options,...options,...options,];
                               return Align(
                                 alignment: Alignment.topLeft,
                                 child: Material(
