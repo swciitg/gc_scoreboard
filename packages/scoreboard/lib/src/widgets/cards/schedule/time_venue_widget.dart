@@ -6,6 +6,7 @@ import '../../../globals/colors.dart';
 
 class TimeVenueWidget extends StatelessWidget {
   final EventModel eventModel;
+
   const TimeVenueWidget({Key? key, required this.eventModel}) : super(key: key);
 
   @override
@@ -41,6 +42,7 @@ class TimeVenueWidget extends StatelessWidget {
         ),
         SizedBox(
           height: 18,
+
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -52,10 +54,16 @@ class TimeVenueWidget extends StatelessWidget {
               const SizedBox(
                 width: 8,
               ),
-              Text(
-                eventModel.venue,
-                style: cardVenueStyle,
-              )
+
+             SizedBox(
+               width: 200,
+               child: Text(
+                    eventModel.venue,
+                    overflow: TextOverflow.ellipsis,
+                    style: cardVenueStyle,
+                  ),
+             ),
+
             ],
           ),
         ),
