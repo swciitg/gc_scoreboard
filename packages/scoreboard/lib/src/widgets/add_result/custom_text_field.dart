@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../globals/colors.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomTextFieldTwo extends StatelessWidget {
   final String hintText;
   final TextInputType inputType;
   final String? Function(String?)? validator;
@@ -10,7 +10,7 @@ class CustomTextField extends StatelessWidget {
   final onChanged;
   final bool isNecessary;
 
-  const CustomTextField(
+  const CustomTextFieldTwo(
       {super.key,
       required this.hintText,
       required this.validator,

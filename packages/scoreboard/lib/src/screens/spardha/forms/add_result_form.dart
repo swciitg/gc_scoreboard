@@ -160,7 +160,7 @@ class _AddResultFormState extends State<AddResultForm> {
                                 const SizedBox(
                                   height: 22,
                                 ),
-                                CustomTextField(
+                                CustomTextFieldTwo(
                                   inputType: TextInputType.text,
                                   hintText: 'Victory Statement',
                                   validator: validateField,
@@ -282,7 +282,7 @@ class _AddResultFormState extends State<AddResultForm> {
                                       children: [
                                         Expanded(
                                           flex: 46,
-                                          child: CustomTextField(
+                                          child: CustomTextFieldTwo(
                                             inputType: TextInputType.text,
                                             isNecessary: true,
                                             hintText: 'Primary Score',
@@ -300,7 +300,7 @@ class _AddResultFormState extends State<AddResultForm> {
                                         ),
                                         Expanded(
                                             flex: 46,
-                                            child: CustomTextField(
+                                            child: CustomTextFieldTwo(
                                               inputType: TextInputType.text,
                                               isNecessary: false,
                                               hintText: 'Secondary Score',
