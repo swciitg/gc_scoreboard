@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../globals/colors.dart';
 
@@ -31,6 +32,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       cursorColor: Themes.theme.primaryColor,
       onTap: widget.onTap,
       decoration: InputDecoration(
+        errorStyle: GoogleFonts.montserrat(),
         label: RichText(
           text: TextSpan(
             children: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:scoreboard/src/widgets/add_event/timepicker_color.dart';
 import '../../../functions/snackbar.dart';
@@ -178,12 +179,23 @@ class _AddEventFormState extends State<AddEventForm> {
                                     .requestFocus(FocusNode());
                                 DateTime? pickedDate = await showDatePicker(
                                     context: context,
-                                    initialDate: DateTime.now(),
+                                    initialDate: selectedDate ?? DateTime.now(),
                                     firstDate: DateTime(2000),
                                     //DateTime.now() - not to allow to choose before today.
                                     lastDate: DateTime(2101),
                                     builder: (context, child) =>Theme(
                                       data: Theme.of(context).copyWith(
+                                        textTheme: TextTheme(
+                                          headline4: GoogleFonts.montserrat(),
+                                          headline5: GoogleFonts.montserrat(), // Selected Date landscape
+                                          headline6: GoogleFonts.montserrat(), // Selected Date portrait
+                                          overline: GoogleFonts.montserrat(), // Title - SELECT DATE
+                                          bodyText1: GoogleFonts.montserrat(), // year gridbview picker
+                                          bodyText2: GoogleFonts.montserrat(), // year gridbview picker
+                                          subtitle1: GoogleFonts.montserrat(), // input
+                                          subtitle2: GoogleFonts.montserrat(), // month/year picker
+                                          caption: GoogleFonts.montserrat(), // days
+                                        ),
                                         colorScheme: ColorScheme.light(
                                           primary: const Color(0xff2B3E5C),
                                           onPrimary: Colors.white,
@@ -228,7 +240,7 @@ class _AddEventFormState extends State<AddEventForm> {
                                   builder: (context, childWidget) {
                                     return TimePickerColor(childWidget: childWidget,);
                                   },
-                                  initialTime: TimeOfDay.now(),
+                                  initialTime: selectedTime ?? TimeOfDay.now(),
                                   context: context,
                                   //context of current state
                                 );
