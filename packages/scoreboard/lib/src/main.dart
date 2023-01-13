@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:scoreboard/src/globals/constants.dart';
 import 'package:scoreboard/src/widgets/common/filter_bar.dart';
 import 'package:scoreboard/src/widgets/common/home_app_bar.dart';
 import 'package:scoreboard/src/widgets/common/shimmer.dart';
@@ -52,11 +53,11 @@ class _GCScoreBoardState extends State<GCScoreBoard> {
               // reload page
               setState(() {});
             }
-
             return FutureBuilder(
               future:
                   AuthUserHelpers.saveUserData(widget.userInfo, buildContext),
               builder: (futureContext, snapshot) {
+                print(allHostelList);
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Scaffold(
                     backgroundColor: Themes.backgroundColor,

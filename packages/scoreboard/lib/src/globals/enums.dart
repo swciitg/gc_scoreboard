@@ -39,7 +39,7 @@ enum Hostel {
   brahmaputra("Brahmaputra"),
   kameng("Kameng"),
   dihing("Dihing"),
-  disangMen("Disang Men"),
+  disangMen("Disang (Men)"),
   kapili('Kapili'),
   barak("Barak"),
   lohit("Lohit"),
