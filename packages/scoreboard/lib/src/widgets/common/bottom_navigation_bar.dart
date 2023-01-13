@@ -23,28 +23,22 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     double mediaWidth = MediaQuery.of(context).size.width;
-    return SafeArea(
-      child: Container(
-          color: Themes.bottomNavBarColor,
-          height: 80,
-          width: MediaQuery.of(context).size.width,
-          child: Row(
-            children: [
-              BottomNavBarItem(
-                  competition: Competitions.gc,
-                  width: mediaWidth / 4),
-              BottomNavBarItem(
-                  competition: Competitions.spardha,
-                  width: mediaWidth / 4),
-              BottomNavBarItem(
-                  competition: Competitions.kriti,
-                  width: mediaWidth / 4),
-              BottomNavBarItem(
-                  competition: Competitions.manthan,
-                  width: mediaWidth / 4),
-            ],
-          )),
-    );
+    return Container(
+        color: Themes.bottomNavBarColor,
+        height: 90,
+        width: MediaQuery.of(context).size.width,
+        child: Row(
+          children: [
+            BottomNavBarItem(
+                competition: Competitions.gc, width: mediaWidth / 4),
+            BottomNavBarItem(
+                competition: Competitions.spardha, width: mediaWidth / 4),
+            BottomNavBarItem(
+                competition: Competitions.kriti, width: mediaWidth / 4),
+            BottomNavBarItem(
+                competition: Competitions.manthan, width: mediaWidth / 4),
+          ],
+        ));
   }
 }
 
@@ -63,25 +57,33 @@ class BottomNavBarItem extends StatelessWidget {
     CommonStore commonStore = context.read<CommonStore>();
 
     var competitionStore;
-    switch(competition){
-      case Competitions.gc : {
-        competitionStore = context.read<GCStore>();
-      } break;
-      case Competitions.spardha : {
-        competitionStore = context.read<SpardhaStore>();
-      } break;
-      case Competitions.kriti : {
-        competitionStore = context.read<KritiStore>();
-      } break;
-      case Competitions.manthan : {
-        competitionStore = context.read<ManthanStore>();
-      } break;
+    switch (competition) {
+      case Competitions.gc:
+        {
+          competitionStore = context.read<GCStore>();
+        }
+        break;
+      case Competitions.spardha:
+        {
+          competitionStore = context.read<SpardhaStore>();
+        }
+        break;
+      case Competitions.kriti:
+        {
+          competitionStore = context.read<KritiStore>();
+        }
+        break;
+      case Competitions.manthan:
+        {
+          competitionStore = context.read<ManthanStore>();
+        }
+        break;
     }
 
     return Observer(builder: (context) {
       return GestureDetector(
         onTap: () {
-          commonStore.setCompetition(competition,competitionStore);
+          commonStore.setCompetition(competition, competitionStore);
         },
         child: SizedBox(
           width: width,
