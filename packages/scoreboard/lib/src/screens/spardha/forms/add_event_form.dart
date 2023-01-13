@@ -152,7 +152,8 @@ class _AddEventFormState extends State<AddEventForm> {
                                   .toLowerCase()
                                   .contains(val.text.toLowerCase()));
                         },
-                        initialValue: TextEditingValue(text:widget.event?.event??""),
+                        initialValue:
+                            TextEditingValue(text: widget.event?.event ?? ""),
                         onSelected: (s) => sportName = s,
                         optionsMaxHeight: 50,
                         optionsViewBuilder: (BuildContext context,
@@ -167,8 +168,7 @@ class _AddEventFormState extends State<AddEventForm> {
                                 // padding: EdgeInsets.all(10.0),
                                 padding: EdgeInsets.symmetric(vertical: 0),
                                 itemCount: options.length,
-                                itemBuilder:
-                                    (BuildContext context, int index) {
+                                itemBuilder: (BuildContext context, int index) {
                                   final String option =
                                       options.elementAt(index);
                                   return GestureDetector(
@@ -178,8 +178,8 @@ class _AddEventFormState extends State<AddEventForm> {
                                     child: ListTile(
                                       tileColor: Themes.theme.backgroundColor,
                                       title: Text(option,
-                                          style: Themes
-                                              .theme.textTheme.headline6),
+                                          style:
+                                              Themes.theme.textTheme.headline6),
                                     ),
                                   );
                                 },
@@ -242,7 +242,10 @@ class _AddEventFormState extends State<AddEventForm> {
                                     firstDate: DateTime(2000),
                                     //DateTime.now() - not to allow to choose before today.
                                     lastDate: DateTime(2101),
-                                    builder: (context, child) => DatePickerTheme(child: child,));
+                                    builder: (context, child) =>
+                                        DatePickerTheme(
+                                          child: child,
+                                        ));
                                 if (pickedDate != null) {
                                   if (!mounted) return;
                                   selectedDate = pickedDate;
@@ -356,7 +359,7 @@ class _AddEventFormState extends State<AddEventForm> {
                         height: 18,
                       ),
                       CustomDropDown(
-                        items: [for (var i = 2; i <= 10; i++) i.toString()],
+                        items: [for (var i = 2; i <= 15; i++) i.toString()],
                         value: hostelSizeValue,
                         hintText: 'Select Number of Hostels',
                         onChanged: callbackHostels,
