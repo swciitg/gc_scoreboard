@@ -27,7 +27,8 @@ class _ResultsPageState extends State<ResultsPage> {
     var commonStore = context.read<CommonStore>();
     var spardhaStore = context.read<SpardhaStore>();
 
-    reloadCallback(){ // reload page
+    reloadCallback() {
+      // reload page
       setState(() {});
     }
 
@@ -56,8 +57,7 @@ class _ResultsPageState extends State<ResultsPage> {
                           );
                         }),
                   );
-                }
-                else if(snapshot.hasData) {
+                } else if (snapshot.hasData) {
                   List<EventModel> allSpardhaEventSchedules = snapshot.data!;
                   return Observer(builder: (context) {
                     List<EventModel> filteredEventSchedules = filterSchedule(
@@ -75,7 +75,7 @@ class _ResultsPageState extends State<ResultsPage> {
                                           filteredEventSchedules[index]);
                                 })
                             : Center(
-                                child: Text("No Schedule found",
+                                child: Text("No Result found",
                                     style: GoogleFonts.montserrat(
                                         fontWeight: FontWeight.w600,
                                         fontSize: 12,
