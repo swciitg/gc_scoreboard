@@ -34,77 +34,18 @@ class ExpandedResultsCard extends StatelessWidget {
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: eventModel.results[index].length,
                     itemBuilder: (context, subIndex) {
-                      return eventModel.results[0][0].secondaryScore == null
-                          ? NullSecondaryResultsCardItem(
-                              index + 1,
-                              eventModel.results[index][subIndex].hostelName!,
-                              eventModel.results[index][subIndex].primaryScore!)
-                          : SecondaryScoreResultsCardItem(
-                              index + 1,
-                              eventModel.results[index][subIndex].hostelName!,
-                              eventModel.results[index][subIndex].primaryScore!,
-                              eventModel
-                                  .results[index][subIndex].secondaryScore);
+                      return ScoreCardItem(
+                          index + 1,
+                          eventModel.results[index][subIndex].hostelName!,
+                          eventModel.results[index][subIndex].primaryScore!,
+                          eventModel.results[index][subIndex].secondaryScore);
                     }),
               );
             }));
   }
 
-  Widget NullSecondaryResultsCardItem(
-      int position, String hostelName, String score) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            height: 18,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  width: 16,
-                  height: 18,
-                  child: Text(
-                    '${position}',
-                    style: GoogleFonts.montserrat(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 12,
-                        color: Themes.cardFontColor2),
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  hostelName,
-                  style: GoogleFonts.montserrat(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12,
-                      color: Themes.cardFontColor2),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            alignment: Alignment.center,
-            height: 18,
-            child: Text(
-              '${score}',
-              style: GoogleFonts.montserrat(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 12,
-                  color: Themes.cardFontColor3),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget SecondaryScoreResultsCardItem(int position, String hostelName,
-      String finalScore, String? secondaryScore) {
+  Widget ScoreCardItem(int position, String hostelName, String finalScore,
+      String? secondaryScore) {
     final split = secondaryScore?.split(',');
     print(split);
 
@@ -133,12 +74,16 @@ class ExpandedResultsCard extends StatelessWidget {
                 SizedBox(
                   width: 10,
                 ),
-                Text(
-                  hostelName,
-                  style: GoogleFonts.montserrat(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12,
-                      color: Themes.cardFontColor2),
+                Container(
+                  width: 105,
+                  child: Text(
+                    overflow: TextOverflow.visible,
+                    hostelName,
+                    style: GoogleFonts.montserrat(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12,
+                        color: Themes.cardFontColor2),
+                  ),
                 ),
               ],
             ),
@@ -155,29 +100,35 @@ class ExpandedResultsCard extends StatelessWidget {
                       fontSize: 12,
                       color: Themes.cardFontColor3),
                 ),
-                SizedBox(
-                  width: 8,
-                ),
-                Container(
-                  width: (split?.length.toDouble())! * 18,
-                  child: ListView.builder(
-                      itemCount: split?.length,
-                      scrollDirection: Axis.horizontal,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return Container(
-                          alignment: Alignment.centerRight,
-                          width: 18,
-                          child: Text(
-                            '${split![index]}',
-                            style: GoogleFonts.montserrat(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 12,
-                                color: Themes.cardFontColor1),
+                secondaryScore == null
+                    ? Container()
+                    : Row(
+                        children: [
+                          SizedBox(
+                            width: 8,
                           ),
-                        );
-                      }),
-                ),
+                          Container(
+                            width: (split?.length.toDouble())! * 18,
+                            child: ListView.builder(
+                                itemCount: split?.length,
+                                scrollDirection: Axis.horizontal,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    alignment: Alignment.centerRight,
+                                    width: 18,
+                                    child: Text(
+                                      '${split![index]}',
+                                      style: GoogleFonts.montserrat(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 12,
+                                          color: Themes.cardFontColor1),
+                                    ),
+                                  );
+                                }),
+                          ),
+                        ],
+                      ),
               ],
             ),
           )
