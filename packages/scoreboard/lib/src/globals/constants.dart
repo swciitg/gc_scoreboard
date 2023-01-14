@@ -34,7 +34,7 @@ const Map<String,String> hostelsImagePath = {
   'Kameng' : '$logoDir/kameng.jpg',
   'Kapili' : '$logoDir/kapili.jpg',
   'Lohit' : '$logoDir/lohit.jpg',
-  'Manas' : '$logoDir/hostel_image.jpg',
+  'Manas' : '$logoDir/manas.jpeg',
   'Married Scholars (Men)' : '$logoDir/hostel_image.jpg',
   'Married Scholars (Women)' : '$logoDir/hostel_image.jpg',
   'Siang' : '$logoDir/siang.jpg',
