@@ -33,6 +33,10 @@ class _PopupMenuState extends State<PopupMenu> {
   }
 
   void _showContextMenu(context, commonStore) async {
+
+    if (widget.items.isEmpty) {
+      return;
+    }
     final RenderBox overlay =
     Overlay.of(context)?.context.findRenderObject() as RenderBox;
 

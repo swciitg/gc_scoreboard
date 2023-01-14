@@ -41,13 +41,36 @@ class _ScheduleCardState extends State<ScheduleCard> {
         child: ConstrainedBox(
           constraints: BoxConstraints(
               minHeight: widget.eventModel.hostels.length == 11 ? 256 : 290),
-          child: commonStore.viewType == ViewType.admin
-              ? PopupMenu(
-                  eventModel: widget.eventModel,
-                  items: popupOptions,
-                  child: ScheduleCardItems(),
-                )
-              : ScheduleCardItems(),
+          child: PopupMenu(
+            eventModel: widget.eventModel,
+            items: commonStore.viewType == ViewType.admin ? popupOptions : [],
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(24),
+                color: Themes.cardColor2,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CardEventDetails(eventModel: widget.eventModel),
+                    widget.eventModel.hostels.length > 2
+                        ? MultipleHostelView(eventModel: widget.eventModel)
+                        : BiHostelView(
+                            hostelA: widget.eventModel.hostels[0],
+                            hostelB: widget.eventModel.hostels[1],
+                          ),
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    TimeVenueWidget(eventModel: widget.eventModel),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ),
       );
     });
