@@ -78,7 +78,7 @@ class _ResultsCardState extends State<ResultsCard> {
                         Expanded(
                           child: Text(
                             widget.eventModel.victoryStatement!,
-                            overflow: TextOverflow.ellipsis,
+                            overflow: TextOverflow.visible,
                             style: GoogleFonts.montserrat(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 12,
