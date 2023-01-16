@@ -130,12 +130,12 @@ class _AddStandingState extends State<AddStanding> {
                     ),
                     Column(
                       children: [
-                        Container(
+                        SizedBox(
                           width: double.infinity,
                           child: Autocomplete<String>(
                             optionsBuilder: (TextEditingValue val) {
                               if (val.text == '') {
-                                return Iterable<String>.empty();
+                                return const Iterable<String>.empty();
                               }
                               return StaticStore.spardhaEvents.where(
                                   (element) => element
@@ -155,7 +155,7 @@ class _AddStandingState extends State<AddStanding> {
                                   color: Colors.transparent,
                                   child: ListView.builder(
                                     // padding: EdgeInsets.all(10.0),
-                                    padding: EdgeInsets.symmetric(vertical: 0),
+                                    padding: const EdgeInsets.symmetric(vertical: 0),
                                     itemCount: options.length,
                                     itemBuilder:
                                         (BuildContext context, int index) {
@@ -193,10 +193,10 @@ class _AddStandingState extends State<AddStanding> {
                             },
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
-                        Container(
+                        SizedBox(
                           width: double.infinity,
                           child: CustomDropDown(
                               items: eventCategories,

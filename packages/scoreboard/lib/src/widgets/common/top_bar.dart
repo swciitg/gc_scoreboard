@@ -63,7 +63,7 @@ class TopBarItem extends StatelessWidget {
   Widget build(BuildContext context) {
     CommonStore commonStore = context.read<CommonStore>();
 
-    var competitionStore;
+    dynamic competitionStore;
     switch(commonStore.competition){
       case Competitions.gc : {
         competitionStore = context.read<GCStore>();

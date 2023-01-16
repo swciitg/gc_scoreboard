@@ -7,7 +7,7 @@ class CustomTextFieldTwo extends StatelessWidget {
   final TextInputType inputType;
   final String? Function(String?)? validator;
   final String? value;
-  final onChanged;
+  final void Function(String)? onChanged;
   final bool isNecessary;
 
   const CustomTextFieldTwo(

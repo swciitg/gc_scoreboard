@@ -1,14 +1,9 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import '../../functions/auth_user_helper.dart';
-import '../../functions/snackbar.dart';
-import '../../globals/constants.dart';
 import '../../globals/colors.dart';
 import '../../globals/enums.dart';
 import '../../screens/home.dart';
-import '../../screens/login/admin_login.dart';
 import '../../stores/common_store.dart';
 
 class StandingsAppBar extends StatefulWidget {

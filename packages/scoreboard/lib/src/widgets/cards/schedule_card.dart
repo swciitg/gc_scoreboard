@@ -22,15 +22,15 @@ class ScheduleCard extends StatefulWidget {
 
 class _ScheduleCardState extends State<ScheduleCard> {
   List<PopupMenuEntry> popupOptions = [
-    OptionsMenuItem('Edit', 'edit schedule', Themes.kWhite),
+    optionsMenuItem('Edit', 'edit schedule', Themes.kWhite),
     const PopupMenuDivider(
       height: 2,
     ),
-    OptionsMenuItem('Add result', 'add', Themes.primaryColor),
+    optionsMenuItem('Add result', 'add', Themes.primaryColor),
     const PopupMenuDivider(
       height: 2,
     ),
-    OptionsMenuItem('Delete', 'delete', Themes.errorRed),
+    optionsMenuItem('Delete', 'delete', Themes.errorRed),
   ];
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,7 @@ class _ScheduleCardState extends State<ScheduleCard> {
     });
   }
 
-  Widget ScheduleCardItems() {
+  Widget scheduleCardItems() {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),

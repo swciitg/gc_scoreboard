@@ -7,7 +7,7 @@ class CommonStore = _CommonStore with _$CommonStore;
 
 abstract class _CommonStore with Store {
 
-  static List<String> spardhaEvents=[];
+  // static List<String> spardhaEvents=[];
 
   @observable
   Competitions competition = Competitions.gc;

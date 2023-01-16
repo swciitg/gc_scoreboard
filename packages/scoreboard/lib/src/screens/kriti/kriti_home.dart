@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/src/globals/colors.dart';
-import 'package:scoreboard/src/globals/enums.dart';
+
 import 'package:scoreboard/src/widgets/common/coming_soon.dart';
 import 'package:scoreboard/src/widgets/common/restricted_page.dart';
 import 'package:scoreboard/src/stores/common_store.dart';
@@ -25,10 +25,10 @@ class _KritiHomeState extends State<KritiHome> {
       builder: (context) {
         return Scaffold(
           backgroundColor: Themes.backgroundColor,
-          appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(56),
+          appBar: const PreferredSize(
+              preferredSize:  Size.fromHeight(56),
               child: AppBarHomeComponent()),
-          body: !commonStore.isKritiAdmin ? RestrictedPage() : ComingSoon(competition: commonStore.competition),
+          body: !commonStore.isKritiAdmin ? const RestrictedPage() : ComingSoon(competition: commonStore.competition),
           bottomNavigationBar: const BottomNavBar(),
         );
       }

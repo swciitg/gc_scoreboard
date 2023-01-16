@@ -16,25 +16,25 @@ class StandingsExpandedresultsCard extends StatelessWidget {
           maxHeight: standingModel.standings!.length * 30,
         ),
         child: ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: standingModel.standings!.length,
             itemBuilder: (context, index) {
-              return AthleticsResultsCardItem(
+              return athleticsResultsCardItem(
                   index + 1,
                   standingModel.standings![index].hostelName!,
                   standingModel.standings![index].points.toString());
             }));
-    ;
+    
   }
 
-  Widget AthleticsResultsCardItem(
+  Widget athleticsResultsCardItem(
       int position, String hostelName, String score) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
+          SizedBox(
             height: 18,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -44,14 +44,15 @@ class StandingsExpandedresultsCard extends StatelessWidget {
                   width: 16,
                   height: 18,
                   child: Text(
-                    '${position}',
+                    
+                    '$position',
                     style: GoogleFonts.montserrat(
                         fontWeight: FontWeight.w500,
                         fontSize: 12,
                         color: Themes.cardFontColor2),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Text(
@@ -68,7 +69,7 @@ class StandingsExpandedresultsCard extends StatelessWidget {
             alignment: Alignment.center,
             height: 18,
             child: Text(
-              '${score}',
+              score,
               style: GoogleFonts.montserrat(
                   fontWeight: FontWeight.w500,
                   fontSize: 12,

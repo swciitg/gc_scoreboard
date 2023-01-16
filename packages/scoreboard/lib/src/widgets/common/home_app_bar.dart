@@ -11,7 +11,7 @@ import '../../screens/login/admin_login.dart';
 import '../../stores/common_store.dart';
 
 class AppBarHomeComponent extends StatefulWidget {
-  AppBarHomeComponent({Key? key}) : super(key: key);
+  const AppBarHomeComponent({Key? key}) : super(key: key);
 
   @override
   State<AppBarHomeComponent> createState() => _AppBarHomeComponentState();

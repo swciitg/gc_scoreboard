@@ -56,7 +56,7 @@ class BottomNavBarItem extends StatelessWidget {
   Widget build(BuildContext context) {
     CommonStore commonStore = context.read<CommonStore>();
 
-    var competitionStore;
+   dynamic competitionStore;
     switch (competition) {
       case Competitions.gc:
         {

@@ -40,7 +40,7 @@ class _SpardhaAdminStandingsPageState extends State<SpardhaAdminStandingsPage> {
                   itemBuilder: (context, index) {
                     return Container(
                       height: 200,
-                      padding: EdgeInsets.symmetric(vertical: 8),
+                      padding: const EdgeInsets.symmetric(vertical: 8),
                       child: ShowShimmer(
                         height: 200,
                         width: MediaQuery.of(context).size.width,
@@ -70,7 +70,7 @@ class _SpardhaAdminStandingsPageState extends State<SpardhaAdminStandingsPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: GestureDetector(
         onTap: (){
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddStanding()));
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AddStanding()));
         },
         child: const AddButton(text: 'Add Standing', width: 175,
 

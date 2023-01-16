@@ -39,8 +39,8 @@ class _SpardhaHomeState extends State<SpardhaHome> {
       builder: (context) {
         return Scaffold(
           backgroundColor: Themes.backgroundColor,
-          appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(56),
+          appBar: const PreferredSize(
+              preferredSize:  Size.fromHeight(56),
               child: AppBarHomeComponent()),
           body: tabs[commonStore.page],
           floatingActionButtonLocation:

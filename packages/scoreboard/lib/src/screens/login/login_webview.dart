@@ -33,8 +33,8 @@ class _LoginWebViewState extends State<LoginWebView> {
         return WebView(
           initialUrl: "https://swc.iitg.ac.in/onestopapi/v2/auth/microsoft",
           javascriptMode: JavascriptMode.unrestricted,
-          onWebViewCreated: (_controller){
-            controllerCompleter.complete(_controller);
+          onWebViewCreated: (controller){
+            controllerCompleter.complete(controller);
           },
           onPageFinished: (url) async {
             if (url.startsWith(

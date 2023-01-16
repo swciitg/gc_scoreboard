@@ -17,6 +17,7 @@ import 'stores/manthan_store.dart';
 import 'stores/spardha_store.dart';
 import 'widgets/common/err_reload.dart';
 
+
 class GCScoreBoard extends StatefulWidget {
   Map<String, String> userInfo;
   GCScoreBoard({Key? key, required this.userInfo}) : super(key: key);
@@ -61,8 +62,8 @@ class _GCScoreBoardState extends State<GCScoreBoard> {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Scaffold(
                     backgroundColor: Themes.backgroundColor,
-                    appBar: PreferredSize(
-                        preferredSize: const Size.fromHeight(56),
+                    appBar: const PreferredSize(
+                        preferredSize:  Size.fromHeight(56),
                         child: AppBarHomeComponent()),
                     body: Center(
                       child: Column(

@@ -6,7 +6,7 @@ class CustomDropDown extends StatelessWidget {
   final List<String> items;
   final String hintText;
   final Function? onChanged;
-  final validator;
+  final String? Function(String?)?  validator;
   final int? index;
   final String? value;
 

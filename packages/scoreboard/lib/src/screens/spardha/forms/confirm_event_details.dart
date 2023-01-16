@@ -18,6 +18,7 @@ class ConfirmEventDetails extends StatefulWidget {
   }) : super(key: key);
 
   @override
+
   _ConfirmEventDetailsState createState() => _ConfirmEventDetailsState();
 }
 
@@ -59,7 +60,7 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
           TextButton(
             onPressed: () async {
               print(widget.event.toJson());
-              bool response;
+   
               try {
                 if (widget.isEdit) {
                   await APIService(context)

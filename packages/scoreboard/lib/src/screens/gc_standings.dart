@@ -10,7 +10,7 @@ import '../functions/filter_men_women.dart';
 import '../globals/styles/filter_style.dart';
 import '../globals/colors.dart';
 import '../services/api.dart';
-import '../stores/common_store.dart';
+
 import '../stores/gc_store.dart';
 import '../widgets/common/bottom_navigation_bar.dart';
 import '../widgets/common/home_app_bar.dart';
@@ -32,7 +32,7 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    var commonStore = context.read<CommonStore>();
+
     var gcStore = context.read<GCStore>();
 
     reloadCallback() {
@@ -42,8 +42,8 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
 
     return Scaffold(
       backgroundColor: Themes.backgroundColor,
-      appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(56),
+      appBar: const PreferredSize(
+          preferredSize:  Size.fromHeight(56),
           child: AppBarHomeComponent()),
       body: Padding(
           padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
@@ -60,7 +60,7 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(13, 0, 0, 0),
                       child: PopupMenuButton(
-                          constraints: BoxConstraints(maxHeight: 300),
+                          constraints:const BoxConstraints(maxHeight: 300),
                           position: PopupMenuPosition.under,
                           color: Themes.cardColor1,
                           onSelected: (String item) {
@@ -73,9 +73,9 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
                               _itemsCategory
                                   .map((item) => PopupMenuItem<String>(
                                         value: item,
-                                        child: Container(
+                                        child: SizedBox(
                                           width: double.infinity,
-                                          child: Container(
+                                          child: SizedBox(
                                             width: MediaQuery.of(context).size.width,
                                             child: Text(
                                               'General Championship [$item]',

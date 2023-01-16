@@ -31,7 +31,7 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
         return commonStore.competition == Competitions.gc
             ? const GCStandingsPage()
             : commonStore.competition == Competitions.spardha
-            ? SpardhaHome() : (commonStore.competition == Competitions.kriti ? KritiHome() : ManthanHome());
+            ? const SpardhaHome() : (commonStore.competition == Competitions.kriti ? const KritiHome() : const ManthanHome());
       },
     );
   }

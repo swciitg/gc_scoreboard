@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../globals/colors.dart';
 
 class ErrorReloadPage extends StatefulWidget {
-  final apiFunction;
+  final Function apiFunction;
   const ErrorReloadPage({Key? key,required this.apiFunction}) : super(key: key);
 
   @override
