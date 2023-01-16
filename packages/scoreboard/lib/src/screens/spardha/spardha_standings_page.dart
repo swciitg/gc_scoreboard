@@ -48,7 +48,7 @@ class _StandingsPageState extends State<StandingsPage> {
                     ),
                   ));
                 } else if (snapshot.hasData) {
-                  print(snapshot.data);
+
                   return Observer(builder: (context) {
                     List<dynamic> filteredEventSchedules = filterStandings(
                         input: snapshot.data!,
@@ -59,7 +59,7 @@ class _StandingsPageState extends State<StandingsPage> {
                             hostelStandings: filteredEventSchedules));
                   });
                 }
-                print("here");
+
                 return ErrorReloadPage(apiFunction: reloadCallback);
               },
             )

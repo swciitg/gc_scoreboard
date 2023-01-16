@@ -116,10 +116,14 @@ class _AppBarHomeComponentState extends State<AppBarHomeComponent> {
                               await (Connectivity().checkConnectivity());
                           if (connectivityResults
                                   .contains(connectivityResult)) {
+                      if (!mounted) return;
+
                             Navigator.pushNamed(
                                 context, LoginView.id);
                           }
                           else{
+                      if (!mounted) return;
+
                             showSnackBar(context, "No internet connection");
                           }
                         } else {

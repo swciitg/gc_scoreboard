@@ -6,8 +6,8 @@ import '../../globals/constants.dart';
 
 
 class StandingBoard extends StatefulWidget {
-  List<dynamic> hostelStandings;
-  StandingBoard({
+  final List<dynamic> hostelStandings;
+  const StandingBoard({
     Key? key, required this.hostelStandings
   }) : super(key: key);
 
@@ -25,7 +25,7 @@ class _StandingBoardState extends State<StandingBoard> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.hostelStandings);
+
     return Container(
       margin: const EdgeInsets.fromLTRB(8, 16, 8, 0),
       decoration: const BoxDecoration(
@@ -84,7 +84,7 @@ class _StandingBoardState extends State<StandingBoard> {
             );
           }
           index -= 1;
-          print(widget.hostelStandings[index]["hostelName"]);
+
           return Container(
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
             padding: const EdgeInsets.fromLTRB(15, 10, 10, 10),

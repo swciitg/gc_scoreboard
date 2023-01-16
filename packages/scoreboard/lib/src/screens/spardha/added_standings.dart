@@ -49,13 +49,12 @@ class _SpardhaAdminStandingsPageState extends State<SpardhaAdminStandingsPage> {
                   });
             }
             else if (snapshot.hasData) {
-              print(snapshot.data);
+
               return snapshot.data!['event-wise'].length!=0 ? ListView.builder(
                   itemCount: snapshot.data!['event-wise'].length,
                   itemBuilder: (context, index) {
-                    print('asdfghjk');
-                    print(StandingModel.fromJson(
-                        snapshot.data!['event-wise'][index]));
+       
+                
                     return StandingsResultCard(
                         standingModel: StandingModel.fromJson(
                             snapshot.data!['event-wise'][index]));

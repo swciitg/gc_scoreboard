@@ -3,7 +3,7 @@ import '../models/event_model.dart';
 
 List<EventModel> filterSchedule({required List<EventModel> input, required String event, required String date, required Hostel hostel})
 {
-  print(input);
+
   List<EventModel> output=[];
   output.addAll(input);
   output.retainWhere((element){

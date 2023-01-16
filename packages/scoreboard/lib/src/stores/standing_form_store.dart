@@ -17,16 +17,16 @@ class StandingFormStore {
       standing = standings.standings;
       if(standings.category == 'Men')
         {
-          print('men');
+
           category = Category.men;
         }
       else if(standings.category == 'Women')
         {
-          print('women');
+
           category = Category.women;
         }
       else {
-        print('womeedededeen');
+
         category = Category.menandwomen;
       }
 

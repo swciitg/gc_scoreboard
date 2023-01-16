@@ -90,6 +90,8 @@ class _AddStandingState extends State<AddStanding> {
                               .standing!
                               .map((e) => e.toJson()))
                         });
+                        if (!mounted) return;
+
                         showSnackBar(context, "Standing added");
                       } else {
                         widget.standings!.category =
@@ -99,13 +101,15 @@ class _AddStandingState extends State<AddStanding> {
                             standingFormStore.standing;
                         await APIService(context)
                             .updateSpardhaStanding(widget.standings!);
+                        if (!mounted) return;
+
                         showSnackBar(context, "Standing updated");
                       }
                       commStore.competition = Competitions.gc;
+                      if (!mounted) return;
                       Navigator.pushNamedAndRemoveUntil(
                           context, ScoreBoardHome.id, (route) => false);
                     } on DioError catch (err) {
-                      print(err.toString());
                       showErrorSnackBar(context, err);
                     }
                   },
@@ -155,7 +159,8 @@ class _AddStandingState extends State<AddStanding> {
                                   color: Colors.transparent,
                                   child: ListView.builder(
                                     // padding: EdgeInsets.all(10.0),
-                                    padding: const EdgeInsets.symmetric(vertical: 0),
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 0),
                                     itemCount: options.length,
                                     itemBuilder:
                                         (BuildContext context, int index) {
@@ -210,7 +215,8 @@ class _AddStandingState extends State<AddStanding> {
                                   } else if (value == 'Women') {
                                     standingFormStore.category = Category.women;
                                   } else {
-                                    standingFormStore.category = Category.menandwomen;
+                                    standingFormStore.category =
+                                        Category.menandwomen;
                                   }
                                 });
                               },

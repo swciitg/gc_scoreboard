@@ -6,7 +6,7 @@ import '../../models/standing_model.dart';
 
 class StandingsExpandedresultsCard extends StatelessWidget {
   final StandingModel standingModel;
-  StandingsExpandedresultsCard({Key? key, required this.standingModel})
+  const StandingsExpandedresultsCard({Key? key, required this.standingModel})
       : super(key: key);
 
   @override

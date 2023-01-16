@@ -37,7 +37,7 @@ abstract class _CommonStore with Store {
 
   @action
   void setCompetition(Competitions c,var competitionStore) {
-    print(c);
+
     competition = c;
     // changing filters to default
     competitionStore.setFiltersToDefault();

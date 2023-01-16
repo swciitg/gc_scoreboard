@@ -60,7 +60,9 @@ class AuthUserHelpers {
       await prefs.setString("email", userInfo["email"]!);
       await prefs.setString("name", userInfo["name"]!);
 
-     
+      
+
+
       var commStore = buildContext.read<CommonStore>();
       if (!prefs.containsKey("accessToken")) {
         // has already once used scoreboard
@@ -70,10 +72,9 @@ class AuthUserHelpers {
       }
       StaticStore.spardhaEvents =
           await APIService(buildContext).getAllSpardhaEvents();
-      print(StaticStore.spardhaEvents);
+
       return true;
     } on DioError catch (err) {
-      print("inside auth helper");
       return Future.error(err);
     }
   }

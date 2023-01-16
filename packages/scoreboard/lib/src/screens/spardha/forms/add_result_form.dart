@@ -76,11 +76,15 @@ class _AddResultFormState extends State<AddResultForm> {
                             widget.event.id!,
                             ResultFormStore.resultFields!,
                             ResultFormStore.victoryStatement!);
+                      if (!mounted) return;
+
                         Navigator.of(context).pushNamedAndRemoveUntil(
                             ScoreBoardHome.id, (route) => false);
                         showSnackBar(
                             context, 'Successfully added/updated result');
                         ResultFormStore.clear();
+                      if (!mounted) return;
+
                         Navigator.pushNamedAndRemoveUntil(context, ScoreBoardHome.id, (route) => false);
                       } on DioError catch (err) {
                         showErrorSnackBar(context, err);

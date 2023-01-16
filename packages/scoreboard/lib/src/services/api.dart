@@ -27,9 +27,7 @@ class APIService {
     }, onError: (error, handler) async {
       var response = error.response;
       // print(response.statusCode ?? "no status code");
-      if (response != null) {
-        print(response.data);
-      }
+ 
       if (response != null && response.statusCode == 401) {
         bool couldRegenerate = await regenerateAccessToken();
         var commStore = buildContext.read<CommonStore>();
@@ -44,8 +42,10 @@ class APIService {
         } else {
           // show login screen to admin if only he has internet connection
           var connectivityResult = await (Connectivity().checkConnectivity());
+          
           if (connectivityResults.contains(connectivityResult) &&
               await Navigator.pushNamed(buildContext, LoginView.id) == true) {
+                
             // retry for admin
             return handler.resolve(await retryRequest(response));
           }
@@ -124,9 +124,9 @@ class APIService {
 
   Future<void> postEventSchedule(Map<String, dynamic> data) async {
     try {
-      var resp = await dio.post("/gc/spardha/event-schedule", data: data);
+      // var resp = await dio.post("/gc/spardha/event-schedule", data: data);
     } on DioError catch (err) {
-      print(err.response!.data['message']);
+
       return Future.error(err);
     }
   }
@@ -182,16 +182,16 @@ class APIService {
     try {
       List<List<Map>> results = [];
       for (var positionResults in data) {
-        print(positionResults);
+
         List<Map> addResults = [];
         for (var result in positionResults) {
           addResults.add(result.toJson());
         }
         results.add(addResults);
       }
-      Response resp = await dio.patch(
-          '/gc/spardha/event-schedule/result/$eventID',
-          data: {'victoryStatement': victoryStatement, 'results': results});
+      // Response resp = await dio.patch(
+      //     '/gc/spardha/event-schedule/result/$eventID',
+      //     data: {'victoryStatement': victoryStatement, 'results': results});
     } on DioError catch (err) {
       return Future.error(err);
     }
@@ -199,7 +199,7 @@ class APIService {
 
   Future<void> deleteEvent(String eventID) async {
     try {
-      Response resp = await dio.delete('/gc/spardha/event-schedule/$eventID');
+      // Response resp = await dio.delete('/gc/spardha/event-schedule/$eventID');
     } on DioError catch (err) {
       return Future.error(err);
     }
@@ -207,9 +207,9 @@ class APIService {
 
   Future<void> updateSpardhaEvent(EventModel event) async {
     try {
-      print(event.toJson());
-      Response resp = await dio.patch('/gc/spardha/event-schedule/${event.id!}',
-          data: event.toJson());
+
+      // Response resp = await dio.patch('/gc/spardha/event-schedule/${event.id!}',
+      //     data: event.toJson());
     } on DioError catch (err) {
       return Future.error(err);
     }
@@ -217,8 +217,8 @@ class APIService {
 
   Future<void> deleteSpardhaEventResult(String eventID) async {
     try {
-      Response resp =
-          await dio.delete('/gc/spardha/event-schedule/result/$eventID');
+      // Response resp =
+      //     await dio.delete('/gc/spardha/event-schedule/result/$eventID');
     } on DioError catch (err) {
       return Future.error(err);
     }
@@ -248,8 +248,8 @@ class APIService {
 
   Future<void> postSpardhaStanding(Map<String, dynamic> data) async {
     try {
-      print(data.toString());
-      Response resp = await dio.post("/gc/spardha/standings", data: data);
+
+      // Response resp = await dio.post("/gc/spardha/standings", data: data);
     } on DioError catch (err) {
       return Future.error(err);
     }
@@ -257,9 +257,9 @@ class APIService {
 
   Future<void> updateSpardhaStanding(StandingModel standingModel) async {
     try {
-      Response resp = await dio.patch(
-          "/gc/spardha/standings/${standingModel.id}",
-          data: standingModel.toJson());
+      // Response resp = await dio.patch(
+      //     "/gc/spardha/standings/${standingModel.id}",
+      //     data: standingModel.toJson());
     } on DioError catch (err) {
       return Future.error(err);
     }

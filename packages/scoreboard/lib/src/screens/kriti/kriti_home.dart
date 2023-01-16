@@ -20,7 +20,7 @@ class _KritiHomeState extends State<KritiHome> {
   @override
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
-    print(commonStore.isKritiAdmin);
+    // print(commonStore.isKritiAdmin);
     return Observer(
       builder: (context) {
         return Scaffold(

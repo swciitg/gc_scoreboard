@@ -4,11 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../models/event_model.dart';
 import '../../globals/colors.dart';
 
+// ignore: must_be_immutable
 class ExpandedResultsCard extends StatelessWidget {
   final EventModel eventModel;
   ExpandedResultsCard({Key? key, required this.eventModel}) : super(key: key);
 
-  int length = 0;
+  var length = 0;
 
   void count() {
     for (int i = 0; i < eventModel.results.length.toInt(); i++) {
@@ -47,7 +48,7 @@ class ExpandedResultsCard extends StatelessWidget {
   Widget scoreCardItem(int position, String hostelName, String finalScore,
       String? secondaryScore) {
     final split = secondaryScore?.split(',');
-    print(split);
+
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
