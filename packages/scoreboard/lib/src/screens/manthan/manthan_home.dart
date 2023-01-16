@@ -27,7 +27,7 @@ class _ManthanHomeState extends State<ManthanHome> {
           appBar: PreferredSize(
               preferredSize: const Size.fromHeight(56),
               child: AppBarHomeComponent()),
-          body: commonStore.isManthanAdmin ? RestrictedPage() : ComingSoon(competition: commonStore.competition),
+          body: !commonStore.isManthanAdmin ? RestrictedPage() : ComingSoon(competition: commonStore.competition),
           bottomNavigationBar: const BottomNavBar(),
         );
       }

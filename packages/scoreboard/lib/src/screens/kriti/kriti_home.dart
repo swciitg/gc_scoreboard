@@ -20,6 +20,7 @@ class _KritiHomeState extends State<KritiHome> {
   @override
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
+    print(commonStore.isKritiAdmin);
     return Observer(
       builder: (context) {
         return Scaffold(
@@ -27,7 +28,7 @@ class _KritiHomeState extends State<KritiHome> {
           appBar: PreferredSize(
               preferredSize: const Size.fromHeight(56),
               child: AppBarHomeComponent()),
-          body: commonStore.isManthanAdmin ? RestrictedPage() : ComingSoon(competition: commonStore.competition),
+          body: !commonStore.isKritiAdmin ? RestrictedPage() : ComingSoon(competition: commonStore.competition),
           bottomNavigationBar: const BottomNavBar(),
         );
       }
