@@ -24,6 +24,7 @@ class ConfirmEventDetails extends StatefulWidget {
 class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
   @override
   Widget build(BuildContext context) {
+    bool isLoading = false;
     return GestureDetector(
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
@@ -57,26 +58,36 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
             actions: [
               TextButton(
                 onPressed: () async {
-                  try {
-                    if (widget.isEdit) {
-                      await APIService(context)
-                          .updateSpardhaEvent(widget.event);
-                      if (!mounted) return;
-                      showSnackBar(context, "Event Edited successfully");
-                    } else {
-                      await APIService(context)
-                          .postEventSchedule(widget.event.toJson());
+                  if (isLoading) {
+                    showSnackBar(context, 'Please wait before trying again');
+                  } else {
+                    setState(() {
+                      isLoading = true;
+                    });
+                    try {
+                      if (widget.isEdit) {
+                        await APIService(context)
+                            .updateSpardhaEvent(widget.event);
+                        if (!mounted) return;
+                        showSnackBar(context, "Event Edited successfully");
+                      } else {
+                        await APIService(context)
+                            .postEventSchedule(widget.event.toJson());
+                        if (!mounted) return;
+
+                        showSnackBar(
+                            context, "Event schedule posted successfully");
+                      }
                       if (!mounted) return;
 
-                      showSnackBar(
-                          context, "Event schedule posted successfully");
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, ScoreBoardHome.id, (route) => false);
+                    } on DioError catch (err) {
+                      showErrorSnackBar(context, err);
                     }
-                    if (!mounted) return;
-
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, ScoreBoardHome.id, (route) => false);
-                  } on DioError catch (err) {
-                    showErrorSnackBar(context, err);
+                    setState(() {
+                      isLoading = false;
+                    });
                   }
                 },
                 child: Text(

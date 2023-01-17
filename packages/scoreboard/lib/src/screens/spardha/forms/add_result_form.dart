@@ -36,6 +36,7 @@ class _AddResultFormState extends State<AddResultForm> {
   final key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    bool isLoading = false;
     return GestureDetector(
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
@@ -71,24 +72,35 @@ class _AddResultFormState extends State<AddResultForm> {
                 TextButton(
                   onPressed: () async {
                     if (key.currentState!.validate()) {
-                      try {
-                        await APIService(context).addUpdateResult(
-                            widget.event.id!,
-                            ResultFormStore.resultFields!,
-                            ResultFormStore.victoryStatement!);
-                        if (!mounted) return;
-
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                            ScoreBoardHome.id, (route) => false);
+                      if (isLoading) {
                         showSnackBar(
-                            context, 'Successfully added/updated result');
-                        ResultFormStore.clear();
-                        if (!mounted) return;
+                            context, 'Please wait before trying again');
+                      } else {
+                        setState(() {
+                          isLoading = true;
+                        });
+                        try {
+                          await APIService(context).addUpdateResult(
+                              widget.event.id!,
+                              ResultFormStore.resultFields!,
+                              ResultFormStore.victoryStatement!);
+                          if (!mounted) return;
 
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, ScoreBoardHome.id, (route) => false);
-                      } on DioError catch (err) {
-                        showErrorSnackBar(context, err);
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                              ScoreBoardHome.id, (route) => false);
+                          showSnackBar(
+                              context, 'Successfully added/updated result');
+                          ResultFormStore.clear();
+                          if (!mounted) return;
+
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, ScoreBoardHome.id, (route) => false);
+                        } on DioError catch (err) {
+                          showErrorSnackBar(context, err);
+                        }
+                        setState(() {
+                          isLoading = false;
+                        });
                       }
                     }
                   },

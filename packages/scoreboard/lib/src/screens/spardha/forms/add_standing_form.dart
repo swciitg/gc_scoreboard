@@ -44,6 +44,7 @@ class _AddStandingState extends State<AddStanding> {
 
   @override
   Widget build(BuildContext context) {
+    bool isLoading = false;
     var commStore = context.read<CommonStore>();
     return GestureDetector(
         onTap: () {
@@ -81,36 +82,47 @@ class _AddStandingState extends State<AddStanding> {
                     if (!key.currentState!.validate()) {
                       return;
                     }
-                    try {
-                      if (widget.standings == null) {
-                        await APIService(context).postSpardhaStanding({
-                          "category": standingFormStore.category!.categoryName,
-                          'event': standingFormStore.event,
-                          'standings': List<Map>.from(standingFormStore
-                              .standing!
-                              .map((e) => e.toJson()))
-                        });
-                        if (!mounted) return;
+                    if (isLoading) {
+                      showSnackBar(context, 'Please wait before trying again');
+                    } else {
+                      setState(() {
+                        isLoading = true;
+                      });
+                      try {
+                        if (widget.standings == null) {
+                          await APIService(context).postSpardhaStanding({
+                            "category":
+                                standingFormStore.category!.categoryName,
+                            'event': standingFormStore.event,
+                            'standings': List<Map>.from(standingFormStore
+                                .standing!
+                                .map((e) => e.toJson()))
+                          });
+                          if (!mounted) return;
 
-                        showSnackBar(context, "Standing added");
-                      } else {
-                        widget.standings!.category =
-                            standingFormStore.category!.categoryName;
-                        widget.standings!.event = standingFormStore.event;
-                        widget.standings!.standings =
-                            standingFormStore.standing;
-                        await APIService(context)
-                            .updateSpardhaStanding(widget.standings!);
-                        if (!mounted) return;
+                          showSnackBar(context, "Standing added");
+                        } else {
+                          widget.standings!.category =
+                              standingFormStore.category!.categoryName;
+                          widget.standings!.event = standingFormStore.event;
+                          widget.standings!.standings =
+                              standingFormStore.standing;
+                          await APIService(context)
+                              .updateSpardhaStanding(widget.standings!);
+                          if (!mounted) return;
 
-                        showSnackBar(context, "Standing updated");
+                          showSnackBar(context, "Standing updated");
+                        }
+                        commStore.competition = Competitions.gc;
+                        if (!mounted) return;
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, ScoreBoardHome.id, (route) => false);
+                      } on DioError catch (err) {
+                        showErrorSnackBar(context, err);
                       }
-                      commStore.competition = Competitions.gc;
-                      if (!mounted) return;
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, ScoreBoardHome.id, (route) => false);
-                    } on DioError catch (err) {
-                      showErrorSnackBar(context, err);
+                      setState(() {
+                        isLoading = false;
+                      });
                     }
                   },
                   child: Text(
