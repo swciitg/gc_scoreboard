@@ -67,7 +67,6 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
                       await APIService(context)
                           .postEventSchedule(widget.event.toJson());
                       if (!mounted) return;
-
                       showSnackBar(
                           context, "Event schedule posted successfully");
                     }

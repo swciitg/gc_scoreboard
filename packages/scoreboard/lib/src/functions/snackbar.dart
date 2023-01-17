@@ -13,6 +13,7 @@ void showSnackBar(BuildContext buildContext, String message) {
 }
 
 void showErrorSnackBar(BuildContext buildContext, DioError err) {
+  print(err.response);
   ScaffoldMessenger.of(buildContext).showSnackBar(SnackBar(
     content: Text(
       (err.response != null && err.response!.statusCode! == 406)
