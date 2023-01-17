@@ -1,11 +1,11 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../functions/snackbar.dart';
 import '../../globals/constants.dart';
 import '../../globals/colors.dart';
 import '../../globals/enums.dart';
+import '../../globals/styles.dart';
 import '../../screens/home.dart';
 import '../../screens/login/admin_login.dart';
 import '../../stores/common_store.dart';
@@ -22,7 +22,7 @@ class _AppBarHomeComponentState extends State<AppBarHomeComponent> {
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
     return Container(
-      color: Themes.appbarBackgroundColor,
+      color: Themes.secondaryColor,
       child: SafeArea(
         bottom: false,
         child: Padding(
@@ -32,7 +32,7 @@ class _AppBarHomeComponentState extends State<AppBarHomeComponent> {
             children: [
               InkWell(
                 onTap: () {
-                  Navigator.of(context,rootNavigator: true).pop();
+                  Navigator.of(context, rootNavigator: true).pop();
                   // Navigator.popUntil(context, ModalRoute.withName("/home2"));
                 },
                 child: Container(
@@ -52,32 +52,16 @@ class _AppBarHomeComponentState extends State<AppBarHomeComponent> {
                       const SizedBox(
                         width: 8,
                       ),
-                      Text('One',
-                          style: GoogleFonts.montserrat(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 12,
-                              color: Themes.primaryColor)),
-                      Text('.',
-                          style: GoogleFonts.montserrat(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 12,
-                              color: Themes.cardFontColor3)),
+                      Text('One', style: cardStageStyle2),
+                      Text('.', style: cardStageStyle1),
                     ],
                   ),
                 ),
               ),
               Row(
                 children: [
-                  Text('Scoreboard',
-                      style: GoogleFonts.montserrat(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 22,
-                          color: Themes.primaryColor)),
-                  Text('.',
-                      style: GoogleFonts.montserrat(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 22,
-                          color: Themes.cardFontColor3)),
+                  Text('Scoreboard', style: headingStyle1),
+                  Text('.', style: headingStyle2),
                 ],
               ),
               Padding(
@@ -95,12 +79,13 @@ class _AppBarHomeComponentState extends State<AppBarHomeComponent> {
                           borderRadius: BorderRadius.circular(8)),
                       itemBuilder: (BuildContext buildContext) => [
                         PopupMenuItem(
-                            value: commonStore.viewType==ViewType.admin
-                                ? ScoreBoardHome.id : LoginView.id,
+                            value: commonStore.viewType == ViewType.admin
+                                ? ScoreBoardHome.id
+                                : LoginView.id,
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 11),
                             child: Text(
-                              commonStore.viewType==ViewType.admin
+                              commonStore.viewType == ViewType.admin
                                   ? "Switch to User View"
                                   : "Switch to Admin View",
                               style: Themes.theme.textTheme.headline6,
@@ -115,14 +100,12 @@ class _AppBarHomeComponentState extends State<AppBarHomeComponent> {
                           ConnectivityResult connectivityResult =
                               await (Connectivity().checkConnectivity());
                           if (connectivityResults
-                                  .contains(connectivityResult)) {
-                      if (!mounted) return;
+                              .contains(connectivityResult)) {
+                            if (!mounted) return;
 
-                            Navigator.pushNamed(
-                                context, LoginView.id);
-                          }
-                          else{
-                      if (!mounted) return;
+                            Navigator.pushNamed(context, LoginView.id);
+                          } else {
+                            if (!mounted) return;
 
                             showSnackBar(context, "No internet connection");
                           }
@@ -139,4 +122,3 @@ class _AppBarHomeComponentState extends State<AppBarHomeComponent> {
     );
   }
 }
-

@@ -52,7 +52,7 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
                 Icons.arrow_back,
                 color: Colors.white,
               ),
-              splashColor: const Color.fromRGBO(118, 172, 255, 0.9),
+              splashColor: Themes.splashColor,
             ),
             actions: [
               TextButton(
@@ -71,7 +71,7 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
                       showSnackBar(
                           context, "Event schedule posted successfully");
                     }
-                      if (!mounted) return;
+                    if (!mounted) return;
 
                     Navigator.pushNamedAndRemoveUntil(
                         context, ScoreBoardHome.id, (route) => false);

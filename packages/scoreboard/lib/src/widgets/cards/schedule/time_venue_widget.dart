@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../../globals/styles/card_style.dart';
+import '../../../globals/styles.dart';
 import '../../../models/event_model.dart';
 import '../../../globals/colors.dart';
 
@@ -42,7 +42,6 @@ class TimeVenueWidget extends StatelessWidget {
         ),
         SizedBox(
           height: 18,
-
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -54,16 +53,14 @@ class TimeVenueWidget extends StatelessWidget {
               const SizedBox(
                 width: 8,
               ),
-
-             SizedBox(
-               width: 200,
-               child: Text(
-                    eventModel.venue,
-                    overflow: TextOverflow.ellipsis,
-                    style: cardVenueStyle,
-                  ),
-             ),
-
+              SizedBox(
+                width: 200,
+                child: Text(
+                  eventModel.venue,
+                  overflow: TextOverflow.ellipsis,
+                  style: cardVenueStyle1,
+                ),
+              ),
             ],
           ),
         ),

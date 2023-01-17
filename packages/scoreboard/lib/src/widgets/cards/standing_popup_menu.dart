@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/globals/enums.dart';
-import 'package:scoreboard/src/screens/spardha/forms/add_standing_form.dart';
 import '../../functions/snackbar.dart';
 import '../../globals/colors.dart';
+import '../../globals/enums.dart';
 import '../../models/standing_model.dart';
 import '../../screens/spardha/added_standings.dart';
+import '../../screens/spardha/forms/add_standing_form.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
 
@@ -47,7 +47,9 @@ class _StandingPopupState extends State<StandingPopup> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => AddStanding(standings: widget.standingModel,)));
+                builder: (context) => AddStanding(
+                      standings: widget.standingModel,
+                    )));
         break;
 
       case 'delete':
@@ -67,7 +69,6 @@ class _StandingPopupState extends State<StandingPopup> {
 
   @override
   Widget build(BuildContext context) {
-
     CommonStore commmonStore = context.read<CommonStore>();
     return GestureDetector(
       onTapDown: (position) {

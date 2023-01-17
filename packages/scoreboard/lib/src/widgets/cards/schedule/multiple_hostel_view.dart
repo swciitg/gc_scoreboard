@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../../globals/constants.dart';
+import '../../../globals/styles.dart';
 import '../../../models/event_model.dart';
 import '../../../globals/colors.dart';
 
@@ -12,23 +12,21 @@ class MultipleHostelView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     bool isAllHostel(String category, List<String> participatingHostels) {
-      List<String> allHostels;
+      List<String> l1;
+      List<String> l2 = [...participatingHostels];
+
       if (category == eventCategories[0]) {
-        allHostels = [...menHostel];
+        l1 = [...menHostel];
       } else if (category == eventCategories[1]) {
-        allHostels = [...womenHostel];
+        l1 = [...womenHostel];
       } else {
-        allHostels = [...allHostelList];
+        l1 = [...allHostelList];
       }
 
-      if (allHostels.length != participatingHostels.length) {
+      if (l1.length != participatingHostels.length) {
         return false;
       }
-
-      List<String> l1 = [...allHostels];
-      List<String> l2 = [...participatingHostels];
 
       l1.sort((a, b) => a.compareTo(b));
       l2.sort((a, b) => a.compareTo(b));
@@ -42,7 +40,7 @@ class MultipleHostelView extends StatelessWidget {
       return true;
     }
 
-    final width =  (MediaQuery.of(context).size.width - 16)*(0.4);
+    final width = (MediaQuery.of(context).size.width - 16) * (0.4);
     return ConstrainedBox(
       constraints: const BoxConstraints(minHeight: 18),
       child: Container(
@@ -50,10 +48,7 @@ class MultipleHostelView extends StatelessWidget {
           child: isAllHostel(eventModel.category, eventModel.hostels)
               ? Text(
                   'All hostels will participate.',
-                  style: GoogleFonts.montserrat(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 12,
-                      color: Themes.cardFontColor2),
+                  style: cardVenueStyle2,
                 )
               : SizedBox(
                   height: (eventModel.hostels.length).toDouble() * 12,
@@ -63,12 +58,12 @@ class MultipleHostelView extends StatelessWidget {
                           ? eventModel.hostels.length ~/ 2
                           : (eventModel.hostels.length + 1 / 2).toInt(),
                       itemBuilder: (context, index) {
-                        return multipleHostelViewCardItem(index,width);
+                        return multipleHostelViewCardItem(index, width);
                       }))),
     );
   }
 
-  Widget multipleHostelViewCardItem(int index,double width) {
+  Widget multipleHostelViewCardItem(int index, double width) {
     return Row(
       children: [
         Expanded(
@@ -90,10 +85,7 @@ class MultipleHostelView extends StatelessWidget {
                       child: Text(
                         eventModel.hostels[2 * index],
                         overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.montserrat(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 12,
-                            color: Themes.cardFontColor2),
+                        style: cardVenueStyle2,
                       ),
                     )
                   ],
@@ -119,10 +111,7 @@ class MultipleHostelView extends StatelessWidget {
                       child: Text(
                         eventModel.hostels[2 * index + 1],
                         overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.montserrat(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 12,
-                            color: Themes.cardFontColor2),
+                        style: cardVenueStyle2,
                       ),
                     ),
                   ],

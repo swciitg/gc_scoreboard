@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import '../../globals/colors.dart';
 import 'package:intl/intl.dart';
 
+import '../../globals/colors.dart';
 import '../../globals/enums.dart';
-import '../../globals/styles/filter_style.dart';
+import '../../globals/styles.dart';
 import '../../stores/common_store.dart';
 import '../../stores/spardha_store.dart';
 import '../../stores/static_store.dart';
@@ -180,7 +179,9 @@ class _FilterBarState extends State<FilterBar> {
                                   firstDate: DateTime(2000),
                                   //DateTime.now() - not to allow to choose before today.
                                   lastDate: DateTime(2101),
-                                  builder: (context, child) => DatePickerTheme(child: child,));
+                                  builder: (context, child) => DatePickerTheme(
+                                        child: child,
+                                      ));
                               if (pickedDate != null) {
                                 if (!mounted) return;
                               }
@@ -188,7 +189,8 @@ class _FilterBarState extends State<FilterBar> {
                             child: Padding(
                               padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
                               child: PopupMenuButton(
-                                constraints: const BoxConstraints(maxHeight: 300),
+                                constraints:
+                                    const BoxConstraints(maxHeight: 300),
                                 position: PopupMenuPosition.under,
                                 color: Themes.cardColor1,
                                 onSelected: (String item) {
@@ -231,12 +233,11 @@ class _FilterBarState extends State<FilterBar> {
                                             SizedBox(
                                               height: 18,
                                               width: 90,
-
                                               child: Text(
-
                                                   spardhaStore.selectedHostel
                                                       .hostelName,
-                                                  overflow: TextOverflow.ellipsis,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                   style: popUpItemStyle),
                                             )
                                           ],
@@ -262,8 +263,9 @@ class _FilterBarState extends State<FilterBar> {
                                   firstDate: DateTime(2000),
                                   //DateTime.now() - not to allow to choose before today.
                                   lastDate: DateTime(2101),
-                                  builder: (context, child) => DatePickerTheme(child: child,)
-                                      );
+                                  builder: (context, child) => DatePickerTheme(
+                                        child: child,
+                                      ));
                               if (pickedDate != null) {
                                 if (!mounted) return;
                                 spardhaStore.changeSelectedDate(
@@ -294,11 +296,7 @@ class _FilterBarState extends State<FilterBar> {
                     padding: const EdgeInsets.only(left: 12, top: 12),
                     child: Row(
                       children: [
-                        Text("Showing for ",
-                            style: GoogleFonts.montserrat(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 12,
-                                color: Themes.bottomNavFontColor)),
+                        Text("Showing for ", style: bottomNavStyle2),
                         Container(
                           margin: const EdgeInsets.only(left: 6),
                           padding: const EdgeInsets.symmetric(
@@ -316,10 +314,7 @@ class _FilterBarState extends State<FilterBar> {
                                           DateTime.parse(
                                               spardhaStore.selectedDate))
                                       : '',
-                                  style: GoogleFonts.montserrat(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 12,
-                                      color: Themes.primaryColor)),
+                                  style: cardStageStyle2),
                               SizedBox(
                                 height: 16,
                                 width: 20,

@@ -1,9 +1,9 @@
-
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:scoreboard/src/screens/login/login_webview.dart';
-import 'package:scoreboard/src/widgets/common/home_app_bar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
+import '../../widgets/common/home_app_bar.dart';
+import 'login_webview.dart';
 
 class LoginView extends StatefulWidget {
   static const id = '/admin/login';
@@ -14,7 +14,6 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-
   @override
   void initState() {
     super.initState();
@@ -23,9 +22,9 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-
     return const Scaffold(
-      appBar: PreferredSize(preferredSize:  Size.fromHeight(56), child: AppBarHomeComponent()),
+      appBar: PreferredSize(
+          preferredSize: Size.fromHeight(56), child: AppBarHomeComponent()),
       body: LoginWebView(),
     );
   }

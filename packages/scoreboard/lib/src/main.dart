@@ -16,7 +16,6 @@ import 'stores/manthan_store.dart';
 import 'stores/spardha_store.dart';
 import 'widgets/common/err_reload.dart';
 
-
 class GCScoreBoard extends StatefulWidget {
   final Map<String, String> userInfo;
   const GCScoreBoard({Key? key, required this.userInfo}) : super(key: key);
@@ -53,28 +52,28 @@ class _GCScoreBoardState extends State<GCScoreBoard> {
               // reload page
               setState(() {});
             }
+
             return FutureBuilder(
               future:
                   AuthUserHelpers.saveUserData(widget.userInfo, buildContext),
               builder: (futureContext, snapshot) {
-
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Scaffold(
                     backgroundColor: Themes.backgroundColor,
                     appBar: const PreferredSize(
-                        preferredSize:  Size.fromHeight(56),
+                        preferredSize: Size.fromHeight(56),
                         child: AppBarHomeComponent()),
                     body: Center(
                       child: Column(
                         children: [
                           Shimmer.fromColors(
-                            baseColor: kShimmerBase,
-                            highlightColor: kShimmerHighlight,
+                            baseColor: Themes.kShimmerBaseColor,
+                            highlightColor: Themes.kShimmerHighlightColor,
                             child: const IgnorePointer(child: TopBar()),
                           ),
                           Shimmer.fromColors(
-                            baseColor: kShimmerBase,
-                            highlightColor: kShimmerHighlight,
+                            baseColor: Themes.kShimmerBaseColor,
+                            highlightColor: Themes.kShimmerHighlightColor,
                             child: const IgnorePointer(child: FilterBar()),
                           ),
                           Expanded(
@@ -87,7 +86,6 @@ class _GCScoreBoardState extends State<GCScoreBoard> {
                     ),
                   );
                 } else if (snapshot.hasError) {
-
                   return Scaffold(
                       backgroundColor: Themes.backgroundColor,
                       body: Column(children: [

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../globals/colors.dart';
+import '../../globals/styles.dart';
 
 class CustomDropDown extends StatelessWidget {
   final List<String> items;
   final String hintText;
   final Function? onChanged;
-  final String? Function(String?)?  validator;
+  final String? Function(String?)? validator;
   final int? index;
   final String? value;
 
@@ -42,7 +42,7 @@ class CustomDropDown extends StatelessWidget {
           ),
         ),
         labelStyle: Themes.theme.textTheme.bodyText1,
-        errorStyle: GoogleFonts.montserrat(),
+        errorStyle: basicFontStyle,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         focusedBorder: OutlineInputBorder(

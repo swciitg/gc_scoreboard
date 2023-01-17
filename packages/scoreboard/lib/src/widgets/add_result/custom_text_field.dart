@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../globals/colors.dart';
+import '../../globals/styles.dart';
 
 class CustomTextFieldTwo extends StatelessWidget {
   final String hintText;
@@ -16,7 +16,8 @@ class CustomTextFieldTwo extends StatelessWidget {
       required this.validator,
       required this.value,
       required this.onChanged,
-      required this.isNecessary, required this.inputType});
+      required this.isNecessary,
+      required this.inputType});
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +25,11 @@ class CustomTextFieldTwo extends StatelessWidget {
       style: Themes.theme.textTheme.headline6,
       validator: validator,
       onChanged: onChanged,
-      initialValue: value=='null' ? '' : value,
+      initialValue: value == 'null' ? '' : value,
       cursorColor: Themes.theme.primaryColor,
       keyboardType: inputType,
       decoration: InputDecoration(
-        errorStyle: GoogleFonts.montserrat(),
+        errorStyle: basicFontStyle,
         label: RichText(
           text: TextSpan(
             children: [

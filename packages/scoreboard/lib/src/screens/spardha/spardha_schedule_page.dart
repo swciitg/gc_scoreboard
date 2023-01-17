@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../functions/filter_schedule.dart';
-import '../../globals/colors.dart';
+import '../../globals/styles.dart';
 import '../../models/event_model.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
@@ -27,7 +26,8 @@ class _SchedulePageState extends State<SchedulePage> {
     var commonStore = context.read<CommonStore>();
     var spardhaStore = context.read<SpardhaStore>();
 
-    reloadCallback(){ // reload page
+    reloadCallback() {
+      // reload page
       setState(() {});
     }
 
@@ -57,8 +57,7 @@ class _SchedulePageState extends State<SchedulePage> {
                           );
                         }),
                   );
-                }
-                else if(snapshot.hasData) {
+                } else if (snapshot.hasData) {
                   List<EventModel> allSpardhaEventSchedules = snapshot.data!;
                   return Observer(builder: (context) {
                     List<EventModel> filteredEventSchedules = filterSchedule(
@@ -69,18 +68,16 @@ class _SchedulePageState extends State<SchedulePage> {
                     return Expanded(
                         child: filteredEventSchedules.isNotEmpty
                             ? ListView.builder(
-                            itemCount: filteredEventSchedules.length,
-                            itemBuilder: (context, index) {
-                              return ScheduleCard(
-                                  eventModel: filteredEventSchedules[index]);
-                            })
+                                itemCount: filteredEventSchedules.length,
+                                itemBuilder: (context, index) {
+                                  return ScheduleCard(
+                                      eventModel:
+                                          filteredEventSchedules[index]);
+                                })
                             : Center(
-                          child: Text("No Schedule found",
-                              style: GoogleFonts.montserrat(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 12,
-                                  color: Themes.kWhite)),
-                        ));
+                                child: Text("No Schedule found",
+                                    style: fontStyle1),
+                              ));
                   });
                 }
                 return ErrorReloadPage(apiFunction: reloadCallback);
@@ -88,6 +85,5 @@ class _SchedulePageState extends State<SchedulePage> {
         ],
       ),
     );
-
   }
 }

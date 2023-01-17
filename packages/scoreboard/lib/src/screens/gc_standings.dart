@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/widgets/common/err_reload.dart';
+import '../globals/styles.dart';
+import '../widgets/common/err_reload.dart';
 import '../widgets/common/shimmer.dart';
-
 import '../functions/filter_men_women.dart';
-import '../globals/styles/filter_style.dart';
 import '../globals/colors.dart';
 import '../services/api.dart';
-
 import '../stores/gc_store.dart';
 import '../widgets/common/bottom_navigation_bar.dart';
 import '../widgets/common/home_app_bar.dart';
@@ -32,7 +29,6 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
 
   @override
   Widget build(BuildContext context) {
-
     var gcStore = context.read<GCStore>();
 
     reloadCallback() {
@@ -43,8 +39,7 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
     return Scaffold(
       backgroundColor: Themes.backgroundColor,
       appBar: const PreferredSize(
-          preferredSize:  Size.fromHeight(56),
-          child: AppBarHomeComponent()),
+          preferredSize: Size.fromHeight(56), child: AppBarHomeComponent()),
       body: Padding(
           padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
           child: Column(
@@ -60,70 +55,62 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(13, 0, 0, 0),
                       child: PopupMenuButton(
-                          constraints:const BoxConstraints(maxHeight: 300),
-                          position: PopupMenuPosition.under,
-                          color: Themes.cardColor1,
-                          onSelected: (String item) {
-                            gcStore.changeSelectedCategory(item);
-                            setState(() {
-                              
-                            });
-                          },
-                          itemBuilder: (BuildContext context) =>
-                              _itemsCategory
-                                  .map((item) => PopupMenuItem<String>(
-                                        value: item,
-                                        child: SizedBox(
-                                          width: double.infinity,
-                                          child: SizedBox(
-                                            width: MediaQuery.of(context).size.width,
-                                            child: Text(
-                                              'General Championship [$item]',
-                                              style: popUpItemStyle,
-                                            ),
-                                          ),
-                                        ),
-                                      ))
-                                  .toList(),
-                          child: Container(
-                            height: 56,
-                            decoration: boxDecoration,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.fromLTRB(13, 0, 13, 0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        height: 12,
-                                        child: Text('Category',
-                                            style: popUpHeadingStyle),
+                        constraints: const BoxConstraints(maxHeight: 300),
+                        position: PopupMenuPosition.under,
+                        color: Themes.cardColor1,
+                        onSelected: (String item) {
+                          gcStore.changeSelectedCategory(item);
+                          setState(() {});
+                        },
+                        itemBuilder: (BuildContext context) => _itemsCategory
+                            .map((item) => PopupMenuItem<String>(
+                                  value: item,
+                                  child: SizedBox(
+                                    width: double.infinity,
+                                    child: SizedBox(
+                                      width: MediaQuery.of(context).size.width,
+                                      child: Text(
+                                        'General Championship [$item]',
+                                        style: popUpItemStyle,
                                       ),
-                                      const SizedBox(
-                                        height: 8,
-                                      ),
-                                      SizedBox(
-                                        height: 18,
-                                        child: Text(
-                                                'General Championship [${gcStore.selectedCategory.categoryName}]',
-                                            style: popUpItemStyle),
-                                      )
-                                    ],
+                                    ),
                                   ),
-                                  popUpIcon,
-                                ],
-                              ),
+                                ))
+                            .toList(),
+                        child: Container(
+                          height: 56,
+                          decoration: boxDecoration,
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      height: 12,
+                                      child: Text('Category',
+                                          style: popUpHeadingStyle),
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    SizedBox(
+                                      height: 18,
+                                      child: Text(
+                                          'General Championship [${gcStore.selectedCategory.categoryName}]',
+                                          style: popUpItemStyle),
+                                    )
+                                  ],
+                                ),
+                                popUpIcon,
+                              ],
                             ),
                           ),
                         ),
-                      
+                      ),
                     ),
                   ),
                 ),
@@ -143,10 +130,7 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
                     ),
                     Text(
                       'GC [${gcStore.selectedCategory.categoryName}] Standings',
-                      style: GoogleFonts.montserrat(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                          color: Themes.kWhite),
+                      style: standingsHeadingStyle,
                     ),
                   ],
                 ),
@@ -156,7 +140,7 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
               ),
               const Divider(
                 thickness: 0.7,
-                color: Color.fromRGBO(94, 94, 94, 0.38),
+                color: Themes.dividerColor1,
                 height: 0,
                 indent: 8,
                 endIndent: 8,

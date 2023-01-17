@@ -1,7 +1,5 @@
-
-
-import 'package:scoreboard/src/globals/constants.dart';
-import 'package:scoreboard/src/globals/enums.dart';
+import '../globals/constants.dart';
+import '../globals/enums.dart';
 
 String getPosition(int index) {
   String answer = '';
@@ -27,4 +25,3 @@ List<String> getHostel(Category? category) {
 
   return menHostel + womenHostel;
 }
-

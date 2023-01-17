@@ -65,7 +65,7 @@ class _AddResultFormState extends State<AddResultForm> {
                   Icons.close,
                   color: Themes.theme.primaryColor,
                 ),
-                splashColor: const Color.fromRGBO(118, 172, 255, 0.9),
+                splashColor: Themes.splashColor,
               ),
               actions: [
                 TextButton(
@@ -76,16 +76,17 @@ class _AddResultFormState extends State<AddResultForm> {
                             widget.event.id!,
                             ResultFormStore.resultFields!,
                             ResultFormStore.victoryStatement!);
-                      if (!mounted) return;
+                        if (!mounted) return;
 
                         Navigator.of(context).pushNamedAndRemoveUntil(
                             ScoreBoardHome.id, (route) => false);
                         showSnackBar(
                             context, 'Successfully added/updated result');
                         ResultFormStore.clear();
-                      if (!mounted) return;
+                        if (!mounted) return;
 
-                        Navigator.pushNamedAndRemoveUntil(context, ScoreBoardHome.id, (route) => false);
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, ScoreBoardHome.id, (route) => false);
                       } on DioError catch (err) {
                         showErrorSnackBar(context, err);
                       }
