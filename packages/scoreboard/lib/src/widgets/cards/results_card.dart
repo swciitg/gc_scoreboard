@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../globals/enums.dart';
+import '../../globals/styles.dart';
 import '../../stores/common_store.dart';
 import '../../widgets/cards/expanded_results_card.dart';
 import '../../models/event_model.dart';
@@ -59,7 +59,7 @@ class _ResultsCardState extends State<ResultsCard> {
                               children: [
                                 const Icon(
                                   Icons.emoji_events_outlined,
-                                  color: Themes.cardFontColor3,
+                                  color: Themes.warning,
                                   size: 12,
                                 ),
                                 const SizedBox(
@@ -69,10 +69,7 @@ class _ResultsCardState extends State<ResultsCard> {
                                   child: Text(
                                     widget.eventModel.victoryStatement!,
                                     overflow: TextOverflow.visible,
-                                    style: GoogleFonts.montserrat(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 12,
-                                        color: Themes.cardFontColor3),
+                                    style: cardStageStyle1,
                                   ),
                                 ),
                               ],
@@ -97,10 +94,7 @@ class _ResultsCardState extends State<ResultsCard> {
                                   children: [
                                     Text(
                                       isExpanded ? 'Less' : 'More',
-                                      style: GoogleFonts.montserrat(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 10,
-                                          color: Themes.cardFontColor2),
+                                      style: cardResultStyle1,
                                     ),
                                     Icon(
                                       isExpanded
@@ -138,19 +132,13 @@ class _ResultsCardState extends State<ResultsCard> {
                                         ),
                                         Text(
                                           'Hostel',
-                                          style: GoogleFonts.montserrat(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 10,
-                                              color: Themes.bottomNavFontColor),
+                                          style: cardResultStyle2,
                                         ),
                                       ],
                                     ),
                                     Text(
                                       'Score',
-                                      style: GoogleFonts.montserrat(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 10,
-                                          color: Themes.bottomNavFontColor),
+                                      style: cardResultStyle2,
                                     ),
                                   ],
                                 ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:scoreboard/src/widgets/add_event/timepicker_color.dart';
 import '../../../functions/snackbar.dart';
 import '../../../functions/validator.dart';
 import '../../../globals/constants.dart';
@@ -11,6 +10,7 @@ import '../../../widgets/add_event/datepicker_color.dart';
 import '../../../widgets/add_event/drop_down.dart';
 import '../../../widgets/add_event/heading.dart';
 import '../../../widgets/add_event/text_field.dart';
+import '../../../widgets/add_event/timepicker_color.dart';
 import '../../../widgets/common/form_app_bar.dart';
 import 'confirm_event_details.dart';
 
@@ -165,7 +165,8 @@ class _AddEventFormState extends State<AddEventForm> {
                               color: Colors.transparent,
                               child: ListView.builder(
                                 // padding: EdgeInsets.all(10.0),
-                                padding: const EdgeInsets.symmetric(vertical: 0),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 0),
                                 itemCount: options.length,
                                 itemBuilder: (BuildContext context, int index) {
                                   final String option =
@@ -316,7 +317,7 @@ class _AddEventFormState extends State<AddEventForm> {
                             checkColor: Colors.white,
                             activeColor: Themes.theme.primaryColor,
                             side: const BorderSide(
-                              color: Color.fromRGBO(171, 171, 175, 1),
+                              color: Themes.checkBoxColor,
                               width: 2,
                             ),
                             value: isCancelled,
@@ -333,8 +334,7 @@ class _AddEventFormState extends State<AddEventForm> {
                             checkColor: Colors.white,
                             activeColor: Themes.theme.primaryColor,
                             side: const BorderSide(
-                                color: Color.fromRGBO(171, 171, 175, 1),
-                                width: 2),
+                                color: Themes.checkBoxColor, width: 2),
                             value: isPostponed,
                             onChanged: (bool? value) {
                               setState(() {

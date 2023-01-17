@@ -6,8 +6,8 @@ import '../../globals/enums.dart';
 import '../../stores/common_store.dart';
 import '../../widgets/common/home_app_bar.dart';
 import '../../widgets/schedule_page/add_button.dart';
-import 'forms/add_event_form.dart';
 import '../../widgets/common/bottom_navigation_bar.dart';
+import 'forms/add_event_form.dart';
 import 'added_standings.dart';
 import 'spardha_results_page.dart';
 import 'spardha_schedule_page.dart';
@@ -40,12 +40,11 @@ class _SpardhaHomeState extends State<SpardhaHome> {
         return Scaffold(
           backgroundColor: Themes.backgroundColor,
           appBar: const PreferredSize(
-              preferredSize:  Size.fromHeight(56),
-              child: AppBarHomeComponent()),
+              preferredSize: Size.fromHeight(56), child: AppBarHomeComponent()),
           body: tabs[commonStore.page],
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: commonStore.viewType==ViewType.admin &&
+          floatingActionButton: commonStore.viewType == ViewType.admin &&
                   commonStore.page != Pages.results
               ? GestureDetector(
                   onTap: () {

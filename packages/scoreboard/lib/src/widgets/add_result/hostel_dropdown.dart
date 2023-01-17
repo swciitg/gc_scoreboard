@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../globals/colors.dart';
+import '../../globals/styles.dart';
 
 class HostelDropDown extends StatelessWidget {
   final List<String> hostels;
@@ -8,7 +8,12 @@ class HostelDropDown extends StatelessWidget {
   final void Function(String?)? onChanged;
   final String? value;
 
-  const HostelDropDown({super.key, required this.onChanged, required this.value, required this.validator, required this.hostels});
+  const HostelDropDown(
+      {super.key,
+      required this.onChanged,
+      required this.value,
+      required this.validator,
+      required this.hostels});
 
   @override
   Widget build(BuildContext context) {
@@ -17,19 +22,18 @@ class HostelDropDown extends StatelessWidget {
       isExpanded: true,
       validator: validator,
       decoration: InputDecoration(
-        errorStyle: GoogleFonts.montserrat(),
-         label: RichText(
+        errorStyle: basicFontStyle,
+        label: RichText(
           text: TextSpan(
             children: [
               TextSpan(
                 text: 'Hostels',
                 style: Themes.theme.textTheme.bodyText1,
               ),
-           
-                TextSpan(
-                  text: ' * ',
-                  style: Themes.theme.textTheme.headline5,
-                ),
+              TextSpan(
+                text: ' * ',
+                style: Themes.theme.textTheme.headline5,
+              ),
             ],
           ),
         ),

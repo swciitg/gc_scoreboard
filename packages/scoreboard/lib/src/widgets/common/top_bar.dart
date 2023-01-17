@@ -1,9 +1,9 @@
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../globals/colors.dart';
 import '../../globals/enums.dart';
+import '../../globals/styles.dart';
 import '../../stores/common_store.dart';
 import '../../stores/gc_store.dart';
 import '../../stores/kriti_store.dart';
@@ -64,24 +64,32 @@ class TopBarItem extends StatelessWidget {
     CommonStore commonStore = context.read<CommonStore>();
 
     dynamic competitionStore;
-    switch(commonStore.competition){
-      case Competitions.gc : {
-        competitionStore = context.read<GCStore>();
-      } break;
-      case Competitions.spardha : {
-        competitionStore = context.read<SpardhaStore>();
-      } break;
-      case Competitions.kriti : {
-        competitionStore = context.read<KritiStore>();
-      } break;
-      case Competitions.manthan : {
-        competitionStore = context.read<ManthanStore>();
-      } break;
+    switch (commonStore.competition) {
+      case Competitions.gc:
+        {
+          competitionStore = context.read<GCStore>();
+        }
+        break;
+      case Competitions.spardha:
+        {
+          competitionStore = context.read<SpardhaStore>();
+        }
+        break;
+      case Competitions.kriti:
+        {
+          competitionStore = context.read<KritiStore>();
+        }
+        break;
+      case Competitions.manthan:
+        {
+          competitionStore = context.read<ManthanStore>();
+        }
+        break;
     }
 
     return GestureDetector(
       onTap: () {
-        commonStore.setPage(page,competitionStore);
+        commonStore.setPage(page, competitionStore);
       },
       child: Observer(builder: (context) {
         return Container(
@@ -105,12 +113,9 @@ class TopBarItem extends StatelessWidget {
                 width: 8,
               ),
               Text(page.name,
-                  style: GoogleFonts.montserrat(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 12,
-                      color: commonStore.page == page
-                          ? Themes.secondaryColor
-                          : Themes.primaryColor)),
+                  style: commonStore.page == page
+                      ? cardStageStyle3
+                      : cardStageStyle2),
             ],
           ),
         );

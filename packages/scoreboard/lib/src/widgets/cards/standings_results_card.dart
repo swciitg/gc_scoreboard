@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../../globals/styles/card_style.dart';
 import '../../globals/colors.dart';
+import '../../globals/styles.dart';
 import '../../models/standing_model.dart';
 import 'menu_item.dart';
 import 'standing_popup_menu.dart';
@@ -27,7 +26,6 @@ class _StandingsResultCardState extends State<StandingsResultCard> {
 
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ConstrainedBox(
@@ -88,19 +86,13 @@ class _StandingsResultCardState extends State<StandingsResultCard> {
                                   ),
                                   Text(
                                     'Hostel',
-                                    style: GoogleFonts.montserrat(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 10,
-                                        color: Themes.bottomNavFontColor),
+                                    style: cardResultStyle2,
                                   ),
                                 ],
                               ),
                               Text(
                                 'Score',
-                                style: GoogleFonts.montserrat(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 10,
-                                    color: Themes.bottomNavFontColor),
+                                style: cardResultStyle2,
                               ),
                             ],
                           ),

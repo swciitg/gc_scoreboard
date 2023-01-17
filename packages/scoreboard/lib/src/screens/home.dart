@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 import '../globals/enums.dart';
 import 'kriti/kriti_home.dart';
 import 'manthan/manthan_home.dart';
-import 'package:provider/provider.dart';
 import 'spardha/spardha_home.dart';
 import '../stores/common_store.dart';
 import 'gc_standings.dart';
-
 
 class ScoreBoardHome extends StatefulWidget {
   static const id = '/gc/home';
@@ -31,7 +30,10 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
         return commonStore.competition == Competitions.gc
             ? const GCStandingsPage()
             : commonStore.competition == Competitions.spardha
-            ? const SpardhaHome() : (commonStore.competition == Competitions.kriti ? const KritiHome() : const ManthanHome());
+                ? const SpardhaHome()
+                : (commonStore.competition == Competitions.kriti
+                    ? const KritiHome()
+                    : const ManthanHome());
       },
     );
   }

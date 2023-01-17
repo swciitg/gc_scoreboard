@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-
-const kShimmerBase = Color.fromRGBO(47, 48, 51, 1);
-const kShimmerHighlight = Color.fromRGBO(68, 71, 79, 1);
+import '../../globals/colors.dart';
 
 class ShowShimmer extends StatefulWidget {
-  const ShowShimmer({Key? key, required this.height, required this.width}) : super(key: key);
+  const ShowShimmer({Key? key, required this.height, required this.width})
+      : super(key: key);
   final double height;
   final double width;
   @override
@@ -14,8 +13,6 @@ class ShowShimmer extends StatefulWidget {
 }
 
 class _ShowShimmerState extends State<ShowShimmer> {
-
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,15 +23,15 @@ class _ShowShimmerState extends State<ShowShimmer> {
         children: [
           Expanded(
             child: Shimmer.fromColors(
-              baseColor: kShimmerBase,
-              highlightColor: kShimmerHighlight,
-              child: Container(
-                height: widget.height,
-                width: widget.width,
-                decoration:  BoxDecoration(
-                    borderRadius: BorderRadius.circular(24),color:kShimmerBase),
-              )
-            ),
+                baseColor: Themes.kShimmerBaseColor,
+                highlightColor: Themes.kShimmerHighlightColor,
+                child: Container(
+                  height: widget.height,
+                  width: widget.width,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(24),
+                      color: Themes.kShimmerBaseColor),
+                )),
           ),
         ],
       ),

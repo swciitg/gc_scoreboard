@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../globals/colors.dart';
+import '../../globals/styles.dart';
 
 class CustomTextField extends StatefulWidget {
   final String hintText;
@@ -34,7 +34,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       cursorColor: Themes.theme.primaryColor,
       onTap: widget.onTap,
       decoration: InputDecoration(
-        errorStyle: GoogleFonts.montserrat(),
+        errorStyle: basicFontStyle,
         label: RichText(
           text: TextSpan(
             children: [

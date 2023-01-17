@@ -7,9 +7,9 @@ class AppBarFormComponent extends StatefulWidget {
   final Function onFormSubmit;
   const AppBarFormComponent(
       {Key? key,
-        required this.title,
-        required this.actionTitle,
-        required this.onFormSubmit})
+      required this.title,
+      required this.actionTitle,
+      required this.onFormSubmit})
       : super(key: key);
 
   @override
@@ -41,7 +41,7 @@ class _AppBarFormComponentState extends State<AppBarFormComponent> {
           Icons.close,
           color: Themes.theme.primaryColor,
         ),
-        splashColor: const Color.fromRGBO(118, 172, 255, 0.9),
+        splashColor: Themes.splashColor,
       ),
       actions: [
         TextButton(
