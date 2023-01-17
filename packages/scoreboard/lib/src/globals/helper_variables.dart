@@ -21,6 +21,6 @@ const List<String> spardhaEventStages = [
   '3rd vs 4th'
 ];
 
-enum apiResponse{
+enum ApiResponse{
   success, adminRelogin
 }

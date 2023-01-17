@@ -31,7 +31,7 @@ class _RestrictedPageState extends State<RestrictedPage> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Text(
               "You don't have admin access for this competition. Switch to audience view to see this section as an audience",
               style: GoogleFonts.montserrat(

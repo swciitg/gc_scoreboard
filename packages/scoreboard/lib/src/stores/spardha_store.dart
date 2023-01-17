@@ -60,7 +60,7 @@ abstract class _SpardhaStore with Store {
   @action
   void changeSelectedEvent(String e){
     selectedEvent=e;
-    print(selectedEvent);
+
   }
 
 }

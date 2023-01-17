@@ -7,7 +7,7 @@ class CommonStore = _CommonStore with _$CommonStore;
 
 abstract class _CommonStore with Store {
 
-  static List<String> spardhaEvents=[];
+  // static List<String> spardhaEvents=[];
 
   @observable
   Competitions competition = Competitions.gc;
@@ -37,7 +37,7 @@ abstract class _CommonStore with Store {
 
   @action
   void setCompetition(Competitions c,var competitionStore) {
-    print(c);
+
     competition = c;
     // changing filters to default
     competitionStore.setFiltersToDefault();

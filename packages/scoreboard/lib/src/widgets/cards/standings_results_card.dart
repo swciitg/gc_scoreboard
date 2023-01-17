@@ -18,16 +18,16 @@ class StandingsResultCard extends StatefulWidget {
 
 class _StandingsResultCardState extends State<StandingsResultCard> {
   List<PopupMenuEntry> popupOptions = [
-    OptionsMenuItem('Edit', 'edit standings', Themes.kWhite),
+    optionsMenuItem('Edit', 'edit standings', Themes.kWhite),
     const PopupMenuDivider(
       height: 2,
     ),
-    OptionsMenuItem('Delete', 'delete', Themes.errorRed),
+    optionsMenuItem('Delete', 'delete', Themes.errorRed),
   ];
 
   @override
   Widget build(BuildContext context) {
-    print(widget.standingModel.toJson());
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ConstrainedBox(

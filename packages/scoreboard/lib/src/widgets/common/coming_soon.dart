@@ -32,7 +32,7 @@ class _ComingSoonState extends State<ComingSoon> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Text(
               "${widget.competition.name} hasn't begun yet. We'll update this page as soon as ${widget.competition.name} starts",
               style: GoogleFonts.montserrat(

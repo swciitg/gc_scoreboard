@@ -22,11 +22,11 @@ class ResultsCard extends StatefulWidget {
 class _ResultsCardState extends State<ResultsCard> {
   bool isExpanded = false;
   List<PopupMenuEntry> popupOptions = [
-    OptionsMenuItem('Edit', 'edit result', Themes.kWhite),
+    optionsMenuItem('Edit', 'edit result', Themes.kWhite),
     const PopupMenuDivider(
       height: 2,
     ),
-    OptionsMenuItem('Delete', 'delete', Themes.errorRed),
+    optionsMenuItem('Delete', 'delete', Themes.errorRed),
   ];
 
   @override

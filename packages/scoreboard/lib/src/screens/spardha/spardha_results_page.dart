@@ -49,7 +49,7 @@ class _ResultsPageState extends State<ResultsPage> {
                         itemBuilder: (context, index) {
                           return Container(
                             height: 200,
-                            padding: EdgeInsets.symmetric(vertical: 8),
+                            padding: const EdgeInsets.symmetric(vertical: 8),
                             child: ShowShimmer(
                               height: 300,
                               width: MediaQuery.of(context).size.width,

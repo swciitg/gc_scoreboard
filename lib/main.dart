@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     debugInvertOversizedImages = true;
-    return MaterialApp(
+    return const MaterialApp(
       home: SampleHome(),
       );
   }
@@ -29,12 +29,12 @@ class SampleHome extends StatelessWidget {
         child: TextButton(
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => GCScoreBoard(userInfo: {
+                  builder: (context) => const GCScoreBoard(userInfo:  {
                     "name": "Kunal Pal",
                     "email": "k.pal@iitg.ac.in"
                   })));
             },
-            child: Text("GC SCOREBOARD")),
+            child: const Text("GC SCOREBOARD")),
       ),
     );
   }

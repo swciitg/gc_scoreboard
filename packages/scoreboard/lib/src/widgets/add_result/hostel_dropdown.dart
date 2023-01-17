@@ -4,8 +4,8 @@ import '../../globals/colors.dart';
 
 class HostelDropDown extends StatelessWidget {
   final List<String> hostels;
-  final validator;
-  final onChanged;
+  final String? Function(String?)? validator;
+  final void Function(String?)? onChanged;
   final String? value;
 
   const HostelDropDown({super.key, required this.onChanged, required this.value, required this.validator, required this.hostels});

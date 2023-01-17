@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-PopupMenuEntry OptionsMenuItem(String label, String value, Color color) {
+PopupMenuEntry optionsMenuItem(String label, String value, Color color) {
   return PopupMenuItem(
-      padding: EdgeInsets.symmetric(horizontal: 24),
+      padding: const EdgeInsets.symmetric(horizontal: 24),
       height: 42,
       value: value,
       child: Center(

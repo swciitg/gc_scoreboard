@@ -40,7 +40,7 @@ class _SpardhaAdminStandingsPageState extends State<SpardhaAdminStandingsPage> {
                   itemBuilder: (context, index) {
                     return Container(
                       height: 200,
-                      padding: EdgeInsets.symmetric(vertical: 8),
+                      padding: const EdgeInsets.symmetric(vertical: 8),
                       child: ShowShimmer(
                         height: 200,
                         width: MediaQuery.of(context).size.width,
@@ -49,13 +49,12 @@ class _SpardhaAdminStandingsPageState extends State<SpardhaAdminStandingsPage> {
                   });
             }
             else if (snapshot.hasData) {
-              print(snapshot.data);
+
               return snapshot.data!['event-wise'].length!=0 ? ListView.builder(
                   itemCount: snapshot.data!['event-wise'].length,
                   itemBuilder: (context, index) {
-                    print('asdfghjk');
-                    print(StandingModel.fromJson(
-                        snapshot.data!['event-wise'][index]));
+       
+                
                     return StandingsResultCard(
                         standingModel: StandingModel.fromJson(
                             snapshot.data!['event-wise'][index]));
@@ -70,7 +69,7 @@ class _SpardhaAdminStandingsPageState extends State<SpardhaAdminStandingsPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: GestureDetector(
         onTap: (){
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => AddStanding()));
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AddStanding()));
         },
         child: const AddButton(text: 'Add Standing', width: 175,
 

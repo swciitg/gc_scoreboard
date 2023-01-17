@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/globals/constants.dart';
 import 'package:scoreboard/src/widgets/common/filter_bar.dart';
 import 'package:scoreboard/src/widgets/common/home_app_bar.dart';
 import 'package:scoreboard/src/widgets/common/shimmer.dart';
@@ -17,9 +16,10 @@ import 'stores/manthan_store.dart';
 import 'stores/spardha_store.dart';
 import 'widgets/common/err_reload.dart';
 
+
 class GCScoreBoard extends StatefulWidget {
-  Map<String, String> userInfo;
-  GCScoreBoard({Key? key, required this.userInfo}) : super(key: key);
+  final Map<String, String> userInfo;
+  const GCScoreBoard({Key? key, required this.userInfo}) : super(key: key);
 
   @override
   State<GCScoreBoard> createState() => _GCScoreBoardState();
@@ -57,12 +57,12 @@ class _GCScoreBoardState extends State<GCScoreBoard> {
               future:
                   AuthUserHelpers.saveUserData(widget.userInfo, buildContext),
               builder: (futureContext, snapshot) {
-                print(allHostelList);
+
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Scaffold(
                     backgroundColor: Themes.backgroundColor,
-                    appBar: PreferredSize(
-                        preferredSize: const Size.fromHeight(56),
+                    appBar: const PreferredSize(
+                        preferredSize:  Size.fromHeight(56),
                         child: AppBarHomeComponent()),
                     body: Center(
                       child: Column(
@@ -87,7 +87,7 @@ class _GCScoreBoardState extends State<GCScoreBoard> {
                     ),
                   );
                 } else if (snapshot.hasError) {
-                  print("snapshot has error");
+
                   return Scaffold(
                       backgroundColor: Themes.backgroundColor,
                       body: Column(children: [

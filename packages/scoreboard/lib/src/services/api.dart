@@ -22,14 +22,12 @@ class APIService {
     dio.interceptors
         .add(InterceptorsWrapper(onRequest: (options, handler) async {
       options.headers["Authorization"] =
-      "Bearer ${await AuthUserHelpers.getAccessToken()}";
+          "Bearer ${await AuthUserHelpers.getAccessToken()}";
       handler.next(options);
     }, onError: (error, handler) async {
       var response = error.response;
       // print(response.statusCode ?? "no status code");
-      if(response!=null){
-        print(response.data);
-      }
+ 
       if (response != null && response.statusCode == 401) {
         bool couldRegenerate = await regenerateAccessToken();
         var commStore = buildContext.read<CommonStore>();
@@ -44,7 +42,10 @@ class APIService {
         } else {
           // show login screen to admin if only he has internet connection
           var connectivityResult = await (Connectivity().checkConnectivity());
-          if (connectivityResults.contains(connectivityResult) && await Navigator.pushNamed(buildContext, LoginView.id)==true){
+          
+          if (connectivityResults.contains(connectivityResult) &&
+              await Navigator.pushNamed(buildContext, LoginView.id) == true) {
+                
             // retry for admin
             return handler.resolve(await retryRequest(response));
           }
@@ -58,9 +59,9 @@ class APIService {
   Future<Response<dynamic>> retryRequest(Response response) async {
     RequestOptions requestOptions = response.requestOptions;
     response.requestOptions.headers[DatabaseRecords.authorization] =
-    "Bearer ${await AuthUserHelpers.getAccessToken()}";
+        "Bearer ${await AuthUserHelpers.getAccessToken()}";
     final options =
-    Options(method: requestOptions.method, headers: requestOptions.headers);
+        Options(method: requestOptions.method, headers: requestOptions.headers);
     Dio retryDio = Dio(BaseOptions(
         baseUrl: const String.fromEnvironment('SERVER-URL'),
         connectTimeout: 5000,
@@ -79,7 +80,6 @@ class APIService {
     }
   }
 
-
   Future<dynamic> generateTokens(CommonStore commStore) async {
     Map<String, String> userData = await AuthUserHelpers.getUserData();
     Response<Map<String, dynamic>> resp = await dio.post("/gc/login",
@@ -88,13 +88,13 @@ class APIService {
     if (data["success"] == true) {
       commStore.setAdminNone();
       data[DatabaseRecords.authevents].forEach((element) => {
-        if (element == "spardha")
-          {commStore.setSpardhaAdmin(true)}
-        else if (element == "kriti")
-          {commStore.setKritiAdmin(true)}
-        else if (element == "manthan")
-            {commStore.setManthanAdmin(true)}
-      });
+            if (element == "spardha")
+              {commStore.setSpardhaAdmin(true)}
+            else if (element == "kriti")
+              {commStore.setKritiAdmin(true)}
+            else if (element == "manthan")
+              {commStore.setManthanAdmin(true)}
+          });
       await AuthUserHelpers.setAdmin(data[DatabaseRecords.isadmin]);
       await AuthUserHelpers.setAccessToken(data[DatabaseRecords.accesstoken]);
       await AuthUserHelpers.setRefreshToken(data[DatabaseRecords.refreshtoken]);
@@ -113,8 +113,7 @@ class APIService {
           }));
       Response<Map<String, dynamic>> resp = await regenDio.post(
           "/gc/gen-accesstoken",
-          options:
-          Options(headers: {"authorization": "Bearer ${refreshToken}"}));
+          options: Options(headers: {"authorization": "Bearer $refreshToken"}));
       var data = resp.data!;
       await AuthUserHelpers.setAccessToken(data["token"]);
       return true;
@@ -125,9 +124,9 @@ class APIService {
 
   Future<void> postEventSchedule(Map<String, dynamic> data) async {
     try {
-      var resp = await dio.post("/gc/spardha/event-schedule", data: data);
+      // var resp = await dio.post("/gc/spardha/event-schedule", data: data);
     } on DioError catch (err) {
-      print(err.response!.data['message']);
+
       return Future.error(err);
     }
   }
@@ -143,13 +142,16 @@ class APIService {
 
   Future<List<EventModel>> getSpardhaSchedule(ViewType v) async {
     try {
-      if (v==ViewType.admin) {
+      if (v == ViewType.admin) {
         dio.options.queryParameters["forAdmin"] = "true";
       }
       Response resp = await dio.get("/gc/spardha/event-schedule");
       List<EventModel> output = [];
-      List<dynamic>.from(resp.data["details"])
-          .forEach((e) => {output.add(EventModel.fromJson(e))});
+      for (var e in List<dynamic>.from(resp.data["details"])) {
+        {
+          output.add(EventModel.fromJson(e));
+        }
+      }
       return output;
     } on DioError catch (err) {
       return Future.error(err);
@@ -158,13 +160,17 @@ class APIService {
 
   Future<List<EventModel>> getSpardhaResults(ViewType v) async {
     try {
-      if (v==ViewType.admin) {
+      if (v == ViewType.admin) {
         dio.options.queryParameters["forAdmin"] = "true";
       }
       Response resp = await dio.get("/gc/spardha/event-schedule/results");
       List<EventModel> output = [];
-      List<dynamic>.from(resp.data["details"])
-          .forEach((e) => {output.add(EventModel.fromJson(e))});
+      for (var e in List<dynamic>.from(resp.data["details"])) {
+        {
+          output.add(EventModel.fromJson(e));
+        }
+        
+      }
       return output;
     } on DioError catch (err) {
       return Future.error(err);
@@ -175,17 +181,17 @@ class APIService {
       String victoryStatement) async {
     try {
       List<List<Map>> results = [];
-      data.forEach((positionResults) {
-        print(positionResults);
+      for (var positionResults in data) {
+
         List<Map> addResults = [];
-        positionResults.forEach((result) {
+        for (var result in positionResults) {
           addResults.add(result.toJson());
-        });
+        }
         results.add(addResults);
-      });
-      Response resp = await dio.patch(
-          '/gc/spardha/event-schedule/result/$eventID',
-          data: {'victoryStatement': victoryStatement, 'results': results});
+      }
+      // Response resp = await dio.patch(
+      //     '/gc/spardha/event-schedule/result/$eventID',
+      //     data: {'victoryStatement': victoryStatement, 'results': results});
     } on DioError catch (err) {
       return Future.error(err);
     }
@@ -193,7 +199,7 @@ class APIService {
 
   Future<void> deleteEvent(String eventID) async {
     try {
-      Response resp = await dio.delete('/gc/spardha/event-schedule/$eventID');
+      // Response resp = await dio.delete('/gc/spardha/event-schedule/$eventID');
     } on DioError catch (err) {
       return Future.error(err);
     }
@@ -201,9 +207,9 @@ class APIService {
 
   Future<void> updateSpardhaEvent(EventModel event) async {
     try {
-      print(event.toJson());
-      Response resp = await dio.patch('/gc/spardha/event-schedule/${event.id!}',
-          data: event.toJson());
+
+      // Response resp = await dio.patch('/gc/spardha/event-schedule/${event.id!}',
+      //     data: event.toJson());
     } on DioError catch (err) {
       return Future.error(err);
     }
@@ -211,8 +217,8 @@ class APIService {
 
   Future<void> deleteSpardhaEventResult(String eventID) async {
     try {
-      Response resp =
-      await dio.delete('/gc/spardha/event-schedule/result/$eventID');
+      // Response resp =
+      //     await dio.delete('/gc/spardha/event-schedule/result/$eventID');
     } on DioError catch (err) {
       return Future.error(err);
     }
@@ -242,8 +248,8 @@ class APIService {
 
   Future<void> postSpardhaStanding(Map<String, dynamic> data) async {
     try {
-      print(data.toString());
-      Response resp = await dio.post("/gc/spardha/standings", data: data);
+
+      // Response resp = await dio.post("/gc/spardha/standings", data: data);
     } on DioError catch (err) {
       return Future.error(err);
     }
@@ -251,9 +257,9 @@ class APIService {
 
   Future<void> updateSpardhaStanding(StandingModel standingModel) async {
     try {
-      Response resp = await dio.patch(
-          "/gc/spardha/standings/${standingModel.id}",
-          data: standingModel.toJson());
+      // Response resp = await dio.patch(
+      //     "/gc/spardha/standings/${standingModel.id}",
+      //     data: standingModel.toJson());
     } on DioError catch (err) {
       return Future.error(err);
     }
@@ -261,7 +267,7 @@ class APIService {
 
   Future<bool> deleteStanding(String standingID) async {
     try {
-      Response resp = await dio.delete("/gc/spardha/standings/${standingID}");
+      Response resp = await dio.delete("/gc/spardha/standings/$standingID");
       return resp.data['success'];
     } on DioError catch (err) {
       return Future.error(err);

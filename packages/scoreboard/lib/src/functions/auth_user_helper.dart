@@ -8,8 +8,7 @@ import '../services/api.dart';
 import '../stores/common_store.dart';
 import '../stores/static_store.dart';
 
-class AuthUserHelpers{
-
+class AuthUserHelpers {
   static Future<bool> checkIfAdmin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getBool(DatabaseRecords.isadmin) ?? false;
@@ -17,7 +16,7 @@ class AuthUserHelpers{
 
   static Future<void> setAdmin(bool value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(DatabaseRecords.isadmin,value);
+    await prefs.setBool(DatabaseRecords.isadmin, value);
   }
 
   static Future<String> getAccessToken() async {
@@ -45,31 +44,38 @@ class AuthUserHelpers{
     return prefs.getString(DatabaseRecords.useremail) ?? " ";
   }
 
-  static Future<Map<String,String>> getUserData() async {
+  static Future<Map<String, String>> getUserData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return {"name" : prefs.getString(DatabaseRecords.username) ?? " ",DatabaseRecords.useremail : prefs.getString(DatabaseRecords.useremail) ?? " "};
+    return {
+      "name": prefs.getString(DatabaseRecords.username) ?? " ",
+      DatabaseRecords.useremail:
+          prefs.getString(DatabaseRecords.useremail) ?? " "
+    };
   }
 
-  static Future<bool> saveUserData(Map<String,String> userInfo,BuildContext buildContext) async {
-    try{
+  static Future<bool> saveUserData(
+      Map<String, String> userInfo, BuildContext buildContext) async {
+    try {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("email", userInfo["email"]!);
       await prefs.setString("name", userInfo["name"]!);
+
+      
+
+
       var commStore = buildContext.read<CommonStore>();
-      if(!prefs.containsKey("accessToken")){ // has already once used scoreboard
+      if (!prefs.containsKey("accessToken")) {
+        // has already once used scoreboard
         await APIService(buildContext).generateTokens(commStore);
+      } else if (await checkIfAdmin()) {
+        commStore.isAdmin = true;
       }
-      else if(await checkIfAdmin()){
-        commStore.isAdmin=true;
-      }
-      StaticStore.spardhaEvents= await APIService(buildContext).getAllSpardhaEvents();
-      print(StaticStore.spardhaEvents);
+      StaticStore.spardhaEvents =
+          await APIService(buildContext).getAllSpardhaEvents();
+
       return true;
-    }
-    on DioError catch (err) {
-      print("inside auth helper");
+    } on DioError catch (err) {
       return Future.error(err);
     }
   }
-
 }

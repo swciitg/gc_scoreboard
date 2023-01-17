@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:scoreboard/src/widgets/common/err_reload.dart';
-import 'package:shimmer/shimmer.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../functions/filter_standings.dart';
 import '../../services/api.dart';
@@ -32,8 +31,8 @@ class _StandingsPageState extends State<StandingsPage> {
         padding: const EdgeInsets.symmetric(horizontal: 0),
         child: Column(
           children: [
-            TopBar(),
-            FilterBar(),
+            const TopBar(),
+            const FilterBar(),
             FutureBuilder<Map<String, dynamic>>(
               future: APIService(context).getSpardhaStandings(),
               builder: (context, snapshot) {
@@ -49,7 +48,7 @@ class _StandingsPageState extends State<StandingsPage> {
                     ),
                   ));
                 } else if (snapshot.hasData) {
-                  print(snapshot.data);
+
                   return Observer(builder: (context) {
                     List<dynamic> filteredEventSchedules = filterStandings(
                         input: snapshot.data!,
@@ -60,7 +59,7 @@ class _StandingsPageState extends State<StandingsPage> {
                             hostelStandings: filteredEventSchedules));
                   });
                 }
-                print("here");
+
                 return ErrorReloadPage(apiFunction: reloadCallback);
               },
             )

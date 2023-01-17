@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:scoreboard/src/widgets/add_event/timepicker_color.dart';
 import '../../../functions/snackbar.dart';
@@ -145,7 +144,7 @@ class _AddEventFormState extends State<AddEventForm> {
                       Autocomplete<String>(
                         optionsBuilder: (TextEditingValue val) {
                           if (val.text == '') {
-                            return Iterable<String>.empty();
+                            return const Iterable<String>.empty();
                           }
                           return StaticStore.spardhaEvents.where((element) =>
                               element
@@ -166,7 +165,7 @@ class _AddEventFormState extends State<AddEventForm> {
                               color: Colors.transparent,
                               child: ListView.builder(
                                 // padding: EdgeInsets.all(10.0),
-                                padding: EdgeInsets.symmetric(vertical: 0),
+                                padding: const EdgeInsets.symmetric(vertical: 0),
                                 itemCount: options.length,
                                 itemBuilder: (BuildContext context, int index) {
                                   final String option =

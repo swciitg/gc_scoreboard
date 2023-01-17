@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../../globals/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../globals/constants.dart';
 
+
 class StandingBoard extends StatefulWidget {
-  List<dynamic> hostelStandings;
-  StandingBoard({
+  final List<dynamic> hostelStandings;
+  const StandingBoard({
     Key? key, required this.hostelStandings
   }) : super(key: key);
 
@@ -25,12 +25,12 @@ class _StandingBoardState extends State<StandingBoard> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.hostelStandings);
+
     return Container(
-      margin: EdgeInsets.fromLTRB(8, 16, 8, 0),
+      margin: const EdgeInsets.fromLTRB(8, 16, 8, 0),
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.vertical(top: Radius.circular(18)),color: Themes.cardColor1),
-      child: widget.hostelStandings.length==0 ? Center(
+      child: widget.hostelStandings.isEmpty ? Center(
         child: Text("No Standings found",
             softWrap: true,
             style: GoogleFonts.montserrat(
@@ -42,8 +42,8 @@ class _StandingBoardState extends State<StandingBoard> {
         itemBuilder: (context, index) {
           if (index == 0) {
             return Container(
-              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               child: Row(
                 children: [
                   Expanded(
@@ -54,7 +54,7 @@ class _StandingBoardState extends State<StandingBoard> {
                             fontSize: 13,
                             color: Themes.cardFontColor2)),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Expanded(
@@ -84,10 +84,10 @@ class _StandingBoardState extends State<StandingBoard> {
             );
           }
           index -= 1;
-          print(widget.hostelStandings[index]["hostelName"]);
+
           return Container(
-            margin: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-            padding: EdgeInsets.fromLTRB(15, 10, 10, 10),
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+            padding: const EdgeInsets.fromLTRB(15, 10, 10, 10),
             child: Row(
               children: [
                 Expanded(
@@ -108,7 +108,7 @@ class _StandingBoardState extends State<StandingBoard> {
                               color: Color(_colorMedal[index]),
                               size: 18,
                             )
-                          : Text(''),
+                          : const Text(''),
                     ],
                   ),
                 ),
