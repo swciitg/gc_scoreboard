@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
+import '../../globals/colors.dart';
+import '../../globals/styles.dart';
 
 class TimePickerColor extends StatefulWidget {
   final Widget? childWidget;
@@ -15,13 +17,13 @@ class _TimePickerColorState extends State<TimePickerColor> {
     return Theme(
       data: Theme.of(context).copyWith(
         timePickerTheme: TimePickerThemeData(
-          backgroundColor: const Color(0xff273141),
-          dayPeriodBorderSide: const BorderSide(
-              color: Color.fromRGBO(91, 146, 227, 1), width: 2),
+          backgroundColor: Themes.secondaryColor,
+          dayPeriodBorderSide:
+              const BorderSide(color: Themes.dayPeriodBorderColor, width: 2),
           dayPeriodColor: MaterialStateColor.resolveWith((states) =>
               states.contains(MaterialState.selected)
-                  ? const Color.fromRGBO(91, 146, 227, 1)
-                  : const Color(0xff273141)),
+                  ? Themes.dayPeriodBorderColor
+                  : Themes.secondaryColor),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(8)),
           ),
@@ -35,22 +37,17 @@ class _TimePickerColorState extends State<TimePickerColor> {
           ),
           hourMinuteColor: MaterialStateColor.resolveWith((states) =>
               states.contains(MaterialState.selected)
-                  ? const Color.fromRGBO(91, 146, 227, 1)
-                  : const Color(0xff2B3E5C)),
+                  ? Themes.dayPeriodBorderColor
+                  : Themes.datePickerSurfaceColor),
           hourMinuteTextColor: MaterialStateColor.resolveWith((states) =>
               states.contains(MaterialState.selected)
                   ? Colors.white
                   : Colors.white),
-          dialHandColor: const Color.fromRGBO(118, 172, 255, 1),
-          dialBackgroundColor: const Color(0xff2B3E5C),
-          hourMinuteTextStyle: GoogleFonts.montserrat(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-          dayPeriodTextStyle:
-              GoogleFonts.montserrat(fontSize: 12, fontWeight: FontWeight.bold),
-          helpTextStyle: GoogleFonts.montserrat(
-              fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white),
+          dialHandColor: Themes.primaryColor,
+          dialBackgroundColor: Themes.datePickerSurfaceColor,
+          hourMinuteTextStyle: hourMinuteStyle,
+          dayPeriodTextStyle: dayPeriodStyle,
+          helpTextStyle: helptextStyle,
           dialTextColor: MaterialStateColor.resolveWith((states) =>
               states.contains(MaterialState.selected)
                   ? Colors.black
@@ -58,14 +55,14 @@ class _TimePickerColorState extends State<TimePickerColor> {
           entryModeIconColor: Colors.blueGrey.shade600,
         ),
         textTheme: TextTheme(
-          caption: GoogleFonts.montserrat(), // days
+          caption: basicFontStyle, // days
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-              backgroundColor: const Color(0xff273141), // button
-              foregroundColor: const Color.fromRGBO(118, 172, 255, 1),
+              backgroundColor: Themes.secondaryColor, // button
+              foregroundColor: Themes.primaryColor,
               elevation: 0,
-              textStyle: GoogleFonts.montserrat()),
+              textStyle: basicFontStyle),
         ),
       ),
       child: MediaQuery(
@@ -73,6 +70,6 @@ class _TimePickerColorState extends State<TimePickerColor> {
           // If you want 24-Hour format, just change alwaysUse24HourFormat to true or remove all the builder argument
           child: widget.childWidget!),
     );
-    
+    ;
   }
 }

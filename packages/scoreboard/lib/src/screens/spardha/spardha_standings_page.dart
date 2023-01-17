@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:scoreboard/src/widgets/common/err_reload.dart';
+import '../../widgets/common/err_reload.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../functions/filter_standings.dart';
 import '../../services/api.dart';
@@ -48,8 +48,8 @@ class _StandingsPageState extends State<StandingsPage> {
                     ),
                   ));
                 } else if (snapshot.hasData) {
-
                   return Observer(builder: (context) {
+                    print(snapshot.data!);
                     List<dynamic> filteredEventSchedules = filterStandings(
                         input: snapshot.data!,
                         event: spardhaStore.selectedEvent,

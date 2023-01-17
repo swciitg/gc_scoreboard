@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../../../globals/colors.dart';
 import '../../../globals/constants.dart';
+import '../../../globals/styles.dart';
 
 class BiHostelView extends StatelessWidget {
   final String hostelA;
   final String hostelB;
-  const BiHostelView({Key? key, required this.hostelA, required this.hostelB}) : super(key: key);
+  const BiHostelView({Key? key, required this.hostelA, required this.hostelB})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class BiHostelView extends StatelessWidget {
                 height: 18,
                 width: 18,
                 child: Image.asset(
-                    hostelsImagePath[hostelA]!,
+                  hostelsImagePath[hostelA]!,
                   cacheWidth: 50,
                   cacheHeight: 50,
                 ),
@@ -32,10 +32,7 @@ class BiHostelView extends StatelessWidget {
               ),
               Text(
                 hostelA,
-                style: GoogleFonts.montserrat(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 14,
-                    color: Themes.cardFontColor2),
+                style: cardVenueStyle3,
               )
             ],
           ),
@@ -62,10 +59,7 @@ class BiHostelView extends StatelessWidget {
               ),
               Text(
                 hostelB,
-                style: GoogleFonts.montserrat(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 14,
-                    color: Themes.cardFontColor2),
+                style: cardVenueStyle3,
               )
             ],
           ),

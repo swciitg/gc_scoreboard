@@ -1,23 +1,23 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/globals/enums.dart';
-import 'package:scoreboard/src/models/standing_model.dart';
-import 'package:scoreboard/src/screens/home.dart';
-import 'package:scoreboard/src/services/api.dart';
-import 'package:scoreboard/src/stores/common_store.dart';
-import 'package:scoreboard/src/stores/static_store.dart';
-import 'package:scoreboard/src/widgets/add_event/drop_down.dart';
-import 'package:scoreboard/src/widgets/add_result/hostel_dropdown.dart';
 import '../../../functions/snackbar.dart';
 import '../../../functions/validator.dart';
 import '../../../globals/colors.dart';
 import '../../../globals/constants.dart';
+import '../../../globals/enums.dart';
+import '../../../models/standing_model.dart';
+import '../../../services/api.dart';
+import '../../../stores/common_store.dart';
 import '../../../stores/standing_form_store.dart';
+import '../../../stores/static_store.dart';
+import '../../../widgets/add_event/drop_down.dart';
 import '../../../widgets/add_event/text_field.dart';
 import '../../../widgets/add_result/custom_text_field.dart';
 import '../../../widgets/add_result/fields_mandatory.dart';
 import '../../../functions/position.dart';
+import '../../../widgets/add_result/hostel_dropdown.dart';
+import '../../home.dart';
 
 class AddStanding extends StatefulWidget {
   final StandingModel? standings;
@@ -44,6 +44,7 @@ class _AddStandingState extends State<AddStanding> {
 
   @override
   Widget build(BuildContext context) {
+    bool isLoading = false;
     var commStore = context.read<CommonStore>();
     return GestureDetector(
         onTap: () {
@@ -73,7 +74,7 @@ class _AddStandingState extends State<AddStanding> {
                   Icons.close,
                   color: Themes.theme.primaryColor,
                 ),
-                splashColor: const Color.fromRGBO(118, 172, 255, 0.9),
+                splashColor: Themes.splashColor,
               ),
               actions: [
                 TextButton(
@@ -81,36 +82,47 @@ class _AddStandingState extends State<AddStanding> {
                     if (!key.currentState!.validate()) {
                       return;
                     }
-                    try {
-                      if (widget.standings == null) {
-                        await APIService(context).postSpardhaStanding({
-                          "category": standingFormStore.category!.categoryName,
-                          'event': standingFormStore.event,
-                          'standings': List<Map>.from(standingFormStore
-                              .standing!
-                              .map((e) => e.toJson()))
-                        });
-                        if (!mounted) return;
+                    if (isLoading) {
+                      showSnackBar(context, 'Please wait before trying again');
+                    } else {
+                      setState(() {
+                        isLoading = true;
+                      });
+                      try {
+                        if (widget.standings == null) {
+                          await APIService(context).postSpardhaStanding({
+                            "category":
+                                standingFormStore.category!.categoryName,
+                            'event': standingFormStore.event,
+                            'standings': List<Map>.from(standingFormStore
+                                .standing!
+                                .map((e) => e.toJson()))
+                          });
+                          if (!mounted) return;
 
-                        showSnackBar(context, "Standing added");
-                      } else {
-                        widget.standings!.category =
-                            standingFormStore.category!.categoryName;
-                        widget.standings!.event = standingFormStore.event;
-                        widget.standings!.standings =
-                            standingFormStore.standing;
-                        await APIService(context)
-                            .updateSpardhaStanding(widget.standings!);
-                        if (!mounted) return;
+                          showSnackBar(context, "Standing added");
+                        } else {
+                          widget.standings!.category =
+                              standingFormStore.category!.categoryName;
+                          widget.standings!.event = standingFormStore.event;
+                          widget.standings!.standings =
+                              standingFormStore.standing;
+                          await APIService(context)
+                              .updateSpardhaStanding(widget.standings!);
+                          if (!mounted) return;
 
-                        showSnackBar(context, "Standing updated");
+                          showSnackBar(context, "Standing updated");
+                        }
+                        commStore.competition = Competitions.gc;
+                        if (!mounted) return;
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, ScoreBoardHome.id, (route) => false);
+                      } on DioError catch (err) {
+                        showErrorSnackBar(context, err);
                       }
-                      commStore.competition = Competitions.gc;
-                      if (!mounted) return;
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, ScoreBoardHome.id, (route) => false);
-                    } on DioError catch (err) {
-                      showErrorSnackBar(context, err);
+                      setState(() {
+                        isLoading = false;
+                      });
                     }
                   },
                   child: Text(

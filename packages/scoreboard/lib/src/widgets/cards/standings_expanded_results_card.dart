@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-import '../../globals/colors.dart';
+import '../../globals/styles.dart';
 import '../../models/standing_model.dart';
 
 class StandingsExpandedresultsCard extends StatelessWidget {
@@ -24,7 +23,6 @@ class StandingsExpandedresultsCard extends StatelessWidget {
                   standingModel.standings![index].hostelName!,
                   standingModel.standings![index].points.toString());
             }));
-    
   }
 
   Widget athleticsResultsCardItem(
@@ -44,12 +42,8 @@ class StandingsExpandedresultsCard extends StatelessWidget {
                   width: 16,
                   height: 18,
                   child: Text(
-                    
                     '$position',
-                    style: GoogleFonts.montserrat(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 12,
-                        color: Themes.cardFontColor2),
+                    style: cardVenueStyle1,
                   ),
                 ),
                 const SizedBox(
@@ -57,10 +51,7 @@ class StandingsExpandedresultsCard extends StatelessWidget {
                 ),
                 Text(
                   hostelName,
-                  style: GoogleFonts.montserrat(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12,
-                      color: Themes.cardFontColor2),
+                  style: cardVenueStyle1,
                 ),
               ],
             ),
@@ -70,10 +61,7 @@ class StandingsExpandedresultsCard extends StatelessWidget {
             height: 18,
             child: Text(
               score,
-              style: GoogleFonts.montserrat(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 12,
-                  color: Themes.cardFontColor3),
+              style: cardPostponedStyle,
             ),
           )
         ],

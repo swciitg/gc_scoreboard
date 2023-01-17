@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../globals/colors.dart';
 import '../../globals/enums.dart';
+import '../../globals/styles.dart';
 import '../../stores/common_store.dart';
 import '../../stores/gc_store.dart';
 import '../../stores/kriti_store.dart';
@@ -56,7 +56,7 @@ class BottomNavBarItem extends StatelessWidget {
   Widget build(BuildContext context) {
     CommonStore commonStore = context.read<CommonStore>();
 
-   dynamic competitionStore;
+    dynamic competitionStore;
     switch (competition) {
       case Competitions.gc:
         {
@@ -113,14 +113,9 @@ class BottomNavBarItem extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(0.0),
                 child: Text(competition.name,
-                    style: GoogleFonts.montserrat(
-                        fontWeight: commonStore.competition == competition
-                            ? FontWeight.w600
-                            : FontWeight.w500,
-                        fontSize: 12,
-                        color: commonStore.competition == competition
-                            ? Themes.primaryColor
-                            : Themes.bottomNavFontColor)),
+                    style: commonStore.competition == competition
+                        ? cardStageStyle2
+                        : bottomNavStyle1),
               )
             ],
           ),

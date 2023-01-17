@@ -86,6 +86,7 @@ class APIService {
         data: {DatabaseRecords.useremail: userData[DatabaseRecords.useremail]});
     var data = resp.data!;
     if (data["success"] == true) {
+      print(data);
       commStore.setAdminNone();
       data[DatabaseRecords.authevents].forEach((element) => {
             if (element == "spardha")

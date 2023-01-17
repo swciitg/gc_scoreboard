@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
+import '../../globals/styles.dart';
 import '../../models/event_model.dart';
-import '../../globals/colors.dart';
 
 // ignore: must_be_immutable
 class ExpandedResultsCard extends StatelessWidget {
@@ -49,7 +48,6 @@ class ExpandedResultsCard extends StatelessWidget {
       String? secondaryScore) {
     final split = secondaryScore?.split(',');
 
-
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
@@ -66,10 +64,7 @@ class ExpandedResultsCard extends StatelessWidget {
                   height: 18,
                   child: Text(
                     '$position',
-                    style: GoogleFonts.montserrat(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 12,
-                        color: Themes.cardFontColor2),
+                    style: cardVenueStyle1,
                   ),
                 ),
                 const SizedBox(
@@ -80,10 +75,7 @@ class ExpandedResultsCard extends StatelessWidget {
                   child: Text(
                     overflow: TextOverflow.visible,
                     hostelName,
-                    style: GoogleFonts.montserrat(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 12,
-                        color: Themes.cardFontColor2),
+                    style: cardVenueStyle1,
                   ),
                 ),
               ],
@@ -96,10 +88,7 @@ class ExpandedResultsCard extends StatelessWidget {
               children: [
                 Text(
                   finalScore,
-                  style: GoogleFonts.montserrat(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12,
-                      color: Themes.cardFontColor3),
+                  style: cardPostponedStyle,
                 ),
                 secondaryScore == null
                     ? Container()
@@ -120,10 +109,7 @@ class ExpandedResultsCard extends StatelessWidget {
                                     width: 18,
                                     child: Text(
                                       split![index],
-                                      style: GoogleFonts.montserrat(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 12,
-                                          color: Themes.cardFontColor1),
+                                      style: cardSecondaryScoreStyle,
                                     ),
                                   );
                                 }),

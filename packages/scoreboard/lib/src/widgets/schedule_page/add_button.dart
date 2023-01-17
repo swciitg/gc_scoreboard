@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
+import '../../globals/styles.dart';
 
 class AddButton extends StatelessWidget {
   final String text;
@@ -25,8 +26,7 @@ class AddButton extends StatelessWidget {
             ),
             Text(
               text,
-              style: GoogleFonts.montserrat(
-                  fontSize: 15, fontWeight: FontWeight.w600),
+              style: buttonStyle,
             )
           ],
         ));

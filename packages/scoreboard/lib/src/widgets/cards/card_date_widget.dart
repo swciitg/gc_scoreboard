@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 
-import '../../globals/styles/card_style.dart';
-
+import '../../globals/styles.dart';
 
 class DateWidget extends StatelessWidget {
   final DateTime date;
@@ -18,27 +17,23 @@ class DateWidget extends StatelessWidget {
           package: 'scoreboard',
         ),
         Padding(
-          padding:
-          const EdgeInsets.fromLTRB(8, 34, 8, 0),
+          padding: const EdgeInsets.fromLTRB(8, 34, 8, 0),
           child: Container(
             alignment: Alignment.center,
             height: 28,
             width: 66,
             child: Row(
-              mainAxisAlignment:
-              MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  DateFormat.d()
-                      .format(date),
+                  DateFormat.d().format(date),
                   style: dateWidgetStyle,
                 ),
                 const SizedBox(
                   width: 4,
                 ),
                 Text(
-                  DateFormat.LLL()
-                      .format(date),
+                  DateFormat.LLL().format(date),
                   style: dateWidgetStyle,
                 ),
               ],

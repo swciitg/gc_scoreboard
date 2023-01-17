@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../globals/colors.dart';
 import '../../globals/enums.dart';
+import '../../globals/styles.dart';
 import '../../screens/home.dart';
 import '../../stores/common_store.dart';
 
@@ -18,7 +18,7 @@ class _StandingsAppBarState extends State<StandingsAppBar> {
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
     return Container(
-      color: Themes.appbarBackgroundColor,
+      color: Themes.secondaryColor,
       child: SafeArea(
         bottom: false,
         child: Padding(
@@ -47,38 +47,22 @@ class _StandingsAppBarState extends State<StandingsAppBar> {
                       const SizedBox(
                         width: 8,
                       ),
-                      Text('One',
-                          style: GoogleFonts.montserrat(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 12,
-                              color: Themes.primaryColor)),
-                      Text('.',
-                          style: GoogleFonts.montserrat(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 12,
-                              color: Themes.cardFontColor3)),
+                      Text('One', style: cardStageStyle2),
+                      Text('.', style: cardStageStyle1),
                     ],
                   ),
                 ),
               ),
               Row(
                 children: [
-                  Text('Scoreboard',
-                      style: GoogleFonts.montserrat(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 22,
-                          color: Themes.primaryColor)),
-                  Text('.',
-                      style: GoogleFonts.montserrat(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 22,
-                          color: Themes.cardFontColor3)),
+                  Text('Scoreboard', style: headingStyle1),
+                  Text('.', style: headingStyle2),
                 ],
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 8),
                 child: Container(
-                  // width: width * 0.8,
+                    // width: width * 0.8,
                     width: 72,
                     height: 36,
                     alignment: Alignment.centerRight,
@@ -100,7 +84,8 @@ class _StandingsAppBarState extends State<StandingsAppBar> {
                       ],
                       onSelected: (newRoute) async {
                         commonStore.setViewType(ViewType.user);
-                        Navigator.pushNamedAndRemoveUntil(context, ScoreBoardHome.id, (route) => false);
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, ScoreBoardHome.id, (route) => false);
                       },
                     )),
               ),
