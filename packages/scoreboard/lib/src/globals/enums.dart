@@ -55,3 +55,26 @@ enum Hostel {
   final String hostelName;
   const Hostel(this.hostelName);
 }
+
+// kriti enums
+enum Club{
+  overall("Overall"),
+  codingClub("Coding Club"),
+  cnaClub("CnA Club"),
+  eCell("E-Cell"),
+  roboticsClub("Robotics Club");
+
+  final String clubName;
+  const Club(this.clubName);
+}
+
+enum Cup{
+  overall("Overall"),
+  brainiac("Brainiac Cup"),
+  astro("Astro Club"),
+  business("Business Cup");
+
+  final String cupName;
+  const Cup(this.cupName);
+}
+
