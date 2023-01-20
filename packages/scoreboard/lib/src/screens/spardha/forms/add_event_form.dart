@@ -11,6 +11,7 @@ import '../../../widgets/add_event/drop_down.dart';
 import '../../../widgets/add_event/heading.dart';
 import '../../../widgets/add_event/text_field.dart';
 import '../../../widgets/add_event/timepicker_color.dart';
+import '../../../widgets/common/autocomplete.dart';
 import '../../../widgets/common/form_app_bar.dart';
 import 'confirm_event_details.dart';
 
@@ -50,6 +51,10 @@ class _AddEventFormState extends State<AddEventForm> {
   callbackAddHostel(value, index) {
     participatingHostels[index - 1] = value;
     hostelSizeValue = participatingHostels.length.toString();
+  }
+
+  callbackAutocomplete(value){
+    sportName=value;
   }
 
   @override
@@ -141,66 +146,7 @@ class _AddEventFormState extends State<AddEventForm> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Autocomplete<String>(
-                        optionsBuilder: (TextEditingValue val) {
-                          if (val.text == '') {
-                            return const Iterable<String>.empty();
-                          }
-                          return StaticStore.spardhaEvents.where((element) =>
-                              element
-                                  .toLowerCase()
-                                  .contains(val.text.toLowerCase()));
-                        },
-                        initialValue:
-                            TextEditingValue(text: widget.event?.event ?? ""),
-                        onSelected: (s) => sportName = s,
-                        optionsMaxHeight: 50,
-                        optionsViewBuilder: (BuildContext context,
-                            AutocompleteOnSelected<String> onSelected,
-                            Iterable<String> options) {
-                          // options = [...options,...options,...options,...options,...options,...options,...options,];
-                          return Align(
-                            alignment: Alignment.topLeft,
-                            child: Material(
-                              color: Colors.transparent,
-                              child: ListView.builder(
-                                // padding: EdgeInsets.all(10.0),
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 0),
-                                itemCount: options.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  final String option =
-                                      options.elementAt(index);
-                                  return GestureDetector(
-                                    onTap: () {
-                                      onSelected(option);
-                                    },
-                                    child: ListTile(
-                                      tileColor: Themes.theme.backgroundColor,
-                                      title: Text(option,
-                                          style:
-                                              Themes.theme.textTheme.headline6),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          );
-                        },
-                        fieldViewBuilder: (context, c, f, __) {
-                          return CustomTextField(
-                            hintText: 'Event Name',
-                            validator: (s) {
-                              if (StaticStore.spardhaEvents.contains(s)) {
-                                return null;
-                              }
-                              return "Enter a valid event";
-                            },
-                            controller: c,
-                            focusNode: f,
-                          );
-                        },
-                      ),
+                      AutocompleteTextField(callbackFunction: callbackAutocomplete, standings: widget.event?.event, selectedItem: sportName,),
                       const SizedBox(height: 12),
                       CustomDropDown(
                         items: eventCategories,
