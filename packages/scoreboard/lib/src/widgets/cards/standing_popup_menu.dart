@@ -53,8 +53,8 @@ class _StandingPopupState extends State<StandingPopup> {
         break;
 
       case 'delete':
-        bool response =
-            await APIService(context).deleteStanding(widget.standingModel.id!);
+        bool response = await APIService(context)
+            .deleteSpardhaStanding(widget.standingModel.id!);
         commonStore.competition = Competitions.gc;
         if (!response) {
           showSnackBar(context, 'Some error occurred, try again later');

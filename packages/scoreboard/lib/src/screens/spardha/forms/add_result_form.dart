@@ -80,7 +80,7 @@ class _AddResultFormState extends State<AddResultForm> {
                           isLoading = true;
                         });
                         try {
-                          await APIService(context).addUpdateResult(
+                          await APIService(context).addUpdateSpardhaResult(
                               widget.event.id!,
                               ResultFormStore.resultFields!,
                               ResultFormStore.victoryStatement!);
@@ -271,7 +271,9 @@ class _AddResultFormState extends State<AddResultForm> {
                                                 ResultFormStore
                                                     .resultFields?[index][team]
                                                     .hostelName = hostel,
-                                            hostels: widget.event.hostels.toSet().toList(), // multiple times same hostels can be in list
+                                            hostels: widget.event.hostels
+                                                .toSet()
+                                                .toList(), // multiple times same hostels can be in list
                                           ),
                                         ),
                                         // const Spacer(

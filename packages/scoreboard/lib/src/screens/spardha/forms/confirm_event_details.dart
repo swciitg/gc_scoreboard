@@ -72,7 +72,7 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
                         showSnackBar(context, "Event Edited successfully");
                       } else {
                         await APIService(context)
-                            .postEventSchedule(widget.event.toJson());
+                            .postSpardhaEventSchedule(widget.event.toJson());
                         if (!mounted) return;
 
                         showSnackBar(

@@ -2,10 +2,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:scoreboard/src/models/kriti_models/kriti_event_model.dart';
 import '../functions/auth_user_helper.dart';
 import '../globals/constants.dart';
 import '../globals/enums.dart';
 import '../models/event_model.dart';
+import '../models/kriti_models/kriti_result_model.dart';
 import '../models/result_model.dart';
 import '../models/standing_model.dart';
 import '../screens/login/admin_login.dart';
@@ -27,7 +29,7 @@ class APIService {
     }, onError: (error, handler) async {
       var response = error.response;
       // print(response.statusCode ?? "no status code");
- 
+
       if (response != null && response.statusCode == 401) {
         bool couldRegenerate = await regenerateAccessToken();
         var commStore = buildContext.read<CommonStore>();
@@ -42,10 +44,9 @@ class APIService {
         } else {
           // show login screen to admin if only he has internet connection
           var connectivityResult = await (Connectivity().checkConnectivity());
-          
+
           if (connectivityResults.contains(connectivityResult) &&
               await Navigator.pushNamed(buildContext, LoginView.id) == true) {
-                
             // retry for admin
             return handler.resolve(await retryRequest(response));
           }
@@ -123,13 +124,12 @@ class APIService {
     }
   }
 
-  Future<void> postEventSchedule(Map<String, dynamic> data) async {
+  Future<void> postSpardhaEventSchedule(Map<String, dynamic> data) async {
     try {
       print(data);
       var resp = await dio.post("/gc/spardha/event-schedule", data: data);
       print(resp.data);
     } on DioError catch (err) {
-
       return Future.error(err);
     }
   }
@@ -172,7 +172,6 @@ class APIService {
         {
           output.add(EventModel.fromJson(e));
         }
-        
       }
       return output;
     } on DioError catch (err) {
@@ -180,12 +179,11 @@ class APIService {
     }
   }
 
-  Future<void> addUpdateResult(String eventID, List<List<ResultModel>> data,
-      String victoryStatement) async {
+  Future<void> addUpdateSpardhaResult(String eventID,
+      List<List<ResultModel>> data, String victoryStatement) async {
     try {
       List<List<Map>> results = [];
       for (var positionResults in data) {
-
         List<Map> addResults = [];
         for (var result in positionResults) {
           addResults.add(result.toJson());
@@ -200,7 +198,7 @@ class APIService {
     }
   }
 
-  Future<void> deleteEvent(String eventID) async {
+  Future<void> deleteSpardhaEvent(String eventID) async {
     try {
       Response resp = await dio.delete('/gc/spardha/event-schedule/$eventID');
     } on DioError catch (err) {
@@ -266,10 +264,109 @@ class APIService {
     }
   }
 
-  Future<bool> deleteStanding(String standingID) async {
+  Future<bool> deleteSpardhaStanding(String standingID) async {
     try {
       Response resp = await dio.delete("/gc/spardha/standings/$standingID");
       return resp.data['success'];
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
+  // kriti
+
+  Future<void> postKritiEventSchedule(Map<String, dynamic> data) async {
+    try {
+      print(data);
+      var resp = await dio.post("/gc/kriti/event-schedule", data: data);
+      print(resp.data);
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
+  Future<void> deleteKritiEvent(String eventID) async {
+    try {
+      Response resp = await dio.delete('/gc/kriti/event-schedule/$eventID');
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
+  Future<void> updateKritiEvent(EventModel event) async {
+    try {
+      Response resp = await dio.patch('/gc/kriti/event-schedule/${event.id!}',
+          data: event.toJson());
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
+  Future<List<String>> getAllKritiEvents() async {
+    try {
+      Response resp = await dio.get("/gc/kriti/all-events");
+      return List<String>.from(resp.data["details"]);
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
+  Future<List<KritiEventModel>> getKritiSchedule(ViewType v) async {
+    try {
+      if (v == ViewType.admin) {
+        dio.options.queryParameters["forAdmin"] = "true";
+      }
+      Response resp = await dio.get("/gc/kriti/event-schedule");
+      List<KritiEventModel> output = [];
+      for (var e in List<dynamic>.from(resp.data["details"])) {
+        {
+          output.add(KritiEventModel.fromJson(e));
+        }
+      }
+      return output;
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
+  Future<List<KritiEventModel>> getKritiResults(ViewType v) async {
+    try {
+      if (v == ViewType.admin) {
+        dio.options.queryParameters["forAdmin"] = "true";
+      }
+      Response resp = await dio.get("/gc/kriti/event-schedule/results");
+      List<KritiEventModel> output = [];
+      for (var e in List<dynamic>.from(resp.data["details"])) {
+        {
+          output.add(KritiEventModel.fromJson(e));
+        }
+      }
+      return output;
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
+  Future<void> addUpdateKritiResult(String eventID, List<KritiResultModel> data,
+      String victoryStatement) async {
+    try {
+      List<Map> results = [];
+      for (var result in data) {
+        results.add(result.toJson());
+      }
+
+      Response resp = await dio.patch(
+          '/gc/kriti/event-schedule/result/$eventID',
+          data: {'victoryStatement': victoryStatement, 'results': results});
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
+  Future<void> deleteKritiEventResult(String eventID) async {
+    try {
+      Response resp =
+          await dio.delete('/gc/kriti/event-schedule/result/$eventID');
     } on DioError catch (err) {
       return Future.error(err);
     }

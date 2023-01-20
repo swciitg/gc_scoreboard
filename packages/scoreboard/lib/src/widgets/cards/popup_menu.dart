@@ -17,9 +17,9 @@ class PopupMenu extends StatefulWidget {
   final EventModel eventModel;
   const PopupMenu(
       {Key? key,
-        required this.child,
-        required this.items,
-        required this.eventModel})
+      required this.child,
+      required this.items,
+      required this.eventModel})
       : super(key: key);
 
   @override
@@ -33,12 +33,11 @@ class _PopupMenuState extends State<PopupMenu> {
   }
 
   void _showContextMenu(context, commonStore) async {
-
     if (widget.items.isEmpty) {
       return;
     }
     final RenderBox overlay =
-    Overlay.of(context)?.context.findRenderObject() as RenderBox;
+        Overlay.of(context)?.context.findRenderObject() as RenderBox;
 
     final result = await showMenu(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -54,8 +53,8 @@ class _PopupMenuState extends State<PopupMenu> {
             context,
             MaterialPageRoute(
                 builder: (context) => AddEventForm(
-                  event: widget.eventModel,
-                )));
+                      event: widget.eventModel,
+                    )));
         break;
 
       case 'edit result':
@@ -63,31 +62,30 @@ class _PopupMenuState extends State<PopupMenu> {
             context,
             MaterialPageRoute(
                 builder: (context) => AddResultForm(
-                  event: widget.eventModel,
-                )));
+                      event: widget.eventModel,
+                    )));
         break;
       case 'add':
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => AddResultForm(
-                  event: widget.eventModel,
-                )));
+                      event: widget.eventModel,
+                    )));
         break;
       case 'delete':
-        try{
-          if(commonStore.page == Pages.results){
-            await APIService(context).deleteSpardhaEventResult(widget.eventModel.id!);
-            showSnackBar(context,"Result Deleted");
-          }
-          else{
-            await APIService(context).deleteEvent(widget.eventModel.id!);
-            showSnackBar(context,"Event Deleted");
+        try {
+          if (commonStore.page == Pages.results) {
+            await APIService(context)
+                .deleteSpardhaEventResult(widget.eventModel.id!);
+            showSnackBar(context, "Result Deleted");
+          } else {
+            await APIService(context).deleteSpardhaEvent(widget.eventModel.id!);
+            showSnackBar(context, "Event Deleted");
           }
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => const ScoreBoardHome()));
-        }
-        on DioError catch(err){
+        } on DioError catch (err) {
           showErrorSnackBar(context, err);
         }
     }
