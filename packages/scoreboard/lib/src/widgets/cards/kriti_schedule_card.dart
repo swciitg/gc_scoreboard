@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import '../../globals/enums.dart';
 import '../../globals/styles.dart';
 import '../../models/kriti_models/kriti_event_model.dart';
 import '../../stores/common_store.dart';
-import '../../widgets/cards/popup_menu.dart';
 import '../../globals/colors.dart';
 import 'card_date_widget.dart';
-import 'schedule/multiple_hostel_view.dart';
-import 'card_event_details.dart';
-import 'menu_item.dart';
-import 'schedule/single_hostel_view.dart';
-import 'schedule/time_venue_widget.dart';
 
 
 
@@ -96,19 +90,23 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                                         color: const Color(0xffFFC907),
                                         borderRadius: BorderRadius.circular(8),
                                       ),
-                                      child: Container(
+                                      child:  Container(
                                         alignment: Alignment.center,
-                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
                                         child: Row(
                                           crossAxisAlignment: CrossAxisAlignment.center,
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Center(
-                                              child: Icon(Icons.link,color: Colors.black,)
+                                            const Center(
+                                              child: Icon(Icons.link,color: Colors.black,),
                                             ),
+                                            SizedBox(width: 3,),
                                             Text(
                                               'Open Problem',
-                                              style: buttonStyle,
+                                              style:  GoogleFonts.montserrat(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 14,
+                                                ),
                                             ),
                                           ],
                                         ),
