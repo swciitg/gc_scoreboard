@@ -12,7 +12,7 @@ KritiEventModel _$KritiEventModelFromJson(Map<String, dynamic> json) =>
       event: json['event'] as String,
       cup: json['cup'] as String,
       difficulty: json['difficulty'] as String,
-      points: json['points'] as int,
+      points: (json['points'] as num).toDouble(),
       startDate: DateTime.parse(json['startDate'] as String),
       endDate: DateTime.parse(json['endDate'] as String),
       clubs: (json['clubs'] as List<dynamic>).map((e) => e as String).toList(),

@@ -9,7 +9,7 @@ part of 'kriti_result_model.dart';
 KritiResultModel _$KritiResultModelFromJson(Map<String, dynamic> json) =>
     KritiResultModel(
       hostelName: json['hostelName'] as String?,
-      points: json['points'] as int?,
+      points: (json['points'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$KritiResultModelToJson(KritiResultModel instance) =>
