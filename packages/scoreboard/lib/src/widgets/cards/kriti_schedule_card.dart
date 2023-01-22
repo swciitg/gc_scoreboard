@@ -34,7 +34,7 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
         padding: const EdgeInsets.all(8.0),
         child: ConstrainedBox(
           constraints: const BoxConstraints(
-              minHeight: 256 ),
+              minHeight: 150 ),
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24),
@@ -69,20 +69,53 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                               const SizedBox(
                                 height: 16,
                               ),
-                              Container(
-                                height: 26,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: Themes.kGrey,
-                                ),
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                  child: Text(widget.eventModel.difficulty,
-                                      style:
-                                      cardCategoryStyle
+                              Row(
+                                children: [
+                                  Container(
+                                    height: 26,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: Themes.kGrey,
+                                    ),
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                      child: Text(widget.eventModel.difficulty,
+                                          style:
+                                          cardCategoryStyle
+                                          ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 8,),
+                                  GestureDetector(
+                                    onTap: (){
+                                    },
+                                    child: Container(
+                                      height: 26,
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xffFFC907),
+                                        borderRadius: BorderRadius.circular(8),
                                       ),
-                                ),
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                        child: Row(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Center(
+                                              child: Icon(Icons.link,color: Colors.black,)
+                                            ),
+                                            Text(
+                                              'Open Problem',
+                                              style: buttonStyle,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
                               )
                             ],
                           ),
@@ -100,28 +133,6 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                     )
                   ]),
 
-                  GestureDetector(
-                    onTap: (){
-
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      height: 38,
-                      decoration: BoxDecoration(
-                        color: const Color(0xffFFC907),
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Problem Statement',
-                          style: buttonStyle,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 32,
-                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
