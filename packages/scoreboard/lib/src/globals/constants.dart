@@ -71,11 +71,8 @@ const List<String> spardhaEventStages = [
   '3rd vs 4th'
 ];
 
-const List<String> kritiCups = ['Brainiac Cup', 'Astro Cup', 'Business Cup'];
 
-const List<String> iitgTechClubs = [
-  'Coding Club',
-  'E-Cell',
-  'CnA Club',
-  'Robotics Club'
-];
+
+const List<String> kritiDifficulties = ["High", "Mid", "Low"];
+
+

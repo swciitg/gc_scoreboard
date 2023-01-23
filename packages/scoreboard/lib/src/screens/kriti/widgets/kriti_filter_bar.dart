@@ -20,6 +20,8 @@ class KritiFilterBar extends StatefulWidget {
 }
 
 class _FilterBarState extends State<KritiFilterBar> {
+  List<String> cupNames = Cup.values.map((e) => e.cupName).toList();
+  List<String> clubNames = Club.values.map((e) => e.clubName).toList();
   @override
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
@@ -111,7 +113,7 @@ class _FilterBarState extends State<KritiFilterBar> {
                             kritiStore.changeSelectedCup(item);
                             print(kritiStore.selectedCup.cupName);
                           },
-                          itemBuilder: (BuildContext context) => kritiCups
+                          itemBuilder: (BuildContext context) => cupNames
                               .map((item) => PopupMenuItem<String>(
                                     value: item,
                                     child: Text(
@@ -170,8 +172,8 @@ class _FilterBarState extends State<KritiFilterBar> {
                             print(kritiStore.selectedClub.clubName);
 
                           },
-                          itemBuilder: (BuildContext context) => iitgTechClubs
-                              .map((item) => PopupMenuItem<String>(
+                          itemBuilder: (BuildContext context) =>
+                              clubNames.map((item) => PopupMenuItem<String>(
                                     value: item,
                                     child: Text(
                                       item,
