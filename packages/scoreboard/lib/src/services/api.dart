@@ -274,4 +274,18 @@ class APIService {
       return Future.error(err);
     }
   }
+  Future<Map<String, dynamic>> getKritStandings() async {
+    try {
+      Response resp1 = await dio.get("/gc/kriti/standings/all-events");
+      Response resp2 = await dio.get("/gc/kriti/standings");
+      return {
+        "overall": resp2.data["details"],
+        "event-wise": resp1.data["details"]
+      };
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
 }
+
+
