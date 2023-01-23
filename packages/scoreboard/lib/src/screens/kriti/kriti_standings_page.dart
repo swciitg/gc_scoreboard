@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:scoreboard/src/screens/kriti/widgets/kriti_filter_bar.dart';
 import '../../widgets/common/err_reload.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../functions/filter_standings.dart';
@@ -32,7 +33,7 @@ class _StandingsPageState extends State<KritiStandingsPage> {
         child: Column(
           children: [
             const TopBar(),
-            const FilterBar(),
+            const KritiFilterBar(),
             FutureBuilder<Map<String, dynamic>>(
               future: APIService(context).getSpardhaStandings(),
               builder: (context, snapshot) {

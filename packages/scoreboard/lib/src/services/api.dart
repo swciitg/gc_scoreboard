@@ -271,6 +271,15 @@ class APIService {
     }
   }
 
+    Future<List<String>> getAllKritiEvents() async {
+    try {
+      Response resp = await dio.get("/gc/kriti/all-events");
+      return List<String>.from(resp.data["details"]);
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
   Future<Map<String, dynamic>> getKritStandings() async {
     print('in getKritiTAandings');
     try {
@@ -288,4 +297,6 @@ class APIService {
       return Future.error(err);
     }
   }
+
+  
 }

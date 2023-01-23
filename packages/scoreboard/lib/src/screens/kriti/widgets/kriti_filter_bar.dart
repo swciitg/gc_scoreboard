@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:scoreboard/src/globals/constants.dart';
 import 'package:scoreboard/src/stores/kriti_store.dart';
 
 import '../../../globals/colors.dart';
@@ -11,32 +12,22 @@ import '../../../stores/common_store.dart';
 import '../../../stores/spardha_store.dart';
 import '../../../stores/static_store.dart';
 
-class FilterBar extends StatefulWidget {
-  const FilterBar({Key? key}) : super(key: key);
+class KritiFilterBar extends StatefulWidget {
+  const KritiFilterBar({Key? key}) : super(key: key);
 
   @override
-  State<FilterBar> createState() => _FilterBarState();
+  State<KritiFilterBar> createState() => _FilterBarState();
 }
 
-class _FilterBarState extends State<FilterBar> {
+class _FilterBarState extends State<KritiFilterBar> {
   @override
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
     var kritiStore = context.read<KritiStore>();
 
     List<String> itemsEvents = ['Overall'];
-    List<String> items = [];
-    List<String> itemsCategory = [];
 
-    if (commonStore.competition == Competitions.spardha) {
-      itemsEvents.addAll(StaticStore.spardhaEvents);
-      itemsHostels = Hostel.values
-          .map((e) => e.hostelName)
-          .toList(); // get all hostel names from common store hostel
-      itemsCategory = Category.values
-          .map((e) => e.categoryName)
-          .toList(); // get all categories from common store category
-    }
+    itemsEvents.addAll(StaticStore.kritiEvents);
 
     return Observer(builder: (context) {
       return Padding(
@@ -46,7 +37,7 @@ class _FilterBarState extends State<FilterBar> {
             child: Column(mainAxisSize: MainAxisSize.min, children: [
               Row(
                 children: [
-                  commonStore.page == Pages.standings
+                  commonStore.page != Pages.schedule
                       ? Flexible(
                           flex: 3,
                           child: Padding(
@@ -56,18 +47,18 @@ class _FilterBarState extends State<FilterBar> {
                               position: PopupMenuPosition.under,
                               color: Themes.cardColor1,
                               onSelected: (String item) {
-                                spardhaStore.changeSelectedCategory(item);
+                                kritiStore.changeSelectedEvent(item);
+                                print(kritiStore.selectedEvent);
                               },
-                              itemBuilder: (BuildContext context) =>
-                                  itemsCategory
-                                      .map((item) => PopupMenuItem<String>(
-                                            value: item,
-                                            child: Text(
-                                              item,
-                                              style: popUpItemStyle,
-                                            ),
-                                          ))
-                                      .toList(),
+                              itemBuilder: (BuildContext context) => itemsEvents
+                                  .map((item) => PopupMenuItem<String>(
+                                        value: item,
+                                        child: Text(
+                                          item,
+                                          style: popUpItemStyle,
+                                        ),
+                                      ))
+                                  .toList(),
                               child: Container(
                                 height: 56,
                                 decoration: boxDecoration,
@@ -95,8 +86,7 @@ class _FilterBarState extends State<FilterBar> {
                                           SizedBox(
                                             height: 18,
                                             child: Text(
-                                                spardhaStore.selectedCategory
-                                                    .categoryName,
+                                                kritiStore.selectedCup.cupName,
                                                 style: popUpItemStyle),
                                           )
                                         ],
@@ -118,9 +108,69 @@ class _FilterBarState extends State<FilterBar> {
                           position: PopupMenuPosition.under,
                           color: Themes.cardColor1,
                           onSelected: (String item) {
-                            spardhaStore.changeSelectedEvent(item);
+                            kritiStore.changeSelectedCup(item);
+                            print(kritiStore.selectedCup.cupName);
                           },
-                          itemBuilder: (BuildContext context) => itemsEvents
+                          itemBuilder: (BuildContext context) => kritiCups
+                              .map((item) => PopupMenuItem<String>(
+                                    value: item,
+                                    child: Text(
+                                      item,
+                                      style: popUpItemStyle,
+                                    ),
+                                  ))
+                              .toList(),
+                          child: Container(
+                            height: 56,
+                            decoration: boxDecoration,
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        height: 12,
+                                        child: Text('Category',
+                                            style: popUpHeadingStyle),
+                                      ),
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      SizedBox(
+                                        height: 18,
+                                        child: Text(
+                                            kritiStore.selectedCup.cupName,
+                                            style: popUpItemStyle),
+                                      )
+                                    ],
+                                  ),
+                                  popUpIcon,
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      )),
+                  Flexible(
+                      flex: 3,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
+                        child: PopupMenuButton(
+                          constraints: const BoxConstraints(maxHeight: 300),
+                          position: PopupMenuPosition.under,
+                          color: Themes.cardColor1,
+                          onSelected: (String item) {
+                            kritiStore.changeSelectedClub(item);
+                            print(kritiStore.selectedClub.clubName);
+
+                          },
+                          itemBuilder: (BuildContext context) => iitgTechClubs
                               .map((item) => PopupMenuItem<String>(
                                     value: item,
                                     child: Text(
@@ -153,7 +203,8 @@ class _FilterBarState extends State<FilterBar> {
                                       ),
                                       SizedBox(
                                         height: 18,
-                                        child: Text(spardhaStore.selectedEvent,
+                                        child: Text(
+                                            kritiStore.selectedClub.clubName,
                                             style: popUpItemStyle),
                                       )
                                     ],

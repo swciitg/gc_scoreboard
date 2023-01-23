@@ -1,4 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+
 const List<String> menHostel = [
   'Barak',
   'Brahmaputra',
@@ -24,22 +25,22 @@ const List<String> allHostelList = [...menHostel, ...womenHostel];
 
 const String logoDir = 'packages/scoreboard/assets/logos';
 
-const Map<String,String> hostelsImagePath = {
-  'Barak' : '$logoDir/barak.jpg',
-  'Brahmaputra' : '$logoDir/brahma.jpg',
-  'Dhansiri' : '$logoDir/dhansiri.jpg',
-  'Dihing' : '$logoDir/dihing.jpg',
-  'Disang (Men)' : '$logoDir/disang.jpg',
-  'Disang (Women)' : '$logoDir/disang.jpg',
-  'Kameng' : '$logoDir/kameng.jpg',
-  'Kapili' : '$logoDir/kapili.jpg',
-  'Lohit' : '$logoDir/lohit.jpg',
-  'Manas' : '$logoDir/manas.jpg',
-  'Married Scholars (Men)' : '$logoDir/hostel_image.jpg',
-  'Married Scholars (Women)' : '$logoDir/hostel_image.jpg',
-  'Siang' : '$logoDir/siang.jpg',
-  'Subansiri' : '$logoDir/subansiri.jpg',
-  'Umiam' : '$logoDir/umiam.jpg'
+const Map<String, String> hostelsImagePath = {
+  'Barak': '$logoDir/barak.jpg',
+  'Brahmaputra': '$logoDir/brahma.jpg',
+  'Dhansiri': '$logoDir/dhansiri.jpg',
+  'Dihing': '$logoDir/dihing.jpg',
+  'Disang (Men)': '$logoDir/disang.jpg',
+  'Disang (Women)': '$logoDir/disang.jpg',
+  'Kameng': '$logoDir/kameng.jpg',
+  'Kapili': '$logoDir/kapili.jpg',
+  'Lohit': '$logoDir/lohit.jpg',
+  'Manas': '$logoDir/manas.jpg',
+  'Married Scholars (Men)': '$logoDir/hostel_image.jpg',
+  'Married Scholars (Women)': '$logoDir/hostel_image.jpg',
+  'Siang': '$logoDir/siang.jpg',
+  'Subansiri': '$logoDir/subansiri.jpg',
+  'Umiam': '$logoDir/umiam.jpg'
 };
 
 class DatabaseRecords {
@@ -68,4 +69,13 @@ const List<String> spardhaEventStages = [
   'Semi-Finals',
   'Quater-Finals',
   '3rd vs 4th'
+];
+
+const List<String> kritiCups = ['Brainiac Cup', 'Astro Cup', 'Business Cup'];
+
+const List<String> iitgTechClubs = [
+  'Coding Club',
+  'E-Cell',
+  'CnA Club',
+  'Robotics Club'
 ];
