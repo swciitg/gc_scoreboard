@@ -42,10 +42,15 @@ class _SpardhaHomeState extends State<SpardhaHome> {
           backgroundColor: Themes.backgroundColor,
           appBar: const PreferredSize(
               preferredSize: Size.fromHeight(56), child: AppBarHomeComponent()),
-          body: commonStore.viewType == ViewType.user ? tabs[commonStore.page] : (commonStore.isSpardhaAdmin ? tabs[commonStore.page] : const RestrictedPage()),
+          body: commonStore.viewType == ViewType.user
+              ? tabs[commonStore.page]
+              : (commonStore.isSpardhaAdmin
+                  ? tabs[commonStore.page]
+                  : const RestrictedPage()),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: commonStore.viewType == ViewType.admin && commonStore.isSpardhaAdmin &&
+          floatingActionButton: commonStore.viewType == ViewType.admin &&
+                  commonStore.isSpardhaAdmin &&
                   commonStore.page != Pages.results
               ? GestureDetector(
                   onTap: () {
@@ -60,7 +65,8 @@ class _SpardhaHomeState extends State<SpardhaHome> {
                         : 'Add/Update standings',
                     width: commonStore.page == Pages.schedule ? 130 : 220,
                   ),
-                ) : Container(),
+                )
+              : Container(),
           bottomNavigationBar: const BottomNavBar(),
         );
       },
