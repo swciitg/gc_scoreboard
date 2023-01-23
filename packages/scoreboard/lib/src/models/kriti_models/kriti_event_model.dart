@@ -11,8 +11,8 @@ class KritiEventModel{
   String cup;
   String difficulty;
   double points;
-  DateTime startDate;
-  DateTime endDate;
+  DateTime date;
+
   List<String> clubs;
   String venue="";
   bool resultAdded=false;
@@ -27,8 +27,7 @@ class KritiEventModel{
     required this.cup,
     required this.difficulty,
     required this.points,
-    required this.startDate,
-    required this.endDate,
+    required this.date,
     required this.clubs,
     required this.venue,
     required this.resultAdded,

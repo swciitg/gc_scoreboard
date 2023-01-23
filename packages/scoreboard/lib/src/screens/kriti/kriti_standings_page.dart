@@ -10,14 +10,14 @@ import '../../widgets/common/top_bar.dart';
 import '../../widgets/standings_page/standingboard.dart';
 import 'package:provider/provider.dart';
 
-class StandingsPage extends StatefulWidget {
-  const StandingsPage({super.key});
+class KritiStandingsPage extends StatefulWidget {
+  const KritiStandingsPage({super.key});
 
   @override
-  State<StandingsPage> createState() => _StandingsPageState();
+  State<KritiStandingsPage> createState() => _StandingsPageState();
 }
 
-class _StandingsPageState extends State<StandingsPage> {
+class _StandingsPageState extends State<KritiStandingsPage> {
   @override
   Widget build(BuildContext context) {
     var spardhaStore = context.read<SpardhaStore>();

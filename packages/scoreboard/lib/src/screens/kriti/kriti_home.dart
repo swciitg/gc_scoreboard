@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:scoreboard/src/screens/kriti/kriti_standings_page.dart';
 import '../../globals/colors.dart';
 import '../../stores/common_store.dart';
 import '../../widgets/common/bottom_navigation_bar.dart';
@@ -27,7 +28,7 @@ class _KritiHomeState extends State<KritiHome> {
             preferredSize: Size.fromHeight(56), child: AppBarHomeComponent()),
         body: !commonStore.isKritiAdmin
             ? const RestrictedPage()
-            : ComingSoon(competition: commonStore.competition),
+            : KritiStandingsPage(),
         bottomNavigationBar: const BottomNavBar(),
       );
     });
