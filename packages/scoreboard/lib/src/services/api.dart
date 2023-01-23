@@ -27,7 +27,7 @@ class APIService {
     }, onError: (error, handler) async {
       var response = error.response;
       // print(response.statusCode ?? "no status code");
- 
+
       if (response != null && response.statusCode == 401) {
         bool couldRegenerate = await regenerateAccessToken();
         var commStore = buildContext.read<CommonStore>();
@@ -42,10 +42,9 @@ class APIService {
         } else {
           // show login screen to admin if only he has internet connection
           var connectivityResult = await (Connectivity().checkConnectivity());
-          
+
           if (connectivityResults.contains(connectivityResult) &&
               await Navigator.pushNamed(buildContext, LoginView.id) == true) {
-                
             // retry for admin
             return handler.resolve(await retryRequest(response));
           }
@@ -129,7 +128,6 @@ class APIService {
       var resp = await dio.post("/gc/spardha/event-schedule", data: data);
       print(resp.data);
     } on DioError catch (err) {
-
       return Future.error(err);
     }
   }
@@ -172,7 +170,6 @@ class APIService {
         {
           output.add(EventModel.fromJson(e));
         }
-        
       }
       return output;
     } on DioError catch (err) {
@@ -185,7 +182,6 @@ class APIService {
     try {
       List<List<Map>> results = [];
       for (var positionResults in data) {
-
         List<Map> addResults = [];
         for (var result in positionResults) {
           addResults.add(result.toJson());
@@ -274,18 +270,33 @@ class APIService {
       return Future.error(err);
     }
   }
+
+    Future<List<String>> getAllKritiEvents() async {
+    try {
+      Response resp = await dio.get("/gc/kriti/all-events");
+      return List<String>.from(resp.data["details"]);
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
   Future<Map<String, dynamic>> getKritStandings() async {
+    print('in getKritiTAandings');
     try {
       Response resp1 = await dio.get("/gc/kriti/standings/all-events");
       Response resp2 = await dio.get("/gc/kriti/standings");
+
+      print(resp1);
+      print(resp2);
       return {
         "overall": resp2.data["details"],
         "event-wise": resp1.data["details"]
       };
     } on DioError catch (err) {
+      print(err);
       return Future.error(err);
     }
   }
+
+  
 }
-
-

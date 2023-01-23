@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:scoreboard/src/globals/enums.dart';
+import 'package:scoreboard/src/models/kriti_models/kriti_result_model.dart';
+import 'package:scoreboard/src/screens/kriti/kriti_results_page.dart';
+import 'package:scoreboard/src/screens/kriti/kriti_schedule_page.dart';
+import 'package:scoreboard/src/screens/kriti/kriti_standings_page.dart';
 import '../../globals/colors.dart';
 import '../../stores/common_store.dart';
 import '../../widgets/common/bottom_navigation_bar.dart';
@@ -16,6 +21,11 @@ class KritiHome extends StatefulWidget {
 }
 
 class _KritiHomeState extends State<KritiHome> {
+  Map<Pages, Widget> tabs = {
+    Pages.schedule: const KritiSchedulePage(),
+    Pages.standings: const KritiStandingsPage(),
+    Pages.results: const KritiResultsPage(),
+  };
   @override
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
@@ -25,9 +35,11 @@ class _KritiHomeState extends State<KritiHome> {
         backgroundColor: Themes.backgroundColor,
         appBar: const PreferredSize(
             preferredSize: Size.fromHeight(56), child: AppBarHomeComponent()),
-        body: !commonStore.isKritiAdmin
-            ? const RestrictedPage()
-            : ComingSoon(competition: commonStore.competition),
+        body: commonStore.viewType == ViewType.user
+            ? tabs[commonStore.page]
+            : (commonStore.isKritiAdmin
+                ? tabs[commonStore.page]
+                : const RestrictedPage()),
         bottomNavigationBar: const BottomNavBar(),
       );
     });

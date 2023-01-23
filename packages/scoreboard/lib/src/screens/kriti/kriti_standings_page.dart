@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:scoreboard/src/screens/kriti/widgets/kriti_filter_bar.dart';
 import '../../widgets/common/err_reload.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../functions/filter_standings.dart';
@@ -10,14 +11,14 @@ import '../../widgets/common/top_bar.dart';
 import '../../widgets/standings_page/standingboard.dart';
 import 'package:provider/provider.dart';
 
-class StandingsPage extends StatefulWidget {
-  const StandingsPage({super.key});
+class KritiStandingsPage extends StatefulWidget {
+  const KritiStandingsPage({super.key});
 
   @override
-  State<StandingsPage> createState() => _StandingsPageState();
+  State<KritiStandingsPage> createState() => _StandingsPageState();
 }
 
-class _StandingsPageState extends State<StandingsPage> {
+class _StandingsPageState extends State<KritiStandingsPage> {
   @override
   Widget build(BuildContext context) {
     var spardhaStore = context.read<SpardhaStore>();
@@ -32,7 +33,7 @@ class _StandingsPageState extends State<StandingsPage> {
         child: Column(
           children: [
             const TopBar(),
-            const FilterBar(),
+            const KritiFilterBar(),
             FutureBuilder<Map<String, dynamic>>(
               future: APIService(context).getSpardhaStandings(),
               builder: (context, snapshot) {
