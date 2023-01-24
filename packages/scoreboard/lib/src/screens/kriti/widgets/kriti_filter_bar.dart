@@ -79,7 +79,7 @@ class _FilterBarState extends State<KritiFilterBar> {
                                         children: [
                                           SizedBox(
                                             height: 12,
-                                            child: Text('Category',
+                                            child: Text('Event',
                                                 style: popUpHeadingStyle),
                                           ),
                                           const SizedBox(
@@ -101,7 +101,7 @@ class _FilterBarState extends State<KritiFilterBar> {
                             ),
                           ))
                       : Container(),
-                  Flexible(
+                  commonStore.page != Pages.standings ? Flexible(
                       flex: 3,
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
@@ -138,7 +138,7 @@ class _FilterBarState extends State<KritiFilterBar> {
                                     children: [
                                       SizedBox(
                                         height: 12,
-                                        child: Text('Category',
+                                        child: Text('Cup',
                                             style: popUpHeadingStyle),
                                       ),
                                       const SizedBox(
@@ -158,8 +158,8 @@ class _FilterBarState extends State<KritiFilterBar> {
                             ),
                           ),
                         ),
-                      )),
-                  Flexible(
+                      )) : Container(),
+                  commonStore.page != Pages.standings ? Flexible(
                       flex: 3,
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
@@ -170,7 +170,6 @@ class _FilterBarState extends State<KritiFilterBar> {
                           onSelected: (String item) {
                             kritiStore.changeSelectedClub(item);
                             print(kritiStore.selectedClub.clubName);
-
                           },
                           itemBuilder: (BuildContext context) =>
                               clubNames.map((item) => PopupMenuItem<String>(
@@ -197,7 +196,7 @@ class _FilterBarState extends State<KritiFilterBar> {
                                     children: [
                                       SizedBox(
                                         height: 12,
-                                        child: Text('Event',
+                                        child: Text('Club',
                                             style: popUpHeadingStyle),
                                       ),
                                       const SizedBox(
@@ -217,7 +216,7 @@ class _FilterBarState extends State<KritiFilterBar> {
                             ),
                           ),
                         ),
-                      )),
+                      )) : Container(),
                 ],
               ),
             ]),

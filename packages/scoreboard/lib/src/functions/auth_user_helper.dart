@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:scoreboard/src/globals/enums.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../globals/constants.dart';
@@ -53,19 +54,34 @@ class AuthUserHelpers {
     };
   }
 
+  static Future<void> saveAuthCompetitions(Map<String,bool> auth) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> keys = auth.keys.toList();
+    List<bool> values = auth.values.toList();
+    for(int i=0;i<3;i++){
+      if(prefs.containsKey(keys[i])) await prefs.remove(keys[i]);
+      await prefs.setBool(keys[i], values[i]);
+    }
+  }
+
+
   static Future<bool> saveUserData(
       Map<String, String> userInfo, BuildContext buildContext) async {
     try {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("email", userInfo["email"]!);
       await prefs.setString("name", userInfo["name"]!);
-
       var commStore = buildContext.read<CommonStore>();
+      print("here 2");
       if (!prefs.containsKey("accessToken")) {
-        // has already once used scoreboard
+        // first time using scoreboard
+        print("here");
         await APIService(buildContext).generateTokens(commStore);
       } else if (await checkIfAdmin()) {
         commStore.isAdmin = true;
+        commStore.isSpardhaAdmin = prefs.getBool("spardha")!;
+        commStore.isKritiAdmin = prefs.getBool("kriti")!;
+        commStore.isManthanAdmin = prefs.getBool("manthan")!;
       }
       StaticStore.spardhaEvents =
           await APIService(buildContext).getAllSpardhaEvents();
@@ -78,4 +94,5 @@ class AuthUserHelpers {
       return Future.error(err);
     }
   }
+
 }
