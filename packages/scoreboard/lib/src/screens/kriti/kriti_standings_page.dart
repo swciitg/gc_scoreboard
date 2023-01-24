@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:scoreboard/src/screens/kriti/functions/kriti_standings_filter.dart';
 import 'package:scoreboard/src/screens/kriti/widgets/kriti_filter_bar.dart';
+import '../../stores/kriti_store.dart';
 import '../../widgets/common/err_reload.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../functions/filter_standings.dart';
@@ -21,7 +23,7 @@ class KritiStandingsPage extends StatefulWidget {
 class _StandingsPageState extends State<KritiStandingsPage> {
   @override
   Widget build(BuildContext context) {
-    var spardhaStore = context.read<SpardhaStore>();
+    var kritiStore = context.read<KritiStore>();
 
     reloadCallback() {
       // reload page
@@ -35,7 +37,7 @@ class _StandingsPageState extends State<KritiStandingsPage> {
             const TopBar(),
             const KritiFilterBar(),
             FutureBuilder<Map<String, dynamic>>(
-              future: APIService(context).getSpardhaStandings(),
+              future: APIService(context).getKritStandings(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Expanded(
@@ -51,16 +53,12 @@ class _StandingsPageState extends State<KritiStandingsPage> {
                 } else if (snapshot.hasData) {
                   return Observer(builder: (context) {
                     print(snapshot.data!);
-                    List<dynamic> filteredEventSchedules = filterStandings(
-                        input: snapshot.data!,
-                        event: spardhaStore.selectedEvent,
-                        category: spardhaStore.selectedCategory);
+                    List<dynamic> filteredEventSchedules = filterKritiStandings(input: snapshot.data!, event: kritiStore.selectedEvent);
                     return Expanded(
                         child: StandingBoard(
                             hostelStandings: filteredEventSchedules));
                   });
                 }
-
                 return ErrorReloadPage(apiFunction: reloadCallback);
               },
             )

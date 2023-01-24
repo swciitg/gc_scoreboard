@@ -10,7 +10,7 @@ class KritiEventModel{
   String event; // CP Contest
   String cup;
   String difficulty;
-  double points;
+  double? points;
   DateTime date;
 
   List<String> clubs;
@@ -26,7 +26,6 @@ class KritiEventModel{
     required this.event,
     required this.cup,
     required this.difficulty,
-    required this.points,
     required this.date,
     required this.clubs,
     required this.venue,
