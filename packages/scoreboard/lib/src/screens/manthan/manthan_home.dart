@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:scoreboard/src/globals/enums.dart';
 import '../../globals/colors.dart';
 import '../../stores/common_store.dart';
 import '../../widgets/common/bottom_navigation_bar.dart';
@@ -24,7 +25,7 @@ class _ManthanHomeState extends State<ManthanHome> {
         backgroundColor: Themes.backgroundColor,
         appBar: const PreferredSize(
             preferredSize: Size.fromHeight(56), child: AppBarHomeComponent()),
-        body: !commonStore.isManthanAdmin
+        body: !commonStore.isManthanAdmin && commonStore.viewType==ViewType.admin
             ? const RestrictedPage()
             : ComingSoon(competition: commonStore.competition),
         bottomNavigationBar: const BottomNavBar(),

@@ -2,13 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:scoreboard/src/functions/snackbar.dart';
 import '../functions/auth_user_helper.dart';
 import '../globals/constants.dart';
 import '../globals/enums.dart';
 import '../models/event_model.dart';
 import '../models/result_model.dart';
 import '../models/standing_model.dart';
-import '../screens/login/admin_login.dart';
 import '../stores/common_store.dart';
 
 class APIService {
@@ -29,6 +29,7 @@ class APIService {
       // print(response.statusCode ?? "no status code");
 
       if (response != null && response.statusCode == 401) {
+        print(response.requestOptions.path);
         bool couldRegenerate = await regenerateAccessToken();
         var commStore = buildContext.read<CommonStore>();
         if (couldRegenerate) {
@@ -40,14 +41,7 @@ class APIService {
           // retry
           return handler.resolve(await retryRequest(response));
         } else {
-          // show login screen to admin if only he has internet connection
-          var connectivityResult = await (Connectivity().checkConnectivity());
-
-          if (connectivityResults.contains(connectivityResult) &&
-              await Navigator.pushNamed(buildContext, LoginView.id) == true) {
-            // retry for admin
-            return handler.resolve(await retryRequest(response));
-          }
+          showSnackBar(buildContext, "Your session has expired!! Login again in OneStop.");
         }
       }
       // admin user with expired tokens
@@ -80,21 +74,28 @@ class APIService {
   }
 
   Future<dynamic> generateTokens(CommonStore commStore) async {
+    print("here");
     Map<String, String> userData = await AuthUserHelpers.getUserData();
+    print(userData);
     Response<Map<String, dynamic>> resp = await dio.post("/gc/login",
         data: {DatabaseRecords.useremail: userData[DatabaseRecords.useremail]});
     var data = resp.data!;
     if (data["success"] == true) {
       print(data);
       commStore.setAdminNone();
+      Map<String,bool> authCompetitions = {"spardha" : false,"kriti" : false,"manthan" : false};
       data[DatabaseRecords.authevents].forEach((element) => {
+        authCompetitions[element]=true,
             if (element == "spardha")
-              {commStore.setSpardhaAdmin(true)}
+              {
+                commStore.setSpardhaAdmin(true)
+              }
             else if (element == "kriti")
               {commStore.setKritiAdmin(true)}
             else if (element == "manthan")
               {commStore.setManthanAdmin(true)}
           });
+      await AuthUserHelpers.saveAuthCompetitions(authCompetitions);
       await AuthUserHelpers.setAdmin(data[DatabaseRecords.isadmin]);
       await AuthUserHelpers.setAccessToken(data[DatabaseRecords.accesstoken]);
       await AuthUserHelpers.setRefreshToken(data[DatabaseRecords.refreshtoken]);
@@ -224,6 +225,7 @@ class APIService {
 
   Future<Map<String, dynamic>> getSpardhaStandings() async {
     try {
+      print("here 2");
       Response resp1 = await dio.get("/gc/spardha/standings/all-events");
       Response resp2 = await dio.get("/gc/spardha/standings");
       return {

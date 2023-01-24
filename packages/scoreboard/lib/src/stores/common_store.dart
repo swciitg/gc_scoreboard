@@ -40,6 +40,7 @@ abstract class _CommonStore with Store {
 
     competition = c;
     // changing filters to default
+    page = Pages.standings;
     competitionStore.setFiltersToDefault();
   }
 

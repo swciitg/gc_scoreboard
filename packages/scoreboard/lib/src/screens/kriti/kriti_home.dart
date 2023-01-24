@@ -43,8 +43,6 @@ class _KritiHomeState extends State<KritiHome> {
                 ? tabs[commonStore.page]
                 : const RestrictedPage()),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-
-
         floatingActionButton: commonStore.viewType == ViewType.admin &&
             commonStore.isKritiAdmin &&
             commonStore.page == Pages.schedule

@@ -23,10 +23,6 @@ class GCStandingsPage extends StatefulWidget {
 class _GCStandingsPageState extends State<GCStandingsPage> {
   final _itemsCategory = ['Men', 'Women'];
 
-  void onTapped(int index) {
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     var gcStore = context.read<GCStore>();
@@ -148,6 +144,7 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
               FutureBuilder<List<dynamic>>(
                   future: APIService(context).getGCStandings(),
                   builder: (context, snapshot) {
+                    print("in call");
                     if (snapshot.connectionState != ConnectionState.done) {
                       return Expanded(
                         child: Center(

@@ -7,7 +7,6 @@ import '../../globals/colors.dart';
 import '../../globals/enums.dart';
 import '../../globals/styles.dart';
 import '../../screens/home.dart';
-import '../../screens/login/admin_login.dart';
 import '../../stores/common_store.dart';
 
 class AppBarHomeComponent extends StatefulWidget {
@@ -79,9 +78,7 @@ class _AppBarHomeComponentState extends State<AppBarHomeComponent> {
                           borderRadius: BorderRadius.circular(8)),
                       itemBuilder: (BuildContext buildContext) => [
                         PopupMenuItem(
-                            value: commonStore.viewType == ViewType.admin
-                                ? ScoreBoardHome.id
-                                : LoginView.id,
+                            value: commonStore.viewType.toString(),
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 11),
                             child: Text(
@@ -91,27 +88,18 @@ class _AppBarHomeComponentState extends State<AppBarHomeComponent> {
                               style: Themes.theme.textTheme.headline6,
                             )),
                       ],
-                      onSelected: (newRoute) async {
-                        if (newRoute == LoginView.id) {
+                      onSelected: (value) async {
+                        if (value==ViewType.user.toString()) {
                           if (!commonStore.isAdmin) {
                             showSnackBar(context, "You are not an admin");
                             return;
                           }
-                          ConnectivityResult connectivityResult =
-                              await (Connectivity().checkConnectivity());
-                          if (connectivityResults
-                              .contains(connectivityResult)) {
-                            if (!mounted) return;
-
-                            Navigator.pushNamed(context, LoginView.id);
-                          } else {
-                            if (!mounted) return;
-
-                            showSnackBar(context, "No internet connection");
-                          }
+                          commonStore.setViewType(ViewType.admin);
                         } else {
                           commonStore.setViewType(ViewType.user);
                         }
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, ScoreBoardHome.id, (route) => false); // to change screens data
                       },
                     )),
               ),
