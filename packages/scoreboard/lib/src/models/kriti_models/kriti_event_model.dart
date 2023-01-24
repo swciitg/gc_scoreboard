@@ -12,7 +12,6 @@ class KritiEventModel{
   String difficulty;
   double? points;
   DateTime date;
-
   List<String> clubs;
   String venue="";
   bool resultAdded=false;
@@ -33,7 +32,7 @@ class KritiEventModel{
     required this.problemLink,
     this.results=const [],
     this.victoryStatement,
-    this.posterEmail,
+    this.posterEmail
   });
 
   factory KritiEventModel.fromJson(Map<String,dynamic> json) => _$KritiEventModelFromJson(json);

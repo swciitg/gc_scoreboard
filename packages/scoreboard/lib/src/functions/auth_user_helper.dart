@@ -78,13 +78,18 @@ class AuthUserHelpers {
         print("here");
         await APIService(buildContext).generateTokens(commStore);
       } else if (await checkIfAdmin()) {
+        print("hjsg");
         commStore.isAdmin = true;
-        commStore.isSpardhaAdmin = prefs.getBool("spardha")!;
-        commStore.isKritiAdmin = prefs.getBool("kriti")!;
-        commStore.isManthanAdmin = prefs.getBool("manthan")!;
+        print("fgjdklsg");
+        commStore.isSpardhaAdmin = prefs.getBool("spardha") ?? false;
+        print("gfjdsklgj");
+        commStore.isKritiAdmin = prefs.getBool("kriti") ?? false;
+        commStore.isManthanAdmin = prefs.getBool("manthan") ?? false;
+        print("gfjhndskhggdsf");
       }
       StaticStore.spardhaEvents =
           await APIService(buildContext).getAllSpardhaEvents();
+      print("jfsdahgiukjsdfhkjudsfh");
       StaticStore.kritiEvents =
           await APIService(buildContext).getAllKritiEvents();
       print(StaticStore.kritiEvents);

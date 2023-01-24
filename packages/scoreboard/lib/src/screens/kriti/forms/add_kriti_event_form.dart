@@ -1,8 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scoreboard/src/globals/colors.dart';
 import 'package:scoreboard/src/models/kriti_models/kriti_event_model.dart';
-import 'package:scoreboard/src/screens/kriti/forms/confirm_kriti_event_details.dart';
+import 'package:scoreboard/src/services/api.dart';
 import 'package:scoreboard/src/widgets/add_result/custom_text_field.dart';
 
 import '../../../functions/snackbar.dart';
@@ -16,6 +17,7 @@ import '../../../widgets/add_event/text_field.dart';
 import '../../../widgets/add_event/timepicker_color.dart';
 import '../../../widgets/common/form_app_bar.dart';
 import '../../../globals/enums.dart';
+import '../../home.dart';
 
 
 
@@ -78,6 +80,7 @@ class _AddKritiEventFormState extends State<AddKritiEventForm> {
       for (var club in e.clubs) {
         clubs.add(club);
       }
+      print(clubs);
 
       clubSizeValue = clubs.length.toString();
       date = e.date;
@@ -135,13 +138,27 @@ class _AddKritiEventFormState extends State<AddKritiEventForm> {
         //       event: KritiEventModel.fromJson(data),
         //     )));
 
-print(data);
-        print(KritiEventModel.fromJson(data));
+        try{
+          print("here");
+          if (widget.event!=null) {
+            // update event schedule
+            await APIService(context).updateKritiEvent(KritiEventModel.fromJson(data));
+            if (!mounted) return;
+            showSnackBar(context, "Event Edited successfully");
+          } else {
+            await APIService(context).postKritiEventSchedule(data);
+            if (!mounted) return;
+            showSnackBar(
+                context, "Event schedule posted successfully");
+          }
+          if (!mounted) return;
 
-
-
-
-
+          Navigator.pushNamedAndRemoveUntil(
+              context, ScoreBoardHome.id, (route) => false);
+        }
+        on DioError catch(err){
+          showErrorSnackBar(context, err);
+        }
       }
 
     }
@@ -236,11 +253,6 @@ print(data);
                         hintText: 'Cup Category',
                         onChanged: (s) {
                           cup = s;
-                          setState(() {
-                            clubSize = 0;
-                            clubs = [];
-                            clubSizeValue = null;
-                          });
                         },
                         value: cup,
                         validator: validateField,

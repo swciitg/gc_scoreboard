@@ -7,6 +7,7 @@ import '../functions/auth_user_helper.dart';
 import '../globals/constants.dart';
 import '../globals/enums.dart';
 import '../models/event_model.dart';
+import '../models/kriti_models/kriti_event_model.dart';
 import '../models/result_model.dart';
 import '../models/standing_model.dart';
 import '../stores/common_store.dart';
@@ -273,6 +274,8 @@ class APIService {
     }
   }
 
+  // kriti
+
     Future<List<String>> getAllKritiEvents() async {
     try {
       Response resp = await dio.get("/gc/kriti/all-events");
@@ -300,5 +303,54 @@ class APIService {
     }
   }
 
+  Future<List<KritiEventModel>> getKritiSchedule(ViewType v) async {
+    try {
+      if (v == ViewType.admin) {
+        dio.options.queryParameters["forAdmin"] = "true";
+      }
+      Response resp = await dio.get("/gc/kriti/event-schedule");
+      print(resp);
+      List<KritiEventModel> output = [];
+      for (var e in List<dynamic>.from(resp.data["details"])) {
+        {
+          print(e);
+          print(KritiEventModel.fromJson(e));
+          output.add(KritiEventModel.fromJson(e));
+        }
+      }
+      print(output);
+      return output;
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
+  Future<void> postKritiEventSchedule(Map<String, dynamic> data) async {
+    try {
+      print(data);
+      var resp = await dio.post("/gc/kriti/event-schedule", data: data);
+      print(resp.data);
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
+  Future<void> updateKritiEvent(KritiEventModel event) async {
+    try {
+      Response resp = await dio.patch('/gc/kriti/event-schedule/${event.id!}',
+          data: event.toJson());
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
+  Future<void> deleteKritiEvent(String eventID) async {
+    try {
+      Response resp = await dio.delete('/gc/kriti/event-schedule/$eventID');
+      print(resp);
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
   
 }
