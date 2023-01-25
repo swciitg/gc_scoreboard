@@ -4,13 +4,14 @@ import 'package:provider/provider.dart';
 import 'package:scoreboard/src/screens/kriti/forms/add_kriti_event_form.dart';
 import 'package:scoreboard/src/services/api.dart';
 
-import '../../../functions/snackbar.dart';
-import '../../../globals/colors.dart';
-import '../../../globals/enums.dart';
-import '../../../models/kriti_models/kriti_event_model.dart';
-import '../../../stores/common_store.dart';
-import '../../home.dart';
-import '../forms/kriti_result_form.dart';
+import '../../functions/snackbar.dart';
+import '../../globals/colors.dart';
+import '../../globals/enums.dart';
+import '../../models/kriti_models/kriti_event_model.dart';
+import '../../screens/home.dart';
+import '../../screens/kriti/forms/kriti_result_form.dart';
+import '../../stores/common_store.dart';
+
 
 class KritiPopupMenu extends StatefulWidget {
   final Widget child;

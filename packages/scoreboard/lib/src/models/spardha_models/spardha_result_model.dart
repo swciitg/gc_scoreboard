@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-part 'result_model.g.dart';
+part 'spardha_result_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class ResultModel {

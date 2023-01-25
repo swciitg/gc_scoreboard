@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../globals/styles.dart';
 import '../widgets/common/err_reload.dart';
 import '../widgets/common/shimmer.dart';
-import '../functions/filter_men_women.dart';
+import '../functions/gc_filter.dart';
 import '../globals/colors.dart';
 import '../services/api.dart';
 import '../stores/gc_store.dart';

@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../functions/snackbar.dart';
 import '../../globals/colors.dart';
 import '../../globals/enums.dart';
-import '../../models/event_model.dart';
+import '../../models/spardha_models/spardha_event_model.dart';
 import '../../screens/home.dart';
 import '../../screens/spardha/forms/add_event_form.dart';
 import '../../screens/spardha/forms/add_result_form.dart';

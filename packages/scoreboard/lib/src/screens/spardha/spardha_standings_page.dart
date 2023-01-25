@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../widgets/common/err_reload.dart';
 import '../../widgets/common/shimmer.dart';
-import '../../functions/filter_standings.dart';
+import '../../functions/spardha_filter_standings.dart';
 import '../../services/api.dart';
 import '../../stores/spardha_store.dart';
 import '../../widgets/common/filter_bar.dart';

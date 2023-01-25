@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 
 import '../../../functions/snackbar.dart';
 import '../../../globals/colors.dart';
-import '../../../models/event_model.dart';
+import '../../../models/spardha_models/spardha_event_model.dart';
 import '../../../services/api.dart';
 import '../../home.dart';
 

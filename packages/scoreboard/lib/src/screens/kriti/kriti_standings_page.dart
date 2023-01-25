@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:scoreboard/src/screens/kriti/functions/kriti_standings_filter.dart';
-import 'package:scoreboard/src/screens/kriti/widgets/kriti_filter_bar.dart';
+import '../../functions/kriti_standings_filter.dart';
 import '../../stores/kriti_store.dart';
 import '../../widgets/common/err_reload.dart';
 import '../../widgets/common/shimmer.dart';
-import '../../functions/filter_standings.dart';
 import '../../services/api.dart';
-import '../../stores/spardha_store.dart';
-import '../../widgets/common/filter_bar.dart';
 import '../../widgets/common/top_bar.dart';
 import '../../widgets/standings_page/standingboard.dart';
 import 'package:provider/provider.dart';
+
+import '../../widgets/common/kriti_filter_bar.dart';
 
 class KritiStandingsPage extends StatefulWidget {
   const KritiStandingsPage({super.key});
@@ -26,7 +24,6 @@ class _StandingsPageState extends State<KritiStandingsPage> {
     var kritiStore = context.read<KritiStore>();
 
     reloadCallback() {
-      // reload page
       setState(() {});
     }
 

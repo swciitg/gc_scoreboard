@@ -71,7 +71,8 @@ enum Club{
 enum Cup{
   overall("Overall"),
   brainiac("Brainiac Cup"),
-  astro("Astro Cup"),
+  davinci("Da Vinci Cup"),
+  visionary("Visionary Cup"),
   business("Business Cup");
 
   final String cupName;

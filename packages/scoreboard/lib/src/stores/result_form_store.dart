@@ -1,6 +1,6 @@
 
 
-import '../models/result_model.dart';
+import '../models/spardha_models/spardha_result_model.dart';
 
 class ResultFormStore {
   static String? victoryStatement;

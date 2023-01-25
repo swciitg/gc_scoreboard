@@ -3,10 +3,9 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/screens/kriti/functions/kriti_schedule_filter.dart';
-import 'package:scoreboard/src/screens/kriti/widgets/kriti_filter_bar.dart';
-import 'package:scoreboard/src/screens/kriti/widgets/kriti_schedule_card.dart';
 
+
+import '../../functions/kriti_schedule_filter.dart';
 import '../../globals/styles.dart';
 import '../../models/kriti_models/kriti_event_model.dart';
 import '../../services/api.dart';
@@ -15,6 +14,8 @@ import '../../stores/kriti_store.dart';
 import '../../widgets/common/err_reload.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
+import '../../widgets/common/kriti_filter_bar.dart';
+import '../../widgets/cards/kriti_schedule_card.dart';
 
 class KritiSchedulePage extends StatefulWidget {
   const KritiSchedulePage({super.key});

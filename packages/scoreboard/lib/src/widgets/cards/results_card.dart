@@ -5,7 +5,7 @@ import '../../globals/enums.dart';
 import '../../globals/styles.dart';
 import '../../stores/common_store.dart';
 import '../../widgets/cards/expanded_results_card.dart';
-import '../../models/event_model.dart';
+import '../../models/spardha_models/spardha_event_model.dart';
 import '../../globals/colors.dart';
 import 'card_event_details.dart';
 import 'menu_item.dart';

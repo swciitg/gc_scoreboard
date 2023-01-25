@@ -1,5 +1,7 @@
-import '../../../globals/enums.dart';
-import '../../../models/kriti_models/kriti_event_model.dart';
+
+
+import '../globals/enums.dart';
+import '../models/kriti_models/kriti_event_model.dart';
 
 List<KritiEventModel> kritiFilterSchedule({required List<KritiEventModel> input, required Cup cup, required Club club})
 {

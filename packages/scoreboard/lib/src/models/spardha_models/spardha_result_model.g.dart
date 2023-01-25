@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'result_model.dart';
+part of 'spardha_result_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

@@ -1,6 +1,4 @@
 
-import '../../../functions/filter_men_women.dart';
-import '../../../globals/enums.dart';
 
 List<dynamic> filterKritiStandings({required Map<String,dynamic> input, required String event})
 {

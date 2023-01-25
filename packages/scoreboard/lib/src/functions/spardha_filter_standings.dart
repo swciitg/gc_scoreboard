@@ -1,6 +1,6 @@
 
 import '../globals/enums.dart';
-import 'filter_men_women.dart';
+import 'gc_filter.dart';
 
 List<dynamic> filterStandings({required Map<String,dynamic> input, required String event, required Category category})
 {

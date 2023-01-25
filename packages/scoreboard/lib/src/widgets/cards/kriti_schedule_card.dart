@@ -3,15 +3,15 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/widgets/cards/popup_menu.dart';
-import '../../../globals/colors.dart';
-import '../../../globals/enums.dart';
-import '../../../globals/styles.dart';
-import '../../../models/kriti_models/kriti_event_model.dart';
-import '../../../stores/common_store.dart';
-import '../../../widgets/cards/card_date_widget.dart';
-import '../../../widgets/cards/menu_item.dart';
-import 'popup_menu.dart';
+
+import '../../globals/colors.dart';
+import '../../globals/enums.dart';
+import '../../globals/styles.dart';
+import '../../models/kriti_models/kriti_event_model.dart';
+import '../../stores/common_store.dart';
+import 'card_date_widget.dart';
+import 'menu_item.dart';
+import 'kriti_popup_menu.dart';
 
 
 

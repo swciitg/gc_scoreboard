@@ -4,7 +4,7 @@ import '../../../functions/snackbar.dart';
 import '../../../functions/validator.dart';
 import '../../../globals/constants.dart';
 import '../../../globals/colors.dart';
-import '../../../models/event_model.dart';
+import '../../../models/spardha_models/spardha_event_model.dart';
 import '../../../stores/static_store.dart';
 import '../../../widgets/add_event/datepicker_color.dart';
 import '../../../widgets/add_event/drop_down.dart';

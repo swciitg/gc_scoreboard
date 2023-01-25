@@ -6,10 +6,10 @@ import 'package:scoreboard/src/functions/snackbar.dart';
 import '../functions/auth_user_helper.dart';
 import '../globals/constants.dart';
 import '../globals/enums.dart';
-import '../models/event_model.dart';
+import '../models/spardha_models/spardha_event_model.dart';
 import '../models/kriti_models/kriti_event_model.dart';
 import '../models/kriti_models/kriti_result_model.dart';
-import '../models/result_model.dart';
+import '../models/spardha_models/spardha_result_model.dart';
 import '../models/standing_model.dart';
 import '../stores/common_store.dart';
 
