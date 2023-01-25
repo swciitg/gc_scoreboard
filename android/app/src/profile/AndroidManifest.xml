@@ -4,5 +4,7 @@
          the Flutter tool needs it to communicate with the running application
          to allow setting breakpoints, to provide hot reload, etc.
     -->
+    <!-- Provide required visibility configuration for API level 30 and above -->
+
     <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

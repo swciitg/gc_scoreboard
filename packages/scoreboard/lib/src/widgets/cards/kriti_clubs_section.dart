@@ -14,6 +14,7 @@ class ClubsListSection extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: ListView.builder(
+        physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemCount: eventModel.clubs.length + 1,
           itemBuilder: (context,idx){

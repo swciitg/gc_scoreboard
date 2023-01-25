@@ -29,6 +29,7 @@ class KritiScheduleCard extends StatefulWidget {
 }
 
 class _KritiScheduleCardState extends State<KritiScheduleCard> {
+  bool isLinkPressed = false;
 
   List<PopupMenuEntry> popupOptions = [
     optionsMenuItem('Edit', 'edit schedule', Themes.kWhite),
@@ -105,20 +106,34 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                                   SizedBox(width: 8,),
                                   GestureDetector(
                                     onTap: () async {
-                                      try{
-                                        bool _validURL = Uri.parse(widget.eventModel.problemLink).isAbsolute; // check if valid url
-                                        await launchUrl(Uri.parse(widget.eventModel.problemLink),mode: LaunchMode.externalApplication);
-                                        showSnackBar(context,"Opening problem link");
-                                        if(!_validURL){
-                                          await launchUrl(Uri.parse(kritiWebsiteLink),mode: LaunchMode.externalApplication); // if url is not correct
+                                      if(!isLinkPressed)
+                                        {
+                                          setState(() {
+                                            isLinkPressed = true;
+                                          });
+                                          try{
+                                            bool validURL = Uri.parse(widget.eventModel.problemLink).isAbsolute; // check if valid url
+                                            if(!validURL){
+                                              print('here');
+                                              await launchUrl(Uri.parse(kritiWebsiteLink),mode: LaunchMode.externalApplication); // if url is not correct
+                                            }
+                                            else{
+                                              print('there');
+                                              await launchUrl(Uri.parse(widget.eventModel.problemLink),mode: LaunchMode.externalApplication);
+                                            }
+                                            setState(() {
+                                              isLinkPressed = false;
+                                            });
+                                          }
+                                          catch (err){
+                                            print(err);
+                                            showSnackBar(context, err.toString());
+                                            setState(() {
+                                              isLinkPressed = false;
+                                            });
+                                          }
                                         }
-                                        else{
-                                          await launchUrl(Uri.parse(widget.eventModel.problemLink),mode: LaunchMode.externalApplication);
-                                        }
-                                      }
-                                      catch (err){
-                                        showSnackBar(context, err.toString());
-                                      }
+
                                     },
                                     child: Container(
                                       height: 26,
