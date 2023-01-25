@@ -33,7 +33,7 @@ class _AddKritiEventFormState extends State<AddKritiEventForm> {
   List<String> cupNames = Cup.values.map((e) => e.cupName).toList();
 
   List<String> clubNames = Club.values.map((e) => e.clubName).toList();
-
+  bool isLoading = false;
   String? eventName;
   DateTime? date;
   TimeOfDay? time;
@@ -102,12 +102,20 @@ class _AddKritiEventFormState extends State<AddKritiEventForm> {
   Widget build(BuildContext context) {
     cupNames.remove("Overall"); // overall can't be a cup category in this form
     clubNames.remove("Overall");
-    Future<void> onFormSubmit() async{
+
+    Future<void> onFormSubmit() async {
+      if(!isLoading) {
+        setState(() {
+          isLoading = true;
+        });
       if (!_formKey.currentState!.validate()) {
         showSnackBar(context, 'Please give all the inputs correctly');
+        setState(() {
+          isLoading = false;
+        });
         return;
       }
-      else{
+      else {
         DateTime eventDateTime = DateTime(
             date!.year,
             date!.month,
@@ -116,14 +124,14 @@ class _AddKritiEventFormState extends State<AddKritiEventForm> {
             date!.minute);
 
         var data = {
-          "event" : eventName,
+          "event": eventName,
           "cup": cup,
           "difficulty": difficulty,
           "date": eventDateTime.toIso8601String(),
           "venue": _venueController.text,
           "clubs": clubs,
           "points": points,
-          "problemLink" : _probelmLinkController.text,
+          "problemLink": _probelmLinkController.text,
           "results": [],
           "resultAdded": false,
 
@@ -132,17 +140,11 @@ class _AddKritiEventFormState extends State<AddKritiEventForm> {
           data['_id'] = widget.event!.id;
         }
 
-        // Navigator.of(context).push(MaterialPageRoute(
-        //     builder: (context) => ConfirmKritiEventDetails(
-        //       isEdit: !(widget.event == null),
-        //       event: KritiEventModel.fromJson(data),
-        //     )));
-
-        try{
-          print("here");
-          if (widget.event!=null) {
+        try {
+          if (widget.event != null) {
             // update event schedule
-            await APIService(context).updateKritiEvent(KritiEventModel.fromJson(data));
+            await APIService(context).updateKritiEvent(
+                KritiEventModel.fromJson(data));
             if (!mounted) return;
             showSnackBar(context, "Event Edited successfully");
           } else {
@@ -152,15 +154,20 @@ class _AddKritiEventFormState extends State<AddKritiEventForm> {
                 context, "Event schedule posted successfully");
           }
           if (!mounted) return;
-
+          setState(() {
+            isLoading = true;
+          });
           Navigator.pushNamedAndRemoveUntil(
               context, ScoreBoardHome.id, (route) => false);
         }
-        on DioError catch(err){
+        on DioError catch (err) {
           showErrorSnackBar(context, err);
+          setState(() {
+            isLoading = false;
+          });
         }
       }
-
+    }
     }
 
     return Scaffold(

@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:scoreboard/src/functions/snackbar.dart';
 import 'package:scoreboard/src/globals/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 import '../../globals/colors.dart';
 import '../../globals/enums.dart';
 import '../../globals/styles.dart';
@@ -16,7 +15,6 @@ import 'card_date_widget.dart';
 import 'kriti_clubs_section.dart';
 import 'kriti_popup_menu.dart';
 import 'menu_item.dart';
-import 'popup_menu.dart';
 
 
 
