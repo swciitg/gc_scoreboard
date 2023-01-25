@@ -8,6 +8,7 @@ import '../globals/constants.dart';
 import '../globals/enums.dart';
 import '../models/event_model.dart';
 import '../models/kriti_models/kriti_event_model.dart';
+import '../models/kriti_models/kriti_result_model.dart';
 import '../models/result_model.dart';
 import '../models/standing_model.dart';
 import '../stores/common_store.dart';
@@ -210,6 +211,21 @@ class APIService {
       }
       Response resp = await dio.patch(
           '/gc/spardha/event-schedule/result/$eventID',
+          data: {'victoryStatement': victoryStatement, 'results': results});
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
+  Future<void> addUpdateKritiResult(String eventID, List<KritiResultModel> data,
+      String victoryStatement) async {
+    try {
+      List<Map> results = [];
+      for (var positionResults in data) {
+        results.add(positionResults.toJson());
+      }
+      Response resp = await dio.patch(
+          '/gc/kriti/event-schedule/result/$eventID',
           data: {'victoryStatement': victoryStatement, 'results': results});
     } on DioError catch (err) {
       return Future.error(err);

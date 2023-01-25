@@ -10,6 +10,7 @@ import '../../../globals/enums.dart';
 import '../../../models/kriti_models/kriti_event_model.dart';
 import '../../../stores/common_store.dart';
 import '../../home.dart';
+import '../forms/kriti_result_form.dart';
 
 class KritiPopupMenu extends StatefulWidget {
   final Widget child;
@@ -61,6 +62,12 @@ class _KritiPopupMenuState extends State<KritiPopupMenu> {
       case 'edit result':
         break;
       case 'add':
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => KritiResultForm(
+                  event: widget.eventModel,
+                )));
         break;
       case 'delete':
         try{
