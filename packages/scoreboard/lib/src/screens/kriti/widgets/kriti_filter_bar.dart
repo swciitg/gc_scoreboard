@@ -39,7 +39,7 @@ class _FilterBarState extends State<KritiFilterBar> {
             child: Column(mainAxisSize: MainAxisSize.min, children: [
               Row(
                 children: [
-                  commonStore.page != Pages.schedule
+                  commonStore.page == Pages.standings
                       ? Flexible(
                           flex: 3,
                           child: Padding(

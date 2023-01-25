@@ -179,6 +179,24 @@ class APIService {
     }
   }
 
+  Future<List<KritiEventModel>> getKritiResults(ViewType v) async {
+    try {
+      if (v == ViewType.admin) {
+        dio.options.queryParameters["forAdmin"] = "true";
+      }
+      Response resp = await dio.get("/gc/kriti/event-schedule/results");
+      List<KritiEventModel> output = [];
+      for (var e in List<dynamic>.from(resp.data["details"])) {
+        {
+          output.add(KritiEventModel.fromJson(e));
+        }
+      }
+      return output;
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
   Future<void> addUpdateResult(String eventID, List<List<ResultModel>> data,
       String victoryStatement) async {
     try {

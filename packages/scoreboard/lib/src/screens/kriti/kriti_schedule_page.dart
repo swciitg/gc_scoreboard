@@ -12,9 +12,7 @@ import '../../models/kriti_models/kriti_event_model.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
 import '../../stores/kriti_store.dart';
-import '../../stores/spardha_store.dart';
 import '../../widgets/common/err_reload.dart';
-import '../../widgets/common/filter_bar.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
 
