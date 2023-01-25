@@ -61,6 +61,12 @@ class _KritiPopupMenuState extends State<KritiPopupMenu> {
         break;
 
       case 'edit result':
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => KritiResultForm(
+                  event: widget.eventModel,
+                )));
         break;
       case 'add':
         Navigator.push(
@@ -73,6 +79,7 @@ class _KritiPopupMenuState extends State<KritiPopupMenu> {
       case 'delete':
         try{
           if(commonStore.page == Pages.results){
+            await APIService(context).deleteKritiEventResult(widget.eventModel.id!);
             showSnackBar(context,"Result Deleted");
           }
           else{

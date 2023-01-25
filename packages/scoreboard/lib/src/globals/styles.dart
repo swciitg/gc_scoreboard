@@ -36,7 +36,7 @@ final standingsHeadingStyle = GoogleFonts.montserrat(
 final cardCategoryStyle = GoogleFonts.montserrat(
     fontWeight: FontWeight.w500,
     fontSize: 14,
-    color: Themes.bottomNavFontColor);
+    color: Themes.primaryColor);
 
 final bottomNavStyle1 = GoogleFonts.montserrat(
     fontWeight: FontWeight.w500,
@@ -90,6 +90,9 @@ final basicFontStyle = GoogleFonts.montserrat();
 
 final fontStyle1 = GoogleFonts.montserrat(
     fontWeight: FontWeight.w600, fontSize: 12, color: Themes.kWhite);
+
+final fontStyle3 = GoogleFonts.montserrat(
+    fontWeight: FontWeight.w700, fontSize: 14, color: Themes.kWhite);
 
 final fontStyle2 = GoogleFonts.montserrat(
     fontWeight: FontWeight.w700, fontSize: 16, color: Themes.kWhite);

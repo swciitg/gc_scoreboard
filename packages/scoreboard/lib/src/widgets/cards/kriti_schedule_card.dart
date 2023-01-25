@@ -3,15 +3,20 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
+import 'package:scoreboard/src/functions/snackbar.dart';
+import 'package:scoreboard/src/globals/constants.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../../globals/colors.dart';
 import '../../globals/enums.dart';
 import '../../globals/styles.dart';
 import '../../models/kriti_models/kriti_event_model.dart';
 import '../../stores/common_store.dart';
 import 'card_date_widget.dart';
-import 'menu_item.dart';
+import 'kriti_clubs_section.dart';
 import 'kriti_popup_menu.dart';
+import 'menu_item.dart';
+import 'popup_menu.dart';
 
 
 
@@ -90,17 +95,30 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                                     ),
                                     child: Padding(
                                       padding:
-                                          const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                       child: Text(widget.eventModel.difficulty,
                                           style:
                                           cardCategoryStyle
-                                          ),
+                                      ),
                                     ),
                                   ),
                                   SizedBox(width: 8,),
                                   GestureDetector(
-                                    onTap: (){
-
+                                    onTap: () async {
+                                      try{
+                                        bool _validURL = Uri.parse(widget.eventModel.problemLink).isAbsolute; // check if valid url
+                                        await launchUrl(Uri.parse(widget.eventModel.problemLink),mode: LaunchMode.externalApplication);
+                                        showSnackBar(context,"Opening problem link");
+                                        if(!_validURL){
+                                          await launchUrl(Uri.parse(kritiWebsiteLink),mode: LaunchMode.externalApplication); // if url is not correct
+                                        }
+                                        else{
+                                          await launchUrl(Uri.parse(widget.eventModel.problemLink),mode: LaunchMode.externalApplication);
+                                        }
+                                      }
+                                      catch (err){
+                                        showSnackBar(context, err.toString());
+                                      }
                                     },
                                     child: Container(
                                       height: 26,
@@ -124,7 +142,7 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                                               style:  GoogleFonts.montserrat(
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 12,
-                                                ),
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -144,11 +162,8 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                         ],
                       ),
                     ),
-                    const SizedBox(
-                      height: 32,
-                    )
                   ]),
-
+                  ClubsListSection(eventModel: widget.eventModel),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -166,7 +181,7 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                               width: 8,
                             ),
                             Text(DateFormat.jm().format(widget.eventModel.date),
-                                  style: cardTimeStyle)
+                                style: cardTimeStyle)
                           ],
                         ),
                       ),
@@ -208,5 +223,6 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
     });
   }
 }
+
 
 

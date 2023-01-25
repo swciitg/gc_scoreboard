@@ -1,4 +1,3 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 
 const List<String> menHostel = [
   'Barak',
@@ -54,13 +53,6 @@ class DatabaseRecords {
   static const authorization = "authorization";
 }
 
-const connectivityResults = [
-  ConnectivityResult.ethernet,
-  ConnectivityResult.mobile,
-  ConnectivityResult.vpn,
-  ConnectivityResult.wifi
-];
-
 const List<String> eventCategories = ['Men', 'Women', 'Men + Women'];
 
 const List<String> spardhaEventStages = [
@@ -70,6 +62,8 @@ const List<String> spardhaEventStages = [
   'Quater-Finals',
   '3rd vs 4th'
 ];
+
+const String kritiWebsiteLink = "https://swc.iitg.ac.in/sa/kriti/";
 
 
 

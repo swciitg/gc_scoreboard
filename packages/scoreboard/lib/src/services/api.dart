@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:scoreboard/src/functions/snackbar.dart';
 import '../functions/auth_user_helper.dart';
 import '../globals/constants.dart';
@@ -382,6 +381,15 @@ class APIService {
     try {
       Response resp = await dio.delete('/gc/kriti/event-schedule/$eventID');
       print(resp);
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
+  Future<void> deleteKritiEventResult(String eventID) async {
+    try {
+      Response resp =
+      await dio.delete('/gc/kriti/event-schedule/result/$eventID');
     } on DioError catch (err) {
       return Future.error(err);
     }
