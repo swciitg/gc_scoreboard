@@ -4,7 +4,7 @@ part 'hostel_points.g.dart';
 @JsonSerializable(explicitToJson: true)
 class HostelPoints {
   String? hostelName;
-  int? points;
+  double? points;
   HostelPoints({this.hostelName, this.points});
   factory HostelPoints.fromJson(Map<String, dynamic> json) =>
       _$HostelPointsFromJson(json);

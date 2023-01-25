@@ -12,9 +12,7 @@ KritiEventModel _$KritiEventModelFromJson(Map<String, dynamic> json) =>
       event: json['event'] as String,
       cup: json['cup'] as String,
       difficulty: json['difficulty'] as String,
-      points: json['points'] as int,
-      startDate: DateTime.parse(json['startDate'] as String),
-      endDate: DateTime.parse(json['endDate'] as String),
+      date: DateTime.parse(json['date'] as String),
       clubs: (json['clubs'] as List<dynamic>).map((e) => e as String).toList(),
       venue: json['venue'] as String,
       resultAdded: json['resultAdded'] as bool,
@@ -25,7 +23,7 @@ KritiEventModel _$KritiEventModelFromJson(Map<String, dynamic> json) =>
           const [],
       victoryStatement: json['victoryStatement'] as String?,
       posterEmail: json['posterEmail'] as String?,
-    );
+    )..points = (json['points'] as num?)?.toDouble();
 
 Map<String, dynamic> _$KritiEventModelToJson(KritiEventModel instance) =>
     <String, dynamic>{
@@ -34,8 +32,7 @@ Map<String, dynamic> _$KritiEventModelToJson(KritiEventModel instance) =>
       'cup': instance.cup,
       'difficulty': instance.difficulty,
       'points': instance.points,
-      'startDate': instance.startDate.toIso8601String(),
-      'endDate': instance.endDate.toIso8601String(),
+      'date': instance.date.toIso8601String(),
       'clubs': instance.clubs,
       'venue': instance.venue,
       'resultAdded': instance.resultAdded,

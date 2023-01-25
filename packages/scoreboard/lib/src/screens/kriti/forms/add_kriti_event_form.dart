@@ -1,10 +1,14 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:scoreboard/src/globals/colors.dart';
+import 'package:scoreboard/src/models/kriti_models/kriti_event_model.dart';
+import 'package:scoreboard/src/services/api.dart';
+import 'package:scoreboard/src/widgets/add_result/custom_text_field.dart';
+
 import '../../../functions/snackbar.dart';
 import '../../../functions/validator.dart';
 import '../../../globals/constants.dart';
-import '../../../globals/colors.dart';
-import '../../../models/spardha_models/spardha_event_model.dart';
 import '../../../stores/static_store.dart';
 import '../../../widgets/add_event/datepicker_color.dart';
 import '../../../widgets/add_event/drop_down.dart';
@@ -12,115 +16,162 @@ import '../../../widgets/add_event/heading.dart';
 import '../../../widgets/add_event/text_field.dart';
 import '../../../widgets/add_event/timepicker_color.dart';
 import '../../../widgets/common/form_app_bar.dart';
-import 'confirm_event_details.dart';
+import '../../../globals/enums.dart';
+import '../../home.dart';
 
-class AddEventForm extends StatefulWidget {
-  final EventModel? event;
 
-  const AddEventForm({super.key, this.event});
+
+class AddKritiEventForm extends StatefulWidget {
+  final KritiEventModel? event;
+  const AddKritiEventForm({Key? key, this.event}) : super(key: key);
 
   @override
-  State<AddEventForm> createState() => _AddEventFormState();
+  State<AddKritiEventForm> createState() => _AddKritiEventFormState();
 }
 
-class _AddEventFormState extends State<AddEventForm> {
-  String? sportName;
+class _AddKritiEventFormState extends State<AddKritiEventForm> {
+  List<String> cupNames = Cup.values.map((e) => e.cupName).toList();
+
+  List<String> clubNames = Club.values.map((e) => e.clubName).toList();
+  bool isLoading = false;
+  String? eventName;
+  DateTime? date;
+  TimeOfDay? time;
+  double? points;
+
+  String? cup;
+  String? difficulty;
+  int clubSize = 0;
+  String? clubSizeValue;
+  List<String?> clubs = [];
+  final _formKey = GlobalKey<FormState>();
+
+  final TextEditingController _probelmLinkController = TextEditingController();
   final TextEditingController _venueController = TextEditingController();
   final TextEditingController dateInput = TextEditingController();
   final TextEditingController timeInput = TextEditingController();
-  DateTime? selectedDate; // stores date picked
-  TimeOfDay? selectedTime; // stores time picked
-  bool isPostponed = false;
-  bool isCancelled = false;
-  String? category;
-  String? stage;
-  String? hostelSizeValue;
-  int hostelsSize = 0;
-  List<String?> participatingHostels = [];
-  final _formKey = GlobalKey<FormState>();
 
-  callbackHostels(value) {
-    participatingHostels.length = int.parse(value);
+  callbackClubs(value) {
+    clubs.length = int.parse(value);
     setState(() {
-      hostelsSize = int.parse(value);
-      hostelSizeValue = hostelsSize.toString();
+      clubSize = int.parse(value);
+      clubSizeValue = clubSize.toString();
     });
   }
 
-  callbackAddHostel(value, index) {
-    participatingHostels[index - 1] = value;
-    hostelSizeValue = participatingHostels.length.toString();
+  callbackAddClub(value, index) {
+    clubs[index - 1] = value;
+    clubSizeValue = clubs.length.toString();
   }
 
   @override
   void initState() {
     super.initState();
-    if (widget.event != null) {
-      EventModel e = widget.event!;
-      sportName = e.event;
+    if( widget.event != null){
+      KritiEventModel e = widget.event!;
+      eventName = e.event;
       _venueController.text = e.venue;
-      category = e.category;
-      stage = e.stage;
-      hostelsSize = e.hostels.length;
-      for (var hostel in e.hostels) {
-        participatingHostels.add(hostel);
+      cup = e.cup;
+      difficulty = e.difficulty;
+      clubSize = e.clubs.length;
+      _probelmLinkController.text = e.problemLink;
+      points =  e.points;
+
+      for (var club in e.clubs) {
+        clubs.add(club);
       }
-      if (e.status == 'cancelled') {
-        isCancelled = true;
-      } else if (e.status == 'postponed') {
-        isPostponed = true;
-      }
-      hostelSizeValue = participatingHostels.length.toString();
-      selectedDate = e.date;
-      selectedTime = TimeOfDay(hour: e.date.hour, minute: e.date.minute);
+      print(clubs);
+
+      clubSizeValue = clubs.length.toString();
+      date = e.date;
+      time = TimeOfDay(hour: e.date.hour, minute: e.date.minute);
       dateInput.text = DateFormat('dd-MMM-yyyy').format(e.date);
       timeInput.text = DateFormat('h:mm a').format(e.date);
-    }
-  }
 
+
+
+
+    }
+
+
+
+
+
+  }
   @override
   Widget build(BuildContext context) {
+    cupNames.remove("Overall"); // overall can't be a cup category in this form
+    clubNames.remove("Overall");
+
     Future<void> onFormSubmit() async {
+      if(!isLoading) {
+        setState(() {
+          isLoading = true;
+        });
       if (!_formKey.currentState!.validate()) {
         showSnackBar(context, 'Please give all the inputs correctly');
+        setState(() {
+          isLoading = false;
+        });
         return;
-      } else {
+      }
+      else {
         DateTime eventDateTime = DateTime(
-            selectedDate!.year,
-            selectedDate!.month,
-            selectedDate!.day,
-            selectedTime!.hour,
-            selectedTime!.minute);
+            date!.year,
+            date!.month,
+            date!.day,
+            date!.hour,
+            date!.minute);
 
         var data = {
-          "event": sportName,
-          "category": category!,
-          "stage": stage!,
+          "event": eventName,
+          "cup": cup,
+          "difficulty": difficulty,
           "date": eventDateTime.toIso8601String(),
           "venue": _venueController.text,
-          "hostels": participatingHostels,
-          "status": isCancelled
-              ? 'cancelled'
-              : isPostponed
-                  ? 'postponed'
-                  : 'ok',
+          "clubs": clubs,
+          "points": points,
+          "problemLink": _probelmLinkController.text,
           "results": [],
-          "resultAdded": false
-        };
+          "resultAdded": false,
 
+        };
         if (widget.event != null) {
           data['_id'] = widget.event!.id;
         }
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => ConfirmEventDetails(
-                  isEdit: !(widget.event == null),
-                  event: EventModel.fromJson(data),
-                )));
+
+        try {
+          if (widget.event != null) {
+            // update event schedule
+            await APIService(context).updateKritiEvent(
+                KritiEventModel.fromJson(data));
+            if (!mounted) return;
+            showSnackBar(context, "Event Edited successfully");
+          } else {
+            await APIService(context).postKritiEventSchedule(data);
+            if (!mounted) return;
+            showSnackBar(
+                context, "Event schedule posted successfully");
+          }
+          if (!mounted) return;
+          setState(() {
+            isLoading = true;
+          });
+          Navigator.pushNamedAndRemoveUntil(
+              context, ScoreBoardHome.id, (route) => false);
+        }
+        on DioError catch (err) {
+          showErrorSnackBar(context, err);
+          setState(() {
+            isLoading = false;
+          });
+        }
       }
+    }
     }
 
     return Scaffold(
-      backgroundColor: Themes.theme.backgroundColor,
+      backgroundColor: Themes.backgroundColor,
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(56),
           child: AppBarFormComponent(
@@ -128,6 +179,8 @@ class _AddEventFormState extends State<AddEventForm> {
             actionTitle: "Next",
             onFormSubmit: onFormSubmit,
           )),
+
+
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(8),
@@ -146,14 +199,14 @@ class _AddEventFormState extends State<AddEventForm> {
                           if (val.text == '') {
                             return const Iterable<String>.empty();
                           }
-                          return StaticStore.spardhaEvents.where((element) =>
+                          return StaticStore.kritiEvents.where((element) =>
                               element
                                   .toLowerCase()
                                   .contains(val.text.toLowerCase()));
                         },
                         initialValue:
-                            TextEditingValue(text: widget.event?.event ?? ""),
-                        onSelected: (s) => sportName = s,
+                        TextEditingValue(text: widget.event?.event ?? ""),
+                        onSelected: (s) => eventName = s,
                         optionsMaxHeight: 50,
                         optionsViewBuilder: (BuildContext context,
                             AutocompleteOnSelected<String> onSelected,
@@ -166,11 +219,11 @@ class _AddEventFormState extends State<AddEventForm> {
                               child: ListView.builder(
                                 // padding: EdgeInsets.all(10.0),
                                 padding:
-                                    const EdgeInsets.symmetric(vertical: 0),
+                                const EdgeInsets.symmetric(vertical: 0),
                                 itemCount: options.length,
                                 itemBuilder: (BuildContext context, int index) {
                                   final String option =
-                                      options.elementAt(index);
+                                  options.elementAt(index);
                                   return GestureDetector(
                                     onTap: () {
                                       onSelected(option);
@@ -179,7 +232,7 @@ class _AddEventFormState extends State<AddEventForm> {
                                       tileColor: Themes.theme.backgroundColor,
                                       title: Text(option,
                                           style:
-                                              Themes.theme.textTheme.headline6),
+                                          Themes.theme.textTheme.headline6),
                                     ),
                                   );
                                 },
@@ -191,7 +244,7 @@ class _AddEventFormState extends State<AddEventForm> {
                           return CustomTextField(
                             hintText: 'Event Name',
                             validator: (s) {
-                              if (StaticStore.spardhaEvents.contains(s)) {
+                              if (StaticStore.kritiEvents.contains(s)) {
                                 return null;
                               }
                               return "Enter a valid event";
@@ -203,28 +256,32 @@ class _AddEventFormState extends State<AddEventForm> {
                       ),
                       const SizedBox(height: 12),
                       CustomDropDown(
-                        items: eventCategories,
-                        hintText: 'Category',
+                        items: cupNames,
+                        hintText: 'Cup Category',
                         onChanged: (s) {
-                          category = s;
-                          setState(() {
-                            hostelsSize = 0;
-                            participatingHostels = [];
-                            hostelSizeValue = null;
-                          });
+                          cup = s;
                         },
-                        value: category,
+                        value: cup,
                         validator: validateField,
                       ),
                       const SizedBox(height: 12),
                       CustomDropDown(
-                        items: spardhaEventStages,
-                        hintText: 'Stage',
-                        onChanged: (s) => stage = s,
-                        value: stage,
+                        items: kritiDifficulties,
+                        hintText: 'Difficulty',
+                        onChanged: (s) => difficulty = s,
+                        value: difficulty,
                         validator: validateField,
                       ),
                       const SizedBox(height: 12),
+
+                      CustomTextField(
+                          hintText: 'Problem Link',
+                          validator: validateField,
+                          controller: _probelmLinkController),
+
+                      const SizedBox(
+                        height: 12,
+                      ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -238,7 +295,7 @@ class _AddEventFormState extends State<AddEventForm> {
                                     .requestFocus(FocusNode());
                                 DateTime? pickedDate = await showDatePicker(
                                     context: context,
-                                    initialDate: selectedDate ?? DateTime.now(),
+                                    initialDate: date ?? DateTime.now(),
                                     firstDate: DateTime(2000),
                                     //DateTime.now() - not to allow to choose before today.
                                     lastDate: DateTime(2101),
@@ -248,10 +305,10 @@ class _AddEventFormState extends State<AddEventForm> {
                                         ));
                                 if (pickedDate != null) {
                                   if (!mounted) return;
-                                  selectedDate = pickedDate;
+                                  date = pickedDate;
                                   String formattedDate =
-                                      DateFormat('dd-MMM-yyyy')
-                                          .format(pickedDate);
+                                  DateFormat('dd-MMM-yyyy')
+                                      .format(pickedDate);
                                   setState(() {
                                     dateInput.text =
                                         formattedDate; //set output date to TextField value.
@@ -277,22 +334,22 @@ class _AddEventFormState extends State<AddEventForm> {
                                       childWidget: childWidget,
                                     );
                                   },
-                                  initialTime: selectedTime ?? TimeOfDay.now(),
+                                  initialTime: time ?? TimeOfDay.now(),
                                   context: context,
                                   //context of current state
                                 );
                                 if (pickedTime != null) {
                                   if (!mounted) return;
-                                  selectedTime = pickedTime;
+                                  time = pickedTime;
                                   setState(() {
                                     final now = DateTime.now();
                                     final formattedTimeString = DateFormat.jm()
                                         .format(DateTime(
-                                            now.year,
-                                            now.month,
-                                            now.day,
-                                            pickedTime.hour,
-                                            pickedTime.minute)); //"6:00 AM"
+                                        now.year,
+                                        now.month,
+                                        now.day,
+                                        pickedTime.hour,
+                                        pickedTime.minute)); //"6:00 AM"
                                     timeInput.text = formattedTimeString;
                                   });
                                 }
@@ -311,57 +368,19 @@ class _AddEventFormState extends State<AddEventForm> {
                       const SizedBox(
                         height: 12,
                       ),
-                      Row(
-                        children: [
-                          Checkbox(
-                            checkColor: Colors.white,
-                            activeColor: Themes.theme.primaryColor,
-                            side: const BorderSide(
-                              color: Themes.checkBoxColor,
-                              width: 2,
-                            ),
-                            value: isCancelled,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                isCancelled = value!;
-                                isPostponed = false;
-                              });
-                            },
-                          ),
-                          Text('Event cancelled',
-                              style: Themes.theme.textTheme.headline2),
-                          Checkbox(
-                            checkColor: Colors.white,
-                            activeColor: Themes.theme.primaryColor,
-                            side: const BorderSide(
-                                color: Themes.checkBoxColor, width: 2),
-                            value: isPostponed,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                isPostponed = value!;
-                                isCancelled = false;
-                              });
-                            },
-                          ),
-                          Text('Event postponed',
-                              style: Themes.theme.textTheme.headline2),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
+
                       Text(
-                        'Participating Hostels',
+                        'Clubs',
                         style: Themes.theme.textTheme.headline1,
                       ),
                       const SizedBox(
                         height: 18,
                       ),
                       CustomDropDown(
-                        items: [for (var i = 2; i <= 15; i++) i.toString()],
-                        value: hostelSizeValue,
-                        hintText: 'Select Number of Hostels',
-                        onChanged: callbackHostels,
+                        items: [for (var i = 1; i <= 15; i++) i.toString()],
+                        value: clubSizeValue,
+                        hintText: 'Select Number of Clubs',
+                        onChanged: callbackClubs,
                         validator: validateField,
                       ),
                       const SizedBox(
@@ -369,20 +388,16 @@ class _AddEventFormState extends State<AddEventForm> {
                       ),
                       Column(
                         children: [
-                          for (var i = 1; i <= hostelsSize; i++)
+                          for (var i = 1; i <= clubSize; i++)
                             Padding(
                               padding: const EdgeInsets.only(bottom: 12),
                               child: CustomDropDown(
-                                items: category == "Men"
-                                    ? menHostel
-                                    : (category == "Women"
-                                        ? womenHostel
-                                        : allHostelList),
-                                value: participatingHostels[i - 1],
-                                hintText: 'Hostel Name $i',
+                                items: clubNames,
+                                value: clubs[i - 1],
+                                hintText: 'Club Name $i',
                                 index: i,
                                 validator: validateField,
-                                onChanged: callbackAddHostel,
+                                onChanged: callbackAddClub,
                               ),
                             )
                         ],
@@ -393,6 +408,8 @@ class _AddEventFormState extends State<AddEventForm> {
           ),
         ),
       ),
+
+
     );
   }
 }

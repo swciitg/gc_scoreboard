@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import '../../functions/kriti_standings_filter.dart';
+import '../../stores/kriti_store.dart';
 import '../../widgets/common/err_reload.dart';
 import '../../widgets/common/shimmer.dart';
-import '../../functions/spardha_filter_standings.dart';
 import '../../services/api.dart';
-import '../../stores/spardha_store.dart';
-import '../../widgets/common/filter_bar.dart';
 import '../../widgets/common/top_bar.dart';
 import '../../widgets/standings_page/standingboard.dart';
 import 'package:provider/provider.dart';
 
-class StandingsPage extends StatefulWidget {
-  const StandingsPage({super.key});
+import '../../widgets/common/kriti_filter_bar.dart';
+
+class KritiStandingsPage extends StatefulWidget {
+  const KritiStandingsPage({super.key});
 
   @override
-  State<StandingsPage> createState() => _StandingsPageState();
+  State<KritiStandingsPage> createState() => _StandingsPageState();
 }
 
-class _StandingsPageState extends State<StandingsPage> {
+class _StandingsPageState extends State<KritiStandingsPage> {
   @override
   Widget build(BuildContext context) {
-    var spardhaStore = context.read<SpardhaStore>();
+    var kritiStore = context.read<KritiStore>();
 
     reloadCallback() {
-      // reload page
       setState(() {});
     }
 
@@ -32,9 +32,9 @@ class _StandingsPageState extends State<StandingsPage> {
         child: Column(
           children: [
             const TopBar(),
-            const FilterBar(),
+            const KritiFilterBar(),
             FutureBuilder<Map<String, dynamic>>(
-              future: APIService(context).getSpardhaStandings(),
+              future: APIService(context).getKritStandings(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Expanded(
@@ -50,16 +50,12 @@ class _StandingsPageState extends State<StandingsPage> {
                 } else if (snapshot.hasData) {
                   return Observer(builder: (context) {
                     print(snapshot.data!);
-                    List<dynamic> filteredEventSchedules = filterStandings(
-                        input: snapshot.data!,
-                        event: spardhaStore.selectedEvent,
-                        category: spardhaStore.selectedCategory);
+                    List<dynamic> filteredEventSchedules = filterKritiStandings(input: snapshot.data!, event: kritiStore.selectedEvent);
                     return Expanded(
                         child: StandingBoard(
                             hostelStandings: filteredEventSchedules));
                   });
                 }
-
                 return ErrorReloadPage(apiFunction: reloadCallback);
               },
             )

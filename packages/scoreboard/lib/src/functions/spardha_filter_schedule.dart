@@ -1,5 +1,5 @@
 import '../globals/enums.dart';
-import '../models/event_model.dart';
+import '../models/spardha_models/spardha_event_model.dart';
 
 List<EventModel> filterSchedule({required List<EventModel> input, required String event, required String date, required Hostel hostel})
 {

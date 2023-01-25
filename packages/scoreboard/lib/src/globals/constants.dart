@@ -1,4 +1,4 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
+
 const List<String> menHostel = [
   'Barak',
   'Brahmaputra',
@@ -24,22 +24,22 @@ const List<String> allHostelList = [...menHostel, ...womenHostel];
 
 const String logoDir = 'packages/scoreboard/assets/logos';
 
-const Map<String,String> hostelsImagePath = {
-  'Barak' : '$logoDir/barak.jpg',
-  'Brahmaputra' : '$logoDir/brahma.jpg',
-  'Dhansiri' : '$logoDir/dhansiri.jpg',
-  'Dihing' : '$logoDir/dihing.jpg',
-  'Disang (Men)' : '$logoDir/disang.jpg',
-  'Disang (Women)' : '$logoDir/disang.jpg',
-  'Kameng' : '$logoDir/kameng.jpg',
-  'Kapili' : '$logoDir/kapili.jpg',
-  'Lohit' : '$logoDir/lohit.jpg',
-  'Manas' : '$logoDir/manas.jpg',
-  'Married Scholars (Men)' : '$logoDir/hostel_image.jpg',
-  'Married Scholars (Women)' : '$logoDir/hostel_image.jpg',
-  'Siang' : '$logoDir/siang.jpg',
-  'Subansiri' : '$logoDir/subansiri.jpg',
-  'Umiam' : '$logoDir/umiam.jpg'
+const Map<String, String> hostelsImagePath = {
+  'Barak': '$logoDir/barak.jpg',
+  'Brahmaputra': '$logoDir/brahma.jpg',
+  'Dhansiri': '$logoDir/dhansiri.jpg',
+  'Dihing': '$logoDir/dihing.jpg',
+  'Disang (Men)': '$logoDir/disang.jpg',
+  'Disang (Women)': '$logoDir/disang.jpg',
+  'Kameng': '$logoDir/kameng.jpg',
+  'Kapili': '$logoDir/kapili.jpg',
+  'Lohit': '$logoDir/lohit.jpg',
+  'Manas': '$logoDir/manas.jpg',
+  'Married Scholars (Men)': '$logoDir/hostel_image.jpg',
+  'Married Scholars (Women)': '$logoDir/hostel_image.jpg',
+  'Siang': '$logoDir/siang.jpg',
+  'Subansiri': '$logoDir/subansiri.jpg',
+  'Umiam': '$logoDir/umiam.jpg'
 };
 
 class DatabaseRecords {
@@ -53,13 +53,6 @@ class DatabaseRecords {
   static const authorization = "authorization";
 }
 
-const connectivityResults = [
-  ConnectivityResult.ethernet,
-  ConnectivityResult.mobile,
-  ConnectivityResult.vpn,
-  ConnectivityResult.wifi
-];
-
 const List<String> eventCategories = ['Men', 'Women', 'Men + Women'];
 
 const List<String> spardhaEventStages = [
@@ -69,3 +62,11 @@ const List<String> spardhaEventStages = [
   'Quater-Finals',
   '3rd vs 4th'
 ];
+
+const String kritiWebsiteLink = "https://swc.iitg.ac.in/sa/kriti/";
+
+
+
+const List<String> kritiDifficulties = ["High", "Mid", "Low"];
+
+

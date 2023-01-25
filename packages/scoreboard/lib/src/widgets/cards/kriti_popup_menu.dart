@@ -1,21 +1,23 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:scoreboard/src/screens/kriti/forms/add_kriti_event_form.dart';
+import 'package:scoreboard/src/services/api.dart';
+
 import '../../functions/snackbar.dart';
 import '../../globals/colors.dart';
 import '../../globals/enums.dart';
-import '../../models/spardha_models/spardha_event_model.dart';
+import '../../models/kriti_models/kriti_event_model.dart';
 import '../../screens/home.dart';
-import '../../screens/spardha/forms/add_event_form.dart';
-import '../../screens/spardha/forms/add_result_form.dart';
-import '../../services/api.dart';
+import '../../screens/kriti/forms/kriti_result_form.dart';
 import '../../stores/common_store.dart';
 
-class PopupMenu extends StatefulWidget {
+
+class KritiPopupMenu extends StatefulWidget {
   final Widget child;
   final List<PopupMenuEntry> items;
-  final EventModel eventModel;
-  const PopupMenu(
+  final KritiEventModel eventModel;
+  const KritiPopupMenu(
       {Key? key,
         required this.child,
         required this.items,
@@ -23,10 +25,10 @@ class PopupMenu extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<PopupMenu> createState() => _PopupMenuState();
+  State<KritiPopupMenu> createState() => _KritiPopupMenuState();
 }
 
-class _PopupMenuState extends State<PopupMenu> {
+class _KritiPopupMenuState extends State<KritiPopupMenu> {
   Offset _tapPosition = Offset.zero;
   void _getTapPosition(TapDownDetails tapDownDetails) {
     _tapPosition = tapDownDetails.globalPosition;
@@ -53,7 +55,7 @@ class _PopupMenuState extends State<PopupMenu> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => AddEventForm(
+                builder: (context) => AddKritiEventForm(
                   event: widget.eventModel,
                 )));
         break;
@@ -62,7 +64,7 @@ class _PopupMenuState extends State<PopupMenu> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => AddResultForm(
+                builder: (context) => KritiResultForm(
                   event: widget.eventModel,
                 )));
         break;
@@ -70,18 +72,18 @@ class _PopupMenuState extends State<PopupMenu> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => AddResultForm(
+                builder: (context) => KritiResultForm(
                   event: widget.eventModel,
                 )));
         break;
       case 'delete':
         try{
           if(commonStore.page == Pages.results){
-            await APIService(context).deleteSpardhaEventResult(widget.eventModel.id!);
+            await APIService(context).deleteKritiEventResult(widget.eventModel.id!);
             showSnackBar(context,"Result Deleted");
           }
           else{
-            await APIService(context).deleteEvent(widget.eventModel.id!);
+            await APIService(context).deleteKritiEvent(widget.eventModel.id!);
             showSnackBar(context,"Event Deleted");
           }
           Navigator.pushReplacement(context,

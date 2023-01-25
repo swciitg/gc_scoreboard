@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../globals/colors.dart';
 import '../../globals/styles.dart';
-import '../../models/event_model.dart';
+import '../../models/spardha_models/spardha_event_model.dart';
 import 'card_date_widget.dart';
 
 class CardEventDetails extends StatelessWidget {

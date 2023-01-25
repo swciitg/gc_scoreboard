@@ -293,7 +293,7 @@ class _AddStandingState extends State<AddStanding> {
                                           onChanged: (ps) {
                                             standingFormStore
                                                 .standing![index - 1]
-                                                .points = int.parse(ps);
+                                                .points = double.parse(ps);
                                           },
                                           value: standingFormStore
                                               .standing![index - 1].points

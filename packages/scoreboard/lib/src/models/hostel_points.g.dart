@@ -8,7 +8,7 @@ part of 'hostel_points.dart';
 
 HostelPoints _$HostelPointsFromJson(Map<String, dynamic> json) => HostelPoints(
       hostelName: json['hostelName'] as String?,
-      points: json['points'] as int?,
+      points: (json['points'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$HostelPointsToJson(HostelPoints instance) =>

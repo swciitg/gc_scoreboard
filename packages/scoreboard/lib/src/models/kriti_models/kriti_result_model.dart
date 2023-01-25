@@ -4,7 +4,7 @@ part 'kriti_result_model.g.dart';
 @JsonSerializable(explicitToJson: true)
 class KritiResultModel {
   String? hostelName;
-  int? points;
+  double? points;
   KritiResultModel({
     this.hostelName,
     this.points

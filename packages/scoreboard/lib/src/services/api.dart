@@ -1,14 +1,15 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:scoreboard/src/functions/snackbar.dart';
 import '../functions/auth_user_helper.dart';
 import '../globals/constants.dart';
 import '../globals/enums.dart';
-import '../models/event_model.dart';
-import '../models/result_model.dart';
+import '../models/spardha_models/spardha_event_model.dart';
+import '../models/kriti_models/kriti_event_model.dart';
+import '../models/kriti_models/kriti_result_model.dart';
+import '../models/spardha_models/spardha_result_model.dart';
 import '../models/standing_model.dart';
-import '../screens/login/admin_login.dart';
 import '../stores/common_store.dart';
 
 class APIService {
@@ -27,8 +28,9 @@ class APIService {
     }, onError: (error, handler) async {
       var response = error.response;
       // print(response.statusCode ?? "no status code");
- 
+
       if (response != null && response.statusCode == 401) {
+        print(response.requestOptions.path);
         bool couldRegenerate = await regenerateAccessToken();
         var commStore = buildContext.read<CommonStore>();
         if (couldRegenerate) {
@@ -40,15 +42,7 @@ class APIService {
           // retry
           return handler.resolve(await retryRequest(response));
         } else {
-          // show login screen to admin if only he has internet connection
-          var connectivityResult = await (Connectivity().checkConnectivity());
-          
-          if (connectivityResults.contains(connectivityResult) &&
-              await Navigator.pushNamed(buildContext, LoginView.id) == true) {
-                
-            // retry for admin
-            return handler.resolve(await retryRequest(response));
-          }
+          showSnackBar(buildContext, "Your session has expired!! Login again in OneStop.");
         }
       }
       // admin user with expired tokens
@@ -81,21 +75,28 @@ class APIService {
   }
 
   Future<dynamic> generateTokens(CommonStore commStore) async {
+    print("here");
     Map<String, String> userData = await AuthUserHelpers.getUserData();
+    print(userData);
     Response<Map<String, dynamic>> resp = await dio.post("/gc/login",
         data: {DatabaseRecords.useremail: userData[DatabaseRecords.useremail]});
     var data = resp.data!;
     if (data["success"] == true) {
       print(data);
       commStore.setAdminNone();
+      Map<String,bool> authCompetitions = {"spardha" : false,"kriti" : false,"manthan" : false};
       data[DatabaseRecords.authevents].forEach((element) => {
+        authCompetitions[element]=true,
             if (element == "spardha")
-              {commStore.setSpardhaAdmin(true)}
+              {
+                commStore.setSpardhaAdmin(true)
+              }
             else if (element == "kriti")
               {commStore.setKritiAdmin(true)}
             else if (element == "manthan")
               {commStore.setManthanAdmin(true)}
           });
+      await AuthUserHelpers.saveAuthCompetitions(authCompetitions);
       await AuthUserHelpers.setAdmin(data[DatabaseRecords.isadmin]);
       await AuthUserHelpers.setAccessToken(data[DatabaseRecords.accesstoken]);
       await AuthUserHelpers.setRefreshToken(data[DatabaseRecords.refreshtoken]);
@@ -129,7 +130,6 @@ class APIService {
       var resp = await dio.post("/gc/spardha/event-schedule", data: data);
       print(resp.data);
     } on DioError catch (err) {
-
       return Future.error(err);
     }
   }
@@ -172,7 +172,24 @@ class APIService {
         {
           output.add(EventModel.fromJson(e));
         }
-        
+      }
+      return output;
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
+  Future<List<KritiEventModel>> getKritiResults(ViewType v) async {
+    try {
+      if (v == ViewType.admin) {
+        dio.options.queryParameters["forAdmin"] = "true";
+      }
+      Response resp = await dio.get("/gc/kriti/event-schedule/results");
+      List<KritiEventModel> output = [];
+      for (var e in List<dynamic>.from(resp.data["details"])) {
+        {
+          output.add(KritiEventModel.fromJson(e));
+        }
       }
       return output;
     } on DioError catch (err) {
@@ -185,7 +202,6 @@ class APIService {
     try {
       List<List<Map>> results = [];
       for (var positionResults in data) {
-
         List<Map> addResults = [];
         for (var result in positionResults) {
           addResults.add(result.toJson());
@@ -194,6 +210,21 @@ class APIService {
       }
       Response resp = await dio.patch(
           '/gc/spardha/event-schedule/result/$eventID',
+          data: {'victoryStatement': victoryStatement, 'results': results});
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
+  Future<void> addUpdateKritiResult(String eventID, List<KritiResultModel> data,
+      String victoryStatement) async {
+    try {
+      List<Map> results = [];
+      for (var positionResults in data) {
+        results.add(positionResults.toJson());
+      }
+      Response resp = await dio.patch(
+          '/gc/kriti/event-schedule/result/$eventID',
           data: {'victoryStatement': victoryStatement, 'results': results});
     } on DioError catch (err) {
       return Future.error(err);
@@ -228,6 +259,7 @@ class APIService {
 
   Future<Map<String, dynamic>> getSpardhaStandings() async {
     try {
+      print("here 2");
       Response resp1 = await dio.get("/gc/spardha/standings/all-events");
       Response resp2 = await dio.get("/gc/spardha/standings");
       return {
@@ -274,4 +306,93 @@ class APIService {
       return Future.error(err);
     }
   }
+
+  // kriti
+
+    Future<List<String>> getAllKritiEvents() async {
+    try {
+      Response resp = await dio.get("/gc/kriti/all-events");
+      return List<String>.from(resp.data["details"]);
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
+  Future<Map<String, dynamic>> getKritStandings() async {
+    print('in getKritiTAandings');
+    try {
+      Response resp1 = await dio.get("/gc/kriti/standings/all-events");
+      Response resp2 = await dio.get("/gc/kriti/standings");
+
+      print(resp1);
+      print(resp2);
+      return {
+        "overall": resp2.data["details"],
+        "event-wise": resp1.data["details"]
+      };
+    } on DioError catch (err) {
+      print(err);
+      return Future.error(err);
+    }
+  }
+
+  Future<List<KritiEventModel>> getKritiSchedule(ViewType v) async {
+    try {
+      if (v == ViewType.admin) {
+        dio.options.queryParameters["forAdmin"] = "true";
+      }
+      Response resp = await dio.get("/gc/kriti/event-schedule");
+      print(resp);
+      List<KritiEventModel> output = [];
+      for (var e in List<dynamic>.from(resp.data["details"])) {
+        {
+          print(e);
+          print(KritiEventModel.fromJson(e));
+          output.add(KritiEventModel.fromJson(e));
+        }
+      }
+      print(output);
+      return output;
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
+  Future<void> postKritiEventSchedule(Map<String, dynamic> data) async {
+    try {
+      print(data);
+      var resp = await dio.post("/gc/kriti/event-schedule", data: data);
+      print(resp.data);
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
+  Future<void> updateKritiEvent(KritiEventModel event) async {
+    try {
+      Response resp = await dio.patch('/gc/kriti/event-schedule/${event.id!}',
+          data: event.toJson());
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
+  Future<void> deleteKritiEvent(String eventID) async {
+    try {
+      Response resp = await dio.delete('/gc/kriti/event-schedule/$eventID');
+      print(resp);
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
+  Future<void> deleteKritiEventResult(String eventID) async {
+    try {
+      Response resp =
+      await dio.delete('/gc/kriti/event-schedule/result/$eventID');
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+  
 }

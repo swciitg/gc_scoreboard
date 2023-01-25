@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import '../../functions/filter_schedule.dart';
+import '../../functions/spardha_filter_schedule.dart';
 import '../../globals/styles.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
 import '../../stores/spardha_store.dart';
 import '../../widgets/cards/results_card.dart';
-import '../../models/event_model.dart';
+import '../../models/spardha_models/spardha_event_model.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
 import '../../widgets/common/filter_bar.dart';

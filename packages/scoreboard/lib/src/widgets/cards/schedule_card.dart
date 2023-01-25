@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../globals/enums.dart';
 import '../../stores/common_store.dart';
 import '../../widgets/cards/popup_menu.dart';
-import '../../models/event_model.dart';
+import '../../models/spardha_models/spardha_event_model.dart';
 import '../../globals/colors.dart';
 import 'schedule/multiple_hostel_view.dart';
 import 'card_event_details.dart';

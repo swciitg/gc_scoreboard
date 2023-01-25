@@ -1,5 +1,3 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
-
 class DatabaseRecords{
   static const useremail = "email";
   static const username = "name";
@@ -11,7 +9,6 @@ class DatabaseRecords{
   static const authorization = "authorization";
 }
 
-const connectivityResults = [ConnectivityResult.ethernet, ConnectivityResult.mobile, ConnectivityResult.vpn, ConnectivityResult.wifi];
 const List<String> eventCategories = ['Men', 'Women', 'Men + Women'];
 const List<String> spardhaEventStages = [
   'Qualifiers',

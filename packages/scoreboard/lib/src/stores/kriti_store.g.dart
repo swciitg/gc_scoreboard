@@ -41,6 +41,22 @@ mixin _$KritiStore on _KritiStore, Store {
     });
   }
 
+  late final _$selectedEventAtom =
+      Atom(name: '_KritiStore.selectedEvent', context: context);
+
+  @override
+  String get selectedEvent {
+    _$selectedEventAtom.reportRead();
+    return super.selectedEvent;
+  }
+
+  @override
+  set selectedEvent(String value) {
+    _$selectedEventAtom.reportWrite(value, super.selectedEvent, () {
+      super.selectedEvent = value;
+    });
+  }
+
   late final _$_KritiStoreActionController =
       ActionController(name: '_KritiStore', context: context);
 
@@ -50,6 +66,17 @@ mixin _$KritiStore on _KritiStore, Store {
         name: '_KritiStore.setFiltersToDefault');
     try {
       return super.setFiltersToDefault();
+    } finally {
+      _$_KritiStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void changeSelectedEvent(String e) {
+    final _$actionInfo = _$_KritiStoreActionController.startAction(
+        name: '_KritiStore.changeSelectedEvent');
+    try {
+      return super.changeSelectedEvent(e);
     } finally {
       _$_KritiStoreActionController.endAction(_$actionInfo);
     }
@@ -81,7 +108,8 @@ mixin _$KritiStore on _KritiStore, Store {
   String toString() {
     return '''
 selectedCup: ${selectedCup},
-selectedClub: ${selectedClub}
+selectedClub: ${selectedClub},
+selectedEvent: ${selectedEvent}
     ''';
   }
 }

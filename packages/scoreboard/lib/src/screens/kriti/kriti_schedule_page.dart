@@ -1,30 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import '../../functions/spardha_filter_schedule.dart';
+
+
+import '../../functions/kriti_schedule_filter.dart';
 import '../../globals/styles.dart';
-import '../../models/spardha_models/spardha_event_model.dart';
+import '../../models/kriti_models/kriti_event_model.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
-import '../../stores/spardha_store.dart';
-import '../../widgets/cards/schedule_card.dart';
-import '../../widgets/common/filter_bar.dart';
+import '../../stores/kriti_store.dart';
+import '../../widgets/common/err_reload.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
-import '../../widgets/common/err_reload.dart';
+import '../../widgets/common/kriti_filter_bar.dart';
+import '../../widgets/cards/kriti_schedule_card.dart';
 
-class SchedulePage extends StatefulWidget {
-  const SchedulePage({Key? key}) : super(key: key);
+class KritiSchedulePage extends StatefulWidget {
+  const KritiSchedulePage({super.key});
 
   @override
-  State<SchedulePage> createState() => _SchedulePageState();
+  State<KritiSchedulePage> createState() => _KritiSchedulePageState();
 }
 
-class _SchedulePageState extends State<SchedulePage> {
+class _KritiSchedulePageState extends State<KritiSchedulePage> {
   @override
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
-    var spardhaStore = context.read<SpardhaStore>();
+    var kritiStore = context.read<KritiStore>();
 
     reloadCallback() {
       // reload page
@@ -37,10 +41,9 @@ class _SchedulePageState extends State<SchedulePage> {
         mainAxisSize: MainAxisSize.min,
         children: [
           const TopBar(),
-          const FilterBar(),
-          FutureBuilder<List<EventModel>>(
-              future:
-                  APIService(context).getSpardhaSchedule(commonStore.viewType),
+          const KritiFilterBar(),
+          FutureBuilder<List<KritiEventModel>>(
+              future: APIService(context).getKritiSchedule(commonStore.viewType),
               builder: (context, snapshot) {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Expanded(
@@ -58,26 +61,20 @@ class _SchedulePageState extends State<SchedulePage> {
                         }),
                   );
                 } else if (snapshot.hasData) {
-                  List<EventModel> allSpardhaEventSchedules = snapshot.data!;
+                  List<KritiEventModel> allKritiEventSchedules = snapshot.data!;
                   return Observer(builder: (context) {
-                    List<EventModel> filteredEventSchedules = filterSchedule(
-                        input: allSpardhaEventSchedules,
-                        event: spardhaStore.selectedEvent,
-                        date: spardhaStore.selectedDate,
-                        hostel: spardhaStore.selectedHostel);
+                    List<KritiEventModel> filteredEventSchedules = kritiFilterSchedule(input: allKritiEventSchedules, cup: kritiStore.selectedCup, club: kritiStore.selectedClub);
                     return Expanded(
                         child: filteredEventSchedules.isNotEmpty
                             ? ListView.builder(
-                                itemCount: filteredEventSchedules.length,
-                                itemBuilder: (context, index) {
-                                  return ScheduleCard(
-                                      eventModel:
-                                          filteredEventSchedules[index]);
-                                })
+                            itemCount: filteredEventSchedules.length,
+                            itemBuilder: (context, index) {
+                              return KritiScheduleCard(eventModel: filteredEventSchedules[index]);
+                            })
                             : Center(
-                                child: Text("No Schedule found",
-                                    style: fontStyle1),
-                              ));
+                          child: Text("No Schedule found",
+                              style: fontStyle1),
+                        ));
                   });
                 }
                 return ErrorReloadPage(apiFunction: reloadCallback);

@@ -1,6 +1,6 @@
-import 'result_model.dart';
+import 'spardha_result_model.dart';
 import 'package:json_annotation/json_annotation.dart';
-part 'event_model.g.dart';
+part 'spardha_event_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class EventModel {
