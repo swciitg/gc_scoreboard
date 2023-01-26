@@ -72,7 +72,6 @@ enum Cup{
   overall("Overall"),
   brainiac("Brainiac Cup"),
   davinci("Da Vinci Cup"),
-  visionary("Visionary Cup"),
   business("Business Cup");
 
   final String cupName;
