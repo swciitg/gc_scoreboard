@@ -50,7 +50,7 @@ class _ResultsCardState extends State<ResultsCard> {
                   children: [
                     CardEventDetails(eventModel: widget.eventModel),
                     SizedBox(
-                      height: 24,
+                      // height: 24,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

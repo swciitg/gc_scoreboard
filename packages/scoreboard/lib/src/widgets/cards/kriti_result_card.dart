@@ -108,7 +108,7 @@ class _KritiResultCardState extends State<KritiResultCard> {
                   ]),
                   ClubsListSection(eventModel: widget.eventModel),
                   SizedBox(
-                    height: 24,
+                    // height: 24,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
