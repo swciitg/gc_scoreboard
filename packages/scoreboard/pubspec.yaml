@@ -47,7 +47,6 @@ dev_dependencies:
 flutter:
   assets:
     - assets/
-    - assets/hostel_image.jpg
     - assets/logos/
   #
   # For details regarding assets in packages, see
