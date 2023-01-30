@@ -7,9 +7,9 @@ import '../../../globals/colors.dart';
 import '../../../globals/constants.dart';
 import '../../../models/kriti_models/kriti_event_model.dart';
 import '../../../services/api.dart';
+import '../../../widgets/add_event/drop_down.dart';
 import '../../../widgets/add_result/custom_text_field.dart';
 import '../../../widgets/add_result/fields_mandatory.dart';
-import '../../../widgets/add_result/hostel_dropdown.dart';
 import '../../../widgets/cards/card_date_widget.dart';
 import '../../home.dart';
 import 'kriti_result_store.dart';
@@ -210,15 +210,15 @@ class _KritiResultFormState extends State<KritiResultForm> {
                                   const SizedBox(
                                     height: 20,
                                   ),
-                                  HostelDropDown(
+                                  CustomDropDown(
                                     validator: validateField,
                                     value: KritiResultFormStore
                                         .resultFields?[index - 1].hostelName,
                                     onChanged: (hostel) => KritiResultFormStore
                                         .resultFields?[index - 1]
                                         .hostelName = hostel,
-                                    hostels:
-                                        allHostelList, // multiple times same hostels can be in list
+                                    items:
+                                        allHostelList, hintText: 'Hostels', // multiple times same hostels can be in list
                                   ),
                                   const SizedBox(
                                     height: 16,
