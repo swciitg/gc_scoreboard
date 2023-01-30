@@ -1,20 +1,19 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:scoreboard/src/globals/colors.dart';
-import 'package:scoreboard/src/models/kriti_models/kriti_event_model.dart';
-import 'package:scoreboard/src/services/api.dart';
-import 'package:scoreboard/src/widgets/add_result/custom_text_field.dart';
 
 import '../../../functions/snackbar.dart';
 import '../../../functions/validator.dart';
+import '../../../globals/colors.dart';
 import '../../../globals/constants.dart';
+import '../../../models/kriti_models/kriti_event_model.dart';
+import '../../../services/api.dart';
 import '../../../stores/static_store.dart';
 import '../../../widgets/add_event/datepicker_color.dart';
 import '../../../widgets/add_event/drop_down.dart';
 import '../../../widgets/add_event/heading.dart';
-import '../../../widgets/add_event/text_field.dart';
 import '../../../widgets/add_event/timepicker_color.dart';
+import '../../../widgets/add_result/custom_text_field.dart';
 import '../../../widgets/common/form_app_bar.dart';
 import '../../../globals/enums.dart';
 import '../../home.dart';
@@ -250,7 +249,7 @@ class _AddKritiEventFormState extends State<AddKritiEventForm> {
                               return "Enter a valid event";
                             },
                             controller: c,
-                            focusNode: f,
+                            focusNode: f, isNecessary: true,
                           );
                         },
                       ),
@@ -277,7 +276,7 @@ class _AddKritiEventFormState extends State<AddKritiEventForm> {
                       CustomTextField(
                           hintText: 'Problem Link',
                           validator: validateField,
-                          controller: _probelmLinkController),
+                          controller: _probelmLinkController, isNecessary: true,),
 
                       const SizedBox(
                         height: 12,
@@ -314,7 +313,7 @@ class _AddKritiEventFormState extends State<AddKritiEventForm> {
                                         formattedDate; //set output date to TextField value.
                                   });
                                 }
-                              },
+                              }, isNecessary: true,
                             ),
                           ),
                           const SizedBox(
@@ -353,7 +352,7 @@ class _AddKritiEventFormState extends State<AddKritiEventForm> {
                                     timeInput.text = formattedTimeString;
                                   });
                                 }
-                              },
+                              }, isNecessary: true,
                             ),
                           )
                         ],
@@ -364,7 +363,7 @@ class _AddKritiEventFormState extends State<AddKritiEventForm> {
                       CustomTextField(
                           hintText: 'Venue',
                           validator: validateField,
-                          controller: _venueController),
+                          controller: _venueController, isNecessary: true,),
                       const SizedBox(
                         height: 12,
                       ),

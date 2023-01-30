@@ -9,8 +9,8 @@ import '../../../stores/static_store.dart';
 import '../../../widgets/add_event/datepicker_color.dart';
 import '../../../widgets/add_event/drop_down.dart';
 import '../../../widgets/add_event/heading.dart';
-import '../../../widgets/add_event/text_field.dart';
 import '../../../widgets/add_event/timepicker_color.dart';
+import '../../../widgets/add_result/custom_text_field.dart';
 import '../../../widgets/common/form_app_bar.dart';
 import 'confirm_event_details.dart';
 
@@ -197,7 +197,7 @@ class _AddEventFormState extends State<AddEventForm> {
                               return "Enter a valid event";
                             },
                             controller: c,
-                            focusNode: f,
+                            focusNode: f, isNecessary: true,
                           );
                         },
                       ),
@@ -257,7 +257,7 @@ class _AddEventFormState extends State<AddEventForm> {
                                         formattedDate; //set output date to TextField value.
                                   });
                                 }
-                              },
+                              }, isNecessary: true,
                             ),
                           ),
                           const SizedBox(
@@ -296,7 +296,7 @@ class _AddEventFormState extends State<AddEventForm> {
                                     timeInput.text = formattedTimeString;
                                   });
                                 }
-                              },
+                              }, isNecessary: true,
                             ),
                           )
                         ],
@@ -307,7 +307,7 @@ class _AddEventFormState extends State<AddEventForm> {
                       CustomTextField(
                           hintText: 'Venue',
                           validator: validateField,
-                          controller: _venueController),
+                          controller: _venueController, isNecessary: true,),
                       const SizedBox(
                         height: 12,
                       ),

@@ -178,7 +178,7 @@ class _KritiResultFormState extends State<KritiResultForm> {
                                 const SizedBox(
                                   height: 22,
                                 ),
-                                CustomTextFieldTwo(
+                                CustomTextField(
                                   inputType: TextInputType.text,
                                   hintText: 'Victory Statement',
                                   validator: validateField,
@@ -223,7 +223,7 @@ class _KritiResultFormState extends State<KritiResultForm> {
                                   const SizedBox(
                                     height: 16,
                                   ),
-                                  CustomTextFieldTwo(
+                                  CustomTextField(
                                     inputType: TextInputType.number,
                                     isNecessary: true,
                                     hintText: 'Points',
