@@ -133,6 +133,7 @@ class _KritiResultCardState extends State<KritiResultCard> {
                             ],
                           ),
                         ),
+                        SizedBox(width: 8,),
                         GestureDetector(
                           onTap: () {
                             setState(() {
