@@ -63,16 +63,16 @@ enum Club{
   automobileClub("Automobile Club"),
   roboticsClub("Robotics Club"),
   electronicsClub("Electronics Club"),
-  iitgAI("iitg.ai"),
-  gamedev("Gamedev and E-Sports"),
+  iitgAI("IITG.AI"),
+  gamedev("Gamedev and ESports"),
   equinox("Equinox"),
-  finance("Finance and Economics Club"),
+  finance("FEC"),
   whitespace("Whitespace"),
   acumen("Acumen"),
   fouri("4i Labs"),
   codingClub("Coding Club"),
-  cnaClub("Consulting and Analytics Club"),
-  eCell("E Cell");
+  cnaClub("CnA Club"),
+  eCell("E-Cell");
 
   final String clubName;
   const Club(this.clubName);
