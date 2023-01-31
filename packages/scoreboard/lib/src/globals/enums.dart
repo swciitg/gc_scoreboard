@@ -59,10 +59,20 @@ enum Hostel {
 // kriti enums
 enum Club{
   overall("Overall"),
+  aeromodellingClub("Aeromodelling Club"),
+  automobileClub("Automobile Club"),
+  roboticsClub("Robotics Club"),
+  electronicsClub("Electronics Club"),
+  iitgAI("iitg.ai"),
+  gamedev("Gamedev and E-Sports"),
+  equinox("Equinox"),
+  finance("Finance and Economics Club"),
+  whitespace("Whitespace"),
+  acumen("Acumen"),
+  fouri("4i Labs"),
   codingClub("Coding Club"),
-  cnaClub("CnA Club"),
-  eCell("E-Cell"),
-  roboticsClub("Robotics Club");
+  cnaClub("Consulting and Analytics Club"),
+  eCell("E Cell"),
 
   final String clubName;
   const Club(this.clubName);
