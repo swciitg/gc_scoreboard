@@ -72,7 +72,7 @@ enum Club{
   fouri("4i Labs"),
   codingClub("Coding Club"),
   cnaClub("Consulting and Analytics Club"),
-  eCell("E Cell"),
+  eCell("E Cell");
 
   final String clubName;
   const Club(this.clubName);
