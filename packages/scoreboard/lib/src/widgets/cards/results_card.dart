@@ -75,6 +75,7 @@ class _ResultsCardState extends State<ResultsCard> {
                               ],
                             ),
                           ),
+                          SizedBox(width: 8,),
                           GestureDetector(
                             onTap: () {
                               setState(() {

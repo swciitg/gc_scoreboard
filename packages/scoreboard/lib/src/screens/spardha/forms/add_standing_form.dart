@@ -12,11 +12,9 @@ import '../../../stores/common_store.dart';
 import '../../../stores/standing_form_store.dart';
 import '../../../stores/static_store.dart';
 import '../../../widgets/add_event/drop_down.dart';
-import '../../../widgets/add_event/text_field.dart';
 import '../../../widgets/add_result/custom_text_field.dart';
 import '../../../widgets/add_result/fields_mandatory.dart';
 import '../../../functions/position.dart';
-import '../../../widgets/add_result/hostel_dropdown.dart';
 import '../../home.dart';
 
 class AddStanding extends StatefulWidget {
@@ -205,7 +203,7 @@ class _AddStandingState extends State<AddStanding> {
                                   return "Enter a valid event";
                                 },
                                 controller: c,
-                                focusNode: f,
+                                focusNode: f, isNecessary: true,
                               );
                             },
                           ),
@@ -266,17 +264,18 @@ class _AddStandingState extends State<AddStanding> {
                                     children: [
                                       Expanded(
                                         flex: 50,
-                                        child: HostelDropDown(
+                                        child: CustomDropDown(
                                           validator: validateField,
-                                          value: standingFormStore
-                                              .standing![index - 1].hostelName,
+                                          value:standingFormStore
+                                                .standing![index - 1].hostelName ,
                                           onChanged: (hostel) =>
-                                              standingFormStore
-                                                  .standing![index - 1]
-                                                  .hostelName = hostel,
-                                          hostels: getHostel(
-                                              standingFormStore.category),
+                                                standingFormStore
+                                                    .standing![index - 1]
+                                                    .hostelName = hostel,
+                                          items: getHostel(
+                                                  standingFormStore.category), hintText: 'Hostels' ,
                                         ),
+
                                       ),
                                       if (index > 0)
                                         const Spacer(
@@ -285,7 +284,7 @@ class _AddStandingState extends State<AddStanding> {
                                       if (index > 0) Container(),
                                       Expanded(
                                         flex: 35,
-                                        child: CustomTextFieldTwo(
+                                        child: CustomTextField(
                                           isNecessary: true,
                                           inputType: TextInputType.number,
                                           hintText: 'Points',

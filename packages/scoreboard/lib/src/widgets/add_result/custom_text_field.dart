@@ -2,42 +2,57 @@ import 'package:flutter/material.dart';
 import '../../globals/colors.dart';
 import '../../globals/styles.dart';
 
-class CustomTextFieldTwo extends StatelessWidget {
+class CustomTextField extends StatefulWidget {
   final String hintText;
-  final TextInputType inputType;
+  final TextInputType? inputType;
   final String? Function(String?)? validator;
   final String? value;
   final void Function(String)? onChanged;
   final bool isNecessary;
+  final TextEditingController? controller;
+  final void Function()? onTap;
+  final FocusNode? focusNode;
 
-  const CustomTextFieldTwo(
+  const CustomTextField(
       {super.key,
       required this.hintText,
       required this.validator,
-      required this.value,
-      required this.onChanged,
+      this.value,
+      this.onChanged,
       required this.isNecessary,
-      required this.inputType});
+      this.inputType,
+      this.controller,
+      this.onTap,
+      this.focusNode});
 
+  @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style: Themes.theme.textTheme.headline6,
-      validator: validator,
-      onChanged: onChanged,
-      initialValue: value == 'null' ? '' : value,
+      readOnly: widget.onTap != null,
+      style: Themes.theme.textTheme.headline6?.copyWith(color: Colors.white),
+      validator: widget.validator,
+      controller: widget.controller,
+      focusNode: widget.focusNode,
       cursorColor: Themes.theme.primaryColor,
-      keyboardType: inputType,
+      onTap: widget.onTap,
+      onChanged: widget.onChanged,
+      initialValue: widget.value == 'null' ? '' : widget.value,
+      keyboardType: widget.inputType,
       decoration: InputDecoration(
         errorStyle: basicFontStyle,
         label: RichText(
           text: TextSpan(
             children: [
               TextSpan(
-                text: hintText,
+                text: widget.hintText,
                 style: Themes.theme.textTheme.bodyText1,
               ),
-              if (isNecessary)
+              if (widget.isNecessary)
                 TextSpan(
                   text: ' * ',
                   style: Themes.theme.textTheme.headline5,

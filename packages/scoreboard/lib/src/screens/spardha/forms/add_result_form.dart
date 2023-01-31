@@ -7,9 +7,9 @@ import '../../../globals/colors.dart';
 import '../../../models/spardha_models/spardha_event_model.dart';
 import '../../../services/api.dart';
 import '../../../stores/result_form_store.dart';
+import '../../../widgets/add_event/drop_down.dart';
 import '../../../widgets/add_result/custom_text_field.dart';
 import '../../../widgets/add_result/fields_mandatory.dart';
-import '../../../widgets/add_result/hostel_dropdown.dart';
 import '../../../widgets/cards/card_date_widget.dart';
 import '../../home.dart';
 
@@ -177,7 +177,7 @@ class _AddResultFormState extends State<AddResultForm> {
                                 const SizedBox(
                                   height: 22,
                                 ),
-                                CustomTextFieldTwo(
+                                CustomTextField(
                                   inputType: TextInputType.text,
                                   hintText: 'Victory Statement',
                                   validator: validateField,
@@ -262,7 +262,7 @@ class _AddResultFormState extends State<AddResultForm> {
                                       children: [
                                         Expanded(
                                           flex: 65,
-                                          child: HostelDropDown(
+                                          child: CustomDropDown(
                                             validator: validateField,
                                             value: ResultFormStore
                                                 .resultFields?[index][team]
@@ -271,7 +271,7 @@ class _AddResultFormState extends State<AddResultForm> {
                                                 ResultFormStore
                                                     .resultFields?[index][team]
                                                     .hostelName = hostel,
-                                            hostels: widget.event.hostels.toSet().toList(), // multiple times same hostels can be in list
+                                            items: widget.event.hostels.toSet().toList(), hintText: 'Hostels', // multiple times same hostels can be in list
                                           ),
                                         ),
                                         // const Spacer(
@@ -299,7 +299,7 @@ class _AddResultFormState extends State<AddResultForm> {
                                       children: [
                                         Expanded(
                                           flex: 46,
-                                          child: CustomTextFieldTwo(
+                                          child: CustomTextField(
                                             inputType: TextInputType.text,
                                             isNecessary: true,
                                             hintText: 'Primary Score',
@@ -317,7 +317,7 @@ class _AddResultFormState extends State<AddResultForm> {
                                         ),
                                         Expanded(
                                             flex: 46,
-                                            child: CustomTextFieldTwo(
+                                            child: CustomTextField(
                                               inputType: TextInputType.text,
                                               isNecessary: false,
                                               hintText: 'Secondary Score',
