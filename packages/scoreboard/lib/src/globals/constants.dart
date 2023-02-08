@@ -64,6 +64,7 @@ const List<String> spardhaEventStages = [
 ];
 
 const String kritiWebsiteLink = "https://swc.iitg.ac.in/sa/kriti/";
+const String sahyogWebsiteLink = "http://www.google.com/";
 
 
 

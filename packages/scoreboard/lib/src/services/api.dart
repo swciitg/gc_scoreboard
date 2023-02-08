@@ -84,7 +84,7 @@ class APIService {
     if (data["success"] == true) {
       print(data);
       commStore.setAdminNone();
-      Map<String,bool> authCompetitions = {"spardha" : false,"kriti" : false,"manthan" : false};
+      Map<String,bool> authCompetitions = {"spardha" : false,"kriti" : false,"manthan" : false, "sahyog": false};
       data[DatabaseRecords.authevents].forEach((element) => {
         authCompetitions[element]=true,
             if (element == "spardha")
@@ -95,6 +95,8 @@ class APIService {
               {commStore.setKritiAdmin(true)}
             else if (element == "manthan")
               {commStore.setManthanAdmin(true)}
+              else if (element == "sahyog")
+                  {commStore.setSahyogAdmin(true)}
           });
       await AuthUserHelpers.saveAuthCompetitions(authCompetitions);
       await AuthUserHelpers.setAdmin(data[DatabaseRecords.isadmin]);
