@@ -10,6 +10,7 @@ import '../../stores/common_store.dart';
 import '../../stores/gc_store.dart';
 import '../../stores/kriti_store.dart';
 import '../../stores/manthan_store.dart';
+import '../../stores/sahyog_store.dart';
 import '../../stores/spardha_store.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -30,13 +31,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
         child: Row(
           children: [
             BottomNavBarItem(
-                competition: Competitions.gc, width: mediaWidth / 4),
+                competition: Competitions.gc, width: mediaWidth / 5),
             BottomNavBarItem(
-                competition: Competitions.spardha, width: mediaWidth / 4),
+                competition: Competitions.spardha, width: mediaWidth / 5),
             BottomNavBarItem(
-                competition: Competitions.kriti, width: mediaWidth / 4),
+                competition: Competitions.kriti, width: mediaWidth / 5),
             BottomNavBarItem(
-                competition: Competitions.manthan, width: mediaWidth / 4),
+                competition: Competitions.manthan, width: mediaWidth / 5),
+            BottomNavBarItem(
+                competition: Competitions.sahyog, width: mediaWidth / 5),
           ],
         ));
   }
@@ -78,6 +81,12 @@ class BottomNavBarItem extends StatelessWidget {
           competitionStore = context.read<ManthanStore>();
         }
         break;
+      case Competitions.sahyog:
+        {
+          competitionStore = context.read<SahyogStore>();
+        }
+        break;
+
     }
 
     return Observer(builder: (context) {

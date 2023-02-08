@@ -318,7 +318,7 @@ class APIService {
     }
   }
 
-  Future<Map<String, dynamic>> getKritStandings() async {
+  Future<Map<String, dynamic>> getKritiStandings() async {
     print('in getKritiTAandings');
     try {
       Response resp1 = await dio.get("/gc/kriti/standings/all-events");

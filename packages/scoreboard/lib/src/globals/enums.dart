@@ -6,6 +6,7 @@ enum Competitions {
   spardha("Spardha", "assets/spardha2.svg"),
   kriti("Kriti", "assets/kriti2.svg"),
   manthan("Manthan", "assets/manthan2.svg"),
+  sahyog("Sahyog", "assets/manthan2.svg"),
   gc("GC", "assets/gc.svg");
 
   final String name;
@@ -57,7 +58,7 @@ enum Hostel {
 }
 
 // kriti enums
-enum Club{
+enum Club {
   overall("Overall"),
   aeromodellingClub("Aeromodelling Club"),
   automobileClub("Automobile Club"),
@@ -78,7 +79,7 @@ enum Club{
   const Club(this.clubName);
 }
 
-enum Cup{
+enum Cup {
   overall("Overall"),
   brainiac("Brainiac Cup"),
   davinci("Da Vinci Cup"),
@@ -88,3 +89,10 @@ enum Cup{
   const Cup(this.cupName);
 }
 
+enum SahyogClub {
+  overall("Overall"),
+  eCell("E-Cell");
+
+  final String clubName;
+  const SahyogClub(this.clubName);
+}

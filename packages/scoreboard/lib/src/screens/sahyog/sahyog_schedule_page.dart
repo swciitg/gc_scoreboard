@@ -1,38 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-
-
-import '../../functions/kriti_schedule_filter.dart';
 import '../../globals/styles.dart';
 import '../../models/kriti_models/kriti_event_model.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
-import '../../stores/kriti_store.dart';
+import '../../stores/sahyog_store.dart';
+import '../../widgets/cards/kriti_schedule_card.dart';
 import '../../widgets/common/err_reload.dart';
+import '../../widgets/common/kriti_filter_bar.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
-import '../../widgets/common/kriti_filter_bar.dart';
-import '../../widgets/cards/kriti_schedule_card.dart';
 
-class KritiSchedulePage extends StatefulWidget {
-  const KritiSchedulePage({super.key});
+class SahyogSchedulePage extends StatefulWidget {
+  const SahyogSchedulePage({Key? key}) : super(key: key);
 
   @override
-  State<KritiSchedulePage> createState() => _KritiSchedulePageState();
+  State<SahyogSchedulePage> createState() => _SahyogSchedulePageState();
 }
 
-class _KritiSchedulePageState extends State<KritiSchedulePage> {
+class _SahyogSchedulePageState extends State<SahyogSchedulePage> {
   @override
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
-    var kritiStore = context.read<KritiStore>();
+    var sahyogStore = context.read<SahyogStore>();
 
     reloadCallback() {
       // reload page
       setState(() {});
     }
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0),
       child: Column(
@@ -61,7 +57,8 @@ class _KritiSchedulePageState extends State<KritiSchedulePage> {
                 } else if (snapshot.hasData) {
                   List<KritiEventModel> allKritiEventSchedules = snapshot.data!;
                   return Observer(builder: (context) {
-                    List<KritiEventModel> filteredEventSchedules = kritiFilterSchedule(input: allKritiEventSchedules, cup: kritiStore.selectedCup, club: kritiStore.selectedClub);
+                    List<KritiEventModel> filteredEventSchedules = [];
+                    // List<KritiEventModel> filteredEventSchedules = kritiFilterSchedule(input: allKritiEventSchedules, cup: kritiStore.selectedCup, club: kritiStore.selectedClub);
                     return Expanded(
                         child: filteredEventSchedules.isNotEmpty
                             ? ListView.builder(

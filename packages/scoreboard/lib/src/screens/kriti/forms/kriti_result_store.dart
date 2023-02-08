@@ -1,5 +1,3 @@
-
-
 import '../../../models/kriti_models/kriti_result_model.dart';
 
 class KritiResultFormStore {
@@ -17,12 +15,8 @@ class KritiResultFormStore {
     resultFields?.add(KritiResultModel());
   }
 
-
-  static void clear()
-  {
-    resultFields = [
-      KritiResultModel()
-    ];
+  static void clear() {
+    resultFields = [KritiResultModel()];
     victoryStatement = null;
   }
 }
