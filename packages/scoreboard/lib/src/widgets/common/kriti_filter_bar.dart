@@ -85,7 +85,7 @@ class _FilterBarState extends State<KritiFilterBar> {
                                           SizedBox(
                                             height: 18,
                                             child: Text(
-                                                kritiStore.selectedCup.cupName,
+                                                kritiStore.selectedEvent,
                                                 style: popUpItemStyle),
                                           )
                                         ],
