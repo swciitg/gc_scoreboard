@@ -225,52 +225,57 @@ class HostelsPointsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        shrinkWrap: true,
-        itemCount: eventModel.results.length,
-        itemBuilder: (context,position){
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                height: 18,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      width: 16,
-                      height: 18,
-                      child: Text(
-                        (position+1).toString(),
-                        style: cardVenueStyle1,
-                      ),
+    return Column(
+      children: [
+        ListView.builder(
+          physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: eventModel.results.length,
+            itemBuilder: (context,position){
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    height: 18,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          alignment: Alignment.center,
+                          width: 16,
+                          height: 18,
+                          child: Text(
+                            (position+1).toString(),
+                            style: cardVenueStyle1,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        SizedBox(
+                          width: 105,
+                          child: Text(
+                            overflow: TextOverflow.visible,
+                            eventModel.results[position].hostelName!,
+                            style: cardVenueStyle1,
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(
-                      width: 10,
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    height: 18,
+                    child: Text(
+                      eventModel.results[position].points!.toString(),
+                      style: cardPostponedStyle,
                     ),
-                    SizedBox(
-                      width: 105,
-                      child: Text(
-                        overflow: TextOverflow.visible,
-                        eventModel.results[position].hostelName!,
-                        style: cardVenueStyle1,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                alignment: Alignment.center,
-                height: 18,
-                child: Text(
-                  eventModel.results[position].points!.toString(),
-                  style: cardPostponedStyle,
-                ),
-              )
-            ],
-          );
-        });
+                  )
+                ],
+              );
+            }),
+      ],
+    );
   }
 }
 
