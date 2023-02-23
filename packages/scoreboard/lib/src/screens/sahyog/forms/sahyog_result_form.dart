@@ -5,32 +5,32 @@ import '../../../functions/snackbar.dart';
 import '../../../functions/validator.dart';
 import '../../../globals/colors.dart';
 import '../../../globals/constants.dart';
-import '../../../models/kriti_models/kriti_event_model.dart';
+import '../../../models/sahyog_models/sahyog_event_model.dart';
 import '../../../services/api.dart';
 import '../../../widgets/add_event/drop_down.dart';
 import '../../../widgets/add_result/custom_text_field.dart';
 import '../../../widgets/add_result/fields_mandatory.dart';
 import '../../../widgets/cards/card_date_widget.dart';
 import '../../home.dart';
-import 'kriti_result_store.dart';
+import 'sahyog_result_store.dart';
 
-class KritiResultForm extends StatefulWidget {
-  final KritiEventModel event;
-  const KritiResultForm({super.key, required this.event});
+class SahyogResultForm extends StatefulWidget {
+  final SahyogEventModel event;
+  const SahyogResultForm({super.key, required this.event});
 
   @override
-  State<KritiResultForm> createState() => _KritiResultFormState();
+  State<SahyogResultForm> createState() => _SahyogResultFormState();
 }
 
-class _KritiResultFormState extends State<KritiResultForm> {
+class _SahyogResultFormState extends State<SahyogResultForm> {
   TextEditingController victoryStatement = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     if (widget.event.results.isNotEmpty) {
-      KritiResultFormStore.resultFields = widget.event.results;
-      KritiResultFormStore.victoryStatement = widget.event.victoryStatement!;
+      SahyogResultFormStore.resultFields = widget.event.results;
+      SahyogResultFormStore.victoryStatement = widget.event.victoryStatement!;
     }
   }
 
@@ -60,7 +60,7 @@ class _KritiResultFormState extends State<KritiResultForm> {
               ),
               leading: IconButton(
                 onPressed: () {
-                  KritiResultFormStore.clear();
+                  SahyogResultFormStore.clear();
                   Navigator.of(context).pop();
                 },
                 icon: Icon(
@@ -81,17 +81,17 @@ class _KritiResultFormState extends State<KritiResultForm> {
                           isLoading = true;
                         });
                         try {
-                          await APIService(context).addUpdateKritiResult(
+                          await APIService(context).addUpdateSahyogResult(
                               widget.event.id!,
-                              KritiResultFormStore.resultFields!,
-                              KritiResultFormStore.victoryStatement!);
+                              SahyogResultFormStore.resultFields!,
+                              SahyogResultFormStore.victoryStatement!);
                           if (!mounted) return;
 
                           Navigator.of(context).pushNamedAndRemoveUntil(
                               ScoreBoardHome.id, (route) => false);
                           showSnackBar(
                               context, 'Successfully added/updated result');
-                          KritiResultFormStore.clear();
+                          SahyogResultFormStore.clear();
                           if (!mounted) return;
 
                           Navigator.pushNamedAndRemoveUntil(
@@ -116,14 +116,14 @@ class _KritiResultFormState extends State<KritiResultForm> {
               key: key,
               child: Container(
                 margin:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
                 width: double.infinity,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
                       child: ListView.builder(
-                        itemCount: KritiResultFormStore.numPositions() + 1,
+                        itemCount: SahyogResultFormStore.numPositions() + 1,
                         itemBuilder: (context, index) {
                           if (index == 0) {
                             return Column(
@@ -137,20 +137,15 @@ class _KritiResultFormState extends State<KritiResultForm> {
                                   children: [
                                     Column(
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           widget.event.event,
                                           style:
-                                              Themes.theme.textTheme.headline1,
+                                          Themes.theme.textTheme.headline1,
                                         ),
                                         const SizedBox(
                                           height: 4,
-                                        ),
-                                        Text(
-                                          widget.event.cup,
-                                          style:
-                                              Themes.theme.textTheme.headline2,
                                         ),
                                       ],
                                     ),
@@ -182,9 +177,9 @@ class _KritiResultFormState extends State<KritiResultForm> {
                                   inputType: TextInputType.text,
                                   hintText: 'Victory Statement',
                                   validator: validateField,
-                                  value: KritiResultFormStore.victoryStatement,
+                                  value: SahyogResultFormStore.victoryStatement,
                                   onChanged: (p) {
-                                    KritiResultFormStore.victoryStatement = p;
+                                    SahyogResultFormStore.victoryStatement = p;
                                   },
                                   isNecessary: true,
                                 ),
@@ -212,13 +207,13 @@ class _KritiResultFormState extends State<KritiResultForm> {
                                   ),
                                   CustomDropDown(
                                     validator: validateField,
-                                    value: KritiResultFormStore
+                                    value: SahyogResultFormStore
                                         .resultFields?[index - 1].hostelName,
-                                    onChanged: (hostel) => KritiResultFormStore
+                                    onChanged: (hostel) => SahyogResultFormStore
                                         .resultFields?[index - 1]
                                         .hostelName = hostel,
                                     items:
-                                        allHostelList, hintText: 'Hostels', // multiple times same hostels can be in list
+                                    allHostelList, hintText: 'Hostels', // multiple times same hostels can be in list
                                   ),
                                   const SizedBox(
                                     height: 16,
@@ -228,10 +223,10 @@ class _KritiResultFormState extends State<KritiResultForm> {
                                     isNecessary: true,
                                     hintText: 'Points',
                                     validator: validateField,
-                                    onChanged: (ps) => KritiResultFormStore
+                                    onChanged: (ps) => SahyogResultFormStore
                                         .resultFields?[index - 1]
                                         .points = double.parse(ps),
-                                    value: KritiResultFormStore
+                                    value: SahyogResultFormStore
                                         .resultFields?[index - 1].points
                                         .toString(),
                                   ),
@@ -246,21 +241,21 @@ class _KritiResultFormState extends State<KritiResultForm> {
                                     height: 24,
                                   ),
                                   if (index ==
-                                      KritiResultFormStore.resultFields!.length)
+                                      SahyogResultFormStore.resultFields!.length)
                                     TextButton(
                                         style: TextButton.styleFrom(
                                           padding: EdgeInsets.zero,
                                         ),
                                         onPressed: () {
                                           setState(() {
-                                            KritiResultFormStore.addNewPosition(
+                                            SahyogResultFormStore.addNewPosition(
                                                 index - 1);
                                           });
                                         },
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
                                           mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                          MainAxisAlignment.start,
                                           children: [
                                             Icon(
                                               Icons.add,

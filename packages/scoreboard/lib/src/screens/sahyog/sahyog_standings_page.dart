@@ -1,32 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import '../../functions/kriti_standings_filter.dart';
-import '../../stores/kriti_store.dart';
-import '../../widgets/common/err_reload.dart';
-import '../../widgets/common/shimmer.dart';
+import 'package:provider/provider.dart';
+import '../../functions/sahyog_standings_filter.dart';
 import '../../services/api.dart';
+import '../../stores/sahyog_store.dart';
+import '../../widgets/common/err_reload.dart';
+import '../../widgets/common/kriti_filter_bar.dart';
+import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
 import '../../widgets/standings_page/standingboard.dart';
-import 'package:provider/provider.dart';
 
-import '../../widgets/common/kriti_filter_bar.dart';
-
-class KritiStandingsPage extends StatefulWidget {
-  const KritiStandingsPage({super.key});
+class SahyogStandingsPage extends StatefulWidget {
+  const SahyogStandingsPage({Key? key}) : super(key: key);
 
   @override
-  State<KritiStandingsPage> createState() => _StandingsPageState();
+  State<SahyogStandingsPage> createState() => _SahyogStandingsPageState();
 }
 
-class _StandingsPageState extends State<KritiStandingsPage> {
+class _SahyogStandingsPageState extends State<SahyogStandingsPage> {
+
   @override
   Widget build(BuildContext context) {
-    var kritiStore = context.read<KritiStore>();
+    var sahyogStore = context.read<SahyogStore>();
 
     reloadCallback() {
       setState(() {});
     }
-
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 0),
         child: Column(
@@ -34,23 +33,23 @@ class _StandingsPageState extends State<KritiStandingsPage> {
             const TopBar(),
             const KritiFilterBar(),
             FutureBuilder<Map<String, dynamic>>(
-              future: APIService(context).getKritiStandings(),
+              future: APIService(context).getSahyogStandings(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Expanded(
                       child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 16),
-                      child: ShowShimmer(
-                        height: 400,
-                        width: MediaQuery.of(context).size.width,
-                      ),
-                    ),
-                  ));
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: ShowShimmer(
+                            height: 400,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                        ),
+                      ));
                 } else if (snapshot.hasData) {
                   return Observer(builder: (context) {
                     print(snapshot.data!);
-                    List<dynamic> filteredEventSchedules = filterKritiStandings(input: snapshot.data!, event: kritiStore.selectedEvent);
+                    List<dynamic> filteredEventSchedules = filterSahyogStandings(input: snapshot.data!, event: sahyogStore.selectedEvent);
                     return Expanded(
                         child: StandingBoard(
                             hostelStandings: filteredEventSchedules));
