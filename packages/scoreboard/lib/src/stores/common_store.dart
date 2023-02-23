@@ -30,9 +30,6 @@ abstract class _CommonStore with Store {
   @observable
   bool isManthanAdmin=false;
 
-  @observable
-  bool isSahyogAdmin=false;
-
   @action
   void setViewType(ViewType v){
     viewType=v;
@@ -60,7 +57,6 @@ abstract class _CommonStore with Store {
     isSpardhaAdmin=false;
     isKritiAdmin=false;
     isManthanAdmin=false;
-    isSahyogAdmin=false;
   }
 
   @action
@@ -78,12 +74,6 @@ abstract class _CommonStore with Store {
   @action
   void setManthanAdmin(bool input){
     isManthanAdmin=input;
-    isAdmin=true;
-  }
-
-  @action
-  void setSahyogAdmin(bool input){
-    isSahyogAdmin=input;
     isAdmin=true;
   }
 

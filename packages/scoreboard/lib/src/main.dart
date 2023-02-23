@@ -13,7 +13,6 @@ import 'stores/common_store.dart';
 import 'stores/gc_store.dart';
 import 'stores/kriti_store.dart';
 import 'stores/manthan_store.dart';
-import 'stores/sahyog_store.dart';
 import 'stores/spardha_store.dart';
 import 'widgets/common/err_reload.dart';
 
@@ -44,10 +43,6 @@ class _GCScoreBoardState extends State<GCScoreBoard> {
           ),
           Provider<ManthanStore>(
             create: (_) => ManthanStore(),
-          ),
-          Provider<SahyogStore>(
-            create: (_) => SahyogStore(),
-
           ),
         ],
         child: MaterialApp(

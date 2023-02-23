@@ -8,7 +8,6 @@ import '../../stores/common_store.dart';
 import '../../stores/gc_store.dart';
 import '../../stores/kriti_store.dart';
 import '../../stores/manthan_store.dart';
-import '../../stores/sahyog_store.dart';
 import '../../stores/spardha_store.dart';
 
 class TopBar extends StatefulWidget {
@@ -84,11 +83,6 @@ class TopBarItem extends StatelessWidget {
       case Competitions.manthan:
         {
           competitionStore = context.read<ManthanStore>();
-        }
-        break;
-      case Competitions.sahyog:
-        {
-          competitionStore = context.read<SahyogStore>();
         }
         break;
     }

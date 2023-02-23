@@ -289,3 +289,36 @@ class _KritiResultFormState extends State<KritiResultForm> {
             )));
   }
 }
+// Row(
+// children: [
+
+// Row(
+// children: [
+// Expanded(
+// child: CustomTextFieldTwo(
+// inputType: TextInputType.number,
+// isNecessary: true,
+// hintText: 'Points',
+// validator: validateField,
+// onChanged: (ps) => KritiResultFormStore
+//     .resultFields?[index-1].points = double.parse(ps),
+// value: KritiResultFormStore
+//     .resultFields?[index-1]
+// .points.toString(),
+// ),
+// ),
+// ],
+// ),
+// const SizedBox(
+// height: 24,
+// ),
+// Divider(
+// thickness: 1,
+// color: Themes.theme.dividerColor,
+// ),
+// const SizedBox(
+// height: 24,
+// ),
+//
+// ],
+// )

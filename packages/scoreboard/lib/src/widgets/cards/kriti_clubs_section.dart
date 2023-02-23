@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+
 import '../../globals/colors.dart';
 import '../../globals/styles.dart';
+import '../../models/kriti_models/kriti_event_model.dart';
 
 class ClubsListSection extends StatelessWidget {
-  final List<String> clubs;
+  final KritiEventModel eventModel;
 
-  const ClubsListSection({Key? key,required this.clubs}) : super(key: key);
+  ClubsListSection({Key? key,required this.eventModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +16,7 @@ class ClubsListSection extends StatelessWidget {
       child: ListView.builder(
         physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          itemCount: clubs.length + 1,
+          itemCount: eventModel.clubs.length + 1,
           itemBuilder: (context,idx){
             if(idx==0){
               return Padding(
@@ -34,7 +36,7 @@ class ClubsListSection extends StatelessWidget {
                   const SizedBox(
                     width: 8,
                   ),
-                  Text(clubs[idx-1],overflow: TextOverflow.ellipsis,
+                  Text(eventModel.clubs[idx-1],overflow: TextOverflow.ellipsis,
                     style: cardVenueStyle2,)
                 ],
               ),

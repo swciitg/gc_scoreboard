@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+
 import '../../globals/colors.dart';
 import '../../globals/enums.dart';
 import '../../globals/styles.dart';
@@ -8,13 +11,14 @@ import '../../models/kriti_models/kriti_event_model.dart';
 import '../../stores/common_store.dart';
 import 'card_date_widget.dart';
 import 'kriti_clubs_section.dart';
+import 'kriti_schedule_card.dart';
 import 'menu_item.dart';
 import 'kriti_popup_menu.dart';
 
 
 
 class KritiResultCard extends StatefulWidget {
-  final eventModel;
+  final KritiEventModel eventModel;
   const KritiResultCard({super.key, required this.eventModel});
 
   @override
@@ -35,7 +39,6 @@ class _KritiResultCardState extends State<KritiResultCard> {
   @override
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
-    bool isKriti = (widget.eventModel.runtimeType == KritiEventModel);
     return Observer(builder: (context) {
       return Padding(
         padding: const EdgeInsets.all(8.0),
@@ -71,7 +74,7 @@ class _KritiResultCardState extends State<KritiResultCard> {
                               ),
                               SizedBox(
                                 height: 20,
-                                child: isKriti ? Text(widget.eventModel.cup, style: cardStageStyle1) : Container(),
+                                child: Text(widget.eventModel.cup, style: cardStageStyle1),
                               ),
                               const SizedBox(
                                 height: 16,
@@ -103,7 +106,7 @@ class _KritiResultCardState extends State<KritiResultCard> {
                       ),
                     ),
                   ]),
-                  ClubsListSection(clubs: widget.eventModel.clubs),
+                  ClubsListSection(eventModel: widget.eventModel),
                   SizedBox(
                     // height: 24,
                     child: Row(
@@ -216,7 +219,7 @@ class _KritiResultCardState extends State<KritiResultCard> {
 }
 
 class HostelsPointsSection extends StatelessWidget {
-  final eventModel;
+  final KritiEventModel eventModel;
 
   const HostelsPointsSection({Key? key,required this.eventModel}) : super(key: key);
 

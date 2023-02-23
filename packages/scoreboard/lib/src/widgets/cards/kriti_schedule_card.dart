@@ -3,13 +3,13 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/models/kriti_models/kriti_event_model.dart';
+import 'package:scoreboard/src/functions/snackbar.dart';
+import 'package:scoreboard/src/globals/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../functions/snackbar.dart';
 import '../../globals/colors.dart';
-import '../../globals/constants.dart';
 import '../../globals/enums.dart';
 import '../../globals/styles.dart';
+import '../../models/kriti_models/kriti_event_model.dart';
 import '../../stores/common_store.dart';
 import 'card_date_widget.dart';
 import 'kriti_clubs_section.dart';
@@ -19,7 +19,7 @@ import 'menu_item.dart';
 
 
 class KritiScheduleCard extends StatefulWidget {
-  final eventModel;
+  final KritiEventModel eventModel;
   const KritiScheduleCard({super.key, required this.eventModel});
 
   @override
@@ -44,8 +44,6 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
   @override
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
-    bool isKriti = (widget.eventModel.runtimeType == KritiEventModel);
-
     return Observer(builder: (context) {
       return Padding(
         padding: const EdgeInsets.all(8.0),
@@ -81,7 +79,7 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                               ),
                               SizedBox(
                                 height: 20,
-                                child: isKriti ? Text(widget.eventModel.cup, style: cardStageStyle1) : Container(),
+                                child: Text(widget.eventModel.cup, style: cardStageStyle1),
                               ),
                               const SizedBox(
                                 height: 16,
@@ -115,15 +113,7 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                                             bool validURL = Uri.parse(widget.eventModel.problemLink).isAbsolute; // check if valid url
                                             if(!validURL){
                                               print('here');
-                                              if(isKriti)
-                                                {
-                                                  await launchUrl(Uri.parse(kritiWebsiteLink),mode: LaunchMode.externalApplication); // if url is not correct
-
-                                                }
-                                              else
-                                                {
-                                                  await launchUrl(Uri.parse(sahyogWebsiteLink),mode: LaunchMode.externalApplication); // if url is not correct
-                                                }
+                                              await launchUrl(Uri.parse(kritiWebsiteLink),mode: LaunchMode.externalApplication); // if url is not correct
                                             }
                                             else{
                                               print('there');
@@ -186,7 +176,7 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                       ),
                     ),
                   ]),
-                  ClubsListSection(clubs: widget.eventModel.clubs),
+                  ClubsListSection(eventModel: widget.eventModel),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../globals/enums.dart';
 import 'kriti/kriti_home.dart';
 import 'manthan/manthan_home.dart';
-import 'sahyog/sahyog_home.dart';
 import 'spardha/spardha_home.dart';
 import '../stores/common_store.dart';
 import 'gc_standings.dart';
@@ -32,9 +31,9 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
             ? const GCStandingsPage()
             : commonStore.competition == Competitions.spardha
                 ? const SpardhaHome()
-                : commonStore.competition == Competitions.kriti
+                : (commonStore.competition == Competitions.kriti
                     ? const KritiHome()
-                    : commonStore.competition == Competitions.manthan ? const ManthanHome() : const SahyogHome();
+                    : const ManthanHome());
       },
     );
   }
