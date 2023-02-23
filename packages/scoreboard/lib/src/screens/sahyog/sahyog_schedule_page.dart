@@ -11,6 +11,7 @@ import '../../stores/sahyog_store.dart';
 import '../../widgets/cards/kriti_schedule_card.dart';
 import '../../widgets/common/err_reload.dart';
 import '../../widgets/common/kriti_filter_bar.dart';
+import '../../widgets/common/sahyog_filter_bar.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
 
@@ -37,7 +38,7 @@ class _SahyogSchedulePageState extends State<SahyogSchedulePage> {
         mainAxisSize: MainAxisSize.min,
         children: [
           const TopBar(),
-          const KritiFilterBar(),
+          const SahyogFilterBar(),
           FutureBuilder<List<SahyogEventModel>>(
               future: APIService(context).getSahyogSchedule(commonStore.viewType),
               builder: (context, snapshot) {

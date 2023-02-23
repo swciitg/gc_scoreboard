@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:scoreboard/src/widgets/common/sahyog_filter_bar.dart';
 
 import '../../functions/sahyog_schedule_filter.dart';
 import '../../globals/styles.dart';
@@ -37,7 +38,7 @@ class _SahyogResultsPageState extends State<SahyogResultsPage> {
       child: Column(
         children: [
           const TopBar(),
-          const KritiFilterBar(),
+          const SahyogFilterBar(),
           FutureBuilder<List<SahyogEventModel>>(
               future: APIService(context).getSahyogResults(commonStore.viewType),
               builder: (context, snapshot) {

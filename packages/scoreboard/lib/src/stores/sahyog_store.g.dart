@@ -83,6 +83,17 @@ mixin _$SahyogStore on _SahyogStore, Store {
   }
 
   @override
+  void changeDifficulty(String e) {
+    final _$actionInfo = _$_SahyogStoreActionController.startAction(
+        name: '_SahyogStore.changeDifficulty');
+    try {
+      return super.changeDifficulty(e);
+    } finally {
+      _$_SahyogStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void changeSelectedClub(String c) {
     final _$actionInfo = _$_SahyogStoreActionController.startAction(
         name: '_SahyogStore.changeSelectedClub');

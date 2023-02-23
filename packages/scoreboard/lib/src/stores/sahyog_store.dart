@@ -27,6 +27,12 @@ abstract class _SahyogStore with Store {
     selectedEvent = e;
   }
 
+  @action
+  void changeDifficulty(String e)
+  {
+    difficulty = e;
+  }
+
 
   @action
   void changeSelectedClub(String c) {

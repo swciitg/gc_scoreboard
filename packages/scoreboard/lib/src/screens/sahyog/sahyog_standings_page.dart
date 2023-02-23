@@ -6,6 +6,7 @@ import '../../services/api.dart';
 import '../../stores/sahyog_store.dart';
 import '../../widgets/common/err_reload.dart';
 import '../../widgets/common/kriti_filter_bar.dart';
+import '../../widgets/common/sahyog_filter_bar.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
 import '../../widgets/standings_page/standingboard.dart';
@@ -31,7 +32,7 @@ class _SahyogStandingsPageState extends State<SahyogStandingsPage> {
         child: Column(
           children: [
             const TopBar(),
-            const KritiFilterBar(),
+            const SahyogFilterBar(),
             FutureBuilder<Map<String, dynamic>>(
               future: APIService(context).getSahyogStandings(),
               builder: (context, snapshot) {

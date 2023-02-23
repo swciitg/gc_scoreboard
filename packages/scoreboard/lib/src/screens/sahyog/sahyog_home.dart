@@ -36,7 +36,7 @@ class _SahyogHomeState extends State<SahyogHome> {
             preferredSize: Size.fromHeight(56), child: AppBarHomeComponent()),
         body: commonStore.viewType == ViewType.user
             ? tabs[commonStore.page]
-            : (commonStore.isKritiAdmin
+            : (commonStore.isSahyogAdmin
             ? tabs[commonStore.page]
             : const RestrictedPage()),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
