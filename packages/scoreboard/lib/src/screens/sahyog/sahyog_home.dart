@@ -6,6 +6,7 @@ import '../../globals/enums.dart';
 import '../../stores/common_store.dart';
 import '../../widgets/common/bottom_navigation_bar.dart';
 import '../../widgets/common/home_app_bar.dart';
+import '../../widgets/common/restricted_page.dart';
 import '../../widgets/schedule_page/add_button.dart';
 import 'forms/add_sahyog_event_form.dart';
 import 'sahyog_results_page.dart';
@@ -35,18 +36,14 @@ class _SahyogHomeState extends State<SahyogHome> {
             preferredSize: Size.fromHeight(56), child: AppBarHomeComponent()),
         body: commonStore.viewType == ViewType.user
             ? tabs[commonStore.page]
-            : tabs[commonStore.page],
-        // commonStore.viewType == ViewType.user
-        //     ? tabs[commonStore.page]
-        //     : (commonStore.isKritiAdmin
-        //     ? tabs[commonStore.page]
-        //     : const RestrictedPage()),
+            : (commonStore.isKritiAdmin
+            ? tabs[commonStore.page]
+            : const RestrictedPage()),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: commonStore.viewType == ViewType.admin &&
-            commonStore.page == Pages.schedule
-      //     commonStore.viewType == ViewType.admin &&
-      // commonStore.isSahyogAdmin &&
-      // commonStore.page == Pages.schedule
+        floatingActionButton:
+          commonStore.viewType == ViewType.admin &&
+      commonStore.isSahyogAdmin &&
+      commonStore.page == Pages.schedule
             ? GestureDetector(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
@@ -54,7 +51,6 @@ class _SahyogHomeState extends State<SahyogHome> {
           },
           child: const AddButton(
             text: 'Add event',
-
             width: 130,
           ),
         )

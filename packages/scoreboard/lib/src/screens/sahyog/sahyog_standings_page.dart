@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import '../../functions/sahyog_standings_filter.dart';
 import '../../services/api.dart';
 import '../../stores/sahyog_store.dart';
 import '../../widgets/common/err_reload.dart';
@@ -32,9 +33,7 @@ class _SahyogStandingsPageState extends State<SahyogStandingsPage> {
             const TopBar(),
             const KritiFilterBar(),
             FutureBuilder<Map<String, dynamic>>(
-              future: APIService(context).getKritiStandings(),
-              // future: APIService(context).getSahyogStandings(),
-
+              future: APIService(context).getSahyogStandings(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Expanded(
@@ -50,9 +49,7 @@ class _SahyogStandingsPageState extends State<SahyogStandingsPage> {
                 } else if (snapshot.hasData) {
                   return Observer(builder: (context) {
                     print(snapshot.data!);
-                    List<dynamic> filteredEventSchedules = [];
-
-                    // List<dynamic> filteredEventSchedules = filterKritiStandings(input: snapshot.data!, event: kritiStore.selectedEvent);
+                    List<dynamic> filteredEventSchedules = filterSahyogStandings(input: snapshot.data!, event: sahyogStore.selectedEvent);
                     return Expanded(
                         child: StandingBoard(
                             hostelStandings: filteredEventSchedules));

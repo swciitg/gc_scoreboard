@@ -7,15 +7,19 @@ class SahyogStore = _SahyogStore with _$SahyogStore;
 abstract class _SahyogStore with Store {
 
   @observable
-  Club selectedClub = Club.overall;
+  SahyogClub selectedClub = SahyogClub.overall;
 
   @observable
   String selectedEvent = 'Overall';
 
+  @observable
+  String difficulty = "Overall";
+
   @action
   void setFiltersToDefault() {
-    selectedClub = Club.overall;
+    selectedClub = SahyogClub.overall;
     selectedEvent = 'Overall';
+    difficulty = "Overall";
   }
 
   @action
@@ -26,7 +30,7 @@ abstract class _SahyogStore with Store {
 
   @action
   void changeSelectedClub(String c) {
-    Club.values.firstWhere((element) {
+    SahyogClub.values.firstWhere((element) {
       if (c == element.clubName) {
         selectedClub = element;
         return true;

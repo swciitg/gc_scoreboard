@@ -13,13 +13,13 @@ mixin _$SahyogStore on _SahyogStore, Store {
       Atom(name: '_SahyogStore.selectedClub', context: context);
 
   @override
-  Club get selectedClub {
+  SahyogClub get selectedClub {
     _$selectedClubAtom.reportRead();
     return super.selectedClub;
   }
 
   @override
-  set selectedClub(Club value) {
+  set selectedClub(SahyogClub value) {
     _$selectedClubAtom.reportWrite(value, super.selectedClub, () {
       super.selectedClub = value;
     });
@@ -38,6 +38,22 @@ mixin _$SahyogStore on _SahyogStore, Store {
   set selectedEvent(String value) {
     _$selectedEventAtom.reportWrite(value, super.selectedEvent, () {
       super.selectedEvent = value;
+    });
+  }
+
+  late final _$difficultyAtom =
+      Atom(name: '_SahyogStore.difficulty', context: context);
+
+  @override
+  String get difficulty {
+    _$difficultyAtom.reportRead();
+    return super.difficulty;
+  }
+
+  @override
+  set difficulty(String value) {
+    _$difficultyAtom.reportWrite(value, super.difficulty, () {
+      super.difficulty = value;
     });
   }
 
@@ -81,7 +97,8 @@ mixin _$SahyogStore on _SahyogStore, Store {
   String toString() {
     return '''
 selectedClub: ${selectedClub},
-selectedEvent: ${selectedEvent}
+selectedEvent: ${selectedEvent},
+difficulty: ${difficulty}
     ''';
   }
 }

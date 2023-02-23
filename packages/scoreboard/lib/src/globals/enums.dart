@@ -91,7 +91,13 @@ enum Cup {
 
 enum SahyogClub {
   overall("Overall"),
-  eCell("E-Cell");
+  rnr("Rights and Responsibilities Club"),
+  redRibbon("Red Ribbon Club"),
+  youth("Youth Empowerment Club"),
+  saathi("Saathi"),
+  social("Social Service Club"),
+  substance("Substance Abuse Awareness Club"),
+  academic("Academic Initiatives Club");
 
   final String clubName;
   const SahyogClub(this.clubName);

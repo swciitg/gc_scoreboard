@@ -7,6 +7,7 @@ import '../../../functions/validator.dart';
 import '../../../globals/colors.dart';
 import '../../../globals/constants.dart';
 import '../../../models/sahyog_models/sahyog_event_model.dart';
+import '../../../services/api.dart';
 import '../../../stores/static_store.dart';
 import '../../../widgets/add_event/datepicker_color.dart';
 import '../../../widgets/add_event/drop_down.dart';
@@ -124,13 +125,13 @@ class _AddSahyogEventFormState extends State<AddSahyogEventForm> {
 
           try {
             if (widget.event != null) {
-              // update event schedule
-              // await APIService(context).updateSahyogEvent(
-              //     SahyogEventModel.fromJson(data));
+              //update event schedule
+              await APIService(context).updateSahyogEvent(
+                  SahyogEventModel.fromJson(data));
               if (!mounted) return;
               showSnackBar(context, "Event Edited successfully");
             } else {
-              // await APIService(context).postSahyogEventSchedule(data);
+              await APIService(context).postSahyogEventSchedule(data);
               if (!mounted) return;
               showSnackBar(
                   context, "Event schedule posted successfully");
