@@ -252,8 +252,9 @@ class HostelsPointsSection extends StatelessWidget {
                         SizedBox(
                           width: 105,
                           child: Text(
-                            overflow: TextOverflow.visible,
                             eventModel.results[position].hostelName!,
+                            overflow: TextOverflow.visible,
+
                             style: cardVenueStyle1,
                           ),
                         ),

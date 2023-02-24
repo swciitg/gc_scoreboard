@@ -18,8 +18,8 @@ class SahyogFilterBar extends StatefulWidget {
 }
 
 class _FilterBarState extends State<SahyogFilterBar> {
-  List<String> diff = ['Overall','High Prep', "Mid Prep", 'Low Prep'];
-  List<String> clubNames = Club.values.map((e) => e.clubName).toList();
+  List<String> diff = ['Overall','High', "Mid", 'Low'];
+  List<String> clubNames = SahyogClub.values.map((e) => e.clubName).toList();
   @override
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
@@ -201,7 +201,8 @@ class _FilterBarState extends State<SahyogFilterBar> {
                                         height: 18,
                                         child: Text(
                                             sahyogStore.selectedClub.clubName,
-                                            style: popUpItemStyle),
+                                            style: popUpItemStyle,
+                                        overflow: TextOverflow.ellipsis,),
                                       )
                                     ],
                                   ),

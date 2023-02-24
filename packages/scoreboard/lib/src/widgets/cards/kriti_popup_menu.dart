@@ -92,14 +92,14 @@ class _KritiPopupMenuState extends State<KritiPopupMenu> {
               await APIService(context)
                   .deleteKritiEventResult(widget.eventModel.id!);
             } else {
-              //await APIService(context).deleteSahyogEventResult(widget.eventModel.id!);
+              await APIService(context).deleteSahyogEventResult(widget.eventModel.id!);
             }
             showSnackBar(context, "Result Deleted");
           } else {
             if (isKriti) {
               await APIService(context).deleteKritiEvent(widget.eventModel.id!);
             } else {
-              //await APIService(context).deleteSahyogEvent(widget.eventModel.id!);
+              await APIService(context).deleteSahyogEvent(widget.eventModel.id!);
             }
             showSnackBar(context, "Event Deleted");
           }

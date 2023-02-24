@@ -81,14 +81,14 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                               ),
                               SizedBox(
                                 height: 20,
-                                child: isKriti ? Text(widget.eventModel.cup, style: cardStageStyle1) : Container(),
+                                child: isKriti ? Text(widget.eventModel.cup, style: cardStageStyle1) : Text(widget.eventModel.difficulty, style: cardStageStyle1,),
                               ),
                               const SizedBox(
                                 height: 16,
                               ),
                               Row(
                                 children: [
-                                  Container(
+                                  isKriti ? Container(
                                     height: 26,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8),
@@ -102,8 +102,8 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                                           cardCategoryStyle
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(width: 8,),
+                                  ) : Container(),
+                                  isKriti ?SizedBox(width: 8,) : Container(),
                                   GestureDetector(
                                     onTap: () async {
                                       if(!isLinkPressed)

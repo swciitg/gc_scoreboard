@@ -2,17 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/src/widgets/common/sahyog_filter_bar.dart';
-
 import '../../functions/sahyog_schedule_filter.dart';
 import '../../globals/styles.dart';
-import '../../models/kriti_models/kriti_event_model.dart';
 import '../../models/sahyog_models/sahyog_event_model.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
 import '../../stores/sahyog_store.dart';
 import '../../widgets/cards/kriti_result_card.dart';
 import '../../widgets/common/err_reload.dart';
-import '../../widgets/common/kriti_filter_bar.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
 
@@ -60,9 +57,7 @@ class _SahyogResultsPageState extends State<SahyogResultsPage> {
                 } else if (snapshot.hasData) {
                   List<SahyogEventModel> allSahyogResults = snapshot.data!;
                   return Observer(builder: (context) {
-
-                    List<SahyogEventModel> filteredEventSchedules = sahyogFilterSchedule(input: allSahyogResults, difficulty: 'Overall', club: sahyogStore.selectedClub);
-
+                    List<SahyogEventModel> filteredEventSchedules = sahyogFilterSchedule(input: allSahyogResults, difficulty: sahyogStore.difficulty, club: sahyogStore.selectedClub);
                     return Expanded(
                         child: filteredEventSchedules.isNotEmpty
                             ? ListView.builder(

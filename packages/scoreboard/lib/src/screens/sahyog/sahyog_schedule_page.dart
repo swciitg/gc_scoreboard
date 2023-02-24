@@ -59,9 +59,10 @@ class _SahyogSchedulePageState extends State<SahyogSchedulePage> {
                   );
                 } else if (snapshot.hasData) {
                   List<SahyogEventModel> allSahyogEventSchedules = snapshot.data!;
-                  List<SahyogEventModel> filteredEventSchedules = sahyogFilterSchedule(input: allSahyogEventSchedules, difficulty: 'Overall', club: sahyogStore.selectedClub);
 
                   return Observer(builder: (context) {
+                    List<SahyogEventModel> filteredEventSchedules = sahyogFilterSchedule(input: allSahyogEventSchedules, difficulty: sahyogStore.difficulty, club: sahyogStore.selectedClub);
+
                     return Expanded(
                         child: filteredEventSchedules.isNotEmpty
                             ? ListView.builder(
