@@ -6,7 +6,7 @@ enum Competitions {
   spardha("Spardha", "assets/spardha2.svg"),
   kriti("Kriti", "assets/kriti2.svg"),
   manthan("Manthan", "assets/manthan2.svg"),
-  sahyog("Sahyog", "assets/manthan2.svg"),
+  sahyog("Sahyog", "assets/sahyog2.svg"),
   gc("GC", "assets/gc.svg");
 
   final String name;
