@@ -9,7 +9,7 @@ import '../../widgets/common/top_bar.dart';
 import '../../widgets/standings_page/standingboard.dart';
 import 'package:provider/provider.dart';
 
-import '../../widgets/common/kriti_filter_bar.dart';
+import '../../widgets/filters/kriti_filter_bar.dart';
 
 class KritiStandingsPage extends StatefulWidget {
   const KritiStandingsPage({super.key});

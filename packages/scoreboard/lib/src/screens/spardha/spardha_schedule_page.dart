@@ -8,7 +8,7 @@ import '../../services/api.dart';
 import '../../stores/common_store.dart';
 import '../../stores/spardha_store.dart';
 import '../../widgets/cards/schedule_card.dart';
-import '../../widgets/common/filter_bar.dart';
+import '../../widgets/filters/spardha_filter_bar.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
 import '../../widgets/common/err_reload.dart';
@@ -37,7 +37,7 @@ class _SchedulePageState extends State<SchedulePage> {
         mainAxisSize: MainAxisSize.min,
         children: [
           const TopBar(),
-          const FilterBar(),
+          const SpardhaFilterBar(),
           FutureBuilder<List<EventModel>>(
               future:
                   APIService(context).getSpardhaSchedule(commonStore.viewType),

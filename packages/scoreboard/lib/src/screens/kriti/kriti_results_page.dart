@@ -10,7 +10,7 @@ import '../../stores/kriti_store.dart';
 import '../../widgets/common/err_reload.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
-import '../../widgets/common/kriti_filter_bar.dart';
+import '../../widgets/filters/kriti_filter_bar.dart';
 import '../../widgets/cards/kriti_result_card.dart';
 
 
