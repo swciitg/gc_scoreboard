@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/globals/enums.dart';
 import '../../globals/colors.dart';
 import '../../globals/constants.dart';
 import '../../globals/styles.dart';

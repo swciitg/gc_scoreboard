@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:scoreboard/src/widgets/filters/gc_filter_bar.dart';
 import '../globals/styles.dart';
 import '../widgets/common/err_reload.dart';
 import '../widgets/common/shimmer.dart';
@@ -21,7 +22,6 @@ class GCStandingsPage extends StatefulWidget {
 }
 
 class _GCStandingsPageState extends State<GCStandingsPage> {
-  final _itemsCategory = ['Men', 'Women'];
 
   @override
   Widget build(BuildContext context) {
@@ -40,96 +40,30 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
           padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
           child: Column(
             children: [
-              SizedBox(
-                height: 56,
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-                  child: Container(
-                    height: 56,
-                    decoration: boxDecoration,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(13, 0, 0, 0),
-                      child: PopupMenuButton(
-                        constraints: const BoxConstraints(maxHeight: 300),
-                        position: PopupMenuPosition.under,
-                        color: Themes.cardColor1,
-                        onSelected: (String item) {
-                          gcStore.changeSelectedCategory(item);
-                          setState(() {});
-                        },
-                        itemBuilder: (BuildContext context) => _itemsCategory
-                            .map((item) => PopupMenuItem<String>(
-                                  value: item,
-                                  child: SizedBox(
-                                    width: double.infinity,
-                                    child: SizedBox(
-                                      width: MediaQuery.of(context).size.width,
-                                      child: Text(
-                                        'General Championship [$item]',
-                                        style: popUpItemStyle,
-                                      ),
-                                    ),
-                                  ),
-                                ))
-                            .toList(),
-                        child: Container(
-                          height: 56,
-                          decoration: boxDecoration,
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SizedBox(
-                                      height: 12,
-                                      child: Text('Category',
-                                          style: popUpHeadingStyle),
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    SizedBox(
-                                      height: 18,
-                                      child: Text(
-                                          'General Championship [${gcStore.selectedCategory.categoryName}]',
-                                          style: popUpItemStyle),
-                                    )
-                                  ],
-                                ),
-                                popUpIcon,
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              const GCFilterBar(),
               const SizedBox(
                 height: 25,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: SvgPicture.asset(
-                        "packages/scoreboard/assets/trophy.svg",
-                      ),
+              Observer(
+                builder: (context){
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: SvgPicture.asset(
+                            "packages/scoreboard/assets/trophy.svg",
+                          ),
+                        ),
+                        Text(
+                          'GC [${gcStore.selectedCategory.categoryName}] Standings',
+                          style: standingsHeadingStyle,
+                        ),
+                      ],
                     ),
-                    Text(
-                      'GC [${gcStore.selectedCategory.categoryName}] Standings',
-                      style: standingsHeadingStyle,
-                    ),
-                  ],
-                ),
+                  );
+                },
               ),
               const SizedBox(
                 height: 12,

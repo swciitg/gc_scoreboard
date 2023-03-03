@@ -5,7 +5,7 @@ import '../../widgets/common/shimmer.dart';
 import '../../functions/spardha_filter_standings.dart';
 import '../../services/api.dart';
 import '../../stores/spardha_store.dart';
-import '../../widgets/common/filter_bar.dart';
+import '../../widgets/filters/spardha_filter_bar.dart';
 import '../../widgets/common/top_bar.dart';
 import '../../widgets/standings_page/standingboard.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +32,7 @@ class _StandingsPageState extends State<StandingsPage> {
         child: Column(
           children: [
             const TopBar(),
-            const FilterBar(),
+            const SpardhaFilterBar(),
             FutureBuilder<Map<String, dynamic>>(
               future: APIService(context).getSpardhaStandings(),
               builder: (context, snapshot) {

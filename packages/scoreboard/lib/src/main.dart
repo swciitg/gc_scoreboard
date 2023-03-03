@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/widgets/common/filter_bar.dart';
-import 'package:scoreboard/src/widgets/common/home_app_bar.dart';
-import 'package:scoreboard/src/widgets/common/shimmer.dart';
-import 'package:scoreboard/src/widgets/common/top_bar.dart';
 import 'package:shimmer/shimmer.dart';
 import 'functions/auth_user_helper.dart';
 import 'globals/colors.dart';
@@ -16,6 +12,10 @@ import 'stores/manthan_store.dart';
 import 'stores/sahyog_store.dart';
 import 'stores/spardha_store.dart';
 import 'widgets/common/err_reload.dart';
+import 'widgets/common/home_app_bar.dart';
+import 'widgets/common/shimmer.dart';
+import 'widgets/common/top_bar.dart';
+import 'widgets/filters/spardha_filter_bar.dart';
 
 class GCScoreBoard extends StatefulWidget {
   final Map<String, String> userInfo;
@@ -79,7 +79,7 @@ class _GCScoreBoardState extends State<GCScoreBoard> {
                           Shimmer.fromColors(
                             baseColor: Themes.kShimmerBaseColor,
                             highlightColor: Themes.kShimmerHighlightColor,
-                            child: const IgnorePointer(child: FilterBar()),
+                            child: const IgnorePointer(child: SpardhaFilterBar()),
                           ),
                           Expanded(
                               child: ShowShimmer(

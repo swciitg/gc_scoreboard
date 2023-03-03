@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
-
 import '../../globals/styles.dart';
 
 class DateWidget extends StatelessWidget {
