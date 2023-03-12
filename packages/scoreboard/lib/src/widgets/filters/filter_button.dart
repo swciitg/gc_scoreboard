@@ -63,7 +63,7 @@ class _FilterButtonState extends State<FilterButton> {
                         ),
                         SizedBox(
                           height: 18,
-                          child: Text(widget.value, style: popUpItemStyle),
+                          child: Text(widget.value, style: popUpItemStyle, overflow: TextOverflow.ellipsis,),
                         )
                       ],
                     ),
