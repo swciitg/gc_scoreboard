@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import '../kriti_models/kriti_result_model.dart';
+import 'manthan_result_model.dart';
 part 'manthan_event_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
@@ -10,7 +10,7 @@ class ManthanEventModel {
   String module; // Men/Women
   DateTime date;
   String venue;
-  List<KritiResultModel> results;
+  List<ManthanResultModel> results;
   String? posterEmail = '';
   bool resultAdded;
   String? victoryStatement = '';
