@@ -10,7 +10,7 @@ import '../../widgets/cards/results_card.dart';
 import '../../models/spardha_models/spardha_event_model.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
-import '../../widgets/common/filter_bar.dart';
+import '../../widgets/filters/spardha_filter_bar.dart';
 import '../../widgets/common/err_reload.dart';
 
 class ResultsPage extends StatefulWidget {
@@ -36,7 +36,7 @@ class _ResultsPageState extends State<ResultsPage> {
       child: Column(
         children: [
           const TopBar(),
-          const FilterBar(),
+          const SpardhaFilterBar(),
           FutureBuilder<List<EventModel>>(
               future:
                   APIService(context).getSpardhaResults(commonStore.viewType),

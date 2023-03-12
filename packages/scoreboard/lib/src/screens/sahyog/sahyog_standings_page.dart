@@ -1,65 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import '../../widgets/common/err_reload.dart';
-import '../../widgets/common/shimmer.dart';
-import '../../functions/spardha_filter_standings.dart';
+import 'package:provider/provider.dart';
+import '../../functions/sahyog_standings_filter.dart';
 import '../../services/api.dart';
-import '../../stores/spardha_store.dart';
-import '../../widgets/filters/spardha_filter_bar.dart';
+import '../../stores/sahyog_store.dart';
+import '../../widgets/common/err_reload.dart';
+import '../../widgets/filters/kriti_filter_bar.dart';
+import '../../widgets/filters/sahyog_filter_bar.dart';
+import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
 import '../../widgets/standings_page/standingboard.dart';
-import 'package:provider/provider.dart';
 
-class StandingsPage extends StatefulWidget {
-  const StandingsPage({super.key});
+class SahyogStandingsPage extends StatefulWidget {
+  const SahyogStandingsPage({Key? key}) : super(key: key);
 
   @override
-  State<StandingsPage> createState() => _StandingsPageState();
+  State<SahyogStandingsPage> createState() => _SahyogStandingsPageState();
 }
 
-class _StandingsPageState extends State<StandingsPage> {
+class _SahyogStandingsPageState extends State<SahyogStandingsPage> {
+
   @override
   Widget build(BuildContext context) {
-    var spardhaStore = context.read<SpardhaStore>();
+    var sahyogStore = context.read<SahyogStore>();
 
     reloadCallback() {
-      // reload page
       setState(() {});
     }
-
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 0),
         child: Column(
           children: [
             const TopBar(),
-            const SpardhaFilterBar(),
+            const SahyogFilterBar(),
             FutureBuilder<Map<String, dynamic>>(
-              future: APIService(context).getSpardhaStandings(),
+              future: APIService(context).getSahyogStandings(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Expanded(
                       child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 16),
-                      child: ShowShimmer(
-                        height: 400,
-                        width: MediaQuery.of(context).size.width,
-                      ),
-                    ),
-                  ));
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: ShowShimmer(
+                            height: 400,
+                            width: MediaQuery.of(context).size.width,
+                          ),
+                        ),
+                      ));
                 } else if (snapshot.hasData) {
                   return Observer(builder: (context) {
                     print(snapshot.data!);
-                    List<dynamic> filteredEventSchedules = filterStandings(
-                        input: snapshot.data!,
-                        event: spardhaStore.selectedEvent,
-                        category: spardhaStore.selectedCategory);
+                    List<dynamic> filteredEventSchedules = filterSahyogStandings(input: snapshot.data!, event: sahyogStore.selectedEvent);
                     return Expanded(
                         child: StandingBoard(
                             hostelStandings: filteredEventSchedules));
                   });
                 }
-
                 return ErrorReloadPage(apiFunction: reloadCallback);
               },
             )

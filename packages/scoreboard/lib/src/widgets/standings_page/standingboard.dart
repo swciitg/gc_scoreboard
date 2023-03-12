@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/globals/enums.dart';
 import '../../globals/colors.dart';
 import '../../globals/constants.dart';
 import '../../globals/styles.dart';
@@ -25,7 +24,6 @@ class _StandingBoardState extends State<StandingBoard> {
   @override
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
-    bool isGC = commonStore.competition == Competitions.gc;
     return Container(
       margin: const EdgeInsets.fromLTRB(8, 16, 8, 0),
       decoration: const BoxDecoration(
@@ -132,11 +130,7 @@ class _StandingBoardState extends State<StandingBoard> {
                         flex: 1,
                         child: Container(
                           alignment: Alignment.centerRight,
-                          child: isGC ?Text(
-                              widget.hostelStandings[index]["points"].round()
-                                  .toString(),
-                              textAlign: TextAlign.left,
-                              style: standingStyle2) :Text(
+                          child: Text(
                               widget.hostelStandings[index]["points"]
                                   .toString(),
                               textAlign: TextAlign.left,

@@ -9,7 +9,7 @@ import '../../widgets/common/top_bar.dart';
 import '../../widgets/standings_page/standingboard.dart';
 import 'package:provider/provider.dart';
 
-import '../../widgets/common/kriti_filter_bar.dart';
+import '../../widgets/filters/kriti_filter_bar.dart';
 
 class KritiStandingsPage extends StatefulWidget {
   const KritiStandingsPage({super.key});
@@ -34,7 +34,7 @@ class _StandingsPageState extends State<KritiStandingsPage> {
             const TopBar(),
             const KritiFilterBar(),
             FutureBuilder<Map<String, dynamic>>(
-              future: APIService(context).getKritStandings(),
+              future: APIService(context).getKritiStandings(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Expanded(

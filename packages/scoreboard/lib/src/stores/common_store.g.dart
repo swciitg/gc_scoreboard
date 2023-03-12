@@ -120,6 +120,22 @@ mixin _$CommonStore on _CommonStore, Store {
     });
   }
 
+  late final _$isSahyogAdminAtom =
+      Atom(name: '_CommonStore.isSahyogAdmin', context: context);
+
+  @override
+  bool get isSahyogAdmin {
+    _$isSahyogAdminAtom.reportRead();
+    return super.isSahyogAdmin;
+  }
+
+  @override
+  set isSahyogAdmin(bool value) {
+    _$isSahyogAdminAtom.reportWrite(value, super.isSahyogAdmin, () {
+      super.isSahyogAdmin = value;
+    });
+  }
+
   late final _$_CommonStoreActionController =
       ActionController(name: '_CommonStore', context: context);
 
@@ -201,6 +217,17 @@ mixin _$CommonStore on _CommonStore, Store {
   }
 
   @override
+  void setSahyogAdmin(bool input) {
+    final _$actionInfo = _$_CommonStoreActionController.startAction(
+        name: '_CommonStore.setSahyogAdmin');
+    try {
+      return super.setSahyogAdmin(input);
+    } finally {
+      _$_CommonStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 competition: ${competition},
@@ -209,7 +236,8 @@ isAdmin: ${isAdmin},
 viewType: ${viewType},
 isSpardhaAdmin: ${isSpardhaAdmin},
 isKritiAdmin: ${isKritiAdmin},
-isManthanAdmin: ${isManthanAdmin}
+isManthanAdmin: ${isManthanAdmin},
+isSahyogAdmin: ${isSahyogAdmin}
     ''';
   }
 }
