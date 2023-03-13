@@ -22,7 +22,6 @@ class FilterButton extends StatefulWidget {
 class _FilterButtonState extends State<FilterButton> {
   @override
   Widget build(BuildContext context) {
-    print("Label = ${widget.label}, items=${widget.items}");
     return Flexible(
         flex: 3,
         child: Padding(
