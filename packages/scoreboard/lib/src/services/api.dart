@@ -378,6 +378,7 @@ class APIService {
     try {
       Response resp1 = await dio.get("/gc/sahyog/standings/all-events");
       Response resp2 = await dio.get("/gc/sahyog/standings");
+      print("Sahyog \n $resp1 \n $resp2 \n done");
       return {
         "overall": resp2.data["details"],
         "event-wise": resp1.data["details"]

@@ -22,6 +22,7 @@ class FilterButton extends StatefulWidget {
 class _FilterButtonState extends State<FilterButton> {
   @override
   Widget build(BuildContext context) {
+    print("Label = ${widget.label}, items=${widget.items}");
     return Flexible(
         flex: 3,
         child: Padding(
@@ -42,35 +43,41 @@ class _FilterButtonState extends State<FilterButton> {
                       ),
                     ))
                 .toList(),
-            child: Container(
-              height: 56,
-              decoration: boxDecoration,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
+            child: LayoutBuilder(
+              builder: (context,constraints) {
+                double maxWidth = constraints.maxWidth;
+                return Container(
+                  height: 56,
+                  decoration: boxDecoration,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(
-                          height: 12,
-                          child: Text(widget.label, style: popUpHeadingStyle),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 12,
+                              child: Text(widget.label, style: popUpHeadingStyle),
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            SizedBox(
+                              height: 18,
+                              width: maxWidth*0.7,
+                              child: Text(widget.value, style: popUpItemStyle, overflow: TextOverflow.ellipsis,),
+                            )
+                          ],
                         ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        SizedBox(
-                          height: 18,
-                          child: Text(widget.value, style: popUpItemStyle, overflow: TextOverflow.ellipsis,),
-                        )
+                        popUpIcon,
                       ],
                     ),
-                    popUpIcon,
-                  ],
-                ),
-              ),
+                  ),
+                );
+              }
             ),
           ),
         ));
