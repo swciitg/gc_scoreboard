@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/src/functions/snackbar.dart';
+import 'package:scoreboard/src/models/manthan_models/manthan_event_model.dart';
+import 'package:scoreboard/src/models/manthan_models/manthan_result_model.dart';
 import '../functions/auth_user_helper.dart';
 import '../globals/constants.dart';
 import '../globals/enums.dart';
@@ -252,6 +254,21 @@ class APIService {
     }
   }
 
+  Future<void> addUpdateManthanResult(String eventID, List<ManthanResultModel> data,
+      String victoryStatement) async {
+    try {
+      List<Map> results = [];
+      for (var positionResults in data) {
+        results.add(positionResults.toJson());
+      }
+      Response resp = await dio.patch(
+          '/gc/manthan/event-schedule/result/$eventID',
+          data: {'victoryStatement': victoryStatement, 'results': results});
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
   Future<void> addUpdateSahyogResult(String eventID,
       List<SahyogResultModel> data, String victoryStatement) async {
     try {
@@ -430,6 +447,13 @@ class APIService {
       return Future.error(err);
     }
   }
+  Future<void> postManthanEventSchedule(Map<String, dynamic> data) async {
+    try {
+      await dio.post("/gc/manthan/event-schedule", data: data);
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
 
   Future<void> postSahyogEventSchedule(Map<String, dynamic> data) async {
     try {
@@ -442,6 +466,14 @@ class APIService {
   Future<void> updateKritiEvent(KritiEventModel event) async {
     try {
       await dio.patch('/gc/kriti/event-schedule/${event.id!}',
+          data: event.toJson());
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+  Future<void> updateManthanEvent(ManthanEventModel event) async {
+    try {
+      await dio.patch('/gc/manthan/event-schedule/${event.id!}',
           data: event.toJson());
     } on DioError catch (err) {
       return Future.error(err);
