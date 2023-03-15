@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -11,8 +12,6 @@ import 'kriti_clubs_section.dart';
 import 'menu_item.dart';
 import 'kriti_popup_menu.dart';
 
-
-
 class KritiResultCard extends StatefulWidget {
   final eventModel;
   const KritiResultCard({super.key, required this.eventModel});
@@ -22,7 +21,6 @@ class KritiResultCard extends StatefulWidget {
 }
 
 class _KritiResultCardState extends State<KritiResultCard> {
-
   bool isExpanded = false;
   List<PopupMenuEntry> popupOptions = [
     optionsMenuItem('Edit', 'edit result', Themes.kWhite),
@@ -55,7 +53,7 @@ class _KritiResultCardState extends State<KritiResultCard> {
                 children: [
                   Column(children: [
                     SizedBox(
-                      height: 98,
+                      height: isKriti ? 98 : 78,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -63,34 +61,52 @@ class _KritiResultCardState extends State<KritiResultCard> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 4),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 4),
                                 child: SizedBox(
                                   height: 28,
-                                  child: Text(widget.eventModel.event, style: cardEventStyle),
+                                  child: Text(widget.eventModel.event,
+                                      style: cardEventStyle),
                                 ),
                               ),
-                              SizedBox(
-                                height: 20,
-                                child: isKriti ? Text(widget.eventModel.cup, style: cardStageStyle1) : Container(),
-                              ),
+                              isKriti
+                                  ? SizedBox(
+                                      height: 20,
+                                      child: Text(widget.eventModel.cup,
+                                          style: cardStageStyle1))
+                                  : Container(
+                                      height: 26,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        color: Themes.kGrey,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8, vertical: 4),
+                                        child: Text(
+                                            widget.eventModel.difficulty,
+                                            style: cardCategoryStyle),
+                                      ),
+                                    ),
                               const SizedBox(
                                 height: 16,
                               ),
-                              Container(
-                                height: 26,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: Themes.kGrey,
-                                ),
-                                child: Padding(
-                                  padding:
-                                  const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                  child: Text(widget.eventModel.difficulty,
-                                      style:
-                                      cardCategoryStyle
-                                  ),
-                                ),
-                              ),
+                              isKriti
+                                  ? Container(
+                                      height: 26,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        color: Themes.kGrey,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8, vertical: 4),
+                                        child: Text(
+                                            widget.eventModel.difficulty,
+                                            style: cardCategoryStyle),
+                                      ),
+                                    )
+                                  : Container(),
                             ],
                           ),
                           Container(
@@ -130,7 +146,9 @@ class _KritiResultCardState extends State<KritiResultCard> {
                             ],
                           ),
                         ),
-                        SizedBox(width: 8,),
+                        SizedBox(
+                          width: 8,
+                        ),
                         GestureDetector(
                           onTap: () {
                             setState(() {
@@ -169,42 +187,43 @@ class _KritiResultCardState extends State<KritiResultCard> {
                   ),
                   isExpanded
                       ? Column(
-                    children: [
-                      const Divider(
-                        height: 32,
-                        color: Themes.bottomNavHighlightColor,
-                        thickness: 1,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4),
-                        child: SizedBox(
-                          height: 12,
-                          child: Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  const SizedBox(
-                                    width: 26,
-                                  ),
-                                  Text(
-                                    'Hostel',
-                                    style: cardResultStyle2,
-                                  ),
-                                ],
+                          children: [
+                            const Divider(
+                              height: 32,
+                              color: Themes.bottomNavHighlightColor,
+                              thickness: 1,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 4),
+                              child: SizedBox(
+                                height: 12,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        const SizedBox(
+                                          width: 26,
+                                        ),
+                                        Text(
+                                          'Hostel',
+                                          style: cardResultStyle2,
+                                        ),
+                                      ],
+                                    ),
+                                    Text(
+                                      'Points',
+                                      style: cardResultStyle2,
+                                    ),
+                                  ],
+                                ),
                               ),
-                              Text(
-                                'Points',
-                                style: cardResultStyle2,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      HostelsPointsSection(eventModel: widget.eventModel)
-                    ],
-                  ) : Container(),
+                            ),
+                            HostelsPointsSection(eventModel: widget.eventModel)
+                          ],
+                        )
+                      : Container(),
                 ],
               ),
             ),
@@ -218,17 +237,18 @@ class _KritiResultCardState extends State<KritiResultCard> {
 class HostelsPointsSection extends StatelessWidget {
   final eventModel;
 
-  const HostelsPointsSection({Key? key,required this.eventModel}) : super(key: key);
+  const HostelsPointsSection({Key? key, required this.eventModel})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         ListView.builder(
-          physics: NeverScrollableScrollPhysics(),
+            physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: eventModel.results.length,
-            itemBuilder: (context,position){
+            itemBuilder: (context, position) {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -242,7 +262,7 @@ class HostelsPointsSection extends StatelessWidget {
                           width: 16,
                           height: 18,
                           child: Text(
-                            (position+1).toString(),
+                            (position + 1).toString(),
                             style: cardVenueStyle1,
                           ),
                         ),
@@ -254,7 +274,6 @@ class HostelsPointsSection extends StatelessWidget {
                           child: Text(
                             eventModel.results[position].hostelName!,
                             overflow: TextOverflow.visible,
-
                             style: cardVenueStyle1,
                           ),
                         ),
@@ -276,6 +295,3 @@ class HostelsPointsSection extends StatelessWidget {
     );
   }
 }
-
-
-
