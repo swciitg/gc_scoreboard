@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import '../../functions/kriti_standings_filter.dart';
 import '../../functions/manthan_standings_filter.dart';
-import '../../stores/kriti_store.dart';
 import '../../stores/manthan_store.dart';
 import '../../widgets/common/err_reload.dart';
 import '../../widgets/common/shimmer.dart';
@@ -12,7 +10,6 @@ import '../../widgets/filters/manthan_filter_bar.dart';
 import '../../widgets/standings_page/standingboard.dart';
 import 'package:provider/provider.dart';
 
-import '../../widgets/filters/kriti_filter_bar.dart';
 
 class ManthanStandingsPage extends StatefulWidget {
   const ManthanStandingsPage({super.key});

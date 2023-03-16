@@ -2,22 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
-
-import '../../functions/kriti_schedule_filter.dart';
 import '../../functions/manthan_schedule_filter.dart';
 import '../../globals/styles.dart';
-import '../../models/kriti_models/kriti_event_model.dart';
 import '../../models/manthan_models/manthan_event_model.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
-import '../../stores/kriti_store.dart';
 import '../../stores/manthan_store.dart';
 import '../../widgets/cards/manthan_schedule_card.dart';
 import '../../widgets/common/err_reload.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
-import '../../widgets/filters/kriti_filter_bar.dart';
-import '../../widgets/cards/kriti_schedule_card.dart';
 import '../../widgets/filters/manthan_filter_bar.dart';
 
 class ManthanSchedulePage extends StatefulWidget {
