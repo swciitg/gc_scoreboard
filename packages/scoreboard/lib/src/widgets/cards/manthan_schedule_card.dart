@@ -191,7 +191,6 @@ class _ManthanScheduleCardState extends State<ManthanScheduleCard> {
                       ),
                     ),
                   ]),
-                  ClubsListSection(clubs: widget.eventModel.clubs),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
