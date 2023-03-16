@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/models/kriti_models/kriti_event_model.dart';
-import 'package:url_launcher/url_launcher.dart';
-import '../../functions/snackbar.dart';
 import '../../globals/colors.dart';
-import '../../globals/constants.dart';
 import '../../globals/enums.dart';
 import '../../globals/styles.dart';
 import '../../models/manthan_models/manthan_event_model.dart';
 import '../../stores/common_store.dart';
 import 'card_date_widget.dart';
-import 'kriti_clubs_section.dart';
-import 'kriti_popup_menu.dart';
 import 'manthan_popup_menu.dart';
 import 'menu_item.dart';
 
@@ -67,7 +60,7 @@ class _ManthanScheduleCardState extends State<ManthanScheduleCard> {
                 children: [
                   Column(children: [
                     SizedBox(
-                      height: 98,
+                      height: 78,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -88,30 +81,6 @@ class _ManthanScheduleCardState extends State<ManthanScheduleCard> {
                                     ? Text(widget.eventModel.module, style: cardStageStyle1)
                                     : Text(''),
                               ),
-                              const SizedBox(
-                                height: 16,
-                              ),
-                              Row(
-                                children: [
-                                  // isManthan ? Container(
-                                  //   height: 26,
-                                  //   decoration: BoxDecoration(
-                                  //     borderRadius: BorderRadius.circular(8),
-                                  //     color: Themes.kGrey,
-                                  //   ),
-                                  //   child: Padding(
-                                  //     padding:
-                                  //     const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                  //     child: Text(widget.eventModel.difficulty,
-                                  //         style:
-                                  //         cardCategoryStyle
-                                  //     ),
-                                  //   ),
-                                  // ) : Container(),
-                                  isManthan ?SizedBox(width: 8,) : Container(),
-                                  
-                                ],
-                              )
                             ],
                           ),
                           Container(
