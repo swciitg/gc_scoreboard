@@ -109,74 +109,7 @@ class _ManthanScheduleCardState extends State<ManthanScheduleCard> {
                                   //   ),
                                   // ) : Container(),
                                   isManthan ?SizedBox(width: 8,) : Container(),
-                                  GestureDetector(
-                                    onTap: () async {
-                                      if(!isLinkPressed)
-                                        {
-                                          setState(() {
-                                            isLinkPressed = true;
-                                          });
-                                          try{
-                                            bool validURL = Uri.parse(widget.eventModel.problemLink).isAbsolute; // check if valid url
-                                            if(!validURL){
-                                              print('here');
-                                              if(isManthan)
-                                                {
-                                                  await launchUrl(Uri.parse(manthanWebsiteLink),mode: LaunchMode.externalApplication); // if url is not correct
-
-                                                }
-                                              else
-                                                {
-                                                  await launchUrl(Uri.parse(sahyogWebsiteLink),mode: LaunchMode.externalApplication); // if url is not correct
-                                                }
-                                            }
-                                            else{
-                                              print('there');
-                                              await launchUrl(Uri.parse(widget.eventModel.problemLink),mode: LaunchMode.externalApplication);
-                                            }
-                                            setState(() {
-                                              isLinkPressed = false;
-                                            });
-                                          }
-                                          catch (err){
-                                            print(err);
-                                            showSnackBar(context, err.toString());
-                                            setState(() {
-                                              isLinkPressed = false;
-                                            });
-                                          }
-                                        }
-
-                                    },
-                                    child: Container(
-                                      height: 26,
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xffFFC907),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      child:  Container(
-                                        alignment: Alignment.center,
-                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-                                        child: Row(
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            const Center(
-                                              child: Icon(Icons.launch_outlined,color: Colors.black,size: 15,),
-                                            ),
-                                            SizedBox(width: 3,),
-                                            Text(
-                                              'Open Problem',
-                                              style:  GoogleFonts.montserrat(
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 12,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  )
+                                  
                                 ],
                               )
                             ],
