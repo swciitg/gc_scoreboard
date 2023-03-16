@@ -409,6 +409,19 @@ class APIService {
     }
   }
 
+  Future<Map<String, dynamic>> getManthanStandings() async {
+    try {
+      Response resp1 = await dio.get("/gc/manthan/standings/all-events");
+      Response resp2 = await dio.get("/gc/manrhan/standings");
+      return {
+        "overall": resp2.data["details"],
+        "event-wise": resp1.data["details"]
+      };
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
   Future<Map<String, dynamic>> getSahyogStandings() async {
     try {
       Response resp1 = await dio.get("/gc/sahyog/standings/all-events");
@@ -439,6 +452,25 @@ class APIService {
       return Future.error(err);
     }
   }
+
+  Future<List<ManthanEventModel>> getManthanSchedule(ViewType v) async {
+    try {
+      if (v == ViewType.admin) {
+        dio.options.queryParameters["forAdmin"] = "true";
+      }
+      Response resp = await dio.get("/gc/manthan/event-schedule");
+      List<ManthanEventModel> output = [];
+      for (var e in List<dynamic>.from(resp.data["details"])) {
+        {
+          output.add(ManthanEventModel.fromJson(e));
+        }
+      }
+      return output;
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
 
   Future<List<SahyogEventModel>> getSahyogSchedule(ViewType v) async {
     try {

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 
 import '../../functions/kriti_schedule_filter.dart';
+import '../../functions/manthan_schedule_filter.dart';
 import '../../globals/styles.dart';
 import '../../models/kriti_models/kriti_event_model.dart';
 import '../../models/manthan_models/manthan_event_model.dart';
@@ -64,7 +65,7 @@ class _ManthanSchedulePageState extends State<ManthanSchedulePage> {
                 } else if (snapshot.hasData) {
                   List<ManthanEventModel> allManthanEventSchedules = snapshot.data!;
                   return Observer(builder: (context) {
-                    List<ManthanEventModel> filteredEventSchedules = manthanFilterSchedule(input: allManthanEventSchedules, cup: manthanStore.selectedCup, club: manthanStore.selectedClub);
+                    List<ManthanEventModel> filteredEventSchedules = manthanFilterSchedule(input: allManthanEventSchedules, module: manthanStore.selectedModule, );
                     return Expanded(
                         child: filteredEventSchedules.isNotEmpty
                             ? ListView.builder(

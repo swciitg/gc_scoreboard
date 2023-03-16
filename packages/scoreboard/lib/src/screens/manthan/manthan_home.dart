@@ -13,6 +13,8 @@ import '../kriti/kriti_results_page.dart';
 import '../kriti/kriti_schedule_page.dart';
 import '../kriti/kriti_standings_page.dart';
 import 'forms/add_manthan_event_form.dart';
+import 'manthan_results_page.dart';
+import 'manthan_standings_page.dart';
 
 class ManthanHome extends StatefulWidget {
   const ManthanHome({Key? key}) : super(key: key);
@@ -24,8 +26,8 @@ class ManthanHome extends StatefulWidget {
 class _ManthanHomeState extends State<ManthanHome> {
   Map<Pages, Widget> tabs = {
     Pages.schedule: const KritiSchedulePage(),
-    Pages.standings: const KritiStandingsPage(),
-    Pages.results: const KritiResultsPage(),
+    Pages.standings: const ManthanStandingsPage(),
+    Pages.results: const ManthanResultsPage(),
   };
   @override
   Widget build(BuildContext context) {
