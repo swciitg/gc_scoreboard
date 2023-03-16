@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
+import 'package:scoreboard/src/globals/enums.dart';
 import '../../../functions/snackbar.dart';
 import '../../../functions/validator.dart';
-import '../../../globals/constants.dart';
 import '../../../globals/colors.dart';
-import '../../../models/kriti_models/kriti_event_model.dart';
 import '../../../models/manthan_models/manthan_event_model.dart';
 import '../../../services/api.dart';
 import '../../../stores/static_store.dart';
@@ -28,6 +27,8 @@ class AddManthanEventForm extends StatefulWidget {
 }
 
 class _AddManthanEventFormState extends State<AddManthanEventForm> {
+  List<String> moduleNames = Module.values.map((e) => e.moduleName).toList();
+
   bool isLoading = false;
   String? eventName;
   DateTime? date; // stores date picked
@@ -196,7 +197,7 @@ class _AddManthanEventFormState extends State<AddManthanEventForm> {
                       ),
                       const SizedBox(height: 12),
                       CustomDropDown(
-                        items: eventCategories,
+                        items: moduleNames,
                         hintText: 'Module',
                         onChanged: (s) {
                           module = s;
