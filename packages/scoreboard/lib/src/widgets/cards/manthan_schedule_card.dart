@@ -15,6 +15,7 @@ import '../../stores/common_store.dart';
 import 'card_date_widget.dart';
 import 'kriti_clubs_section.dart';
 import 'kriti_popup_menu.dart';
+import 'manthan_popup_menu.dart';
 import 'menu_item.dart';
 
 
@@ -82,28 +83,31 @@ class _ManthanScheduleCardState extends State<ManthanScheduleCard> {
                               ),
                               SizedBox(
                                 height: 20,
-                                child: isManthan ? Text(widget.eventModel.cup, style: cardStageStyle1) : Text(widget.eventModel.difficulty, style: cardStageStyle1,),
+                                child:
+                                isManthan
+                                    ? Text(widget.eventModel.module, style: cardStageStyle1)
+                                    : Text(''),
                               ),
                               const SizedBox(
                                 height: 16,
                               ),
                               Row(
                                 children: [
-                                  isManthan ? Container(
-                                    height: 26,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      color: Themes.kGrey,
-                                    ),
-                                    child: Padding(
-                                      padding:
-                                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                      child: Text(widget.eventModel.difficulty,
-                                          style:
-                                          cardCategoryStyle
-                                      ),
-                                    ),
-                                  ) : Container(),
+                                  // isManthan ? Container(
+                                  //   height: 26,
+                                  //   decoration: BoxDecoration(
+                                  //     borderRadius: BorderRadius.circular(8),
+                                  //     color: Themes.kGrey,
+                                  //   ),
+                                  //   child: Padding(
+                                  //     padding:
+                                  //     const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                  //     child: Text(widget.eventModel.difficulty,
+                                  //         style:
+                                  //         cardCategoryStyle
+                                  //     ),
+                                  //   ),
+                                  // ) : Container(),
                                   isManthan ?SizedBox(width: 8,) : Container(),
                                   GestureDetector(
                                     onTap: () async {
