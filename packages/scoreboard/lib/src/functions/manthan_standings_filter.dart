@@ -18,7 +18,7 @@ List<dynamic> filterManthanStandings({required Map<String,dynamic> input, requir
     }
   }
   output.sort((e1, e2) {
-    if (e1['primaryScore'] > e2['primaryScore']) {
+    if (e1['points'] > e2['points']) {
       return -1;
     } else {
       return 1;

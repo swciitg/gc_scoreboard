@@ -131,7 +131,7 @@ class _StandingBoardState extends State<StandingBoard> {
                         child: Container(
                           alignment: Alignment.centerRight,
                           child: Text(
-                              widget.hostelStandings[index]["primaryScore"]
+                              widget.hostelStandings[index]["points"]
                                   .toString(),
                               textAlign: TextAlign.left,
                               style: standingStyle2),

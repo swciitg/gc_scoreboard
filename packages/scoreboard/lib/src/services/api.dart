@@ -387,6 +387,15 @@ class APIService {
     }
   }
 
+  Future<List<String>> getAllManthanEvents() async {
+    try {
+      Response resp = await dio.get("/gc/manthan/all-events");
+      return List<String>.from(resp.data["details"]);
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
   Future<List<String>> getAllSahyogEvents() async {
     try {
       Response resp = await dio.get("/gc/sahyog/all-events");
@@ -412,7 +421,7 @@ class APIService {
   Future<Map<String, dynamic>> getManthanStandings() async {
     try {
       Response resp1 = await dio.get("/gc/manthan/standings/all-events");
-      Response resp2 = await dio.get("/gc/manrhan/standings");
+      Response resp2 = await dio.get("/gc/manthan/standings");
       return {
         "overall": resp2.data["details"],
         "event-wise": resp1.data["details"]

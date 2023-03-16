@@ -85,7 +85,10 @@ class AuthUserHelpers {
       StaticStore.kritiEvents =
           await APIService(buildContext).getAllKritiEvents();
       StaticStore.sahyogEvents =
-      await APIService(buildContext).getAllSahyogEvents();
+          await APIService(buildContext).getAllSahyogEvents();
+      StaticStore.manthanEvents=
+          await APIService(buildContext).getAllManthanEvents();
+
       return true;
     } on DioError catch (err) {
       return Future.error(err);
