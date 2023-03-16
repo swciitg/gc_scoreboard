@@ -202,6 +202,24 @@ class APIService {
     }
   }
 
+  Future<List<ManthanEventModel>> getManthanResults(ViewType v) async {
+    try {
+      if (v == ViewType.admin) {
+        dio.options.queryParameters["forAdmin"] = "true";
+      }
+      Response resp = await dio.get("/gc/manthan/event-schedule/results");
+      List<ManthanEventModel> output = [];
+      for (var e in List<dynamic>.from(resp.data["details"])) {
+        {
+          output.add(ManthanEventModel.fromJson(e));
+        }
+      }
+      return output;
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
   Future<List<SahyogEventModel>> getSahyogResults(ViewType v) async {
     try {
       if (v == ViewType.admin) {
@@ -497,6 +515,14 @@ class APIService {
     }
   }
 
+  Future<void> deleteManthanEvent(String eventID) async {
+    try {
+      await dio.delete('/gc/manthan/event-schedule/$eventID');
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
   Future<void> deleteSahyogEvent(String eventID) async {
     try {
       await dio.delete('/gc/sahyog/event-schedule/$eventID');
@@ -508,6 +534,14 @@ class APIService {
   Future<void> deleteKritiEventResult(String eventID) async {
     try {
       await dio.delete('/gc/kriti/event-schedule/result/$eventID');
+    } on DioError catch (err) {
+      return Future.error(err);
+    }
+  }
+
+  Future<void> deleteManthanEventResult(String eventID) async {
+    try {
+      await dio.delete('/gc/manthan/event-schedule/result/$eventID');
     } on DioError catch (err) {
       return Future.error(err);
     }
