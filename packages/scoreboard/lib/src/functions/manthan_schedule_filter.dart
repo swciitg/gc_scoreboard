@@ -3,14 +3,23 @@ import '../globals/enums.dart';
 
 List<ManthanEventModel> manthanFilterSchedule({required List<ManthanEventModel> input, required String module})
 {
-
+  print(module);
   List<ManthanEventModel> output=[];
   output.addAll(input);
   output.retainWhere((element){
-    if(module != Module.overall && module!= element.module){
-      return false;
-    }
-    return true;
+    if(module == Module.overall.moduleName)
+      {
+        print(module);
+        return true;
+      }
+    else if(module == element.module)
+      {
+        return true;
+      }
+    else
+      {
+        return false;
+      }
   });
   return output;
 }
