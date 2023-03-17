@@ -1,7 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+
 import '../../globals/colors.dart';
 import '../../globals/enums.dart';
 import '../../globals/styles.dart';
@@ -10,9 +10,10 @@ import '../../stores/common_store.dart';
 import 'card_date_widget.dart';
 import 'manthan_popup_menu.dart';
 import 'menu_item.dart';
+import 'score_card_item.dart';
 
 class ManthanResultCard extends StatefulWidget {
-  final eventModel;
+  final ManthanEventModel eventModel;
   const ManthanResultCard({super.key, required this.eventModel});
 
   @override
@@ -189,7 +190,27 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
                                 ),
                               ),
                             ),
-                            HostelsPointsSection(eventModel: widget.eventModel)
+                            ConstrainedBox(
+                                constraints: BoxConstraints(
+                                  maxHeight:
+                                      widget.eventModel.results.length * 30,
+                                ),
+                                child: ListView.builder(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    itemCount: widget.eventModel.results.length,
+                                    itemBuilder: (context, index) {
+                                      return ScoreCardItem(
+                                          position: index + 1,
+                                          hostelName: widget.eventModel
+                                              .results[index].hostelName!,
+                                          finalScore: widget.eventModel
+                                              .results[index].primaryScore!
+                                              .toString(),
+                                          secondaryScore: widget.eventModel
+                                              .results[index].secondaryScore
+                                              .toString());
+                                    }))
                           ],
                         )
                       : Container(),
@@ -200,107 +221,5 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
         ),
       );
     });
-  }
-}
-
-class HostelsPointsSection extends StatelessWidget {
-  final ManthanEventModel eventModel;
-
-  const HostelsPointsSection({super.key, required this.eventModel});
-
-  @override
-  Widget build(BuildContext context) {
-    return ConstrainedBox(
-        constraints: BoxConstraints(
-          maxHeight: eventModel.results.length * 30,
-        ),
-        child: ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: eventModel.results.length,
-            itemBuilder: (context, index) {
-              final split =
-                  eventModel.results[index].secondaryScore?.split(',');
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 6),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      height: 18,
-                      child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            alignment: Alignment.center,
-                            width: 16,
-                            height: 18,
-                            child: Text(
-                              '${index + 1}',
-                              style: cardVenueStyle1,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width - 210,
-                            child: Text(
-                              overflow: TextOverflow.visible,
-                              eventModel.results[index].hostelName!,
-                              style: cardVenueStyle1,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      height: 18,
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 40,
-                            child: Text(
-                              eventModel.results[index].primaryScore!
-                                  .toString(),
-                              style: cardPostponedStyle,
-                            ),
-                          ),
-                          eventModel.results[index].secondaryScore == null
-                              ? Container()
-                              : Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    SizedBox(
-                                      width: (split?.length.toDouble())! * 40,
-                                      child: ListView.builder(
-                                          itemCount: split?.length,
-                                          scrollDirection: Axis.horizontal,
-                                          physics:
-                                              const NeverScrollableScrollPhysics(),
-                                          itemBuilder: (context, index) {
-                                            return Container(
-                                              alignment: Alignment.centerRight,
-                                              width: 40,
-                                              child: Text(
-                                                split![index],
-                                                style: cardSecondaryScoreStyle,
-                                              ),
-                                            );
-                                          }),
-                                    ),
-                                  ],
-                                ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              );
-            }));
   }
 }
