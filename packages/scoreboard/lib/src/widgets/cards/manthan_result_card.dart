@@ -61,7 +61,7 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
                             children: [
                               Padding(
                                 padding:
-                                const EdgeInsets.symmetric(vertical: 4),
+                                    const EdgeInsets.symmetric(vertical: 4),
                                 child: SizedBox(
                                   height: 28,
                                   child: Text(widget.eventModel.event,
@@ -70,9 +70,9 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
                               ),
                               isManthan
                                   ? SizedBox(
-                                  height: 20,
-                                  child: Text(widget.eventModel.module,
-                                      style: cardStageStyle1))
+                                      height: 20,
+                                      child: Text(widget.eventModel.module,
+                                          style: cardStageStyle1))
                                   : Container(),
                               const SizedBox(
                                 height: 16,
@@ -89,7 +89,6 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
                       ),
                     ),
                   ]),
-
                   SizedBox(
                     // height: 24,
                     child: Row(
@@ -157,42 +156,42 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
                   ),
                   isExpanded
                       ? Column(
-                    children: [
-                      const Divider(
-                        height: 32,
-                        color: Themes.bottomNavHighlightColor,
-                        thickness: 1,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4),
-                        child: SizedBox(
-                          height: 12,
-                          child: Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  const SizedBox(
-                                    width: 26,
-                                  ),
-                                  Text(
-                                    'Hostel',
-                                    style: cardResultStyle2,
-                                  ),
-                                ],
+                          children: [
+                            const Divider(
+                              height: 32,
+                              color: Themes.bottomNavHighlightColor,
+                              thickness: 1,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 4),
+                              child: SizedBox(
+                                height: 12,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        const SizedBox(
+                                          width: 26,
+                                        ),
+                                        Text(
+                                          'Hostel',
+                                          style: cardResultStyle2,
+                                        ),
+                                      ],
+                                    ),
+                                    Text(
+                                      'Points',
+                                      style: cardResultStyle2,
+                                    ),
+                                  ],
+                                ),
                               ),
-                              Text(
-                                'Points',
-                                style: cardResultStyle2,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      HostelsPointsSection(eventModel: widget.eventModel)
-                    ],
-                  )
+                            ),
+                            HostelsPointsSection(eventModel: widget.eventModel)
+                          ],
+                        )
                       : Container(),
                 ],
               ),
@@ -204,190 +203,104 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
   }
 }
 
-// class HostelsPointsSection extends StatelessWidget {
-//   final eventModel;
-//
-//   HostelsPointsSection({Key? key, required this.eventModel})
-//       : super(key: key);
-//
-//   var length = 0;
-//
-//   void count() {
-//     for(var x in eventModel.results)
-//       {
-//         length++;
-//       }
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     count();
-//     return ConstrainedBox(
-//         constraints: BoxConstraints(
-//           maxHeight: length * 30,
-//         ),
-//         child: ListView.builder(
-//             physics: const NeverScrollableScrollPhysics(),
-//             itemCount: eventModel.results.length,
-//             itemBuilder: (context, index) {
-//               return ConstrainedBox(
-//                 constraints: BoxConstraints(
-//                     maxHeight: 1 * 30),
-//                 child: ListView.builder(
-//                     physics: const NeverScrollableScrollPhysics(),
-//                     itemCount: eventModel.results[index],
-//                     itemBuilder: (context, subIndex) {
-//                       return scoreCardItem(
-//                           index + 1,
-//                           eventModel.results[index][subIndex].hostelName!,
-//                           eventModel.results[index][subIndex].primaryScore!,
-//                           eventModel.results[index][subIndex].secondaryScore);
-//                     }),
-//               );
-//             }));
-//   }
-//
-//
-//   Widget scoreCardItem(int position, String hostelName, String finalScore,
-//       String? secondaryScore) {
-//     final split = secondaryScore?.split(',');
-//
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(vertical: 6),
-//       child: Row(
-//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//         children: [
-//           SizedBox(
-//             height: 18,
-//             child: Row(
-//               crossAxisAlignment: CrossAxisAlignment.center,
-//               children: [
-//                 Container(
-//                   alignment: Alignment.center,
-//                   width: 16,
-//                   height: 18,
-//                   child: Text(
-//                     '$position',
-//                     style: cardVenueStyle1,
-//                   ),
-//                 ),
-//                 const SizedBox(
-//                   width: 10,
-//                 ),
-//                 SizedBox(
-//                   width: 105,
-//                   child: Text(
-//                     overflow: TextOverflow.visible,
-//                     hostelName,
-//                     style: cardVenueStyle1,
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//           Container(
-//             alignment: Alignment.center,
-//             height: 18,
-//             child: Row(
-//               children: [
-//                 Text(
-//                   finalScore,
-//                   style: cardPostponedStyle,
-//                 ),
-//                 secondaryScore == null
-//                     ? Container()
-//                     : Row(
-//                   children: [
-//                     const SizedBox(
-//                       width: 8,
-//                     ),
-//                     SizedBox(
-//                       width: (split?.length.toDouble())! * 18,
-//                       child: ListView.builder(
-//                           itemCount: split?.length,
-//                           scrollDirection: Axis.horizontal,
-//                           physics: const NeverScrollableScrollPhysics(),
-//                           itemBuilder: (context, index) {
-//                             return Container(
-//                               alignment: Alignment.centerRight,
-//                               width: 18,
-//                               child: Text(
-//                                 split![index],
-//                                 style: cardSecondaryScoreStyle,
-//                               ),
-//                             );
-//                           }),
-//                     ),
-//                   ],
-//                 ),
-//               ],
-//             ),
-//           )
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-
 class HostelsPointsSection extends StatelessWidget {
-  final eventModel;
+  final ManthanEventModel eventModel;
 
-  const HostelsPointsSection({Key? key, required this.eventModel})
-      : super(key: key);
+  const HostelsPointsSection({super.key, required this.eventModel});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
+    return ConstrainedBox(
+        constraints: BoxConstraints(
+          maxHeight: eventModel.results.length * 30,
+        ),
+        child: ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: eventModel.results.length,
-            itemBuilder: (context, position) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    height: 18,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          alignment: Alignment.center,
-                          width: 16,
-                          height: 18,
-                          child: Text(
-                            (position + 1).toString(),
-                            style: cardVenueStyle1,
+            itemBuilder: (context, index) {
+              final split =
+                  eventModel.results[index].secondaryScore?.split(',');
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 6),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      height: 18,
+                      child: Row(
+                        // mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            alignment: Alignment.center,
+                            width: 16,
+                            height: 18,
+                            child: Text(
+                              '${index + 1}',
+                              style: cardVenueStyle1,
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        SizedBox(
-                          width: 150,
-                          child: Text(
-                            eventModel.results[position].hostelName!,
-                            overflow: TextOverflow.visible,
-                            style: cardVenueStyle1,
+                          const SizedBox(
+                            width: 10,
                           ),
-                        ),
-                      ],
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width - 210,
+                            child: Text(
+                              overflow: TextOverflow.visible,
+                              eventModel.results[index].hostelName!,
+                              style: cardVenueStyle1,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    height: 18,
-                    child: Text(
-                      eventModel.results[position].primaryScore!.toString(),
-                      style: cardPostponedStyle,
-                    ),
-                  )
-                ],
+                    Container(
+                      alignment: Alignment.center,
+                      height: 18,
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 40,
+                            child: Text(
+                              eventModel.results[index].primaryScore!
+                                  .toString(),
+                              style: cardPostponedStyle,
+                            ),
+                          ),
+                          eventModel.results[index].secondaryScore == null
+                              ? Container()
+                              : Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const SizedBox(
+                                      width: 8,
+                                    ),
+                                    SizedBox(
+                                      width: (split?.length.toDouble())! * 40,
+                                      child: ListView.builder(
+                                          itemCount: split?.length,
+                                          scrollDirection: Axis.horizontal,
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          itemBuilder: (context, index) {
+                                            return Container(
+                                              alignment: Alignment.centerRight,
+                                              width: 40,
+                                              child: Text(
+                                                split![index],
+                                                style: cardSecondaryScoreStyle,
+                                              ),
+                                            );
+                                          }),
+                                    ),
+                                  ],
+                                ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               );
-            }),
-      ],
-    );
+            }));
   }
 }

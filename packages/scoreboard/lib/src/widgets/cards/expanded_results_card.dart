@@ -38,14 +38,14 @@ class ExpandedResultsCard extends StatelessWidget {
                           index + 1,
                           eventModel.results[index][subIndex].hostelName!,
                           eventModel.results[index][subIndex].primaryScore!,
-                          eventModel.results[index][subIndex].secondaryScore);
+                          eventModel.results[index][subIndex].secondaryScore,context);
                     }),
               );
             }));
   }
 
   Widget scoreCardItem(int position, String hostelName, String finalScore,
-      String? secondaryScore) {
+      String? secondaryScore, BuildContext context) {
     final split = secondaryScore?.split(',');
 
     return Padding(
@@ -71,7 +71,7 @@ class ExpandedResultsCard extends StatelessWidget {
                   width: 10,
                 ),
                 SizedBox(
-                  width: 105,
+                   width: MediaQuery.of(context).size.width - 210,
                   child: Text(
                     overflow: TextOverflow.visible,
                     hostelName,
@@ -98,7 +98,7 @@ class ExpandedResultsCard extends StatelessWidget {
                             width: 8,
                           ),
                           SizedBox(
-                            width: (split?.length.toDouble())! * 18,
+                            width: (split?.length.toDouble())! * 36,
                             child: ListView.builder(
                                 itemCount: split?.length,
                                 scrollDirection: Axis.horizontal,
@@ -106,7 +106,7 @@ class ExpandedResultsCard extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   return Container(
                                     alignment: Alignment.centerRight,
-                                    width: 18,
+                                    width: 36,
                                     child: Text(
                                       split![index],
                                       style: cardSecondaryScoreStyle,
