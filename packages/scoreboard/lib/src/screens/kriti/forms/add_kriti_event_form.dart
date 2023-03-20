@@ -20,15 +20,15 @@ import '../../home.dart';
 
 
 
-class AddKritiEventForm extends StatefulWidget {
+class KritiEventForm extends StatefulWidget {
   final KritiEventModel? event;
-  const AddKritiEventForm({Key? key, this.event}) : super(key: key);
+  const KritiEventForm({Key? key, this.event}) : super(key: key);
 
   @override
-  State<AddKritiEventForm> createState() => _AddKritiEventFormState();
+  State<KritiEventForm> createState() => _KritiEventFormState();
 }
 
-class _AddKritiEventFormState extends State<AddKritiEventForm> {
+class _KritiEventFormState extends State<KritiEventForm> {
   List<String> cupNames = Cup.values.map((e) => e.cupName).toList();
 
   List<String> clubNames = Club.values.map((e) => e.clubName).toList();

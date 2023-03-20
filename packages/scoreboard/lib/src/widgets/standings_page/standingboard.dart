@@ -24,6 +24,8 @@ class _StandingBoardState extends State<StandingBoard> {
   @override
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
+    print("STANDINGS");
+    print(widget.hostelStandings);
     return Container(
       margin: const EdgeInsets.fromLTRB(8, 16, 8, 0),
       decoration: const BoxDecoration(
@@ -131,8 +133,7 @@ class _StandingBoardState extends State<StandingBoard> {
                         child: Container(
                           alignment: Alignment.centerRight,
                           child: Text(
-                              widget.hostelStandings[index]["points"]
-                                  .toString(),
+                              (widget.hostelStandings[index]["points"] ?? widget.hostelStandings[index]['primaryScore']).toString(),
                               textAlign: TextAlign.left,
                               style: standingStyle2),
                         ),

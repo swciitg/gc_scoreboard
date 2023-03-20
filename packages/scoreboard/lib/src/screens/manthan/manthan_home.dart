@@ -47,7 +47,7 @@ class _ManthanHomeState extends State<ManthanHome> {
             ? GestureDetector(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const AddManthanEventForm()));
+                builder: (context) => const ManthanEventForm()));
           },
           child: const AddButton(
             text: 'Add event',

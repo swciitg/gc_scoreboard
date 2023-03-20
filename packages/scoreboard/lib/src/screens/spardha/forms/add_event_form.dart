@@ -14,16 +14,16 @@ import '../../../widgets/add_result/custom_text_field.dart';
 import '../../../widgets/common/form_app_bar.dart';
 import 'confirm_event_details.dart';
 
-class AddEventForm extends StatefulWidget {
+class SpardhaEventForm extends StatefulWidget {
   final EventModel? event;
 
-  const AddEventForm({super.key, this.event});
+  const SpardhaEventForm({super.key, this.event});
 
   @override
-  State<AddEventForm> createState() => _AddEventFormState();
+  State<SpardhaEventForm> createState() => _SpardhaEventFormState();
 }
 
-class _AddEventFormState extends State<AddEventForm> {
+class _SpardhaEventFormState extends State<SpardhaEventForm> {
   String? sportName;
   final TextEditingController _venueController = TextEditingController();
   final TextEditingController dateInput = TextEditingController();

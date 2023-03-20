@@ -274,6 +274,9 @@ class APIService {
 
   Future<void> addUpdateManthanResult(String eventID, List<ManthanResultModel> data,
       String victoryStatement) async {
+    print("RESULT API CALLED");
+    print(data[0].primaryScore);
+    print(data[0].secondaryScore);
     try {
       List<Map> results = [];
       for (var positionResults in data) {
@@ -319,7 +322,7 @@ class APIService {
     }
   }
 
-  Future<void> deleteSpardhaEventResult(String eventID) async {
+  Future<void> deleteSpardhaResult(String eventID) async {
     try {
       await dio.delete('/gc/spardha/event-schedule/result/$eventID');
     } on DioError catch (err) {
@@ -572,7 +575,7 @@ class APIService {
     }
   }
 
-  Future<void> deleteKritiEventResult(String eventID) async {
+  Future<void> deleteKritiResult(String eventID) async {
     try {
       await dio.delete('/gc/kriti/event-schedule/result/$eventID');
     } on DioError catch (err) {
@@ -580,7 +583,7 @@ class APIService {
     }
   }
 
-  Future<void> deleteManthanEventResult(String eventID) async {
+  Future<void> deleteManthanResult(String eventID) async {
     try {
       await dio.delete('/gc/manthan/event-schedule/result/$eventID');
     } on DioError catch (err) {
@@ -588,7 +591,7 @@ class APIService {
     }
   }
 
-  Future<void> deleteSahyogEventResult(String eventID) async {
+  Future<void> deleteSahyogResult(String eventID) async {
     try {
       await dio.delete('/gc/sahyog/event-schedule/result/$eventID');
     } on DioError catch (err) {

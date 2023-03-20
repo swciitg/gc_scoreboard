@@ -17,16 +17,16 @@ import '../../../widgets/common/form_app_bar.dart';
 import '../../home.dart';
 // import 'confirm_event_details.dart';
 
-class AddManthanEventForm extends StatefulWidget {
+class ManthanEventForm extends StatefulWidget {
   final ManthanEventModel? event;
 
-  const AddManthanEventForm({super.key, this.event});
+  const ManthanEventForm({super.key, this.event});
 
   @override
-  State<AddManthanEventForm> createState() => _AddManthanEventFormState();
+  State<ManthanEventForm> createState() => _ManthanEventFormState();
 }
 
-class _AddManthanEventFormState extends State<AddManthanEventForm> {
+class _ManthanEventFormState extends State<ManthanEventForm> {
   List<String> moduleNames = Module.values.map((e) => e.moduleName).toList();
 
   bool isLoading = false;

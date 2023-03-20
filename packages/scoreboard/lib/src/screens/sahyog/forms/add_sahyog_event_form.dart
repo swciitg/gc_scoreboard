@@ -20,15 +20,15 @@ import '../../home.dart';
 
 
 
-class AddSahyogEventForm extends StatefulWidget {
+class SahyogEventForm extends StatefulWidget {
   final SahyogEventModel? event;
-  const AddSahyogEventForm({Key? key, this.event}) : super(key: key);
+  const SahyogEventForm({Key? key, this.event}) : super(key: key);
 
   @override
-  State<AddSahyogEventForm> createState() => _AddSahyogEventFormState();
+  State<SahyogEventForm> createState() => _SahyogEventFormState();
 }
 
-class _AddSahyogEventFormState extends State<AddSahyogEventForm> {
+class _SahyogEventFormState extends State<SahyogEventForm> {
   List<String> clubNames = SahyogClub.values.map((e) => e.clubName).toList();
   bool isLoading = false;
   String? eventName;

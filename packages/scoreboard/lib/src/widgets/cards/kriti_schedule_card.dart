@@ -13,7 +13,7 @@ import '../../globals/styles.dart';
 import '../../stores/common_store.dart';
 import 'card_date_widget.dart';
 import 'kriti_clubs_section.dart';
-import 'kriti_popup_menu.dart';
+import 'popup_menu.dart';
 import 'menu_item.dart';
 
 
@@ -49,7 +49,7 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
     return Observer(builder: (context) {
       return Padding(
         padding: const EdgeInsets.all(8.0),
-        child: KritiPopupMenu(
+        child: PopupMenu(
           eventModel: widget.eventModel,
           items: commonStore.viewType == ViewType.admin ? popupOptions : [],
           child: Container(

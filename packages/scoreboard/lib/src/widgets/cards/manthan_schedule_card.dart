@@ -8,7 +8,7 @@ import '../../globals/styles.dart';
 import '../../models/manthan_models/manthan_event_model.dart';
 import '../../stores/common_store.dart';
 import 'card_date_widget.dart';
-import 'manthan_popup_menu.dart';
+import 'popup_menu.dart';
 import 'menu_item.dart';
 
 
@@ -44,7 +44,7 @@ class _ManthanScheduleCardState extends State<ManthanScheduleCard> {
     return Observer(builder: (context) {
       return Padding(
         padding: const EdgeInsets.all(8.0),
-        child: ManthanPopupMenu(
+        child: PopupMenu(
           eventModel: widget.eventModel,
           items: commonStore.viewType == ViewType.admin ? popupOptions : [],
           child: Container(
