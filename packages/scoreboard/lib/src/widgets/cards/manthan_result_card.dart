@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+
 import '../../globals/colors.dart';
 import '../../globals/enums.dart';
 import '../../globals/styles.dart';
-import '../../models/kriti_models/kriti_event_model.dart';
+import '../../models/manthan_models/manthan_event_model.dart';
 import '../../stores/common_store.dart';
 import 'card_date_widget.dart';
-import 'kriti_clubs_section.dart';
-import 'menu_item.dart';
 import 'popup_menu.dart';
+import 'menu_item.dart';
 import 'score_card_item.dart';
 
-class KritiResultCard extends StatefulWidget {
-  final eventModel;
-  const KritiResultCard({super.key, required this.eventModel});
+class ManthanResultCard extends StatefulWidget {
+  final ManthanEventModel eventModel;
+  const ManthanResultCard({super.key, required this.eventModel});
 
   @override
-  State<KritiResultCard> createState() => _KritiResultCardState();
+  State<ManthanResultCard> createState() => _ManthanResultCardState();
 }
 
-class _KritiResultCardState extends State<KritiResultCard> {
+class _ManthanResultCardState extends State<ManthanResultCard> {
   bool isExpanded = false;
   List<PopupMenuEntry> popupOptions = [
     optionsMenuItem('Edit', 'edit result', Themes.kWhite),
@@ -33,7 +33,8 @@ class _KritiResultCardState extends State<KritiResultCard> {
   @override
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
-    bool isKriti = (widget.eventModel.runtimeType == KritiEventModel);
+    bool isManthan = (widget.eventModel.runtimeType == ManthanEventModel);
+    print(widget.eventModel.results[0].primaryScore);
     return Observer(builder: (context) {
       return Padding(
         padding: const EdgeInsets.all(8.0),
@@ -53,7 +54,7 @@ class _KritiResultCardState extends State<KritiResultCard> {
                 children: [
                   Column(children: [
                     SizedBox(
-                      height: isKriti ? 98 : 78,
+                      height: isManthan ? 98 : 78,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -69,44 +70,15 @@ class _KritiResultCardState extends State<KritiResultCard> {
                                       style: cardEventStyle),
                                 ),
                               ),
-                              isKriti
+                              isManthan
                                   ? SizedBox(
                                       height: 20,
-                                      child: Text(widget.eventModel.cup,
+                                      child: Text(widget.eventModel.module,
                                           style: cardStageStyle1))
-                                  : Container(
-                                      height: 26,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                        color: Themes.kGrey,
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 8, vertical: 4),
-                                        child: Text(
-                                            widget.eventModel.difficulty,
-                                            style: cardCategoryStyle),
-                                      ),
-                                    ),
+                                  : Container(),
                               const SizedBox(
                                 height: 16,
                               ),
-                              isKriti
-                                  ? Container(
-                                      height: 26,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                        color: Themes.kGrey,
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 8, vertical: 4),
-                                        child: Text(
-                                            widget.eventModel.difficulty,
-                                            style: cardCategoryStyle),
-                                      ),
-                                    )
-                                  : Container(),
                             ],
                           ),
                           Container(
@@ -119,7 +91,6 @@ class _KritiResultCardState extends State<KritiResultCard> {
                       ),
                     ),
                   ]),
-                  ClubsListSection(clubs: widget.eventModel.clubs),
                   SizedBox(
                     // height: 24,
                     child: Row(
@@ -220,7 +191,26 @@ class _KritiResultCardState extends State<KritiResultCard> {
                                 ),
                               ),
                             ),
-                            HostelsPointsSection(eventModel: widget.eventModel)
+                            ConstrainedBox(
+                                constraints: BoxConstraints(
+                                  maxHeight:
+                                      widget.eventModel.results.length * 30,
+                                ),
+                                child: ListView.builder(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    itemCount: widget.eventModel.results.length,
+                                    itemBuilder: (context, index) {
+                                      return ScoreCardItem(
+                                          position: index + 1,
+                                          hostelName: widget.eventModel
+                                              .results[index].hostelName!,
+                                          finalScore: widget.eventModel
+                                              .results[index].primaryScore!
+                                              .toString(),
+                                          secondaryScore: widget.eventModel
+                                              .results[index].secondaryScore);
+                                    }))
                           ],
                         )
                       : Container(),
@@ -231,30 +221,5 @@ class _KritiResultCardState extends State<KritiResultCard> {
         ),
       );
     });
-  }
-}
-
-class HostelsPointsSection extends StatelessWidget {
-  final eventModel;
-
-  const HostelsPointsSection({Key? key, required this.eventModel})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ConstrainedBox(
-        constraints: BoxConstraints(
-          maxHeight: eventModel.results.length * 30.0,
-        ),
-        child: ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: eventModel.results.length,
-            itemBuilder: (context, index) {
-              return ScoreCardItem(
-                position: index + 1,
-                hostelName: eventModel.results[index].hostelName!,
-                finalScore: eventModel.results[index].points!.toString(),
-              );
-            }));
   }
 }

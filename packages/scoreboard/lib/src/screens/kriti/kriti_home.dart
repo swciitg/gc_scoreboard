@@ -46,7 +46,7 @@ class _KritiHomeState extends State<KritiHome> {
             ? GestureDetector(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const AddKritiEventForm()));
+                builder: (context) => const KritiEventForm()));
           },
           child: const AddButton(
             text: 'Add event',

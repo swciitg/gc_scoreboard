@@ -1,12 +1,11 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
-
+import 'package:scoreboard/src/globals/enums.dart';
 import '../../../functions/snackbar.dart';
 import '../../../functions/validator.dart';
 import '../../../globals/colors.dart';
-import '../../../globals/constants.dart';
-import '../../../models/sahyog_models/sahyog_event_model.dart';
+import '../../../models/manthan_models/manthan_event_model.dart';
 import '../../../services/api.dart';
 import '../../../stores/static_store.dart';
 import '../../../widgets/add_event/datepicker_color.dart';
@@ -15,126 +14,87 @@ import '../../../widgets/add_event/heading.dart';
 import '../../../widgets/add_event/timepicker_color.dart';
 import '../../../widgets/add_result/custom_text_field.dart';
 import '../../../widgets/common/form_app_bar.dart';
-import '../../../globals/enums.dart';
 import '../../home.dart';
+// import 'confirm_event_details.dart';
 
+class ManthanEventForm extends StatefulWidget {
+  final ManthanEventModel? event;
 
-
-class SahyogEventForm extends StatefulWidget {
-  final SahyogEventModel? event;
-  const SahyogEventForm({Key? key, this.event}) : super(key: key);
+  const ManthanEventForm({super.key, this.event});
 
   @override
-  State<SahyogEventForm> createState() => _SahyogEventFormState();
+  State<ManthanEventForm> createState() => _ManthanEventFormState();
 }
 
-class _SahyogEventFormState extends State<SahyogEventForm> {
-  List<String> clubNames = SahyogClub.values.map((e) => e.clubName).toList();
+class _ManthanEventFormState extends State<ManthanEventForm> {
+  List<String> moduleNames = Module.values.map((e) => e.moduleName).toList();
+
   bool isLoading = false;
   String? eventName;
-  DateTime? date;
-  TimeOfDay? time;
-  double? points;
-  String? difficulty;
-  int clubSize = 0;
-  String? clubSizeValue;
-  List<String?> clubs = [];
-  final _formKey = GlobalKey<FormState>();
-
-  final TextEditingController _probelmLinkController = TextEditingController();
+  DateTime? date; // stores date picked
+  TimeOfDay? time; // stores time picked
+  String? module; // Men/Women
+  // String? stage;
+  // String? hostelSizeValue;
+  // int hostelsSize = 0;
+  // List<String?> participatingHostels = [];
   final TextEditingController _venueController = TextEditingController();
   final TextEditingController dateInput = TextEditingController();
   final TextEditingController timeInput = TextEditingController();
-
-  callbackClubs(value) {
-    clubs.length = int.parse(value);
-    setState(() {
-      clubSize = int.parse(value);
-      clubSizeValue = clubSize.toString();
-    });
-  }
-
-  callbackAddClub(value, index) {
-    clubs[index - 1] = value;
-    clubSizeValue = clubs.length.toString();
-  }
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
-    if( widget.event != null){
-      SahyogEventModel e = widget.event!;
+    if (widget.event != null) {
+      ManthanEventModel e = widget.event!;
       eventName = e.event;
       _venueController.text = e.venue;
-      difficulty = e.difficulty;
-      clubSize = e.clubs.length;
-      _probelmLinkController.text = e.problemLink;
-      points =  e.points;
-
-      for (var club in e.clubs) {
-        clubs.add(club);
-      }
-      print(clubs);
-
-      clubSizeValue = clubs.length.toString();
+      module = e.module;
       date = e.date;
       time = TimeOfDay(hour: e.date.hour, minute: e.date.minute);
       dateInput.text = DateFormat('dd-MMM-yyyy').format(e.date);
       timeInput.text = DateFormat('h:mm a').format(e.date);
     }
   }
+
   @override
   Widget build(BuildContext context) {
-    clubNames.remove("Overall");
-
     Future<void> onFormSubmit() async {
-      if(!isLoading) {
+      if (!isLoading) {
         setState(() {
           isLoading = true;
         });
         if (!_formKey.currentState!.validate()) {
           showSnackBar(context, 'Please give all the inputs correctly');
-          setState(() {
-            isLoading = false;
-          });
           return;
-        }
-        else {
+        } else {
           DateTime eventDateTime = DateTime(
-              date!.year,
-              date!.month,
-              date!.day,
-              date!.hour,
-              date!.minute);
+              date!.year, date!.month, date!.day, time!.hour, time!.minute);
 
           var data = {
             "event": eventName,
-            "difficulty": difficulty,
+            "module": module!,
             "date": eventDateTime.toIso8601String(),
             "venue": _venueController.text,
-            "clubs": clubs,
-            "points": points,
-            "problemLink": _probelmLinkController.text,
             "results": [],
-            "resultAdded": false,
-
+            "resultAdded": false
           };
+
           if (widget.event != null) {
             data['_id'] = widget.event!.id;
           }
-
           try {
             if (widget.event != null) {
-              //update event schedule
-              await APIService(context).updateSahyogEvent(
-                  SahyogEventModel.fromJson(data));
+              // update event schedule
+              await APIService(context)
+                  .updateManthanEvent(ManthanEventModel.fromJson(data));
               if (!mounted) return;
               showSnackBar(context, "Event Edited successfully");
             } else {
-              await APIService(context).postSahyogEventSchedule(data);
+              await APIService(context).postManthanEventSchedule(data);
               if (!mounted) return;
-              showSnackBar(
-                  context, "Event schedule posted successfully");
+              showSnackBar(context, "Event schedule posted successfully");
             }
             if (!mounted) return;
             setState(() {
@@ -142,8 +102,7 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
             });
             Navigator.pushNamedAndRemoveUntil(
                 context, ScoreBoardHome.id, (route) => false);
-          }
-          on DioError catch (err) {
+          } on DioError catch (err) {
             showErrorSnackBar(context, err);
             setState(() {
               isLoading = false;
@@ -154,7 +113,7 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
     }
 
     return Scaffold(
-      backgroundColor: Themes.backgroundColor,
+      backgroundColor: Themes.theme.backgroundColor,
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(56),
           child: AppBarFormComponent(
@@ -162,8 +121,6 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
             actionTitle: "Next",
             onFormSubmit: onFormSubmit,
           )),
-
-
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(8),
@@ -182,13 +139,13 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
                           if (val.text == '') {
                             return const Iterable<String>.empty();
                           }
-                          return StaticStore.sahyogEvents.where((element) =>
+                          return StaticStore.manthanEvents.where((element) =>
                               element
                                   .toLowerCase()
                                   .contains(val.text.toLowerCase()));
                         },
                         initialValue:
-                        TextEditingValue(text: widget.event?.event ?? ""),
+                            TextEditingValue(text: widget.event?.event ?? ""),
                         onSelected: (s) => eventName = s,
                         optionsMaxHeight: 50,
                         optionsViewBuilder: (BuildContext context,
@@ -202,11 +159,11 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
                               child: ListView.builder(
                                 // padding: EdgeInsets.all(10.0),
                                 padding:
-                                const EdgeInsets.symmetric(vertical: 0),
+                                    const EdgeInsets.symmetric(vertical: 0),
                                 itemCount: options.length,
                                 itemBuilder: (BuildContext context, int index) {
                                   final String option =
-                                  options.elementAt(index);
+                                      options.elementAt(index);
                                   return GestureDetector(
                                     onTap: () {
                                       onSelected(option);
@@ -215,7 +172,7 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
                                       tileColor: Themes.theme.backgroundColor,
                                       title: Text(option,
                                           style:
-                                          Themes.theme.textTheme.headline6),
+                                              Themes.theme.textTheme.headline6),
                                     ),
                                   );
                                 },
@@ -227,34 +184,33 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
                           return CustomTextField(
                             hintText: 'Event Name',
                             validator: (s) {
-                              if (StaticStore.sahyogEvents.contains(s)) {
+                              if (StaticStore.manthanEvents.contains(s)) {
                                 return null;
                               }
                               return "Enter a valid event";
                             },
                             controller: c,
-                            focusNode: f, isNecessary: true,
+                            focusNode: f,
+                            isNecessary: true,
                           );
                         },
                       ),
                       const SizedBox(height: 12),
                       CustomDropDown(
-                        items: kritiDifficulties,
-                        hintText: 'Difficulty',
-                        onChanged: (s) => difficulty = s,
-                        value: difficulty,
+                        items: moduleNames,
+                        hintText: 'Module',
+                        onChanged: (s) {
+                          module = s;
+                          // setState(() {
+                          //   hostelsSize = 0;
+                          //   participatingHostels = [];
+                          //   hostelSizeValue = null;
+                          // });
+                        },
+                        value: module,
                         validator: validateField,
                       ),
                       const SizedBox(height: 12),
-
-                      CustomTextField(
-                        hintText: 'Problem Link',
-                        validator: validateField,
-                        controller: _probelmLinkController, isNecessary: true,),
-
-                      const SizedBox(
-                        height: 12,
-                      ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -280,14 +236,15 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
                                   if (!mounted) return;
                                   date = pickedDate;
                                   String formattedDate =
-                                  DateFormat('dd-MMM-yyyy')
-                                      .format(pickedDate);
+                                      DateFormat('dd-MMM-yyyy')
+                                          .format(pickedDate);
                                   setState(() {
                                     dateInput.text =
                                         formattedDate; //set output date to TextField value.
                                   });
                                 }
-                              }, isNecessary: true,
+                              },
+                              isNecessary: true,
                             ),
                           ),
                           const SizedBox(
@@ -318,15 +275,16 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
                                     final now = DateTime.now();
                                     final formattedTimeString = DateFormat.jm()
                                         .format(DateTime(
-                                        now.year,
-                                        now.month,
-                                        now.day,
-                                        pickedTime.hour,
-                                        pickedTime.minute)); //"6:00 AM"
+                                            now.year,
+                                            now.month,
+                                            now.day,
+                                            pickedTime.hour,
+                                            pickedTime.minute)); //"6:00 AM"
                                     timeInput.text = formattedTimeString;
                                   });
                                 }
-                              }, isNecessary: true,
+                              },
+                              isNecessary: true,
                             ),
                           )
                         ],
@@ -337,52 +295,18 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
                       CustomTextField(
                         hintText: 'Venue',
                         validator: validateField,
-                        controller: _venueController, isNecessary: true,),
-                      const SizedBox(
-                        height: 12,
-                      ),
-
-                      Text(
-                        'Clubs',
-                        style: Themes.theme.textTheme.headline1,
-                      ),
-                      const SizedBox(
-                        height: 18,
-                      ),
-                      CustomDropDown(
-                        items: [for (var i = 1; i <= 15; i++) i.toString()],
-                        value: clubSizeValue,
-                        hintText: 'Select Number of Clubs',
-                        onChanged: callbackClubs,
-                        validator: validateField,
+                        controller: _venueController,
+                        isNecessary: true,
                       ),
                       const SizedBox(
                         height: 12,
                       ),
-                      Column(
-                        children: [
-                          for (var i = 1; i <= clubSize; i++)
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 12),
-                              child: CustomDropDown(
-                                items: clubNames,
-                                value: clubs[i - 1],
-                                hintText: 'Club Name $i',
-                                index: i,
-                                validator: validateField,
-                                onChanged: callbackAddClub,
-                              ),
-                            )
-                        ],
-                      )
                     ],
                   ))
             ],
           ),
         ),
       ),
-
-
     );
   }
 }

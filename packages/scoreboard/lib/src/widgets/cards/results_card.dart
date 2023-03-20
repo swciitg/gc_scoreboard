@@ -8,8 +8,8 @@ import '../../widgets/cards/expanded_results_card.dart';
 import '../../models/spardha_models/spardha_event_model.dart';
 import '../../globals/colors.dart';
 import 'card_event_details.dart';
-import 'menu_item.dart';
 import 'popup_menu.dart';
+import 'menu_item.dart';
 
 class ResultsCard extends StatefulWidget {
   final EventModel eventModel;
@@ -75,7 +75,7 @@ class _ResultsCardState extends State<ResultsCard> {
                               ],
                             ),
                           ),
-                          SizedBox(width: 8,),
+                          const SizedBox(width: 8,),
                           GestureDetector(
                             onTap: () {
                               setState(() {

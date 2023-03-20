@@ -47,7 +47,7 @@ class _SahyogHomeState extends State<SahyogHome> {
             ? GestureDetector(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const AddSahyogEventForm()));
+                builder: (context) => const SahyogEventForm()));
           },
           child: const AddButton(
             text: 'Add event',

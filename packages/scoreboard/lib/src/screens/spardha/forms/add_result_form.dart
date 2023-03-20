@@ -13,15 +13,15 @@ import '../../../widgets/add_result/fields_mandatory.dart';
 import '../../../widgets/cards/card_date_widget.dart';
 import '../../home.dart';
 
-class AddResultForm extends StatefulWidget {
+class SpardhaResultForm extends StatefulWidget {
   final EventModel event;
-  const AddResultForm({super.key, required this.event});
+  const SpardhaResultForm({super.key, required this.event});
 
   @override
-  State<AddResultForm> createState() => _AddResultFormState();
+  State<SpardhaResultForm> createState() => _SpardhaResultFormState();
 }
 
-class _AddResultFormState extends State<AddResultForm> {
+class _SpardhaResultFormState extends State<SpardhaResultForm> {
   TextEditingController victoryStatement = TextEditingController();
 
   @override

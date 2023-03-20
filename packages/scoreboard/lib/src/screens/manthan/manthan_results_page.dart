@@ -1,44 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import '../../functions/sahyog_schedule_filter.dart';
+import '../../functions/manthan_schedule_filter.dart';
 import '../../globals/styles.dart';
-import '../../models/sahyog_models/sahyog_event_model.dart';
+import '../../models/manthan_models/manthan_event_model.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
-import '../../stores/sahyog_store.dart';
-import '../../widgets/cards/kriti_schedule_card.dart';
+import '../../stores/manthan_store.dart';
+import '../../widgets/cards/manthan_result_card.dart';
 import '../../widgets/common/err_reload.dart';
-import '../../widgets/filters/sahyog_filter_bar.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
+import '../../widgets/filters/manthan_filter_bar.dart';
 
-class SahyogSchedulePage extends StatefulWidget {
-  const SahyogSchedulePage({Key? key}) : super(key: key);
+
+
+class ManthanResultsPage extends StatefulWidget {
+  const ManthanResultsPage({Key? key}) : super(key: key);
 
   @override
-  State<SahyogSchedulePage> createState() => _SahyogSchedulePageState();
+  State<ManthanResultsPage> createState() => _ManthanResultsPageState();
 }
 
-class _SahyogSchedulePageState extends State<SahyogSchedulePage> {
+class _ManthanResultsPageState extends State<ManthanResultsPage> {
   @override
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
-    var sahyogStore = context.read<SahyogStore>();
+    var manthanStore = context.read<ManthanStore>();
 
     reloadCallback() {
       // reload page
       setState(() {});
     }
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         children: [
           const TopBar(),
-          const SahyogFilterBar(),
-          FutureBuilder<List<SahyogEventModel>>(
-              future: APIService(context).getSahyogSchedule(commonStore.viewType),
+          const ManthanFilterBar(),
+          FutureBuilder<List<ManthanEventModel>>(
+              future: APIService(context).getManthanResults(commonStore.viewType),
               builder: (context, snapshot) {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Expanded(
@@ -46,7 +48,7 @@ class _SahyogSchedulePageState extends State<SahyogSchedulePage> {
                         itemCount: 3,
                         itemBuilder: (context, index) {
                           return Container(
-                            height: 300,
+                            height: 200,
                             padding: const EdgeInsets.symmetric(vertical: 8),
                             child: ShowShimmer(
                               height: 300,
@@ -56,21 +58,21 @@ class _SahyogSchedulePageState extends State<SahyogSchedulePage> {
                         }),
                   );
                 } else if (snapshot.hasData) {
-                  List<SahyogEventModel> allSahyogEventSchedules = snapshot.data!;
-
+                  List<ManthanEventModel> allManthanResults = snapshot.data!;
                   return Observer(builder: (context) {
-                    List<SahyogEventModel> filteredEventSchedules = sahyogFilterSchedule(input: allSahyogEventSchedules, difficulty: sahyogStore.difficulty, club: sahyogStore.selectedClub);
-
+                    List<ManthanEventModel> filteredEventSchedules = manthanFilterSchedule(input: allManthanResults, module: manthanStore.selectedModule, );
                     return Expanded(
                         child: filteredEventSchedules.isNotEmpty
                             ? ListView.builder(
                             itemCount: filteredEventSchedules.length,
                             itemBuilder: (context, index) {
-                              return KritiScheduleCard(eventModel: filteredEventSchedules[index]);
+                              return ManthanResultCard(
+                                  eventModel:
+                                  filteredEventSchedules[index]);
                             })
                             : Center(
-                          child: Text("No Schedule found",
-                              style: fontStyle1),
+                          child:
+                          Text("No Result found", style: fontStyle1),
                         ));
                   });
                 }

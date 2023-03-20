@@ -102,3 +102,21 @@ enum SahyogClub {
   final String clubName;
   const SahyogClub(this.clubName);
 }
+
+//manthan enums
+enum Module {
+  overall("Overall"),
+  dance("Dance"),
+  music("Music"),
+  contentCreation("Content Creation"),
+  photography("Photography"),
+  literary("Literary"),
+  dramatics("Dramatics"),
+  film("Film"),
+  fineArts("Fine Arts"),
+  debating("Debating"),
+  culinary("Culinary");
+
+  final String moduleName;
+  const Module(this.moduleName);
+}

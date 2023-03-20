@@ -2,6 +2,8 @@ import '../globals/constants.dart';
 import '../globals/enums.dart';
 
 List<dynamic> filterGCStandings(Category category, List<dynamic> input) {
+  print('GC STANDINGS');
+  print(input);
   List<dynamic> output = [];
   for (var element in input) {
     if (menHostel.contains(element['hostelName']) && category == Category.men) {

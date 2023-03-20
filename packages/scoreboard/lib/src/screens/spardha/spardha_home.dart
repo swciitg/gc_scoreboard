@@ -56,7 +56,7 @@ class _SpardhaHomeState extends State<SpardhaHome> {
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => commonStore.page == Pages.schedule
-                            ? const AddEventForm()
+                            ? const SpardhaEventForm()
                             : const SpardhaAdminStandingsPage()));
                   },
                   child: AddButton(
