@@ -146,7 +146,7 @@ class _KritiResultCardState extends State<KritiResultCard> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 8,
                         ),
                         GestureDetector(

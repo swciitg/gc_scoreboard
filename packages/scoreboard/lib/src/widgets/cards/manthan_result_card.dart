@@ -117,7 +117,7 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 8,
                         ),
                         GestureDetector(
@@ -209,8 +209,7 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
                                               .results[index].primaryScore!
                                               .toString(),
                                           secondaryScore: widget.eventModel
-                                              .results[index].secondaryScore
-                                              .toString());
+                                              .results[index].secondaryScore);
                                     }))
                           ],
                         )

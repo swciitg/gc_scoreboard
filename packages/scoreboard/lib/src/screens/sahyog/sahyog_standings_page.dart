@@ -5,7 +5,6 @@ import '../../functions/sahyog_standings_filter.dart';
 import '../../services/api.dart';
 import '../../stores/sahyog_store.dart';
 import '../../widgets/common/err_reload.dart';
-import '../../widgets/filters/kriti_filter_bar.dart';
 import '../../widgets/filters/sahyog_filter_bar.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
@@ -49,7 +48,6 @@ class _SahyogStandingsPageState extends State<SahyogStandingsPage> {
                       ));
                 } else if (snapshot.hasData) {
                   return Observer(builder: (context) {
-                    print(snapshot.data!);
                     List<dynamic> filteredEventSchedules = filterSahyogStandings(input: snapshot.data!, event: sahyogStore.selectedEvent);
                     return Expanded(
                         child: StandingBoard(

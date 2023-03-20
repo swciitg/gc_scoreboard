@@ -93,7 +93,7 @@ class _PopupMenuState extends State<PopupMenu> {
                     case 'sahyog':
                       return SahyogEventForm(event: widget.eventModel,);
                   }
-                  return Scaffold();
+                  return const Scaffold();
                 }
             ));
         break;
@@ -107,55 +107,25 @@ class _PopupMenuState extends State<PopupMenu> {
                   switch(competition)
                   {
                     case 'spardha':
-                      print('apple');
                       return SpardhaResultForm(event: widget.eventModel,);
                     case 'manthan':
-                      print('ball');
                       return ManthanResultForm(event: widget.eventModel,);
                     case 'kriti':
                       return KritiResultForm(event: widget.eventModel,);
                     case 'sahyog':
                       return SahyogResultForm(event: widget.eventModel,);
                   }
-                  return Scaffold();
+                  return const Scaffold();
                 }
             ));
         break;
       case 'delete':
         try {
           if (commonStore.page == Pages.results) {
-            switch(competition)
-            {
-              case 'spardha':
-                await APIService(context).deleteSpardhaResult(widget.eventModel.id!);
-                break;
-              case 'manthan':
-                await APIService(context).deleteManthanResult(widget.eventModel.id!);
-                break;
-              case 'kriti':
-                await APIService(context).deleteKritiResult(widget.eventModel.id!);
-                break;
-              case 'sahyog':
-                await APIService(context).deleteSahyogResult(widget.eventModel.id!);
-                break;
-            }
+            await APIService(context).deleteResult(widget.eventModel.id!, competition);
             showSnackBar(context, "Result Deleted");
           } else {
-            switch(competition)
-            {
-              case 'spardha':
-                await APIService(context).deleteEvent(widget.eventModel.id!);
-                break;
-              case 'manthan':
-                await APIService(context).deleteManthanEvent(widget.eventModel.id!);
-                break;
-              case 'kriti':
-                await APIService(context).deleteKritiEvent(widget.eventModel.id!);
-                break;
-              case 'sahyog':
-                await APIService(context).deleteSahyogEvent(widget.eventModel.id!);
-                break;
-            }
+            await APIService(context).deleteEvent(widget.eventModel.id!,competition);
             showSnackBar(context, "Event Deleted");
           }
           Navigator.pushReplacement(context,

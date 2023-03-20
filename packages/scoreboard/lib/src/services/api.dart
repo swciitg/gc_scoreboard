@@ -31,8 +31,6 @@ class APIService {
       handler.next(options);
     }, onError: (error, handler) async {
       var response = error.response;
-      // print(response.statusCode ?? "no status code");
-
       if (response != null && response.statusCode == 401) {
         print(response.requestOptions.path);
         bool couldRegenerate = await regenerateAccessToken();
@@ -305,14 +303,6 @@ class APIService {
     }
   }
 
-  Future<void> deleteEvent(String eventID) async {
-    try {
-      Response resp = await dio.delete('/gc/spardha/event-schedule/$eventID');
-    } on DioError catch (err) {
-      return Future.error(err);
-    }
-  }
-
   Future<void> updateSpardhaEvent(EventModel event) async {
     try {
       Response resp = await dio.patch('/gc/spardha/event-schedule/${event.id!}',
@@ -322,13 +312,7 @@ class APIService {
     }
   }
 
-  Future<void> deleteSpardhaResult(String eventID) async {
-    try {
-      await dio.delete('/gc/spardha/event-schedule/result/$eventID');
-    } on DioError catch (err) {
-      return Future.error(err);
-    }
-  }
+
 
   Future<Map<String, dynamic>> getSpardhaStandings() async {
     try {
@@ -551,51 +535,21 @@ class APIService {
     }
   }
 
-  Future<void> deleteKritiEvent(String eventID) async {
+  Future<void> deleteEvent(String eventID, String competition) async {
     try {
-      await dio.delete('/gc/kriti/event-schedule/$eventID');
+      Response resp = await dio.delete('/gc/$competition/event-schedule/$eventID');
     } on DioError catch (err) {
       return Future.error(err);
     }
   }
 
-  Future<void> deleteManthanEvent(String eventID) async {
+  Future<void> deleteResult(String eventID, String competition) async {
     try {
-      await dio.delete('/gc/manthan/event-schedule/$eventID');
+      await dio.delete('/gc/$competition/event-schedule/result/$eventID');
     } on DioError catch (err) {
       return Future.error(err);
     }
   }
 
-  Future<void> deleteSahyogEvent(String eventID) async {
-    try {
-      await dio.delete('/gc/sahyog/event-schedule/$eventID');
-    } on DioError catch (err) {
-      return Future.error(err);
-    }
-  }
 
-  Future<void> deleteKritiResult(String eventID) async {
-    try {
-      await dio.delete('/gc/kriti/event-schedule/result/$eventID');
-    } on DioError catch (err) {
-      return Future.error(err);
-    }
-  }
-
-  Future<void> deleteManthanResult(String eventID) async {
-    try {
-      await dio.delete('/gc/manthan/event-schedule/result/$eventID');
-    } on DioError catch (err) {
-      return Future.error(err);
-    }
-  }
-
-  Future<void> deleteSahyogResult(String eventID) async {
-    try {
-      await dio.delete('/gc/sahyog/event-schedule/result/$eventID');
-    } on DioError catch (err) {
-      return Future.error(err);
-    }
-  }
 }

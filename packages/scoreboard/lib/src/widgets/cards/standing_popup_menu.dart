@@ -32,7 +32,7 @@ class _StandingPopupState extends State<StandingPopup> {
 
   void _showContextMenu(context, commonStore) async {
     final RenderBox overlay =
-        Overlay.of(context)?.context.findRenderObject() as RenderBox;
+        Overlay.of(context).context.findRenderObject() as RenderBox;
 
     final result = await showMenu(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),

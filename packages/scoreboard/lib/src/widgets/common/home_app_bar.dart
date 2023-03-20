@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../functions/snackbar.dart';
-import '../../globals/constants.dart';
 import '../../globals/colors.dart';
 import '../../globals/enums.dart';
 import '../../globals/styles.dart';

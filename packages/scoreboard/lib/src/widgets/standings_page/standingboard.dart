@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../globals/colors.dart';
 import '../../globals/constants.dart';
 import '../../globals/styles.dart';
-import '../../stores/common_store.dart';
 
 class StandingBoard extends StatefulWidget {
   final List<dynamic> hostelStandings;
@@ -23,7 +21,6 @@ class _StandingBoardState extends State<StandingBoard> {
 
   @override
   Widget build(BuildContext context) {
-    var commonStore = context.read<CommonStore>();
     print("STANDINGS");
     print(widget.hostelStandings);
     return Container(

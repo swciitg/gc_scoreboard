@@ -70,6 +70,6 @@ class _TimePickerColorState extends State<TimePickerColor> {
           // If you want 24-Hour format, just change alwaysUse24HourFormat to true or remove all the builder argument
           child: widget.childWidget!),
     );
-    ;
+
   }
 }

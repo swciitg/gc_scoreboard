@@ -103,7 +103,7 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                                       ),
                                     ),
                                   ) : Container(),
-                                  isKriti ?SizedBox(width: 8,) : Container(),
+                                  isKriti ?const SizedBox(width: 8,) : Container(),
                                   GestureDetector(
                                     onTap: () async {
                                       if(!isLinkPressed)
@@ -159,7 +159,7 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                                             const Center(
                                               child: Icon(Icons.launch_outlined,color: Colors.black,size: 15,),
                                             ),
-                                            SizedBox(width: 3,),
+                                            const SizedBox(width: 3,),
                                             Text(
                                               'Open Problem',
                                               style:  GoogleFonts.montserrat(

@@ -79,7 +79,7 @@ class _ManthanScheduleCardState extends State<ManthanScheduleCard> {
                                 child:
                                 isManthan
                                     ? Text(widget.eventModel.module, style: cardStageStyle1)
-                                    : Text(''),
+                                    : const Text(''),
                               ),
                             ],
                           ),
