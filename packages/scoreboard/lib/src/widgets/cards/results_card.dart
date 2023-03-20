@@ -8,8 +8,8 @@ import '../../widgets/cards/expanded_results_card.dart';
 import '../../models/spardha_models/spardha_event_model.dart';
 import '../../globals/colors.dart';
 import 'card_event_details.dart';
-import 'popup_menu.dart';
 import 'menu_item.dart';
+import 'popup_menu.dart';
 
 class ResultsCard extends StatefulWidget {
   final EventModel eventModel;
@@ -75,7 +75,7 @@ class _ResultsCardState extends State<ResultsCard> {
                               ],
                             ),
                           ),
-                          const SizedBox(width: 8,),
+                          SizedBox(width: 8,),
                           GestureDetector(
                             onTap: () {
                               setState(() {
@@ -114,44 +114,44 @@ class _ResultsCardState extends State<ResultsCard> {
                     ),
                     isExpanded
                         ? Column(
+                      children: [
+                        const Divider(
+                          height: 32,
+                          color: Themes.bottomNavHighlightColor,
+                          thickness: 1,
+                        ),
+                        SizedBox(
+                          height: 12,
+                          child: Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
                             children: [
-                              const Divider(
-                                height: 32,
-                                color: Themes.bottomNavHighlightColor,
-                                thickness: 1,
+                              Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 26,
+                                  ),
+                                  Text(
+                                    'Hostel',
+                                    style: cardResultStyle2,
+                                  ),
+                                ],
                               ),
-                              SizedBox(
-                                height: 12,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        const SizedBox(
-                                          width: 26,
-                                        ),
-                                        Text(
-                                          'Hostel',
-                                          style: cardResultStyle2,
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      'Score',
-                                      style: cardResultStyle2,
-                                    ),
-                                  ],
-                                ),
+                              Text(
+                                'Score',
+                                style: cardResultStyle2,
                               ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 2),
-                                child: ExpandedResultsCard(
-                                    eventModel: widget.eventModel),
-                              )
                             ],
-                          )
+                          ),
+                        ),
+                        Padding(
+                          padding:
+                          const EdgeInsets.symmetric(vertical: 2),
+                          child: ExpandedResultsCard(
+                              eventModel: widget.eventModel),
+                        )
+                      ],
+                    )
                         : Container(),
                   ],
                 ),
