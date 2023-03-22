@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/widgets/filters/sahyog_filter_bar.dart';
+
 import '../../functions/sahyog_schedule_filter.dart';
 import '../../globals/styles.dart';
 import '../../models/sahyog_models/sahyog_event_model.dart';
@@ -12,6 +12,7 @@ import '../../widgets/cards/kriti_result_card.dart';
 import '../../widgets/common/err_reload.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
+import '../../widgets/filters/sahyog_filter_bar.dart';
 
 class SahyogResultsPage extends StatefulWidget {
   const SahyogResultsPage({Key? key}) : super(key: key);

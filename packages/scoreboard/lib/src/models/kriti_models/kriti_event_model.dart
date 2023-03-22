@@ -1,6 +1,6 @@
-import 'kriti_result_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import 'kriti_result_model.dart';
 part 'kriti_event_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)

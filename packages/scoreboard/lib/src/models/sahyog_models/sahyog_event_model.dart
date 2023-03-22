@@ -1,6 +1,6 @@
-import 'sahyog_result_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import 'sahyog_result_model.dart';
 part 'sahyog_event_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
