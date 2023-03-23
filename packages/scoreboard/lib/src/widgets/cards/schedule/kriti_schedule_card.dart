@@ -20,6 +20,7 @@ import '../menu_item.dart';
 
 
 
+
 class KritiScheduleCard extends StatefulWidget {
   // ignore: prefer_typing_uninitialized_variables
   final eventModel;

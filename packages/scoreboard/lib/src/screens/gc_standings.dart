@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/widgets/filters/gc_filter_bar.dart';
 import '../globals/styles.dart';
 import '../widgets/common/err_reload.dart';
 import '../widgets/common/shimmer.dart';
@@ -12,6 +11,7 @@ import '../services/api.dart';
 import '../stores/gc_store.dart';
 import '../widgets/common/bottom_navigation_bar.dart';
 import '../widgets/common/home_app_bar.dart';
+import '../widgets/filters/gc_filter_bar.dart';
 import '../widgets/standings_page/standingboard.dart';
 
 class GCStandingsPage extends StatefulWidget {

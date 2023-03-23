@@ -15,6 +15,7 @@ import '../../../widgets/add_event/drop_down.dart';
 import '../../../widgets/add_result/custom_text_field.dart';
 import '../../../widgets/add_result/fields_mandatory.dart';
 import '../../../functions/position.dart';
+import '../../../widgets/common/autocomplete.dart';
 import '../../home.dart';
 
 class AddStanding extends StatefulWidget {
@@ -30,6 +31,10 @@ class _AddStandingState extends State<AddStanding> {
   TextEditingController victoryStatement = TextEditingController();
   final StandingFormStore standingFormStore = StandingFormStore();
 
+  callbackAutocomplete(value){
+    standingFormStore.event=value;
+  }
+  
   @override
   void initState() {
     super.initState();
@@ -146,67 +151,7 @@ class _AddStandingState extends State<AddStanding> {
                       children: [
                         SizedBox(
                           width: double.infinity,
-                          child: Autocomplete<String>(
-                            optionsBuilder: (TextEditingValue val) {
-                              if (val.text == '') {
-                                return const Iterable<String>.empty();
-                              }
-                              return StaticStore.spardhaEvents.where(
-                                  (element) => element
-                                      .toLowerCase()
-                                      .contains(val.text.toLowerCase()));
-                            },
-                            initialValue: TextEditingValue(
-                                text: widget.standings?.event ?? ""),
-                            onSelected: (s) => standingFormStore.event = s,
-                            optionsMaxHeight: 50,
-                            optionsViewBuilder: (BuildContext context,
-                                AutocompleteOnSelected<String> onSelected,
-                                Iterable<String> options) {
-                              return Align(
-                                alignment: Alignment.topLeft,
-                                child: Material(
-                                  color: Colors.transparent,
-                                  child: ListView.builder(
-                                    // padding: EdgeInsets.all(10.0),
-                                    padding:
-                                        const EdgeInsets.symmetric(vertical: 0),
-                                    itemCount: options.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      final String option =
-                                          options.elementAt(index);
-                                      return GestureDetector(
-                                        onTap: () {
-                                          onSelected(option);
-                                        },
-                                        child: ListTile(
-                                          tileColor:
-                                              Themes.theme.backgroundColor,
-                                          title: Text(option,
-                                              style: Themes
-                                                  .theme.textTheme.headline6),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                              );
-                            },
-                            fieldViewBuilder: (context, c, f, __) {
-                              return CustomTextField(
-                                hintText: 'Event Name',
-                                validator: (s) {
-                                  if (StaticStore.spardhaEvents.contains(s)) {
-                                    return null;
-                                  }
-                                  return "Enter a valid event";
-                                },
-                                controller: c,
-                                focusNode: f, isNecessary: true,
-                              );
-                            },
-                          ),
+                          child: AutocompleteTextField(callbackFunction: callbackAutocomplete, standings: widget.standings?.event,),
                         ),
                         const SizedBox(
                           height: 15,
