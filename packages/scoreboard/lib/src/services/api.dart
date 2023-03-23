@@ -19,8 +19,8 @@ import '../stores/common_store.dart';
 class APIService {
   final dio = Dio(BaseOptions(
       baseUrl: const String.fromEnvironment('SERVER-URL'),
-      connectTimeout: 15000,
-      receiveTimeout: 15000,
+      connectTimeout: Duration(seconds: 15),
+      receiveTimeout: Duration(seconds: 15),
       headers: {'Security-Key': const String.fromEnvironment('SECURITY-KEY')}));
 
   APIService(BuildContext buildContext) {
@@ -61,8 +61,8 @@ class APIService {
         Options(method: requestOptions.method, headers: requestOptions.headers);
     Dio retryDio = Dio(BaseOptions(
         baseUrl: const String.fromEnvironment('SERVER-URL'),
-        connectTimeout: 5000,
-        receiveTimeout: 5000,
+        connectTimeout: Duration(seconds: 5),
+        receiveTimeout: Duration(seconds: 5),
         headers: {
           'Security-Key': const String.fromEnvironment('SECURITY-KEY')
         }));
@@ -113,8 +113,8 @@ class APIService {
     try {
       Dio regenDio = Dio(BaseOptions(
           baseUrl: const String.fromEnvironment('SERVER-URL'),
-          connectTimeout: 5000,
-          receiveTimeout: 5000,
+          connectTimeout: Duration(seconds: 5),
+          receiveTimeout: Duration(seconds: 5),
           headers: {
             'Security-Key': const String.fromEnvironment('SECURITY-KEY')
           }));
@@ -363,10 +363,6 @@ class APIService {
       return Future.error(err);
     }
   }
-
-
-
-
 
   // Get-all events
 
