@@ -4,10 +4,10 @@ import '../../globals/styles.dart';
 import '../../models/standing_model.dart';
 import '../../services/api.dart';
 import '../../widgets/cards/results/standings_results_card.dart';
-import '../../widgets/common/shimmer.dart';
+import '../../widgets/ui/shimmer.dart';
 import '../../widgets/common/standings_app_bar.dart';
 import '../../widgets/schedule_page/add_button.dart';
-import '../../widgets/common/err_reload.dart';
+import '../../widgets/ui/err_reload.dart';
 import 'forms/add_standing_form.dart';
 
 class SpardhaAdminStandingsPage extends StatefulWidget {

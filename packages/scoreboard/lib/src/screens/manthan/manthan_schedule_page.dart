@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
-import '../../functions/manthan_schedule_filter.dart';
+import '../../functions/filters/manthan_schedule_filter.dart';
 import '../../globals/styles.dart';
 import '../../models/manthan_models/manthan_event_model.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
 import '../../stores/manthan_store.dart';
 import '../../widgets/cards/schedule/manthan_schedule_card.dart';
-import '../../widgets/common/err_reload.dart';
-import '../../widgets/common/shimmer.dart';
+import '../../widgets/ui/err_reload.dart';
+import '../../widgets/ui/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
 import '../../widgets/filters/manthan_filter_bar.dart';
 

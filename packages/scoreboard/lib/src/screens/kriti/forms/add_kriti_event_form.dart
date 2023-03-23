@@ -8,13 +8,12 @@ import '../../../globals/colors.dart';
 import '../../../globals/constants.dart';
 import '../../../models/kriti_models/kriti_event_model.dart';
 import '../../../services/api.dart';
-import '../../../stores/static_store.dart';
-import '../../../widgets/add_event/datepicker_color.dart';
-import '../../../widgets/add_event/drop_down.dart';
-import '../../../widgets/add_event/heading.dart';
-import '../../../widgets/add_event/timepicker_color.dart';
-import '../../../widgets/add_result/custom_text_field.dart';
-import '../../../widgets/common/autocomplete.dart';
+import '../../../widgets/fields/datepicker_color.dart';
+import '../../../widgets/fields/drop_down.dart';
+import '../../../widgets/ui/heading.dart';
+import '../../../widgets/fields/timepicker_color.dart';
+import '../../../widgets/fields/custom_text_field.dart';
+import '../../../widgets/fields/autocomplete.dart';
 import '../../../widgets/common/form_app_bar.dart';
 import '../../../globals/enums.dart';
 import '../../home.dart';
@@ -218,12 +217,10 @@ class _KritiEventFormState extends State<KritiEventForm> {
                         validator: validateField,
                       ),
                       const SizedBox(height: 12),
-
                       CustomTextField(
                           hintText: 'Problem Link',
                           validator: validateField,
                           controller: _probelmLinkController, isNecessary: true,),
-
                       const SizedBox(
                         height: 12,
                       ),
@@ -244,16 +241,12 @@ class _KritiEventFormState extends State<KritiEventForm> {
                                     firstDate: DateTime(2000),
                                     //DateTime.now() - not to allow to choose before today.
                                     lastDate: DateTime(2101),
-                                    builder: (context, child) =>
-                                        DatePickerTheme(
-                                          child: child,
-                                        ));
+                                    builder: (context, child) => DatePickerTheme(child: child,));
                                 if (pickedDate != null) {
                                   if (!mounted) return;
                                   date = pickedDate;
                                   String formattedDate =
-                                  DateFormat('dd-MMM-yyyy')
-                                      .format(pickedDate);
+                                  DateFormat('dd-MMM-yyyy').format(pickedDate);
                                   setState(() {
                                     dateInput.text =
                                         formattedDate; //set output date to TextField value.
@@ -313,7 +306,6 @@ class _KritiEventFormState extends State<KritiEventForm> {
                       const SizedBox(
                         height: 12,
                       ),
-
                       Text(
                         'Clubs',
                         style: Themes.theme.textTheme.headline1,
@@ -353,8 +345,6 @@ class _KritiEventFormState extends State<KritiEventForm> {
           ),
         ),
       ),
-
-
     );
   }
 }

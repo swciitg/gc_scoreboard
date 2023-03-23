@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-
 import '../../globals/colors.dart';
 import '../../stores/static_store.dart';
-import '../add_result/custom_text_field.dart';
+import 'custom_text_field.dart';
 
 
 class AutocompleteTextField extends StatefulWidget {

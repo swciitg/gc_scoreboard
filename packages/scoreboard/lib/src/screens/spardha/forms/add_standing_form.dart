@@ -10,12 +10,11 @@ import '../../../models/standing_model.dart';
 import '../../../services/api.dart';
 import '../../../stores/common_store.dart';
 import '../../../stores/standing_form_store.dart';
-import '../../../stores/static_store.dart';
-import '../../../widgets/add_event/drop_down.dart';
-import '../../../widgets/add_result/custom_text_field.dart';
-import '../../../widgets/add_result/fields_mandatory.dart';
+import '../../../widgets/fields/drop_down.dart';
+import '../../../widgets/fields/custom_text_field.dart';
 import '../../../functions/position.dart';
-import '../../../widgets/common/autocomplete.dart';
+import '../../../widgets/fields/autocomplete.dart';
+import '../../../widgets/ui/heading.dart';
 import '../../home.dart';
 
 class AddStanding extends StatefulWidget {

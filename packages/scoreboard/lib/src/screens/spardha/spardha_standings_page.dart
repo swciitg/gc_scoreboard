@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import '../../widgets/common/err_reload.dart';
-import '../../widgets/common/shimmer.dart';
-import '../../functions/spardha_filter_standings.dart';
+import '../../widgets/ui/err_reload.dart';
+import '../../widgets/ui/shimmer.dart';
+import '../../functions/filters/spardha_filter_standings.dart';
 import '../../services/api.dart';
 import '../../stores/spardha_store.dart';
 import '../../widgets/filters/spardha_filter_bar.dart';

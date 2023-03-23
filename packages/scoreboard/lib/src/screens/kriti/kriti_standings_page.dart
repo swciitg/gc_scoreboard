@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import '../../functions/kriti_standings_filter.dart';
+import '../../functions/filters/kriti_standings_filter.dart';
 import '../../stores/kriti_store.dart';
-import '../../widgets/common/err_reload.dart';
-import '../../widgets/common/shimmer.dart';
+import '../../widgets/ui/err_reload.dart';
+import '../../widgets/ui/shimmer.dart';
 import '../../services/api.dart';
 import '../../widgets/common/top_bar.dart';
 import '../../widgets/standings_page/standingboard.dart';

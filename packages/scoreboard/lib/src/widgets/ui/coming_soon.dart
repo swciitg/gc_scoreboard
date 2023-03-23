@@ -14,7 +14,6 @@ class ComingSoon extends StatefulWidget {
 class _ComingSoonState extends State<ComingSoon> {
   @override
   Widget build(BuildContext context) {
-    // print(widget.competition);
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,

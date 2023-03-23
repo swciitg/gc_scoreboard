@@ -7,7 +7,7 @@ import '../../globals/enums.dart';
 import '../../stores/common_store.dart';
 import '../../widgets/common/bottom_navigation_bar.dart';
 import '../../widgets/common/home_app_bar.dart';
-import '../../widgets/common/restricted_page.dart';
+import '../../widgets/ui/restricted_page.dart';
 import '../../widgets/schedule_page/add_button.dart';
 import 'forms/add_manthan_event_form.dart';
 import 'manthan_results_page.dart';

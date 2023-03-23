@@ -1,5 +1,5 @@
 
-import '../globals/enums.dart';
+import '../../globals/enums.dart';
 import 'gc_filter.dart';
 
 List<dynamic> filterStandings({required Map<String,dynamic> input, required String event, required Category category})

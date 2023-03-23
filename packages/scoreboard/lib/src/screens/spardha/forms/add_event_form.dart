@@ -6,12 +6,12 @@ import '../../../globals/constants.dart';
 import '../../../globals/colors.dart';
 import '../../../models/spardha_models/spardha_event_model.dart';
 import '../../../stores/static_store.dart';
-import '../../../widgets/add_event/datepicker_color.dart';
-import '../../../widgets/add_event/drop_down.dart';
-import '../../../widgets/add_event/heading.dart';
-import '../../../widgets/add_event/timepicker_color.dart';
-import '../../../widgets/add_result/custom_text_field.dart';
-import '../../../widgets/common/autocomplete.dart';
+import '../../../widgets/fields/datepicker_color.dart';
+import '../../../widgets/fields/drop_down.dart';
+import '../../../widgets/ui/heading.dart';
+import '../../../widgets/fields/timepicker_color.dart';
+import '../../../widgets/fields/custom_text_field.dart';
+import '../../../widgets/fields/autocomplete.dart';
 import '../../../widgets/common/form_app_bar.dart';
 import 'confirm_event_details.dart';
 

@@ -11,9 +11,9 @@ import 'stores/kriti_store.dart';
 import 'stores/manthan_store.dart';
 import 'stores/sahyog_store.dart';
 import 'stores/spardha_store.dart';
-import 'widgets/common/err_reload.dart';
+import 'widgets/ui/err_reload.dart';
 import 'widgets/common/home_app_bar.dart';
-import 'widgets/common/shimmer.dart';
+import 'widgets/ui/shimmer.dart';
 import 'widgets/common/top_bar.dart';
 import 'widgets/filters/spardha_filter_bar.dart';
 

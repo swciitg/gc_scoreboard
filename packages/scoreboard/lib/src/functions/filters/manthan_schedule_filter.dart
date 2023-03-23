@@ -1,6 +1,6 @@
 
-import '../globals/enums.dart';
-import '../models/manthan_models/manthan_event_model.dart';
+import '../../globals/enums.dart';
+import '../../models/manthan_models/manthan_event_model.dart';
 
 List<ManthanEventModel> manthanFilterSchedule({required List<ManthanEventModel> input, required String module})
 {

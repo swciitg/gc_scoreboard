@@ -7,10 +7,10 @@ import '../../../globals/colors.dart';
 import '../../../models/spardha_models/spardha_event_model.dart';
 import '../../../services/api.dart';
 import '../../../stores/result_form_store.dart';
-import '../../../widgets/add_event/drop_down.dart';
-import '../../../widgets/add_result/custom_text_field.dart';
-import '../../../widgets/add_result/fields_mandatory.dart';
+import '../../../widgets/fields/drop_down.dart';
+import '../../../widgets/fields/custom_text_field.dart';
 import '../../../widgets/cards/card_date_widget.dart';
+import '../../../widgets/ui/heading.dart';
 import '../../home.dart';
 
 class SpardhaResultForm extends StatefulWidget {
