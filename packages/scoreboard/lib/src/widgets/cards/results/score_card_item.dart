@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../../globals/enums.dart';
-import '../../globals/styles.dart';
-import '../../stores/common_store.dart';
+import '../../../globals/styles.dart';
 
+// ignore: must_be_immutable
 class ScoreCardItem extends StatelessWidget {
   final int position;
   final String hostelName;
@@ -21,9 +19,6 @@ class ScoreCardItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final split = secondaryScore?.split(',');
-    var commonStore = context.read<CommonStore>();
-    bool isWide = (commonStore.competition == Competitions.kriti ||
-        commonStore.competition == Competitions.sahyog);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
@@ -47,9 +42,7 @@ class ScoreCardItem extends StatelessWidget {
                   width: 10,
                 ),
                 SizedBox(
-                  width: isWide
-                      ? MediaQuery.of(context).size.width - 120
-                      : MediaQuery.of(context).size.width - 210,
+                  width: secondaryScore == null ? 165 : 105,
                   child: Text(
                     overflow: TextOverflow.visible,
                     hostelName,

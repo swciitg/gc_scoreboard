@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:scoreboard/src/functions/snackbar.dart';
-import 'package:scoreboard/src/models/manthan_models/manthan_event_model.dart';
-import 'package:scoreboard/src/models/manthan_models/manthan_result_model.dart';
 import '../functions/auth_user_helper.dart';
+import '../functions/snackbar.dart';
 import '../globals/constants.dart';
 import '../globals/enums.dart';
+import '../models/manthan_models/manthan_event_model.dart';
+import '../models/manthan_models/manthan_result_model.dart';
 import '../models/sahyog_models/sahyog_event_model.dart';
 import '../models/sahyog_models/sahyog_result_model.dart';
 import '../models/spardha_models/spardha_event_model.dart';

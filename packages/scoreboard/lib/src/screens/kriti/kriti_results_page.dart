@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import '../../functions/kriti_schedule_filter.dart';
+import '../../functions/filters/kriti_schedule_filter.dart';
 import '../../globals/styles.dart';
 import '../../models/kriti_models/kriti_event_model.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
 import '../../stores/kriti_store.dart';
-import '../../widgets/common/err_reload.dart';
-import '../../widgets/common/shimmer.dart';
+import '../../widgets/ui/err_reload.dart';
+import '../../widgets/ui/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
 import '../../widgets/filters/kriti_filter_bar.dart';
-import '../../widgets/cards/kriti_result_card.dart';
+import '../../widgets/cards/results/kriti_result_card.dart';
 
 
 

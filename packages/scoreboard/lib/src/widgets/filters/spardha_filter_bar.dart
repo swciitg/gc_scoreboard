@@ -8,7 +8,7 @@ import '../../globals/styles.dart';
 import '../../stores/common_store.dart';
 import '../../stores/spardha_store.dart';
 import '../../stores/static_store.dart';
-import '../add_event/datepicker_color.dart';
+import '../fields/datepicker_color.dart';
 import 'filter_button.dart';
 
 class SpardhaFilterBar extends StatefulWidget {

@@ -8,12 +8,12 @@ import '../../../globals/colors.dart';
 import '../../../globals/constants.dart';
 import '../../../models/kriti_models/kriti_event_model.dart';
 import '../../../services/api.dart';
-import '../../../stores/static_store.dart';
-import '../../../widgets/add_event/datepicker_color.dart';
-import '../../../widgets/add_event/drop_down.dart';
-import '../../../widgets/add_event/heading.dart';
-import '../../../widgets/add_event/timepicker_color.dart';
-import '../../../widgets/add_result/custom_text_field.dart';
+import '../../../widgets/fields/datepicker_color.dart';
+import '../../../widgets/fields/drop_down.dart';
+import '../../../widgets/ui/heading.dart';
+import '../../../widgets/fields/timepicker_color.dart';
+import '../../../widgets/fields/custom_text_field.dart';
+import '../../../widgets/fields/autocomplete.dart';
 import '../../../widgets/common/form_app_bar.dart';
 import '../../../globals/enums.dart';
 import '../../home.dart';
@@ -61,6 +61,10 @@ class _KritiEventFormState extends State<KritiEventForm> {
   callbackAddClub(value, index) {
     clubs[index - 1] = value;
     clubSizeValue = clubs.length.toString();
+  }
+
+  callbackAutocomplete(value){
+    eventName=value;
   }
 
   @override
@@ -192,66 +196,7 @@ class _KritiEventFormState extends State<KritiEventForm> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Autocomplete<String>(
-                        optionsBuilder: (TextEditingValue val) {
-                          if (val.text == '') {
-                            return const Iterable<String>.empty();
-                          }
-                          return StaticStore.kritiEvents.where((element) =>
-                              element
-                                  .toLowerCase()
-                                  .contains(val.text.toLowerCase()));
-                        },
-                        initialValue:
-                        TextEditingValue(text: widget.event?.event ?? ""),
-                        onSelected: (s) => eventName = s,
-                        optionsMaxHeight: 50,
-                        optionsViewBuilder: (BuildContext context,
-                            AutocompleteOnSelected<String> onSelected,
-                            Iterable<String> options) {
-                          // options = [...options,...options,...options,...options,...options,...options,...options,];
-                          return Align(
-                            alignment: Alignment.topLeft,
-                            child: Material(
-                              color: Colors.transparent,
-                              child: ListView.builder(
-                                // padding: EdgeInsets.all(10.0),
-                                padding:
-                                const EdgeInsets.symmetric(vertical: 0),
-                                itemCount: options.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  final String option =
-                                  options.elementAt(index);
-                                  return GestureDetector(
-                                    onTap: () {
-                                      onSelected(option);
-                                    },
-                                    child: ListTile(
-                                      tileColor: Themes.theme.backgroundColor,
-                                      title: Text(option,
-                                          style:
-                                          Themes.theme.textTheme.headline6),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          );
-                        },
-                        fieldViewBuilder: (context, c, f, __) {
-                          return CustomTextField(
-                            hintText: 'Event Name',
-                            validator: (s) {
-                              if (StaticStore.kritiEvents.contains(s)) {
-                                return null;
-                              }
-                              return "Enter a valid event";
-                            },
-                            controller: c,
-                            focusNode: f, isNecessary: true,
-                          );
-                        },
-                      ),
+                      AutocompleteTextField(callbackFunction: callbackAutocomplete, standings: widget.event?.event,),
                       const SizedBox(height: 12),
                       CustomDropDown(
                         items: cupNames,
@@ -271,12 +216,10 @@ class _KritiEventFormState extends State<KritiEventForm> {
                         validator: validateField,
                       ),
                       const SizedBox(height: 12),
-
                       CustomTextField(
                           hintText: 'Problem Link',
                           validator: validateField,
                           controller: _probelmLinkController, isNecessary: true,),
-
                       const SizedBox(
                         height: 12,
                       ),
@@ -297,16 +240,12 @@ class _KritiEventFormState extends State<KritiEventForm> {
                                     firstDate: DateTime(2000),
                                     //DateTime.now() - not to allow to choose before today.
                                     lastDate: DateTime(2101),
-                                    builder: (context, child) =>
-                                        DatePickerTheme(
-                                          child: child,
-                                        ));
+                                    builder: (context, child) => DatePickerTheme(child: child,));
                                 if (pickedDate != null) {
                                   if (!mounted) return;
                                   date = pickedDate;
                                   String formattedDate =
-                                  DateFormat('dd-MMM-yyyy')
-                                      .format(pickedDate);
+                                  DateFormat('dd-MMM-yyyy').format(pickedDate);
                                   setState(() {
                                     dateInput.text =
                                         formattedDate; //set output date to TextField value.
@@ -366,7 +305,6 @@ class _KritiEventFormState extends State<KritiEventForm> {
                       const SizedBox(
                         height: 12,
                       ),
-
                       Text(
                         'Clubs',
                         style: Themes.theme.textTheme.headline1,
@@ -406,8 +344,9 @@ class _KritiEventFormState extends State<KritiEventForm> {
           ),
         ),
       ),
-
-
     );
   }
 }
+
+
+

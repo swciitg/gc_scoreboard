@@ -1,5 +1,5 @@
-import '../globals/enums.dart';
-import '../models/sahyog_models/sahyog_event_model.dart';
+import '../../globals/enums.dart';
+import '../../models/sahyog_models/sahyog_event_model.dart';
 
 
 List<SahyogEventModel> sahyogFilterSchedule({required List<SahyogEventModel> input, required String difficulty, required SahyogClub club})

@@ -1,5 +1,6 @@
 import 'package:mobx/mobx.dart';
-import 'package:scoreboard/src/globals/enums.dart';
+
+import '../globals/enums.dart';
 part 'sahyog_store.g.dart';
 
 class SahyogStore = _SahyogStore with _$SahyogStore;

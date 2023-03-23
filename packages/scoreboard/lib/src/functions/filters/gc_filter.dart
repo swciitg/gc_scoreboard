@@ -1,5 +1,5 @@
-import '../globals/constants.dart';
-import '../globals/enums.dart';
+import '../../globals/constants.dart';
+import '../../globals/enums.dart';
 
 List<dynamic> filterGCStandings(Category category, List<dynamic> input) {
   print('GC STANDINGS');

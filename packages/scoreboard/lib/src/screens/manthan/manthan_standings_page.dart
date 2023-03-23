@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import '../../functions/manthan_standings_filter.dart';
+import '../../functions/filters/manthan_standings_filter.dart';
 import '../../stores/manthan_store.dart';
-import '../../widgets/common/err_reload.dart';
-import '../../widgets/common/shimmer.dart';
+import '../../widgets/ui/err_reload.dart';
+import '../../widgets/ui/shimmer.dart';
 import '../../services/api.dart';
 import '../../widgets/common/top_bar.dart';
 import '../../widgets/filters/manthan_filter_bar.dart';
