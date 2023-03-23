@@ -7,7 +7,7 @@ import '../../models/manthan_models/manthan_event_model.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
 import '../../stores/manthan_store.dart';
-import '../../widgets/cards/manthan_result_card.dart';
+import '../../widgets/cards/results/manthan_result_card.dart';
 import '../../widgets/common/err_reload.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';

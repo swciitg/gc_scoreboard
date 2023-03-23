@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../globals/colors.dart';
-import '../../globals/styles.dart';
-import '../../models/standing_model.dart';
-import 'menu_item.dart';
-import 'standing_popup_menu.dart';
-import 'standings_expanded_results_card.dart';
+import '../../../globals/colors.dart';
+import '../../../globals/styles.dart';
+import '../../../models/standing_model.dart';
+import '../menu_item.dart';
+import '../standing_popup_menu.dart';
+import 'score_card_item.dart';
+
 
 class StandingsResultCard extends StatefulWidget {
   final StandingModel standingModel;
@@ -63,9 +64,6 @@ class _StandingsResultCardState extends State<StandingsResultCard> {
                           ],
                         ),
                       ),
-                      // const SizedBox(
-                      //   height: 32,
-                      // )
                     ]),
                     Column(
                       children: [
@@ -99,8 +97,24 @@ class _StandingsResultCardState extends State<StandingsResultCard> {
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 2),
-                          child: StandingsExpandedresultsCard(
-                              standingModel: widget.standingModel),
+                          child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                maxHeight:
+                                    widget.standingModel.standings!.length * 30,
+                              ),
+                              child: ListView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount:
+                                      widget.standingModel.standings!.length,
+                                  itemBuilder: (context, index) {
+                                    return ScoreCardItem(
+                                        position: index + 1,
+                                        hostelName: widget.standingModel
+                                            .standings![index].hostelName!,
+                                        finalScore: widget.standingModel
+                                            .standings![index].points
+                                            .toString());
+                                  })),
                         )
                       ],
                     )

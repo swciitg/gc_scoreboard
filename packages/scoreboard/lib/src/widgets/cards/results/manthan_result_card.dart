@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
-import '../../globals/colors.dart';
-import '../../globals/enums.dart';
-import '../../globals/styles.dart';
-import '../../models/manthan_models/manthan_event_model.dart';
-import '../../stores/common_store.dart';
-import 'card_date_widget.dart';
-import 'popup_menu.dart';
-import 'menu_item.dart';
+import '../../../globals/colors.dart';
+import '../../../globals/enums.dart';
+import '../../../globals/styles.dart';
+import '../../../models/manthan_models/manthan_event_model.dart';
+import '../../../stores/common_store.dart';
+import '../card_date_widget.dart';
+import '../popup_menu.dart';
+import '../menu_item.dart';
 import 'score_card_item.dart';
 
 class ManthanResultCard extends StatefulWidget {
@@ -33,8 +33,6 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
   @override
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
-    bool isManthan = (widget.eventModel.runtimeType == ManthanEventModel);
-    print(widget.eventModel.results[0].primaryScore);
     return Observer(builder: (context) {
       return Padding(
         padding: const EdgeInsets.all(8.0),
@@ -54,7 +52,7 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
                 children: [
                   Column(children: [
                     SizedBox(
-                      height: isManthan ? 98 : 78,
+                      height: 98,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -70,12 +68,10 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
                                       style: cardEventStyle),
                                 ),
                               ),
-                              isManthan
-                                  ? SizedBox(
-                                      height: 20,
-                                      child: Text(widget.eventModel.module,
-                                          style: cardStageStyle1))
-                                  : Container(),
+                              SizedBox(
+                                  height: 20,
+                                  child: Text(widget.eventModel.module,
+                                      style: cardStageStyle1)),
                               const SizedBox(
                                 height: 16,
                               ),

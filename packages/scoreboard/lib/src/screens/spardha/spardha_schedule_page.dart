@@ -7,7 +7,7 @@ import '../../models/spardha_models/spardha_event_model.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
 import '../../stores/spardha_store.dart';
-import '../../widgets/cards/schedule_card.dart';
+import '../../widgets/cards/schedule/spardha_schedule_card.dart';
 import '../../widgets/filters/spardha_filter_bar.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
@@ -70,7 +70,7 @@ class _SchedulePageState extends State<SchedulePage> {
                             ? ListView.builder(
                                 itemCount: filteredEventSchedules.length,
                                 itemBuilder: (context, index) {
-                                  return ScheduleCard(
+                                  return SpardhaScheduleCard(
                                       eventModel:
                                           filteredEventSchedules[index]);
                                 })

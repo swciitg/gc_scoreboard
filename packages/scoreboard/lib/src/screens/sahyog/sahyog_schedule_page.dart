@@ -7,7 +7,7 @@ import '../../models/sahyog_models/sahyog_event_model.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
 import '../../stores/sahyog_store.dart';
-import '../../widgets/cards/kriti_schedule_card.dart';
+import '../../widgets/cards/schedule/kriti_schedule_card.dart';
 import '../../widgets/common/err_reload.dart';
 import '../../widgets/filters/sahyog_filter_bar.dart';
 import '../../widgets/common/shimmer.dart';

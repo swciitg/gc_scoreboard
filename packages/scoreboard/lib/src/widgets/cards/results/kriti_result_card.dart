@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import '../../globals/colors.dart';
-import '../../globals/enums.dart';
-import '../../globals/styles.dart';
-import '../../models/kriti_models/kriti_event_model.dart';
-import '../../stores/common_store.dart';
-import 'card_date_widget.dart';
-import 'kriti_clubs_section.dart';
-import 'menu_item.dart';
-import 'popup_menu.dart';
+import '../../../globals/colors.dart';
+import '../../../globals/enums.dart';
+import '../../../globals/styles.dart';
+import '../../../models/kriti_models/kriti_event_model.dart';
+import '../../../stores/common_store.dart';
+import '../card_date_widget.dart';
+import '../kriti_clubs_section.dart';
+import '../menu_item.dart';
+import '../popup_menu.dart';
 import 'score_card_item.dart';
 
 class KritiResultCard extends StatefulWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final eventModel;
   const KritiResultCard({super.key, required this.eventModel});
 
@@ -220,7 +221,25 @@ class _KritiResultCardState extends State<KritiResultCard> {
                                 ),
                               ),
                             ),
-                            HostelsPointsSection(eventModel: widget.eventModel)
+                            ConstrainedBox(
+                                constraints: BoxConstraints(
+                                  maxHeight:
+                                      widget.eventModel.results.length * 30.0,
+                                ),
+                                child: ListView.builder(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    itemCount: widget.eventModel.results.length,
+                                    itemBuilder: (context, index) {
+                                      return ScoreCardItem(
+                                        position: index + 1,
+                                        hostelName: widget.eventModel
+                                            .results[index].hostelName!,
+                                        finalScore: widget
+                                            .eventModel.results[index].points!
+                                            .toString(),
+                                      );
+                                    }))
                           ],
                         )
                       : Container(),
@@ -231,30 +250,5 @@ class _KritiResultCardState extends State<KritiResultCard> {
         ),
       );
     });
-  }
-}
-
-class HostelsPointsSection extends StatelessWidget {
-  final eventModel;
-
-  const HostelsPointsSection({Key? key, required this.eventModel})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ConstrainedBox(
-        constraints: BoxConstraints(
-          maxHeight: eventModel.results.length * 30.0,
-        ),
-        child: ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: eventModel.results.length,
-            itemBuilder: (context, index) {
-              return ScoreCardItem(
-                position: index + 1,
-                hostelName: eventModel.results[index].hostelName!,
-                finalScore: eventModel.results[index].points!.toString(),
-              );
-            }));
   }
 }

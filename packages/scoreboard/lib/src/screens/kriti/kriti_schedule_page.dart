@@ -13,7 +13,7 @@ import '../../widgets/common/err_reload.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
 import '../../widgets/filters/kriti_filter_bar.dart';
-import '../../widgets/cards/kriti_schedule_card.dart';
+import '../../widgets/cards/schedule/kriti_schedule_card.dart';
 
 class KritiSchedulePage extends StatefulWidget {
   const KritiSchedulePage({super.key});
