@@ -142,12 +142,11 @@ class _KritiEventFormState extends State<KritiEventForm> {
         try {
           if (widget.event != null) {
             // update event schedule
-            await APIService(context).updateKritiEvent(
-                KritiEventModel.fromJson(data));
+            await APIService(context).updateEventSchedule(data: data, competition: 'kriti');
             if (!mounted) return;
             showSnackBar(context, "Event Edited successfully");
           } else {
-            await APIService(context).postKritiEventSchedule(data);
+            await APIService(context).postEventSchedule(data: data, competiton: 'kriti');
             if (!mounted) return;
             showSnackBar(
                 context, "Event schedule posted successfully");

@@ -87,12 +87,11 @@ class _ManthanEventFormState extends State<ManthanEventForm> {
           try {
             if (widget.event != null) {
               // update event schedule
-              await APIService(context)
-                  .updateManthanEvent(ManthanEventModel.fromJson(data));
+              await APIService(context).updateEventSchedule(data: data, competition: 'manthan');
               if (!mounted) return;
               showSnackBar(context, "Event Edited successfully");
             } else {
-              await APIService(context).postManthanEventSchedule(data);
+              await APIService(context).postEventSchedule(data: data, competiton: 'manthan');
               if (!mounted) return;
               showSnackBar(context, "Event schedule posted successfully");
             }

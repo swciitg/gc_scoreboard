@@ -34,7 +34,7 @@ class _StandingsPageState extends State<KritiStandingsPage> {
             const TopBar(),
             const KritiFilterBar(),
             FutureBuilder<Map<String, dynamic>>(
-              future: APIService(context).getKritiStandings(),
+              future: APIService(context).getStandings(competition: 'kriti'),
               builder: (context, snapshot) {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Expanded(

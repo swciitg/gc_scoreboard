@@ -32,7 +32,7 @@ class _SpardhaAdminStandingsPageState extends State<SpardhaAdminStandingsPage> {
       appBar: const PreferredSize(
           preferredSize: Size.fromHeight(56), child: StandingsAppBar()),
       body: FutureBuilder<Map<String, dynamic>>(
-        future: APIService(context).getSpardhaStandings(),
+        future: APIService(context).getStandings(competition: 'spardha'),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return ListView.builder(

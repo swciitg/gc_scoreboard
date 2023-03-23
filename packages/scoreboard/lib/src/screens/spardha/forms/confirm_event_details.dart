@@ -66,13 +66,11 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
                     });
                     try {
                       if (widget.isEdit) {
-                        await APIService(context)
-                            .updateSpardhaEvent(widget.event);
+                        await APIService(context).updateEventSchedule(data: widget.event.toJson(), competition: 'spardha');
                         if (!mounted) return;
                         showSnackBar(context, "Event Edited successfully");
                       } else {
-                        await APIService(context)
-                            .postEventSchedule(widget.event.toJson());
+                        await APIService(context).postEventSchedule(data: widget.event.toJson(), competiton: 'spardha');
                         if (!mounted) return;
 
                         showSnackBar(

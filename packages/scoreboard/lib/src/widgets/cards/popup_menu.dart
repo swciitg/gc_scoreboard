@@ -122,10 +122,10 @@ class _PopupMenuState extends State<PopupMenu> {
       case 'delete':
         try {
           if (commonStore.page == Pages.results) {
-            await APIService(context).deleteResult(widget.eventModel.id!, competition);
+            await APIService(context).deleteResult(eventID: widget.eventModel.id!, competition: competition);
             showSnackBar(context, "Result Deleted");
           } else {
-            await APIService(context).deleteEvent(widget.eventModel.id!,competition);
+            await APIService(context).deleteEvent(eventID: widget.eventModel.id!, competition: competition);
             showSnackBar(context, "Event Deleted");
           }
           Navigator.pushReplacement(context,

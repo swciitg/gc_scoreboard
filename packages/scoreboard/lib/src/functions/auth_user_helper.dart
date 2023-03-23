@@ -71,6 +71,7 @@ class AuthUserHelpers {
       await prefs.setString("email", userInfo["email"]!);
       await prefs.setString("name", userInfo["name"]!);
       var commStore = buildContext.read<CommonStore>();
+      await APIService(buildContext).generateTokens(commStore);
       if (!prefs.containsKey("accessToken")) {
         await APIService(buildContext).generateTokens(commStore);
       } else if (await checkIfAdmin()) {
@@ -81,13 +82,13 @@ class AuthUserHelpers {
         commStore.isSahyogAdmin = prefs.getBool("sahyog") ?? false;
       }
       StaticStore.spardhaEvents =
-          await APIService(buildContext).getAllSpardhaEvents();
+          await APIService(buildContext).getCompetitionEvents(competition: 'spardha');
       StaticStore.kritiEvents =
-          await APIService(buildContext).getAllKritiEvents();
+          await APIService(buildContext).getCompetitionEvents(competition: 'kriti');
       StaticStore.sahyogEvents =
-          await APIService(buildContext).getAllSahyogEvents();
+          await APIService(buildContext).getCompetitionEvents(competition: 'sahyog');
       StaticStore.manthanEvents=
-          await APIService(buildContext).getAllManthanEvents();
+          await APIService(buildContext).getCompetitionEvents(competition: 'manthan');
 
       return true;
     } on DioError catch (err) {

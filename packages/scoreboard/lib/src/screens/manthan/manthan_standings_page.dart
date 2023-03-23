@@ -34,7 +34,7 @@ class _StandingsPageState extends State<ManthanStandingsPage> {
             const TopBar(),
             const ManthanFilterBar(),
             FutureBuilder<Map<String, dynamic>>(
-              future: APIService(context).getManthanStandings(),
+              future: APIService(context).getStandings(competition: 'manthan'),
               builder: (context, snapshot) {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Expanded(

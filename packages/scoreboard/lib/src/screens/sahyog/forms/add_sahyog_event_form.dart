@@ -126,12 +126,11 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
           try {
             if (widget.event != null) {
               //update event schedule
-              await APIService(context).updateSahyogEvent(
-                  SahyogEventModel.fromJson(data));
+              await APIService(context).updateEventSchedule(data: data, competition: 'sahyog');
               if (!mounted) return;
               showSnackBar(context, "Event Edited successfully");
             } else {
-              await APIService(context).postSahyogEventSchedule(data);
+              await APIService(context).postEventSchedule(data: data, competiton: 'sahyog');
               if (!mounted) return;
               showSnackBar(
                   context, "Event schedule posted successfully");

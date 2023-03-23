@@ -80,7 +80,7 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                           isLoading = true;
                         });
                         try {
-                          await APIService(context).addUpdateResult(
+                          await APIService(context).addUpdateSpardhaResult(
                               widget.event.id!,
                               ResultFormStore.resultFields!,
                               ResultFormStore.victoryStatement!);

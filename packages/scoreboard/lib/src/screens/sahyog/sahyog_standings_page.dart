@@ -33,7 +33,7 @@ class _SahyogStandingsPageState extends State<SahyogStandingsPage> {
             const TopBar(),
             const SahyogFilterBar(),
             FutureBuilder<Map<String, dynamic>>(
-              future: APIService(context).getSahyogStandings(),
+              future: APIService(context).getStandings(competition: 'sahyog'),
               builder: (context, snapshot) {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Expanded(

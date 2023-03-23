@@ -34,7 +34,7 @@ class _StandingsPageState extends State<StandingsPage> {
             const TopBar(),
             const SpardhaFilterBar(),
             FutureBuilder<Map<String, dynamic>>(
-              future: APIService(context).getSpardhaStandings(),
+              future: APIService(context).getStandings(competition: 'spardha'),
               builder: (context, snapshot) {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Expanded(
