@@ -6,7 +6,7 @@ import '../../globals/styles.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
 import '../../stores/spardha_store.dart';
-import '../../widgets/cards/results_card.dart';
+import '../../widgets/cards/results/spardha_results_card.dart';
 import '../../models/spardha_models/spardha_event_model.dart';
 import '../../widgets/common/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
@@ -69,7 +69,7 @@ class _ResultsPageState extends State<ResultsPage> {
                             ? ListView.builder(
                                 itemCount: filteredEventSchedules.length,
                                 itemBuilder: (context, index) {
-                                  return ResultsCard(
+                                  return SpardhaResultsCard(
                                       eventModel:
                                           filteredEventSchedules[index]);
                                 })

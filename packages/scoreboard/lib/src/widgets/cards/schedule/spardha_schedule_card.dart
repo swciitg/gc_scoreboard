@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import '../../globals/enums.dart';
-import '../../stores/common_store.dart';
-import '../../models/spardha_models/spardha_event_model.dart';
-import '../../globals/colors.dart';
-import 'popup_menu.dart';
-import 'schedule/multiple_hostel_view.dart';
-import 'card_event_details.dart';
-import 'menu_item.dart';
-import 'schedule/single_hostel_view.dart';
-import 'schedule/time_venue_widget.dart';
+import '../../../globals/enums.dart';
+import '../../../stores/common_store.dart';
+import '../../../models/spardha_models/spardha_event_model.dart';
+import '../../../globals/colors.dart';
+import '../popup_menu.dart';
+import 'multiple_hostel_view.dart';
+import '../card_event_details.dart';
+import '../menu_item.dart';
+import 'single_hostel_view.dart';
+import 'time_venue_widget.dart';
 
-class ScheduleCard extends StatefulWidget {
+class SpardhaScheduleCard extends StatefulWidget {
   final EventModel eventModel;
-  const ScheduleCard({super.key, required this.eventModel});
+  const SpardhaScheduleCard({super.key, required this.eventModel});
 
   @override
-  State<ScheduleCard> createState() => _ScheduleCardState();
+  State<SpardhaScheduleCard> createState() => _SpardhaScheduleCardState();
 }
 
-class _ScheduleCardState extends State<ScheduleCard> {
+class _SpardhaScheduleCardState extends State<SpardhaScheduleCard> {
   List<PopupMenuEntry> popupOptions = [
     optionsMenuItem('Edit', 'edit schedule', Themes.kWhite),
     const PopupMenuDivider(
@@ -74,34 +74,5 @@ class _ScheduleCardState extends State<ScheduleCard> {
         ),
       );
     });
-  }
-
-  Widget scheduleCardItems() {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
-        color: Themes.cardColor2,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            CardEventDetails(eventModel: widget.eventModel),
-            widget.eventModel.hostels.length > 2
-                ? MultipleHostelView(eventModel: widget.eventModel)
-                : BiHostelView(
-                    hostelA: widget.eventModel.hostels[0],
-                    hostelB: widget.eventModel.hostels[1],
-                  ),
-            const SizedBox(
-              height: 32,
-            ),
-            TimeVenueWidget(eventModel: widget.eventModel),
-          ],
-        ),
-      ),
-    );
   }
 }

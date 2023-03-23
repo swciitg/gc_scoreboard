@@ -1,24 +1,28 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+
 import 'package:url_launcher/url_launcher.dart';
-import '../../functions/snackbar.dart';
-import '../../globals/colors.dart';
-import '../../globals/constants.dart';
-import '../../globals/enums.dart';
-import '../../globals/styles.dart';
-import '../../models/kriti_models/kriti_event_model.dart';
-import '../../stores/common_store.dart';
-import 'card_date_widget.dart';
-import 'kriti_clubs_section.dart';
-import 'popup_menu.dart';
-import 'menu_item.dart';
+import '../../../functions/snackbar.dart';
+import '../../../globals/colors.dart';
+import '../../../globals/constants.dart';
+import '../../../globals/enums.dart';
+import '../../../globals/styles.dart';
+import '../../../models/kriti_models/kriti_event_model.dart';
+import '../../../stores/common_store.dart';
+import '../card_date_widget.dart';
+import '../kriti_clubs_section.dart';
+import '../popup_menu.dart';
+import '../menu_item.dart';
+
 
 
 
 class KritiScheduleCard extends StatefulWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final eventModel;
   const KritiScheduleCard({super.key, required this.eventModel});
 
@@ -114,7 +118,6 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                                           try{
                                             bool validURL = Uri.parse(widget.eventModel.problemLink).isAbsolute; // check if valid url
                                             if(!validURL){
-                                              print('here');
                                               if(isKriti)
                                                 {
                                                   await launchUrl(Uri.parse(kritiWebsiteLink),mode: LaunchMode.externalApplication); // if url is not correct
@@ -126,7 +129,6 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                                                 }
                                             }
                                             else{
-                                              print('there');
                                               await launchUrl(Uri.parse(widget.eventModel.problemLink),mode: LaunchMode.externalApplication);
                                             }
                                             setState(() {
@@ -134,7 +136,9 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                                             });
                                           }
                                           catch (err){
-                                            print(err);
+                                            if (kDebugMode) {
+                                              print(err);
+                                            }
                                             showSnackBar(context, err.toString());
                                             setState(() {
                                               isLinkPressed = false;
