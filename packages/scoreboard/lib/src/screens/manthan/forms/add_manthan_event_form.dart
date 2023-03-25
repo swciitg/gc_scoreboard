@@ -7,7 +7,6 @@ import '../../../globals/colors.dart';
 import '../../../globals/enums.dart';
 import '../../../models/manthan_models/manthan_event_model.dart';
 import '../../../services/api.dart';
-import '../../../stores/static_store.dart';
 import '../../../widgets/fields/datepicker_color.dart';
 import '../../../widgets/fields/drop_down.dart';
 import '../../../widgets/ui/heading.dart';
@@ -117,7 +116,7 @@ class _ManthanEventFormState extends State<ManthanEventForm> {
     }
 
     return Scaffold(
-      backgroundColor: Themes.theme.backgroundColor,
+      backgroundColor: Themes.backgroundColor,
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(56),
           child: AppBarFormComponent(

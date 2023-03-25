@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scoreboard/src/globals/styles.dart';
 import '../../globals/colors.dart';
 import '../../stores/static_store.dart';
 import 'custom_text_field.dart';
@@ -52,10 +53,10 @@ class _AutocompleteTextField extends State<AutocompleteTextField> {
                     onSelected(option);
                   },
                   child: ListTile(
-                    tileColor: Themes.theme.backgroundColor,
+                    tileColor: Themes.backgroundColor,
                     title: Text(option,
                         style:
-                        Themes.theme.textTheme.headline6),
+                            headline6,),
                   ),
                 );
               },

@@ -5,7 +5,7 @@ import '../../models/spardha_models/spardha_event_model.dart';
 import 'card_date_widget.dart';
 
 class CardEventDetails extends StatelessWidget {
-  final EventModel eventModel;
+  final SpardhaEventModel eventModel;
   const CardEventDetails({Key? key, required this.eventModel})
       : super(key: key);
 

@@ -1,16 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import '../../../functions/snackbar.dart';
 import '../../../globals/colors.dart';
+import '../../../globals/styles.dart';
 import '../../../models/spardha_models/spardha_event_model.dart';
 import '../../../services/api.dart';
 import '../../home.dart';
 
 class ConfirmEventDetails extends StatefulWidget {
   final bool isEdit;
-  final EventModel event;
+  final SpardhaEventModel event;
   const ConfirmEventDetails({
     Key? key,
     required this.event,
@@ -18,6 +18,7 @@ class ConfirmEventDetails extends StatefulWidget {
   }) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _ConfirmEventDetailsState createState() => _ConfirmEventDetailsState();
 }
 
@@ -30,20 +31,20 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
           FocusScope.of(context).requestFocus(FocusNode());
         },
         child: Scaffold(
-          backgroundColor: Themes.theme.backgroundColor,
+          backgroundColor: Themes.backgroundColor,
           appBar: AppBar(
             elevation: 0,
-            backgroundColor: Themes.theme.backgroundColor,
-            shape: Border(
+            backgroundColor: Themes.backgroundColor,
+            shape: const Border(
               bottom: BorderSide(
-                color: Themes.theme.dividerColor,
+                color: Themes.dividerColor1,
                 width: 1,
               ),
             ),
             centerTitle: true,
             title: Text(
               'Confirm Event',
-              style: Themes.theme.textTheme.headline2,
+              style: headline2,
             ),
             leading: IconButton(
               onPressed: () {
@@ -90,7 +91,7 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
                 },
                 child: Text(
                   'Post',
-                  style: Themes.theme.textTheme.headline3,
+                  style: headline3,
                 ),
               )
             ],
@@ -106,14 +107,14 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: Text(
                         'Confirm if the following event details are correct.',
-                        style: Themes.theme.textTheme.headline4,
+                        style: headline4,
                       )),
                   const SizedBox(
                     height: 16,
                   ),
                   Text(
                     'Event Details',
-                    style: Themes.theme.textTheme.headline1,
+                    style: headline1,
                   ),
                   const SizedBox(
                     height: 12,
@@ -159,7 +160,7 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
                   ),
                   Text(
                     'Participating Hostels',
-                    style: Themes.theme.textTheme.headline1,
+                    style: headline1,
                   ),
                   const SizedBox(
                     height: 10,
@@ -195,15 +196,14 @@ class DataTile extends StatelessWidget {
       children: [
         Text(
           title,
-          style: Themes.theme.textTheme.bodyText2
-              ?.copyWith(color: Themes.bottomNavFontColor),
+          style: bodyText2.copyWith(color: Themes.bottomNavFontColor),
         ),
         const SizedBox(
           height: 10,
         ),
         Text(
           semiTitle,
-          style: Themes.theme.textTheme.headline6?.copyWith(
+          style: headline6.copyWith(
               color: semiTitle == 'Event cancelled'
                   ? Themes.errorRed
                   : semiTitle == 'Event postponed'

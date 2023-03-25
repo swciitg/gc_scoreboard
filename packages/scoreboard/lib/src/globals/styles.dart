@@ -115,8 +115,33 @@ final helptextStyle = GoogleFonts.montserrat(
 
 // standingBoardStyles
 
+// text themes
 final standingStyle1 = GoogleFonts.montserrat(
     fontWeight: FontWeight.w700, fontSize: 13, color: Themes.cardFontColor2);
 
 final standingStyle2 = GoogleFonts.montserrat(
     fontWeight: FontWeight.w600, fontSize: 13, color: Themes.cardFontColor2);
+
+final headline1 = GoogleFonts.montserrat(
+    fontWeight: FontWeight.w700, fontSize: 16, color: Themes.kWhite);
+
+final headline2 = GoogleFonts.montserrat(
+    fontWeight: FontWeight.w600, fontSize: 14, color: Themes.bottomNavFontColor);
+
+final headline3 = GoogleFonts.montserrat(
+    fontWeight: FontWeight.w600, fontSize: 12, color: Themes.primaryColor);
+
+final headline4 = GoogleFonts.montserrat(
+    fontWeight: FontWeight.w500, fontSize: 12, color: Themes.bottomNavFontColor);
+
+final headline5 = GoogleFonts.montserrat(
+    fontWeight: FontWeight.w500, fontSize: 16, color: Themes.errorRed);
+
+final headline6 = GoogleFonts.montserrat(
+    fontWeight: FontWeight.w500, fontSize: 14, color: Themes.kWhite);
+
+final bodyText1 = GoogleFonts.montserrat(
+    fontWeight: FontWeight.w500, fontSize: 14, color: Themes.bottomNavFontColor);
+
+final bodyText2 = GoogleFonts.montserrat(
+    fontWeight: FontWeight.w600, fontSize: 12, color: Themes.warning);

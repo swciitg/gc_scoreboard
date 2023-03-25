@@ -137,7 +137,6 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                                           }
                                           catch (err){
                                             if (kDebugMode) {
-                                              print(err);
                                             }
                                             showSnackBar(context, err.toString());
                                             setState(() {

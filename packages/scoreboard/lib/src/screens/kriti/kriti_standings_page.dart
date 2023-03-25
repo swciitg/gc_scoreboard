@@ -49,7 +49,6 @@ class _StandingsPageState extends State<KritiStandingsPage> {
                   ));
                 } else if (snapshot.hasData) {
                   return Observer(builder: (context) {
-                    print(snapshot.data!);
                     List<dynamic> filteredEventSchedules = filterKritiStandings(input: snapshot.data!, event: kritiStore.selectedEvent);
                     return Expanded(
                         child: StandingBoard(

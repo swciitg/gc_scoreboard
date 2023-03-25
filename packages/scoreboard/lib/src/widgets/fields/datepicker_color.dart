@@ -22,15 +22,12 @@ class _DatePickerThemeState extends State<DatePickerTheme> {
           headline6: basicFontStyle, // Selected Date portrait
           overline: basicFontStyle, // Title - SELECT DATE
           bodyText1: basicFontStyle, // year gridbview picker
-          bodyText2: basicFontStyle, // year gridbview picker
           subtitle1: basicFontStyle, // input
           subtitle2: basicFontStyle, // month/year picker
           caption: basicFontStyle, // days
         ),
         colorScheme: const ColorScheme.dark(
           primary: Themes.datePickerPrimaryColor,
-          onPrimary: Colors.black,
-          onSurface: Colors.white,
           surface: Themes.datePickerSurfaceColor,
         ),
         dialogBackgroundColor: Themes.datePickerSurfaceColor,

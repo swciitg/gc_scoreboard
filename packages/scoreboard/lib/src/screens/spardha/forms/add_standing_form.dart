@@ -6,6 +6,7 @@ import '../../../functions/validator.dart';
 import '../../../globals/colors.dart';
 import '../../../globals/constants.dart';
 import '../../../globals/enums.dart';
+import '../../../globals/styles.dart';
 import '../../../models/standing_model.dart';
 import '../../../services/api.dart';
 import '../../../stores/common_store.dart';
@@ -53,28 +54,28 @@ class _AddStandingState extends State<AddStanding> {
           FocusScope.of(context).requestFocus(FocusNode());
         },
         child: Scaffold(
-            backgroundColor: Themes.theme.backgroundColor,
+            backgroundColor: Themes.backgroundColor,
             appBar: AppBar(
               elevation: 0,
-              backgroundColor: Themes.theme.backgroundColor,
-              shape: Border(
+              backgroundColor: Themes.backgroundColor,
+              shape: const Border(
                 bottom: BorderSide(
-                  color: Themes.theme.dividerColor,
+                  color: Themes.dividerColor1,
                   width: 1,
                 ),
               ),
               centerTitle: true,
               title: Text(
                 widget.standings == null ? 'Add Standings' : 'Edit Standings',
-                style: Themes.theme.textTheme.headline2,
+                style: headline2,
               ),
               leading: IconButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.close,
-                  color: Themes.theme.primaryColor,
+                  color: Themes.primaryColor,
                 ),
                 splashColor: Themes.splashColor,
               ),
@@ -129,7 +130,7 @@ class _AddStandingState extends State<AddStanding> {
                   },
                   child: Text(
                     'Next',
-                    style: Themes.theme.textTheme.headline3,
+                    style: headline3,
                   ),
                 )
               ],
@@ -195,7 +196,7 @@ class _AddStandingState extends State<AddStanding> {
                                     children: [
                                       Text(
                                         getPosition(index - 1),
-                                        style: Themes.theme.textTheme.bodyText2,
+                                        style: bodyText2,
                                       ),
                                       const Spacer(),
                                     ],
@@ -250,9 +251,9 @@ class _AddStandingState extends State<AddStanding> {
                                     height: 16,
                                   ),
                                 if (index > 0)
-                                  Divider(
+                                  const Divider(
                                     thickness: 1,
-                                    color: Themes.theme.dividerColor,
+                                    color: Themes.dividerColor1,
                                   ),
                                 if (index > 0)
                                   const SizedBox(
@@ -273,17 +274,16 @@ class _AddStandingState extends State<AddStanding> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.add,
-                                            color: Themes.theme.primaryColor,
+                                            color: Themes.primaryColor,
                                           ),
                                           const SizedBox(
                                             width: 10,
                                           ),
                                           Text(
                                             'Add Position',
-                                            style: Themes
-                                                .theme.textTheme.headline3,
+                                            style: headline3,
                                           )
                                         ],
                                       ))

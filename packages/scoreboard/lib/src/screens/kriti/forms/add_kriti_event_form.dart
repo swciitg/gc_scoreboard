@@ -6,6 +6,7 @@ import '../../../functions/snackbar.dart';
 import '../../../functions/validator.dart';
 import '../../../globals/colors.dart';
 import '../../../globals/constants.dart';
+import '../../../globals/styles.dart';
 import '../../../models/kriti_models/kriti_event_model.dart';
 import '../../../services/api.dart';
 import '../../../widgets/fields/datepicker_color.dart';
@@ -83,7 +84,6 @@ class _KritiEventFormState extends State<KritiEventForm> {
       for (var club in e.clubs) {
         clubs.add(club);
       }
-      print(clubs);
 
       clubSizeValue = clubs.length.toString();
       date = e.date;
@@ -307,7 +307,7 @@ class _KritiEventFormState extends State<KritiEventForm> {
                       ),
                       Text(
                         'Clubs',
-                        style: Themes.theme.textTheme.headline1,
+                        style: headline1,
                       ),
                       const SizedBox(
                         height: 18,

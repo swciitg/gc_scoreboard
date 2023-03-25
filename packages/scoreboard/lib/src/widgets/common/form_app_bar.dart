@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../globals/colors.dart';
+import '../../globals/styles.dart';
 
 class AppBarFormComponent extends StatefulWidget {
   final String title;
@@ -21,25 +22,25 @@ class _AppBarFormComponentState extends State<AppBarFormComponent> {
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
-      backgroundColor: Themes.theme.backgroundColor,
-      shape: Border(
+      backgroundColor: Themes.backgroundColor,
+      shape: const Border(
         bottom: BorderSide(
-          color: Themes.theme.dividerColor,
+          color: Themes.dividerColor1,
           width: 1,
         ),
       ),
       centerTitle: true,
       title: Text(
         widget.title,
-        style: Themes.theme.textTheme.headline2,
+        style: headline2,
       ),
       leading: IconButton(
         onPressed: () {
           Navigator.of(context).pop();
         },
-        icon: Icon(
+        icon: const Icon(
           Icons.close,
-          color: Themes.theme.primaryColor,
+          color: Themes.primaryColor,
         ),
         splashColor: Themes.splashColor,
       ),
@@ -50,7 +51,7 @@ class _AppBarFormComponentState extends State<AppBarFormComponent> {
           },
           child: Text(
             widget.actionTitle,
-            style: Themes.theme.textTheme.headline3,
+            style: headline3,
           ),
         )
       ],

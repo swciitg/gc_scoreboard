@@ -79,7 +79,7 @@ class _StandingsAppBarState extends State<StandingsAppBar> {
                                 horizontal: 20, vertical: 11),
                             child: Text(
                               "Switch to User View",
-                              style: Themes.theme.textTheme.headline6,
+                              style: headline6,
                             )),
                       ],
                       onSelected: (newRoute) async {

@@ -2,62 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Themes {
-  static final theme = ThemeData(
-    primaryColor: primaryColor,
-    splashColor: primaryColor,
-    backgroundColor: backgroundColor,
-    cardColor: kGrey,
-    focusColor: const Color.fromRGBO(94, 94, 94, 1),
-    dividerColor: bottomNavHighlightColor,
-    textTheme: TextTheme(
-      headline1: GoogleFonts.montserrat(
-        fontWeight: FontWeight.w700,
-        fontSize: 16,
-        color: kWhite,
-      ),
-      headline2: GoogleFonts.montserrat(
-        fontWeight: FontWeight.w600,
-        fontSize: 14,
-        color: bottomNavFontColor,
-      ),
-      headline3: GoogleFonts.montserrat(
-        fontWeight: FontWeight.w600,
-        fontSize: 12,
-        color: primaryColor,
-      ),
-      headline4: GoogleFonts.montserrat(
-        fontWeight: FontWeight.w500,
-        fontSize: 12,
-        color: bottomNavFontColor,
-      ),
-      headline5: GoogleFonts.montserrat(
-        fontWeight: FontWeight.w500,
-        fontSize: 16,
-        color: errorRed,
-      ),
-      headline6: GoogleFonts.montserrat(
-        fontWeight: FontWeight.w500,
-        fontSize: 14,
-        color: kWhite,
-      ),
-      bodyText1: GoogleFonts.montserrat(
-        fontWeight: FontWeight.w500,
-        fontSize: 14,
-        color: bottomNavFontColor,
-      ),
-      bodyText2: GoogleFonts.montserrat(
-        fontWeight: FontWeight.w600,
-        fontSize: 12,
-        color: warning,
-      ),
-    ),
-  );
   static const kWhite = Color.fromRGBO(242, 242, 242, 1);
   static const kGrey = Color.fromRGBO(71, 71, 71, 1);
   static const kYellow = Color.fromRGBO(255, 201, 7, 1);
   static const kBlack = Colors.black;
   static const backgroundColor = Color.fromRGBO(27, 27, 29, 1);
   static const primaryColor = Color.fromRGBO(118, 172, 255, 1);
+  static const cardColor = Color.fromRGBO(71, 71, 71, 1);
+  static const focusColor = Color.fromRGBO(94, 94, 94, 1);
   static const secondaryColor = Color.fromRGBO(39, 49, 65, 1);
   static const bottomNavBarColor = Color.fromRGBO(45, 48, 55, 1);
   static const bottomNavFontColor = Color.fromRGBO(171, 171, 175, 1);

@@ -78,7 +78,6 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
               FutureBuilder<List<dynamic>>(
                   future: APIService(context).getGCStandings(),
                   builder: (context, snapshot) {
-                    print("in call");
                     if (snapshot.connectionState != ConnectionState.done) {
                       return Expanded(
                         child: Center(

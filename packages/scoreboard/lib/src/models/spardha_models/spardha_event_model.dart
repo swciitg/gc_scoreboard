@@ -3,7 +3,7 @@ import 'spardha_result_model.dart';
 part 'spardha_event_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class EventModel {
+class SpardhaEventModel {
   @JsonKey(name: '_id')
   String? id;
   String event; // Sprint
@@ -13,11 +13,11 @@ class EventModel {
   String status;
   String venue;
   List<String> hostels; // Participating hostels
-  List<List<ResultModel>> results;
+  List<List<SpardhaResultModel>> results;
   String? posterEmail = '';
   bool resultAdded;
   String? victoryStatement = '';
-  EventModel({
+  SpardhaEventModel({
     this.id,
     required this.event,
     required this.category,
@@ -31,8 +31,8 @@ class EventModel {
     this.victoryStatement = '',
   });
 
-  factory EventModel.fromJson(Map<String,dynamic> json) => _$EventModelFromJson(json);
+  factory SpardhaEventModel.fromJson(Map<String,dynamic> json) => _$SpardhaEventModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$EventModelToJson(this);
+  Map<String, dynamic> toJson() => _$SpardhaEventModelToJson(this);
 
 }

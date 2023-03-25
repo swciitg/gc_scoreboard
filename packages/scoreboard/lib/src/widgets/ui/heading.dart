@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scoreboard/src/globals/styles.dart';
 import '../../globals/colors.dart';
 
 class EventFormHeading extends StatelessWidget {
@@ -15,7 +16,7 @@ class EventFormHeading extends StatelessWidget {
         ),
         Text(
           'Event Details',
-          style: Themes.theme.textTheme.headline1,
+          style: headline1,
         ),
         const SizedBox(
           height: 12,
@@ -37,15 +38,15 @@ class FieldsMandatory extends StatelessWidget {
         children: [
           TextSpan(
             text: 'Fields marked with',
-            style: Themes.theme.textTheme.headline4,
+            style: headline4,
           ),
           TextSpan(
             text: ' * ',
-            style: Themes.theme.textTheme.headline5,
+            style: headline5,
           ),
           TextSpan(
             text: 'are compulsory',
-            style: Themes.theme.textTheme.headline4,
+            style: headline4,
           ),
         ],
       ),

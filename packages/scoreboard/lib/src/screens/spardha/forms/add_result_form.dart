@@ -4,6 +4,7 @@ import '../../../functions/position.dart';
 import '../../../functions/snackbar.dart';
 import '../../../functions/validator.dart';
 import '../../../globals/colors.dart';
+import '../../../globals/styles.dart';
 import '../../../models/spardha_models/spardha_event_model.dart';
 import '../../../services/api.dart';
 import '../../../stores/result_form_store.dart';
@@ -14,7 +15,7 @@ import '../../../widgets/ui/heading.dart';
 import '../../home.dart';
 
 class SpardhaResultForm extends StatefulWidget {
-  final EventModel event;
+  final SpardhaEventModel event;
   const SpardhaResultForm({super.key, required this.event});
 
   @override
@@ -42,29 +43,29 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
           FocusScope.of(context).requestFocus(FocusNode());
         },
         child: Scaffold(
-            backgroundColor: Themes.theme.backgroundColor,
+            backgroundColor: Themes.backgroundColor,
             appBar: AppBar(
               elevation: 0,
-              backgroundColor: Themes.theme.backgroundColor,
-              shape: Border(
+              backgroundColor: Themes.backgroundColor,
+              shape: const Border(
                 bottom: BorderSide(
-                  color: Themes.theme.dividerColor,
+                  color: Themes.dividerColor1,
                   width: 1,
                 ),
               ),
               centerTitle: true,
               title: Text(
                 widget.event.results.isEmpty ? 'Add Result' : 'Edit Result',
-                style: Themes.theme.textTheme.headline2,
+                style: headline2,
               ),
               leading: IconButton(
                 onPressed: () {
                   ResultFormStore.clear();
                   Navigator.of(context).pop();
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.close,
-                  color: Themes.theme.primaryColor,
+                  color: Themes.primaryColor,
                 ),
                 splashColor: Themes.splashColor,
               ),
@@ -106,7 +107,7 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                   },
                   child: Text(
                     'Next',
-                    style: Themes.theme.textTheme.headline3,
+                    style: headline3,
                   ),
                 )
               ],
@@ -141,7 +142,7 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                                         Text(
                                           widget.event.event,
                                           style:
-                                              Themes.theme.textTheme.headline1,
+                                              headline1,
                                         ),
                                         const SizedBox(
                                           height: 4,
@@ -149,7 +150,7 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                                         Text(
                                           widget.event.category,
                                           style:
-                                              Themes.theme.textTheme.headline2,
+                                              headline2,
                                         ),
                                       ],
                                     ),
@@ -167,11 +168,11 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                                       horizontal: 8, vertical: 4),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
-                                    color: Themes.theme.cardColor,
+                                    color: Themes.cardColor,
                                   ),
                                   child: Text(
                                     widget.event.stage,
-                                    style: Themes.theme.textTheme.headline3,
+                                    style: headline3,
                                   ),
                                 ),
                                 const SizedBox(
@@ -209,20 +210,20 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                                         Text(
                                           getPosition(index),
                                           style:
-                                              Themes.theme.textTheme.bodyText2,
+                                              bodyText2,
                                         ),
                                         const Spacer(),
                                         if (team == 0)
                                           GestureDetector(
                                             behavior:
                                                 HitTestBehavior.translucent,
-                                            child: Padding(
+                                            child: const Padding(
                                               padding:
-                                                  const EdgeInsets.all(4.0),
+                                                  EdgeInsets.all(4.0),
                                               child: Icon(
                                                 Icons.add,
                                                 color:
-                                                    Themes.theme.primaryColor,
+                                                    Themes.primaryColor,
                                               ),
                                             ),
                                             onTap: () {
@@ -237,12 +238,12 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                                           GestureDetector(
                                             behavior:
                                                 HitTestBehavior.translucent,
-                                            child: Padding(
+                                            child: const Padding(
                                               padding:
-                                                  const EdgeInsets.all(4.0),
+                                                  EdgeInsets.all(4.0),
                                               child: Icon(
                                                 Icons.remove,
-                                                color: Themes.theme.errorColor,
+                                                color: Themes.errorRed,
                                               ),
                                             ),
                                             onTap: () {
@@ -274,22 +275,6 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                                             items: widget.event.hostels.toSet().toList(), hintText: 'Hostels', // multiple times same hostels can be in list
                                           ),
                                         ),
-                                        // const Spacer(
-                                        //   flex: 5,
-                                        // ),
-                                        // Expanded(
-                                        //     flex: 30,
-                                        //     child: CustomTextField(
-                                        //       isNecessary: true,
-                                        //       hintText: 'Points',
-                                        //       validator: validateField,
-                                        //       onChanged: (p) => ResultFormStore
-                                        //           .resultFields?[index][team]
-                                        //           .points = int.tryParse(p),
-                                        //       value: ResultFormStore
-                                        //           .resultFields?[index][team].points
-                                        //           .toString(),
-                                        //     ))
                                       ],
                                     ),
                                     const SizedBox(
@@ -334,9 +319,9 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                                     const SizedBox(
                                       height: 24,
                                     ),
-                                    Divider(
+                                    const Divider(
                                       thickness: 1,
-                                      color: Themes.theme.dividerColor,
+                                      color: Themes.dividerColor1,
                                     ),
                                     const SizedBox(
                                       height: 24,
@@ -362,18 +347,17 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: [
-                                              Icon(
+                                              const Icon(
                                                 Icons.add,
                                                 color:
-                                                    Themes.theme.primaryColor,
+                                                    Themes.primaryColor,
                                               ),
                                               const SizedBox(
                                                 width: 10,
                                               ),
                                               Text(
                                                 'Add Position',
-                                                style: Themes
-                                                    .theme.textTheme.headline3,
+                                                style: headline3,
                                               )
                                             ],
                                           ))

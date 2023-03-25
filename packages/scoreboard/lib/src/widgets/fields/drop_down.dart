@@ -32,28 +32,28 @@ class CustomDropDown extends StatelessWidget {
             children: [
               TextSpan(
                 text: hintText,
-                style: Themes.theme.textTheme.bodyText1,
+                style: bodyText1,
               ),
               TextSpan(
                 text: ' * ',
-                style: Themes.theme.textTheme.headline5,
+                style: headline5,
               ),
             ],
           ),
         ),
-        labelStyle: Themes.theme.textTheme.bodyText1,
+        labelStyle: bodyText1,
         errorStyle: basicFontStyle,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Themes.theme.focusColor, width: 1),
-          borderRadius: const BorderRadius.all(
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Themes.focusColor, width: 1),
+          borderRadius: BorderRadius.all(
             Radius.circular(4),
           ),
         ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Themes.theme.focusColor, width: 1),
-          borderRadius: const BorderRadius.all(
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Themes.focusColor, width: 1),
+          borderRadius: BorderRadius.all(
             Radius.circular(4),
           ),
         ),
@@ -70,14 +70,14 @@ class CustomDropDown extends StatelessWidget {
           ),
         ),
       ),
-      dropdownColor: Themes.theme.backgroundColor,
+      dropdownColor: Themes.backgroundColor,
       isDense: true,
       icon: const Icon(
         Icons.arrow_drop_down,
         size: 28,
       ),
       elevation: 16,
-      style: Themes.theme.textTheme.headline6,
+      style: headline6,
       onChanged: (String? value) {
         if (index != null) {
           onChanged!(value, index);

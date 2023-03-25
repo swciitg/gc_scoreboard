@@ -5,6 +5,7 @@ import '../../../functions/snackbar.dart';
 import '../../../functions/validator.dart';
 import '../../../globals/colors.dart';
 import '../../../globals/constants.dart';
+import '../../../globals/styles.dart';
 import '../../../models/manthan_models/manthan_event_model.dart';
 import '../../../services/api.dart';
 import '../../../widgets/fields/drop_down.dart';
@@ -45,29 +46,29 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
           FocusScope.of(context).requestFocus(FocusNode());
         },
         child: Scaffold(
-            backgroundColor: Themes.theme.backgroundColor,
+            backgroundColor: Themes.backgroundColor,
             appBar: AppBar(
               elevation: 0,
-              backgroundColor: Themes.theme.backgroundColor,
-              shape: Border(
+              backgroundColor: Themes.backgroundColor,
+              shape: const Border(
                 bottom: BorderSide(
-                  color: Themes.theme.dividerColor,
+                  color: Themes.dividerColor1,
                   width: 1,
                 ),
               ),
               centerTitle: true,
               title: Text(
                 widget.event.results.isEmpty ? 'Add Result' : 'Edit Result',
-                style: Themes.theme.textTheme.headline2,
+                style: headline2,
               ),
               leading: IconButton(
                 onPressed: () {
                   ManthanResultFormStore.clear();
                   Navigator.of(context).pop();
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.close,
-                  color: Themes.theme.primaryColor,
+                  color: Themes.primaryColor,
                 ),
                 splashColor: Themes.splashColor,
               ),
@@ -109,7 +110,7 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
                   },
                   child: Text(
                     'Next',
-                    style: Themes.theme.textTheme.headline3,
+                    style: headline3,
                   ),
                 )
               ],
@@ -144,7 +145,7 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
                                         Text(
                                           widget.event.event,
                                           style:
-                                              Themes.theme.textTheme.headline1,
+                                          headline1,
                                         ),
                                         const SizedBox(
                                           height: 4,
@@ -152,7 +153,7 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
                                         Text(
                                           widget.event.module,
                                           style:
-                                              Themes.theme.textTheme.headline2,
+                                          headline2,
                                         ),
                                       ],
                                     ),
@@ -192,7 +193,7 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
                                   Row(children: [
                                     Text(
                                       getPosition(index - 1),
-                                      style: Themes.theme.textTheme.bodyText2,
+                                      style: bodyText2,
                                     ),
                                   ]),
                                   const SizedBox(
@@ -254,9 +255,9 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
                                   const SizedBox(
                                     height: 24,
                                   ),
-                                  Divider(
+                                  const Divider(
                                     thickness: 1,
-                                    color: Themes.theme.dividerColor,
+                                    color: Themes.dividerColor1,
                                   ),
                                   const SizedBox(
                                     height: 24,
@@ -279,17 +280,16 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
-                                            Icon(
+                                            const Icon(
                                               Icons.add,
-                                              color: Themes.theme.primaryColor,
+                                              color: Themes.primaryColor,
                                             ),
                                             const SizedBox(
                                               width: 10,
                                             ),
                                             Text(
                                               'Add Position',
-                                              style: Themes
-                                                  .theme.textTheme.headline3,
+                                              style: headline3,
                                             )
                                           ],
                                         ))
