@@ -4,6 +4,7 @@ import '../../../functions/snackbar.dart';
 import '../../../functions/validator.dart';
 import '../../../globals/constants.dart';
 import '../../../globals/colors.dart';
+import '../../../globals/styles.dart';
 import '../../../models/spardha_models/spardha_event_model.dart';
 import '../../../widgets/fields/datepicker_color.dart';
 import '../../../widgets/fields/drop_down.dart';
@@ -124,7 +125,7 @@ class _SpardhaEventFormState extends State<SpardhaEventForm> {
     }
 
     return Scaffold(
-      backgroundColor: Themes.theme.backgroundColor,
+      backgroundColor: Themes.backgroundColor,
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(56),
           child: AppBarFormComponent(
@@ -260,7 +261,7 @@ class _SpardhaEventFormState extends State<SpardhaEventForm> {
                         children: [
                           Checkbox(
                             checkColor: Colors.white,
-                            activeColor: Themes.theme.primaryColor,
+                            activeColor: Themes.primaryColor,
                             side: const BorderSide(
                               color: Themes.checkBoxColor,
                               width: 2,
@@ -274,10 +275,10 @@ class _SpardhaEventFormState extends State<SpardhaEventForm> {
                             },
                           ),
                           Text('Event cancelled',
-                              style: Themes.theme.textTheme.headline2),
+                              style: headline2),
                           Checkbox(
                             checkColor: Colors.white,
-                            activeColor: Themes.theme.primaryColor,
+                            activeColor: Themes.primaryColor,
                             side: const BorderSide(
                                 color: Themes.checkBoxColor, width: 2),
                             value: isPostponed,
@@ -289,7 +290,7 @@ class _SpardhaEventFormState extends State<SpardhaEventForm> {
                             },
                           ),
                           Text('Event postponed',
-                              style: Themes.theme.textTheme.headline2),
+                              style: headline2),
                         ],
                       ),
                       const SizedBox(
@@ -297,7 +298,7 @@ class _SpardhaEventFormState extends State<SpardhaEventForm> {
                       ),
                       Text(
                         'Participating Hostels',
-                        style: Themes.theme.textTheme.headline1,
+                        style: headline1,
                       ),
                       const SizedBox(
                         height: 18,

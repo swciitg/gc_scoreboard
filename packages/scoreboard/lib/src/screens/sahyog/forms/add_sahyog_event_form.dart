@@ -5,6 +5,7 @@ import '../../../functions/snackbar.dart';
 import '../../../functions/validator.dart';
 import '../../../globals/colors.dart';
 import '../../../globals/constants.dart';
+import '../../../globals/styles.dart';
 import '../../../models/sahyog_models/sahyog_event_model.dart';
 import '../../../services/api.dart';
 import '../../../widgets/fields/datepicker_color.dart';
@@ -286,7 +287,7 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
 
                       Text(
                         'Clubs',
-                        style: Themes.theme.textTheme.headline1,
+                        style: headline1,
                       ),
                       const SizedBox(
                         height: 18,

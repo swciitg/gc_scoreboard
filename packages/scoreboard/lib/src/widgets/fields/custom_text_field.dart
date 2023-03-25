@@ -34,11 +34,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       readOnly: widget.onTap != null,
-      style: Themes.theme.textTheme.headline6?.copyWith(color: Colors.white),
+      style: headline6.copyWith(color: Colors.white),
       validator: widget.validator,
       controller: widget.controller,
       focusNode: widget.focusNode,
-      cursorColor: Themes.theme.primaryColor,
+      cursorColor: Themes.primaryColor,
       onTap: widget.onTap,
       onChanged: widget.onChanged,
       initialValue: widget.value == 'null' ? '' : widget.value,
@@ -50,29 +50,29 @@ class _CustomTextFieldState extends State<CustomTextField> {
             children: [
               TextSpan(
                 text: widget.hintText,
-                style: Themes.theme.textTheme.bodyText1,
+                style: bodyText1,
               ),
               if (widget.isNecessary)
                 TextSpan(
                   text: ' * ',
-                  style: Themes.theme.textTheme.headline5,
+                  style: headline5,
                 ),
             ],
           ),
         ),
-        labelStyle: Themes.theme.textTheme.bodyText1,
-        hintStyle: Themes.theme.textTheme.bodyText1,
+        labelStyle: bodyText1,
+        hintStyle: bodyText1,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Themes.theme.focusColor, width: 1),
-          borderRadius: const BorderRadius.all(
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Themes.focusColor, width: 1),
+          borderRadius: BorderRadius.all(
             Radius.circular(4),
           ),
         ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Themes.theme.focusColor, width: 1),
-          borderRadius: const BorderRadius.all(
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Themes.focusColor, width: 1),
+          borderRadius: BorderRadius.all(
             Radius.circular(4),
           ),
         ),

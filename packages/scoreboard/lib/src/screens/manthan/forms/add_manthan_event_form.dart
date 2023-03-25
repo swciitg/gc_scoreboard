@@ -116,7 +116,7 @@ class _ManthanEventFormState extends State<ManthanEventForm> {
     }
 
     return Scaffold(
-      backgroundColor: Themes.theme.backgroundColor,
+      backgroundColor: Themes.backgroundColor,
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(56),
           child: AppBarFormComponent(

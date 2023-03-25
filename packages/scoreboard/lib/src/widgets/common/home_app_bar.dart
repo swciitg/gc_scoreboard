@@ -83,7 +83,7 @@ class _AppBarHomeComponentState extends State<AppBarHomeComponent> {
                               commonStore.viewType == ViewType.admin
                                   ? "Switch to User View"
                                   : "Switch to Admin View",
-                              style: Themes.theme.textTheme.headline6,
+                              style: headline6,
                             )),
                       ],
                       onSelected: (value) async {
