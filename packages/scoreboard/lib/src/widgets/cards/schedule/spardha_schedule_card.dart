@@ -13,7 +13,7 @@ import 'single_hostel_view.dart';
 import 'time_venue_widget.dart';
 
 class SpardhaScheduleCard extends StatefulWidget {
-  final EventModel eventModel;
+  final SpardhaEventModel eventModel;
   const SpardhaScheduleCard({super.key, required this.eventModel});
 
   @override

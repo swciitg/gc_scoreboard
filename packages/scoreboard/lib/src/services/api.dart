@@ -19,8 +19,8 @@ import '../stores/common_store.dart';
 class APIService {
   final dio = Dio(BaseOptions(
       baseUrl: const String.fromEnvironment('SERVER-URL'),
-      connectTimeout: Duration(seconds: 15),
-      receiveTimeout: Duration(seconds: 15),
+      connectTimeout: const Duration(seconds: 15),
+      receiveTimeout: const Duration(seconds: 15),
       headers: {'Security-Key': const String.fromEnvironment('SECURITY-KEY')}));
 
   APIService(BuildContext buildContext) {
@@ -32,8 +32,8 @@ class APIService {
     }, onError: (error, handler) async {
       var response = error.response;
       if (response != null && response.statusCode == 401) {
-        print(response.requestOptions.path);
         bool couldRegenerate = await regenerateAccessToken();
+        // ignore: use_build_context_synchronously
         var commStore = buildContext.read<CommonStore>();
         if (couldRegenerate) {
           // retry
@@ -44,6 +44,7 @@ class APIService {
           // retry
           return handler.resolve(await retryRequest(response));
         } else {
+          // ignore: use_build_context_synchronously
           showSnackBar(buildContext,
               "Your session has expired!! Login again in OneStop.");
         }
@@ -61,8 +62,8 @@ class APIService {
         Options(method: requestOptions.method, headers: requestOptions.headers);
     Dio retryDio = Dio(BaseOptions(
         baseUrl: const String.fromEnvironment('SERVER-URL'),
-        connectTimeout: Duration(seconds: 5),
-        receiveTimeout: Duration(seconds: 5),
+        connectTimeout: const Duration(seconds: 5),
+        receiveTimeout: const Duration(seconds: 5),
         headers: {
           'Security-Key': const String.fromEnvironment('SECURITY-KEY')
         }));
@@ -113,8 +114,8 @@ class APIService {
     try {
       Dio regenDio = Dio(BaseOptions(
           baseUrl: const String.fromEnvironment('SERVER-URL'),
-          connectTimeout: Duration(seconds: 5),
-          receiveTimeout: Duration(seconds: 5),
+          connectTimeout: const Duration(seconds: 5),
+          receiveTimeout: const Duration(seconds: 5),
           headers: {
             'Security-Key': const String.fromEnvironment('SECURITY-KEY')
           }));
@@ -129,16 +130,16 @@ class APIService {
     }
   }
 
-  Future<List<EventModel>> getSpardhaSchedule(ViewType v) async {
+  Future<List<SpardhaEventModel>> getSpardhaSchedule(ViewType v) async {
     try {
       if (v == ViewType.admin) {
         dio.options.queryParameters["forAdmin"] = "true";
       }
       Response resp = await dio.get("/gc/spardha/event-schedule");
-      List<EventModel> output = [];
+      List<SpardhaEventModel> output = [];
       for (var e in List<dynamic>.from(resp.data["details"])) {
         {
-          output.add(EventModel.fromJson(e));
+          output.add(SpardhaEventModel.fromJson(e));
         }
       }
       return output;
@@ -201,16 +202,16 @@ class APIService {
     }
   }
 
-  Future<List<EventModel>> getSpardhaResults(ViewType v) async {
+  Future<List<SpardhaEventModel>> getSpardhaResults(ViewType v) async {
     try {
       if (v == ViewType.admin) {
         dio.options.queryParameters["forAdmin"] = "true";
       }
       Response resp = await dio.get("/gc/spardha/event-schedule/results");
-      List<EventModel> output = [];
+      List<SpardhaEventModel> output = [];
       for (var e in List<dynamic>.from(resp.data["details"])) {
         {
-          output.add(EventModel.fromJson(e));
+          output.add(SpardhaEventModel.fromJson(e));
         }
       }
       return output;
@@ -273,7 +274,7 @@ class APIService {
     }
   }
 
-  Future<void> addUpdateSpardhaResult(String eventID, List<List<ResultModel>> data,
+  Future<void> addUpdateSpardhaResult(String eventID, List<List<SpardhaResultModel>> data,
       String victoryStatement) async {
     try {
       List<List<Map>> results = [];

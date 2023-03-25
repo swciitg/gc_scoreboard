@@ -5,7 +5,7 @@ import '../../../models/spardha_models/spardha_event_model.dart';
 import '../../../globals/colors.dart';
 
 class TimeVenueWidget extends StatelessWidget {
-  final EventModel eventModel;
+  final SpardhaEventModel eventModel;
 
   const TimeVenueWidget({Key? key, required this.eventModel}) : super(key: key);
 

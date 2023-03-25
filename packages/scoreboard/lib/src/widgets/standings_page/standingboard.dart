@@ -21,8 +21,6 @@ class _StandingBoardState extends State<StandingBoard> {
 
   @override
   Widget build(BuildContext context) {
-    print("STANDINGS");
-    print(widget.hostelStandings);
     return Container(
       margin: const EdgeInsets.fromLTRB(8, 16, 8, 0),
       decoration: const BoxDecoration(
