@@ -49,7 +49,6 @@ class _StandingsPageState extends State<ManthanStandingsPage> {
                   ));
                 } else if (snapshot.hasData) {
                   return Observer(builder: (context) {
-                  print(snapshot.data!);
                     List<dynamic> filteredEventSchedules = filterManthanStandings(input: snapshot.data!, event: manthanStore.selectedEvent);
                     return Expanded(
                         child: StandingBoard(

@@ -1,14 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import '../../../functions/snackbar.dart';
 import '../../../functions/validator.dart';
 import '../../../globals/colors.dart';
 import '../../../globals/constants.dart';
 import '../../../models/sahyog_models/sahyog_event_model.dart';
 import '../../../services/api.dart';
-import '../../../stores/static_store.dart';
 import '../../../widgets/fields/datepicker_color.dart';
 import '../../../widgets/fields/drop_down.dart';
 import '../../../widgets/ui/heading.dart';
@@ -79,7 +77,6 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
       for (var club in e.clubs) {
         clubs.add(club);
       }
-      print(clubs);
 
       clubSizeValue = clubs.length.toString();
       date = e.date;

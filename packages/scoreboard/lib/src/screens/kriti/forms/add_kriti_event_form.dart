@@ -83,7 +83,6 @@ class _KritiEventFormState extends State<KritiEventForm> {
       for (var club in e.clubs) {
         clubs.add(club);
       }
-      print(clubs);
 
       clubSizeValue = clubs.length.toString();
       date = e.date;
