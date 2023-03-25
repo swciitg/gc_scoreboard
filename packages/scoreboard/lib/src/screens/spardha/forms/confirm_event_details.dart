@@ -10,7 +10,7 @@ import '../../home.dart';
 
 class ConfirmEventDetails extends StatefulWidget {
   final bool isEdit;
-  final EventModel event;
+  final SpardhaEventModel event;
   const ConfirmEventDetails({
     Key? key,
     required this.event,

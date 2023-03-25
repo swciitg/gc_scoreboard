@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../widgets/ui/err_reload.dart';
 import '../../widgets/ui/shimmer.dart';
-import '../../functions/filters/spardha_filter_standings.dart';
+import '../../functions/filters/spardha_standings_filter.dart';
 import '../../services/api.dart';
 import '../../stores/spardha_store.dart';
 import '../../widgets/filters/spardha_filter_bar.dart';
@@ -49,8 +49,7 @@ class _StandingsPageState extends State<StandingsPage> {
                   ));
                 } else if (snapshot.hasData) {
                   return Observer(builder: (context) {
-                    print(snapshot.data!);
-                    List<dynamic> filteredEventSchedules = filterStandings(
+                    List<dynamic> filteredEventSchedules = filterSpardhaStandings(
                         input: snapshot.data!,
                         event: spardhaStore.selectedEvent,
                         category: spardhaStore.selectedCategory);

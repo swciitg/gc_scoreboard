@@ -5,7 +5,6 @@ import '../../../functions/validator.dart';
 import '../../../globals/constants.dart';
 import '../../../globals/colors.dart';
 import '../../../models/spardha_models/spardha_event_model.dart';
-import '../../../stores/static_store.dart';
 import '../../../widgets/fields/datepicker_color.dart';
 import '../../../widgets/fields/drop_down.dart';
 import '../../../widgets/ui/heading.dart';
@@ -16,7 +15,7 @@ import '../../../widgets/common/form_app_bar.dart';
 import 'confirm_event_details.dart';
 
 class SpardhaEventForm extends StatefulWidget {
-  final EventModel? event;
+  final SpardhaEventModel? event;
 
   const SpardhaEventForm({super.key, this.event});
 
@@ -61,7 +60,7 @@ class _SpardhaEventFormState extends State<SpardhaEventForm> {
   void initState() {
     super.initState();
     if (widget.event != null) {
-      EventModel e = widget.event!;
+      SpardhaEventModel e = widget.event!;
       sportName = e.event;
       _venueController.text = e.venue;
       category = e.category;
@@ -119,7 +118,7 @@ class _SpardhaEventFormState extends State<SpardhaEventForm> {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => ConfirmEventDetails(
                   isEdit: !(widget.event == null),
-                  event: EventModel.fromJson(data),
+                  event: SpardhaEventModel.fromJson(data),
                 )));
       }
     }

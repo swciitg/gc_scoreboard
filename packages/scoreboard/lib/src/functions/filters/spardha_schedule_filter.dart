@@ -1,10 +1,10 @@
 import '../../globals/enums.dart';
 import '../../models/spardha_models/spardha_event_model.dart';
 
-List<EventModel> filterSchedule({required List<EventModel> input, required String event, required String date, required Hostel hostel})
+List<SpardhaEventModel> filterSpardhaSchedule({required List<SpardhaEventModel> input, required String event, required String date, required Hostel hostel})
 {
 
-  List<EventModel> output=[];
+  List<SpardhaEventModel> output=[];
   output.addAll(input);
   output.retainWhere((element){
     if(event!='Overall' && event!=element.event){

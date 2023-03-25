@@ -2,7 +2,7 @@
 import '../../globals/enums.dart';
 import 'gc_filter.dart';
 
-List<dynamic> filterStandings({required Map<String,dynamic> input, required String event, required Category category})
+List<dynamic> filterSpardhaStandings({required Map<String,dynamic> input, required String event, required Category category})
 {
 
   List<dynamic> output=[];

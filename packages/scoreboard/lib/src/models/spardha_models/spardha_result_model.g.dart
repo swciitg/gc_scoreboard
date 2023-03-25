@@ -6,13 +6,13 @@ part of 'spardha_result_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ResultModel _$ResultModelFromJson(Map<String, dynamic> json) => ResultModel(
+SpardhaResultModel _$SpardhaResultModelFromJson(Map<String, dynamic> json) => SpardhaResultModel(
       hostelName: json['hostelName'] as String?,
       primaryScore: json['primaryScore'] as String?,
       secondaryScore: json['secondaryScore'] as String?,
     );
 
-Map<String, dynamic> _$ResultModelToJson(ResultModel instance) =>
+Map<String, dynamic> _$SpardhaResultModelToJson(SpardhaResultModel instance) =>
     <String, dynamic>{
       'hostelName': instance.hostelName,
       'primaryScore': instance.primaryScore,

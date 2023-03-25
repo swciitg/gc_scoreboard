@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import '../../functions/filters/spardha_filter_schedule.dart';
+import '../../functions/filters/spardha_schedule_filter.dart';
 import '../../globals/styles.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
@@ -37,7 +37,7 @@ class _ResultsPageState extends State<ResultsPage> {
         children: [
           const TopBar(),
           const SpardhaFilterBar(),
-          FutureBuilder<List<EventModel>>(
+          FutureBuilder<List<SpardhaEventModel>>(
               future:
                   APIService(context).getSpardhaResults(commonStore.viewType),
               builder: (context, snapshot) {
@@ -57,9 +57,9 @@ class _ResultsPageState extends State<ResultsPage> {
                         }),
                   );
                 } else if (snapshot.hasData) {
-                  List<EventModel> allSpardhaEventSchedules = snapshot.data!;
+                  List<SpardhaEventModel> allSpardhaEventSchedules = snapshot.data!;
                   return Observer(builder: (context) {
-                    List<EventModel> filteredEventSchedules = filterSchedule(
+                    List<SpardhaEventModel> filteredEventSchedules = filterSpardhaSchedule(
                         input: allSpardhaEventSchedules,
                         event: spardhaStore.selectedEvent,
                         date: spardhaStore.selectedDate,

@@ -14,7 +14,7 @@ import '../../../widgets/ui/heading.dart';
 import '../../home.dart';
 
 class SpardhaResultForm extends StatefulWidget {
-  final EventModel event;
+  final SpardhaEventModel event;
   const SpardhaResultForm({super.key, required this.event});
 
   @override

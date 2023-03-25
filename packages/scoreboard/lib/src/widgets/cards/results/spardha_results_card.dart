@@ -12,7 +12,7 @@ import '../popup_menu.dart';
 import 'score_card_item.dart';
 
 class SpardhaResultsCard extends StatefulWidget {
-  final EventModel eventModel;
+  final SpardhaEventModel eventModel;
   const SpardhaResultsCard({Key? key, required this.eventModel})
       : super(key: key);
 
@@ -169,7 +169,7 @@ class _SpardhaResultsCardState extends State<SpardhaResultsCard> {
 
 // ignore: must_be_immutable
 class ExpandedSpardhaResultsCard extends StatelessWidget {
-  final EventModel eventModel;
+  final SpardhaEventModel eventModel;
   ExpandedSpardhaResultsCard({Key? key, required this.eventModel})
       : super(key: key);
 

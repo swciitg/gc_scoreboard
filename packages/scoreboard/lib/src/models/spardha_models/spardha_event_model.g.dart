@@ -6,7 +6,8 @@ part of 'spardha_event_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-EventModel _$EventModelFromJson(Map<String, dynamic> json) => EventModel(
+SpardhaEventModel _$SpardhaEventModelFromJson(Map<String, dynamic> json) =>
+    SpardhaEventModel(
       id: json['_id'] as String?,
       event: json['event'] as String,
       category: json['category'] as String,
@@ -18,7 +19,7 @@ EventModel _$EventModelFromJson(Map<String, dynamic> json) => EventModel(
       status: json['status'] as String,
       results: (json['results'] as List<dynamic>?)
               ?.map((e) => (e as List<dynamic>)
-                  .map((e) => ResultModel.fromJson(e as Map<String, dynamic>))
+                  .map((e) => SpardhaResultModel.fromJson(e as Map<String, dynamic>))
                   .toList())
               .toList() ??
           const [],
@@ -26,7 +27,7 @@ EventModel _$EventModelFromJson(Map<String, dynamic> json) => EventModel(
       victoryStatement: json['victoryStatement'] as String? ?? '',
     )..posterEmail = json['posterEmail'] as String?;
 
-Map<String, dynamic> _$EventModelToJson(EventModel instance) =>
+Map<String, dynamic> _$SpardhaEventModelToJson(SpardhaEventModel instance) =>
     <String, dynamic>{
       '_id': instance.id,
       'event': instance.event,

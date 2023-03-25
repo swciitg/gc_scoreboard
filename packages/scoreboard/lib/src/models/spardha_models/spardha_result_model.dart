@@ -2,17 +2,17 @@ import 'package:json_annotation/json_annotation.dart';
 part 'spardha_result_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class ResultModel {
+class SpardhaResultModel {
   String? hostelName;
   String? primaryScore;
   String? secondaryScore;
-  ResultModel({
+  SpardhaResultModel({
     this.hostelName,
     this.primaryScore,
     this.secondaryScore,
   });
-  factory ResultModel.fromJson(Map<String, dynamic> json) =>
-      _$ResultModelFromJson(json);
+  factory SpardhaResultModel.fromJson(Map<String, dynamic> json) =>
+      _$SpardhaResultModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ResultModelToJson(this);
+  Map<String, dynamic> toJson() => _$SpardhaResultModelToJson(this);
 }
