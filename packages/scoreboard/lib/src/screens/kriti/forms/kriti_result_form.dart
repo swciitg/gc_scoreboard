@@ -82,10 +82,11 @@ class _KritiResultFormState extends State<KritiResultForm> {
                           isLoading = true;
                         });
                         try {
-                          await APIService(context).addUpdateKritiResult(
-                              widget.event.id!,
-                              KritiResultFormStore.resultFields!,
-                              KritiResultFormStore.victoryStatement!);
+                          await APIService(context).addUpdateResult(
+                              eventID: widget.event.id!,
+                              data: KritiResultFormStore.resultFields!,
+                              victoryStatement: KritiResultFormStore.victoryStatement!,
+                              competition: 'kriti');
                           if (!mounted) return;
 
                           Navigator.of(context).pushNamedAndRemoveUntil(

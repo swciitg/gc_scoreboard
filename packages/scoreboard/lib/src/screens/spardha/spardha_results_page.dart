@@ -37,9 +37,9 @@ class _ResultsPageState extends State<ResultsPage> {
         children: [
           const TopBar(),
           const SpardhaFilterBar(),
-          FutureBuilder<List<SpardhaEventModel>>(
+          FutureBuilder<List<dynamic>>(
               future:
-                  APIService(context).getSpardhaResults(commonStore.viewType),
+                  APIService(context).getResults(commonStore.viewType,competition: 'spardha'),
               builder: (context, snapshot) {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Expanded(
@@ -57,10 +57,9 @@ class _ResultsPageState extends State<ResultsPage> {
                         }),
                   );
                 } else if (snapshot.hasData) {
-                  List<SpardhaEventModel> allSpardhaEventSchedules = snapshot.data!;
                   return Observer(builder: (context) {
-                    List<SpardhaEventModel> filteredEventSchedules = filterSpardhaSchedule(
-                        input: allSpardhaEventSchedules,
+                    List<dynamic> filteredEventSchedules = filterSpardhaSchedule(
+                        input: snapshot.data!,
                         event: spardhaStore.selectedEvent,
                         date: spardhaStore.selectedDate,
                         hostel: spardhaStore.selectedHostel);

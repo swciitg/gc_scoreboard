@@ -6,12 +6,9 @@ import '../functions/snackbar.dart';
 import '../globals/constants.dart';
 import '../globals/enums.dart';
 import '../models/manthan_models/manthan_event_model.dart';
-import '../models/manthan_models/manthan_result_model.dart';
 import '../models/sahyog_models/sahyog_event_model.dart';
-import '../models/sahyog_models/sahyog_result_model.dart';
 import '../models/spardha_models/spardha_event_model.dart';
 import '../models/kriti_models/kriti_event_model.dart';
-import '../models/kriti_models/kriti_result_model.dart';
 import '../models/spardha_models/spardha_result_model.dart';
 import '../models/standing_model.dart';
 import '../stores/common_store.dart';
@@ -130,16 +127,36 @@ class APIService {
     }
   }
 
-  Future<List<SpardhaEventModel>> getSpardhaSchedule(ViewType v) async {
+  // get competition event model
+  dynamic getEventModel(String competition) {
+    return competition == 'spardha'
+        ? SpardhaEventModel
+        : competition == 'kriti'
+            ? KritiEventModel
+            : competition == 'manthan'
+                ? ManthanEventModel
+                : SahyogEventModel;
+  }
+
+  // get competition schedule
+
+  Future<List<dynamic>> getSchedule(ViewType v,
+      {required String competition}) async {
     try {
       if (v == ViewType.admin) {
         dio.options.queryParameters["forAdmin"] = "true";
       }
-      Response resp = await dio.get("/gc/spardha/event-schedule");
-      List<SpardhaEventModel> output = [];
+      Response resp = await dio.get("/gc/$competition/event-schedule");
+      List<dynamic> output = [];
       for (var e in List<dynamic>.from(resp.data["details"])) {
         {
-          output.add(SpardhaEventModel.fromJson(e));
+          competition == 'spardha'
+              ? output.add(SpardhaEventModel.fromJson(e))
+              : competition == 'manthan'
+              ? output.add(ManthanEventModel.fromJson(e))
+              : competition == 'kriti'
+              ? output.add(KritiEventModel.fromJson(e))
+              : output.add(SahyogEventModel.fromJson(e));
         }
       }
       return output;
@@ -148,16 +165,28 @@ class APIService {
     }
   }
 
-  Future<List<KritiEventModel>> getKritiSchedule(ViewType v) async {
+  // get competition Results
+
+  Future<List<dynamic>> getResults(ViewType v,
+      {required String competition}) async {
+    print('called');
     try {
       if (v == ViewType.admin) {
         dio.options.queryParameters["forAdmin"] = "true";
       }
-      Response resp = await dio.get("/gc/kriti/event-schedule");
-      List<KritiEventModel> output = [];
-      for (var e in List<dynamic>.from(resp.data["details"])) {
+      Response resp = await dio.get("/gc/$competition/event-schedule/results");
+      List<dynamic> output = [];
+      print(resp.data["details"]);
+
+      for (var e in List<Map<String, dynamic>>.from(resp.data["details"])) {
         {
-          output.add(KritiEventModel.fromJson(e));
+          competition == 'spardha'
+              ? output.add(SpardhaEventModel.fromJson(e))
+              : competition == 'manthan'
+                  ? output.add(ManthanEventModel.fromJson(e))
+                  : competition == 'kriti'
+                      ? output.add(KritiEventModel.fromJson(e))
+                      : output.add(SahyogEventModel.fromJson(e));
         }
       }
       return output;
@@ -166,116 +195,9 @@ class APIService {
     }
   }
 
-  Future<List<ManthanEventModel>> getManthanSchedule(ViewType v) async {
-    try {
-      if (v == ViewType.admin) {
-        dio.options.queryParameters["forAdmin"] = "true";
-      }
-      Response resp = await dio.get("/gc/manthan/event-schedule");
-      List<ManthanEventModel> output = [];
-      for (var e in List<dynamic>.from(resp.data["details"])) {
-        {
-          output.add(ManthanEventModel.fromJson(e));
-        }
-      }
-      return output;
-    } on DioError catch (err) {
-      return Future.error(err);
-    }
-  }
-
-  Future<List<SahyogEventModel>> getSahyogSchedule(ViewType v) async {
-    try {
-      if (v == ViewType.admin) {
-        dio.options.queryParameters["forAdmin"] = "true";
-      }
-      Response resp = await dio.get("/gc/sahyog/event-schedule");
-      List<SahyogEventModel> output = [];
-      for (var e in List<dynamic>.from(resp.data["details"])) {
-        {
-          output.add(SahyogEventModel.fromJson(e));
-        }
-      }
-      return output;
-    } on DioError catch (err) {
-      return Future.error(err);
-    }
-  }
-
-  Future<List<SpardhaEventModel>> getSpardhaResults(ViewType v) async {
-    try {
-      if (v == ViewType.admin) {
-        dio.options.queryParameters["forAdmin"] = "true";
-      }
-      Response resp = await dio.get("/gc/spardha/event-schedule/results");
-      List<SpardhaEventModel> output = [];
-      for (var e in List<dynamic>.from(resp.data["details"])) {
-        {
-          output.add(SpardhaEventModel.fromJson(e));
-        }
-      }
-      return output;
-    } on DioError catch (err) {
-      return Future.error(err);
-    }
-  }
-
-  Future<List<KritiEventModel>> getKritiResults(ViewType v) async {
-    try {
-      if (v == ViewType.admin) {
-        dio.options.queryParameters["forAdmin"] = "true";
-      }
-      Response resp = await dio.get("/gc/kriti/event-schedule/results");
-      List<KritiEventModel> output = [];
-      for (var e in List<dynamic>.from(resp.data["details"])) {
-        {
-          output.add(KritiEventModel.fromJson(e));
-        }
-      }
-      return output;
-    } on DioError catch (err) {
-      return Future.error(err);
-    }
-  }
-
-  Future<List<ManthanEventModel>> getManthanResults(ViewType v) async {
-    try {
-      if (v == ViewType.admin) {
-        dio.options.queryParameters["forAdmin"] = "true";
-      }
-      Response resp = await dio.get("/gc/manthan/event-schedule/results");
-      List<ManthanEventModel> output = [];
-      for (var e in List<dynamic>.from(resp.data["details"])) {
-        {
-          output.add(ManthanEventModel.fromJson(e));
-        }
-      }
-      return output;
-    } on DioError catch (err) {
-      return Future.error(err);
-    }
-  }
-
-  Future<List<SahyogEventModel>> getSahyogResults(ViewType v) async {
-    try {
-      if (v == ViewType.admin) {
-        dio.options.queryParameters["forAdmin"] = "true";
-      }
-      Response resp = await dio.get("/gc/sahyog/event-schedule/results");
-      List<SahyogEventModel> output = [];
-      for (var e in List<dynamic>.from(resp.data["details"])) {
-        {
-          output.add(SahyogEventModel.fromJson(e));
-        }
-      }
-      return output;
-    } on DioError catch (err) {
-      return Future.error(err);
-    }
-  }
-
-  Future<void> addUpdateSpardhaResult(String eventID, List<List<SpardhaResultModel>> data,
-      String victoryStatement) async {
+  // addUpdateResult
+  Future<void> addUpdateSpardhaResult(String eventID,
+      List<List<SpardhaResultModel>> data, String victoryStatement) async {
     try {
       List<List<Map>> results = [];
       for (var positionResults in data) {
@@ -293,45 +215,18 @@ class APIService {
     }
   }
 
-  Future<void> addUpdateKritiResult(String eventID, List<KritiResultModel> data,
-      String victoryStatement) async {
+  Future<void> addUpdateResult(
+      {required String eventID,
+      required List<dynamic> data,
+      required String victoryStatement,
+      required String competition}) async {
     try {
       List<Map> results = [];
       for (var positionResults in data) {
         results.add(positionResults.toJson());
       }
       Response resp = await dio.patch(
-          '/gc/kriti/event-schedule/result/$eventID',
-          data: {'victoryStatement': victoryStatement, 'results': results});
-    } on DioError catch (err) {
-      return Future.error(err);
-    }
-  }
-
-  Future<void> addUpdateManthanResult(String eventID, List<ManthanResultModel> data,
-      String victoryStatement) async {
-    try {
-      List<Map> results = [];
-      for (var positionResults in data) {
-        results.add(positionResults.toJson());
-      }
-      Response resp = await dio.patch(
-          '/gc/manthan/event-schedule/result/$eventID',
-          data: {'victoryStatement': victoryStatement, 'results': results});
-    } on DioError catch (err) {
-      return Future.error(err);
-    }
-  }
-
-  Future<void> addUpdateSahyogResult(String eventID,
-      List<SahyogResultModel> data, String victoryStatement) async {
-    try {
-      List<Map> results = [];
-      for (var positionResults in data) {
-        results.add(positionResults.toJson());
-      }
-      Response resp = await dio.patch(
-          '/gc/sahyog/event-schedule/result/$eventID',
+          '/gc/$competition/event-schedule/result/$eventID',
           data: {'victoryStatement': victoryStatement, 'results': results});
     } on DioError catch (err) {
       return Future.error(err);
@@ -367,7 +262,8 @@ class APIService {
 
   // Get-all events
 
-  Future<List<String>> getCompetitionEvents({required String competition}) async {
+  Future<List<String>> getCompetitionEvents(
+      {required String competition}) async {
     try {
       Response resp = await dio.get("/gc/$competition/all-events");
       return List<String>.from(resp.data["details"]);
@@ -389,7 +285,8 @@ class APIService {
 
   //Get Competition standings
 
-  Future<Map<String, dynamic>> getStandings({required String competition}) async {
+  Future<Map<String, dynamic>> getStandings(
+      {required String competition}) async {
     try {
       Response resp1 = await dio.get("/gc/$competition/standings/all-events");
       Response resp2 = await dio.get("/gc/$competition/standings");
@@ -403,7 +300,8 @@ class APIService {
   }
 
   //Post Event Schedule
-  Future<void> postEventSchedule({required Map<String, dynamic> data, required String competiton}) async {
+  Future<void> postEventSchedule(
+      {required Map<String, dynamic> data, required String competiton}) async {
     try {
       var resp = await dio.post("/gc/$competiton/event-schedule", data: data);
     } on DioError catch (err) {
@@ -413,10 +311,11 @@ class APIService {
 
   //update an event
 
-  Future<void> updateEventSchedule({required Map<String,dynamic> data, required String competition}) async {
+  Future<void> updateEventSchedule(
+      {required Map<String, dynamic> data, required String competition}) async {
     try {
-      Response resp = await dio.patch('/gc/$competition/event-schedule/${data['_id']}',
-          data: data);
+      Response resp = await dio
+          .patch('/gc/$competition/event-schedule/${data['_id']}', data: data);
     } on DioError catch (err) {
       return Future.error(err);
     }
@@ -424,9 +323,11 @@ class APIService {
 
   //delete event
 
-  Future<void> deleteEvent({required String eventID, required String competition}) async {
+  Future<void> deleteEvent(
+      {required String eventID, required String competition}) async {
     try {
-      Response resp = await dio.delete('/gc/$competition/event-schedule/$eventID');
+      Response resp =
+          await dio.delete('/gc/$competition/event-schedule/$eventID');
     } on DioError catch (err) {
       return Future.error(err);
     }
@@ -434,13 +335,12 @@ class APIService {
 
   //delete result
 
-  Future<void> deleteResult({required String eventID, required String competition}) async {
+  Future<void> deleteResult(
+      {required String eventID, required String competition}) async {
     try {
       await dio.delete('/gc/$competition/event-schedule/result/$eventID');
     } on DioError catch (err) {
       return Future.error(err);
     }
   }
-
-
 }

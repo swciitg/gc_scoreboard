@@ -3,7 +3,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import '../../functions/filters/sahyog_schedule_filter.dart';
 import '../../globals/styles.dart';
-import '../../models/sahyog_models/sahyog_event_model.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
 import '../../stores/sahyog_store.dart';
@@ -37,8 +36,8 @@ class _SahyogSchedulePageState extends State<SahyogSchedulePage> {
         children: [
           const TopBar(),
           const SahyogFilterBar(),
-          FutureBuilder<List<SahyogEventModel>>(
-              future: APIService(context).getSahyogSchedule(commonStore.viewType),
+          FutureBuilder<List<dynamic>>(
+              future: APIService(context).getSchedule(commonStore.viewType,competition: 'sahyog'),
               builder: (context, snapshot) {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Expanded(
@@ -56,10 +55,9 @@ class _SahyogSchedulePageState extends State<SahyogSchedulePage> {
                         }),
                   );
                 } else if (snapshot.hasData) {
-                  List<SahyogEventModel> allSahyogEventSchedules = snapshot.data!;
 
                   return Observer(builder: (context) {
-                    List<SahyogEventModel> filteredEventSchedules = sahyogFilterSchedule(input: allSahyogEventSchedules, difficulty: sahyogStore.difficulty, club: sahyogStore.selectedClub);
+                    List<dynamic> filteredEventSchedules = sahyogFilterSchedule(input: snapshot.data!, difficulty: sahyogStore.difficulty, club: sahyogStore.selectedClub);
 
                     return Expanded(
                         child: filteredEventSchedules.isNotEmpty

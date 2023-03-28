@@ -1,16 +1,15 @@
 import '../../globals/enums.dart';
-import '../../models/sahyog_models/sahyog_event_model.dart';
 
 
-List<SahyogEventModel> sahyogFilterSchedule({required List<SahyogEventModel> input, required String difficulty, required SahyogClub club})
+List<dynamic> sahyogFilterSchedule({required List<dynamic> input, required String difficulty, required SahyogClub club})
 {
-  List<SahyogEventModel> output=[];
+  List<dynamic> output=[];
   output.addAll(input);
   output.retainWhere((element){
-    if(difficulty != 'Overall' && difficulty!=element.difficulty){
+    if(difficulty != 'Overall' && difficulty!=element['difficulty']){
       return false;
     }
-    if(club !=SahyogClub.overall && !element.clubs.contains(club.clubName)){
+    if(club !=SahyogClub.overall && !element['clubs'].contains(club.clubName)){
       return false;
     }
     return true;

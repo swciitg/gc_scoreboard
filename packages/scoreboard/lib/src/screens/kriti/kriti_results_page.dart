@@ -3,7 +3,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import '../../functions/filters/kriti_schedule_filter.dart';
 import '../../globals/styles.dart';
-import '../../models/kriti_models/kriti_event_model.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
 import '../../stores/kriti_store.dart';
@@ -39,8 +38,8 @@ class _KritiResultsPageState extends State<KritiResultsPage> {
         children: [
           const TopBar(),
           const KritiFilterBar(),
-          FutureBuilder<List<KritiEventModel>>(
-              future: APIService(context).getKritiResults(commonStore.viewType),
+          FutureBuilder<List<dynamic>>(
+              future: APIService(context).getResults(commonStore.viewType,competition: 'kriti'),
               builder: (context, snapshot) {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Expanded(
@@ -58,9 +57,8 @@ class _KritiResultsPageState extends State<KritiResultsPage> {
                         }),
                   );
                 } else if (snapshot.hasData) {
-                  List<KritiEventModel> allKritiResults = snapshot.data!;
                   return Observer(builder: (context) {
-                    List<KritiEventModel> filteredEventSchedules = kritiFilterSchedule(input: allKritiResults, cup: kritiStore.selectedCup, club: kritiStore.selectedClub);
+                    List<dynamic> filteredEventSchedules = kritiFilterSchedule(input: snapshot.data!, cup: kritiStore.selectedCup, club: kritiStore.selectedClub);
                     return Expanded(
                         child: filteredEventSchedules.isNotEmpty
                             ? ListView.builder(
