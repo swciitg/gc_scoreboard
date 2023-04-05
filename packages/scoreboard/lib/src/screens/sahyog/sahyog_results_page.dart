@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-
 import '../../functions/filters/sahyog_schedule_filter.dart';
 import '../../globals/styles.dart';
-import '../../models/sahyog_models/sahyog_event_model.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
 import '../../stores/sahyog_store.dart';
@@ -31,14 +29,16 @@ class _SahyogResultsPageState extends State<SahyogResultsPage> {
       // reload page
       setState(() {});
     }
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0),
       child: Column(
         children: [
           const TopBar(),
           const SahyogFilterBar(),
-          FutureBuilder<List<SahyogEventModel>>(
-              future: APIService(context).getSahyogResults(commonStore.viewType),
+          FutureBuilder<List<dynamic>>(
+              future: APIService(context)
+                  .getResults(commonStore.viewType, competition: 'sahyog'),
               builder: (context, snapshot) {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Expanded(
@@ -56,22 +56,24 @@ class _SahyogResultsPageState extends State<SahyogResultsPage> {
                         }),
                   );
                 } else if (snapshot.hasData) {
-                  List<SahyogEventModel> allSahyogResults = snapshot.data!;
                   return Observer(builder: (context) {
-                    List<SahyogEventModel> filteredEventSchedules = sahyogFilterSchedule(input: allSahyogResults, difficulty: sahyogStore.difficulty, club: sahyogStore.selectedClub);
+                    List<dynamic> filteredEventSchedules = sahyogFilterSchedule(
+                        input: snapshot.data!,
+                        difficulty: sahyogStore.difficulty,
+                        club: sahyogStore.selectedClub);
                     return Expanded(
                         child: filteredEventSchedules.isNotEmpty
                             ? ListView.builder(
-                            itemCount: filteredEventSchedules.length,
-                            itemBuilder: (context, index) {
-                              return KritiResultCard(
-                                  eventModel:
-                                  filteredEventSchedules[index]);
-                            })
+                                itemCount: filteredEventSchedules.length,
+                                itemBuilder: (context, index) {
+                                  return KritiResultCard(
+                                      eventModel:
+                                          filteredEventSchedules[index]);
+                                })
                             : Center(
-                          child:
-                          Text("No Result found", style: fontStyle1),
-                        ));
+                                child:
+                                    Text("No Result found", style: fontStyle1),
+                              ));
                   });
                 }
                 return ErrorReloadPage(apiFunction: reloadCallback);

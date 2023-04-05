@@ -3,7 +3,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import '../../functions/filters/manthan_schedule_filter.dart';
 import '../../globals/styles.dart';
-import '../../models/manthan_models/manthan_event_model.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
 import '../../stores/manthan_store.dart';
@@ -39,8 +38,8 @@ class _ManthanResultsPageState extends State<ManthanResultsPage> {
         children: [
           const TopBar(),
           const ManthanFilterBar(),
-          FutureBuilder<List<ManthanEventModel>>(
-              future: APIService(context).getManthanResults(commonStore.viewType),
+          FutureBuilder<List<dynamic>>(
+              future: APIService(context).getResults(commonStore.viewType,competition: 'manthan'),
               builder: (context, snapshot) {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Expanded(
@@ -58,9 +57,8 @@ class _ManthanResultsPageState extends State<ManthanResultsPage> {
                         }),
                   );
                 } else if (snapshot.hasData) {
-                  List<ManthanEventModel> allManthanResults = snapshot.data!;
                   return Observer(builder: (context) {
-                    List<ManthanEventModel> filteredEventSchedules = manthanFilterSchedule(input: allManthanResults, module: manthanStore.selectedModule, );
+                    List<dynamic> filteredEventSchedules = manthanFilterSchedule(input: snapshot.data!, module: manthanStore.selectedModule, );
                     return Expanded(
                         child: filteredEventSchedules.isNotEmpty
                             ? ListView.builder(

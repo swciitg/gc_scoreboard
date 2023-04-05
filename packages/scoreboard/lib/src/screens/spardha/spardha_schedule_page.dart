@@ -3,7 +3,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import '../../functions/filters/spardha_schedule_filter.dart';
 import '../../globals/styles.dart';
-import '../../models/spardha_models/spardha_event_model.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
 import '../../stores/spardha_store.dart';
@@ -38,9 +37,9 @@ class _SchedulePageState extends State<SchedulePage> {
         children: [
           const TopBar(),
           const SpardhaFilterBar(),
-          FutureBuilder<List<SpardhaEventModel>>(
+          FutureBuilder<List<dynamic>>(
               future:
-                  APIService(context).getSpardhaSchedule(commonStore.viewType),
+                  APIService(context).getSchedule(commonStore.viewType,competition: 'spardha'),
               builder: (context, snapshot) {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Expanded(
@@ -58,10 +57,9 @@ class _SchedulePageState extends State<SchedulePage> {
                         }),
                   );
                 } else if (snapshot.hasData) {
-                  List<SpardhaEventModel> allSpardhaEventSchedules = snapshot.data!;
                   return Observer(builder: (context) {
-                    List<SpardhaEventModel> filteredEventSchedules = filterSpardhaSchedule(
-                        input: allSpardhaEventSchedules,
+                    List<dynamic> filteredEventSchedules = filterSpardhaSchedule(
+                        input: snapshot.data!,
                         event: spardhaStore.selectedEvent,
                         date: spardhaStore.selectedDate,
                         hostel: spardhaStore.selectedHostel);

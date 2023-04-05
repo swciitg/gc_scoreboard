@@ -84,10 +84,11 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
                           isLoading = true;
                         });
                         try {
-                          await APIService(context).addUpdateManthanResult(
-                              widget.event.id!,
-                              ManthanResultFormStore.resultFields!,
-                              ManthanResultFormStore.victoryStatement!);
+                          await APIService(context).addUpdateResult(
+                              eventID: widget.event.id!,
+                              data: ManthanResultFormStore.resultFields!,
+                              victoryStatement: ManthanResultFormStore.victoryStatement!,
+                              competition: 'manthan');
                           if (!mounted) return;
 
                           Navigator.of(context).pushNamedAndRemoveUntil(

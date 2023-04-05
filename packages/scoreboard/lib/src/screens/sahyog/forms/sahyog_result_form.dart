@@ -82,10 +82,11 @@ class _SahyogResultFormState extends State<SahyogResultForm> {
                           isLoading = true;
                         });
                         try {
-                          await APIService(context).addUpdateSahyogResult(
-                              widget.event.id!,
-                              SahyogResultFormStore.resultFields!,
-                              SahyogResultFormStore.victoryStatement!);
+                          await APIService(context).addUpdateResult(
+                              eventID: widget.event.id!,
+                              data: SahyogResultFormStore.resultFields!,
+                              victoryStatement: SahyogResultFormStore.victoryStatement!,
+                              competition: 'sahyog');
                           if (!mounted) return;
 
                           Navigator.of(context).pushNamedAndRemoveUntil(
