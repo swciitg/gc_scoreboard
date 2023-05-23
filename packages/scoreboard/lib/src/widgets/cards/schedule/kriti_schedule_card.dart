@@ -1,10 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
 import 'package:url_launcher/url_launcher.dart';
 import '../../../functions/snackbar.dart';
 import '../../../globals/colors.dart';
@@ -155,17 +153,18 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                                       child:  Container(
                                         alignment: Alignment.center,
                                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-                                        child: Row(
+                                        child: const Row(
                                           crossAxisAlignment: CrossAxisAlignment.center,
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
-                                            const Center(
+                                            Center(
                                               child: Icon(Icons.launch_outlined,color: Colors.black,size: 15,),
                                             ),
-                                            const SizedBox(width: 3,),
+                                            SizedBox(width: 3,),
                                             Text(
                                               'Open Problem',
-                                              style:  GoogleFonts.montserrat(
+                                              style:  TextStyle(
+                                                fontFamily: 'Montserrat',
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 12,
                                               ),

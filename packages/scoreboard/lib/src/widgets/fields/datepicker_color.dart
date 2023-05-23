@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import '../../globals/colors.dart';
 import '../../globals/styles.dart';
 
-class DatePickerTheme extends StatefulWidget {
+class CustomDatePicker extends StatefulWidget {
   final Widget? child;
-  const DatePickerTheme({super.key, this.child});
+  const CustomDatePicker({super.key, this.child});
 
   @override
-  State<DatePickerTheme> createState() => _DatePickerThemeState();
+  State<CustomDatePicker> createState() => _CustomDatePickerState();
 }
 
-class _DatePickerThemeState extends State<DatePickerTheme> {
+class _CustomDatePickerState extends State<CustomDatePicker> {
   @override
   Widget build(BuildContext context) {
     return Theme(
