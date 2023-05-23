@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 PopupMenuEntry optionsMenuItem(String label, String value, Color color) {
   return PopupMenuItem(
@@ -8,7 +7,8 @@ PopupMenuEntry optionsMenuItem(String label, String value, Color color) {
       value: value,
       child: Center(
         child: Text(label,
-            style: GoogleFonts.montserrat(
+            style: TextStyle(
+              fontFamily: 'Montserrat',
                 fontWeight: FontWeight.w500, fontSize: 12, color: color)),
       ));
 }

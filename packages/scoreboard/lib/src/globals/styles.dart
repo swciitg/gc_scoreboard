@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'colors.dart';
-
+const _font='Montserrat';
 final boxDecoration = BoxDecoration(
     borderRadius: BorderRadius.circular(18), color: Themes.cardColor1);
 
@@ -12,136 +11,325 @@ const popUpIcon = Icon(
   color: Themes.cardFontColor1,
 );
 
-final headingStyle1 = GoogleFonts.montserrat(
+const headingStyle1 = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w600, fontSize: 22, color: Themes.primaryColor);
 
-final headingStyle2 = GoogleFonts.montserrat(
+const headingStyle2 = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w500, fontSize: 22, color: Themes.warning);
 
-final popUpHeadingStyle = GoogleFonts.montserrat(
+const popUpHeadingStyle = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w600, fontSize: 10, color: Themes.cardFontColor1);
 
-final popUpItemStyle = GoogleFonts.montserrat(
+const popUpItemStyle = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w600, fontSize: 12, color: Themes.cardFontColor2);
 
-final dateWidgetStyle = GoogleFonts.montserrat(
+const dateWidgetStyle = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w700, fontSize: 16, color: Themes.cardFontColor2);
 
-final cardEventStyle = GoogleFonts.montserrat(
+const cardEventStyle = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w700, fontSize: 16, color: Themes.cardFontColor2);
 
-final standingsHeadingStyle = GoogleFonts.montserrat(
+const standingsHeadingStyle = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w500, fontSize: 16, color: Themes.kWhite);
 
-final cardCategoryStyle = GoogleFonts.montserrat(
+const cardCategoryStyle = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w500,
     fontSize: 14,
     color: Themes.primaryColor);
 
-final bottomNavStyle1 = GoogleFonts.montserrat(
+const bottomNavStyle1 = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w500,
     fontSize: 12,
     color: Themes.bottomNavFontColor);
 
-final bottomNavStyle2 = GoogleFonts.montserrat(
+const bottomNavStyle2 = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w600,
     fontSize: 12,
     color: Themes.bottomNavFontColor);
 
-final cardStageStyle1 = GoogleFonts.montserrat(
+const cardStageStyle1 = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w600, fontSize: 12, color: Themes.warning);
 
-final cardStageStyle2 = GoogleFonts.montserrat(
+const cardStageStyle2 = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w600, fontSize: 12, color: Themes.primaryColor);
 
-final cardStageStyle3 = GoogleFonts.montserrat(
+const cardStageStyle3 = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w600, fontSize: 12, color: Themes.secondaryColor);
 
-final cardVenueStyle1 = GoogleFonts.montserrat(
+const cardVenueStyle1 = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w500, fontSize: 12, color: Themes.cardFontColor2);
 
-final cardVenueStyle2 = GoogleFonts.montserrat(
+const cardVenueStyle2 = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w600, fontSize: 12, color: Themes.cardFontColor2);
 
-final cardVenueStyle3 = GoogleFonts.montserrat(
+const cardVenueStyle3 = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w600, fontSize: 14, color: Themes.cardFontColor2);
 
-final cardResultStyle1 = GoogleFonts.montserrat(
+const cardResultStyle1 = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w500, fontSize: 10, color: Themes.cardFontColor2);
 
-final cardResultStyle2 = GoogleFonts.montserrat(
+const cardResultStyle2 = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w600,
     fontSize: 10,
     color: Themes.bottomNavFontColor);
 
-final cardSecondaryScoreStyle = GoogleFonts.montserrat(
+const cardSecondaryScoreStyle = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w500, fontSize: 12, color: Themes.cardFontColor1);
 
-final cardPostponedStyle = GoogleFonts.montserrat(
+const cardPostponedStyle = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w500, fontSize: 12, color: Themes.warning);
 
-final cardCancelledStyle = GoogleFonts.montserrat(
+const cardCancelledStyle = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w600, fontSize: 12, color: Themes.errorRed);
 
-final cardTimeStyle = GoogleFonts.montserrat(
+const cardTimeStyle = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w500, fontSize: 12, color: Themes.cardFontColor2);
 
-final basicFontStyle = GoogleFonts.montserrat();
+const basicFontStyle = TextStyle(
+  fontFamily: _font,
+);
 
-final fontStyle1 = GoogleFonts.montserrat(
+const fontStyle1 = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w600, fontSize: 12, color: Themes.kWhite);
 
-final fontStyle3 = GoogleFonts.montserrat(
+const fontStyle3 = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w700, fontSize: 14, color: Themes.kWhite);
 
-final fontStyle2 = GoogleFonts.montserrat(
+const fontStyle2 = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w700, fontSize: 16, color: Themes.kWhite);
 
-final buttonStyle =
-    GoogleFonts.montserrat(fontSize: 15, fontWeight: FontWeight.w600);
+const buttonStyle =
+TextStyle(
+    fontFamily: _font,fontSize: 15, fontWeight: FontWeight.w600);
 
 // dateTimePickerStyles
 
-final hourMinuteStyle = GoogleFonts.montserrat(
+const hourMinuteStyle = TextStyle(
+  fontFamily: _font,
   fontSize: 20,
   fontWeight: FontWeight.bold,
 );
 
-final dayPeriodStyle =
-    GoogleFonts.montserrat(fontSize: 12, fontWeight: FontWeight.bold);
+const dayPeriodStyle =
+TextStyle(
+    fontFamily: _font,fontSize: 12, fontWeight: FontWeight.bold);
 
-final helptextStyle = GoogleFonts.montserrat(
+const helptextStyle = TextStyle(
+    fontFamily: _font,
     fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white);
 
 // standingBoardStyles
 
 // text themes
-final standingStyle1 = GoogleFonts.montserrat(
+const standingStyle1 = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w700, fontSize: 13, color: Themes.cardFontColor2);
 
-final standingStyle2 = GoogleFonts.montserrat(
+const standingStyle2 = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w600, fontSize: 13, color: Themes.cardFontColor2);
 
-final headline1 = GoogleFonts.montserrat(
+const headline1 = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w700, fontSize: 16, color: Themes.kWhite);
 
-final headline2 = GoogleFonts.montserrat(
+const headline2 = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w600, fontSize: 14, color: Themes.bottomNavFontColor);
 
-final headline3 = GoogleFonts.montserrat(
+const headline3 = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w600, fontSize: 12, color: Themes.primaryColor);
 
-final headline4 = GoogleFonts.montserrat(
+const headline4 = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w500, fontSize: 12, color: Themes.bottomNavFontColor);
 
-final headline5 = GoogleFonts.montserrat(
+const headline5 = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w500, fontSize: 16, color: Themes.errorRed);
 
-final headline6 = GoogleFonts.montserrat(
+const headline6 = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w500, fontSize: 14, color: Themes.kWhite);
 
-final bodyText1 = GoogleFonts.montserrat(
+const bodyText1 = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w500, fontSize: 14, color: Themes.bottomNavFontColor);
 
-final bodyText2 = GoogleFonts.montserrat(
+const bodyText2 = TextStyle(
+    fontFamily: _font,
     fontWeight: FontWeight.w600, fontSize: 12, color: Themes.warning);
+// import 'package:flutter/material.dart';
+// import 'package:google_fonts/google_fonts.dart';
+//
+// import 'colors.dart';
+//
+// const boxDecoration = BoxDecoration(
+//     borderRadius: BorderRadius.circular(18), color: Themes.cardColor1);
+//
+// const popUpIcon = Icon(
+//   Icons.unfold_more_outlined,
+//   size: 20,
+//   color: Themes.cardFontColor1,
+// );
+//
+// const headingStyle1 = TextStyle(
+//   fontFamily: '',
+//     fontWeight: FontWeight.w600, fontSize: 22, color: Themes.primaryColor);
+//
+// const headingStyle2 = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w500, fontSize: 22, color: Themes.warning);
+//
+// const popUpHeadingStyle = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w600, fontSize: 10, color: Themes.cardFontColor1);
+//
+// const popUpItemStyle = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w600, fontSize: 12, color: Themes.cardFontColor2);
+//
+// const dateWidgetStyle = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w700, fontSize: 16, color: Themes.cardFontColor2);
+//
+// const cardEventStyle = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w700, fontSize: 16, color: Themes.cardFontColor2);
+//
+// const standingsHeadingStyle = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w500, fontSize: 16, color: Themes.kWhite);
+//
+// const cardCategoryStyle = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w500,
+//     fontSize: 14,
+//     color: Themes.primaryColor);
+//
+// const bottomNavStyle1 = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w500,
+//     fontSize: 12,
+//     color: Themes.bottomNavFontColor);
+//
+// const bottomNavStyle2 = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w600,
+//     fontSize: 12,
+//     color: Themes.bottomNavFontColor);
+//
+// const cardStageStyle1 = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w600, fontSize: 12, color: Themes.warning);
+//
+// const cardStageStyle2 = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w600, fontSize: 12, color: Themes.primaryColor);
+//
+// const cardStageStyle3 = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w600, fontSize: 12, color: Themes.secondaryColor);
+//
+// const cardVenueStyle1 = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w500, fontSize: 12, color: Themes.cardFontColor2);
+//
+// const cardVenueStyle2 = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w600, fontSize: 12, color: Themes.cardFontColor2);
+//
+// const cardVenueStyle3 = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w600, fontSize: 14, color: Themes.cardFontColor2);
+//
+// const cardResultStyle1 = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w500, fontSize: 10, color: Themes.cardFontColor2);
+//
+// const cardResultStyle2 = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w600,
+//     fontSize: 10,
+//     color: Themes.bottomNavFontColor);
+//
+// const cardSecondaryScoreStyle = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w500, fontSize: 12, color: Themes.cardFontColor1);
+//
+// const cardPostponedStyle = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w500, fontSize: 12, color: Themes.warning);
+//
+// const cardCancelledStyle = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w600, fontSize: 12, color: Themes.errorRed);
+//
+// const cardTimeStyle = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w500, fontSize: 12, color: Themes.cardFontColor2);
+//
+// const basicFontStyle = GoogleFonts.montserrat();
+//
+// const fontStyle1 = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w600, fontSize: 12, color: Themes.kWhite);
+//
+// const fontStyle3 = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w700, fontSize: 14, color: Themes.kWhite);
+//
+// const fontStyle2 = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w700, fontSize: 16, color: Themes.kWhite);
+//
+// const buttonStyle =
+//     GoogleFonts.montserrat(fontSize: 15, fontWeight: FontWeight.w600);
+//
+// // dateTimePickerStyles
+//
+// const hourMinuteStyle = GoogleFonts.montserrat(
+//   fontSize: 20,
+//   fontWeight: FontWeight.bold,
+// );
+//
+// const dayPeriodStyle =
+//     GoogleFonts.montserrat(fontSize: 12, fontWeight: FontWeight.bold);
+//
+// const helptextStyle = GoogleFonts.montserrat(
+//     fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white);
+//
+// // standingBoardStyles
+//
+// // text themes
+// const standingStyle1 = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w700, fontSize: 13, color: Themes.cardFontColor2);
+//
+// const standingStyle2 = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w600, fontSize: 13, color: Themes.cardFontColor2);
+//
+// const headline1 = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w700, fontSize: 16, color: Themes.kWhite);
+//
+// const headline2 = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w600, fontSize: 14, color: Themes.bottomNavFontColor);
+//
+// const headline3 = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w600, fontSize: 12, color: Themes.primaryColor);
+//
+// const headline4 = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w500, fontSize: 12, color: Themes.bottomNavFontColor);
+//
+// const headline5 = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w500, fontSize: 16, color: Themes.errorRed);
+//
+// const headline6 = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w500, fontSize: 14, color: Themes.kWhite);
+//
+// const bodyText1 = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w500, fontSize: 14, color: Themes.bottomNavFontColor);
+//
+// const bodyText2 = GoogleFonts.montserrat(
+//     fontWeight: FontWeight.w600, fontSize: 12, color: Themes.warning);

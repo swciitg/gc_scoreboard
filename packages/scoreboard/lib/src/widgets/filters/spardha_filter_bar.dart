@@ -85,7 +85,7 @@ class _SpardhaFilterBarState extends State<SpardhaFilterBar> {
                                   firstDate: DateTime(2000),
                                   //DateTime.now() - not to allow to choose before today.
                                   lastDate: DateTime(2101),
-                                  builder: (context, child) => DatePickerTheme(
+                                  builder: (context, child) => CustomDatePicker(
                                         child: child,
                                       ));
                               if (pickedDate != null) {

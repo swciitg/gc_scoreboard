@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class Themes {
   static const kWhite = Color.fromRGBO(242, 242, 242, 1);

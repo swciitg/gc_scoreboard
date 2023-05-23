@@ -216,7 +216,7 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
                                     //DateTime.now() - not to allow to choose before today.
                                     lastDate: DateTime(2101),
                                     builder: (context, child) =>
-                                        DatePickerTheme(
+                                        CustomDatePicker(
                                           child: child,
                                         ));
                                 if (pickedDate != null) {

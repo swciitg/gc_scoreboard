@@ -240,7 +240,7 @@ class _KritiEventFormState extends State<KritiEventForm> {
                                     firstDate: DateTime(2000),
                                     //DateTime.now() - not to allow to choose before today.
                                     lastDate: DateTime(2101),
-                                    builder: (context, child) => DatePickerTheme(child: child,));
+                                    builder: (context, child) => CustomDatePicker(child: child,));
                                 if (pickedDate != null) {
                                   if (!mounted) return;
                                   date = pickedDate;
