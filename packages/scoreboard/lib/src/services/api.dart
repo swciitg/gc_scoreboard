@@ -101,8 +101,8 @@ class APIService {
           });
       await AuthUserHelpers.saveAuthCompetitions(authCompetitions);
       await AuthUserHelpers.setAdmin(data[DatabaseRecords.isadmin]);
-      await AuthUserHelpers.setAccessToken(data[DatabaseRecords.accesstoken]);
-      await AuthUserHelpers.setRefreshToken(data[DatabaseRecords.refreshtoken]);
+      // await AuthUserHelpers.setAccessToken(data[DatabaseRecords.accesstoken]);
+      // await AuthUserHelpers.setRefreshToken(data[DatabaseRecords.refreshtoken]);
     }
   }
 

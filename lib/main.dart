@@ -30,8 +30,8 @@ class SampleHome extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => const GCScoreBoard(userInfo:  {
-                    "name": "Nandigrama Naga Venkata Hareesh",
-                    "email": "h.nandigrama@iitg.ac.in"
+                    "name": "Hardik Roongta",
+                    "email": "r.hardik@iitg.ac.in"
                   })));
             },
             child: const Text("GC SCOREBOARD")),
