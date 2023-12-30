@@ -117,7 +117,7 @@ class APIService {
             'Security-Key': const String.fromEnvironment('SECURITY-KEY')
           }));
       Response<Map<String, dynamic>> resp = await regenDio.post(
-          "/gc/gen-accesstoken",
+          "/user/accesstoken",
           options: Options(headers: {"authorization": "Bearer $refreshToken"}));
       var data = resp.data!;
       await AuthUserHelpers.setAccessToken(data["token"]);
