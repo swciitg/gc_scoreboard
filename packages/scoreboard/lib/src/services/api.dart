@@ -275,6 +275,8 @@ class APIService {
   // Get GC Standings
 
   Future<List<dynamic>> getGCStandings() async {
+    String a = await AuthUserHelpers.getAccessToken();
+    print(a);
     try {
       Response resp = await dio.get("/gc/overall/standings");
       return resp.data['details'];
