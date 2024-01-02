@@ -99,6 +99,8 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
                         ));
                       });
                     }
+                    print("ERROR IN STANDINGS");
+                    print(snapshot.error);
                     return ErrorReloadPage(apiFunction: reloadCallback);
                   })
             ],
