@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:scoreboard/src/globals/enums.dart';
 import 'package:scoreboard/src/globals/styles.dart';
+import 'package:scoreboard/src/stores/common_store.dart';
 import '../../globals/colors.dart';
 import '../../stores/static_store.dart';
 import 'custom_text_field.dart';
@@ -18,12 +21,23 @@ class AutocompleteTextField extends StatefulWidget {
 class _AutocompleteTextField extends State<AutocompleteTextField> {
   @override
   Widget build(BuildContext context) {
+    final commonStore = context.read<CommonStore>();
+    final events = commonStore.competition == Competitions.spardha
+    ? StaticStore.spardhaEvents
+        : commonStore.competition == Competitions.kriti
+    ? StaticStore.kritiEvents
+        : commonStore.competition == Competitions.manthan
+    ? StaticStore.manthanEvents
+        : commonStore.competition == Competitions.sahyog
+    ? StaticStore.sahyogEvents
+        : <String>[];
+
     return Autocomplete<String>(
       optionsBuilder: (TextEditingValue val) {
         if (val.text == '') {
           return const Iterable<String>.empty();
         }
-        return StaticStore.kritiEvents.where((element) =>
+        return events.where((element) =>
             element
                 .toLowerCase()
                 .contains(val.text.toLowerCase()));
@@ -68,7 +82,7 @@ class _AutocompleteTextField extends State<AutocompleteTextField> {
         return CustomTextField(
           hintText: 'Event Name',
           validator: (s) {
-            if (StaticStore.kritiEvents.contains(s)) {
+            if (events.contains(s)) {
               return null;
             }
             return "Enter a valid event";

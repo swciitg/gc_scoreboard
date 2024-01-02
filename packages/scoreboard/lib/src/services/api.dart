@@ -101,8 +101,8 @@ class APIService {
           });
       await AuthUserHelpers.saveAuthCompetitions(authCompetitions);
       await AuthUserHelpers.setAdmin(data[DatabaseRecords.isadmin]);
-      await AuthUserHelpers.setAccessToken(data[DatabaseRecords.accesstoken]);
-      await AuthUserHelpers.setRefreshToken(data[DatabaseRecords.refreshtoken]);
+      // await AuthUserHelpers.setAccessToken(data[DatabaseRecords.accesstoken]);
+      // await AuthUserHelpers.setRefreshToken(data[DatabaseRecords.refreshtoken]);
     }
   }
 
@@ -117,7 +117,7 @@ class APIService {
             'Security-Key': const String.fromEnvironment('SECURITY-KEY')
           }));
       Response<Map<String, dynamic>> resp = await regenDio.post(
-          "/gc/gen-accesstoken",
+          "/user/accesstoken",
           options: Options(headers: {"authorization": "Bearer $refreshToken"}));
       var data = resp.data!;
       await AuthUserHelpers.setAccessToken(data["token"]);
