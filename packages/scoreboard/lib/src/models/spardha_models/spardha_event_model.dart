@@ -17,6 +17,7 @@ class SpardhaEventModel {
   String? posterEmail = '';
   bool resultAdded;
   String? victoryStatement = '';
+  String link;
   SpardhaEventModel({
     this.id,
     required this.event,
@@ -29,10 +30,11 @@ class SpardhaEventModel {
     this.results = const [],
     this.resultAdded = false,
     this.victoryStatement = '',
+    this.link = '',
   });
 
-  factory SpardhaEventModel.fromJson(Map<String,dynamic> json) => _$SpardhaEventModelFromJson(json);
+  factory SpardhaEventModel.fromJson(Map<String, dynamic> json) =>
+      _$SpardhaEventModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$SpardhaEventModelToJson(this);
-
 }

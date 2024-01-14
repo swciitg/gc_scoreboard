@@ -158,6 +158,10 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
                   const SizedBox(
                     height: 40,
                   ),
+                  DataTile(title: "Score Link", semiTitle: widget.event.link),
+                  const SizedBox(
+                    height: 40,
+                  ),
                   Text(
                     'Participating Hostels',
                     style: headline1,
@@ -209,6 +213,7 @@ class DataTile extends StatelessWidget {
                   : semiTitle == 'Event postponed'
                       ? Themes.warning
                       : Colors.white),
+          softWrap: true,
         )
       ],
     );
