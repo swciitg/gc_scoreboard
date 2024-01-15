@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../../../globals/colors.dart';
 import '../../../globals/enums.dart';
 import '../../../globals/styles.dart';
@@ -10,8 +11,6 @@ import '../../../stores/common_store.dart';
 import '../card_date_widget.dart';
 import '../popup_menu.dart';
 import '../menu_item.dart';
-
-
 
 class ManthanScheduleCard extends StatefulWidget {
   // ignore: prefer_typing_uninitialized_variables
@@ -60,38 +59,46 @@ class _ManthanScheduleCardState extends State<ManthanScheduleCard> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(children: [
-                    SizedBox(
-                      height: 78,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 4),
-                                child: SizedBox(
-                                  height: 28,
-                                  child: Text(widget.eventModel.event, style: cardEventStyle),
-                                ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 4),
+                              child: SizedBox(
+                                height: 28,
+                                child: Text(widget.eventModel.event, style: cardEventStyle),
                               ),
-                              SizedBox(
-                                height: 20,
-                                child:
-                                isManthan
-                                    ? Text(widget.eventModel.module, style: cardStageStyle1)
-                                    : const Text(''),
-                              ),
-                            ],
-                          ),
-                          Container(
-                              alignment: Alignment.topCenter,
-                              width: 82,
-                              child: DateWidget(
-                                date: widget.eventModel.date,
-                              ))
-                        ],
-                      ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                              child: isManthan
+                                  ? Text(widget.eventModel.module, style: cardStageStyle1)
+                                  : const Text(''),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            if (widget.eventModel.link.isNotEmpty)
+                              GestureDetector(
+                                  onTap: () {
+                                    launchUrlString(widget.eventModel.link);
+                                  },
+                                  child: const Text("view score", style: cardCategoryStyle)),
+                            if (widget.eventModel.link.isNotEmpty) const SizedBox(height: 8),
+                            Container(
+                                alignment: Alignment.topCenter,
+                                width: 82,
+                                child: DateWidget(
+                                  date: widget.eventModel.date,
+                                )),
+                          ],
+                        )
+                      ],
                     ),
                   ]),
                   Column(
@@ -153,6 +160,3 @@ class _ManthanScheduleCardState extends State<ManthanScheduleCard> {
     });
   }
 }
-
-
-

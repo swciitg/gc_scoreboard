@@ -18,8 +18,6 @@ import '../../../widgets/common/form_app_bar.dart';
 import '../../../globals/enums.dart';
 import '../../home.dart';
 
-
-
 class SahyogEventForm extends StatefulWidget {
   final SahyogEventModel? event;
   const SahyogEventForm({Key? key, this.event}) : super(key: key);
@@ -43,6 +41,7 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
 
   final TextEditingController _probelmLinkController = TextEditingController();
   final TextEditingController _venueController = TextEditingController();
+  final TextEditingController _linkController = TextEditingController();
   final TextEditingController dateInput = TextEditingController();
   final TextEditingController timeInput = TextEditingController();
 
@@ -59,21 +58,22 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
     clubSizeValue = clubs.length.toString();
   }
 
-  callbackAutocomplete(value){
-    eventName=value;
+  callbackAutocomplete(value) {
+    eventName = value;
   }
 
   @override
   void initState() {
     super.initState();
-    if( widget.event != null){
+    if (widget.event != null) {
       SahyogEventModel e = widget.event!;
       eventName = e.event;
       _venueController.text = e.venue;
+      _linkController.text = e.link;
       difficulty = e.difficulty;
       clubSize = e.clubs.length;
       _probelmLinkController.text = e.problemLink;
-      points =  e.points;
+      points = e.points;
 
       for (var club in e.clubs) {
         clubs.add(club);
@@ -86,12 +86,13 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
       timeInput.text = DateFormat('h:mm a').format(e.date);
     }
   }
+
   @override
   Widget build(BuildContext context) {
     clubNames.remove("Overall");
 
     Future<void> onFormSubmit() async {
-      if(!isLoading) {
+      if (!isLoading) {
         setState(() {
           isLoading = true;
         });
@@ -101,14 +102,9 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
             isLoading = false;
           });
           return;
-        }
-        else {
-          DateTime eventDateTime = DateTime(
-              date!.year,
-              date!.month,
-              date!.day,
-              date!.hour,
-              date!.minute);
+        } else {
+          DateTime eventDateTime =
+              DateTime(date!.year, date!.month, date!.day, date!.hour, date!.minute);
 
           var data = {
             "event": eventName,
@@ -120,7 +116,7 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
             "problemLink": _probelmLinkController.text,
             "results": [],
             "resultAdded": false,
-
+            "link": _linkController.text,
           };
           if (widget.event != null) {
             data['_id'] = widget.event!.id;
@@ -135,17 +131,14 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
             } else {
               await APIService(context).postEventSchedule(data: data, competiton: 'sahyog');
               if (!mounted) return;
-              showSnackBar(
-                  context, "Event schedule posted successfully");
+              showSnackBar(context, "Event schedule posted successfully");
             }
             if (!mounted) return;
             setState(() {
               isLoading = true;
             });
-            Navigator.pushNamedAndRemoveUntil(
-                context, ScoreBoardHome.id, (route) => false);
-          }
-          on DioError catch (err) {
+            Navigator.pushNamedAndRemoveUntil(context, ScoreBoardHome.id, (route) => false);
+          } on DioError catch (err) {
             showErrorSnackBar(context, err);
             setState(() {
               isLoading = false;
@@ -161,11 +154,9 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
           preferredSize: const Size.fromHeight(56),
           child: AppBarFormComponent(
             title: widget.event == null ? 'Add Event' : 'Edit Event',
-            actionTitle: "Next",
+            actionTitle: "Submit",
             onFormSubmit: onFormSubmit,
           )),
-
-
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(8),
@@ -179,7 +170,10 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      AutocompleteTextField(callbackFunction: callbackAutocomplete, standings: widget.event?.event, ),
+                      AutocompleteTextField(
+                        callbackFunction: callbackAutocomplete,
+                        standings: widget.event?.event,
+                      ),
                       const SizedBox(height: 12),
                       CustomDropDown(
                         items: kritiDifficulties,
@@ -189,12 +183,12 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
                         validator: validateField,
                       ),
                       const SizedBox(height: 12),
-
                       CustomTextField(
                         hintText: 'Problem Link',
                         validator: validateField,
-                        controller: _probelmLinkController, isNecessary: true,),
-
+                        controller: _probelmLinkController,
+                        isNecessary: true,
+                      ),
                       const SizedBox(
                         height: 12,
                       ),
@@ -207,30 +201,28 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
                               validator: validateField,
                               controller: dateInput,
                               onTap: () async {
-                                FocusScope.of(context)
-                                    .requestFocus(FocusNode());
+                                FocusScope.of(context).requestFocus(FocusNode());
                                 DateTime? pickedDate = await showDatePicker(
                                     context: context,
                                     initialDate: date ?? DateTime.now(),
                                     firstDate: DateTime(2000),
                                     //DateTime.now() - not to allow to choose before today.
                                     lastDate: DateTime(2101),
-                                    builder: (context, child) =>
-                                        CustomDatePicker(
+                                    builder: (context, child) => CustomDatePicker(
                                           child: child,
                                         ));
                                 if (pickedDate != null) {
                                   if (!mounted) return;
                                   date = pickedDate;
                                   String formattedDate =
-                                  DateFormat('dd-MMM-yyyy')
-                                      .format(pickedDate);
+                                      DateFormat('dd-MMM-yyyy').format(pickedDate);
                                   setState(() {
                                     dateInput.text =
                                         formattedDate; //set output date to TextField value.
                                   });
                                 }
-                              }, isNecessary: true,
+                              },
+                              isNecessary: true,
                             ),
                           ),
                           const SizedBox(
@@ -242,8 +234,7 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
                               validator: validateField,
                               controller: timeInput,
                               onTap: () async {
-                                FocusScope.of(context)
-                                    .requestFocus(FocusNode());
+                                FocusScope.of(context).requestFocus(FocusNode());
                                 TimeOfDay? pickedTime = await showTimePicker(
                                   builder: (context, childWidget) {
                                     return TimePickerColor(
@@ -259,8 +250,7 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
                                   time = pickedTime;
                                   setState(() {
                                     final now = DateTime.now();
-                                    final formattedTimeString = DateFormat.jm()
-                                        .format(DateTime(
+                                    final formattedTimeString = DateFormat.jm().format(DateTime(
                                         now.year,
                                         now.month,
                                         now.day,
@@ -269,7 +259,8 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
                                     timeInput.text = formattedTimeString;
                                   });
                                 }
-                              }, isNecessary: true,
+                              },
+                              isNecessary: true,
                             ),
                           )
                         ],
@@ -280,11 +271,21 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
                       CustomTextField(
                         hintText: 'Venue',
                         validator: validateField,
-                        controller: _venueController, isNecessary: true,),
+                        controller: _venueController,
+                        isNecessary: true,
+                      ),
                       const SizedBox(
                         height: 12,
                       ),
-
+                      CustomTextField(
+                        hintText: 'Score link',
+                        validator: validateField,
+                        controller: _linkController,
+                        isNecessary: false,
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
                       Text(
                         'Clubs',
                         style: headline1,
@@ -324,8 +325,6 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
           ),
         ),
       ),
-
-
     );
   }
 }

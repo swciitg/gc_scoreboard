@@ -7,7 +7,7 @@ class SahyogResultModel {
   double? points;
   SahyogResultModel({
     this.hostelName,
-    this.points
+    this.points,
   });
   factory SahyogResultModel.fromJson(Map<String, dynamic> json) =>
       _$SahyogResultModelFromJson(json);
