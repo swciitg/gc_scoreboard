@@ -10,7 +10,7 @@ List<dynamic> manthanFilterSchedule({required List<dynamic> input, required Stri
       {
         return true;
       }
-    else if(module == element['module'])
+    else if(module == element.module)
       {
         return true;
       }
