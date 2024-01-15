@@ -1,6 +1,6 @@
 import '../../globals/enums.dart';
 
-List<dynamic> kritiFilterSchedule({required List<dynamic> input, required Cup cup, required Club club})
+List<dynamic> kritiFilter({required List<dynamic> input, required Cup cup, required Club club})
 {
 
   List<dynamic> output=[];

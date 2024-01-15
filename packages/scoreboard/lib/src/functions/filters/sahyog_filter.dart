@@ -1,7 +1,7 @@
 import '../../globals/enums.dart';
 
 
-List<dynamic> sahyogFilterSchedule({required List<dynamic> input, required String difficulty, required SahyogClub club})
+List<dynamic> sahyogFilter({required List<dynamic> input, required String difficulty, required SahyogClub club})
 {
   List<dynamic> output=[];
   output.addAll(input);

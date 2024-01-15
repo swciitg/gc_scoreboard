@@ -1,6 +1,6 @@
 import '../../globals/enums.dart';
 
-List<dynamic> filterSpardhaSchedule({required List<dynamic> input, required String event, required String date, required Hostel hostel})
+List<dynamic> spardhaFilter({required List<dynamic> input, required String event, required String date, required Hostel hostel})
 {
 
   List<dynamic> output=[];

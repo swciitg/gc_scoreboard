@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import '../../functions/filters/kriti_schedule_filter.dart';
+import '../../functions/filters/kriti_filter.dart';
 import '../../globals/styles.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
@@ -58,7 +58,7 @@ class _KritiResultsPageState extends State<KritiResultsPage> {
                   );
                 } else if (snapshot.hasData) {
                   return Observer(builder: (context) {
-                    List<dynamic> filteredEventSchedules = kritiFilterSchedule(input: snapshot.data!, cup: kritiStore.selectedCup, club: kritiStore.selectedClub);
+                    List<dynamic> filteredEventSchedules = kritiFilter(input: snapshot.data!, cup: kritiStore.selectedCup, club: kritiStore.selectedClub);
                     return Expanded(
                         child: filteredEventSchedules.isNotEmpty
                             ? ListView.builder(
