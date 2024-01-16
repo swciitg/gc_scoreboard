@@ -135,7 +135,9 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
                               padding: const EdgeInsets.symmetric(vertical: 16),
                               child: CustomTextField(
                                 hintText: 'Score link',
-                                validator: validateField,
+                                validator: (val) {
+                                  return null;
+                                },
                                 controller: _linkController,
                                 isNecessary: false,
                               ),

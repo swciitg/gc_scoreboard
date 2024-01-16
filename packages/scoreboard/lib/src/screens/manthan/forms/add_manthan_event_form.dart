@@ -246,7 +246,9 @@ class _ManthanEventFormState extends State<ManthanEventForm> {
                       ),
                       CustomTextField(
                         hintText: 'Score link',
-                        validator: validateField,
+                        validator: (val) {
+                          return null;
+                        },
                         controller: _linkController,
                         isNecessary: false,
                       ),
