@@ -30,6 +30,7 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
 
   @override
   void initState() {
+    _linkController.text = widget.event.link;
     super.initState();
     if (widget.event.results.isNotEmpty) {
       ManthanResultFormStore.resultFields = widget.event.results;
@@ -129,12 +130,14 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
                       child: ListView.builder(
                         itemCount: ManthanResultFormStore.numPositions() + 2,
                         itemBuilder: (context, index) {
-                          if (index == ManthanResultFormStore.numPositions() + 1) {
+                          if (index == 1) {
                             return Padding(
                               padding: const EdgeInsets.symmetric(vertical: 16),
                               child: CustomTextField(
                                 hintText: 'Score link',
-                                validator: validateField,
+                                validator: (val) {
+                                  return null;
+                                },
                                 controller: _linkController,
                                 isNecessary: false,
                               ),
@@ -190,109 +193,106 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
                                 )
                               ],
                             );
-                          } else {
-                            return Column(children: [
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(children: [
-                                    Text(
-                                      getPosition(index - 1),
-                                      style: bodyText2,
+                          }
+                          index--;
+                          return Column(children: [
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(children: [
+                                  Text(
+                                    getPosition(index - 1),
+                                    style: bodyText2,
+                                  ),
+                                ]),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                CustomDropDown(
+                                  validator: validateField,
+                                  value: ManthanResultFormStore.resultFields?[index - 1].hostelName,
+                                  onChanged: (hostel) => ManthanResultFormStore
+                                      .resultFields?[index - 1].hostelName = hostel,
+                                  items: allHostelList,
+                                  hintText: 'Hostels', // multiple times same hostels can be in list
+                                ),
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                Row(children: [
+                                  Expanded(
+                                    flex: 46,
+                                    child: CustomTextField(
+                                      inputType: TextInputType.number,
+                                      isNecessary: true,
+                                      hintText: 'Primary Score',
+                                      validator: validateField,
+                                      onChanged: (ps) => ManthanResultFormStore
+                                          .resultFields?[index - 1].primaryScore = double.parse(ps),
+                                      value: ManthanResultFormStore
+                                          .resultFields?[index - 1].primaryScore
+                                          .toString(),
                                     ),
-                                  ]),
-                                  const SizedBox(
-                                    height: 20,
                                   ),
-                                  CustomDropDown(
-                                    validator: validateField,
-                                    value:
-                                        ManthanResultFormStore.resultFields?[index - 1].hostelName,
-                                    onChanged: (hostel) => ManthanResultFormStore
-                                        .resultFields?[index - 1].hostelName = hostel,
-                                    items: allHostelList,
-                                    hintText:
-                                        'Hostels', // multiple times same hostels can be in list
+                                  const Spacer(
+                                    flex: 6,
                                   ),
-                                  const SizedBox(
-                                    height: 16,
-                                  ),
-                                  Row(children: [
-                                    Expanded(
+                                  Expanded(
                                       flex: 46,
                                       child: CustomTextField(
-                                        inputType: TextInputType.number,
-                                        isNecessary: true,
-                                        hintText: 'Primary Score',
-                                        validator: validateField,
-                                        onChanged: (ps) => ManthanResultFormStore
-                                            .resultFields?[index - 1]
-                                            .primaryScore = double.parse(ps),
+                                        inputType: TextInputType.text,
+                                        isNecessary: false,
+                                        hintText: 'Secondary Score',
+                                        validator: null,
+                                        onChanged: (ss) => ManthanResultFormStore
+                                            .resultFields?[index - 1].secondaryScore = ss,
                                         value: ManthanResultFormStore
-                                            .resultFields?[index - 1].primaryScore
-                                            .toString(),
+                                            .resultFields?[index - 1].secondaryScore,
+                                      )),
+                                ]),
+                                const SizedBox(
+                                  height: 24,
+                                ),
+                                const Divider(
+                                  thickness: 1,
+                                  color: Themes.dividerColor1,
+                                ),
+                                const SizedBox(
+                                  height: 24,
+                                ),
+                                if (index == ManthanResultFormStore.resultFields!.length)
+                                  TextButton(
+                                      style: TextButton.styleFrom(
+                                        padding: EdgeInsets.zero,
                                       ),
-                                    ),
-                                    const Spacer(
-                                      flex: 6,
-                                    ),
-                                    Expanded(
-                                        flex: 46,
-                                        child: CustomTextField(
-                                          inputType: TextInputType.text,
-                                          isNecessary: false,
-                                          hintText: 'Secondary Score',
-                                          validator: null,
-                                          onChanged: (ss) => ManthanResultFormStore
-                                              .resultFields?[index - 1].secondaryScore = ss,
-                                          value: ManthanResultFormStore
-                                              .resultFields?[index - 1].secondaryScore,
-                                        )),
-                                  ]),
-                                  const SizedBox(
-                                    height: 24,
-                                  ),
-                                  const Divider(
-                                    thickness: 1,
-                                    color: Themes.dividerColor1,
-                                  ),
-                                  const SizedBox(
-                                    height: 24,
-                                  ),
-                                  if (index == ManthanResultFormStore.resultFields!.length)
-                                    TextButton(
-                                        style: TextButton.styleFrom(
-                                          padding: EdgeInsets.zero,
-                                        ),
-                                        onPressed: () {
-                                          setState(() {
-                                            ManthanResultFormStore.addNewPosition(index - 1);
-                                          });
-                                        },
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            const Icon(
-                                              Icons.add,
-                                              color: Themes.primaryColor,
-                                            ),
-                                            const SizedBox(
-                                              width: 10,
-                                            ),
-                                            Text(
-                                              'Add Position',
-                                              style: headline3,
-                                            )
-                                          ],
-                                        ))
-                                ],
-                              )
-                            ]);
-                          }
+                                      onPressed: () {
+                                        setState(() {
+                                          ManthanResultFormStore.addNewPosition(index - 1);
+                                        });
+                                      },
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          const Icon(
+                                            Icons.add,
+                                            color: Themes.primaryColor,
+                                          ),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text(
+                                            'Add Position',
+                                            style: headline3,
+                                          )
+                                        ],
+                                      ))
+                              ],
+                            )
+                          ]);
                         },
                       ),
                     )

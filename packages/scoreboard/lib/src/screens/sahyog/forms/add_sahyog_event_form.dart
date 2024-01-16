@@ -279,7 +279,9 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
                       ),
                       CustomTextField(
                         hintText: 'Score link',
-                        validator: validateField,
+                        validator: (val) {
+                          return null;
+                        },
                         controller: _linkController,
                         isNecessary: false,
                       ),

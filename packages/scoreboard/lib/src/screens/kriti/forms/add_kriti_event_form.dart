@@ -297,7 +297,9 @@ class _KritiEventFormState extends State<KritiEventForm> {
                       ),
                       CustomTextField(
                         hintText: 'Score link',
-                        validator: validateField,
+                        validator:  (val) {
+                          return null;
+                        },
                         controller: _linkController,
                         isNecessary: false,
                       ),
