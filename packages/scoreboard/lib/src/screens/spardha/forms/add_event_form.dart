@@ -54,8 +54,8 @@ class _SpardhaEventFormState extends State<SpardhaEventForm> {
     hostelSizeValue = participatingHostels.length.toString();
   }
 
-  callbackAutocomplete(value){
-    sportName=value;
+  callbackAutocomplete(value) {
+    sportName = value;
   }
 
   @override
@@ -65,6 +65,7 @@ class _SpardhaEventFormState extends State<SpardhaEventForm> {
       SpardhaEventModel e = widget.event!;
       sportName = e.event;
       _venueController.text = e.venue;
+      _scoreLinkController.text = e.link;
       category = e.category;
       stage = e.stage;
       hostelsSize = e.hostels.length;
@@ -91,12 +92,8 @@ class _SpardhaEventFormState extends State<SpardhaEventForm> {
         showSnackBar(context, 'Please give all the inputs correctly');
         return;
       } else {
-        DateTime eventDateTime = DateTime(
-            selectedDate!.year,
-            selectedDate!.month,
-            selectedDate!.day,
-            selectedTime!.hour,
-            selectedTime!.minute);
+        DateTime eventDateTime = DateTime(selectedDate!.year, selectedDate!.month,
+            selectedDate!.day, selectedTime!.hour, selectedTime!.minute);
 
         var data = {
           "event": sportName,
@@ -148,7 +145,10 @@ class _SpardhaEventFormState extends State<SpardhaEventForm> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      AutocompleteTextField(callbackFunction: callbackAutocomplete, standings: widget.event?.event,),
+                      AutocompleteTextField(
+                        callbackFunction: callbackAutocomplete,
+                        standings: widget.event?.event,
+                      ),
                       const SizedBox(height: 12),
                       CustomDropDown(
                         items: eventCategories,
@@ -182,30 +182,28 @@ class _SpardhaEventFormState extends State<SpardhaEventForm> {
                               validator: validateField,
                               controller: dateInput,
                               onTap: () async {
-                                FocusScope.of(context)
-                                    .requestFocus(FocusNode());
+                                FocusScope.of(context).requestFocus(FocusNode());
                                 DateTime? pickedDate = await showDatePicker(
                                     context: context,
                                     initialDate: selectedDate ?? DateTime.now(),
                                     firstDate: DateTime(2000),
                                     //DateTime.now() - not to allow to choose before today.
                                     lastDate: DateTime(2101),
-                                    builder: (context, child) =>
-                                        CustomDatePicker(
+                                    builder: (context, child) => CustomDatePicker(
                                           child: child,
                                         ));
                                 if (pickedDate != null) {
                                   if (!mounted) return;
                                   selectedDate = pickedDate;
                                   String formattedDate =
-                                      DateFormat('dd-MMM-yyyy')
-                                          .format(pickedDate);
+                                      DateFormat('dd-MMM-yyyy').format(pickedDate);
                                   setState(() {
                                     dateInput.text =
                                         formattedDate; //set output date to TextField value.
                                   });
                                 }
-                              }, isNecessary: true,
+                              },
+                              isNecessary: true,
                             ),
                           ),
                           const SizedBox(
@@ -217,8 +215,7 @@ class _SpardhaEventFormState extends State<SpardhaEventForm> {
                               validator: validateField,
                               controller: timeInput,
                               onTap: () async {
-                                FocusScope.of(context)
-                                    .requestFocus(FocusNode());
+                                FocusScope.of(context).requestFocus(FocusNode());
                                 TimeOfDay? pickedTime = await showTimePicker(
                                   builder: (context, childWidget) {
                                     return TimePickerColor(
@@ -234,17 +231,17 @@ class _SpardhaEventFormState extends State<SpardhaEventForm> {
                                   selectedTime = pickedTime;
                                   setState(() {
                                     final now = DateTime.now();
-                                    final formattedTimeString = DateFormat.jm()
-                                        .format(DateTime(
-                                            now.year,
-                                            now.month,
-                                            now.day,
-                                            pickedTime.hour,
-                                            pickedTime.minute)); //"6:00 AM"
+                                    final formattedTimeString = DateFormat.jm().format(DateTime(
+                                        now.year,
+                                        now.month,
+                                        now.day,
+                                        pickedTime.hour,
+                                        pickedTime.minute)); //"6:00 AM"
                                     timeInput.text = formattedTimeString;
                                   });
                                 }
-                              }, isNecessary: true,
+                              },
+                              isNecessary: true,
                             ),
                           )
                         ],
@@ -253,16 +250,22 @@ class _SpardhaEventFormState extends State<SpardhaEventForm> {
                         height: 12,
                       ),
                       CustomTextField(
-                          hintText: 'Venue',
-                          validator: validateField,
-                          controller: _venueController, isNecessary: true,),
+                        hintText: 'Venue',
+                        validator: validateField,
+                        controller: _venueController,
+                        isNecessary: true,
+                      ),
                       const SizedBox(
                         height: 12,
                       ),
                       CustomTextField(
-                          hintText: 'Score Link',
-                          validator: validateField,
-                          controller: _scoreLinkController, isNecessary: false,),
+                        hintText: 'Score Link',
+                        validator: (val) {
+                          return null;
+                        },
+                        controller: _scoreLinkController,
+                        isNecessary: false,
+                      ),
                       const SizedBox(
                         height: 12,
                       ),
@@ -283,13 +286,11 @@ class _SpardhaEventFormState extends State<SpardhaEventForm> {
                               });
                             },
                           ),
-                          Text('Event cancelled',
-                              style: headline2),
+                          Text('Event cancelled', style: headline2),
                           Checkbox(
                             checkColor: Colors.white,
                             activeColor: Themes.primaryColor,
-                            side: const BorderSide(
-                                color: Themes.checkBoxColor, width: 2),
+                            side: const BorderSide(color: Themes.checkBoxColor, width: 2),
                             value: isPostponed,
                             onChanged: (bool? value) {
                               setState(() {
@@ -298,8 +299,7 @@ class _SpardhaEventFormState extends State<SpardhaEventForm> {
                               });
                             },
                           ),
-                          Text('Event postponed',
-                              style: headline2),
+                          Text('Event postponed', style: headline2),
                         ],
                       ),
                       const SizedBox(
@@ -330,9 +330,7 @@ class _SpardhaEventFormState extends State<SpardhaEventForm> {
                               child: CustomDropDown(
                                 items: category == "Men"
                                     ? menHostel
-                                    : (category == "Women"
-                                        ? womenHostel
-                                        : allHostelList),
+                                    : (category == "Women" ? womenHostel : allHostelList),
                                 value: participatingHostels[i - 1],
                                 hintText: 'Hostel Name $i',
                                 index: i,
