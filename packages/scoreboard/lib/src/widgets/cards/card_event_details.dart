@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:scoreboard/src/functions/snackbar.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../../globals/colors.dart';
 import '../../globals/styles.dart';
@@ -52,8 +54,25 @@ class CardEventDetails extends StatelessWidget {
               children: [
                 if (eventModel.link.isNotEmpty)
                   GestureDetector(
-                      onTap: () {
-                        launchUrlString(eventModel.link);
+                      onTap: () async {
+                        var url = eventModel.link;
+                        if (!eventModel.link.startsWith('http://') &&
+                            !eventModel.link.startsWith('https://')) {
+                          url = 'http://$url';
+                        }
+                        if (await canLaunchUrlString(url)) {
+                          await launchUrlString(url);
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                "Some error occurred. try again",
+                                style: basicFontStyle,
+                              ),
+                              duration: Duration(seconds: 5),
+                            ),
+                          );
+                        }
                       },
                       child: const Text("view score", style: cardCategoryStyle)),
                 if (eventModel.link.isNotEmpty) const SizedBox(height: 8),

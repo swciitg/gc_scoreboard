@@ -30,6 +30,7 @@ class _KritiResultFormState extends State<KritiResultForm> {
   @override
   void initState() {
     super.initState();
+    _linkController.text = widget.event.link;
     if (widget.event.results.isNotEmpty) {
       KritiResultFormStore.resultFields = widget.event.results;
       KritiResultFormStore.victoryStatement = widget.event.victoryStatement!;
@@ -127,7 +128,7 @@ class _KritiResultFormState extends State<KritiResultForm> {
                       child: ListView.builder(
                         itemCount: KritiResultFormStore.numPositions() + 2,
                         itemBuilder: (context, index) {
-                          if (index == KritiResultFormStore.numPositions() + 1) {
+                          if (index == 1) {
                             return Padding(
                               padding: const EdgeInsets.symmetric(vertical: 16),
                               child: CustomTextField(
@@ -202,86 +203,85 @@ class _KritiResultFormState extends State<KritiResultForm> {
                                 )
                               ],
                             );
-                          } else {
-                            return Column(children: [
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(children: [
-                                    Text(
-                                      getPosition(index - 1),
-                                      style: bodyText2,
-                                    ),
-                                  ]),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  CustomDropDown(
-                                    validator: validateField,
-                                    value: KritiResultFormStore.resultFields?[index - 1].hostelName,
-                                    onChanged: (hostel) => KritiResultFormStore
-                                        .resultFields?[index - 1].hostelName = hostel,
-                                    items: allHostelList,
-                                    hintText:
-                                        'Hostels', // multiple times same hostels can be in list
-                                  ),
-                                  const SizedBox(
-                                    height: 16,
-                                  ),
-                                  CustomTextField(
-                                    inputType: TextInputType.number,
-                                    isNecessary: true,
-                                    hintText: 'Points',
-                                    validator: validateField,
-                                    onChanged: (ps) => KritiResultFormStore
-                                        .resultFields?[index - 1].points = double.parse(ps),
-                                    value: KritiResultFormStore.resultFields?[index - 1].points
-                                        .toString(),
-                                  ),
-                                  const SizedBox(
-                                    height: 24,
-                                  ),
-                                  const Divider(
-                                    thickness: 1,
-                                    color: Themes.dividerColor1,
-                                  ),
-                                  const SizedBox(
-                                    height: 24,
-                                  ),
-                                  if (index == KritiResultFormStore.resultFields!.length)
-                                    TextButton(
-                                        style: TextButton.styleFrom(
-                                          padding: EdgeInsets.zero,
-                                        ),
-                                        onPressed: () {
-                                          setState(() {
-                                            KritiResultFormStore.addNewPosition(index - 1);
-                                          });
-                                        },
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            const Icon(
-                                              Icons.add,
-                                              color: Themes.primaryColor,
-                                            ),
-                                            const SizedBox(
-                                              width: 10,
-                                            ),
-                                            Text(
-                                              'Add Position',
-                                              style: headline3,
-                                            )
-                                          ],
-                                        ))
-                                ],
-                              )
-                            ]);
                           }
+                          index--;
+                          return Column(children: [
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(children: [
+                                  Text(
+                                    getPosition(index - 1),
+                                    style: bodyText2,
+                                  ),
+                                ]),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                CustomDropDown(
+                                  validator: validateField,
+                                  value: KritiResultFormStore.resultFields?[index - 1].hostelName,
+                                  onChanged: (hostel) => KritiResultFormStore
+                                      .resultFields?[index - 1].hostelName = hostel,
+                                  items: allHostelList,
+                                  hintText: 'Hostels', // multiple times same hostels can be in list
+                                ),
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                CustomTextField(
+                                  inputType: TextInputType.number,
+                                  isNecessary: true,
+                                  hintText: 'Points',
+                                  validator: validateField,
+                                  onChanged: (ps) => KritiResultFormStore
+                                      .resultFields?[index - 1].points = double.parse(ps),
+                                  value: KritiResultFormStore.resultFields?[index - 1].points
+                                      .toString(),
+                                ),
+                                const SizedBox(
+                                  height: 24,
+                                ),
+                                const Divider(
+                                  thickness: 1,
+                                  color: Themes.dividerColor1,
+                                ),
+                                const SizedBox(
+                                  height: 24,
+                                ),
+                                if (index == KritiResultFormStore.resultFields!.length)
+                                  TextButton(
+                                      style: TextButton.styleFrom(
+                                        padding: EdgeInsets.zero,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          KritiResultFormStore.addNewPosition(index - 1);
+                                        });
+                                      },
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          const Icon(
+                                            Icons.add,
+                                            color: Themes.primaryColor,
+                                          ),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text(
+                                            'Add Position',
+                                            style: headline3,
+                                          )
+                                        ],
+                                      ))
+                              ],
+                            )
+                          ]);
                         },
                       ),
                     )
