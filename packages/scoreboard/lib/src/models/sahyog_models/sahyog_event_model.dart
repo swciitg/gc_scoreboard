@@ -4,7 +4,7 @@ import 'sahyog_result_model.dart';
 part 'sahyog_event_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class SahyogEventModel{
+class SahyogEventModel {
   @JsonKey(name: '_id')
   String? id;
   String event; // CP Contest
@@ -12,12 +12,13 @@ class SahyogEventModel{
   double? points;
   DateTime date;
   List<String> clubs;
-  String venue="";
-  bool resultAdded=false;
+  String venue = "";
+  bool resultAdded = false;
   String? victoryStatement = '';
   List<SahyogResultModel> results;
   String? posterEmail = '';
   String problemLink;
+  String link;
 
   SahyogEventModel({
     this.id,
@@ -28,12 +29,12 @@ class SahyogEventModel{
     required this.venue,
     required this.resultAdded,
     required this.problemLink,
-    this.results=const [],
+    this.results = const [],
     this.victoryStatement,
-    this.posterEmail
+    this.posterEmail,
+    this.link = '',
   });
 
-  factory SahyogEventModel.fromJson(Map<String,dynamic> json) => _$SahyogEventModelFromJson(json);
-  Map<String,dynamic> toJson() => _$SahyogEventModelToJson(this);
-
+  factory SahyogEventModel.fromJson(Map<String, dynamic> json) => _$SahyogEventModelFromJson(json);
+  Map<String, dynamic> toJson() => _$SahyogEventModelToJson(this);
 }

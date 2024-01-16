@@ -1,19 +1,18 @@
-
-
 import '../models/spardha_models/spardha_result_model.dart';
 
 class ResultFormStore {
   static String? victoryStatement;
   static List<List<SpardhaResultModel>>? resultFields = [
-    [SpardhaResultModel()],[SpardhaResultModel()] // there must be atleast two positions
+    [SpardhaResultModel()], [SpardhaResultModel()] // there must be atleast two positions
   ];
+  static String? link;
 
   static void addTeamAtPosition(int position) {
-    resultFields?[position-1].add(SpardhaResultModel());
+    resultFields?[position - 1].add(SpardhaResultModel());
   }
 
   static void removeTeamAtPosition(int position, int team) {
-    resultFields?[position-1].removeAt(team);
+    resultFields?[position - 1].removeAt(team);
   }
 
   static int numPositions() {
@@ -30,11 +29,15 @@ class ResultFormStore {
     return resultFields![position - 1].length;
   }
 
-  static void clear()
-  {
+  static void updateResultLink(String? value) {
+    link = value;
+  }
+
+  static void clear() {
     resultFields = [
       [SpardhaResultModel()]
     ];
     victoryStatement = null;
+    link = null;
   }
 }

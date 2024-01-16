@@ -14,6 +14,7 @@ class ManthanEventModel {
   String? posterEmail = '';
   bool resultAdded;
   String? victoryStatement = '';
+  String link;
   ManthanEventModel({
     this.id,
     required this.event,
@@ -23,10 +24,11 @@ class ManthanEventModel {
     this.results = const [],
     this.resultAdded = false,
     this.victoryStatement = '',
+    this.link = '',
   });
 
-  factory ManthanEventModel.fromJson(Map<String,dynamic> json) => _$ManthanEventModelFromJson(json);
+  factory ManthanEventModel.fromJson(Map<String, dynamic> json) =>
+      _$ManthanEventModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$ManthanEventModelToJson(this);
-
 }

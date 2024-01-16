@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import '../../globals/colors.dart';
 import '../../globals/styles.dart';
 import '../../models/spardha_models/spardha_event_model.dart';
@@ -6,14 +7,12 @@ import 'card_date_widget.dart';
 
 class CardEventDetails extends StatelessWidget {
   final SpardhaEventModel eventModel;
-  const CardEventDetails({Key? key, required this.eventModel})
-      : super(key: key);
+  const CardEventDetails({Key? key, required this.eventModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(children: [
       SizedBox(
-        height: 98,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -41,22 +40,32 @@ class CardEventDetails extends StatelessWidget {
                     color: Themes.kGrey,
                   ),
                   child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     child: Text(eventModel.stage,
-                        style: eventModel.results.isEmpty
-                            ? cardStageStyle1
-                            : cardStageStyle2),
+                        style: eventModel.results.isEmpty ? cardStageStyle1 : cardStageStyle2),
                   ),
                 )
               ],
             ),
-            Container(
-                alignment: Alignment.topCenter,
-                width: 82,
-                child: DateWidget(
-                  date: eventModel.date,
-                ))
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                if (eventModel.link.isNotEmpty)
+                  GestureDetector(
+                      onTap: () {
+                        launchUrlString(eventModel.link);
+                      },
+                      child: const Text("view score", style: cardCategoryStyle)),
+                if (eventModel.link.isNotEmpty) const SizedBox(height: 8),
+                Container(
+                  alignment: Alignment.topCenter,
+                  width: 82,
+                  child: DateWidget(
+                    date: eventModel.date,
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),

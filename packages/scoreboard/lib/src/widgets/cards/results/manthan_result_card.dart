@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../globals/colors.dart';
 import '../../../globals/enums.dart';
@@ -51,40 +52,46 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(children: [
-                    SizedBox(
-                      height: 98,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 4),
-                                child: SizedBox(
-                                  height: 28,
-                                  child: Text(widget.eventModel.event,
-                                      style: cardEventStyle),
-                                ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 4),
+                              child: SizedBox(
+                                height: 28,
+                                child: Text(widget.eventModel.event, style: cardEventStyle),
                               ),
-                              SizedBox(
-                                  height: 20,
-                                  child: Text(widget.eventModel.module,
-                                      style: cardStageStyle1)),
-                              const SizedBox(
-                                height: 16,
-                              ),
-                            ],
-                          ),
-                          Container(
-                              alignment: Alignment.topCenter,
-                              width: 82,
-                              child: DateWidget(
-                                date: widget.eventModel.date,
-                              ))
-                        ],
-                      ),
+                            ),
+                            SizedBox(
+                                height: 20,
+                                child: Text(widget.eventModel.module, style: cardStageStyle1)),
+                            const SizedBox(
+                              height: 16,
+                            ),
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            if (widget.eventModel.link.isNotEmpty)
+                              GestureDetector(
+                                  onTap: () {
+                                    launchUrlString(widget.eventModel.link);
+                                  },
+                                  child: const Text("view score", style: cardCategoryStyle)),
+                            if (widget.eventModel.link.isNotEmpty) const SizedBox(height: 8),
+                            Container(
+                                alignment: Alignment.topCenter,
+                                width: 82,
+                                child: DateWidget(
+                                  date: widget.eventModel.date,
+                                )),
+                          ],
+                        )
+                      ],
                     ),
                   ]),
                   SizedBox(
@@ -125,12 +132,10 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
                           child: Container(
                             height: 24,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: Themes.kGrey),
+                                borderRadius: BorderRadius.circular(100), color: Themes.kGrey),
                             width: 64,
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 6),
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                               child: Row(
                                 children: [
                                   Text(
@@ -165,8 +170,7 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
                               child: SizedBox(
                                 height: 12,
                                 child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
                                       children: [
@@ -189,23 +193,19 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
                             ),
                             ConstrainedBox(
                                 constraints: BoxConstraints(
-                                  maxHeight:
-                                      widget.eventModel.results.length * 30,
+                                  maxHeight: widget.eventModel.results.length * 30,
                                 ),
                                 child: ListView.builder(
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
+                                    physics: const NeverScrollableScrollPhysics(),
                                     itemCount: widget.eventModel.results.length,
                                     itemBuilder: (context, index) {
                                       return ScoreCardItem(
                                           position: index + 1,
-                                          hostelName: widget.eventModel
-                                              .results[index].hostelName!,
-                                          finalScore: widget.eventModel
-                                              .results[index].primaryScore!
+                                          hostelName: widget.eventModel.results[index].hostelName!,
+                                          finalScore: widget.eventModel.results[index].primaryScore!
                                               .toString(),
-                                          secondaryScore: widget.eventModel
-                                              .results[index].secondaryScore);
+                                          secondaryScore:
+                                              widget.eventModel.results[index].secondaryScore);
                                     }))
                           ],
                         )

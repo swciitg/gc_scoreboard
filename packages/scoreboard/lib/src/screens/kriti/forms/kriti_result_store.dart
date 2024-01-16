@@ -5,6 +5,7 @@ class KritiResultFormStore {
   static List<KritiResultModel>? resultFields = [
     KritiResultModel() // there must be atleast two positions
   ];
+  static String? link;
 
   static int numPositions() {
     return resultFields!.length;
@@ -15,8 +16,13 @@ class KritiResultFormStore {
     resultFields?.add(KritiResultModel());
   }
 
+  static void updateResultLink(String? value) {
+    link = value;
+  }
+
   static void clear() {
     resultFields = [KritiResultModel()];
     victoryStatement = null;
+    link = null;
   }
 }

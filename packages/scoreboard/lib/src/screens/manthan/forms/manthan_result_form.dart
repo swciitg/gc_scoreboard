@@ -26,6 +26,7 @@ class ManthanResultForm extends StatefulWidget {
 
 class _ManthanResultFormState extends State<ManthanResultForm> {
   TextEditingController victoryStatement = TextEditingController();
+  final _linkController = TextEditingController();
 
   @override
   void initState() {
@@ -77,24 +78,24 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
                   onPressed: () async {
                     if (key.currentState!.validate()) {
                       if (isLoading) {
-                        showSnackBar(
-                            context, 'Please wait before trying again');
+                        showSnackBar(context, 'Please wait before trying again');
                       } else {
                         setState(() {
                           isLoading = true;
                         });
                         try {
                           await APIService(context).addUpdateResult(
-                              eventID: widget.event.id!,
-                              data: ManthanResultFormStore.resultFields!,
-                              victoryStatement: ManthanResultFormStore.victoryStatement!,
-                              competition: 'manthan');
+                            eventID: widget.event.id!,
+                            data: ManthanResultFormStore.resultFields!,
+                            victoryStatement: ManthanResultFormStore.victoryStatement!,
+                            competition: 'manthan',
+                            link: _linkController.text.trim(),
+                          );
                           if (!mounted) return;
 
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              ScoreBoardHome.id, (route) => false);
-                          showSnackBar(
-                              context, 'Successfully added/updated result');
+                          Navigator.of(context)
+                              .pushNamedAndRemoveUntil(ScoreBoardHome.id, (route) => false);
+                          showSnackBar(context, 'Successfully added/updated result');
                           ManthanResultFormStore.clear();
                           if (!mounted) return;
 
@@ -119,16 +120,26 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
             body: Form(
               key: key,
               child: Container(
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
                 width: double.infinity,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
                       child: ListView.builder(
-                        itemCount: ManthanResultFormStore.numPositions() + 1,
+                        itemCount: ManthanResultFormStore.numPositions() + 2,
                         itemBuilder: (context, index) {
+                          if (index == ManthanResultFormStore.numPositions() + 1) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              child: CustomTextField(
+                                hintText: 'Score link',
+                                validator: validateField,
+                                controller: _linkController,
+                                isNecessary: false,
+                              ),
+                            );
+                          }
                           if (index == 0) {
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -140,21 +151,18 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
                                 Row(
                                   children: [
                                     Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           widget.event.event,
-                                          style:
-                                          headline1,
+                                          style: headline1,
                                         ),
                                         const SizedBox(
                                           height: 4,
                                         ),
                                         Text(
                                           widget.event.module,
-                                          style:
-                                          headline2,
+                                          style: headline2,
                                         ),
                                       ],
                                     ),
@@ -171,8 +179,7 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
                                   inputType: TextInputType.text,
                                   hintText: 'Victory Statement',
                                   validator: validateField,
-                                  value:
-                                      ManthanResultFormStore.victoryStatement,
+                                  value: ManthanResultFormStore.victoryStatement,
                                   onChanged: (p) {
                                     ManthanResultFormStore.victoryStatement = p;
                                   },
@@ -202,12 +209,10 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
                                   ),
                                   CustomDropDown(
                                     validator: validateField,
-                                    value: ManthanResultFormStore
-                                        .resultFields?[index - 1].hostelName,
-                                    onChanged: (hostel) =>
-                                        ManthanResultFormStore
-                                            .resultFields?[index - 1]
-                                            .hostelName = hostel,
+                                    value:
+                                        ManthanResultFormStore.resultFields?[index - 1].hostelName,
+                                    onChanged: (hostel) => ManthanResultFormStore
+                                        .resultFields?[index - 1].hostelName = hostel,
                                     items: allHostelList,
                                     hintText:
                                         'Hostels', // multiple times same hostels can be in list
@@ -223,14 +228,11 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
                                         isNecessary: true,
                                         hintText: 'Primary Score',
                                         validator: validateField,
-                                        onChanged: (ps) =>
-                                            ManthanResultFormStore
-                                                    .resultFields?[index - 1]
-                                                    .primaryScore =
-                                                double.parse(ps),
-                                        value: ManthanResultFormStore
+                                        onChanged: (ps) => ManthanResultFormStore
                                             .resultFields?[index - 1]
-                                            .primaryScore
+                                            .primaryScore = double.parse(ps),
+                                        value: ManthanResultFormStore
+                                            .resultFields?[index - 1].primaryScore
                                             .toString(),
                                       ),
                                     ),
@@ -244,13 +246,10 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
                                           isNecessary: false,
                                           hintText: 'Secondary Score',
                                           validator: null,
-                                          onChanged: (ss) =>
-                                              ManthanResultFormStore
-                                                  .resultFields?[index - 1]
-                                                  .secondaryScore = ss,
+                                          onChanged: (ss) => ManthanResultFormStore
+                                              .resultFields?[index - 1].secondaryScore = ss,
                                           value: ManthanResultFormStore
-                                              .resultFields?[index - 1]
-                                              .secondaryScore,
+                                              .resultFields?[index - 1].secondaryScore,
                                         )),
                                   ]),
                                   const SizedBox(
@@ -263,23 +262,19 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
                                   const SizedBox(
                                     height: 24,
                                   ),
-                                  if (index ==
-                                      ManthanResultFormStore
-                                          .resultFields!.length)
+                                  if (index == ManthanResultFormStore.resultFields!.length)
                                     TextButton(
                                         style: TextButton.styleFrom(
                                           padding: EdgeInsets.zero,
                                         ),
                                         onPressed: () {
                                           setState(() {
-                                            ManthanResultFormStore
-                                                .addNewPosition(index - 1);
+                                            ManthanResultFormStore.addNewPosition(index - 1);
                                           });
                                         },
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
                                           children: [
                                             const Icon(
                                               Icons.add,

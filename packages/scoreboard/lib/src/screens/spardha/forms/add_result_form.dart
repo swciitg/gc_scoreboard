@@ -24,6 +24,7 @@ class SpardhaResultForm extends StatefulWidget {
 
 class _SpardhaResultFormState extends State<SpardhaResultForm> {
   TextEditingController victoryStatement = TextEditingController();
+  final _linkController = TextEditingController();
 
   @override
   void initState() {
@@ -74,23 +75,23 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                   onPressed: () async {
                     if (key.currentState!.validate()) {
                       if (isLoading) {
-                        showSnackBar(
-                            context, 'Please wait before trying again');
+                        showSnackBar(context, 'Please wait before trying again');
                       } else {
                         setState(() {
                           isLoading = true;
                         });
                         try {
                           await APIService(context).addUpdateSpardhaResult(
-                              widget.event.id!,
-                              ResultFormStore.resultFields!,
-                              ResultFormStore.victoryStatement!);
+                            widget.event.id!,
+                            ResultFormStore.resultFields!,
+                            ResultFormStore.victoryStatement!,
+                            link: _linkController.text.trim(),
+                          );
                           if (!mounted) return;
 
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              ScoreBoardHome.id, (route) => false);
-                          showSnackBar(
-                              context, 'Successfully added/updated result');
+                          Navigator.of(context)
+                              .pushNamedAndRemoveUntil(ScoreBoardHome.id, (route) => false);
+                          showSnackBar(context, 'Successfully added/updated result');
                           ResultFormStore.clear();
                           if (!mounted) return;
 
@@ -115,15 +116,14 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
             body: Form(
               key: key,
               child: Container(
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
                 width: double.infinity,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
                       child: ListView.builder(
-                        itemCount: ResultFormStore.numPositions() + 1,
+                        itemCount: ResultFormStore.numPositions() + 2,
                         itemBuilder: (context, index) {
                           if (index == 0) {
                             return Column(
@@ -136,21 +136,18 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                                 Row(
                                   children: [
                                     Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           widget.event.event,
-                                          style:
-                                              headline1,
+                                          style: headline1,
                                         ),
                                         const SizedBox(
                                           height: 4,
                                         ),
                                         Text(
                                           widget.event.category,
-                                          style:
-                                              headline2,
+                                          style: headline2,
                                         ),
                                       ],
                                     ),
@@ -164,8 +161,7 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                                   height: 4,
                                 ),
                                 Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 4),
+                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
                                     color: Themes.cardColor,
@@ -191,6 +187,17 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                               ],
                             );
                           }
+                          if (index == ResultFormStore.numPositions() + 1) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              child: CustomTextField(
+                                hintText: 'Score link',
+                                validator: validateField,
+                                controller: _linkController,
+                                isNecessary: false,
+                              ),
+                            );
+                          }
                           index--;
                           return Column(
                             children: [
@@ -198,9 +205,7 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                                 height: 10,
                               ),
                               for (int team = 0;
-                                  team <
-                                      ResultFormStore.numTeamsWithPosition(
-                                          index + 1);
+                                  team < ResultFormStore.numTeamsWithPosition(index + 1);
                                   team++)
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -209,38 +214,30 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                                       children: [
                                         Text(
                                           getPosition(index),
-                                          style:
-                                              bodyText2,
+                                          style: bodyText2,
                                         ),
                                         const Spacer(),
                                         if (team == 0)
                                           GestureDetector(
-                                            behavior:
-                                                HitTestBehavior.translucent,
+                                            behavior: HitTestBehavior.translucent,
                                             child: const Padding(
-                                              padding:
-                                                  EdgeInsets.all(4.0),
+                                              padding: EdgeInsets.all(4.0),
                                               child: Icon(
                                                 Icons.add,
-                                                color:
-                                                    Themes.primaryColor,
+                                                color: Themes.primaryColor,
                                               ),
                                             ),
                                             onTap: () {
                                               setState(() {
-                                                ResultFormStore
-                                                    .addTeamAtPosition(
-                                                        index + 1);
+                                                ResultFormStore.addTeamAtPosition(index + 1);
                                               });
                                             },
                                           ),
                                         if (team != 0)
                                           GestureDetector(
-                                            behavior:
-                                                HitTestBehavior.translucent,
+                                            behavior: HitTestBehavior.translucent,
                                             child: const Padding(
-                                              padding:
-                                                  EdgeInsets.all(4.0),
+                                              padding: EdgeInsets.all(4.0),
                                               child: Icon(
                                                 Icons.remove,
                                                 color: Themes.errorRed,
@@ -248,9 +245,8 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                                             ),
                                             onTap: () {
                                               setState(() {
-                                                ResultFormStore
-                                                    .removeTeamAtPosition(
-                                                        index + 1, team);
+                                                ResultFormStore.removeTeamAtPosition(
+                                                    index + 1, team);
                                               });
                                             },
                                           ),
@@ -266,13 +262,12 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                                           child: CustomDropDown(
                                             validator: validateField,
                                             value: ResultFormStore
-                                                .resultFields?[index][team]
-                                                .hostelName,
-                                            onChanged: (hostel) =>
-                                                ResultFormStore
-                                                    .resultFields?[index][team]
-                                                    .hostelName = hostel,
-                                            items: widget.event.hostels.toSet().toList(), hintText: 'Hostels', // multiple times same hostels can be in list
+                                                .resultFields?[index][team].hostelName,
+                                            onChanged: (hostel) => ResultFormStore
+                                                .resultFields?[index][team].hostelName = hostel,
+                                            items: widget.event.hostels.toSet().toList(),
+                                            hintText:
+                                                'Hostels', // multiple times same hostels can be in list
                                           ),
                                         ),
                                       ],
@@ -290,11 +285,9 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                                             hintText: 'Primary Score',
                                             validator: validateField,
                                             onChanged: (ps) => ResultFormStore
-                                                .resultFields?[index][team]
-                                                .primaryScore = ps,
+                                                .resultFields?[index][team].primaryScore = ps,
                                             value: ResultFormStore
-                                                .resultFields?[index][team]
-                                                .primaryScore,
+                                                .resultFields?[index][team].primaryScore,
                                           ),
                                         ),
                                         const Spacer(
@@ -308,11 +301,9 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                                               hintText: 'Secondary Score',
                                               validator: null,
                                               onChanged: (ss) => ResultFormStore
-                                                  .resultFields?[index][team]
-                                                  .secondaryScore = ss,
+                                                  .resultFields?[index][team].secondaryScore = ss,
                                               value: ResultFormStore
-                                                  .resultFields?[index][team]
-                                                  .secondaryScore,
+                                                  .resultFields?[index][team].secondaryScore,
                                             ))
                                       ],
                                     ),
@@ -326,31 +317,24 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                                     const SizedBox(
                                       height: 24,
                                     ),
-                                    if (index + 1 ==
-                                            ResultFormStore
-                                                .resultFields!.length &&
-                                        team + 1 ==
-                                            ResultFormStore
-                                                .resultFields![index].length)
+                                    if (index + 1 == ResultFormStore.resultFields!.length &&
+                                        team + 1 == ResultFormStore.resultFields![index].length)
                                       TextButton(
                                           style: TextButton.styleFrom(
                                             padding: EdgeInsets.zero,
                                           ),
                                           onPressed: () {
                                             setState(() {
-                                              ResultFormStore.addNewPosition(
-                                                  index);
+                                              ResultFormStore.addNewPosition(index);
                                             });
                                           },
                                           child: Row(
                                             mainAxisSize: MainAxisSize.min,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
                                               const Icon(
                                                 Icons.add,
-                                                color:
-                                                    Themes.primaryColor,
+                                                color: Themes.primaryColor,
                                               ),
                                               const SizedBox(
                                                 width: 10,
@@ -367,7 +351,7 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                           );
                         },
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

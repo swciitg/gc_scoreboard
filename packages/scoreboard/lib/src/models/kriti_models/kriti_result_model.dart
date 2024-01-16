@@ -7,10 +7,9 @@ class KritiResultModel {
   double? points;
   KritiResultModel({
     this.hostelName,
-    this.points
+    this.points,
   });
-  factory KritiResultModel.fromJson(Map<String, dynamic> json) =>
-      _$KritiResultModelFromJson(json);
+  factory KritiResultModel.fromJson(Map<String, dynamic> json) => _$KritiResultModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$KritiResultModelToJson(this);
 }
