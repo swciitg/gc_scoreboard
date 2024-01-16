@@ -29,6 +29,7 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
   @override
   void initState() {
     super.initState();
+    _linkController.text = widget.event.link;
     if (widget.event.results.isNotEmpty) {
       ResultFormStore.resultFields = widget.event.results;
       ResultFormStore.victoryStatement = widget.event.victoryStatement!;
@@ -187,7 +188,7 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                               ],
                             );
                           }
-                          if (index == ResultFormStore.numPositions() + 1) {
+                          if (index == 1) {
                             return Padding(
                               padding: const EdgeInsets.symmetric(vertical: 16),
                               child: CustomTextField(
@@ -198,7 +199,7 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                               ),
                             );
                           }
-                          index--;
+                          index = index - 2;
                           return Column(
                             children: [
                               const SizedBox(

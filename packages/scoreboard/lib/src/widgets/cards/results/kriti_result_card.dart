@@ -108,11 +108,29 @@ class _KritiResultCardState extends State<KritiResultCard> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             if (widget.eventModel.link.isNotEmpty)
-                            GestureDetector(
-                                onTap: () {
-                                  launchUrlString(widget.eventModel.link);
+                              GestureDetector(
+                                onTap: () async {
+                                  var url = widget.eventModel.link;
+                                  if (!widget.eventModel.link.startsWith('http://') &&
+                                      !widget.eventModel.link.startsWith('https://')) {
+                                    url = 'http://$url';
+                                  }
+                                  if (await canLaunchUrlString(url)) {
+                                    await launchUrlString(url);
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text(
+                                          "Some error occurred. try again",
+                                          style: basicFontStyle,
+                                        ),
+                                        duration: Duration(seconds: 5),
+                                      ),
+                                    );
+                                  }
                                 },
-                                child: const Text("view score", style: cardCategoryStyle)),
+                                child: const Text("view score", style: cardCategoryStyle),
+                              ),
                             if (widget.eventModel.link.isNotEmpty) const SizedBox(height: 8),
                             Container(
                                 alignment: Alignment.topCenter,
