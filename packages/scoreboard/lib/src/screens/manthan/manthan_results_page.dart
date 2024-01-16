@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import '../../functions/filters/manthan_schedule_filter.dart';
+import '../../functions/filters/manthan_filter.dart';
 import '../../globals/styles.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
@@ -58,7 +58,7 @@ class _ManthanResultsPageState extends State<ManthanResultsPage> {
                   );
                 } else if (snapshot.hasData) {
                   return Observer(builder: (context) {
-                    List<dynamic> filteredEventSchedules = manthanFilterSchedule(input: snapshot.data!, module: manthanStore.selectedModule, );
+                    List<dynamic> filteredEventSchedules = manthanFilter(input: snapshot.data!, module: manthanStore.selectedModule, );
                     return Expanded(
                         child: filteredEventSchedules.isNotEmpty
                             ? ListView.builder(

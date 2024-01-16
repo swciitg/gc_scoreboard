@@ -1,7 +1,7 @@
 
 import '../../globals/enums.dart';
 
-List<dynamic> manthanFilterSchedule({required List<dynamic> input, required String module})
+List<dynamic> manthanFilter({required List<dynamic> input, required String module})
 {
   List<dynamic> output=[];
   output.addAll(input);
@@ -10,7 +10,7 @@ List<dynamic> manthanFilterSchedule({required List<dynamic> input, required Stri
       {
         return true;
       }
-    else if(module == element['module'])
+    else if(module == element.module)
       {
         return true;
       }

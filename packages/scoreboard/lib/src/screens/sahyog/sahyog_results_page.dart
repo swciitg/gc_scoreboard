@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import '../../functions/filters/sahyog_schedule_filter.dart';
+import '../../functions/filters/sahyog_filter.dart';
 import '../../globals/styles.dart';
 import '../../services/api.dart';
 import '../../stores/common_store.dart';
@@ -57,7 +57,7 @@ class _SahyogResultsPageState extends State<SahyogResultsPage> {
                   );
                 } else if (snapshot.hasData) {
                   return Observer(builder: (context) {
-                    List<dynamic> filteredEventSchedules = sahyogFilterSchedule(
+                    List<dynamic> filteredEventSchedules = sahyogFilter(
                         input: snapshot.data!,
                         difficulty: sahyogStore.difficulty,
                         club: sahyogStore.selectedClub);

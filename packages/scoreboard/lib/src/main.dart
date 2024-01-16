@@ -31,8 +31,8 @@ class _GCScoreBoardState extends State<GCScoreBoard> {
    initState() {
     // TODO: implement initState
     super.initState();
-    // AuthUserHelpers.setAccessToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2NGM3NWM4YWE2ZDE3ZWE0NTYyM2M5ODIiLCJpYXQiOjE3MDM4NDQzNjcsImV4cCI6MTcwNDcwODM2N30.cYc0JY1w8dHYuKu_IzwYK29auKn3zdvpBOc5Coeyygw').then((value){
-    //   AuthUserHelpers.setRefreshToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2NGM3NWM4YWE2ZDE3ZWE0NTYyM2M5ODIiLCJpYXQiOjE3MDM4NDQzNjcsImV4cCI6MTcwNjQzNjM2N30.iRj7Tq_AjwQomH0gLohbLQgPvFPkn89krpXioPgBfOw').then((value) {
+    // AuthUserHelpers.setAccessToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2NGM2Y2YyYmYyMTRkN2IwMjhjNTdiNWQiLCJpYXQiOjE3MDUzNTAyMDYsImV4cCI6MTcwNjIxNDIwNn0.cXp9DoemT65J4K8Q-HYHDABKFW7vOyhRYL2Pm_tpbPI').then((value){
+    //   AuthUserHelpers.setRefreshToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2NGM2Y2YyYmYyMTRkN2IwMjhjNTdiNWQiLCJpYXQiOjE3MDUzNTAyMDYsImV4cCI6MTcwNzk0MjIwNn0.hg_zkwo7ofQsbVBejLXGxiQ7IuAd05zdsRb37Dt2egE').then((value) {
     //     print('****************************Tokens set*************************');
     //   });
     // });
