@@ -5,6 +5,7 @@ class SahyogResultFormStore {
   static List<SahyogResultModel>? resultFields = [
     SahyogResultModel() // there must be atleast two positions
   ];
+  static String? link;
 
   static int numPositions() {
     return resultFields!.length;
@@ -15,8 +16,13 @@ class SahyogResultFormStore {
     resultFields?.add(SahyogResultModel());
   }
 
+  static void updateResultLink(String? value) {
+    link = value;
+  }
+
   static void clear() {
     resultFields = [SahyogResultModel()];
     victoryStatement = null;
+    link = null;
   }
 }

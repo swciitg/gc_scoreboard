@@ -20,6 +20,7 @@ ManthanEventModel _$ManthanEventModelFromJson(Map<String, dynamic> json) =>
           const [],
       resultAdded: json['resultAdded'] as bool? ?? false,
       victoryStatement: json['victoryStatement'] as String? ?? '',
+      link: json['link'] as String? ?? '',
     )..posterEmail = json['posterEmail'] as String?;
 
 Map<String, dynamic> _$ManthanEventModelToJson(ManthanEventModel instance) =>
@@ -33,4 +34,5 @@ Map<String, dynamic> _$ManthanEventModelToJson(ManthanEventModel instance) =>
       'posterEmail': instance.posterEmail,
       'resultAdded': instance.resultAdded,
       'victoryStatement': instance.victoryStatement,
+      'link': instance.link,
     };

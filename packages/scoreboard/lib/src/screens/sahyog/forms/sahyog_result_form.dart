@@ -25,6 +25,7 @@ class SahyogResultForm extends StatefulWidget {
 
 class _SahyogResultFormState extends State<SahyogResultForm> {
   TextEditingController victoryStatement = TextEditingController();
+  final _linkController = TextEditingController();
 
   @override
   void initState() {
@@ -75,24 +76,24 @@ class _SahyogResultFormState extends State<SahyogResultForm> {
                   onPressed: () async {
                     if (key.currentState!.validate()) {
                       if (isLoading) {
-                        showSnackBar(
-                            context, 'Please wait before trying again');
+                        showSnackBar(context, 'Please wait before trying again');
                       } else {
                         setState(() {
                           isLoading = true;
                         });
                         try {
                           await APIService(context).addUpdateResult(
-                              eventID: widget.event.id!,
-                              data: SahyogResultFormStore.resultFields!,
-                              victoryStatement: SahyogResultFormStore.victoryStatement!,
-                              competition: 'sahyog');
+                            eventID: widget.event.id!,
+                            data: SahyogResultFormStore.resultFields!,
+                            victoryStatement: SahyogResultFormStore.victoryStatement!,
+                            competition: 'sahyog',
+                            link: _linkController.text.trim(),
+                          );
                           if (!mounted) return;
 
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              ScoreBoardHome.id, (route) => false);
-                          showSnackBar(
-                              context, 'Successfully added/updated result');
+                          Navigator.of(context)
+                              .pushNamedAndRemoveUntil(ScoreBoardHome.id, (route) => false);
+                          showSnackBar(context, 'Successfully added/updated result');
                           SahyogResultFormStore.clear();
                           if (!mounted) return;
 
@@ -117,16 +118,26 @@ class _SahyogResultFormState extends State<SahyogResultForm> {
             body: Form(
               key: key,
               child: Container(
-                margin:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
                 width: double.infinity,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
                       child: ListView.builder(
-                        itemCount: SahyogResultFormStore.numPositions() + 1,
+                        itemCount: SahyogResultFormStore.numPositions() + 2,
                         itemBuilder: (context, index) {
+                          if (index == SahyogResultFormStore.numPositions() + 1) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              child: CustomTextField(
+                                hintText: 'Score link',
+                                validator: validateField,
+                                controller: _linkController,
+                                isNecessary: false,
+                              ),
+                            );
+                          }
                           if (index == 0) {
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -138,13 +149,11 @@ class _SahyogResultFormState extends State<SahyogResultForm> {
                                 Row(
                                   children: [
                                     Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           widget.event.event,
-                                          style:
-                                          headline1,
+                                          style: headline1,
                                         ),
                                         const SizedBox(
                                           height: 4,
@@ -161,8 +170,7 @@ class _SahyogResultFormState extends State<SahyogResultForm> {
                                   height: 4,
                                 ),
                                 Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 4),
+                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
                                     color: Themes.cardColor,
@@ -209,13 +217,13 @@ class _SahyogResultFormState extends State<SahyogResultForm> {
                                   ),
                                   CustomDropDown(
                                     validator: validateField,
-                                    value: SahyogResultFormStore
-                                        .resultFields?[index - 1].hostelName,
+                                    value:
+                                        SahyogResultFormStore.resultFields?[index - 1].hostelName,
                                     onChanged: (hostel) => SahyogResultFormStore
-                                        .resultFields?[index - 1]
-                                        .hostelName = hostel,
-                                    items:
-                                    allHostelList, hintText: 'Hostels', // multiple times same hostels can be in list
+                                        .resultFields?[index - 1].hostelName = hostel,
+                                    items: allHostelList,
+                                    hintText:
+                                        'Hostels', // multiple times same hostels can be in list
                                   ),
                                   const SizedBox(
                                     height: 16,
@@ -226,10 +234,8 @@ class _SahyogResultFormState extends State<SahyogResultForm> {
                                     hintText: 'Points',
                                     validator: validateField,
                                     onChanged: (ps) => SahyogResultFormStore
-                                        .resultFields?[index - 1]
-                                        .points = double.parse(ps),
-                                    value: SahyogResultFormStore
-                                        .resultFields?[index - 1].points
+                                        .resultFields?[index - 1].points = double.parse(ps),
+                                    value: SahyogResultFormStore.resultFields?[index - 1].points
                                         .toString(),
                                   ),
                                   const SizedBox(
@@ -242,22 +248,19 @@ class _SahyogResultFormState extends State<SahyogResultForm> {
                                   const SizedBox(
                                     height: 24,
                                   ),
-                                  if (index ==
-                                      SahyogResultFormStore.resultFields!.length)
+                                  if (index == SahyogResultFormStore.resultFields!.length)
                                     TextButton(
                                         style: TextButton.styleFrom(
                                           padding: EdgeInsets.zero,
                                         ),
                                         onPressed: () {
                                           setState(() {
-                                            SahyogResultFormStore.addNewPosition(
-                                                index - 1);
+                                            SahyogResultFormStore.addNewPosition(index - 1);
                                           });
                                         },
                                         child: Row(
                                           mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
                                           children: [
                                             const Icon(
                                               Icons.add,

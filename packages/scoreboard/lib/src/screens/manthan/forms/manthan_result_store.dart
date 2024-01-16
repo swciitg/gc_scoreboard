@@ -5,6 +5,7 @@ class ManthanResultFormStore {
   static List<ManthanResultModel>? resultFields = [
     ManthanResultModel() // there must be atleast two positions
   ];
+  static String? link;
 
   static int numPositions() {
     return resultFields!.length;
@@ -15,8 +16,13 @@ class ManthanResultFormStore {
     resultFields?.add(ManthanResultModel());
   }
 
+  static void upadteLink(String? value) {
+    link = value;
+  }
+
   static void clear() {
     resultFields = [ManthanResultModel()];
     victoryStatement = null;
+    link = null;
   }
 }

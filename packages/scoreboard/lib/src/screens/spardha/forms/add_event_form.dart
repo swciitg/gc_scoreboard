@@ -27,6 +27,7 @@ class SpardhaEventForm extends StatefulWidget {
 class _SpardhaEventFormState extends State<SpardhaEventForm> {
   String? sportName;
   final TextEditingController _venueController = TextEditingController();
+  final TextEditingController _scoreLinkController = TextEditingController();
   final TextEditingController dateInput = TextEditingController();
   final TextEditingController timeInput = TextEditingController();
   DateTime? selectedDate; // stores date picked
@@ -110,7 +111,8 @@ class _SpardhaEventFormState extends State<SpardhaEventForm> {
                   ? 'postponed'
                   : 'ok',
           "results": [],
-          "resultAdded": false
+          "resultAdded": false,
+          'link': _scoreLinkController.text,
         };
 
         if (widget.event != null) {
@@ -254,6 +256,13 @@ class _SpardhaEventFormState extends State<SpardhaEventForm> {
                           hintText: 'Venue',
                           validator: validateField,
                           controller: _venueController, isNecessary: true,),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      CustomTextField(
+                          hintText: 'Score Link',
+                          validator: validateField,
+                          controller: _scoreLinkController, isNecessary: false,),
                       const SizedBox(
                         height: 12,
                       ),

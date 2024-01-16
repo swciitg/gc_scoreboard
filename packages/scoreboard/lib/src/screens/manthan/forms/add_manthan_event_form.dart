@@ -39,12 +39,13 @@ class _ManthanEventFormState extends State<ManthanEventForm> {
   // int hostelsSize = 0;
   // List<String?> participatingHostels = [];
   final TextEditingController _venueController = TextEditingController();
+  final TextEditingController _linkController = TextEditingController();
   final TextEditingController dateInput = TextEditingController();
   final TextEditingController timeInput = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  callbackAutocomplete(value){
-    eventName=value;
+  callbackAutocomplete(value) {
+    eventName = value;
   }
 
   @override
@@ -54,6 +55,7 @@ class _ManthanEventFormState extends State<ManthanEventForm> {
       ManthanEventModel e = widget.event!;
       eventName = e.event;
       _venueController.text = e.venue;
+      _linkController.text = e.link;
       module = e.module;
       date = e.date;
       time = TimeOfDay(hour: e.date.hour, minute: e.date.minute);
@@ -73,8 +75,8 @@ class _ManthanEventFormState extends State<ManthanEventForm> {
           showSnackBar(context, 'Please give all the inputs correctly');
           return;
         } else {
-          DateTime eventDateTime = DateTime(
-              date!.year, date!.month, date!.day, time!.hour, time!.minute);
+          DateTime eventDateTime =
+              DateTime(date!.year, date!.month, date!.day, time!.hour, time!.minute);
 
           var data = {
             "event": eventName,
@@ -82,7 +84,8 @@ class _ManthanEventFormState extends State<ManthanEventForm> {
             "date": eventDateTime.toIso8601String(),
             "venue": _venueController.text,
             "results": [],
-            "resultAdded": false
+            "resultAdded": false,
+            "link": _linkController.text,
           };
 
           if (widget.event != null) {
@@ -103,8 +106,7 @@ class _ManthanEventFormState extends State<ManthanEventForm> {
             setState(() {
               isLoading = true;
             });
-            Navigator.pushNamedAndRemoveUntil(
-                context, ScoreBoardHome.id, (route) => false);
+            Navigator.pushNamedAndRemoveUntil(context, ScoreBoardHome.id, (route) => false);
           } on DioError catch (err) {
             showErrorSnackBar(context, err);
             setState(() {
@@ -121,7 +123,7 @@ class _ManthanEventFormState extends State<ManthanEventForm> {
           preferredSize: const Size.fromHeight(56),
           child: AppBarFormComponent(
             title: widget.event == null ? 'Add Event' : 'Edit Event',
-            actionTitle: "Next",
+            actionTitle: "Submit",
             onFormSubmit: onFormSubmit,
           )),
       body: SingleChildScrollView(
@@ -137,7 +139,10 @@ class _ManthanEventFormState extends State<ManthanEventForm> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      AutocompleteTextField(callbackFunction: callbackAutocomplete, standings: widget.event?.event,),
+                      AutocompleteTextField(
+                        callbackFunction: callbackAutocomplete,
+                        standings: widget.event?.event,
+                      ),
                       const SizedBox(height: 12),
                       CustomDropDown(
                         items: moduleNames,
@@ -163,24 +168,21 @@ class _ManthanEventFormState extends State<ManthanEventForm> {
                               validator: validateField,
                               controller: dateInput,
                               onTap: () async {
-                                FocusScope.of(context)
-                                    .requestFocus(FocusNode());
+                                FocusScope.of(context).requestFocus(FocusNode());
                                 DateTime? pickedDate = await showDatePicker(
                                     context: context,
                                     initialDate: date ?? DateTime.now(),
                                     firstDate: DateTime(2000),
                                     //DateTime.now() - not to allow to choose before today.
                                     lastDate: DateTime(2101),
-                                    builder: (context, child) =>
-                                        CustomDatePicker(
+                                    builder: (context, child) => CustomDatePicker(
                                           child: child,
                                         ));
                                 if (pickedDate != null) {
                                   if (!mounted) return;
                                   date = pickedDate;
                                   String formattedDate =
-                                      DateFormat('dd-MMM-yyyy')
-                                          .format(pickedDate);
+                                      DateFormat('dd-MMM-yyyy').format(pickedDate);
                                   setState(() {
                                     dateInput.text =
                                         formattedDate; //set output date to TextField value.
@@ -199,8 +201,7 @@ class _ManthanEventFormState extends State<ManthanEventForm> {
                               validator: validateField,
                               controller: timeInput,
                               onTap: () async {
-                                FocusScope.of(context)
-                                    .requestFocus(FocusNode());
+                                FocusScope.of(context).requestFocus(FocusNode());
                                 TimeOfDay? pickedTime = await showTimePicker(
                                   builder: (context, childWidget) {
                                     return TimePickerColor(
@@ -216,13 +217,12 @@ class _ManthanEventFormState extends State<ManthanEventForm> {
                                   time = pickedTime;
                                   setState(() {
                                     final now = DateTime.now();
-                                    final formattedTimeString = DateFormat.jm()
-                                        .format(DateTime(
-                                            now.year,
-                                            now.month,
-                                            now.day,
-                                            pickedTime.hour,
-                                            pickedTime.minute)); //"6:00 AM"
+                                    final formattedTimeString = DateFormat.jm().format(DateTime(
+                                        now.year,
+                                        now.month,
+                                        now.day,
+                                        pickedTime.hour,
+                                        pickedTime.minute)); //"6:00 AM"
                                     timeInput.text = formattedTimeString;
                                   });
                                 }
@@ -240,6 +240,15 @@ class _ManthanEventFormState extends State<ManthanEventForm> {
                         validator: validateField,
                         controller: _venueController,
                         isNecessary: true,
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      CustomTextField(
+                        hintText: 'Score link',
+                        validator: validateField,
+                        controller: _linkController,
+                        isNecessary: false,
                       ),
                       const SizedBox(
                         height: 12,

@@ -19,8 +19,6 @@ import '../../../widgets/common/form_app_bar.dart';
 import '../../../globals/enums.dart';
 import '../../home.dart';
 
-
-
 class KritiEventForm extends StatefulWidget {
   final KritiEventModel? event;
   const KritiEventForm({Key? key, this.event}) : super(key: key);
@@ -48,6 +46,7 @@ class _KritiEventFormState extends State<KritiEventForm> {
 
   final TextEditingController _probelmLinkController = TextEditingController();
   final TextEditingController _venueController = TextEditingController();
+  final TextEditingController _linkController = TextEditingController();
   final TextEditingController dateInput = TextEditingController();
   final TextEditingController timeInput = TextEditingController();
 
@@ -64,22 +63,23 @@ class _KritiEventFormState extends State<KritiEventForm> {
     clubSizeValue = clubs.length.toString();
   }
 
-  callbackAutocomplete(value){
-    eventName=value;
+  callbackAutocomplete(value) {
+    eventName = value;
   }
 
   @override
   void initState() {
     super.initState();
-    if( widget.event != null){
+    if (widget.event != null) {
       KritiEventModel e = widget.event!;
       eventName = e.event;
       _venueController.text = e.venue;
+      _linkController.text = e.link;
       cup = e.cup;
       difficulty = e.difficulty;
       clubSize = e.clubs.length;
       _probelmLinkController.text = e.problemLink;
-      points =  e.points;
+      points = e.points;
 
       for (var club in e.clubs) {
         clubs.add(club);
@@ -90,86 +90,70 @@ class _KritiEventFormState extends State<KritiEventForm> {
       time = TimeOfDay(hour: e.date.hour, minute: e.date.minute);
       dateInput.text = DateFormat('dd-MMM-yyyy').format(e.date);
       timeInput.text = DateFormat('h:mm a').format(e.date);
-
-
-
-
     }
-
-
-
-
-
   }
+
   @override
   Widget build(BuildContext context) {
     cupNames.remove("Overall"); // overall can't be a cup category in this form
     clubNames.remove("Overall");
 
     Future<void> onFormSubmit() async {
-      if(!isLoading) {
+      if (!isLoading) {
         setState(() {
           isLoading = true;
         });
-      if (!_formKey.currentState!.validate()) {
-        showSnackBar(context, 'Please give all the inputs correctly');
-        setState(() {
-          isLoading = false;
-        });
-        return;
-      }
-      else {
-        DateTime eventDateTime = DateTime(
-            date!.year,
-            date!.month,
-            date!.day,
-            date!.hour,
-            date!.minute);
-
-        var data = {
-          "event": eventName,
-          "cup": cup,
-          "difficulty": difficulty,
-          "date": eventDateTime.toIso8601String(),
-          "venue": _venueController.text,
-          "clubs": clubs,
-          "points": points,
-          "problemLink": _probelmLinkController.text,
-          "results": [],
-          "resultAdded": false,
-
-        };
-        if (widget.event != null) {
-          data['_id'] = widget.event!.id;
-        }
-
-        try {
-          if (widget.event != null) {
-            // update event schedule
-            await APIService(context).updateEventSchedule(data: data, competition: 'kriti');
-            if (!mounted) return;
-            showSnackBar(context, "Event Edited successfully");
-          } else {
-            await APIService(context).postEventSchedule(data: data, competiton: 'kriti');
-            if (!mounted) return;
-            showSnackBar(
-                context, "Event schedule posted successfully");
-          }
-          if (!mounted) return;
-          setState(() {
-            isLoading = true;
-          });
-          Navigator.pushNamedAndRemoveUntil(
-              context, ScoreBoardHome.id, (route) => false);
-        }
-        on DioError catch (err) {
-          showErrorSnackBar(context, err);
+        if (!_formKey.currentState!.validate()) {
+          showSnackBar(context, 'Please give all the inputs correctly');
           setState(() {
             isLoading = false;
           });
+          return;
+        } else {
+          DateTime eventDateTime =
+              DateTime(date!.year, date!.month, date!.day, date!.hour, date!.minute);
+
+          var data = {
+            "event": eventName,
+            "cup": cup,
+            "difficulty": difficulty,
+            "date": eventDateTime.toIso8601String(),
+            "venue": _venueController.text,
+            "clubs": clubs,
+            "points": points,
+            "problemLink": _probelmLinkController.text,
+            "results": [],
+            "resultAdded": false,
+            "link": _linkController.text,
+          };
+          if (widget.event != null) {
+            data['_id'] = widget.event!.id;
+          }
+
+          try {
+            if (widget.event != null) {
+              // update event schedule
+              await APIService(context).updateEventSchedule(data: data, competition: 'kriti');
+              if (!mounted) return;
+              showSnackBar(context, "Event Edited successfully");
+            } else {
+              await APIService(context).postEventSchedule(data: data, competiton: 'kriti');
+              if (!mounted) return;
+              showSnackBar(context, "Event schedule posted successfully");
+            }
+            if (!mounted) return;
+            setState(() {
+              isLoading = true;
+            });
+            Navigator.pushNamedAndRemoveUntil(context, ScoreBoardHome.id, (route) => false);
+          } on DioError catch (err) {
+            showErrorSnackBar(context, err);
+            setState(() {
+              isLoading = false;
+            });
+          }
         }
       }
-    }
     }
 
     return Scaffold(
@@ -178,11 +162,9 @@ class _KritiEventFormState extends State<KritiEventForm> {
           preferredSize: const Size.fromHeight(56),
           child: AppBarFormComponent(
             title: widget.event == null ? 'Add Event' : 'Edit Event',
-            actionTitle: "Next",
+            actionTitle: "Submit",
             onFormSubmit: onFormSubmit,
           )),
-
-
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(8),
@@ -196,7 +178,10 @@ class _KritiEventFormState extends State<KritiEventForm> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      AutocompleteTextField(callbackFunction: callbackAutocomplete, standings: widget.event?.event,),
+                      AutocompleteTextField(
+                        callbackFunction: callbackAutocomplete,
+                        standings: widget.event?.event,
+                      ),
                       const SizedBox(height: 12),
                       CustomDropDown(
                         items: cupNames,
@@ -217,9 +202,11 @@ class _KritiEventFormState extends State<KritiEventForm> {
                       ),
                       const SizedBox(height: 12),
                       CustomTextField(
-                          hintText: 'Problem Link',
-                          validator: validateField,
-                          controller: _probelmLinkController, isNecessary: true,),
+                        hintText: 'Problem Link',
+                        validator: validateField,
+                        controller: _probelmLinkController,
+                        isNecessary: true,
+                      ),
                       const SizedBox(
                         height: 12,
                       ),
@@ -232,26 +219,28 @@ class _KritiEventFormState extends State<KritiEventForm> {
                               validator: validateField,
                               controller: dateInput,
                               onTap: () async {
-                                FocusScope.of(context)
-                                    .requestFocus(FocusNode());
+                                FocusScope.of(context).requestFocus(FocusNode());
                                 DateTime? pickedDate = await showDatePicker(
                                     context: context,
                                     initialDate: date ?? DateTime.now(),
                                     firstDate: DateTime(2000),
                                     //DateTime.now() - not to allow to choose before today.
                                     lastDate: DateTime(2101),
-                                    builder: (context, child) => CustomDatePicker(child: child,));
+                                    builder: (context, child) => CustomDatePicker(
+                                          child: child,
+                                        ));
                                 if (pickedDate != null) {
                                   if (!mounted) return;
                                   date = pickedDate;
                                   String formattedDate =
-                                  DateFormat('dd-MMM-yyyy').format(pickedDate);
+                                      DateFormat('dd-MMM-yyyy').format(pickedDate);
                                   setState(() {
                                     dateInput.text =
                                         formattedDate; //set output date to TextField value.
                                   });
                                 }
-                              }, isNecessary: true,
+                              },
+                              isNecessary: true,
                             ),
                           ),
                           const SizedBox(
@@ -263,8 +252,7 @@ class _KritiEventFormState extends State<KritiEventForm> {
                               validator: validateField,
                               controller: timeInput,
                               onTap: () async {
-                                FocusScope.of(context)
-                                    .requestFocus(FocusNode());
+                                FocusScope.of(context).requestFocus(FocusNode());
                                 TimeOfDay? pickedTime = await showTimePicker(
                                   builder: (context, childWidget) {
                                     return TimePickerColor(
@@ -280,8 +268,7 @@ class _KritiEventFormState extends State<KritiEventForm> {
                                   time = pickedTime;
                                   setState(() {
                                     final now = DateTime.now();
-                                    final formattedTimeString = DateFormat.jm()
-                                        .format(DateTime(
+                                    final formattedTimeString = DateFormat.jm().format(DateTime(
                                         now.year,
                                         now.month,
                                         now.day,
@@ -290,7 +277,8 @@ class _KritiEventFormState extends State<KritiEventForm> {
                                     timeInput.text = formattedTimeString;
                                   });
                                 }
-                              }, isNecessary: true,
+                              },
+                              isNecessary: true,
                             ),
                           )
                         ],
@@ -299,9 +287,20 @@ class _KritiEventFormState extends State<KritiEventForm> {
                         height: 12,
                       ),
                       CustomTextField(
-                          hintText: 'Venue',
-                          validator: validateField,
-                          controller: _venueController, isNecessary: true,),
+                        hintText: 'Venue',
+                        validator: validateField,
+                        controller: _venueController,
+                        isNecessary: true,
+                      ),
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      CustomTextField(
+                        hintText: 'Score link',
+                        validator: validateField,
+                        controller: _linkController,
+                        isNecessary: false,
+                      ),
                       const SizedBox(
                         height: 12,
                       ),
@@ -347,6 +346,3 @@ class _KritiEventFormState extends State<KritiEventForm> {
     );
   }
 }
-
-
-

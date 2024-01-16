@@ -19,12 +19,14 @@ SpardhaEventModel _$SpardhaEventModelFromJson(Map<String, dynamic> json) =>
       status: json['status'] as String,
       results: (json['results'] as List<dynamic>?)
               ?.map((e) => (e as List<dynamic>)
-                  .map((e) => SpardhaResultModel.fromJson(e as Map<String, dynamic>))
+                  .map((e) =>
+                      SpardhaResultModel.fromJson(e as Map<String, dynamic>))
                   .toList())
               .toList() ??
           const [],
       resultAdded: json['resultAdded'] as bool? ?? false,
       victoryStatement: json['victoryStatement'] as String? ?? '',
+      link: json['link'] as String? ?? '',
     )..posterEmail = json['posterEmail'] as String?;
 
 Map<String, dynamic> _$SpardhaEventModelToJson(SpardhaEventModel instance) =>
@@ -43,4 +45,5 @@ Map<String, dynamic> _$SpardhaEventModelToJson(SpardhaEventModel instance) =>
       'posterEmail': instance.posterEmail,
       'resultAdded': instance.resultAdded,
       'victoryStatement': instance.victoryStatement,
+      'link': instance.link,
     };

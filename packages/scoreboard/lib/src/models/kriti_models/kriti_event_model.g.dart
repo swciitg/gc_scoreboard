@@ -23,6 +23,7 @@ KritiEventModel _$KritiEventModelFromJson(Map<String, dynamic> json) =>
           const [],
       victoryStatement: json['victoryStatement'] as String?,
       posterEmail: json['posterEmail'] as String?,
+      link: json['link'] as String? ?? '',
     )..points = (json['points'] as num?)?.toDouble();
 
 Map<String, dynamic> _$KritiEventModelToJson(KritiEventModel instance) =>
@@ -40,4 +41,5 @@ Map<String, dynamic> _$KritiEventModelToJson(KritiEventModel instance) =>
       'results': instance.results.map((e) => e.toJson()).toList(),
       'posterEmail': instance.posterEmail,
       'problemLink': instance.problemLink,
+      'link': instance.link,
     };
