@@ -54,26 +54,29 @@ class _AutocompleteTextField extends State<AutocompleteTextField> {
           alignment: Alignment.topLeft,
           child: Material(
             color: Colors.transparent,
-            child: ListView.builder(
-              // padding: EdgeInsets.all(10.0),
-              padding:
-              const EdgeInsets.symmetric(vertical: 0),
-              itemCount: options.length,
-              itemBuilder: (BuildContext context, int index) {
-                final String option =
-                options.elementAt(index);
-                return GestureDetector(
-                  onTap: () {
-                    onSelected(option);
-                  },
-                  child: ListTile(
-                    tileColor: Themes.backgroundColor,
-                    title: Text(option,
-                        style:
-                            headline6,),
-                  ),
-                );
-              },
+            child: SizedBox(
+              height: 300,
+              child: ListView.builder(
+                // padding: EdgeInsets.all(10.0),
+                padding:
+                const EdgeInsets.symmetric(vertical: 0),
+                itemCount: options.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final String option =
+                  options.elementAt(index);
+                  return GestureDetector(
+                    onTap: () {
+                      onSelected(option);
+                    },
+                    child: ListTile(
+                      tileColor: Themes.backgroundColor,
+                      title: Text(option,
+                          style:
+                              headline6,),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         );

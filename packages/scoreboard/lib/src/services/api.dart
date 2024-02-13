@@ -23,10 +23,13 @@ class APIService {
   APIService(BuildContext buildContext) {
     dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) async {
       options.headers["Authorization"] = "Bearer ${await AuthUserHelpers.getAccessToken()}";
+      print(options.headers['Authorization']);
       handler.next(options);
     }, onError: (error, handler) async {
       var response = error.response;
+      print(error.response?.data.toString());
       if (response != null && response.statusCode == 401) {
+        print("Regenerating accessToken");
         bool couldRegenerate = await regenerateAccessToken();
         // ignore: use_build_context_synchronously
         var commStore = buildContext.read<CommonStore>();

@@ -68,6 +68,6 @@ const String sahyogWebsiteLink = "http://www.google.com/";
 
 
 
-const List<String> kritiDifficulties = ["High", "Mid", "Low"];
+const List<String> kritiDifficulties = ["High", "Mid", "Low", "No Prep"];
 
 
