@@ -4,7 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher_string.dart';
+
 import '../../../functions/snackbar.dart';
 import '../../../globals/colors.dart';
 import '../../../globals/constants.dart';
@@ -14,12 +14,13 @@ import '../../../models/kriti_models/kriti_event_model.dart';
 import '../../../stores/common_store.dart';
 import '../card_date_widget.dart';
 import '../kriti_clubs_section.dart';
-import '../popup_menu.dart';
 import '../menu_item.dart';
+import '../popup_menu.dart';
 
 class KritiScheduleCard extends StatefulWidget {
   // ignore: prefer_typing_uninitialized_variables
   final eventModel;
+
   const KritiScheduleCard({super.key, required this.eventModel});
 
   @override
@@ -74,13 +75,15 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                               padding: const EdgeInsets.symmetric(vertical: 4),
                               child: SizedBox(
                                 height: 28,
-                                child: Text(widget.eventModel.event, style: cardEventStyle),
+                                child: Text(widget.eventModel.event,
+                                    style: cardEventStyle),
                               ),
                             ),
                             SizedBox(
                               height: 20,
                               child: isKriti
-                                  ? Text(widget.eventModel.cup, style: cardStageStyle1)
+                                  ? Text(widget.eventModel.cup,
+                                      style: cardStageStyle1)
                                   : Text(
                                       widget.eventModel.difficulty,
                                       style: cardStageStyle1,
@@ -95,13 +98,15 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                                     ? Container(
                                         height: 26,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(8),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                           color: Themes.kGrey,
                                         ),
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 8, vertical: 4),
-                                          child: Text(widget.eventModel.difficulty,
+                                          child: Text(
+                                              widget.eventModel.difficulty,
                                               style: cardCategoryStyle),
                                         ),
                                       )
@@ -118,21 +123,27 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                                         isLinkPressed = true;
                                       });
                                       try {
-                                        bool validURL = Uri.parse(widget.eventModel.problemLink)
+                                        bool validURL = Uri.parse(
+                                                widget.eventModel.problemLink)
                                             .isAbsolute; // check if valid url
                                         if (!validURL) {
                                           if (isKriti) {
-                                            await launchUrl(Uri.parse(kritiWebsiteLink),
+                                            await launchUrl(
+                                                Uri.parse(kritiWebsiteLink),
                                                 mode: LaunchMode
                                                     .externalApplication); // if url is not correct
                                           } else {
-                                            await launchUrl(Uri.parse(sahyogWebsiteLink),
+                                            await launchUrl(
+                                                Uri.parse(sahyogWebsiteLink),
                                                 mode: LaunchMode
                                                     .externalApplication); // if url is not correct
                                           }
                                         } else {
-                                          await launchUrl(Uri.parse(widget.eventModel.problemLink),
-                                              mode: LaunchMode.externalApplication);
+                                          await launchUrl(
+                                              Uri.parse(widget
+                                                  .eventModel.problemLink),
+                                              mode: LaunchMode
+                                                  .externalApplication);
                                         }
                                         setState(() {
                                           isLinkPressed = false;
@@ -154,11 +165,13 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                                     ),
                                     child: Container(
                                       alignment: Alignment.center,
-                                      padding:
-                                          const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8, vertical: 0),
                                       child: const Row(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Center(
                                             child: Icon(
@@ -193,28 +206,36 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                             if (widget.eventModel.link.isNotEmpty)
                               GestureDetector(
                                 onTap: () async {
-                                  var url = widget.eventModel.link;
-                                  if (!widget.eventModel.link.startsWith('http://') &&
-                                      !widget.eventModel.link.startsWith('https://')) {
-                                    url = 'http://$url';
-                                  }
-                                  if (await canLaunchUrlString(url)) {
-                                    await launchUrlString(url);
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text(
-                                          "Some error occurred. try again",
-                                          style: basicFontStyle,
+                                  try {
+                                    bool validURL =
+                                        Uri.parse(widget.eventModel.link)
+                                            .isAbsolute; // check if valid url
+                                    if (!validURL) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                            "Some error occurred. Try again!",
+                                            style: basicFontStyle,
+                                          ),
+                                          duration: Duration(seconds: 5),
                                         ),
-                                        duration: Duration(seconds: 5),
-                                      ),
-                                    );
+                                      );
+                                    } else {
+                                      await launchUrl(
+                                          Uri.parse(widget.eventModel.link),
+                                          mode: LaunchMode.externalApplication);
+                                    }
+                                  } catch (err) {
+                                    if (kDebugMode) {}
+                                    showSnackBar(context, err.toString());
                                   }
                                 },
-                                child: const Text("view score", style: cardCategoryStyle),
+                                child: const Text("View Score",
+                                    style: cardCategoryStyle),
                               ),
-                            if (widget.eventModel.link.isNotEmpty) const SizedBox(height: 8),
+                            if (widget.eventModel.link.isNotEmpty)
+                              const SizedBox(height: 8),
                             Container(
                                 alignment: Alignment.topCenter,
                                 width: 82,
