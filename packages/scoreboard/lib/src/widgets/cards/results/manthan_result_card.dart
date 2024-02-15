@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher_string.dart';
+import 'package:scoreboard/src/functions/snackbar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../globals/colors.dart';
 import '../../../globals/enums.dart';
@@ -9,12 +11,13 @@ import '../../../globals/styles.dart';
 import '../../../models/manthan_models/manthan_event_model.dart';
 import '../../../stores/common_store.dart';
 import '../card_date_widget.dart';
-import '../popup_menu.dart';
 import '../menu_item.dart';
+import '../popup_menu.dart';
 import 'score_card_item.dart';
 
 class ManthanResultCard extends StatefulWidget {
   final ManthanEventModel eventModel;
+
   const ManthanResultCard({super.key, required this.eventModel});
 
   @override
@@ -62,12 +65,14 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
                               padding: const EdgeInsets.symmetric(vertical: 4),
                               child: SizedBox(
                                 height: 28,
-                                child: Text(widget.eventModel.event, style: cardEventStyle),
+                                child: Text(widget.eventModel.event,
+                                    style: cardEventStyle),
                               ),
                             ),
                             SizedBox(
                                 height: 20,
-                                child: Text(widget.eventModel.module, style: cardStageStyle1)),
+                                child: Text(widget.eventModel.module,
+                                    style: cardStageStyle1)),
                             const SizedBox(
                               height: 16,
                             ),
@@ -78,11 +83,37 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
                           children: [
                             if (widget.eventModel.link.isNotEmpty)
                               GestureDetector(
-                                  onTap: () {
-                                    launchUrlString(widget.eventModel.link);
+                                  onTap: () async {
+                                    try {
+                                      bool validURL =
+                                          Uri.parse(widget.eventModel.link)
+                                              .isAbsolute; // check if valid url
+                                      if (!validURL) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                            content: Text(
+                                              "Some error occurred. Try again!",
+                                              style: basicFontStyle,
+                                            ),
+                                            duration: Duration(seconds: 5),
+                                          ),
+                                        );
+                                      } else {
+                                        await launchUrl(
+                                            Uri.parse(widget.eventModel.link),
+                                            mode:
+                                                LaunchMode.externalApplication);
+                                      }
+                                    } catch (err) {
+                                      if (kDebugMode) {}
+                                      showSnackBar(context, err.toString());
+                                    }
                                   },
-                                  child: const Text("view score", style: cardCategoryStyle)),
-                            if (widget.eventModel.link.isNotEmpty) const SizedBox(height: 8),
+                                  child: const Text("View Score",
+                                      style: cardCategoryStyle)),
+                            if (widget.eventModel.link.isNotEmpty)
+                              const SizedBox(height: 8),
                             Container(
                                 alignment: Alignment.topCenter,
                                 width: 82,
@@ -132,10 +163,12 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
                           child: Container(
                             height: 24,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100), color: Themes.kGrey),
+                                borderRadius: BorderRadius.circular(100),
+                                color: Themes.kGrey),
                             width: 64,
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 6),
                               child: Row(
                                 children: [
                                   Text(
@@ -170,7 +203,8 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
                               child: SizedBox(
                                 height: 12,
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Row(
                                       children: [
@@ -193,19 +227,23 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
                             ),
                             ConstrainedBox(
                                 constraints: BoxConstraints(
-                                  maxHeight: widget.eventModel.results.length * 30,
+                                  maxHeight:
+                                      widget.eventModel.results.length * 30,
                                 ),
                                 child: ListView.builder(
-                                    physics: const NeverScrollableScrollPhysics(),
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
                                     itemCount: widget.eventModel.results.length,
                                     itemBuilder: (context, index) {
                                       return ScoreCardItem(
                                           position: index + 1,
-                                          hostelName: widget.eventModel.results[index].hostelName!,
-                                          finalScore: widget.eventModel.results[index].primaryScore!
+                                          hostelName: widget.eventModel
+                                              .results[index].hostelName!,
+                                          finalScore: widget.eventModel
+                                              .results[index].primaryScore!
                                               .toString(),
-                                          secondaryScore:
-                                              widget.eventModel.results[index].secondaryScore);
+                                          secondaryScore: widget.eventModel
+                                              .results[index].secondaryScore);
                                     }))
                           ],
                         )

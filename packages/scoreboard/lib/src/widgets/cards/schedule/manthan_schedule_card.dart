@@ -1,20 +1,24 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher_string.dart';
+import 'package:scoreboard/src/functions/snackbar.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import '../../../globals/colors.dart';
 import '../../../globals/enums.dart';
 import '../../../globals/styles.dart';
 import '../../../models/manthan_models/manthan_event_model.dart';
 import '../../../stores/common_store.dart';
 import '../card_date_widget.dart';
-import '../popup_menu.dart';
 import '../menu_item.dart';
+import '../popup_menu.dart';
 
 class ManthanScheduleCard extends StatefulWidget {
   // ignore: prefer_typing_uninitialized_variables
   final eventModel;
+
   const ManthanScheduleCard({super.key, required this.eventModel});
 
   @override
@@ -69,13 +73,15 @@ class _ManthanScheduleCardState extends State<ManthanScheduleCard> {
                               padding: const EdgeInsets.symmetric(vertical: 4),
                               child: SizedBox(
                                 height: 28,
-                                child: Text(widget.eventModel.event, style: cardEventStyle),
+                                child: Text(widget.eventModel.event,
+                                    style: cardEventStyle),
                               ),
                             ),
                             SizedBox(
                               height: 20,
                               child: isManthan
-                                  ? Text(widget.eventModel.module, style: cardStageStyle1)
+                                  ? Text(widget.eventModel.module,
+                                      style: cardStageStyle1)
                                   : const Text(''),
                             ),
                           ],
@@ -86,28 +92,36 @@ class _ManthanScheduleCardState extends State<ManthanScheduleCard> {
                             if (widget.eventModel.link.isNotEmpty)
                               GestureDetector(
                                 onTap: () async {
-                                  var url = widget.eventModel.link;
-                                  if (!widget.eventModel.link.startsWith('http://') &&
-                                      !widget.eventModel.link.startsWith('https://')) {
-                                    url = 'http://$url';
-                                  }
-                                  if (await canLaunchUrlString(url)) {
-                                    await launchUrlString(url);
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text(
-                                          "Some error occurred. try again",
-                                          style: basicFontStyle,
+                                  try {
+                                    bool validURL =
+                                        Uri.parse(widget.eventModel.link)
+                                            .isAbsolute; // check if valid url
+                                    if (!validURL) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                            "Some error occurred. Try again!",
+                                            style: basicFontStyle,
+                                          ),
+                                          duration: Duration(seconds: 5),
                                         ),
-                                        duration: Duration(seconds: 5),
-                                      ),
-                                    );
+                                      );
+                                    } else {
+                                      await launchUrl(
+                                          Uri.parse(widget.eventModel.link),
+                                          mode: LaunchMode.externalApplication);
+                                    }
+                                  } catch (err) {
+                                    if (kDebugMode) {}
+                                    showSnackBar(context, err.toString());
                                   }
                                 },
-                                child: const Text("view score", style: cardCategoryStyle),
+                                child: const Text("View Score",
+                                    style: cardCategoryStyle),
                               ),
-                            if (widget.eventModel.link.isNotEmpty) const SizedBox(height: 8),
+                            if (widget.eventModel.link.isNotEmpty)
+                              const SizedBox(height: 8),
                             Container(
                                 alignment: Alignment.topCenter,
                                 width: 82,

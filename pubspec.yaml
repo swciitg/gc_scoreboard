@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   scoreboard:
     path: packages/scoreboard
+  shared_preferences: ^2.2.2
 
 
 dev_dependencies:

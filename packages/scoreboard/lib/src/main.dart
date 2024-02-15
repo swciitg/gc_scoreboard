@@ -26,20 +26,6 @@ class GCScoreBoard extends StatefulWidget {
 }
 
 class _GCScoreBoardState extends State<GCScoreBoard> {
-
-  @override
-   initState() {
-    // TODO: implement initState
-    super.initState();
-    // AuthUserHelpers.setAccessToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2NGM2Y2YyYmYyMTRkN2IwMjhjNTdiNWQiLCJpYXQiOjE3MDUzNTAyMDYsImV4cCI6MTcwNjIxNDIwNn0.cXp9DoemT65J4K8Q-HYHDABKFW7vOyhRYL2Pm_tpbPI').then((value){
-    //   AuthUserHelpers.setRefreshToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2NGM2Y2YyYmYyMTRkN2IwMjhjNTdiNWQiLCJpYXQiOjE3MDUzNTAyMDYsImV4cCI6MTcwNzk0MjIwNn0.hg_zkwo7ofQsbVBejLXGxiQ7IuAd05zdsRb37Dt2egE').then((value) {
-    //     print('****************************Tokens set*************************');
-    //   });
-    // });
-
-
-  }
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

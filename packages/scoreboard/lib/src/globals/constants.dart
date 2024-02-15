@@ -1,4 +1,3 @@
-
 const List<String> menHostel = [
   'Barak',
   'Brahmaputra',
@@ -66,8 +65,4 @@ const List<String> spardhaEventStages = [
 const String kritiWebsiteLink = "https://swc.iitg.ac.in/sa/kriti/";
 const String sahyogWebsiteLink = "http://www.google.com/";
 
-
-
-const List<String> kritiDifficulties = ["High", "Mid", "Low"];
-
-
+const List<String> kritiDifficulties = ["High", "Mid", "Low", "No Prep"];
