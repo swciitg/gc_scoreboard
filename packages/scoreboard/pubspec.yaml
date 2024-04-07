@@ -19,7 +19,7 @@ dependencies:
   shared_preferences: ^2.0.15
   dio: ^5.0.3
   intl: ^0.18.0
-  webview_flutter: ^3.0.4
+  webview_flutter: ^4.7.0
   connectivity_plus:
   json_annotation: ^4.7.0
   shimmer: ^2.0.0
