@@ -5,6 +5,7 @@ import '../../globals/styles.dart';
 
 class TimePickerColor extends StatefulWidget {
   final Widget? childWidget;
+
   const TimePickerColor({super.key, required this.childWidget});
 
   @override
@@ -20,27 +21,27 @@ class _TimePickerColorState extends State<TimePickerColor> {
           backgroundColor: Themes.secondaryColor,
           dayPeriodBorderSide:
               const BorderSide(color: Themes.dayPeriodBorderColor, width: 2),
-          dayPeriodColor: MaterialStateColor.resolveWith((states) =>
-              states.contains(MaterialState.selected)
+          dayPeriodColor: WidgetStateColor.resolveWith((states) =>
+              states.contains(WidgetState.selected)
                   ? Themes.dayPeriodBorderColor
                   : Themes.secondaryColor),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(8)),
           ),
-          dayPeriodTextColor: MaterialStateColor.resolveWith((states) =>
-              states.contains(MaterialState.selected)
+          dayPeriodTextColor: WidgetStateColor.resolveWith((states) =>
+              states.contains(WidgetState.selected)
                   ? Colors.white
                   : Colors.blueGrey.shade600),
           dayPeriodShape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(8)),
             side: BorderSide(width: 4),
           ),
-          hourMinuteColor: MaterialStateColor.resolveWith((states) =>
-              states.contains(MaterialState.selected)
+          hourMinuteColor: WidgetStateColor.resolveWith((states) =>
+              states.contains(WidgetState.selected)
                   ? Themes.dayPeriodBorderColor
                   : Themes.datePickerSurfaceColor),
-          hourMinuteTextColor: MaterialStateColor.resolveWith((states) =>
-              states.contains(MaterialState.selected)
+          hourMinuteTextColor: WidgetStateColor.resolveWith((states) =>
+              states.contains(WidgetState.selected)
                   ? Colors.white
                   : Colors.white),
           dialHandColor: Themes.primaryColor,
@@ -48,15 +49,17 @@ class _TimePickerColorState extends State<TimePickerColor> {
           hourMinuteTextStyle: hourMinuteStyle,
           dayPeriodTextStyle: dayPeriodStyle,
           helpTextStyle: helptextStyle,
-          dialTextColor: MaterialStateColor.resolveWith((states) =>
-              states.contains(MaterialState.selected)
+          dialTextColor: WidgetStateColor.resolveWith((states) =>
+              states.contains(WidgetState.selected)
                   ? Colors.black
                   : Colors.white),
           entryModeIconColor: Colors.blueGrey.shade600,
         ),
-        textTheme: TextTheme(
-          caption: basicFontStyle, // days
-        ),
+        textTheme: const TextTheme(
+            labelLarge: basicFontStyle,
+            labelMedium: basicFontStyle,
+            labelSmall: basicFontStyle // days
+            ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
               backgroundColor: Themes.secondaryColor, // button
@@ -70,6 +73,5 @@ class _TimePickerColorState extends State<TimePickerColor> {
           // If you want 24-Hour format, just change alwaysUse24HourFormat to true or remove all the builder argument
           child: widget.childWidget!),
     );
-
   }
 }

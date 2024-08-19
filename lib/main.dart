@@ -32,17 +32,18 @@ class SampleHome extends StatelessWidget {
               final nav = Navigator.of(context);
               final prefs = await SharedPreferences.getInstance();
               await prefs.setString('accessToken',
-                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2NGM3NWM4YWE2ZDE3ZWE0NTYyM2M5ODIiLCJpYXQiOjE3MDc5OTg2ODMsImV4cCI6MTcwODg2MjY4M30.4JxJIG5V4Mr1P7ruqswxkWVJdiJBetIkHwfmhD2fWQA');
+                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2NjRmNzhmM2FhZTg2NDIyNzU0YjE2ZjMiLCJpYXQiOjE3MjQwNTc5MDEsImV4cCI6MTcyNDkyMTkwMX0.XMfpKTpTYYE2ozfIvTSWL1dM_CGlTh1H_A6u4C37rD0');
               await prefs.setString('refreshToken',
                   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2NGM3NWM4YWE2ZDE3ZWE0NTYyM2M5ODIiLCJpYXQiOjE3MDc5OTg2ODMsImV4cCI6MTcxMDU5MDY4M30.CjzlhCKI4qIFv4DeTxE8F6tstgOEl6f84EFgT2kV2Ac');
-              print(
-                  '****************************Tokens set*************************');
 
-              nav.push(MaterialPageRoute(
+              nav.push(
+                MaterialPageRoute(
                   builder: (context) => const GCScoreBoard(userInfo: {
-                        "name": "Hardik Roongta",
-                        "email": "r.hardik@iitg.ac.in"
-                      })));
+                    "name": "Hardik Roongta",
+                    "email": "r.hardik@iitg.ac.in"
+                  }),
+                ),
+              );
             },
             child: const Text("GC SCOREBOARD")),
       ),

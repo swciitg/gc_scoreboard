@@ -5,6 +5,7 @@ import '../../globals/styles.dart';
 
 class CustomDatePicker extends StatefulWidget {
   final Widget? child;
+
   const CustomDatePicker({super.key, this.child});
 
   @override
@@ -16,15 +17,21 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
   Widget build(BuildContext context) {
     return Theme(
       data: Theme.of(context).copyWith(
-        textTheme: TextTheme(
-          headline4: basicFontStyle,
-          headline5: basicFontStyle, // Selected Date landscape
-          headline6: basicFontStyle, // Selected Date portrait
-          overline: basicFontStyle, // Title - SELECT DATE
-          bodyText1: basicFontStyle, // year gridbview picker
-          subtitle1: basicFontStyle, // input
-          subtitle2: basicFontStyle, // month/year picker
-          caption: basicFontStyle, // days
+        textTheme: const TextTheme(
+          headlineLarge: basicFontStyle,
+          headlineMedium: basicFontStyle,
+          // Selected Date landscape
+          headlineSmall: basicFontStyle,
+          // Selected Date portrait
+          titleMedium: basicFontStyle,
+          // Title - SELECT DATE
+          bodyLarge: basicFontStyle,
+          // year gridbview picker
+          bodyMedium: basicFontStyle,
+          // input
+          bodySmall: basicFontStyle,
+          // month/year picker
+          labelLarge: basicFontStyle, // days
         ),
         colorScheme: const ColorScheme.dark(
           primary: Themes.datePickerPrimaryColor,
