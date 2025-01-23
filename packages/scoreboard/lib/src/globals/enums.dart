@@ -41,6 +41,7 @@ enum Hostel {
   kameng("Kameng"),
   dihing("Dihing"),
   disangMen("Disang (Men)"),
+  gaurang("Gaurang"),
   kapili('Kapili'),
   barak("Barak"),
   lohit("Lohit"),
