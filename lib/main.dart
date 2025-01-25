@@ -32,15 +32,15 @@ class SampleHome extends StatelessWidget {
               final nav = Navigator.of(context);
               final prefs = await SharedPreferences.getInstance();
               await prefs.setString('accessToken',
-                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2NjRmNzhmM2FhZTg2NDIyNzU0YjE2ZjMiLCJpYXQiOjE3MjQwNTc5MDEsImV4cCI6MTcyNDkyMTkwMX0.XMfpKTpTYYE2ozfIvTSWL1dM_CGlTh1H_A6u4C37rD0');
+                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2NjQ0YzE1NTZiZWMxMGE3NjRmMGFkYTEiLCJpYXQiOjE3Mzc3MjQ4NzUsImV4cCI6MTczODU4ODg3NX0.pCgvGGENMWwGklnyxTARBQLfHy06tKQh7gAVfULhxeE');
               await prefs.setString('refreshToken',
-                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2NGM3NWM4YWE2ZDE3ZWE0NTYyM2M5ODIiLCJpYXQiOjE3MDc5OTg2ODMsImV4cCI6MTcxMDU5MDY4M30.CjzlhCKI4qIFv4DeTxE8F6tstgOEl6f84EFgT2kV2Ac');
+                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiI2NjQ0YzE1NTZiZWMxMGE3NjRmMGFkYTEiLCJpYXQiOjE3Mzc3MjQ4NzUsImV4cCI6MTc0MDMxNjg3NX0.aBqrowjTfMqjDVhpWvc2GXkakLLi78eftOP5wP6tCZ8');
 
               nav.push(
                 MaterialPageRoute(
                   builder: (context) => const GCScoreBoard(userInfo: {
-                    "name": "Hardik Roongta",
-                    "email": "r.hardik@iitg.ac.in"
+                    "name": "Amit Singh",
+                    "email": "amitsingh.cl@iitg.ac.in"
                   }),
                 ),
               );
