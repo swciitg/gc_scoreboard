@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
 import '../functions/auth_user_helper.dart';
@@ -17,10 +16,10 @@ import '../stores/common_store.dart';
 
 class APIService {
   final dio = Dio(BaseOptions(
-    baseUrl: dotenv.env["SERVER_URL"]!,
+    baseUrl: const String.fromEnvironment("SERVER_URL"),
     connectTimeout: const Duration(seconds: 15),
     receiveTimeout: const Duration(seconds: 15),
-    headers: {'Security-Key': dotenv.env['SECURITY_KEY']!},
+    headers: {'Security-Key': const String.fromEnvironment('SECURITY_KEY')},
   ));
 
   APIService(BuildContext buildContext) {
