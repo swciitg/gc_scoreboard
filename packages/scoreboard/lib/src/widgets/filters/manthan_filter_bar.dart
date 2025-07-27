@@ -8,7 +8,7 @@ import '../../stores/static_store.dart';
 import 'filter_button.dart';
 
 class ManthanFilterBar extends StatefulWidget {
-  const ManthanFilterBar({Key? key}) : super(key: key);
+  const ManthanFilterBar({super.key});
 
   @override
   State<ManthanFilterBar> createState() => _ManthanFilterBarState();

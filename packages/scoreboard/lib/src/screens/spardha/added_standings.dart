@@ -12,7 +12,7 @@ import 'forms/add_standing_form.dart';
 
 class SpardhaAdminStandingsPage extends StatefulWidget {
   static const id = '/spardha/standings';
-  const SpardhaAdminStandingsPage({Key? key}) : super(key: key);
+  const SpardhaAdminStandingsPage({super.key});
 
   @override
   State<SpardhaAdminStandingsPage> createState() =>
@@ -20,7 +20,7 @@ class SpardhaAdminStandingsPage extends StatefulWidget {
 }
 
 class _SpardhaAdminStandingsPageState extends State<SpardhaAdminStandingsPage> {
-  reloadCallback() {
+  void reloadCallback() {
     // reload page
     setState(() {});
   }

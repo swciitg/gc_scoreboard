@@ -10,9 +10,10 @@ StandingModel _$StandingModelFromJson(Map<String, dynamic> json) =>
     StandingModel(
       event: json['event'] as String?,
       category: json['category'] as String?,
-      standings: (json['standings'] as List<dynamic>?)
-          ?.map((e) => HostelPoints.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      standings:
+          (json['standings'] as List<dynamic>?)
+              ?.map((e) => HostelPoints.fromJson(e as Map<String, dynamic>))
+              .toList(),
     )..id = json['_id'] as String?;
 
 Map<String, dynamic> _$StandingModelToJson(StandingModel instance) =>

@@ -1,2 +1,2 @@
-library scoreboard;
+library;
 export 'src/main.dart' show GCScoreBoard;

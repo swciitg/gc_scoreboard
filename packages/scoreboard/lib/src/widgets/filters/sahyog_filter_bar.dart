@@ -8,7 +8,7 @@ import '../../stores/static_store.dart';
 import 'filter_button.dart';
 
 class SahyogFilterBar extends StatefulWidget {
-  const SahyogFilterBar({Key? key}) : super(key: key);
+  const SahyogFilterBar({super.key});
 
   @override
   State<SahyogFilterBar> createState() => _SahyogFilterBarState();

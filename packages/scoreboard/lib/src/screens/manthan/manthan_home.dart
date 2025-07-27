@@ -15,7 +15,7 @@ import 'manthan_schedule_page.dart';
 import 'manthan_standings_page.dart';
 
 class ManthanHome extends StatefulWidget {
-  const ManthanHome({Key? key}) : super(key: key);
+  const ManthanHome({super.key});
 
   @override
   State<ManthanHome> createState() => _ManthanHomeState();

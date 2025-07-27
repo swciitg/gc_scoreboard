@@ -12,10 +12,10 @@ class ConfirmEventDetails extends StatefulWidget {
   final bool isEdit;
   final SpardhaEventModel event;
   const ConfirmEventDetails({
-    Key? key,
+    super.key,
     required this.event,
     required this.isEdit,
-  }) : super(key: key);
+  });
 
   @override
   // ignore: library_private_types_in_public_api
@@ -68,12 +68,11 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
                     try {
                       if (widget.isEdit) {
                         await APIService(context).updateEventSchedule(data: widget.event.toJson(), competition: 'spardha');
-                        if (!mounted) return;
+                        if (!context.mounted) return;
                         showSnackBar(context, "Event Edited successfully");
                       } else {
                         await APIService(context).postEventSchedule(data: widget.event.toJson(), competiton: 'spardha');
-                        if (!mounted) return;
-
+                        if (!context.mounted) return;
                         showSnackBar(
                             context, "Event schedule posted successfully");
                       }
@@ -81,7 +80,7 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
 
                       Navigator.pushNamedAndRemoveUntil(
                           context, ScoreBoardHome.id, (route) => false);
-                    } on DioError catch (err) {
+                    } on DioException catch (err) {
                       showErrorSnackBar(context, err);
                     }
                     setState(() {
@@ -190,8 +189,7 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
 class DataTile extends StatelessWidget {
   final String title;
   final String semiTitle;
-  const DataTile({Key? key, required this.title, required this.semiTitle})
-      : super(key: key);
+  const DataTile({super.key, required this.title, required this.semiTitle});
 
   @override
   Widget build(BuildContext context) {

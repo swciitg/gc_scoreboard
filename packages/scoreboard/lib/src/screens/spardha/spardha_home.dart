@@ -15,7 +15,7 @@ import 'spardha_schedule_page.dart';
 import 'spardha_standings_page.dart';
 
 class SpardhaHome extends StatefulWidget {
-  const SpardhaHome({Key? key}) : super(key: key);
+  const SpardhaHome({super.key});
 
   @override
   State<SpardhaHome> createState() => _SpardhaHomeState();

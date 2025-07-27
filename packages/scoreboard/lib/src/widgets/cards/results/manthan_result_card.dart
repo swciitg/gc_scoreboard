@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -106,7 +105,7 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
                                                 LaunchMode.externalApplication);
                                       }
                                     } catch (err) {
-                                      if (kDebugMode) {}
+                                      if (!context.mounted) return;
                                       showSnackBar(context, err.toString());
                                     }
                                   },

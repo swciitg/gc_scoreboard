@@ -90,7 +90,7 @@ class _KritiResultFormState extends State<KritiResultForm> {
                             competition: 'kriti',
                             link: _linkController.text.trim(),
                           );
-                          if (!mounted) return;
+                          if (!context.mounted) return;
 
                           Navigator.of(context)
                               .pushNamedAndRemoveUntil(ScoreBoardHome.id, (route) => false);
@@ -100,7 +100,7 @@ class _KritiResultFormState extends State<KritiResultForm> {
 
                           Navigator.pushNamedAndRemoveUntil(
                               context, ScoreBoardHome.id, (route) => false);
-                        } on DioError catch (err) {
+                        } on DioException catch (err) {
                           showErrorSnackBar(context, err);
                         }
                         setState(() {

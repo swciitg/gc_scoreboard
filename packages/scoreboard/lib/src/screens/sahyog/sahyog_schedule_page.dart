@@ -13,7 +13,7 @@ import '../../widgets/ui/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
 
 class SahyogSchedulePage extends StatefulWidget {
-  const SahyogSchedulePage({Key? key}) : super(key: key);
+  const SahyogSchedulePage({super.key});
 
   @override
   State<SahyogSchedulePage> createState() => _SahyogSchedulePageState();

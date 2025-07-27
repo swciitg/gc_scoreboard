@@ -92,7 +92,7 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
                             competition: 'manthan',
                             link: _linkController.text.trim(),
                           );
-                          if (!mounted) return;
+                          if (!context.mounted) return;
 
                           Navigator.of(context)
                               .pushNamedAndRemoveUntil(ScoreBoardHome.id, (route) => false);
@@ -102,7 +102,7 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
 
                           Navigator.pushNamedAndRemoveUntil(
                               context, ScoreBoardHome.id, (route) => false);
-                        } on DioError catch (err) {
+                        } on DioException catch (err) {
                           showErrorSnackBar(context, err);
                         }
                         setState(() {

@@ -9,8 +9,10 @@ part of 'common_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$CommonStore on _CommonStore, Store {
-  late final _$competitionAtom =
-      Atom(name: '_CommonStore.competition', context: context);
+  late final _$competitionAtom = Atom(
+    name: '_CommonStore.competition',
+    context: context,
+  );
 
   @override
   Competitions get competition {
@@ -40,8 +42,10 @@ mixin _$CommonStore on _CommonStore, Store {
     });
   }
 
-  late final _$isAdminAtom =
-      Atom(name: '_CommonStore.isAdmin', context: context);
+  late final _$isAdminAtom = Atom(
+    name: '_CommonStore.isAdmin',
+    context: context,
+  );
 
   @override
   bool get isAdmin {
@@ -56,8 +60,10 @@ mixin _$CommonStore on _CommonStore, Store {
     });
   }
 
-  late final _$viewTypeAtom =
-      Atom(name: '_CommonStore.viewType', context: context);
+  late final _$viewTypeAtom = Atom(
+    name: '_CommonStore.viewType',
+    context: context,
+  );
 
   @override
   ViewType get viewType {
@@ -72,8 +78,10 @@ mixin _$CommonStore on _CommonStore, Store {
     });
   }
 
-  late final _$isSpardhaAdminAtom =
-      Atom(name: '_CommonStore.isSpardhaAdmin', context: context);
+  late final _$isSpardhaAdminAtom = Atom(
+    name: '_CommonStore.isSpardhaAdmin',
+    context: context,
+  );
 
   @override
   bool get isSpardhaAdmin {
@@ -88,8 +96,10 @@ mixin _$CommonStore on _CommonStore, Store {
     });
   }
 
-  late final _$isKritiAdminAtom =
-      Atom(name: '_CommonStore.isKritiAdmin', context: context);
+  late final _$isKritiAdminAtom = Atom(
+    name: '_CommonStore.isKritiAdmin',
+    context: context,
+  );
 
   @override
   bool get isKritiAdmin {
@@ -104,8 +114,10 @@ mixin _$CommonStore on _CommonStore, Store {
     });
   }
 
-  late final _$isManthanAdminAtom =
-      Atom(name: '_CommonStore.isManthanAdmin', context: context);
+  late final _$isManthanAdminAtom = Atom(
+    name: '_CommonStore.isManthanAdmin',
+    context: context,
+  );
 
   @override
   bool get isManthanAdmin {
@@ -120,8 +132,10 @@ mixin _$CommonStore on _CommonStore, Store {
     });
   }
 
-  late final _$isSahyogAdminAtom =
-      Atom(name: '_CommonStore.isSahyogAdmin', context: context);
+  late final _$isSahyogAdminAtom = Atom(
+    name: '_CommonStore.isSahyogAdmin',
+    context: context,
+  );
 
   @override
   bool get isSahyogAdmin {
@@ -136,13 +150,16 @@ mixin _$CommonStore on _CommonStore, Store {
     });
   }
 
-  late final _$_CommonStoreActionController =
-      ActionController(name: '_CommonStore', context: context);
+  late final _$_CommonStoreActionController = ActionController(
+    name: '_CommonStore',
+    context: context,
+  );
 
   @override
   void setViewType(ViewType v) {
     final _$actionInfo = _$_CommonStoreActionController.startAction(
-        name: '_CommonStore.setViewType');
+      name: '_CommonStore.setViewType',
+    );
     try {
       return super.setViewType(v);
     } finally {
@@ -153,7 +170,8 @@ mixin _$CommonStore on _CommonStore, Store {
   @override
   void setCompetition(Competitions c, dynamic competitionStore) {
     final _$actionInfo = _$_CommonStoreActionController.startAction(
-        name: '_CommonStore.setCompetition');
+      name: '_CommonStore.setCompetition',
+    );
     try {
       return super.setCompetition(c, competitionStore);
     } finally {
@@ -164,7 +182,8 @@ mixin _$CommonStore on _CommonStore, Store {
   @override
   void setPage(Pages p, dynamic competitionStore) {
     final _$actionInfo = _$_CommonStoreActionController.startAction(
-        name: '_CommonStore.setPage');
+      name: '_CommonStore.setPage',
+    );
     try {
       return super.setPage(p, competitionStore);
     } finally {
@@ -175,7 +194,8 @@ mixin _$CommonStore on _CommonStore, Store {
   @override
   void setAdminNone() {
     final _$actionInfo = _$_CommonStoreActionController.startAction(
-        name: '_CommonStore.setAdminNone');
+      name: '_CommonStore.setAdminNone',
+    );
     try {
       return super.setAdminNone();
     } finally {
@@ -186,7 +206,8 @@ mixin _$CommonStore on _CommonStore, Store {
   @override
   void setSpardhaAdmin(bool input) {
     final _$actionInfo = _$_CommonStoreActionController.startAction(
-        name: '_CommonStore.setSpardhaAdmin');
+      name: '_CommonStore.setSpardhaAdmin',
+    );
     try {
       return super.setSpardhaAdmin(input);
     } finally {
@@ -197,7 +218,8 @@ mixin _$CommonStore on _CommonStore, Store {
   @override
   void setKritiAdmin(bool input) {
     final _$actionInfo = _$_CommonStoreActionController.startAction(
-        name: '_CommonStore.setKritiAdmin');
+      name: '_CommonStore.setKritiAdmin',
+    );
     try {
       return super.setKritiAdmin(input);
     } finally {
@@ -208,7 +230,8 @@ mixin _$CommonStore on _CommonStore, Store {
   @override
   void setManthanAdmin(bool input) {
     final _$actionInfo = _$_CommonStoreActionController.startAction(
-        name: '_CommonStore.setManthanAdmin');
+      name: '_CommonStore.setManthanAdmin',
+    );
     try {
       return super.setManthanAdmin(input);
     } finally {
@@ -219,7 +242,8 @@ mixin _$CommonStore on _CommonStore, Store {
   @override
   void setSahyogAdmin(bool input) {
     final _$actionInfo = _$_CommonStoreActionController.startAction(
-        name: '_CommonStore.setSahyogAdmin');
+      name: '_CommonStore.setSahyogAdmin',
+    );
     try {
       return super.setSahyogAdmin(input);
     } finally {

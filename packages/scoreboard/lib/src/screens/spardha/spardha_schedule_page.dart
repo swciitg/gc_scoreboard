@@ -13,7 +13,7 @@ import '../../widgets/common/top_bar.dart';
 import '../../widgets/ui/err_reload.dart';
 
 class SchedulePage extends StatefulWidget {
-  const SchedulePage({Key? key}) : super(key: key);
+  const SchedulePage({super.key});
 
   @override
   State<SchedulePage> createState() => _SchedulePageState();

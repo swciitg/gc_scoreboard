@@ -5,7 +5,7 @@ import '../../stores/gc_store.dart';
 import 'filter_button.dart';
 
 class GCFilterBar extends StatefulWidget {
-  const GCFilterBar({Key? key}) : super(key: key);
+  const GCFilterBar({super.key});
 
   @override
   State<GCFilterBar> createState() => _GCFilterBarState();

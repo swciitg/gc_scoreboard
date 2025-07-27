@@ -3,8 +3,7 @@ import 'package:shimmer/shimmer.dart';
 import '../../globals/colors.dart';
 
 class ShowShimmer extends StatefulWidget {
-  const ShowShimmer({Key? key, required this.height, required this.width})
-      : super(key: key);
+  const ShowShimmer({super.key, required this.height, required this.width});
   final double height;
   final double width;
   @override

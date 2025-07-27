@@ -37,14 +37,13 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
           primary: Themes.datePickerPrimaryColor,
           surface: Themes.datePickerSurfaceColor,
         ),
-        dialogBackgroundColor: Themes.datePickerSurfaceColor,
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
               backgroundColor: Themes.datePickerSurfaceColor, // button
               foregroundColor: Themes.primaryColor,
               elevation: 0,
               textStyle: basicFontStyle),
-        ),
+        ), dialogTheme: DialogThemeData(backgroundColor: Themes.datePickerSurfaceColor),
       ),
       child: widget.child!,
     );

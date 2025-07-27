@@ -7,11 +7,10 @@ class AppBarFormComponent extends StatefulWidget {
   final String actionTitle;
   final Function onFormSubmit;
   const AppBarFormComponent(
-      {Key? key,
+      {super.key,
       required this.title,
       required this.actionTitle,
-      required this.onFormSubmit})
-      : super(key: key);
+      required this.onFormSubmit});
 
   @override
   State<AppBarFormComponent> createState() => _AppBarFormComponentState();

@@ -88,7 +88,7 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                             ResultFormStore.victoryStatement!,
                             link: _linkController.text.trim(),
                           );
-                          if (!mounted) return;
+                          if (!context.mounted) return;
 
                           Navigator.of(context)
                               .pushNamedAndRemoveUntil(ScoreBoardHome.id, (route) => false);
@@ -98,7 +98,7 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
 
                           Navigator.pushNamedAndRemoveUntil(
                               context, ScoreBoardHome.id, (route) => false);
-                        } on DioError catch (err) {
+                        } on DioException catch (err) {
                           showErrorSnackBar(context, err);
                         }
                         setState(() {

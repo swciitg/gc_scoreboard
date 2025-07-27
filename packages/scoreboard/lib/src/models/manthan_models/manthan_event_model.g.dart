@@ -13,9 +13,11 @@ ManthanEventModel _$ManthanEventModelFromJson(Map<String, dynamic> json) =>
       module: json['module'] as String,
       date: DateTime.parse(json['date'] as String),
       venue: json['venue'] as String,
-      results: (json['results'] as List<dynamic>?)
+      results:
+          (json['results'] as List<dynamic>?)
               ?.map(
-                  (e) => ManthanResultModel.fromJson(e as Map<String, dynamic>))
+                (e) => ManthanResultModel.fromJson(e as Map<String, dynamic>),
+              )
               .toList() ??
           const [],
       resultAdded: json['resultAdded'] as bool? ?? false,

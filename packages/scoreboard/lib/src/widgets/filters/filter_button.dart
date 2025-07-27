@@ -8,12 +8,11 @@ class FilterButton extends StatefulWidget {
   final List<String> items;
   final Function setFunction;
   const FilterButton(
-      {Key? key,
+      {super.key,
       required this.label,
       required this.value,
       required this.items,
-      required this.setFunction})
-      : super(key: key);
+      required this.setFunction});
 
   @override
   State<FilterButton> createState() => _FilterButtonState();

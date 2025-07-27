@@ -9,8 +9,10 @@ part of 'manthan_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$ManthanStore on _ManthanStore, Store {
-  late final _$selectedModuleAtom =
-      Atom(name: '_ManthanStore.selectedModule', context: context);
+  late final _$selectedModuleAtom = Atom(
+    name: '_ManthanStore.selectedModule',
+    context: context,
+  );
 
   @override
   String get selectedModule {
@@ -25,8 +27,10 @@ mixin _$ManthanStore on _ManthanStore, Store {
     });
   }
 
-  late final _$selectedEventAtom =
-      Atom(name: '_ManthanStore.selectedEvent', context: context);
+  late final _$selectedEventAtom = Atom(
+    name: '_ManthanStore.selectedEvent',
+    context: context,
+  );
 
   @override
   String get selectedEvent {
@@ -41,13 +45,16 @@ mixin _$ManthanStore on _ManthanStore, Store {
     });
   }
 
-  late final _$_ManthanStoreActionController =
-      ActionController(name: '_ManthanStore', context: context);
+  late final _$_ManthanStoreActionController = ActionController(
+    name: '_ManthanStore',
+    context: context,
+  );
 
   @override
   void setFiltersToDefault() {
     final _$actionInfo = _$_ManthanStoreActionController.startAction(
-        name: '_ManthanStore.setFiltersToDefault');
+      name: '_ManthanStore.setFiltersToDefault',
+    );
     try {
       return super.setFiltersToDefault();
     } finally {
@@ -58,7 +65,8 @@ mixin _$ManthanStore on _ManthanStore, Store {
   @override
   void changeSelectedEvent(String e) {
     final _$actionInfo = _$_ManthanStoreActionController.startAction(
-        name: '_ManthanStore.changeSelectedEvent');
+      name: '_ManthanStore.changeSelectedEvent',
+    );
     try {
       return super.changeSelectedEvent(e);
     } finally {
@@ -69,7 +77,8 @@ mixin _$ManthanStore on _ManthanStore, Store {
   @override
   void changeSelectedModule(String c) {
     final _$actionInfo = _$_ManthanStoreActionController.startAction(
-        name: '_ManthanStore.changeSelectedModule');
+      name: '_ManthanStore.changeSelectedModule',
+    );
     try {
       return super.changeSelectedModule(c);
     } finally {

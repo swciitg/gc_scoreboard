@@ -41,7 +41,7 @@ class _SpardhaEventFormState extends State<SpardhaEventForm> {
   List<String?> participatingHostels = [];
   final _formKey = GlobalKey<FormState>();
 
-  callbackHostels(value) {
+  void callbackHostels(String value) {
     participatingHostels.length = int.parse(value);
     setState(() {
       hostelsSize = int.parse(value);
@@ -49,12 +49,12 @@ class _SpardhaEventFormState extends State<SpardhaEventForm> {
     });
   }
 
-  callbackAddHostel(value, index) {
+  void callbackAddHostel(String value, int index) {
     participatingHostels[index - 1] = value;
     hostelSizeValue = participatingHostels.length.toString();
   }
 
-  callbackAutocomplete(value) {
+  void callbackAutocomplete(String value) {
     sportName = value;
   }
 

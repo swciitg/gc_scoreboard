@@ -13,8 +13,7 @@ import 'score_card_item.dart';
 
 class SpardhaResultsCard extends StatefulWidget {
   final SpardhaEventModel eventModel;
-  const SpardhaResultsCard({Key? key, required this.eventModel})
-      : super(key: key);
+  const SpardhaResultsCard({super.key, required this.eventModel});
 
   @override
   State<SpardhaResultsCard> createState() => _SpardhaResultsCardState();
@@ -170,8 +169,7 @@ class _SpardhaResultsCardState extends State<SpardhaResultsCard> {
 // ignore: must_be_immutable
 class ExpandedSpardhaResultsCard extends StatelessWidget {
   final SpardhaEventModel eventModel;
-  ExpandedSpardhaResultsCard({Key? key, required this.eventModel})
-      : super(key: key);
+  ExpandedSpardhaResultsCard({super.key, required this.eventModel});
 
   var length = 0; // number of items in expanded card
 

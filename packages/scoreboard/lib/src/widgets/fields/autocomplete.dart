@@ -80,7 +80,7 @@ class _AutocompleteTextField extends State<AutocompleteTextField> {
           ),
         );
       },
-      fieldViewBuilder: (context, c, f, __) {
+      fieldViewBuilder: (context, c, f, _) {
         return CustomTextField(
           hintText: 'Event Name',
           validator: (s) {

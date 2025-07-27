@@ -7,7 +7,7 @@ import '../../screens/home.dart';
 import '../../stores/common_store.dart';
 
 class StandingsAppBar extends StatefulWidget {
-  const StandingsAppBar({Key? key}) : super(key: key);
+  const StandingsAppBar({super.key});
 
   @override
   State<StandingsAppBar> createState() => _StandingsAppBarState();

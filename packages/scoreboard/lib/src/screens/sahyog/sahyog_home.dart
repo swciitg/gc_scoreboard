@@ -14,7 +14,7 @@ import 'sahyog_schedule_page.dart';
 import 'sahyog_standings_page.dart';
 
 class SahyogHome extends StatefulWidget {
-  const SahyogHome({Key? key}) : super(key: key);
+  const SahyogHome({super.key});
 
   @override
   State<SahyogHome> createState() => _SahyogHomeState();

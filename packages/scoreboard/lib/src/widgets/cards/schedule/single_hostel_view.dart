@@ -5,8 +5,7 @@ import '../../../globals/styles.dart';
 class BiHostelView extends StatelessWidget {
   final String hostelA;
   final String hostelB;
-  const BiHostelView({Key? key, required this.hostelA, required this.hostelB})
-      : super(key: key);
+  const BiHostelView({super.key, required this.hostelA, required this.hostelB});
 
   @override
   Widget build(BuildContext context) {

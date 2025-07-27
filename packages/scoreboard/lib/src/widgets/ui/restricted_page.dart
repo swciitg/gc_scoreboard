@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../globals/styles.dart';
 
 class RestrictedPage extends StatefulWidget {
-  const RestrictedPage({Key? key}) : super(key: key);
+  const RestrictedPage({super.key});
 
   @override
   State<RestrictedPage> createState() => _RestrictedPageState();

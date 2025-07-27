@@ -31,7 +31,7 @@ class _AddStandingState extends State<AddStanding> {
   TextEditingController victoryStatement = TextEditingController();
   final StandingFormStore standingFormStore = StandingFormStore();
 
-  callbackAutocomplete(value){
+  void callbackAutocomplete(String value){
     standingFormStore.event=value;
   }
   
@@ -101,7 +101,7 @@ class _AddStandingState extends State<AddStanding> {
                                 .standing!
                                 .map((e) => e.toJson()))
                           });
-                          if (!mounted) return;
+                          if (!context.mounted) return;
 
                           showSnackBar(context, "Standing added");
                         } else {
@@ -112,7 +112,7 @@ class _AddStandingState extends State<AddStanding> {
                               standingFormStore.standing;
                           await APIService(context)
                               .updateSpardhaStanding(widget.standings!);
-                          if (!mounted) return;
+                          if (!context.mounted) return;
 
                           showSnackBar(context, "Standing updated");
                         }
@@ -120,7 +120,7 @@ class _AddStandingState extends State<AddStanding> {
                         if (!mounted) return;
                         Navigator.pushNamedAndRemoveUntil(
                             context, ScoreBoardHome.id, (route) => false);
-                      } on DioError catch (err) {
+                      } on DioException catch (err) {
                         showErrorSnackBar(context, err);
                       }
                       setState(() {

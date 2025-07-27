@@ -11,7 +11,7 @@ import '../../widgets/common/top_bar.dart';
 import '../../widgets/standings_page/standingboard.dart';
 
 class SahyogStandingsPage extends StatefulWidget {
-  const SahyogStandingsPage({Key? key}) : super(key: key);
+  const SahyogStandingsPage({super.key});
 
   @override
   State<SahyogStandingsPage> createState() => _SahyogStandingsPageState();

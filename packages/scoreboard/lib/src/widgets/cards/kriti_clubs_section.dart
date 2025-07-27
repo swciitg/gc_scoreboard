@@ -5,7 +5,7 @@ import '../../globals/styles.dart';
 class ClubsListSection extends StatelessWidget {
   final List<String> clubs;
 
-  const ClubsListSection({Key? key,required this.clubs}) : super(key: key);
+  const ClubsListSection({super.key,required this.clubs});
 
   @override
   Widget build(BuildContext context) {

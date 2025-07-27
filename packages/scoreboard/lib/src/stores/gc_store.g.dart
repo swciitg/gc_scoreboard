@@ -9,8 +9,10 @@ part of 'gc_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$GCStore on _GCStore, Store {
-  late final _$selectedCategoryAtom =
-      Atom(name: '_GCStore.selectedCategory', context: context);
+  late final _$selectedCategoryAtom = Atom(
+    name: '_GCStore.selectedCategory',
+    context: context,
+  );
 
   @override
   Category get selectedCategory {
@@ -25,13 +27,16 @@ mixin _$GCStore on _GCStore, Store {
     });
   }
 
-  late final _$_GCStoreActionController =
-      ActionController(name: '_GCStore', context: context);
+  late final _$_GCStoreActionController = ActionController(
+    name: '_GCStore',
+    context: context,
+  );
 
   @override
   void changeSelectedCategory(String c) {
     final _$actionInfo = _$_GCStoreActionController.startAction(
-        name: '_GCStore.changeSelectedCategory');
+      name: '_GCStore.changeSelectedCategory',
+    );
     try {
       return super.changeSelectedCategory(c);
     } finally {
@@ -42,7 +47,8 @@ mixin _$GCStore on _GCStore, Store {
   @override
   void setFiltersToDefault() {
     final _$actionInfo = _$_GCStoreActionController.startAction(
-        name: '_GCStore.setFiltersToDefault');
+      name: '_GCStore.setFiltersToDefault',
+    );
     try {
       return super.setFiltersToDefault();
     } finally {

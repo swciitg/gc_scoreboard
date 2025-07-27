@@ -15,7 +15,7 @@ import '../../widgets/filters/manthan_filter_bar.dart';
 
 
 class ManthanResultsPage extends StatefulWidget {
-  const ManthanResultsPage({Key? key}) : super(key: key);
+  const ManthanResultsPage({super.key});
 
   @override
   State<ManthanResultsPage> createState() => _ManthanResultsPageState();

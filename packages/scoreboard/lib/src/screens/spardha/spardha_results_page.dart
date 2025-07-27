@@ -7,14 +7,13 @@ import '../../services/api.dart';
 import '../../stores/common_store.dart';
 import '../../stores/spardha_store.dart';
 import '../../widgets/cards/results/spardha_results_card.dart';
-import '../../models/spardha_models/spardha_event_model.dart';
 import '../../widgets/ui/shimmer.dart';
 import '../../widgets/common/top_bar.dart';
 import '../../widgets/filters/spardha_filter_bar.dart';
 import '../../widgets/ui/err_reload.dart';
 
 class ResultsPage extends StatefulWidget {
-  const ResultsPage({Key? key}) : super(key: key);
+  const ResultsPage({super.key});
 
   @override
   State<ResultsPage> createState() => _ResultsPageState();

@@ -20,7 +20,7 @@ import '../../home.dart';
 
 class SahyogEventForm extends StatefulWidget {
   final SahyogEventModel? event;
-  const SahyogEventForm({Key? key, this.event}) : super(key: key);
+  const SahyogEventForm({super.key, this.event});
 
   @override
   State<SahyogEventForm> createState() => _SahyogEventFormState();
@@ -45,7 +45,7 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
   final TextEditingController dateInput = TextEditingController();
   final TextEditingController timeInput = TextEditingController();
 
-  callbackClubs(value) {
+  void callbackClubs(String value) {
     clubs.length = int.parse(value);
     setState(() {
       clubSize = int.parse(value);
@@ -53,12 +53,12 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
     });
   }
 
-  callbackAddClub(value, index) {
+  void callbackAddClub(String value, int index) {
     clubs[index - 1] = value;
     clubSizeValue = clubs.length.toString();
   }
 
-  callbackAutocomplete(value) {
+  void callbackAutocomplete(String value) {
     eventName = value;
   }
 
@@ -126,11 +126,11 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
             if (widget.event != null) {
               //update event schedule
               await APIService(context).updateEventSchedule(data: data, competition: 'sahyog');
-              if (!mounted) return;
+              if (!context.mounted) return;
               showSnackBar(context, "Event Edited successfully");
             } else {
               await APIService(context).postEventSchedule(data: data, competiton: 'sahyog');
-              if (!mounted) return;
+             if (!context.mounted) return;
               showSnackBar(context, "Event schedule posted successfully");
             }
             if (!mounted) return;
@@ -138,7 +138,7 @@ class _SahyogEventFormState extends State<SahyogEventForm> {
               isLoading = true;
             });
             Navigator.pushNamedAndRemoveUntil(context, ScoreBoardHome.id, (route) => false);
-          } on DioError catch (err) {
+          } on DioException catch (err) {
             showErrorSnackBar(context, err);
             setState(() {
               isLoading = false;

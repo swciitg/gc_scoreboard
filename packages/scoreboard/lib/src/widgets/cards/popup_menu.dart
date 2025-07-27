@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,13 +26,12 @@ import '../../stores/common_store.dart';
 class PopupMenu extends StatefulWidget {
   final Widget child;
   final List<PopupMenuEntry> items;
-  final eventModel;
+  final dynamic eventModel;
   const PopupMenu(
-      {Key? key,
+      {super.key,
       required this.child,
       required this.items,
-      required this.eventModel})
-      : super(key: key);
+      required this.eventModel});
 
   @override
   State<PopupMenu> createState() => _PopupMenuState();
@@ -41,7 +42,6 @@ class _PopupMenuState extends State<PopupMenu> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     setState(() {
       var type = widget.eventModel.runtimeType;
@@ -61,13 +61,13 @@ class _PopupMenuState extends State<PopupMenu> {
     _tapPosition = tapDownDetails.globalPosition;
   }
 
-  void _showContextMenu(context, commonStore) async {
+  void _showContextMenu(BuildContext context,CommonStore commonStore) async {
     if (widget.items.isEmpty) {
       return;
     }
 
     final RenderBox overlay =
-        Overlay.of(context)?.context.findRenderObject() as RenderBox;
+        Overlay.of(context).context.findRenderObject() as RenderBox;
 
     final result = await showMenu(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -130,7 +130,7 @@ class _PopupMenuState extends State<PopupMenu> {
           }
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => const ScoreBoardHome()));
-        } on DioError catch (err) {
+        } on DioException catch (err) {
           showErrorSnackBar(context, err);
         }
     }

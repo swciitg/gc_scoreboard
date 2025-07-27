@@ -21,7 +21,7 @@ import '../../home.dart';
 
 class KritiEventForm extends StatefulWidget {
   final KritiEventModel? event;
-  const KritiEventForm({Key? key, this.event}) : super(key: key);
+  const KritiEventForm({super.key, this.event});
 
   @override
   State<KritiEventForm> createState() => _KritiEventFormState();
@@ -50,7 +50,7 @@ class _KritiEventFormState extends State<KritiEventForm> {
   final TextEditingController dateInput = TextEditingController();
   final TextEditingController timeInput = TextEditingController();
 
-  callbackClubs(value) {
+  void callbackClubs(String value) {
     clubs.length = int.parse(value);
     setState(() {
       clubSize = int.parse(value);
@@ -58,12 +58,12 @@ class _KritiEventFormState extends State<KritiEventForm> {
     });
   }
 
-  callbackAddClub(value, index) {
+  void callbackAddClub(String value, int index) {
     clubs[index - 1] = value;
     clubSizeValue = clubs.length.toString();
   }
 
-  callbackAutocomplete(value) {
+  void callbackAutocomplete(String value) {
     eventName = value;
   }
 
@@ -110,8 +110,13 @@ class _KritiEventFormState extends State<KritiEventForm> {
           });
           return;
         } else {
-          DateTime eventDateTime =
-              DateTime(date!.year, date!.month, date!.day, date!.hour, date!.minute);
+          DateTime eventDateTime = DateTime(
+            date!.year,
+            date!.month,
+            date!.day,
+            date!.hour,
+            date!.minute,
+          );
 
           var data = {
             "event": eventName,
@@ -134,19 +139,20 @@ class _KritiEventFormState extends State<KritiEventForm> {
             if (widget.event != null) {
               // update event schedule
               await APIService(context).updateEventSchedule(data: data, competition: 'kriti');
-              if (!mounted) return;
+              if (!context.mounted) return;
               showSnackBar(context, "Event Edited successfully");
             } else {
               await APIService(context).postEventSchedule(data: data, competiton: 'kriti');
-              if (!mounted) return;
+              if (!context.mounted) return;
               showSnackBar(context, "Event schedule posted successfully");
             }
             if (!mounted) return;
             setState(() {
               isLoading = true;
             });
+            if (!context.mounted) return;
             Navigator.pushNamedAndRemoveUntil(context, ScoreBoardHome.id, (route) => false);
-          } on DioError catch (err) {
+          } on DioException catch (err) {
             showErrorSnackBar(context, err);
             setState(() {
               isLoading = false;
@@ -159,12 +165,13 @@ class _KritiEventFormState extends State<KritiEventForm> {
     return Scaffold(
       backgroundColor: Themes.backgroundColor,
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(56),
-          child: AppBarFormComponent(
-            title: widget.event == null ? 'Add Event' : 'Edit Event',
-            actionTitle: "Submit",
-            onFormSubmit: onFormSubmit,
-          )),
+        preferredSize: const Size.fromHeight(56),
+        child: AppBarFormComponent(
+          title: widget.event == null ? 'Add Event' : 'Edit Event',
+          actionTitle: "Submit",
+          onFormSubmit: onFormSubmit,
+        ),
+      ),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(8),
@@ -174,173 +181,156 @@ class _KritiEventFormState extends State<KritiEventForm> {
             children: [
               const EventFormHeading(),
               Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AutocompleteTextField(
-                        callbackFunction: callbackAutocomplete,
-                        standings: widget.event?.event,
-                      ),
-                      const SizedBox(height: 12),
-                      CustomDropDown(
-                        items: cupNames,
-                        hintText: 'Cup Category',
-                        onChanged: (s) {
-                          cup = s;
-                        },
-                        value: cup,
-                        validator: validateField,
-                      ),
-                      const SizedBox(height: 12),
-                      CustomDropDown(
-                        items: kritiDifficulties,
-                        hintText: 'Difficulty',
-                        onChanged: (s) => difficulty = s,
-                        value: difficulty,
-                        validator: validateField,
-                      ),
-                      const SizedBox(height: 12),
-                      CustomTextField(
-                        hintText: 'Problem Link',
-                        validator: validateField,
-                        controller: _probelmLinkController,
-                        isNecessary: true,
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: CustomTextField(
-                              hintText: 'Date',
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AutocompleteTextField(
+                      callbackFunction: callbackAutocomplete,
+                      standings: widget.event?.event,
+                    ),
+                    const SizedBox(height: 12),
+                    CustomDropDown(
+                      items: cupNames,
+                      hintText: 'Cup Category',
+                      onChanged: (s) {
+                        cup = s;
+                      },
+                      value: cup,
+                      validator: validateField,
+                    ),
+                    const SizedBox(height: 12),
+                    CustomDropDown(
+                      items: kritiDifficulties,
+                      hintText: 'Difficulty',
+                      onChanged: (s) => difficulty = s,
+                      value: difficulty,
+                      validator: validateField,
+                    ),
+                    const SizedBox(height: 12),
+                    CustomTextField(
+                      hintText: 'Problem Link',
+                      validator: validateField,
+                      controller: _probelmLinkController,
+                      isNecessary: true,
+                    ),
+                    const SizedBox(height: 12),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: CustomTextField(
+                            hintText: 'Date',
+                            validator: validateField,
+                            controller: dateInput,
+                            onTap: () async {
+                              FocusScope.of(context).requestFocus(FocusNode());
+                              DateTime? pickedDate = await showDatePicker(
+                                context: context,
+                                initialDate: date ?? DateTime.now(),
+                                firstDate: DateTime(2000),
+                                //DateTime.now() - not to allow to choose before today.
+                                lastDate: DateTime(2101),
+                                builder: (context, child) => CustomDatePicker(child: child),
+                              );
+                              if (pickedDate != null) {
+                                if (!mounted) return;
+                                date = pickedDate;
+                                String formattedDate = DateFormat('dd-MMM-yyyy').format(pickedDate);
+                                setState(() {
+                                  dateInput.text =
+                                      formattedDate; //set output date to TextField value.
+                                });
+                              }
+                            },
+                            isNecessary: true,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: CustomTextField(
+                            hintText: 'Time',
+                            validator: validateField,
+                            controller: timeInput,
+                            onTap: () async {
+                              FocusScope.of(context).requestFocus(FocusNode());
+                              TimeOfDay? pickedTime = await showTimePicker(
+                                builder: (context, childWidget) {
+                                  return TimePickerColor(childWidget: childWidget);
+                                },
+                                initialTime: time ?? TimeOfDay.now(),
+                                context: context,
+                                //context of current state
+                              );
+                              if (pickedTime != null) {
+                                if (!mounted) return;
+                                time = pickedTime;
+                                setState(() {
+                                  final now = DateTime.now();
+                                  final formattedTimeString = DateFormat.jm().format(
+                                    DateTime(
+                                      now.year,
+                                      now.month,
+                                      now.day,
+                                      pickedTime.hour,
+                                      pickedTime.minute,
+                                    ),
+                                  ); //"6:00 AM"
+                                  timeInput.text = formattedTimeString;
+                                });
+                              }
+                            },
+                            isNecessary: true,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    CustomTextField(
+                      hintText: 'Venue',
+                      validator: validateField,
+                      controller: _venueController,
+                      isNecessary: true,
+                    ),
+                    const SizedBox(height: 12),
+                    CustomTextField(
+                      hintText: 'Score link',
+                      validator: (val) {
+                        return null;
+                      },
+                      controller: _linkController,
+                      isNecessary: false,
+                    ),
+                    const SizedBox(height: 12),
+                    Text('Clubs', style: headline1),
+                    const SizedBox(height: 18),
+                    CustomDropDown(
+                      items: [for (var i = 1; i <= 15; i++) i.toString()],
+                      value: clubSizeValue,
+                      hintText: 'Select Number of Clubs',
+                      onChanged: callbackClubs,
+                      validator: validateField,
+                    ),
+                    const SizedBox(height: 12),
+                    Column(
+                      children: [
+                        for (var i = 1; i <= clubSize; i++)
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 12),
+                            child: CustomDropDown(
+                              items: clubNames,
+                              value: clubs[i - 1],
+                              hintText: 'Club Name $i',
+                              index: i,
                               validator: validateField,
-                              controller: dateInput,
-                              onTap: () async {
-                                FocusScope.of(context).requestFocus(FocusNode());
-                                DateTime? pickedDate = await showDatePicker(
-                                    context: context,
-                                    initialDate: date ?? DateTime.now(),
-                                    firstDate: DateTime(2000),
-                                    //DateTime.now() - not to allow to choose before today.
-                                    lastDate: DateTime(2101),
-                                    builder: (context, child) => CustomDatePicker(
-                                          child: child,
-                                        ));
-                                if (pickedDate != null) {
-                                  if (!mounted) return;
-                                  date = pickedDate;
-                                  String formattedDate =
-                                      DateFormat('dd-MMM-yyyy').format(pickedDate);
-                                  setState(() {
-                                    dateInput.text =
-                                        formattedDate; //set output date to TextField value.
-                                  });
-                                }
-                              },
-                              isNecessary: true,
+                              onChanged: callbackAddClub,
                             ),
                           ),
-                          const SizedBox(
-                            width: 12,
-                          ),
-                          Expanded(
-                            child: CustomTextField(
-                              hintText: 'Time',
-                              validator: validateField,
-                              controller: timeInput,
-                              onTap: () async {
-                                FocusScope.of(context).requestFocus(FocusNode());
-                                TimeOfDay? pickedTime = await showTimePicker(
-                                  builder: (context, childWidget) {
-                                    return TimePickerColor(
-                                      childWidget: childWidget,
-                                    );
-                                  },
-                                  initialTime: time ?? TimeOfDay.now(),
-                                  context: context,
-                                  //context of current state
-                                );
-                                if (pickedTime != null) {
-                                  if (!mounted) return;
-                                  time = pickedTime;
-                                  setState(() {
-                                    final now = DateTime.now();
-                                    final formattedTimeString = DateFormat.jm().format(DateTime(
-                                        now.year,
-                                        now.month,
-                                        now.day,
-                                        pickedTime.hour,
-                                        pickedTime.minute)); //"6:00 AM"
-                                    timeInput.text = formattedTimeString;
-                                  });
-                                }
-                              },
-                              isNecessary: true,
-                            ),
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      CustomTextField(
-                        hintText: 'Venue',
-                        validator: validateField,
-                        controller: _venueController,
-                        isNecessary: true,
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      CustomTextField(
-                        hintText: 'Score link',
-                        validator:  (val) {
-                          return null;
-                        },
-                        controller: _linkController,
-                        isNecessary: false,
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Text(
-                        'Clubs',
-                        style: headline1,
-                      ),
-                      const SizedBox(
-                        height: 18,
-                      ),
-                      CustomDropDown(
-                        items: [for (var i = 1; i <= 15; i++) i.toString()],
-                        value: clubSizeValue,
-                        hintText: 'Select Number of Clubs',
-                        onChanged: callbackClubs,
-                        validator: validateField,
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Column(
-                        children: [
-                          for (var i = 1; i <= clubSize; i++)
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 12),
-                              child: CustomDropDown(
-                                items: clubNames,
-                                value: clubs[i - 1],
-                                hintText: 'Club Name $i',
-                                index: i,
-                                validator: validateField,
-                                onChanged: callbackAddClub,
-                              ),
-                            )
-                        ],
-                      )
-                    ],
-                  ))
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

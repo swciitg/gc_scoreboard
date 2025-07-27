@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
@@ -16,8 +15,7 @@ import '../menu_item.dart';
 import '../popup_menu.dart';
 
 class ManthanScheduleCard extends StatefulWidget {
-  // ignore: prefer_typing_uninitialized_variables
-  final eventModel;
+  final dynamic eventModel;
 
   const ManthanScheduleCard({super.key, required this.eventModel});
 
@@ -113,7 +111,7 @@ class _ManthanScheduleCardState extends State<ManthanScheduleCard> {
                                           mode: LaunchMode.externalApplication);
                                     }
                                   } catch (err) {
-                                    if (kDebugMode) {}
+                                    if (!context.mounted) return;
                                     showSnackBar(context, err.toString());
                                   }
                                 },

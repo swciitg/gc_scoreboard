@@ -56,9 +56,9 @@ class _TopBarState extends State<TopBar> {
 class TopBarItem extends StatelessWidget {
   final Pages page;
   const TopBarItem({
-    Key? key,
+    super.key,
     required this.page,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

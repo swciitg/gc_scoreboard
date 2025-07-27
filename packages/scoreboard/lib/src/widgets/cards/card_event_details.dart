@@ -7,7 +7,7 @@ import 'card_date_widget.dart';
 
 class CardEventDetails extends StatelessWidget {
   final SpardhaEventModel eventModel;
-  const CardEventDetails({Key? key, required this.eventModel}) : super(key: key);
+  const CardEventDetails({super.key, required this.eventModel});
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +61,7 @@ class CardEventDetails extends StatelessWidget {
                         if (await canLaunchUrlString(url)) {
                           await launchUrlString(url);
                         } else {
+                          if (!context.mounted) return;
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text(

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:scoreboard/src/globals/styles.dart';
-import '../../globals/colors.dart';
 
 class EventFormHeading extends StatelessWidget {
-  const EventFormHeading({Key? key}) : super(key: key);
+  const EventFormHeading({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +27,8 @@ class EventFormHeading extends StatelessWidget {
 
 class FieldsMandatory extends StatelessWidget {
   const FieldsMandatory({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -12,7 +12,7 @@ import '../fields/datepicker_color.dart';
 import 'filter_button.dart';
 
 class SpardhaFilterBar extends StatefulWidget {
-  const SpardhaFilterBar({Key? key}) : super(key: key);
+  const SpardhaFilterBar({super.key});
 
   @override
   State<SpardhaFilterBar> createState() => _SpardhaFilterBarState();

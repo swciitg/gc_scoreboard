@@ -9,8 +9,7 @@ import 'score_card_item.dart';
 
 class StandingsResultCard extends StatefulWidget {
   final StandingModel standingModel;
-  const StandingsResultCard({Key? key, required this.standingModel})
-      : super(key: key);
+  const StandingsResultCard({super.key, required this.standingModel});
 
   @override
   State<StandingsResultCard> createState() => _StandingsResultCardState();

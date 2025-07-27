@@ -8,7 +8,7 @@ import '../../screens/home.dart';
 import '../../stores/common_store.dart';
 
 class AppBarHomeComponent extends StatefulWidget {
-  const AppBarHomeComponent({Key? key}) : super(key: key);
+  const AppBarHomeComponent({super.key});
 
   @override
   State<AppBarHomeComponent> createState() => _AppBarHomeComponentState();

@@ -8,7 +8,7 @@ import '../../stores/static_store.dart';
 import 'filter_button.dart';
 
 class KritiFilterBar extends StatefulWidget {
-  const KritiFilterBar({Key? key}) : super(key: key);
+  const KritiFilterBar({super.key});
 
   @override
   State<KritiFilterBar> createState() => _KritiFilterBarState();

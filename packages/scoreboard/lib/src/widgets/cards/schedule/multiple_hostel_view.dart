@@ -7,8 +7,7 @@ import '../../../globals/colors.dart';
 class MultipleHostelView extends StatelessWidget {
   final SpardhaEventModel eventModel;
 
-  const MultipleHostelView({Key? key, required this.eventModel})
-      : super(key: key);
+  const MultipleHostelView({super.key, required this.eventModel});
 
   @override
   Widget build(BuildContext context) {

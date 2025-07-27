@@ -5,7 +5,7 @@ import '../../globals/styles.dart';
 
 class ComingSoon extends StatefulWidget {
   final Competitions competition;
-  const ComingSoon({Key? key, required this.competition}) : super(key: key);
+  const ComingSoon({super.key, required this.competition});
 
   @override
   State<ComingSoon> createState() => _ComingSoonState();

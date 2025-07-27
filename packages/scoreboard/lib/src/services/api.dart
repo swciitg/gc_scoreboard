@@ -150,7 +150,6 @@ class APIService {
       }
       Response resp = await dio.get("/gc/$competition/event-schedule");
       List<dynamic> output = [];
-      print(resp.data['details']);
       for (var e in List<dynamic>.from(resp.data["details"])) {
         {
           competition == 'spardha'
@@ -164,7 +163,7 @@ class APIService {
       }
 
       return output;
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       return Future.error(err);
     }
   }
@@ -173,14 +172,12 @@ class APIService {
 
   Future<List<dynamic>> getResults(ViewType v,
       {required String competition}) async {
-    print('called');
     try {
       if (v == ViewType.admin) {
         dio.options.queryParameters["forAdmin"] = "true";
       }
       Response resp = await dio.get("/gc/$competition/event-schedule/results");
       List<dynamic> output = [];
-      print(resp.data["details"]);
 
       for (var e in List<Map<String, dynamic>>.from(resp.data["details"])) {
         {
@@ -194,7 +191,7 @@ class APIService {
         }
       }
       return output;
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       return Future.error(err);
     }
   }
@@ -212,13 +209,13 @@ class APIService {
         }
         results.add(addResults);
       }
-      Response resp = await dio
+      await dio
           .patch('/gc/spardha/event-schedule/result/$eventID', data: {
         'victoryStatement': victoryStatement,
         'results': results,
         "link": link
       });
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       return Future.error(err);
     }
   }
@@ -234,31 +231,31 @@ class APIService {
       for (var positionResults in data) {
         results.add(positionResults.toJson());
       }
-      Response resp = await dio
+      await dio
           .patch('/gc/$competition/event-schedule/result/$eventID', data: {
         'victoryStatement': victoryStatement,
         'results': results,
         "link": link
       });
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       return Future.error(err);
     }
   }
 
   Future<void> postSpardhaStanding(Map<String, dynamic> data) async {
     try {
-      Response resp = await dio.post("/gc/spardha/standings", data: data);
-    } on DioError catch (err) {
+      await dio.post("/gc/spardha/standings", data: data);
+    } on DioException catch (err) {
       return Future.error(err);
     }
   }
 
   Future<void> updateSpardhaStanding(StandingModel standingModel) async {
     try {
-      Response resp = await dio.patch(
+      await dio.patch(
           "/gc/spardha/standings/${standingModel.id}",
           data: standingModel.toJson());
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       return Future.error(err);
     }
   }
@@ -267,7 +264,7 @@ class APIService {
     try {
       Response resp = await dio.delete("/gc/spardha/standings/$standingID");
       return resp.data['success'];
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       return Future.error(err);
     }
   }
@@ -279,7 +276,7 @@ class APIService {
     try {
       Response resp = await dio.get("/gc/$competition/all-events");
       return List<String>.from(resp.data["details"]);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       return Future.error(err);
     }
   }
@@ -287,12 +284,10 @@ class APIService {
   // Get GC Standings
 
   Future<List<dynamic>> getGCStandings() async {
-    String a = await AuthUserHelpers.getAccessToken();
-    print(a);
     try {
       Response resp = await dio.get("/gc/overall/standings");
       return resp.data['details'];
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       return Future.error(err);
     }
   }
@@ -308,7 +303,7 @@ class APIService {
         "overall": resp2.data["details"],
         "event-wise": resp1.data["details"]
       };
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       return Future.error(err);
     }
   }
@@ -317,8 +312,8 @@ class APIService {
   Future<void> postEventSchedule(
       {required Map<String, dynamic> data, required String competiton}) async {
     try {
-      var resp = await dio.post("/gc/$competiton/event-schedule", data: data);
-    } on DioError catch (err) {
+      await dio.post("/gc/$competiton/event-schedule", data: data);
+    } on DioException catch (err) {
       return Future.error(err);
     }
   }
@@ -328,9 +323,9 @@ class APIService {
   Future<void> updateEventSchedule(
       {required Map<String, dynamic> data, required String competition}) async {
     try {
-      Response resp = await dio
+      await dio
           .patch('/gc/$competition/event-schedule/${data['_id']}', data: data);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       return Future.error(err);
     }
   }
@@ -340,9 +335,8 @@ class APIService {
   Future<void> deleteEvent(
       {required String eventID, required String competition}) async {
     try {
-      Response resp =
           await dio.delete('/gc/$competition/event-schedule/$eventID');
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       return Future.error(err);
     }
   }
@@ -353,7 +347,7 @@ class APIService {
       {required String eventID, required String competition}) async {
     try {
       await dio.delete('/gc/$competition/event-schedule/result/$eventID');
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       return Future.error(err);
     }
   }

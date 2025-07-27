@@ -13,7 +13,7 @@ import '../../widgets/common/top_bar.dart';
 import '../../widgets/filters/sahyog_filter_bar.dart';
 
 class SahyogResultsPage extends StatefulWidget {
-  const SahyogResultsPage({Key? key}) : super(key: key);
+  const SahyogResultsPage({super.key});
 
   @override
   State<SahyogResultsPage> createState() => _SahyogResultsPageState();

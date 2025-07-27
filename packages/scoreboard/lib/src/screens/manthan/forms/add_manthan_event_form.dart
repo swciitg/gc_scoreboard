@@ -44,7 +44,7 @@ class _ManthanEventFormState extends State<ManthanEventForm> {
   final TextEditingController timeInput = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  callbackAutocomplete(value) {
+  void callbackAutocomplete(String value) {
     eventName = value;
   }
 
@@ -95,11 +95,11 @@ class _ManthanEventFormState extends State<ManthanEventForm> {
             if (widget.event != null) {
               // update event schedule
               await APIService(context).updateEventSchedule(data: data, competition: 'manthan');
-              if (!mounted) return;
+              if (!context.mounted) return;
               showSnackBar(context, "Event Edited successfully");
             } else {
               await APIService(context).postEventSchedule(data: data, competiton: 'manthan');
-              if (!mounted) return;
+              if (!context.mounted) return;
               showSnackBar(context, "Event schedule posted successfully");
             }
             if (!mounted) return;
@@ -107,7 +107,7 @@ class _ManthanEventFormState extends State<ManthanEventForm> {
               isLoading = true;
             });
             Navigator.pushNamedAndRemoveUntil(context, ScoreBoardHome.id, (route) => false);
-          } on DioError catch (err) {
+          } on DioException catch (err) {
             showErrorSnackBar(context, err);
             setState(() {
               isLoading = false;

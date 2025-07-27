@@ -4,8 +4,7 @@ import '../../globals/styles.dart';
 
 class ErrorReloadPage extends StatefulWidget {
   final Function apiFunction;
-  const ErrorReloadPage({Key? key, required this.apiFunction})
-      : super(key: key);
+  const ErrorReloadPage({super.key, required this.apiFunction});
 
   @override
   State<ErrorReloadPage> createState() => _ErrorReloadPageState();
@@ -48,7 +47,7 @@ class _ErrorReloadPageState extends State<ErrorReloadPage> {
                     fontSize: 12,
                     fontWeight: FontWeight.w600)),
             style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(Themes.kYellow)),
+                backgroundColor: WidgetStatePropertyAll(Themes.kYellow)),
           )
         ],
       ),

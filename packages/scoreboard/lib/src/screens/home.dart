@@ -11,7 +11,7 @@ import 'gc_standings.dart';
 
 class ScoreBoardHome extends StatefulWidget {
   static const id = '/gc/home';
-  const ScoreBoardHome({Key? key}) : super(key: key);
+  const ScoreBoardHome({super.key});
 
   @override
   State<ScoreBoardHome> createState() => _ScoreBoardHomeState();

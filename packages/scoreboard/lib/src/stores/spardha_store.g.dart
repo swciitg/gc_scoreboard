@@ -9,8 +9,10 @@ part of 'spardha_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$SpardhaStore on _SpardhaStore, Store {
-  late final _$selectedCategoryAtom =
-      Atom(name: '_SpardhaStore.selectedCategory', context: context);
+  late final _$selectedCategoryAtom = Atom(
+    name: '_SpardhaStore.selectedCategory',
+    context: context,
+  );
 
   @override
   Category get selectedCategory {
@@ -25,8 +27,10 @@ mixin _$SpardhaStore on _SpardhaStore, Store {
     });
   }
 
-  late final _$selectedHostelAtom =
-      Atom(name: '_SpardhaStore.selectedHostel', context: context);
+  late final _$selectedHostelAtom = Atom(
+    name: '_SpardhaStore.selectedHostel',
+    context: context,
+  );
 
   @override
   Hostel get selectedHostel {
@@ -41,8 +45,10 @@ mixin _$SpardhaStore on _SpardhaStore, Store {
     });
   }
 
-  late final _$selectedDateAtom =
-      Atom(name: '_SpardhaStore.selectedDate', context: context);
+  late final _$selectedDateAtom = Atom(
+    name: '_SpardhaStore.selectedDate',
+    context: context,
+  );
 
   @override
   String get selectedDate {
@@ -57,8 +63,10 @@ mixin _$SpardhaStore on _SpardhaStore, Store {
     });
   }
 
-  late final _$selectedEventAtom =
-      Atom(name: '_SpardhaStore.selectedEvent', context: context);
+  late final _$selectedEventAtom = Atom(
+    name: '_SpardhaStore.selectedEvent',
+    context: context,
+  );
 
   @override
   String get selectedEvent {
@@ -73,13 +81,16 @@ mixin _$SpardhaStore on _SpardhaStore, Store {
     });
   }
 
-  late final _$_SpardhaStoreActionController =
-      ActionController(name: '_SpardhaStore', context: context);
+  late final _$_SpardhaStoreActionController = ActionController(
+    name: '_SpardhaStore',
+    context: context,
+  );
 
   @override
   void setFiltersToDefault() {
     final _$actionInfo = _$_SpardhaStoreActionController.startAction(
-        name: '_SpardhaStore.setFiltersToDefault');
+      name: '_SpardhaStore.setFiltersToDefault',
+    );
     try {
       return super.setFiltersToDefault();
     } finally {
@@ -90,7 +101,8 @@ mixin _$SpardhaStore on _SpardhaStore, Store {
   @override
   void changeSelectedCategory(String c) {
     final _$actionInfo = _$_SpardhaStoreActionController.startAction(
-        name: '_SpardhaStore.changeSelectedCategory');
+      name: '_SpardhaStore.changeSelectedCategory',
+    );
     try {
       return super.changeSelectedCategory(c);
     } finally {
@@ -101,7 +113,8 @@ mixin _$SpardhaStore on _SpardhaStore, Store {
   @override
   void changeSelectedHostel(String h) {
     final _$actionInfo = _$_SpardhaStoreActionController.startAction(
-        name: '_SpardhaStore.changeSelectedHostel');
+      name: '_SpardhaStore.changeSelectedHostel',
+    );
     try {
       return super.changeSelectedHostel(h);
     } finally {
@@ -112,7 +125,8 @@ mixin _$SpardhaStore on _SpardhaStore, Store {
   @override
   void changeSelectedDate(String d) {
     final _$actionInfo = _$_SpardhaStoreActionController.startAction(
-        name: '_SpardhaStore.changeSelectedDate');
+      name: '_SpardhaStore.changeSelectedDate',
+    );
     try {
       return super.changeSelectedDate(d);
     } finally {
@@ -123,7 +137,8 @@ mixin _$SpardhaStore on _SpardhaStore, Store {
   @override
   void makeSelectedDateEmpty() {
     final _$actionInfo = _$_SpardhaStoreActionController.startAction(
-        name: '_SpardhaStore.makeSelectedDateEmpty');
+      name: '_SpardhaStore.makeSelectedDateEmpty',
+    );
     try {
       return super.makeSelectedDateEmpty();
     } finally {
@@ -134,7 +149,8 @@ mixin _$SpardhaStore on _SpardhaStore, Store {
   @override
   void changeSelectedEvent(String e) {
     final _$actionInfo = _$_SpardhaStoreActionController.startAction(
-        name: '_SpardhaStore.changeSelectedEvent');
+      name: '_SpardhaStore.changeSelectedEvent',
+    );
     try {
       return super.changeSelectedEvent(e);
     } finally {

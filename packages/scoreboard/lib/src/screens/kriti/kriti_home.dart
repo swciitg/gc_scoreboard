@@ -15,7 +15,7 @@ import 'kriti_schedule_page.dart';
 import 'kriti_standings_page.dart';
 
 class KritiHome extends StatefulWidget {
-  const KritiHome({Key? key}) : super(key: key);
+  const KritiHome({super.key});
 
   @override
   State<KritiHome> createState() => _KritiHomeState();

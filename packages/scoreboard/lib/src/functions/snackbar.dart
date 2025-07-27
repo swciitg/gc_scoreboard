@@ -13,7 +13,7 @@ void showSnackBar(BuildContext buildContext, String message) {
   ));
 }
 
-void showErrorSnackBar(BuildContext buildContext, DioError err) {
+void showErrorSnackBar(BuildContext buildContext, DioException err) {
   ScaffoldMessenger.of(buildContext).showSnackBar(SnackBar(
     content: Text(
       (err.response != null)

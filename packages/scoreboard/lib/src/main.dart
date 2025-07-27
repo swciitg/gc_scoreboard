@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
@@ -19,7 +21,7 @@ import 'widgets/filters/spardha_filter_bar.dart';
 
 class GCScoreBoard extends StatefulWidget {
   final Map<String, String> userInfo;
-  const GCScoreBoard({Key? key, required this.userInfo}) : super(key: key);
+  const GCScoreBoard({super.key, required this.userInfo});
 
   @override
   State<GCScoreBoard> createState() => _GCScoreBoardState();
@@ -91,8 +93,7 @@ class _GCScoreBoardState extends State<GCScoreBoard> {
                     ),
                   );
                 } else if (snapshot.hasError) {
-                  print(snapshot.error);
-                  print("Error occured in GC");
+                  log("Error occured in GC: ${snapshot.error}");
                   return Scaffold(
                       backgroundColor: Themes.backgroundColor,
                       body: Column(children: [

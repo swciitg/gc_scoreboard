@@ -5,8 +5,7 @@ import '../../globals/styles.dart';
 
 class StandingBoard extends StatefulWidget {
   final List<dynamic> hostelStandings;
-  const StandingBoard({Key? key, required this.hostelStandings})
-      : super(key: key);
+  const StandingBoard({super.key, required this.hostelStandings});
 
   @override
   State<StandingBoard> createState() => _StandingBoardState();

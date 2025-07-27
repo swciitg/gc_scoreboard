@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -99,8 +101,7 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
                         ));
                       });
                     }
-                    print("ERROR IN STANDINGS");
-                    print(snapshot.error);
+                    log("ERROR IN STANDINGS: ${snapshot.error}");
                     return ErrorReloadPage(apiFunction: reloadCallback);
                   })
             ],

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
@@ -90,7 +92,7 @@ class AuthUserHelpers {
           await APIService(buildContext).getCompetitionEvents(competition: 'manthan');
 
       return true;
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       return Future.error(err);
     }
   }

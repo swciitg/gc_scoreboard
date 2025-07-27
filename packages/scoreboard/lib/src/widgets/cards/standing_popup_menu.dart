@@ -14,11 +14,10 @@ class StandingPopup extends StatefulWidget {
   final List<PopupMenuEntry> items;
   final StandingModel standingModel;
   const StandingPopup(
-      {Key? key,
+      {super.key,
       required this.child,
       required this.items,
-      required this.standingModel})
-      : super(key: key);
+      required this.standingModel});
 
   @override
   State<StandingPopup> createState() => _StandingPopupState();
@@ -30,9 +29,9 @@ class _StandingPopupState extends State<StandingPopup> {
     _tapPosition = tapDownDetails.globalPosition;
   }
 
-  void _showContextMenu(context, commonStore) async {
+  void _showContextMenu(BuildContext context, CommonStore commonStore) async {
     final RenderBox overlay =
-        Overlay.of(context)?.context.findRenderObject() as RenderBox;
+        Overlay.of(context).context.findRenderObject() as RenderBox;
 
     final result = await showMenu(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -44,6 +43,7 @@ class _StandingPopupState extends State<StandingPopup> {
 
     switch (result) {
       case 'edit standings':
+      if (!context.mounted) return;
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -53,12 +53,15 @@ class _StandingPopupState extends State<StandingPopup> {
         break;
 
       case 'delete':
+      if (!context.mounted) return;
         bool response =
             await APIService(context).deleteSpardhaStanding(widget.standingModel.id!);
         commonStore.competition = Competitions.gc;
         if (!response) {
+          if (!context.mounted) return;
           showSnackBar(context, 'Some error occurred, try again later');
         } else {
+          if (!context.mounted) return;
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(

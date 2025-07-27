@@ -15,7 +15,7 @@ import '../../widgets/cards/results/kriti_result_card.dart';
 
 
 class KritiResultsPage extends StatefulWidget {
-  const KritiResultsPage({Key? key}) : super(key: key);
+  const KritiResultsPage({super.key});
 
   @override
   State<KritiResultsPage> createState() => _KritiResultsPageState();

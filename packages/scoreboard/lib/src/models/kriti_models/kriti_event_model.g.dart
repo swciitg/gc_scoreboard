@@ -17,7 +17,8 @@ KritiEventModel _$KritiEventModelFromJson(Map<String, dynamic> json) =>
       venue: json['venue'] as String,
       resultAdded: json['resultAdded'] as bool,
       problemLink: json['problemLink'] as String,
-      results: (json['results'] as List<dynamic>?)
+      results:
+          (json['results'] as List<dynamic>?)
               ?.map((e) => KritiResultModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],

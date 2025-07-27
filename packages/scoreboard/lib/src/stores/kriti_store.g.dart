@@ -9,8 +9,10 @@ part of 'kriti_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$KritiStore on _KritiStore, Store {
-  late final _$selectedCupAtom =
-      Atom(name: '_KritiStore.selectedCup', context: context);
+  late final _$selectedCupAtom = Atom(
+    name: '_KritiStore.selectedCup',
+    context: context,
+  );
 
   @override
   Cup get selectedCup {
@@ -25,8 +27,10 @@ mixin _$KritiStore on _KritiStore, Store {
     });
   }
 
-  late final _$selectedClubAtom =
-      Atom(name: '_KritiStore.selectedClub', context: context);
+  late final _$selectedClubAtom = Atom(
+    name: '_KritiStore.selectedClub',
+    context: context,
+  );
 
   @override
   Club get selectedClub {
@@ -41,8 +45,10 @@ mixin _$KritiStore on _KritiStore, Store {
     });
   }
 
-  late final _$selectedEventAtom =
-      Atom(name: '_KritiStore.selectedEvent', context: context);
+  late final _$selectedEventAtom = Atom(
+    name: '_KritiStore.selectedEvent',
+    context: context,
+  );
 
   @override
   String get selectedEvent {
@@ -57,13 +63,16 @@ mixin _$KritiStore on _KritiStore, Store {
     });
   }
 
-  late final _$_KritiStoreActionController =
-      ActionController(name: '_KritiStore', context: context);
+  late final _$_KritiStoreActionController = ActionController(
+    name: '_KritiStore',
+    context: context,
+  );
 
   @override
   void setFiltersToDefault() {
     final _$actionInfo = _$_KritiStoreActionController.startAction(
-        name: '_KritiStore.setFiltersToDefault');
+      name: '_KritiStore.setFiltersToDefault',
+    );
     try {
       return super.setFiltersToDefault();
     } finally {
@@ -74,7 +83,8 @@ mixin _$KritiStore on _KritiStore, Store {
   @override
   void changeSelectedEvent(String e) {
     final _$actionInfo = _$_KritiStoreActionController.startAction(
-        name: '_KritiStore.changeSelectedEvent');
+      name: '_KritiStore.changeSelectedEvent',
+    );
     try {
       return super.changeSelectedEvent(e);
     } finally {
@@ -85,7 +95,8 @@ mixin _$KritiStore on _KritiStore, Store {
   @override
   void changeSelectedCup(String c) {
     final _$actionInfo = _$_KritiStoreActionController.startAction(
-        name: '_KritiStore.changeSelectedCup');
+      name: '_KritiStore.changeSelectedCup',
+    );
     try {
       return super.changeSelectedCup(c);
     } finally {
@@ -96,7 +107,8 @@ mixin _$KritiStore on _KritiStore, Store {
   @override
   void changeSelectedClub(String c) {
     final _$actionInfo = _$_KritiStoreActionController.startAction(
-        name: '_KritiStore.changeSelectedClub');
+      name: '_KritiStore.changeSelectedClub',
+    );
     try {
       return super.changeSelectedClub(c);
     } finally {

@@ -50,10 +50,10 @@ class BottomNavBarItem extends StatelessWidget {
   final Competitions competition;
 
   const BottomNavBarItem({
-    Key? key,
+    super.key,
     required this.width,
     required this.competition,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

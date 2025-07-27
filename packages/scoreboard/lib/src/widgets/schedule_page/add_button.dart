@@ -6,7 +6,7 @@ class AddButton extends StatelessWidget {
   final String text;
   final double? width;
 
-  const AddButton({Key? key, required this.text, this.width}) : super(key: key);
+  const AddButton({super.key, required this.text, this.width});
 
   @override
   Widget build(BuildContext context) {
