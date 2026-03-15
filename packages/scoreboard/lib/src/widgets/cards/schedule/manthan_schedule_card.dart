@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
+import 'package:onestop_ui/index.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/src/functions/snackbar.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -51,8 +52,9 @@ class _ManthanScheduleCardState extends State<ManthanScheduleCard> {
           items: commonStore.viewType == ViewType.admin ? popupOptions : [],
           child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(24),
-              color: Themes.cardColor2,
+              borderRadius: BorderRadius.circular(OCornerRadius.l),
+              color: OColor.white,
+              border: Border.all(color: OColor.gray200, width: 1),
             ),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -64,17 +66,18 @@ class _ManthanScheduleCardState extends State<ManthanScheduleCard> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 4),
-                              child: SizedBox(
-                                height: 28,
-                                child: Text(widget.eventModel.event,
-                                    style: cardEventStyle),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 4),
+                                child: SizedBox(
+                                  height: 28,
+                                  child: Text(widget.eventModel.event,
+                                      style: cardEventStyle, overflow: TextOverflow.ellipsis, maxLines: 1),
+                                ),
                               ),
-                            ),
                             SizedBox(
                               height: 20,
                               child: isManthan
@@ -82,7 +85,8 @@ class _ManthanScheduleCardState extends State<ManthanScheduleCard> {
                                       style: cardStageStyle1)
                                   : const Text(''),
                             ),
-                          ],
+                            ],
+                          ),
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -115,7 +119,7 @@ class _ManthanScheduleCardState extends State<ManthanScheduleCard> {
                                     showSnackBar(context, err.toString());
                                   }
                                 },
-                                child: const Text("View Score",
+                                child: Text("View Score",
                                     style: cardCategoryStyle),
                               ),
                             if (widget.eventModel.link.isNotEmpty)
@@ -139,10 +143,10 @@ class _ManthanScheduleCardState extends State<ManthanScheduleCard> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.access_time_outlined,
-                              color: Themes.cardFontColor2,
-                              size: 14,
+                              color: OColor.gray500,
+                              size: 16,
                             ),
                             const SizedBox(
                               width: 8,
@@ -160,10 +164,10 @@ class _ManthanScheduleCardState extends State<ManthanScheduleCard> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.location_on_outlined,
-                              color: Themes.cardFontColor2,
-                              size: 14,
+                              color: OColor.gray500,
+                              size: 16,
                             ),
                             const SizedBox(
                               width: 8,

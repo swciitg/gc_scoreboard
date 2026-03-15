@@ -35,7 +35,7 @@ class _ConfirmEventDetailsState extends State<ConfirmEventDetails> {
           appBar: AppBar(
             elevation: 0,
             backgroundColor: Themes.backgroundColor,
-            shape: const Border(
+            shape: Border(
               bottom: BorderSide(
                 color: Themes.dividerColor1,
                 width: 1,

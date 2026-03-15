@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:onestop_ui/index.dart';
 import 'package:provider/provider.dart';
 import '../../../globals/enums.dart';
 import '../../../globals/styles.dart';
@@ -42,8 +43,9 @@ class _SpardhaResultsCardState extends State<SpardhaResultsCard> {
             items: commonStore.viewType == ViewType.admin ? popupOptions : [],
             child: Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(24),
-                  color: Themes.cardColor2),
+                  borderRadius: BorderRadius.circular(OCornerRadius.l),
+                  color: OColor.white,
+                  border: Border.all(color: OColor.gray200, width: 1)),
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -57,7 +59,7 @@ class _SpardhaResultsCardState extends State<SpardhaResultsCard> {
                           Expanded(
                             child: Row(
                               children: [
-                                const Icon(
+                                Icon(
                                   Icons.emoji_events_outlined,
                                   color: Themes.warning,
                                   size: 12,
@@ -88,7 +90,7 @@ class _SpardhaResultsCardState extends State<SpardhaResultsCard> {
                               height: 24,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(100),
-                                  color: Themes.kGrey),
+                                  color: OColor.gray100),
                               width: 64,
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
@@ -117,9 +119,9 @@ class _SpardhaResultsCardState extends State<SpardhaResultsCard> {
                     isExpanded
                         ? Column(
                             children: [
-                              const Divider(
+                              Divider(
                                 height: 32,
-                                color: Themes.bottomNavHighlightColor,
+                                color: OColor.gray200,
                                 thickness: 1,
                               ),
                               SizedBox(

@@ -52,7 +52,7 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
             appBar: AppBar(
               elevation: 0,
               backgroundColor: Themes.backgroundColor,
-              shape: const Border(
+              shape: Border(
                 bottom: BorderSide(
                   color: Themes.dividerColor1,
                   width: 1,
@@ -68,7 +68,7 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
                   ManthanResultFormStore.clear();
                   Navigator.of(context).pop();
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.close,
                   color: Themes.primaryColor,
                 ),
@@ -256,7 +256,7 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
                                 const SizedBox(
                                   height: 24,
                                 ),
-                                const Divider(
+                                Divider(
                                   thickness: 1,
                                   color: Themes.dividerColor1,
                                 ),
@@ -277,7 +277,7 @@ class _ManthanResultFormState extends State<ManthanResultForm> {
                                         mainAxisSize: MainAxisSize.min,
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
-                                          const Icon(
+                                          Icon(
                                             Icons.add,
                                             color: Themes.primaryColor,
                                           ),

@@ -32,6 +32,7 @@ class _ManthanHomeState extends State<ManthanHome> {
     var commonStore = context.read<CommonStore>();
     return Observer(builder: (context) {
       return Scaffold(
+        extendBody: true,
         backgroundColor: Themes.backgroundColor,
         appBar: const PreferredSize(
             preferredSize: Size.fromHeight(56), child: AppBarHomeComponent()),

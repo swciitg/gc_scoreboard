@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:onestop_ui/index.dart';
 import 'package:provider/provider.dart';
 import 'package:scoreboard/src/functions/snackbar.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -44,8 +45,9 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
           items: commonStore.viewType == ViewType.admin ? popupOptions : [],
           child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(24),
-              color: Themes.cardColor2,
+              borderRadius: BorderRadius.circular(OCornerRadius.l),
+              color: OColor.white,
+              border: Border.all(color: OColor.gray200, width: 1),
             ),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -57,17 +59,18 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 4),
-                              child: SizedBox(
-                                height: 28,
-                                child: Text(widget.eventModel.event,
-                                    style: cardEventStyle),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 4),
+                                child: SizedBox(
+                                  height: 28,
+                                  child: Text(widget.eventModel.event,
+                                      style: cardEventStyle, overflow: TextOverflow.ellipsis, maxLines: 1),
+                                ),
                               ),
-                            ),
                             SizedBox(
                                 height: 20,
                                 child: Text(widget.eventModel.module,
@@ -75,7 +78,8 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
                             const SizedBox(
                               height: 16,
                             ),
-                          ],
+                            ],
+                          ),
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -109,7 +113,7 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
                                       showSnackBar(context, err.toString());
                                     }
                                   },
-                                  child: const Text("View Score",
+                                  child: Text("View Score",
                                       style: cardCategoryStyle)),
                             if (widget.eventModel.link.isNotEmpty)
                               const SizedBox(height: 8),
@@ -132,7 +136,7 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
                         Expanded(
                           child: Row(
                             children: [
-                              const Icon(
+                              Icon(
                                 Icons.emoji_events_outlined,
                                 color: Themes.warning,
                                 size: 12,
@@ -163,7 +167,7 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
                             height: 24,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(100),
-                                color: Themes.kGrey),
+                                color: OColor.gray100),
                             width: 64,
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
@@ -192,9 +196,9 @@ class _ManthanResultCardState extends State<ManthanResultCard> {
                   isExpanded
                       ? Column(
                           children: [
-                            const Divider(
+                            Divider(
                               height: 32,
-                              color: Themes.bottomNavHighlightColor,
+                              color: OColor.gray200,
                               thickness: 1,
                             ),
                             Padding(

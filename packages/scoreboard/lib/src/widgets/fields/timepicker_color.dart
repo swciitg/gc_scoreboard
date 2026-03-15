@@ -20,7 +20,7 @@ class _TimePickerColorState extends State<TimePickerColor> {
         timePickerTheme: TimePickerThemeData(
           backgroundColor: Themes.secondaryColor,
           dayPeriodBorderSide:
-              const BorderSide(color: Themes.dayPeriodBorderColor, width: 2),
+              BorderSide(color: Themes.dayPeriodBorderColor, width: 2),
           dayPeriodColor: WidgetStateColor.resolveWith((states) =>
               states.contains(WidgetState.selected)
                   ? Themes.dayPeriodBorderColor
@@ -55,7 +55,7 @@ class _TimePickerColorState extends State<TimePickerColor> {
                   : Colors.white),
           entryModeIconColor: Colors.blueGrey.shade600,
         ),
-        textTheme: const TextTheme(
+        textTheme: TextTheme(
             labelLarge: basicFontStyle,
             labelMedium: basicFontStyle,
             labelSmall: basicFontStyle // days

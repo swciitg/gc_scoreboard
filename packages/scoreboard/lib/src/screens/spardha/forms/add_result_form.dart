@@ -49,7 +49,7 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
             appBar: AppBar(
               elevation: 0,
               backgroundColor: Themes.backgroundColor,
-              shape: const Border(
+              shape: Border(
                 bottom: BorderSide(
                   color: Themes.dividerColor1,
                   width: 1,
@@ -65,7 +65,7 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                   ResultFormStore.clear();
                   Navigator.of(context).pop();
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.close,
                   color: Themes.primaryColor,
                 ),
@@ -223,7 +223,7 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                                         if (team == 0)
                                           GestureDetector(
                                             behavior: HitTestBehavior.translucent,
-                                            child: const Padding(
+                                            child: Padding(
                                               padding: EdgeInsets.all(4.0),
                                               child: Icon(
                                                 Icons.add,
@@ -239,7 +239,7 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                                         if (team != 0)
                                           GestureDetector(
                                             behavior: HitTestBehavior.translucent,
-                                            child: const Padding(
+                                            child: Padding(
                                               padding: EdgeInsets.all(4.0),
                                               child: Icon(
                                                 Icons.remove,
@@ -313,7 +313,7 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                                     const SizedBox(
                                       height: 24,
                                     ),
-                                    const Divider(
+                                    Divider(
                                       thickness: 1,
                                       color: Themes.dividerColor1,
                                     ),
@@ -335,7 +335,7 @@ class _SpardhaResultFormState extends State<SpardhaResultForm> {
                                             mainAxisSize: MainAxisSize.min,
                                             mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
-                                              const Icon(
+                                              Icon(
                                                 Icons.add,
                                                 color: Themes.primaryColor,
                                               ),

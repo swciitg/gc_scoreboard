@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onestop_ui/index.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../../globals/colors.dart';
 import '../../globals/styles.dart';
@@ -16,16 +17,17 @@ class CardEventDetails extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: SizedBox(
-                    height: 28,
-                    child: Text(eventModel.event, style: cardEventStyle),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: SizedBox(
+                      height: 28,
+                      child: Text(eventModel.event, style: cardEventStyle, overflow: TextOverflow.ellipsis, maxLines: 1),
+                    ),
                   ),
-                ),
                 SizedBox(
                   height: 20,
                   child: Text(eventModel.category, style: cardCategoryStyle),
@@ -36,8 +38,14 @@ class CardEventDetails extends StatelessWidget {
                 Container(
                   height: 26,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Themes.kGrey,
+                    borderRadius: BorderRadius.circular(OCornerRadius.s),
+                    color: Colors.transparent,
+                    border: Border.all(
+                      color: eventModel.results.isEmpty
+                          ? const Color(0xFFFFD700)
+                          : Themes.primaryColor,
+                      width: 1,
+                    ),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -45,7 +53,8 @@ class CardEventDetails extends StatelessWidget {
                         style: eventModel.results.isEmpty ? cardStageStyle1 : cardStageStyle2),
                   ),
                 )
-              ],
+                ],
+              ),
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -73,7 +82,7 @@ class CardEventDetails extends StatelessWidget {
                           );
                         }
                       },
-                      child: const Text("view score", style: cardCategoryStyle)),
+                      child: Text("view score", style: cardCategoryStyle)),
                 if (eventModel.link.isNotEmpty) const SizedBox(height: 8),
                 Container(
                   alignment: Alignment.topCenter,

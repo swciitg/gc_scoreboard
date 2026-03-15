@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:onestop_ui/index.dart';
 import '../../../globals/styles.dart';
 import '../../../models/spardha_models/spardha_event_model.dart';
-import '../../../globals/colors.dart';
 
 class TimeVenueWidget extends StatelessWidget {
   final SpardhaEventModel eventModel;
@@ -19,10 +19,10 @@ class TimeVenueWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const Icon(
+              Icon(
                 Icons.access_time_outlined,
-                color: Themes.cardFontColor2,
-                size: 14,
+                color: OColor.gray500,
+                size: 16,
               ),
               const SizedBox(
                 width: 8,
@@ -45,10 +45,10 @@ class TimeVenueWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const Icon(
+              Icon(
                 Icons.location_on_outlined,
-                color: Themes.cardFontColor2,
-                size: 14,
+                color: OColor.gray500,
+                size: 16,
               ),
               const SizedBox(
                 width: 8,

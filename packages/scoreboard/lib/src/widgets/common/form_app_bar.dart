@@ -22,7 +22,7 @@ class _AppBarFormComponentState extends State<AppBarFormComponent> {
     return AppBar(
       elevation: 0,
       backgroundColor: Themes.backgroundColor,
-      shape: const Border(
+      shape: Border(
         bottom: BorderSide(
           color: Themes.dividerColor1,
           width: 1,
@@ -37,7 +37,7 @@ class _AppBarFormComponentState extends State<AppBarFormComponent> {
         onPressed: () {
           Navigator.of(context).pop();
         },
-        icon: const Icon(
+        icon: Icon(
           Icons.close,
           color: Themes.primaryColor,
         ),

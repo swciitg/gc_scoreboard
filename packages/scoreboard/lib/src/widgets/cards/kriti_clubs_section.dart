@@ -26,7 +26,7 @@ class ClubsListSection extends StatelessWidget {
               height: 18,
               child: Row(
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.fiber_manual_record,
                     size: 4,
                     color: Themes.cardFontColor2,

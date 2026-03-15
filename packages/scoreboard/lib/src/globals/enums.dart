@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 enum ApiResponse { success, adminRelogin }
 
 enum Competitions {
+  gc("GC", "assets/gc.svg"),
   spardha("Spardha", "assets/spardha2.svg"),
   kriti("Kriti", "assets/kriti2.svg"),
   manthan("Manthan", "assets/manthan2.svg"),
-  sahyog("Sahyog", "assets/sahyog.svg"),
-  gc("GC", "assets/gc.svg");
+  sahyog("Sahyog", "assets/sahyog.svg");
 
   final String name;
   final String assetPath;

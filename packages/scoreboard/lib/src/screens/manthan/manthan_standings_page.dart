@@ -39,12 +39,9 @@ class _StandingsPageState extends State<ManthanStandingsPage> {
                 if (snapshot.connectionState != ConnectionState.done) {
                   return Expanded(
                       child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 16),
-                      child: ShowShimmer(
-                        height: 400,
-                        width: MediaQuery.of(context).size.width,
-                      ),
+                    child: ShowShimmer(
+                      height: 400,
+                      width: MediaQuery.of(context).size.width,
                     ),
                   ));
                 } else if (snapshot.hasData) {

@@ -1,9 +1,10 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:onestop_ui/index.dart';
 import 'package:provider/provider.dart';
-import '../../globals/colors.dart';
 import '../../globals/enums.dart';
 import '../../globals/styles.dart';
 import '../../stores/common_store.dart';
@@ -23,37 +24,53 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
-    double mediaWidth = MediaQuery.of(context).size.width;
-    return Container(
-        color: Themes.bottomNavBarColor,
-        height: 90,
-        width: MediaQuery.of(context).size.width,
-        child: Row(
-          children: [
-            BottomNavBarItem(
-                competition: Competitions.gc, width: mediaWidth / 5),
-            BottomNavBarItem(
-                competition: Competitions.spardha, width: mediaWidth / 5),
-            BottomNavBarItem(
-                competition: Competitions.kriti, width: mediaWidth / 5),
-            BottomNavBarItem(
-                competition: Competitions.manthan, width: mediaWidth / 5),
-            BottomNavBarItem(
-                competition: Competitions.sahyog, width: mediaWidth / 5),
+    final bottomInset = MediaQuery.viewPaddingOf(context).bottom;
+    return Padding(
+      padding: EdgeInsets.only(
+        left: 8,
+        right: 8,
+        bottom: Platform.isIOS ? 8 : bottomInset,
+      ),
+      child: Container(
+        padding: const EdgeInsets.all(6),
+        decoration: BoxDecoration(
+          color: OColor.white,
+          borderRadius: BorderRadius.circular(
+              Platform.isIOS ? 40 : OCornerRadius.l),
+          boxShadow: [
+            BoxShadow(
+              color: OColor.black.withValues(alpha: 0.06),
+              blurRadius: 9,
+              offset: const Offset(0, 6),
+            ),
+            BoxShadow(
+              color: OColor.black.withValues(alpha: 0.03),
+              blurRadius: 17,
+              offset: const Offset(0, 16),
+            ),
+            BoxShadow(
+              color: OColor.black.withValues(alpha: 0.02),
+              blurRadius: 23,
+              offset: const Offset(0, 12),
+            ),
           ],
-        ));
+        ),
+        child: Row(
+          children: Competitions.values.map((competition) {
+            return Expanded(
+              child: _BottomNavBarItem(competition: competition),
+            );
+          }).toList(),
+        ),
+      ),
+    );
   }
 }
 
-class BottomNavBarItem extends StatelessWidget {
-  final double width;
+class _BottomNavBarItem extends StatelessWidget {
   final Competitions competition;
 
-  const BottomNavBarItem({
-    super.key,
-    required this.width,
-    required this.competition,
-  });
+  const _BottomNavBarItem({required this.competition});
 
   @override
   Widget build(BuildContext context) {
@@ -62,70 +79,58 @@ class BottomNavBarItem extends StatelessWidget {
     dynamic competitionStore;
     switch (competition) {
       case Competitions.gc:
-        {
-          competitionStore = context.read<GCStore>();
-        }
+        competitionStore = context.read<GCStore>();
         break;
       case Competitions.spardha:
-        {
-          competitionStore = context.read<SpardhaStore>();
-        }
+        competitionStore = context.read<SpardhaStore>();
         break;
       case Competitions.kriti:
-        {
-          competitionStore = context.read<KritiStore>();
-        }
+        competitionStore = context.read<KritiStore>();
         break;
       case Competitions.manthan:
-        {
-          competitionStore = context.read<ManthanStore>();
-        }
+        competitionStore = context.read<ManthanStore>();
         break;
       case Competitions.sahyog:
-        {
-          competitionStore = context.read<SahyogStore>();
-        }
+        competitionStore = context.read<SahyogStore>();
         break;
-
     }
 
     return Observer(builder: (context) {
+      final isSelected = commonStore.competition == competition;
       return GestureDetector(
         onTap: () {
           commonStore.setCompetition(competition, competitionStore);
         },
-        child: SizedBox(
-          width: width,
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: isSelected ? OColor.green100 : null,
+            borderRadius: BorderRadius.circular(
+                Platform.isIOS ? 40 : OCornerRadius.m),
+          ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 12.5, 0, 4),
-                child: Container(
-                  width: width * 0.8,
-                  height: 40,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      color: commonStore.competition == competition
-                          ? Themes.bottomNavHighlightColor
-                          : Themes.bottomNavBarColor),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: SvgPicture.asset(
-                      competition.assetPath,
-                      package: 'scoreboard',
-                    ),
+              SizedBox(
+                height: 24,
+                width: 24,
+                child: SvgPicture.asset(
+                  competition.assetPath,
+                  package: 'scoreboard',
+                  colorFilter: ColorFilter.mode(
+                    isSelected ? OColor.green600 : OColor.gray800,
+                    BlendMode.srcIn,
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(0.0),
-                child: Text(competition.name,
-                    style: commonStore.competition == competition
-                        ? cardStageStyle2
-                        : bottomNavStyle1),
-              )
+              const SizedBox(height: 4),
+              Text(
+                competition.name,
+                style: (isSelected ? bottomNavStyle2 : bottomNavStyle1)
+                    .copyWith(
+                  color: isSelected ? OColor.green600 : OColor.gray800,
+                ),
+              ),
             ],
           ),
         ),

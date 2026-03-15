@@ -10,7 +10,6 @@ import '../../widgets/common/top_bar.dart';
 import '../../widgets/standings_page/standingboard.dart';
 import '../../widgets/filters/kriti_filter_bar.dart';
 
-
 class KritiStandingsPage extends StatefulWidget {
   const KritiStandingsPage({super.key});
 
@@ -28,37 +27,36 @@ class _StandingsPageState extends State<KritiStandingsPage> {
     }
 
     return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 0),
-        child: Column(
-          children: [
-            const TopBar(),
-            const KritiFilterBar(),
-            FutureBuilder<Map<String, dynamic>>(
-              future: APIService(context).getStandings(competition: 'kriti'),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState != ConnectionState.done) {
-                  return Expanded(
-                      child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 16),
-                      child: ShowShimmer(
-                        height: 400,
-                        width: MediaQuery.of(context).size.width,
-                      ),
-                    ),
-                  ));
-                } else if (snapshot.hasData) {
-                  return Observer(builder: (context) {
-                    List<dynamic> filteredEventSchedules = filterKritiStandings(input: snapshot.data!, event: kritiStore.selectedEvent);
-                    return Expanded(
-                        child: StandingBoard(
-                            hostelStandings: filteredEventSchedules));
-                  });
-                }
-                return ErrorReloadPage(apiFunction: reloadCallback);
-              },
-            )
-          ],
-        ));
+      padding: const EdgeInsets.symmetric(horizontal: 0),
+      child: Column(
+        children: [
+          const TopBar(),
+          const KritiFilterBar(),
+          FutureBuilder<Map<String, dynamic>>(
+            future: APIService(context).getStandings(competition: 'kriti'),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState != ConnectionState.done) {
+                return Expanded(
+                  child: Center(
+                    child: ShowShimmer(height: 400, width: MediaQuery.of(context).size.width),
+                  ),
+                );
+              } else if (snapshot.hasData) {
+                return Observer(
+                  builder: (context) {
+                    List<dynamic> filteredEventSchedules = filterKritiStandings(
+                      input: snapshot.data!,
+                      event: kritiStore.selectedEvent,
+                    );
+                    return Expanded(child: StandingBoard(hostelStandings: filteredEventSchedules));
+                  },
+                );
+              }
+              return ErrorReloadPage(apiFunction: reloadCallback);
+            },
+          ),
+        ],
+      ),
+    );
   }
 }

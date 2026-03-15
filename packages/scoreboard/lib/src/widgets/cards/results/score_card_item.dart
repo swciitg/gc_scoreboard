@@ -35,7 +35,7 @@ class ScoreCardItem extends StatelessWidget {
                   height: 18,
                   child: Text(
                     '$position',
-                    style: cardVenueStyle1,
+                    style: cardVenueStyle1.copyWith(fontWeight: FontWeight.w600),
                   ),
                 ),
                 const SizedBox(

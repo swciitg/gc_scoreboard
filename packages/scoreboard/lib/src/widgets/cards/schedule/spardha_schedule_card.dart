@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:onestop_ui/index.dart';
 import 'package:provider/provider.dart';
 import '../../../globals/enums.dart';
 import '../../../stores/common_store.dart';
@@ -46,8 +47,9 @@ class _SpardhaScheduleCardState extends State<SpardhaScheduleCard> {
             items: commonStore.viewType == ViewType.admin ? popupOptions : [],
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(24),
-                color: Themes.cardColor2,
+                borderRadius: BorderRadius.circular(OCornerRadius.l),
+                color: OColor.white,
+                border: Border.all(color: OColor.gray200, width: 1),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),

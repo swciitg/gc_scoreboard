@@ -24,7 +24,6 @@ class GCStandingsPage extends StatefulWidget {
 }
 
 class _GCStandingsPageState extends State<GCStandingsPage> {
-
   @override
   Widget build(BuildContext context) {
     var gcStore = context.read<GCStore>();
@@ -35,77 +34,68 @@ class _GCStandingsPageState extends State<GCStandingsPage> {
     }
 
     return Scaffold(
+      extendBody: true,
       backgroundColor: Themes.backgroundColor,
-      appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(56), child: AppBarHomeComponent()),
+      appBar: const PreferredSize(preferredSize: Size.fromHeight(56), child: AppBarHomeComponent()),
       body: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
-          child: Column(
-            children: [
-              const GCFilterBar(),
-              const SizedBox(
-                height: 25,
-              ),
-              Observer(
-                builder: (context){
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: SvgPicture.asset(
-                            "packages/scoreboard/assets/trophy.svg",
-                          ),
-                        ),
-                        Text(
-                          'GC [${gcStore.selectedCategory.categoryName}] Standings',
-                          style: standingsHeadingStyle,
-                        ),
-                      ],
+        padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+        child: Column(
+          children: [
+            const GCFilterBar(),
+            const SizedBox(height: 10),
+            Observer(
+              builder: (context) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: SvgPicture.asset("packages/scoreboard/assets/trophy.svg"),
+                      ),
+                      Text(
+                        'GC [${gcStore.selectedCategory.categoryName}] Standings',
+                        style: standingsHeadingStyle,
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 16),
+            FutureBuilder<List<dynamic>>(
+              future: APIService(context).getGCStandings(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState != ConnectionState.done) {
+                  return Expanded(
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 16.0),
+                        child: ShowShimmer(height: 400, width: MediaQuery.of(context).size.width),
+                      ),
                     ),
                   );
-                },
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              const Divider(
-                thickness: 0.7,
-                color: Themes.dividerColor1,
-                height: 0,
-                indent: 8,
-                endIndent: 8,
-              ),
-              FutureBuilder<List<dynamic>>(
-                  future: APIService(context).getGCStandings(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState != ConnectionState.done) {
+                } else if (snapshot.hasData) {
+                  return Observer(
+                    builder: (context) {
                       return Expanded(
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 16.0),
-                            child: ShowShimmer(
-                              height: 400,
-                              width: MediaQuery.of(context).size.width,
-                            ),
+                        child: StandingBoard(
+                          hostelStandings: filterGCStandings(
+                            gcStore.selectedCategory,
+                            snapshot.data!,
                           ),
                         ),
                       );
-                    } else if (snapshot.hasData) {
-                      return Observer(builder: (context) {
-                        return Expanded(
-                            child: StandingBoard(
-                          hostelStandings: filterGCStandings(
-                              gcStore.selectedCategory, snapshot.data!),
-                        ));
-                      });
-                    }
-                    log("ERROR IN STANDINGS: ${snapshot.error}");
-                    return ErrorReloadPage(apiFunction: reloadCallback);
-                  })
-            ],
-          )),
+                    },
+                  );
+                }
+                log("ERROR IN STANDINGS: ${snapshot.error}");
+                return ErrorReloadPage(apiFunction: reloadCallback);
+              },
+            ),
+          ],
+        ),
+      ),
       bottomNavigationBar: const BottomNavBar(),
     );
   }

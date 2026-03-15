@@ -71,7 +71,7 @@ class MultipleHostelView extends StatelessWidget {
           child: eventModel.hostels.length >= 2 * index + 1
               ? Row(
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.fiber_manual_record,
                       size: 4,
                       color: Themes.cardFontColor2,
@@ -97,7 +97,7 @@ class MultipleHostelView extends StatelessWidget {
           child: eventModel.hostels.length >= 2 * index + 2
               ? Row(
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.fiber_manual_record,
                       size: 4,
                       color: Themes.cardFontColor2,

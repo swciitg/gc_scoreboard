@@ -2,11 +2,11 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:onestop_ui/index.dart';
 import 'package:provider/provider.dart';
 
 
 import '../../functions/snackbar.dart';
-import '../../globals/colors.dart';
 import '../../globals/enums.dart';
 import '../../models/kriti_models/kriti_event_model.dart';
 import '../../models/manthan_models/manthan_event_model.dart';
@@ -71,7 +71,7 @@ class _PopupMenuState extends State<PopupMenu> {
 
     final result = await showMenu(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        color: Themes.kGrey,
+        color: OColor.white,
         context: context,
         position: RelativeRect.fromSize(
             _tapPosition & const Size(0, 0), overlay.size),

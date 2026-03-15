@@ -17,7 +17,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
   Widget build(BuildContext context) {
     return Theme(
       data: Theme.of(context).copyWith(
-        textTheme: const TextTheme(
+        textTheme: TextTheme(
           headlineLarge: basicFontStyle,
           headlineMedium: basicFontStyle,
           // Selected Date landscape
@@ -33,7 +33,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
           // month/year picker
           labelLarge: basicFontStyle, // days
         ),
-        colorScheme: const ColorScheme.dark(
+        colorScheme: ColorScheme.dark(
           primary: Themes.datePickerPrimaryColor,
           surface: Themes.datePickerSurfaceColor,
         ),

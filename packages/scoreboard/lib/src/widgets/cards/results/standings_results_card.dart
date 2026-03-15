@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onestop_ui/index.dart';
 import '../../../globals/colors.dart';
 import '../../../globals/styles.dart';
 import '../../../models/standing_model.dart';
@@ -35,8 +36,9 @@ class _StandingsResultCardState extends State<StandingsResultCard> {
             standingModel: widget.standingModel,
             child: Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(24),
-                  color: Themes.cardColor2),
+                  borderRadius: BorderRadius.circular(OCornerRadius.l),
+                  color: OColor.white,
+                  border: Border.all(color: OColor.gray200, width: 1)),
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -66,9 +68,9 @@ class _StandingsResultCardState extends State<StandingsResultCard> {
                     ]),
                     Column(
                       children: [
-                        const Divider(
+                        Divider(
                           height: 32,
-                          color: Themes.bottomNavHighlightColor,
+                          color: OColor.gray200,
                           thickness: 1,
                         ),
                         SizedBox(

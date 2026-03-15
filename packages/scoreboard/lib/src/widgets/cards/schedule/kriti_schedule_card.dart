@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
+import 'package:onestop_ui/index.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -53,8 +54,9 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
           items: commonStore.viewType == ViewType.admin ? popupOptions : [],
           child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(24),
-              color: Themes.cardColor2,
+              borderRadius: BorderRadius.circular(OCornerRadius.l),
+              color: OColor.white,
+              border: Border.all(color: OColor.gray200, width: 1),
             ),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -66,17 +68,18 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 4),
-                              child: SizedBox(
-                                height: 28,
-                                child: Text(widget.eventModel.event,
-                                    style: cardEventStyle),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 4),
+                                child: SizedBox(
+                                  height: 28,
+                                  child: Text(widget.eventModel.event,
+                                      style: cardEventStyle, overflow: TextOverflow.ellipsis, maxLines: 1),
+                                ),
                               ),
-                            ),
                             SizedBox(
                               height: 20,
                               child: isKriti
@@ -98,7 +101,7 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(8),
-                                          color: Themes.kGrey,
+                                          color: Themes.primaryColor.withValues(alpha: 0.1),
                                         ),
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
@@ -158,14 +161,15 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                                   child: Container(
                                     height: 26,
                                     decoration: BoxDecoration(
-                                      color: const Color(0xffFFC907),
+                                      color: Colors.transparent,
                                       borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(color: Themes.primaryColor, width: 1),
                                     ),
                                     child: Container(
                                       alignment: Alignment.center,
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 8, vertical: 0),
-                                      child: const Row(
+                                      child: Row(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         mainAxisAlignment:
@@ -174,19 +178,20 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                                           Center(
                                             child: Icon(
                                               Icons.launch_outlined,
-                                              color: Colors.black,
+                                              color: Themes.primaryColor,
                                               size: 15,
                                             ),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 3,
                                           ),
                                           Text(
                                             'Open Problem',
                                             style: TextStyle(
-                                              fontFamily: 'Montserrat',
+                                              fontFamily: 'Geist',
                                               fontWeight: FontWeight.w500,
                                               fontSize: 12,
+                                              color: Themes.primaryColor,
                                             ),
                                           ),
                                         ],
@@ -195,8 +200,9 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                                   ),
                                 )
                               ],
-                            )
-                          ],
+                              )
+                            ],
+                          ),
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -229,7 +235,7 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                                     showSnackBar(context, err.toString());
                                   }
                                 },
-                                child: const Text("View Score",
+                                child: Text("View Score",
                                     style: cardCategoryStyle),
                               ),
                             if (widget.eventModel.link.isNotEmpty)
@@ -254,10 +260,10 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.access_time_outlined,
-                              color: Themes.cardFontColor2,
-                              size: 14,
+                              color: OColor.gray500,
+                              size: 16,
                             ),
                             const SizedBox(
                               width: 8,
@@ -275,10 +281,10 @@ class _KritiScheduleCardState extends State<KritiScheduleCard> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.location_on_outlined,
-                              color: Themes.cardFontColor2,
-                              size: 14,
+                              color: OColor.gray500,
+                              size: 16,
                             ),
                             const SizedBox(
                               width: 8,

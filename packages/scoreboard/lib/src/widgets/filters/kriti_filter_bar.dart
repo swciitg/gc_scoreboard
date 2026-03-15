@@ -28,7 +28,7 @@ class _KritiFilterBarState extends State<KritiFilterBar> {
 
     return Observer(builder: (context) {
       return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 4).copyWith(bottom: 8),
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxHeight: 99),
             child: Column(mainAxisSize: MainAxisSize.min, children: [

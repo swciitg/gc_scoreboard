@@ -18,7 +18,6 @@ class SahyogStandingsPage extends StatefulWidget {
 }
 
 class _SahyogStandingsPageState extends State<SahyogStandingsPage> {
-
   @override
   Widget build(BuildContext context) {
     var sahyogStore = context.read<SahyogStore>();
@@ -26,38 +25,38 @@ class _SahyogStandingsPageState extends State<SahyogStandingsPage> {
     reloadCallback() {
       setState(() {});
     }
+
     return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 0),
-        child: Column(
-          children: [
-            const TopBar(),
-            const SahyogFilterBar(),
-            FutureBuilder<Map<String, dynamic>>(
-              future: APIService(context).getStandings(competition: 'sahyog'),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState != ConnectionState.done) {
-                  return Expanded(
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 16),
-                          child: ShowShimmer(
-                            height: 400,
-                            width: MediaQuery.of(context).size.width,
-                          ),
-                        ),
-                      ));
-                } else if (snapshot.hasData) {
-                  return Observer(builder: (context) {
-                    List<dynamic> filteredEventSchedules = filterSahyogStandings(input: snapshot.data!, event: sahyogStore.selectedEvent);
-                    return Expanded(
-                        child: StandingBoard(
-                            hostelStandings: filteredEventSchedules));
-                  });
-                }
-                return ErrorReloadPage(apiFunction: reloadCallback);
-              },
-            )
-          ],
-        ));
+      padding: const EdgeInsets.symmetric(horizontal: 0),
+      child: Column(
+        children: [
+          const TopBar(),
+          const SahyogFilterBar(),
+          FutureBuilder<Map<String, dynamic>>(
+            future: APIService(context).getStandings(competition: 'sahyog'),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState != ConnectionState.done) {
+                return Expanded(
+                  child: Center(
+                    child: ShowShimmer(height: 400, width: MediaQuery.of(context).size.width),
+                  ),
+                );
+              } else if (snapshot.hasData) {
+                return Observer(
+                  builder: (context) {
+                    List<dynamic> filteredEventSchedules = filterSahyogStandings(
+                      input: snapshot.data!,
+                      event: sahyogStore.selectedEvent,
+                    );
+                    return Expanded(child: StandingBoard(hostelStandings: filteredEventSchedules));
+                  },
+                );
+              }
+              return ErrorReloadPage(apiFunction: reloadCallback);
+            },
+          ),
+        ],
+      ),
+    );
   }
 }

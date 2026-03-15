@@ -23,19 +23,27 @@ class _ScoreBoardHomeState extends State<ScoreBoardHome> {
     super.initState();
   }
 
+  Widget _getCompetitionPage(CommonStore commonStore) {
+      switch (commonStore.competition) {
+      case Competitions.gc:
+        return const GCStandingsPage();
+      case Competitions.spardha:
+        return const SpardhaHome();
+      case Competitions.kriti:
+        return const KritiHome();
+      case Competitions.manthan:
+        return const ManthanHome();
+      case Competitions.sahyog:
+        return const SahyogHome();
+      }
+    }
+
   @override
   Widget build(BuildContext context) {
     var commonStore = context.read<CommonStore>();
+
     return Observer(
-      builder: (context) {
-        return commonStore.competition == Competitions.gc
-            ? const GCStandingsPage()
-            : commonStore.competition == Competitions.spardha
-                ? const SpardhaHome()
-                : commonStore.competition == Competitions.kriti
-                    ? const KritiHome()
-                    : commonStore.competition == Competitions.manthan ? const ManthanHome() : const SahyogHome();
-      },
+      builder: (_) => _getCompetitionPage(commonStore),
     );
   }
 }

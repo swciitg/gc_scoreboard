@@ -45,13 +45,13 @@ class CustomDropDown extends StatelessWidget {
         errorStyle: basicFontStyle,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-        focusedBorder: const OutlineInputBorder(
+        focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Themes.focusColor, width: 1),
           borderRadius: BorderRadius.all(
             Radius.circular(4),
           ),
         ),
-        enabledBorder: const OutlineInputBorder(
+        enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Themes.focusColor, width: 1),
           borderRadius: BorderRadius.all(
             Radius.circular(4),

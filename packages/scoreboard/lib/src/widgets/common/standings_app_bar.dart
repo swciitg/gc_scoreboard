@@ -39,7 +39,7 @@ class _StandingsAppBarState extends State<StandingsAppBar> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.arrow_back_outlined,
                         size: 16,
                         color: Themes.primaryColor,
@@ -68,7 +68,7 @@ class _StandingsAppBarState extends State<StandingsAppBar> {
                     alignment: Alignment.centerRight,
                     child: PopupMenuButton<String>(
                       padding: const EdgeInsets.only(top: 4),
-                      icon: const Icon(Icons.more_vert, color: Themes.kWhite),
+                      icon: Icon(Icons.more_vert, color: Themes.kWhite),
                       color: Themes.kGrey,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8)),

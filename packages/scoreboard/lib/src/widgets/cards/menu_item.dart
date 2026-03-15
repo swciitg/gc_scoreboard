@@ -8,7 +8,7 @@ PopupMenuEntry optionsMenuItem(String label, String value, Color color) {
       child: Center(
         child: Text(label,
             style: TextStyle(
-              fontFamily: 'Montserrat',
+              fontFamily: 'Geist',
                 fontWeight: FontWeight.w500, fontSize: 12, color: color)),
       ));
 }

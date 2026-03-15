@@ -15,32 +15,33 @@ class _GCFilterBarState extends State<GCFilterBar> {
   @override
   Widget build(BuildContext context) {
     var gcStore = context.read<GCStore>();
-    return Observer(builder: (context) {
-      return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 12),
+    return Observer(
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4).copyWith(bottom: 8),
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxHeight: 99),
-            child: Column(mainAxisSize: MainAxisSize.min, children: [
-              Row(
-                children: [
-                  FilterButton(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  children: [
+                    FilterButton(
                       label: 'Category',
-                      value:
-                          'General Championship [${gcStore.selectedCategory.categoryName}]',
-                      items: const [
-                        'General Championship [Men]',
-                        'General Championship [Women]'
-                      ],
+                      value: 'General Championship [${gcStore.selectedCategory.categoryName}]',
+                      items: const ['General Championship [Men]', 'General Championship [Women]'],
                       setFunction: (String value) {
-                        String a = value == 'General Championship [Men]'
-                            ? 'Men'
-                            : 'Women';
+                        String a = value == 'General Championship [Men]' ? 'Men' : 'Women';
                         gcStore.changeSelectedCategory(a);
-                      })
-                ],
-              ),
-            ]),
-          ));
-    });
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 }

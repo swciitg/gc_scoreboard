@@ -274,7 +274,7 @@ class _SpardhaEventFormState extends State<SpardhaEventForm> {
                           Checkbox(
                             checkColor: Colors.white,
                             activeColor: Themes.primaryColor,
-                            side: const BorderSide(
+                            side: BorderSide(
                               color: Themes.checkBoxColor,
                               width: 2,
                             ),
@@ -290,7 +290,7 @@ class _SpardhaEventFormState extends State<SpardhaEventForm> {
                           Checkbox(
                             checkColor: Colors.white,
                             activeColor: Themes.primaryColor,
-                            side: const BorderSide(color: Themes.checkBoxColor, width: 2),
+                            side: BorderSide(color: Themes.checkBoxColor, width: 2),
                             value: isPostponed,
                             onChanged: (bool? value) {
                               setState(() {

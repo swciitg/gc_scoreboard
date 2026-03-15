@@ -36,17 +36,17 @@ class _ErrorReloadPageState extends State<ErrorReloadPage> {
             onPressed: () {
               widget.apiFunction();
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.rotate_right,
               size: 16,
               color: Themes.kBlack,
             ),
-            label: const Text("Try again",
+            label: Text("Try again",
                 style: TextStyle(
                     color: Themes.kBlack,
                     fontSize: 12,
                     fontWeight: FontWeight.w600)),
-            style: const ButtonStyle(
+            style: ButtonStyle(
                 backgroundColor: WidgetStatePropertyAll(Themes.kYellow)),
           )
         ],
