@@ -43,7 +43,7 @@ class _TimePickerColorState extends State<TimePickerColor> {
           hourMinuteTextColor: WidgetStateColor.resolveWith((states) =>
               states.contains(WidgetState.selected)
                   ? Colors.white
-                  : Colors.white),
+                  : Colors.black87),
           dialHandColor: Themes.primaryColor,
           dialBackgroundColor: Themes.datePickerSurfaceColor,
           hourMinuteTextStyle: hourMinuteStyle,
@@ -51,8 +51,8 @@ class _TimePickerColorState extends State<TimePickerColor> {
           helpTextStyle: helptextStyle,
           dialTextColor: WidgetStateColor.resolveWith((states) =>
               states.contains(WidgetState.selected)
-                  ? Colors.black
-                  : Colors.white),
+                  ? Colors.white
+                  : Colors.black87),
           entryModeIconColor: Colors.blueGrey.shade600,
         ),
         textTheme: TextTheme(

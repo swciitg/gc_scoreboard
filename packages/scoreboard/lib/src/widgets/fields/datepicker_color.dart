@@ -33,9 +33,10 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
           // month/year picker
           labelLarge: basicFontStyle, // days
         ),
-        colorScheme: ColorScheme.dark(
+        colorScheme: ColorScheme.light(
           primary: Themes.datePickerPrimaryColor,
           surface: Themes.datePickerSurfaceColor,
+          onSurface: Colors.black87,
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:onestop_ui/index.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 import 'functions/auth_user_helper.dart';
@@ -52,8 +53,12 @@ class _GCScoreBoardState extends State<GCScoreBoard> {
 
           ),
         ],
-        child: MaterialApp(
+        child: Consumer<ThemeStore>(
+          builder: (context, themeStore, _) => MaterialApp(
           debugShowCheckedModeBanner: false,
+          theme: themeStore.lightThemeData,
+          darkTheme: themeStore.darkThemeData,
+          themeMode: themeStore.isDarkMode ? ThemeMode.dark : ThemeMode.light,
           home: Builder(builder: (buildContext) {
             reloadCallback() {
               // reload page
@@ -105,6 +110,6 @@ class _GCScoreBoardState extends State<GCScoreBoard> {
             );
           }),
           routes: routes,
-        ));
+        )));
   }
 }
